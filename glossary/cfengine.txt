@@ -1,0 +1,5 @@
+CFEngine::
+
+CFEngine is a configuration management software. CFEngine comes from a
+contraction of ``ConFiguration Engine''.
+

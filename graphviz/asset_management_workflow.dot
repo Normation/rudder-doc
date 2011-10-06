@@ -1,0 +1,30 @@
+digraph agent_workflow {
+
+compound=true;
+node [shape=Mrecord, style = filled, color="#6699ff", fillcolor="#ececff",
+fontsize=10];
+edge [fontsize=10];
+
+  inventory [label = "Incoming Inventory"];
+    
+    subgraph cluster_ServerNodeState {
+      label="Node State" fontsize=12;
+      pendingnode [label = "Pending"];
+      validnode   [label = "Valid"];
+      refusednode [label = "Refused"];
+      pendingnode -> {validnode refusednode} [label="User validation"];
+    };
+ 
+  inventory -> pendingnode [label="First inventory"];
+  inventory -> {validnode refusednode};
+    
+    subgraph cluster_ServerNodeChanges {
+      label="Node Changes" fontsize=12;
+      nodenew [label = "New"];
+      nodechanged [label = "Changed"];
+      nodeunchanged [label = "Unchanged"];
+    };
+
+  validnode -> {nodenew nodechanged nodeunchanged};
+
+}

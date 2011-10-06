@@ -1,0 +1,7 @@
+== Rudder Web Interface 
+
+This chapter is a general presentation of the Rudder Web Interface. You will
+find how to authenticate in the application, a description of the design of the
+screen, and some explanations about usage of common user interface items like
+the search fields and the reporting screens.
+

@@ -1,0 +1,53 @@
+=== Install Rudder Agent on SuSE
+
+Download the package applicable to your version of SuSE and to its
+architecture on 
+
+----
+
+https://beta.normation.com/packages/RPMS/
+
+----
+
+Install the package:
+
+----
+
+rpm -Uhv rudder-agent-2.2.0~beta1-1.SLES.11.i386.rpm
+
+----
+
+Set up the automatic start of the agent at boot:
+
+----
+
+chkconfig cfengine-community on
+
+----
+
+Type in the IP address of the Rudder Root Server in the following file
+
+----
+
+echo *root_server_IP_address* > /var/rudder/cfengine-community/policy_server.dat
+
+----
+
+[TIP]
+
+====
+
+We advise you to use the +IP address+ of the Rudder Root Server. The DNS name of
+this server can also be accepted if you have a complete DNS infrastructure
+matching the IP of the Nodes with their hostnames. 
+
+====
+
+Finally, start the agent:
+
+----
+
+service rudder-agent start
+
+----
+

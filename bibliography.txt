@@ -1,0 +1,24 @@
+ifdef::backend-xhtml11[]
+
+// we build bibliography only in html output because the section stays empty
+// when build PDF
+
+[bibliography]
+== Bibliography
+
+// The bibliography list is a style of AsciiDoc bulleted list.
+//
+// example:
+//- [[[walsh-muellner]]] Norman Walsh & Leonard Muellner.
+//  'DocBook - The Definitive Guide'. O'Reilly & Associates. 1999.
+//  ISBN 1-56592-580-7.
+//
+
+- [[[cfengine-doc]]] 'CFEngine Community Reference Manual'.
+  http://cfengine.com/manuals/cf3-reference.html
+
+- [[[fusioninventory-doc]]] 'FusionInventory Documentation'.
+  http://fusioninventory.org/wordpress/documentation/
+
+endif::backend-xhtml11[]
+

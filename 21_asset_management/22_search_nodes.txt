@@ -1,0 +1,80 @@
+
+[[search-nodes, Search Nodes]]
+
+=== Search Nodes
+
+You can navigate to *Asset Management > Search Nodes* to display information
+about the Nodes which have been already validated, and are managed by Rudder.
+
+[[quick-search, Quick Search]]
+
+==== Quick Search
+
+The easiest search tool is the Quick search: type in the search field the first
+letters of the 'Rudder ID', 'Reference', or 'Hostname'; choose the accurate Node in
+the autocompletion list; validate and look at the Node informations. This search
+tool can be very useful to help you create a new search in the Advanced Search.
+
+.Quick search the Node called +debian-node+
+
+====
+
+Assuming you have one managed Node called +debian-node.rudder-project.org+,
+which ID in Rudder is +d06b1c6c-f59b-4e5e-8049-d55f769ac33f+. 
+
+. Type in the Quick Search field the +de+ or +d0+.
+
+. Autocompletion will propose you this Node: +debian-node.rudder-project.org --
+d06b1c6c-f59b-4e5e-8049-d55f769ac33f [d06b1c6c-f59b-4e5e-8049-d55f769ac33f]+.
+
+====
+
+[[advanced-search, Advanced Search]]
+
+==== Advanced Search 
+
+In the Advanced Search tool, you create complex research based on Asset
+Inventory informations. The benefit of the Advanced Search tool is to save the
+query and create a Group of Nodes based on the search criteria.
+
+- 1. Select a field
+
+The selection of the field upon which the criteria will apply is a two step
+process. The list of fields is not displayed unordered and extensively. Fields
+have been grouped in the same way they are displayed when you look at
+information about a Node. First you choose among these groups: 'Node', 'Network
+Interface', 'Filesystem', 'Machine', 'RAM', 'Storage', 'BIOS', 'Controller',
+'Port', 'Processor', 'Sound Card', 'Video Card', 'Software'; then you choose
+among the list of fields concerning this theme.
+
+- 2. Select the matching rule
+
+// FIXME: due to a bug in asciidoc, we cannot write '≠' 
+
+The matching rule can be selected between following possibilities: 'Is defined',
+'Is not defined', '=' or ≠  followed by the term you are searching for presence or
+absence. Depending on the field, the list of searchable terms is either an free
+text field, either the list of available terms. 
+
+- 3. Add another rule
+
+You can select only one term for each matching rule. If you want to create more
+complex search, then you can add another rule using the '+' icon. All rules are
+using the same operand, either 'AND' or 'OR'. More complex searches mixing 'AND'
+and 'OR' operands are not available at the moment.
+
+.Advanced search for Linux Nodes with +ssh+.
+
+====
+
+Assuming you want to search every Linux Nodes having +ssh+ installed. You will
+create this 2 lines request:
+
+. Operator: +AND+.
+
+. First search line: +Node+, +Operating System+, +=+, +Linux+.
+
+. Second search line: +Software+, +Name+, +=+, +ssh+.
+ 
+====
+

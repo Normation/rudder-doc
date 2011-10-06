@@ -1,0 +1,56 @@
+=== Authentication
+
+When accessing the Rudder web interface, a login / password is required.  The
+default accounts are:
+
+* Login: jon.doe, password: secret
+
+* Login: alex.bar, password: secret2
+
+You can change the user accounts by following the <<user-management, User management>>
+procedure.
+
+=== Presentation of Rudder Web Interface
+
+The web interface is organised according to the concepts described earlier. It
+is divided in three logical parts: Asset Management, Configuration Management
+and Administration.
+
+==== Rudder Home
+
+The home page summarizes the content of the other parts and provides quick links
+for the most common actions.
+
+.Home menu 
+
+image::./images/RudderHome.png[Home menu]
+
+==== Asset Management
+
+In the Asset Management section, you will find the validation tool for new
+Nodes, a search engine for validated Nodes, and the management tool for groups
+of Nodes.
+
+.Asset Management menu 
+
+image::./images/RudderMenuAssetManagement.png[Asset Management menu]
+
+==== Configuration Management
+
+In the Configuration Management section, you can select the Policy Templates,
+configure the Policy Instances and manage the Configuration Rules.
+
+.Configuration Management menu
+
+image::./images/RudderMenuConfigurationManagement.png[Configuration Management menu]
+
+==== Administration
+
+The Administration section provides some general settings: you can setup the
+available networks for the Policy Server, view the event logs and manage your
+plugin collection.
+
+.Administration menu
+
+image::./images/RudderMenuAdministration.png[Administration menu]
+

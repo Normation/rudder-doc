@@ -1,0 +1,4 @@
+=== Configuration rules
+
+include::../glossary/configuration-rule.txt[]
+

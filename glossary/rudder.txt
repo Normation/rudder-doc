@@ -1,0 +1,5 @@
+Rudder::
+
+Rudder is a Drift Assesment software. Rudder associates Asset Management and
+Configuration Management. Rudder is a Free Software developped by Normation.
+

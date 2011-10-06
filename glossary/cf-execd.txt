@@ -1,0 +1,5 @@
++cf-execd+:: 
+
+This CFEngine Community daemon is launching the CFEngine Community
+Agent +cf-agent+ every 5 minutes.
+

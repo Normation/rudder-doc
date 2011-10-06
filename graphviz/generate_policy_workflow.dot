@@ -1,0 +1,17 @@
+digraph generate_policy_workflow{
+rankdir=LR;
+node [shape=Mrecord, style = filled, color="#6699ff", fillcolor="#ececff",
+fontsize=10];
+
+newnode      [label = "New Node validated"];
+nodechanged  [label = "Inventory changed"] ;
+ptchanged    [label = "Policy Template changed"];
+pichanged    [label = "Policy Instance changed"];
+groupchanged [label = "Group of Node changed"];
+crchanged    [label = "Configuration Rule changed"];
+forcechange  [label = "Regeneration forced by User"];
+preparepol   [label = "Prepare policies for Node"];
+
+{newnode nodechanged ptchanged pichanged groupchanged crchanged forcechange} -> preparepol ;
+
+}

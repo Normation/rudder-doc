@@ -1,0 +1,9 @@
+[code,python]
+
+./etc/default/rudder-agent
+
+----
+
+include::node_etc/rudder-agent[]
+
+----

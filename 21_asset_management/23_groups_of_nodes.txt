@@ -1,0 +1,14 @@
+
+[[groups, Groups]]
+
+=== Group of Nodes
+
+You can create Group of Nodes based on search criteria to ease attribution of
+Rules in Configuration Management. The creation of groups can be done from the
++Asset Management > Search Nodes+ page, or directly from the Groups list in
++Asset Management > Groups+. A group can be either Dynamic or Static.
+
+include::../glossary/dynamic-group.txt[]
+
+include::../glossary/static-group.txt[]
+

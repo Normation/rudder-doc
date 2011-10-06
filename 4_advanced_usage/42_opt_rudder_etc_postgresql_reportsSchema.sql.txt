@@ -1,0 +1,10 @@
+[code,python]
+
+./opt/rudder/etc/postgresql/reportsSchema.sql
+
+----
+
+include::etc/postgresql/reportsSchema.sql[]
+
+----
+

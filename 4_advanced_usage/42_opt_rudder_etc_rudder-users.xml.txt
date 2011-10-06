@@ -1,0 +1,10 @@
+[code,python]
+
+.+/opt/rudder/etc/rudder-users.xml+
+
+----
+
+include::etc/rudder-users.xml[]
+
+----
+

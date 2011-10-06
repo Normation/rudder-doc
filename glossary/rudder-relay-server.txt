@@ -1,0 +1,7 @@
+Rudder Relay Server::
+
+Relay servers are not available in the current version. In a future version,
+these optional servers will let you adapt your Rudder architecture to your
+existing network topology, by acting as a proxy for flows exchanged between
+managed nodes and the root server.
+

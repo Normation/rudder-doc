@@ -1,0 +1,5 @@
+== Install Rudder Server
+
+This chapter covers the installation of a Rudder Root Server, from the
+specification of the underlying server, to the initial setup of the application.
+

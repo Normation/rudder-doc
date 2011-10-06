@@ -1,0 +1,576 @@
+# CMDB schema
+#
+# Depends upon core.schema, cosine.schema, nis.schema and cmdb.schema
+
+
+# CMDB OID
+
+
+#######################################################
+####################### WARNING #######################
+#######################################################
+# This OID is necessary for OpenLDAP -> OpenDS schema tool, 
+# but makes OpenLDAP crashes with a non-meaningfull error message
+# if cmdb.schema (where it is already declared) is included
+
+#objectIdentifier NormationOID 1.3.6.1.4.1.35061
+
+#######################################################
+####################### /WARNING ######################
+#######################################################
+
+
+objectIdentifier RudderOID NormationOID:2
+objectIdentifier RudderAttributes RudderOID:1
+objectIdentifier RudderObjectClasses RudderOID:2
+
+
+#######################################################
+##################### UUIDs ###########################
+#######################################################
+
+attributetype ( RudderAttributes:101
+	NAME 'nodeGroupQueryUuid'
+	DESC 'Unique identifier for a group of nodes'
+	SUP uuid
+	)
+
+attributetype ( RudderAttributes:102
+	NAME 'policyInstanceUuid'
+	DESC 'Unique identifier for a policy instance'
+	SUP uuid
+	)
+	
+attributetype ( RudderAttributes:103
+    NAME 'targetPolicyInstanceUuid'
+    DESC 'Unique identifier for a policy instance'
+    SUP uuid
+    )
+    
+attributetype ( RudderAttributes:104
+    NAME 'rudderServerRoleName'
+    DESC 'Name (identifier) of a Server Role'
+    SUP cn
+    )
+    
+attributetype ( RudderAttributes:105
+    NAME 'rudderTargetServerRoleName'
+    DESC 'Name (identifier) of a Target Server Role'
+    SUP cn
+    )
+    
+attributetype ( RudderAttributes:106
+	NAME 'groupCategoryUuid'
+	DESC 'Unique identifier for a group category'
+	SUP uuid
+	)
+	        
+attributetype ( RudderAttributes:107
+    NAME 'rudderCategoryUuid'
+    DESC 'Unique identifier for a rudder category'
+    SUP uuid
+    )
+	
+attributetype ( RudderAttributes:108
+    NAME 'referencePolicyTemplateUuid'
+    DESC 'Unique identifier for a policy template from reference library'
+    SUP uuid
+    )
+
+attributetype ( RudderAttributes:109
+    NAME 'userPolicyTemplateUuid'
+    DESC 'Unique identifier for an policy template in user library'
+    SUP uuid
+    )
+    
+attributetype ( RudderAttributes:110
+    NAME 'rudderWbpiUuid'
+    DESC 'Unique identifier for an policy instance (the real)'
+    SUP uuid
+    )	
+
+attributetype ( RudderAttributes:111
+	NAME 'nodeGroupUuid'
+	DESC 'Unique identifier for a node group'
+	SUP uuid
+	)
+
+attributetype ( RudderAttributes:112
+    NAME 'rudderConfigurationRuleUuid'
+    DESC 'Unique identifier for a configuration rule'
+    SUP uuid
+    )
+    
+attributetype ( RudderAttributes:113
+    NAME 'referencePolicyTemplateVersion'
+    DESC 'The version'
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{256}
+    )
+
+attributetype ( RudderAttributes:120
+        NAME 'initDatetime'
+        DESC 'Date and time of initialization of the object'
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.24
+        EQUALITY generalizedTimeMatch
+        ORDERING generalizedTimeOrderingMatch
+    )
+
+attributetype ( RudderAttributes:121
+    NAME 'referenceLibraryVersion'
+    DESC 'The version'
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{256}
+    )
+
+###################################################################################################
+	
+	
+attributetype ( RudderAttributes:201
+	NAME 'jsonNodeGroupQuery'
+	DESC 'JSON structure that represent a query for a group of nodes'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{256}
+	)
+
+attributetype ( RudderAttributes:301
+	NAME 'rudderPolicyTarget'
+	DESC 'Target of the policy instance. It is something of the form targetType:targetUuid'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{256}
+	)
+
+attributetype ( RudderAttributes:302
+	NAME 'rudderCreationDate'
+	DESC 'Creation date of the item'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.24
+	EQUALITY generalizedTimeMatch
+  ORDERING generalizedTimeOrderingMatch
+	)
+
+attributetype ( RudderAttributes:303
+	NAME 'rudderLastUpdateDate'
+	DESC 'Last date when the item was updated'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.24
+	EQUALITY generalizedTimeMatch
+  ORDERING generalizedTimeOrderingMatch
+	)
+
+#
+# A policy variable and its values.
+# The expected format is:
+# varaibleName[index]:variableValue
+#
+attributetype ( RudderAttributes:304
+	NAME 'rudderPolicyVariables'
+	DESC 'Pair of variable:value'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{256}
+	)
+
+attributetype ( RudderAttributes:305
+	NAME 'rudderWrittenDate'
+	DESC 'Last date when the item was written'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.24
+	EQUALITY generalizedTimeMatch
+  ORDERING generalizedTimeOrderingMatch
+	)
+
+attributetype ( RudderAttributes:310
+	NAME 'rudderExecutionPlanningStartDate'
+	DESC 'Policy instance execution planning: start date (convention: time set to 00:00:00)'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.24
+	EQUALITY generalizedTimeMatch
+  ORDERING generalizedTimeOrderingMatch
+	)
+
+attributetype ( RudderAttributes:311
+	NAME 'rudderExecutionPlanningTime'
+	DESC 'Policy instance execution planning: execution time (convention: date set to epoch date)'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.24
+	EQUALITY generalizedTimeMatch 
+	)
+
+attributetype ( RudderAttributes:312
+	NAME 'rudderExecutionPlanningSplay'
+	DESC 'Policy instance execution planning: splay time (convention: number of milliseconds)'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+	EQUALITY integerMatch
+	ORDERING integerOrderingMatch
+	)
+
+attributetype ( RudderAttributes:313
+	NAME 'rudderExecutionPlanningEndDate'
+	DESC 'Policy instance execution planning: end date (convention: time set to 00:00:00)'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.24
+	EQUALITY generalizedTimeMatch 
+	)
+
+attributetype ( RudderAttributes:314
+	NAME 'rudderExecutionPlanningDays'
+	DESC 'Policy instance execution planning: repetition days (0 to 7, 0 and 7 being Sunday)'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 
+	EQUALITY integerMatch
+	ORDERING integerOrderingMatch
+	)
+
+attributetype ( RudderAttributes:315
+	NAME 'rudderExecutionPlanningReportTime'
+	DESC 'Policy instance execution planning: report time (convention: number of milliseconds)'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+	EQUALITY integerMatch
+	ORDERING integerOrderingMatch
+	)
+attributetype ( RudderAttributes:316
+    NAME 'rudderExecutionPlanningVariableName'
+    DESC 'Name of the variable used for execution planning'
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{256}
+    )
+
+attributetype ( RudderAttributes:320
+  NAME 'acceptationDatetime'
+  DESC 'Creation date of a user policy'
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  )
+
+attributetype ( RudderAttributes:382
+	NAME 'policyBindingEnforced'
+	DESC 'Define if the binding is enforced. False by default'
+	EQUALITY booleanMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+	SINGLE-VALUE
+	)
+
+attributetype ( RudderAttributes:383
+	NAME 'policyBindingMultivalued'
+	DESC 'Define if the binding is multivalued. False by default'
+	EQUALITY booleanMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+	SINGLE-VALUE
+	)
+
+attributetype ( RudderAttributes:384
+	NAME 'variableBindings'
+	DESC 'binding between a variable name and the role field / variable:role field'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{256}
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	)
+
+attributetype ( RudderAttributes:385
+	NAME 'policyNameBinding'
+	DESC 'binding between a variable name and the role field / variable:role field'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{256}
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	)
+
+
+attributetype ( RudderAttributes:401
+    NAME 'rudderServerIsModified'
+    DESC 'Define if the server is modified and should be processed as such or if it is up to date. Default to false if not specified'
+    EQUALITY booleanMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 
+    )
+    
+attributetype ( RudderAttributes:402
+    NAME 'isActivated'
+    DESC 'Define if the object is currently activated or not (and so should be ignore)'
+    EQUALITY booleanMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 
+    )
+    
+attributetype ( RudderAttributes:403
+    NAME 'rudderPriority'
+    DESC 'The priority of the object compare to other. Higher has more priority'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    ORDERING integerOrderingMatch
+    )
+    
+attributetype ( RudderAttributes:404
+    NAME 'longDescription'
+    DESC 'A long field for text (HTLM expected)'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    )
+
+attributetype ( RudderAttributes:405
+    NAME 'isDynamic'
+    DESC 'Define if the group is dynamic'
+    EQUALITY booleanMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 
+    )
+
+attributetype ( RudderAttributes:406
+    NAME 'isSystem'
+    DESC 'Define if the CR/Group/PI/UPT/Node is created by the system'
+    EQUALITY booleanMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 
+    )
+
+attributetype ( RudderAttributes:410
+    NAME 'serial'
+    DESC 'The serial of the Configuration Rule'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    ORDERING integerOrderingMatch
+    )
+
+attributetype ( RudderAttributes:500
+    NAME 'nodePolicyServerId'
+    DESC 'The identifier of a Node policy server'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    )
+
+attributetype ( RudderAttributes:501
+    NAME 'isBroken'
+    DESC 'Define if the node is broken'
+    EQUALITY booleanMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 
+    )
+
+attributetype ( RudderAttributes:502
+    NAME 'isPolicyServer'
+    DESC 'Define if this node configuration refers to a policy server'
+    EQUALITY booleanMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 
+    )
+
+attributetype ( RudderAttributes:503
+    NAME 'nodeConfSystemVariables'
+    DESC 'The current system variables of a node'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    ) 
+
+attributetype ( RudderAttributes:504
+    NAME 'nodeConfTargetSystemVariables'
+    DESC 'The target system variables of a node'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    )
+
+attributetype ( RudderAttributes:510
+	NAME 'targetName'
+	DESC 'Host name of the server'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{256}
+	)
+
+attributetype ( RudderAttributes:511
+    NAME 'targetNodePolicyServerId'
+    DESC 'The identifier of a Node policy server'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    )
+ 
+attributetype ( RudderAttributes:512
+	NAME 'targetHostname'
+	DESC 'Host name of the server'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{256}
+	)
+
+attributetype ( RudderAttributes:513
+	NAME 'targetAgentsName'
+	DESC 'List of name of the agent (Nova, Community, ...)'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{256}
+	)
+
+attributetype ( RudderAttributes:514
+	NAME 'targetLocalAdministratorAccountName'
+	DESC 'The local administrator account name (login) on the node'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{256}
+	) 
+
+###############################################################
+####    Object Classes 
+###############################################################
+
+objectclass ( RudderObjectClasses:1
+	NAME 'rudderServer' 
+	DESC 'The mapping of the node configuration, a container for promises'
+    SUP top
+	STRUCTURAL
+	MUST ( nodeId $ isPolicyServer )
+	MAY ( cn $ description $ rudderServerIsModified $ rudderLastUpdateDate $
+				nodeHostname $ nodePolicyServerId $ localAdministratorAccountName $ agentsName $
+				targetName $ targetHostname $ targetAgentsName $ targetNodePolicyServerId $ targetLocalAdministratorAccountName $ 
+	      nodeConfSystemVariables $ nodeConfTargetSystemVariables $ rudderWrittenDate
+	    )
+	)
+
+objectclass ( RudderObjectClasses:2
+    NAME 'rudderRootPolicyServer' 
+    SUP 'rudderServer'
+    DESC 'The ROOT policy server of an Rudder Domain'
+    )
+
+objectclass ( RudderObjectClasses:4
+	NAME 'rudderNode' 
+	DESC 'The Node itself'
+     SUP top
+	STRUCTURAL
+	MUST ( nodeId $ cn $ isSystem $ isBroken)
+	MAY ( description )
+	)
+	
+objectclass ( RudderObjectClasses:5
+	NAME 'policyServerNode' 
+	DESC 'The Node representation of a policy server'
+     SUP rudderNode
+	STRUCTURAL
+	MUST ( nodeHostname $ publicKey $ nodeIpSummary $ inventoryDate $
+	localAdministratorAccountName $ agentsName $ nodePolicyServerId )
+	)
+
+
+
+objectclass ( RudderObjectClasses:30
+	NAME 'nodeGroupQuery'
+	DESC 'A query for a node group representation'
+	SUP top
+	STRUCTURAL
+	MUST ( nodeGroupQueryUuid $ jsonNodeGroupQuery )
+	MAY ( description )
+	)
+
+#cn is the policy name for the instance
+objectClass ( RudderObjectClasses:31
+    NAME 'abstractRudderPolicyInstance'
+    DESC 'An abstract instance of a policy instance'
+    SUP top
+    ABSTRACT
+    MUST ( referencePolicyTemplateUuid )
+    MAY ( rudderCreationDate $ rudderLastUpdateDate $ 
+          description $ rudderPolicyTarget $ rudderPolicyVariables $
+          isActivated $ isSystem $
+          referencePolicyTemplateUuid $ 
+          rudderExecutionPlanningVariableName $ referencePolicyTemplateVersion $
+          rudderExecutionPlanningStartDate $ rudderExecutionPlanningTime $
+          rudderExecutionPlanningSplay $ rudderExecutionPlanningEndDate $
+          rudderExecutionPlanningDays $ rudderExecutionPlanningReportTime 
+        )
+    )
+
+objectclass ( RudderObjectClasses:32
+	NAME 'rudderCrPolicyInstance'
+	DESC 'An instance of a policy'
+	SUP abstractRudderPolicyInstance
+	STRUCTURAL
+	MUST ( policyInstanceUuid $ serial $ rudderPriority $ rudderConfigurationRuleUuid )
+	)
+
+objectclass ( RudderObjectClasses:33
+    NAME 'rudderTargetCrPolicyInstance'
+    DESC 'An instance of a target state for a policy instance'
+    SUP abstractRudderPolicyInstance
+    STRUCTURAL
+    MUST ( targetPolicyInstanceUuid $ serial $ rudderPriority $ rudderConfigurationRuleUuid )
+    )
+
+objectclass ( RudderObjectClasses:38
+	NAME 'rudderPolicyBinding'
+	DESC 'A binding between a role and a policy instance'
+	SUP top
+	STRUCTURAL
+	MUST ( rudderServerRoleName $ policyNameBinding $
+	       policyBindingEnforced $ policyBindingMultivalued )
+	MAY ( variableBindings )
+	)
+	
+objectclass ( RudderObjectClasses:40
+	NAME 'rudderGroupCategory'
+	DESC 'The group category'
+	SUP top
+	STRUCTURAL
+	MUST ( groupCategoryUuid $ cn )
+	MAY ( description $ isSystem )
+	)
+
+objectclass ( RudderObjectClasses:41
+    NAME 'rudderCategory'
+    DESC 'The Rudder category'
+    SUP top
+    STRUCTURAL
+    MUST ( rudderCategoryUuid $ cn )
+    MAY ( description $ isSystem )
+    )
+    
+objectclass ( RudderObjectClasses:42
+    NAME 'userPolicyTemplate'
+    DESC 'The Rudder category'
+    SUP top
+    STRUCTURAL
+    MUST ( userPolicyTemplateUuid $ referencePolicyTemplateUuid $ acceptationDatetime)
+    MAY ( isActivated $ isSystem )
+    )
+
+objectclass ( RudderObjectClasses:43
+    NAME 'rudderWbpi'
+    DESC 'The Rudder policy instance (real)'
+    SUP top
+    STRUCTURAL
+    MUST ( rudderWbpiUuid $ referencePolicyTemplateVersion )
+    MAY ( cn $ description $ longDescription $
+          rudderPriority $ rudderPolicyVariables $ isActivated $ isSystem )
+    )
+    	
+objectclass ( RudderObjectClasses:44
+	NAME 'rudderNodeGroup'
+	DESC 'A node group representation'
+	SUP top
+	STRUCTURAL
+	MUST ( nodeGroupUuid $
+	       cn $ isDynamic )
+	MAY ( nodeId $ description $ jsonNodeGroupQuery $ 
+	      isActivated $ isSystem )
+	)
+	
+objectclass ( RudderObjectClasses:45
+    NAME 'rudderConfigurationRule'
+    DESC 'A configuration rule'
+    SUP top
+    STRUCTURAL
+    MUST ( rudderConfigurationRuleUuid  $ serial )
+    MAY ( cn $ description $ longDescription $ isActivated $ isSystem $ rudderPolicyTarget $ rudderWbpiUuid )
+    )
+
+objectclass ( RudderObjectClasses:46
+    NAME 'rudderSpecialPolicyTarget'
+    DESC 'A special target (other than a nodeGroup), for example: all servers'
+    SUP top
+    STRUCTURAL
+    MUST ( rudderPolicyTarget $ cn )
+    MAY (  description $ isActivated $ isSystem )
+    )  
+    
+objectclass ( RudderObjectClasses:60
+    NAME 'userLibraryVersion'
+    DESC 'An object class to contain the initDatetime attribute'
+    SUP top
+    AUXILIARY
+    MAY ( initDatetime $ referenceLibraryVersion )
+    )  

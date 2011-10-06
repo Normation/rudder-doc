@@ -1,0 +1,105 @@
+=== Basic administration of Rudder services
+
+This chapter covers basic administration task of Rudder services like
+configuring some parameters of the Rudder policy server, reading the services
+logg, and start, stop or restart Rudder services.
+
+==== Policy Server Management
+
+The *Administartion > Policy Server Management* section sum-up information about
+Rudder policy server and its parameters. 
+
+===== Configure allowed networks
+
+Here you can configure the networks from which nodes are allowed to connect to
+Rudder policy server to get their updated configuration rules.
+
+You can add as many network as you want, the expected format is:
++networkip/mask+, for example +42.42.0.0/16+. 
+
+==== View Event Logs
+
+The *Administration > View Event Logs* section allows to see last events logged
+in Rudder.
+
+==== Plugin Management
+
+Rudder is an extensible software. The *Administration > Plugin Management*
+section sum-up information about loaded plugins and their configuration. 
+
+==== Restart the agent of the node
+
+To restart the Rudder Agent, use following command on a node:
+
+----
+
+/etc/init.d/rudder-agent restart
+
+----
+
+[TIP] 
+
+====
+
+This command can take more than one minute to restart the CFEngine daemon.
+This is not a bug, but an internal protection system of CFEngine.
+
+====
+
+==== Restart the root rudder service
+
+===== Restart everything
+
+You can restart all components of the Rudder Root Server at once:
+
+----
+
+/etc/init.d/rudder-server-root restart
+
+----
+
+===== Restart only one component
+
+Here is the list of the components of the root server with a brief description
+of their role, and the command to restart them:
+
+include::../glossary/cfengine-server.txt[]
+
+----
+
+/etc/init.d/cfengine-community restart
+
+----
+
+include::../glossary/web-server-application.txt[]
+
+----
+
+/etc/init.d/jetty restart
+
+----
+
+include::../glossary/web-server-front-end.txt[]
+
+----
+
+/etc/init.d/apache2 restart
+
+----
+
+include::../glossary/ldap-server.txt[]
+
+----
+
+/etc/init.d/slapd restart
+
+----
+
+include::../glossary/sql-server.txt[]
+
+----
+
+/etc/init.d/postgresql* restart
+
+----
+

@@ -1,0 +1,7 @@
+Policy Template::
+
+This is a configuration skeleton, adapted to a function or a particular service
+(eg DNS resolver configuration). This skeleton includes the configuration logic
+for this function or service, and can be set according to a list of variables
+(in the same example: IP addresses of DNS servers, the default search box, ...)
+

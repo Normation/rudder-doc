@@ -1,0 +1,6 @@
+CFEngine Nova:: 
+
+Managing Windows machines requires the commercial version of CFEngine, called
+Nova. It needs to open the port 5308 TCP from the Node to the Rudder Root
+Server.
+

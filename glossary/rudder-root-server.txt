@@ -1,0 +1,6 @@
+Rudder Root Server::
+
+This is the core of the Rudder infrastructure. This server must be a dedicated
+machine (either virtual of physical), and contains the main application
+components: the web interface, databases, configuration data, logs...
+

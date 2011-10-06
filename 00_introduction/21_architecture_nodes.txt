@@ -1,0 +1,58 @@
+[[Nodes_supported_OS, the list of supported Operating Systems for Nodes]]
+
+=== Specifications for Rudder Nodes
+
+The following operating systems are supported for Rudder Nodes and packages are
+available for these platforms:
+
+* CentOS GNU/Linux 5
+
+* Debian GNU/Linux 5 (Lenny)
+
+* Debian GNU/Linux 6 (Squeeze)
+
+* <<install-on-windows, Microsoft Windows>> Server 2000
+
+* <<install-on-windows, Microsoft Windows>> Server 2003
+
+* <<install-on-windows, Microsoft Windows>> Server 2008
+
+* RedHat Enterprise Linux 5
+
+* SuSE Linux Enterprise Server (SLES) 10 SP3
+
+* SuSE Linux Enterprise Server (SLES) 11 SP1
+
+* Ubuntu 10.04 LTS (lucid)
+
+* Ubuntu 10.10 (maverick)
+
+[TIP]
+
+[[install-on-windows, Install on Microsoft Windows]] 
+
+.Windows Nodes 
+
+====
+
+Installing Rudder on Windows requires the commercial version of CFEngine (named Nova).
+Hence, as a starting point, we suggest that you only use Linux machines. Once
+you are accustomed to Rudder, contact Normation to obtain a demo version for
+Windows platforms.
+
+====
+
+[WARNING]
+
+.Unsupported Operating Systems 
+
+====
+
+It is possible to use Rudder on other platforms than the ones listed here.
+However, we haven't tested the application on them, and can't currently supply
+any packages for them. Moreover, the Policy Templates are likely to fail. If you
+wish to try Rudder on other systems, please contact us.
+
+====
+
+

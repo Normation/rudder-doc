@@ -1,0 +1,67 @@
+How to build Rudder User Documentation
+======================================
+
+== Dependencies
+
+Rudder User Documentation is written using the 'asciidoc' formatting language, and
+includes 'graphviz' schemas. To build the documentation, you need following software:
+
+Asciidoc:: http://www.methods.co.nz/asciidoc/ to build HTML and PDF outputs.
+
+Docbook:: http://docbook.org/ to build PDF output. Version 0.3.2-1 or superior.
+
+Dblatex:: http://dblatex.sourceforge.net/ to build PDF output.
+
+Graphviz:: http://www.graphviz.org/ to build SVG schemas.
+
+Inkscape:: http://inkcape.org to convert SVG for PDF output.
+
+=== Install the dependencies on Debian and Ubuntu:
+
+----
+apt-get install asciidoc docbook dblatex graphviz inkscape
+----
+
+=== Install the dependencies On Fedora, Centos and RHEL
+
+----
+yum install docbook-utils inkscape
+----
+
+To install +asciidoc+ see: http://www.methods.co.nz/asciidoc/INSTALL.html.
+
+To install +graphviz+ see: http://www.graphviz.org/Download.php
+
+To install +dblatex+ see: http://dblatex.sourceforge.net/doc/manual/ch02.html
+
+== Organisation of files
+
+XX_title:: content of the documentation. The list of files to include in the
+final document is generated at build time from the alphabetically ordered list
+of text files contained in these directories.
+
+glossary:: contains glossary entries. At first occurence of a word, the glossary
+entry should be included in the text.
+
+images:: contains illustrations in PNG format.
+
+graphviz:: contains source files for schemas in 'graphviz' format.
+
+themes:: contains material for visual formatting of the output.
+
+== Build
+
+Create HTML and PDF output suitable for distribution.
+
+----
+make
+make view
+----
+
+== Cleanup
+
+Delete all generated files.
+
+----
+make clean
+----

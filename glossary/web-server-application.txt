@@ -1,0 +1,4 @@
+Web server application::
+
+Execute the web interface and the server that handles the new inventories.
+

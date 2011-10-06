@@ -1,0 +1,25 @@
+<!-- 
+ The "authentication" tag can have a "hash" argument, with these allowed values: 
+ "md5", "sha1", "sha256", "sha-256", "sha512", "sha-512"
+
+ For example: <authentication hash="sha">
+
+ To hash passwords for this format, run these commands:
+ "md5"                    echo -n "secret" | md5sum
+ "sha" or "sha1"          echo -n "secret" | shasum
+ "sha256" or "sha-256"    echo -n "secret" | sha256sum
+ "sha512" or "sha-512"    echo -n "secret" | sha512sum
+
+  After changing this file, the rudder webapp must be restarted to take changes
+  into account: /etc/init.d/jetty restart
+ -->
+
+<!-- example with hash -->
+<!-- <authentication hash="sha"> -->
+<authentication>
+  <user name="jon.doe"  password="secret"/>  
+  <user name="alex.bar" password="secret2"/>
+  <!--  exemple of bad lines -->
+  <!--  <user name="" password="secret2"/>-->
+  <!--  <user name="name" password=""/>-->
+</authentication>

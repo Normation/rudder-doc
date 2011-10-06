@@ -1,0 +1,10 @@
+[code,python]
+
+.+/opt/rudder/etc/inventory-web.properties+
+
+----
+
+include::etc/inventory-web.properties[]
+
+----
+

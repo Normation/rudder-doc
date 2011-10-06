@@ -1,0 +1,8 @@
+User Policy Template Library:: 
+
+This is an organized list of the Policy Templates selected and modified by the
+user. By default this list is the same as the Reference Policy Template Library.
+Policy Templates can be disabled or deleted, and then activated again with a
+simple drag and drop. Categories can be reorganised according to the desired
+taxonomy. A Policy Template can appear only once in the Library.
+

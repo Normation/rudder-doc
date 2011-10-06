@@ -1,0 +1,4 @@
+LDAP server::
+
+Store the inventories and the Node configurations.
+

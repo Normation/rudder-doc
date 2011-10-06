@@ -1,0 +1,21 @@
+=== Files installed by the application.
+
++/etc+:: System-wide configuration files are stored here: init scripts,
+configuration for apache, logrotate and rsyslog.
+
++/opt/rudder+:: Non variable application files are stored here.
+
++/opt/rudder/etc+:: Configuration files for Rudder services are stored here.
+
++/var/log/rudder+:: Log files for Rudder services are stored here.
+
++/var/rudder+:: Variable data for Rudder services are stored here.
+
++/var/rudder/cfengine-community+:: Data for CFEngine Community are stored here.
+
++/var/rudder/policy-templates+:: Policy Templates are stored here.
+
++/var/cfengine+:: Data for CFEngine Nova are stored here.
+
++/usr/share/doc/rudder*+:: Documentation about Rudder packages.
+

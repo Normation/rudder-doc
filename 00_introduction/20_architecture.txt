@@ -1,0 +1,15 @@
+=== Rudder components
+
+The Rudder infrastructure uses three types of machines: 
+
+====
+
+include::../glossary/rudder-node.txt[]
+
+include::../glossary/rudder-root-server.txt[]
+
+include::../glossary/rudder-relay-server.txt[]
+
+====
+
+

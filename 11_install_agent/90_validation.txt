@@ -1,0 +1,16 @@
+=== Validation
+
+Several minutes after the start of the agent, a new Node should be pending in
+the Rudder web interface.
+
+You will be able to browse its inventory, and accept it to manage its
+configuration with Rudder.
+
+You may force the agent execution by issuing the following command :
+
+----
+
+/var/rudder/cfengine-community/bin/cf-agent -KI
+
+----
+

@@ -1,0 +1,6 @@
+Dynamic group:: 
+
+Group of Nodes based on search criteria. The search is replayed every time the
+group is queried.  The list will always contain the nodes that match the
+criteria, even if the data nodes have changed since the group was created.
+

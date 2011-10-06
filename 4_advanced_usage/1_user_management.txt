@@ -1,0 +1,77 @@
+[[user-management]]
+
+=== User management
+
+Change the users authorized to connect to the application
+
+==== Configuration of the users using a XML file
+
+===== Generality and uses of clear text password
+
+The credentials of a user are defined in the XML file
++/opt/rudder/etc/rudder-users.xml+. This file expects the following format:
+
+----
+
+<authentication>
+  <user name="jon.doe" password="secret"/>  
+  <user name="alex.bar" password="secret2"/>
+</authentication>
+
+----
+
+The name and password attributes are mandatory (non empty) for the user tags.
+Only these attributes are recognized.
+
+Every modification of this file should be followed by a restart of the Rudder
+web application to be taken into account:
+
+----
+
+/etc/init.d/jetty restart
+
+----
+
+===== Use of hashed passwords
+
+The authentication tag may have the hash attribute. If defined, the password
+will be stored as hashes.
+
+The algorithm used to create the hash (and verify it during authentication)
+depend on the value of the hash attribute. The possible values, the
+corresponding algorithm and the Linux shell command need to obtain the hash of
+the "secret" password for this algorithm are listed here:
+
+.Hashed passwords algorithms list
+
+[options="header"]
+
+|====
+|Value                 | Algorithm      | Linux command to hash the password
+|"md5"                 | MD5            | +echo -n "secret" \| md5sum+
+|"sha" or "sha1"       | SHA one        | +echo -n "secret" \| shasum+
+|"sha256" or "sha-256" | SHA, 256 bytes | +echo -n "secret" \| sha256sum+
+|"sha512" or "sha-512" | SHA, 512 bytes | +echo -n "secret" \| sha512sum+
+|====
+
+Here is an example of authentication file with hashed password:
+
+----
+
+<authentication hash="sha">
+  <user name="jon.doe"  password="e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4"/>  
+  <user name="alex.bar" password="c636e8e238fd7af97e2e500f8c6f0f4c0bedafb0"/>
+</authentication>
+
+----
+
+==== Going further
+
+Rudder aims at integrating with your IT system transparently, so it can force
+its own authentication system.
+
+To meet this need, Rudder relies on the modular authentication system Spring
+Security that allows to easily integrate with databases, LDAP directory, or an
+entreprise SSO like CAS, OpenID or SPNEGO. The documentation for this
+integration is not yet available, but don't hesitate to reach us on this topic.
+

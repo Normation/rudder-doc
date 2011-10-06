@@ -1,0 +1,46 @@
+=== Compliance
+
+A Policy Instance contains one or multiple components. Each component generates
+one ore multiple reports, based on the number of keys in this component. For
+example, for a Sudoers Policy Instance, each user is a key. These states are
+available in reports:
+
+Success::
+
+The system is already in the desired state. No change is needed. Conformity is
+gained.
+
+Repaired::
+
+The system was not in the desired state. Rudder applied some change and repaired
+what was not correct. Now the system is in the desired state. Conformity is
+gained.
+
+Error::
+
+The system is not in the desired state. Rudder couldn't repair the system.
+
+Applying::
+
+When a Policy Instance is applied, Rudder waits during 10 minutes for a report.
+During this period, the Policy Instance is said 'Applying'.
+
+No answer::
+
+The system didn't sent any reports. Rudder waited for 10 minutes and no report
+was received.
+
+A Policy Instance has gained conformity on a Node is every reports for each
+components, for each key, are in 'Success' state. This is the only condition.
+
+Based on these facts, the compliance of a Configuration Rule is calculated like
+this :
+
+Number of Nodes for which conformity is reached for every Policy Instance of the
+Configuration Rule / Total number of Nodes on which the Configuration Rule has
+been applied
+
+.Reports
+
+image::./images/Reports.png[Reports]
+

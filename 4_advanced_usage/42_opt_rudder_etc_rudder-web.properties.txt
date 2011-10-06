@@ -1,0 +1,10 @@
+[code,python]
+
+.+/opt/rudder/etc/rudder-web.properties+
+
+----
+
+include::etc/rudder-web.properties[]
+
+----
+

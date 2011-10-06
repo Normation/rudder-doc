@@ -1,0 +1,5 @@
++cf-serverd+:: 
+
+This CFEngine Community daemon is listening on the network for a forced launch
+of the CFEngine Community Agent coming from the Rudder Server's Big Red Button.
+

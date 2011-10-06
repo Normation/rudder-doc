@@ -1,0 +1,85 @@
+=== Install Rudder Root server on Debian
+
+==== Add the main, contrib and non-free components
+
+Ensure that the +apt+ package manager is configured to use these three components,
+by checking that +/etc/apt/sources.list+ contains the following lines:
+
+----
+
+deb http://ftp.fr.debian.org/debian/ squeeze main contrib non-free
+deb http://security.debian.org/ squeeze/updates main contrib non-free
+
+----
+
+[TIP]
+
+====
+
+Your mirror may differ, +ftp.fr.debian.org+ is only an example. Also, please
+adapt the distribution name if needed.
+
+====
+
+==== Update the system
+
+Prior to beginning the installation of your Rudder Server, we recommend that you
+update your Debian system with the latest versions of available packages.
+Especially, since the release of Debian 6.0 (Squeeze), the signing key of
+packages repositories has changed. If you haven't already done it, you should
+force the upgrade of the +debian-archive-keyring+ package to fetch the new key:
+
+----
+
+root@rudder-server:~# aptitude update
+
+root@rudder-server:~# aptitude install debian-archive-keyring
+
+root@rudder-server:~# aptitude update
+
+root@rudder-server:~# aptitude safe-upgrade
+
+----
+
+==== Add the Rudder packages repository
+
+To validate the content of the Normation repository, you should import the GPG
+key used to sign it:
+
+----
+
+root@rudder-server:~# apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0F535E38
+
+----
+
+Then add the URL of the Normation repository, by typing the next command:
+
+----
+
+root@rudder-server:~# echo 'deb http://www.rudder-project.org/packages/apt/ squeeze main contrib non-free' >> /etc/apt/sources.list
+
+----
+
+Then, update your local package database to retrieve the list of packages
+available on our repository:
+
+----
+
+root@rudder-server:~# aptitude update
+
+----
+
+==== Install your Rudder Root Server
+
+To begin the installation, you should simply install the rudder-server-root
+metapackage, which will install the required components:
+
+----
+
+root@rudder-server:~# aptitude install rudder-server-root
+
+----
+
+Rudder uses the Oracle Java virtual machine. To install it, you must accept
+its license.
+

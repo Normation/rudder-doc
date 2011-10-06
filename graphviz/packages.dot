@@ -1,0 +1,51 @@
+digraph packages{
+
+rankdir=BT;
+
+node [shape=Mrecord, style=filled, color="#6699ff", fillcolor="#ececff",
+fontsize=10]
+
+"rudder-agent"
+"rudder-jetty"
+"rudder-inventory-ldap"
+"rudder-inventory-endpoint"
+"rudder-reports"
+"rudder-policy-templates"
+"rudder-webapp"
+"rudder-cfengine-community"
+"rudder-server-root"
+
+{rank=same;
+  "rudder-agent"
+  "rudder-server-root"
+}
+{rank=same;
+  "rudder-inventory-ldap"
+  "rudder-jetty"
+}
+
+"rudder-jetty" -> "rudder-inventory-endpoint"
+
+"rudder-inventory-ldap" -> "rudder-inventory-endpoint"
+
+{rank=same;
+  "rudder-inventory-endpoint"
+  "rudder-reports"
+  "rudder-policy-templates"
+}
+
+"rudder-inventory-endpoint" -> "rudder-webapp"
+
+"rudder-policy-templates" -> "rudder-webapp" 
+
+"rudder-reports"-> "rudder-webapp"
+
+"rudder-webapp" -> "rudder-server-root"
+
+"rudder-cfengine-community" ->"rudder-server-root"
+
+}
+
+
+
+

@@ -1,0 +1,8 @@
+=== Validate the installation
+
+Once all these steps have been completed, use your web browser to go to the URL
+given on the step described in <<initial-config, the section about initial configuration>>.
+
+You should see a loading, then a login screen. Only two demo accounts are configured, without
+any right restriction as of now.
+

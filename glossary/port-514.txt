@@ -1,0 +1,4 @@
+Port 514, TCP::
+
+Syslog port, used to centralize reports.
+

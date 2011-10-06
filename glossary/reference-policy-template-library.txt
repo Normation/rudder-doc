@@ -1,0 +1,6 @@
+Reference Policy Template Library:: 
+
+This is an organized list of every available Policy Templates. This list can't
+be modified: every changes made by an user will be applied to the User Policy
+Template Library.
+

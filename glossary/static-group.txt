@@ -1,0 +1,6 @@
+Static group::
+
+Group of Nodes based on search criteria. The search is performed once and the
+resulting list of Nodes is stored.  Once declared, the list of nodes will not
+change, except manual change.
+

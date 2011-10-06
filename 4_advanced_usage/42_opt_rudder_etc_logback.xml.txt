@@ -1,0 +1,10 @@
+[code,python]
+
+./opt/rudder/etc/logback.xml
+
+----
+
+include::etc/logback.xml[]
+
+----
+

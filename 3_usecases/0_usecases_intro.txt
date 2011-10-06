@@ -1,0 +1,31 @@
+=== Usecases
+
+This chapter gives a few examples for using Rudder. We have no doubt that you'll
+have your own ideas, that we're impatient to hear about...
+
+==== Dynamic groups by operating system
+
+Create dynamic groups for each operating system you administer, so that you can
+apply specific policies to each type of OS. When new nodes are added to Rudder,
+these policies will automatically be enforced upon them.
+
+==== Library of preventive policies
+
+Why not create policies for emergency situations in advance? You can then put
+your IT infrastructure in "panic" mode in just a few clicks.
+
+For example, using the provided Policy Templates, you could create a Name
+resolution policy to use your own internal DNS servers for normal situations,
+and a second, alternative policy, to use Google's public DNS servers, in case
+your internal DNS servers are no longer available.
+
+==== Standardizing configurations
+
+You certainly have your own best practices (let's call them good habits) for
+setting up your SSH servers.
+
+But is that configuration the same on all your servers? Enforce the settings
+your really want using an OpenSSH server policy and apply it to all your Linux
+servers. SSH servers can then be stopped or reconfigured manually many times,
+Rudder will always restore your preferred settings and restart the SSH server in
+less than 5 minutes.

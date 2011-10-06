@@ -1,0 +1,5 @@
+Rudder Node::
+
+A Node is client computer managed by Rudder. To be managed, a Node must first be
+accepted as an authorized node.
+

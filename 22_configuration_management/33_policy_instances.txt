@@ -1,0 +1,34 @@
+=== Policy Instances
+
+Once you have selected and organized your Policy Templates, you can create your
+configurations in the *Configuration Management > Policy Instances* section.
+
+include::../glossary/policy-instance.txt[]
+
+The screen is divided in three parts:
+
+- on the left, your list of Policy Templates and Policy Instances, 
+
+- on the right the description of the selected Policy Template or Policy
+  Instance.
+
+- at the bottom, the configuration items of the selected Policy Instance. 
+
+Click on the name of a Policy Template or to see its description. 
+
+Click on the name of a Policy Instance to see the Policy Summary containing the
+description of the Policy Template its derived from, and the configuration items
+of the Policy Instance.
+
+.Create a Policy Instance for Name resolution
+
+====
+
+Use the Policy Template 'Name resolution' to create a new Policy Instance called
++Google DNS Servers+, and shortly described as 'Use Google DNS Server'. Check in
+the options 'Set nameservers' and 'Set DNS search suffix'.  Set the value of the
+variable 'DNS resolver' to +8.8.8.8+ and of 'Domain search suffix' according to
+your organization, like +rudder-project.org+.
+
+====
+

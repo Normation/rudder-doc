@@ -1,0 +1,10 @@
+[code,python]
+
+.+/opt/rudder/etc/reportsInfo.xml+
+
+----
+
+include::etc/reportsInfo.xml[]
+
+----
+

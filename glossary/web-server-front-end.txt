@@ -1,0 +1,5 @@
+Web server front-end:: 
+
+Handle the connection to the Web interface, the received inventories and the
+sharing of the UUID Rudder Root Server.
+

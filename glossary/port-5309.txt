@@ -1,0 +1,5 @@
+Port 5309, TCP::
+
+CFEngine communication port, used to communicate the policies to the rudder
+nodes.
+

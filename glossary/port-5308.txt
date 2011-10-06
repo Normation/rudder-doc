@@ -1,0 +1,5 @@
+Port 5308, TCP::
+
+Nova communication port, used by the commercial version of CFEngine, which is
+required to manage Windows nodes.
+

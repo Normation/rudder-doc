@@ -1,0 +1,39 @@
+digraph concepts{
+
+rankdir=BT;
+node [shape=Mrecord, style=filled, color="#6699ff", fillcolor="#ececff",
+fontsize=10];
+NN NS NG PT PS CR ;
+
+NN [label = "New Nodes" ];
+
+NS [label = "Node Search" ];
+
+NG [label = "Node groups"];
+
+PT [label = "Policy Templates"];
+
+PS [label = "Policies"];
+
+CR [label = "Configuration Rules"];
+
+subgraph cluster0 { 
+    label="Asset Management"; 
+    style=filled;
+    color="#6699ff"; 
+    fillcolor=lightgrey;
+    NN -> NS ->NG; 
+};
+
+NG -> CR ;
+
+subgraph cluster1 { 
+    label="Configuration Management";
+    shape="component";
+    style="filled";
+    color="#6699ff";
+    fillcolor="lightgrey";
+    PT -> PS -> CR; 
+};
+
+}

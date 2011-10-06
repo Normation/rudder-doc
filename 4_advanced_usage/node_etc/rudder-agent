@@ -1,0 +1,24 @@
+#====================================================================
+# Configuration sample for Cfengine Community init script
+#====================================================================
+
+# Cfengine Community directory and files
+CFENGINE_COMMUNITY_PATH="/opt/rudder"
+CFENGINE_COMMUNITY_VAR_PATH="/var/rudder/cfengine-community"
+CFENGINE_COMMUNITY_RUN[CFEXECD]="1"
+CFENGINE_COMMUNITY_RUN[CFSERVERD]="1"
+CFENGINE_COMMUNITY_RUN[CFMONITORD]="0"
+CFENGINE_COMMUNITY_BIN[CFEXECD]="$CFENGINE_COMMUNITY_VAR_PATH/bin/cf-execd"
+CFENGINE_COMMUNITY_BIN[CFSERVERD]="$CFENGINE_COMMUNITY_VAR_PATH/bin/cf-serverd"
+CFENGINE_COMMUNITY_BIN[CFMONITORD]="$CFENGINE_COMMUNITY_VAR_PATH/bin/cf-monitord"
+CFENGINE_COMMUNITY_PARAMS[CFEXECD]=""
+CFENGINE_COMMUNITY_PARAMS[CFSERVERD]=""
+CFENGINE_COMMUNITY_PARAMS[CFMONITORD]=""
+CFENGINE_COMMUNITY_PID_FILE[CFEXECD]="$CFENGINE_COMMUNITY_VAR_PATH/cf-execd.pid"
+CFENGINE_COMMUNITY_PID_FILE[CFSERVERD]="$CFENGINE_COMMUNITY_VAR_PATH/cf-serverd.pid"
+CFENGINE_COMMUNITY_PID_FILE[CFMONITORD]="$CFENGINE_COMMUNITY_VAR_PATH/cf-monitord.pid"
+
+# Other
+TIMEOUT="60" # Max time to start/stop processes
+SYSLOG_FACILITY="local6"
+PS_COMMAND="ps -efww"   # This ensures full width for ps output but doesn't work on Solaris - use "ps -ef"

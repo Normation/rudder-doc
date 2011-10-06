@@ -1,0 +1,51 @@
+=== Policy Templates
+
+==== Concepts
+
+A Policy Template defines a set of operations and configurations to reach the
+desired behaviour. This includes the initial set-up, but also a regular check on
+the parameters, and automatic repairs (when possible).
+
+All the Policy Templates are built with the possibility to change only part of a
+service configuration: each parameter may be either active, either set on the
+"Don't change" value, that will let the default values or in place. This allows
+for a progressive deployment of the configuration management.
+
+Finally, the Policy Templates will generate a set of reports which are sent to
+the Rudder Root Server, which will let you analyse the percentage of compliance
+of your policies, and soon, detailed reports on their application.
+
+==== Manage the Policy Templates
+
+The Policy Templates shipped with Rudder are presented in a library that you can
+reorganize in *Administration > Policy Template Library Management*. The library
+is organized in two parts: the available Policy Templates, and the selection
+made by the user.
+
+include::../glossary/reference-policy-template-library.txt[]
+
+include::../glossary/user-policy-template-library.txt[]
+
+[TIP] 
+
+====
+
+The current version of Rudder has only an handful of *Policy Templates*.  We are
+aware that it considerably limits the use of the application, but we choose to
+hold back other Policy Templates that did not, from our point of view, have the
+sufficient quality. In the future, there will be some upgrades including more
+Policy Templates.
+
+====
+
+[WARNING] 
+
+====
+
+The creation of new Policy Templates is not covered by the Web interface. This
+is an advanced task which is currently not covered by this guide.
+
+====
+
+==== Available Policy Templates
+

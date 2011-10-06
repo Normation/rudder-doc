@@ -1,0 +1,5 @@
+Applied Policy::
+
+This is the result of the conversion of a Policy Instance into a set of CFEngine
+Promises for a particular Node.
+

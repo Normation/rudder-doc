@@ -1,0 +1,67 @@
+=== Install Rudder Root server on SLES
+
+==== Configure the package manager
+
+Ensure that the +zypper+ package manager is configured, and install the required packages:
++rsyslog+, +rsyslog-pgsql+ and 'Oracle Java JRE'. +rsyslog+ and +rsyslog-pgsql+ are downloadable
+along Rudder and Java is available through Oracle's website: http://www.java.com.
+
+==== Update the system
+
+Prior to beginning the installation of your Rudder Server, we recommend that you
+update your SLES system with the latest versions of available packages.
+
+----
+
+root@rudder-server:~# zypper up
+
+----
+
+==== Add the Rudder packages repository
+
+Add the URL of the Normation repository, by typing the next command on a SLES 11:
+
+----
+
+root@rudder-server:~# zypper ar -n "Normation RPM Repositories" http://ci.normation.com/rpm-2.3/SLES_11_SP1/ Normation
+
+----
+
+Or this one on a SLES 10:
+
+----
+
+root@rudder-server:~# zypper sa "http://ci.normation.com/rpm-2.3/SLES_10_SP3/" Normation
+
+----
+
+Then, update your local package database to retrieve the list of packages
+available on our repository:
+
+----
+
+root@rudder-server:~# zypper up
+
+----
+
+==== Install your Rudder Root Server
+
+To begin the installation, you should simply install the rudder-server-root
+metapackage, which will install the required components:
+
+----
+
+root@rudder-server:~# zypper in rudder-server-root
+
+----
+
+[TIP]
+
+====
+
+If you want to manage the Policy Templates Library with 'git' on a SLES based
+system, you should dowload the 'SDK DVD' and install +git-core+ using +yast2+ or
++zypper+, or get the RPM using another channel.
+
+====
+

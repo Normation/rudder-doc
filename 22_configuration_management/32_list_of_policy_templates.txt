@@ -1,0 +1,86 @@
+// FIXME: this list should be generated from PT source code see
+// https://redmine.normation.com/issues/1621 when it is done, uncomment following
+// line and delete uneeded paragraphs: include::../temp/available_pt.txt
+
+===== Application management
+
+Apache 2 HTTP server:: This Policy Template will configure the Apache HTTP
+server and ensure it is running. It will ensure the "apache2" package is
+installed (via the appropriate packaging tool for each OS), ensure the service
+is running and start it if not and ensure the service is configured to run on
+initial system startup. Configuration will create a rudder vhost file.
+
+APT package manager configuration:: Configure the apt-get and aptitude tools on
+GNU/Linux Debian and Ubuntu, especially the source repositories.
+
+OpenVPN client:: This Policy Template will configure the OpenVPN client service
+and ensure it is running. It will ensure the "openvpn" package is installed (via
+the appropriate packaging tool for each OS), ensure the service is running and
+start it if not and ensure the service is configured to run on initial system
+startup. Configuration will create a rudder.conf file. As of this version, only
+the PSK peer identification method is supported, please use the "Download File"
+Policy Template to distribute the secret key.
+
+Package management for Debian / Ubuntu / APT based systems:: Install, update or
+delete packages, automatically and consistently on GNU/Linux Debian and Ubuntu.
+   
+Package management for RHEL / CentOS / RPM based systems:: Install, update or
+delete packages, automatically and consistently on GNU/Linux CentOS and RedHat.
+
+===== Distributing files
+
+Copy a file:: Copy a file on the machine
+
+Distribute ssh keys:: Distribute ssh keys on servers
+
+Download a file:: Download a file for a standard URL (HTTP/FTP), and set
+permissions on the downloaded file.
+
+===== File state configuration
+
+Set the permissions of files:: Set the permissions of files
+
+===== System settings: Miscellaneous
+
+Time settings:: Set up the time zone, the NTP server, and the frequency of time
+synchronisation to the hardware clock. Also ensures that the NTP service is
+installed and started.
+
+===== System settings: Networking
+
+Hosts settings:: Configure the contents of the hosts filed on any operating
+system (Linux and Windows).
+    
+IPv4 routing management:: Control IPv4 routing on any system (Linux and
+Windows), with four possible actions: add, delete (changes will be made), check
+presence or check absence (a warning may be returned, but no changes will be
+made) for a given route.
+ 
+Name resolution:: Set up the IP address of the DNS server name, and the default
+search domain.
+
+NFS Server:: Configure a NFS server
+
+===== System settings: Process 
+
+Process Management:: Enforce defined parameters on system processes
+
+===== System settings: Remote access
+
+OpenSSH server:: Install and set up the SSH service on Linux nodes. Many
+parameters are available.
+
+===== System settings: User management
+
+Group management:: This Policy Template manages the target host(s) groups. It
+will ensure that the defined groups are present on the system.
+
+Sudo utility configuration:: This Policy Template configures the sudo utility.
+It will ensure that the defined rights for given users and groups are correctly
+defined.
+
+User management:: Control users on any system (Linux and Windows), including
+passwords, with four possible actions: add, delete (changes will be made), check
+presence or check absence (a warning may be returned, but no changes will be
+made) for a given user.
+

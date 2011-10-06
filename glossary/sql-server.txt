@@ -1,0 +1,4 @@
+SQL server:: 	
+
+Store the received reports from the nodes.
+
