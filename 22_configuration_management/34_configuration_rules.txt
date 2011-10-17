@@ -2,3 +2,5 @@
 
 include::../glossary/configuration-rule.txt[]
 
+When a Configuration Rule is created or modified, the promises for the target nodes are generated. Rudder computes all the promises each nodes must have, and makes them available for the nodes. This process can take up to several minutes, depending on the number of managed nodes and the Policy Server configuration. During this time, the "Regenerate now" button is replaced by a moving bar and a message stating "Generating configuration rules".
+You can also press the "Regenerate now" button on the top of the interface if you feel the generated promises should be modified (for instance, if you changed the configuration of Rudder)
