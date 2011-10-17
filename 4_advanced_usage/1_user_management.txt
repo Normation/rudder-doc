@@ -67,7 +67,7 @@ Here is an example of authentication file with hashed password:
 
 ==== Going further
 
-Rudder aims at integrating with your IT system transparently, so it can force
+Rudder aims at integrating with your IT system transparently, so it can't force
 its own authentication system.
 
 To meet this need, Rudder relies on the modular authentication system Spring
