@@ -5,7 +5,7 @@ and to its architecture on:
 
 ----
 
-https://beta.normation.com/packages/apt/pool/main/r/rudder-agent/ 
+http://www.rudder-project.org/apt-2.3/pool/main/r/rudder-agent/
 
 ----
 
@@ -13,7 +13,7 @@ Install the package:
 
 ----
 
-dpkg -i rudder-agent_2.2.0~beta1-lenny0_amd64.deb
+dpkg -i rudder-agent_2.3.0-lenny0_amd64.deb
 
 ----
 
