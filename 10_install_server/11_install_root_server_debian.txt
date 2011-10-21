@@ -19,6 +19,11 @@ deb http://security.debian.org/ squeeze/updates main contrib non-free
 Your mirror may differ, +ftp.fr.debian.org+ is only an example. Also, please
 adapt the distribution name if needed.
 
+Also, the keep in mind that the Rudder root server needs a JVM to run, so you
+will have to install it yourself as the packaging of the Sun JVM is now restricted
+by Oracle(TM) and Rudder is not OpenJDK 6 compatible.
+
+You can get the Java JRE 6 here : http://www.java.com
 ====
 
 ==== Update the system
@@ -32,11 +37,8 @@ force the upgrade of the +debian-archive-keyring+ package to fetch the new key:
 ----
 
 root@rudder-server:~# aptitude update
-
 root@rudder-server:~# aptitude install debian-archive-keyring
-
 root@rudder-server:~# aptitude update
-
 root@rudder-server:~# aptitude safe-upgrade
 
 ----
@@ -56,7 +58,7 @@ Then add the URL of the Normation repository, by typing the next command:
 
 ----
 
-root@rudder-server:~# echo 'deb http://www.rudder-project.org/packages/apt/ squeeze main contrib non-free' >> /etc/apt/sources.list
+root@rudder-server:~# echo 'deb http://www.rudder-project.org/apt-2.3/ squeeze main contrib non-free' >> /etc/apt/sources.list
 
 ----
 
