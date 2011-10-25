@@ -3,7 +3,7 @@
 ==== Add the main, contrib and non-free components
 
 Ensure that the +apt+ package manager is configured to use these three components,
-by checking that +/etc/apt/sources.list+ contains the following lines:
+by checking that +/etc/apt/sources.list.d/rudder.list+ contains the following lines:
 
 ----
 
