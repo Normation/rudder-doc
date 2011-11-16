@@ -39,7 +39,7 @@ html/rudder-doc.html : rudder-doc.txt
 	$(ASCIIDOC) $(ASCIIDOCHTMLOPTS) --out-file $@ $?
 	cp -R style/html/* images html/
 
-html/README.html : README
+html/README.html : README.asciidoc
 	mkdir -p html	
 	$(ASCIIDOC) $(ASCIIDOCHTMLOPTS) --out-file $@ $?
 	
