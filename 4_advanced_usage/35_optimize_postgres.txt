@@ -1,0 +1,68 @@
+=== Optimize Postgres
+
+The default (out-of-the-box) configuration of Postgres is really not compliant 
+for large (or normal) machines. It uses a really small amount of memory
+
+The location of the file is:
+
+. /etc/postgresql/8.x/main/postgresql.conf
+. /var/lib/pgsql/data/postgresql.conf (on a SuSE system)
+
+
+
+==== Suggested values on a large node
+
+===== Amount of System V shared memory
+
+A reasonable starting value for shared_buffers is 1/4 of the memory in your system:
+
+. shared_buffers = 1GB
+
+====
+
+[NOTE]
+Note : you may need to set the proper amount on the system
+
+----
+
+$ sysctl -w kernel.shmmax=1073741824
+
+----
+
+====
+
+Ref http://www.postgresql.org/docs/8.4/interactive/kernel-resources.html#SYSVIPC
+
+===== Memory for complex operations
+
+Complex query:
+
+. work_mem = 24MB 
+. max_stack_depth = 4MB
+
+Complex maintenance (index, vacuum):
+
+. maintenance_work_mem = 240MB
+
+===== Write ahead log
+
+Size of the write ahead log:
+
+. wal_buffers = 4MB
+
+===== Query planner
+
+Gives hint to the query planner about the size of disk cache
+
+Setting effective_cache_size to 1/2 of total memory would be a normal conservative setting:
+
+. effective_cache_size = 1024MB
+
+==== Suggested values on a not so large node
+
+. shared_buffers = 128MB
+. work_mem = 8MB
+. max_stack_depth = 3MB
+. maintenance_work_mem = 64MB
+. wal_buffers = 1MB
+. effective_cache_size = 128MB
