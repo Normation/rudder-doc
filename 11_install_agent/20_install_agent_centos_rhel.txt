@@ -17,14 +17,6 @@ rpm -Uhv rudder-agent-2.3.0-1.EL.5.x86_64.rpm
 
 ----
 
-Set up the automatic start of the agent at boot:
-
-----
-
-chkconfig cfengine-community on
-
-----
-
 Type in the IP address of the Rudder Root Server in the following file
 
 ----
