@@ -1,19 +1,40 @@
 === Install Rudder Agent on Debian or Ubuntu
 
-Download the package applicable to your version of Debian or Ubuntu GNU/Linux
-and to its architecture on:
+==== Add the Rudder packages repository
+
+To validate the content of the Normation repository, you should import the GPG
+key used to sign it:
 
 ----
 
-http://www.rudder-project.org/apt-2.3/pool/main/r/rudder-agent/
+root@rudder-server:~# apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0F535E38
 
 ----
 
-Install the package:
+Then add the URL of the Normation repository, by typing the next command:
 
 ----
 
-dpkg -i rudder-agent_2.3.0-lenny0_amd64.deb
+root@rudder-server:~# echo 'deb http://www.rudder-project.org/apt-2.3/ squeeze main contrib non-free' > /etc/apt/sources.list.d/rudder.list
+
+----
+
+Then, update your local package database to retrieve the list of packages
+available on our repository:
+
+----
+
+root@rudder-server:~# aptitude update
+
+----
+
+==== Install your Rudder Agent
+
+To begin the installation, you should simply install the rudder-agent::
+
+----
+
+root@rudder-server:~# aptitude install rudder-agent
 
 ----
 
@@ -24,6 +45,16 @@ Type in the IP address of the Rudder Root Server in the following file
 echo *root_server_IP_address* > /var/rudder/cfengine-community/policy_server.dat
 
 ----
+
+[TIP]
+
+====
+
+We advise you to use the +IP address+ of the Rudder Root Server. The DNS name of
+this server can also be accepted if you have a complete DNS infrastructure
+matching the IP of the Nodes with their hostnames.
+
+====
 
 Finally, start the agent:
 

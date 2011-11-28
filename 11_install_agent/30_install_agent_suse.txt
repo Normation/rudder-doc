@@ -1,19 +1,39 @@
 === Install Rudder Agent on SuSE
 
-Download the package applicable to your version of SuSE and to its
-architecture on 
+
+==== Add the Rudder packages repository
+
+
+Add the URL of the Normation repository, by typing the next command on a SLES 11 node:
 
 ----
 
-http://www.rudder-project.org/rpm-2.3/SLES_11_SP1/
+root@rudder-node:~# zypper ar -n "Rudder RPM Repositories" http://www.rudder-project.org/rpm-2.3/SLES_11_SP1/ Rudder
 
 ----
 
-Install the package:
+Or this one on a SLES 10 node:
+
+----
+root@rudder-node:~# zypper ar -n "Rudder RPM Repositories" http://www.rudder-project.org/rpm-2.3/SLES_10_SP3/ Rudder
+----
+
+Then, update your local package database to retrieve the list of packages
+available on our repository:
 
 ----
 
-rpm -Uhv rudder-server-root-2.3.0.-1.SLES.11.i586.rpm
+root@rudder-node:~# zypper ref
+
+----
+
+==== Install your Rudder Agent
+
+To begin the installation, you should simply install the rudder-agent:
+
+----
+
+root@rudder-server:~# zypper install rudder-agent
 
 ----
 
