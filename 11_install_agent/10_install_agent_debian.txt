@@ -7,7 +7,7 @@ key used to sign it:
 
 ----
 
-root@rudder-server:~# apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0F535E38
+root@rudder-server:~# apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 474A19E8
 
 ----
 
