@@ -1,0 +1,85 @@
+[[ldap-auth-provider, LDAP authentication provider for Rudder]]
+=== Configuring an LDAP authentication provider for Rudder
+
+If you are operating on a corporate network or want to have your users in a
+centralized database, there is a solution for you.
+
+Since Rudder uses the SpringSecurity framework, you are able to connect to a
+wide range of authentication providers.
+
+We will take LDAP as an example, however bear in mind that this procedure
+requires that you make modifications to your application that an update will
+replace, we do not officially support it yet.
+
+If you really want to test this feature, follow this procedure:
+
+First, unzip your webapp to be able to modify some files inside it
+
+----
+
+cd /opt/rudder/jetty7/webapps
+mv rudder.war /root
+mkdir rudder.war
+cd rudder.war && unzip /root/rudder.war
+
+----
+
+Then use your favorite editor to edit /opt/rudder/jetty7/webapps/rudder.war/WEB-INF/classes/applicationContext-security.xml
+to change <authentication-provider ref="demoAuthenticationProvider"/> to <authentication-provider ref="ldapAuthenticationProvider"/>
+and paste the following code block below </authentication-manager> :
+
+----
+
+<beans:bean id="contextSource"
+        class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+  <beans:constructor-arg value="ldap://ldap.mycorp.com:389/dc=mycorp,dc=com"/>
+  <beans:property name="userDn" value="cn=Rudder,ou=AppOU,dc=mycorp,dc=com"/>
+  <beans:property name="password" value="myverysecretpassword"/>
+</beans:bean>
+
+<beans:bean id="ldapAuthenticationProvider"
+    class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+ <beans:constructor-arg>
+   <beans:bean class="org.springframework.security.ldap.authentication.BindAuthenticator">
+     <beans:constructor-arg ref="contextSource"/>
+     <beans:property name="userDnPatterns">
+       <beans:list><beans:value>uid={0},ou=people</beans:value></beans:list>
+     </beans:property>
+   </beans:bean>
+ </beans:constructor-arg>
+ <beans:constructor-arg>
+   <beans:bean
+     class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">
+     <beans:constructor-arg ref="contextSource"/>
+     <beans:constructor-arg value="ou=groups"/>
+     <beans:property name="groupRoleAttribute" value="ou"/>
+   </beans:bean>
+ </beans:constructor-arg>
+</beans:bean>
+
+----
+
+You will have to adjust the ldap URI, the userDn and password to the appropriate values for your infrastructure.
+
+After that, you need to add some .jar files to the webapp classpath:
+
+----
+
+cd /opt/rudder/jetty7/webapps/rudder.war/WEB-INF/lib
+wget --user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101 Firefox/9.0" http://repo2.maven.org/maven2/org/springframework/security/spring-security-ldap/3.0.5.RELEASE/spring-security-ldap-3.0.5.RELEASE.jar
+wget --user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101 Firefox/9.0" http://repo2.maven.org/maven2/ldapsdk/ldapsdk/4.1/ldapsdk-4.1.jar
+wget --user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101 Firefox/9.0" http://repo2.maven.org/maven2/org/springframework/ldap/spring-ldap-core/1.3.1.RELEASE/spring-ldap-core-1.3.1.RELEASE.jar
+
+----
+
+And you are all done !
+
+====
+
+[TIP]
+
+====
+
+This procedure is still hacky, we are considering several solutions to have a standardized procedure that does not require
+to touch the WAR archive and just edit some configuration files.
+
