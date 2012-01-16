@@ -97,6 +97,12 @@ root@rudder-server:~# aptitude install rudder-server-root
 
 ----
 
-Rudder uses the Oracle Java virtual machine. To install it, you must accept
-its license.
+[NOTE]
+
+====
+
+If you use the 'Oracle Java 6 JRE', you will be asked to accept the license of
+the product during installation.
+
+====
 
