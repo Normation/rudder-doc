@@ -21,6 +21,8 @@ Graphviz:: http://www.graphviz.org/ to build SVG schemas.
 
 Inkscape:: http://inkcape.org to convert SVG for PDF output.
 
+ImageMagick:: http://www.imagemagick.org/ to normalize the resolution of illustrations.
+
 === Install the dependencies on Debian and Ubuntu:
 
 ----

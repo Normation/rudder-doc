@@ -26,3 +26,12 @@ do
 	echo "include::../$entry[] \n" >> $FILE
 done
 
+## image resolution should be 150dpi for PDF export
+for pic in $(find images -name \*.png)
+do	
+	if [ 150 != $(identify -verbose $pic | grep Resolution | cut -d x -f 2) ] 
+	then
+		echo "convert $pic to 150dpi"
+		convert -density 150 $pic $pic	
+	fi
+done
