@@ -1,6 +1,16 @@
 === Install Rudder Root server on Debian
 
-==== Add the main, contrib and non-free components
+==== Java on Debian
+
+The Rudder Root server needs a compatible 'Java Runtime Environment' to run. 
+
+On 'Debian Squeeze' and 'Debian Lenny', the available package is 'Oracle Java 6
+JRE', namely +sun-java-6-jre+, which is in the 'non-free' component. 
+
+On 'Debian Wheezy' and above, the available package is 'OpenJDK 7 JRE', namely
++openjdk-7-jre+.
+
+===== On Debian Squeeze or Lenny, add the main, contrib and non-free components
 
 Ensure that the +apt+ package manager is configured to use these three components,
 by checking that +/etc/apt/sources.list+ contains the following lines:
@@ -19,11 +29,16 @@ deb http://security.debian.org/ squeeze/updates main contrib non-free
 Your mirror may differ, +ftp.fr.debian.org+ is only an example. Also, please
 adapt the distribution name if needed.
 
-Also, the keep in mind that the Rudder root server needs a JVM to run, so you
-will have to install it yourself as the packaging of the Sun JVM is now restricted
-by Oracle(TM) and Rudder is not OpenJDK 6 compatible.
+====
 
-You can get the Java JRE 6 here : http://www.java.com
+[WARNING]
+
+====
+
+The packaging and redistribution of the Sun JVM has been restricted by
+'Oracle'. Starting with 'Debian Wheezy', the package is not distributed by
+Debian anymore. The 'Java 6 JRE' is still available here: http://www.java.com.
+
 ====
 
 ==== Update the system

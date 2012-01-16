@@ -67,7 +67,8 @@ sent by FusionInventory and insert the valuable data into the LDAP database.
 Application server for +rudder-webapp+ and +rudder-inventory-endpoint+. Both
 packages are written in 'Scala'. At compilation time, they are converted into
 +.war+ files. They need to be run in an application server. 'Jetty' is this
-application server. It depends on 'Oracle Java JRE'.
+application server. It depends on a compatible Java Runtime Environment. It can
+be either 'Oracle Java JRE' or 'OpenJDK 7 JRE'.
 
 +rudder-policy-templates+::
 
