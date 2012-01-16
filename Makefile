@@ -4,19 +4,26 @@ SOURCES = rudder-doc.txt
 TARGETS = html/rudder-doc.html html/rudder-doc.pdf html/README.html
 
 ## Asciidoc with general options
-ASCIIDOC = asciidoc --doctype=book -a docinfo2
+ASCIIDOC = $(CURDIR)/bin/asciidoc/asciidoc.py --doctype=book -a docinfo2
 
 ## Specific asciidoc options for XHTML output
 ASCIIDOCHTMLOPTS = --backend xhtml11 \
-		   -a stylesdir=$(CURDIR)/style/html \
-		   -a theme=rudder \
+		   -a stylesheet=$(CURDIR)/style/html/rudder.css \
 		   -a numbered \
+		   -a toc-title="Rudder User Documentation" \
 		   -a toc2 \
-		   -a icons \
-		   -a badges \
 		   -a max-width=50em \
-		   -a toc-title="Rudder User Documentation" 
+		   -a icons \
+		   -a badges
 
+## unused options::
+## stylesdir/stylesheet: 
+## we use standard asciidoc stylesheets (no specific stylesdir)
+## and add specific styling for Rudder afterwards (stylesheet option)
+#		   -a stylesdir=$(CURDIR)/style/html \
+## the search path for 'theme' option cannot be set accurately -> unused
+#		   -a theme=rudder \
+## embed css into the html file, this option is not used:
 #		   -a linkcss
 
 ## Generate PDF from docbook

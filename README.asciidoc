@@ -6,7 +6,12 @@ How to build Rudder User Documentation
 Rudder User Documentation is written using the 'asciidoc' formatting language, and
 includes 'graphviz' schemas. To build the documentation, you need following software:
 
-Asciidoc:: http://www.methods.co.nz/asciidoc/ to build HTML and PDF outputs.
+Python:: http://python.org to use asciidoc
+
+Asciidoc:: http://www.methods.co.nz/asciidoc/ to build HTML and PDF outputs. To
+keep control on the asciidoc behaviour after changes in the way asciidoc handles
+the themes and stylesheets, a copy of asciidoc is distributed with the
+documentation (issue #2173). 
 
 Docbook:: http://docbook.org/ to build PDF output. Version 0.3.2-1 or superior.
 
@@ -19,7 +24,7 @@ Inkscape:: http://inkcape.org to convert SVG for PDF output.
 === Install the dependencies on Debian and Ubuntu:
 
 ----
-apt-get install asciidoc docbook dblatex graphviz inkscape
+apt-get install python docbook dblatex graphviz inkscape
 ----
 
 === Install the dependencies On Fedora, Centos and RHEL
