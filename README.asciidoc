@@ -26,13 +26,13 @@ ImageMagick:: http://www.imagemagick.org/ to normalize the resolution of illustr
 === Install the dependencies on Debian and Ubuntu:
 
 ----
-apt-get install python docbook dblatex graphviz inkscape
+apt-get install python docbook dblatex graphviz inkscape imagemagick
 ----
 
 === Install the dependencies On Fedora, Centos and RHEL
 
 ----
-yum install docbook-utils inkscape
+yum install docbook-utils inkscape ImageMagick
 ----
 
 To install +asciidoc+ see: http://www.methods.co.nz/asciidoc/INSTALL.html.
