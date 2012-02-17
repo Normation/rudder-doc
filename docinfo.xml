@@ -45,11 +45,11 @@
 
 <revhistory>
   <revision>
-    <revnumber>2.3.0</revnumber>
-    <date>October 2011</date>
+    <revnumber>2.4.0</revnumber>
+    <date>February 2011</date>
     <authorinitials>NC, JC, FFT</authorinitials>
     <revremark>
-      First release of the Rudder User Documentation.
+      Rudder User Documentation for 2.4 release of Rudder.
     </revremark>
   </revision>
 </revhistory>
