@@ -1,0 +1,25 @@
+=== Policy Server
+
+The *Administartion > Policy Server Management* section sum-up information about
+Rudder policy server and its parameters. 
+
+==== Configure allowed networks
+
+Here you can configure the networks from which nodes are allowed to connect to
+Rudder policy server to get their updated configuration rules.
+
+You can add as many network as you want, the expected format is:
++networkip/mask+, for example +42.42.0.0/16+. 
+
+==== Clear caches
+
+Clear cached datas, like node configuration. That will trigger a full
+redeployment, with regeneration of all promises files.
+
+==== Reload dynamic groups
+
+Reload dynamic groups, so that new nodes and their inventories are taken into
+account. Normally, dynamic group are automatically reloaded unless that feature
+is explicitly disable in Rudder configuration file.
+
+

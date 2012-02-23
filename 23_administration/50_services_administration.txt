@@ -1,32 +1,5 @@
 === Basic administration of Rudder services
 
-This chapter covers basic administration task of Rudder services like
-configuring some parameters of the Rudder policy server, reading the services
-logg, and start, stop or restart Rudder services.
-
-==== Policy Server Management
-
-The *Administartion > Policy Server Management* section sum-up information about
-Rudder policy server and its parameters. 
-
-===== Configure allowed networks
-
-Here you can configure the networks from which nodes are allowed to connect to
-Rudder policy server to get their updated configuration rules.
-
-You can add as many network as you want, the expected format is:
-+networkip/mask+, for example +42.42.0.0/16+. 
-
-==== View Event Logs
-
-The *Administration > View Event Logs* section allows to see last events logged
-in Rudder.
-
-==== Plugin Management
-
-Rudder is an extensible software. The *Administration > Plugin Management*
-section sum-up information about loaded plugins and their configuration. 
-
 ==== Restart the agent of the node
 
 To restart the Rudder Agent, use following command on a node:

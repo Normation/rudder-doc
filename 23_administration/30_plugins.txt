@@ -1,0 +1,21 @@
+=== Plugins
+
+Rudder is an extensible software. The *Administration > Plugin Management*
+section sum-up information about loaded plugins, their version and their
+configuration.
+
+A plugin is a JAR archive. The web application must be restarted after
+installation of a plugin.
+
+==== Install a plugin
+
+To install a plugin, just copy the JAR file and the configuration file in the
+according directories.
+
++/opt/rudder/jetty7/plugins/+::
+
+This directory contains the JAR files of the plugins.
+
++/opt/rudder/etc/plugins/+::
+
+This directory contains the configuration files of the plugins.

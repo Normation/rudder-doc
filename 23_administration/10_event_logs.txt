@@ -1,0 +1,6 @@
+=== Event Logs
+
+The *Administration > View Event Logs* section allows to see last events logged
+in Rudder.
+
+
