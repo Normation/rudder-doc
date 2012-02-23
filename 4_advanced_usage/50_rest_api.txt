@@ -1,0 +1,166 @@
+=== REST API
+
+Rudder can be used as a web service using a REST API. 
+
+==== Default setup
+
+Access to REST API can be either using Rudder authentication, either
+unauthenticated, using authentication mechanisms set elsewhere, for instance at
+Apache level.
+
+===== Rudder Authentication
+
+By default, the access to the REST API is open to users not authenticated in
+Rudder.
+
+The method of authentication can be configured in
++/opt/rudder/etc/rudder-web.properties+
+
+----
+
+rudder.rest.allowNonAuthenticatedUser=true
+
+----
+
+===== Apache access rules
+
+By default, the REST API is exposed for localhost only, at +http://localhost/api+.
+
+.Example usage of non authentified REST API
+
+====
+
+Unrestricted access can be granted to local scripts accessing to +localhost+,
+whereas remote access to the REST API will be either denied, or restricted
+through autentication at apache level.
+
+====
+
+===== User for REST actions
+
+Actions done using the REST API are logged by default as run by the user
++UnknownRestUser+.
+
+To change the name of this user, add following header to the HTTP request:
+
+----
+
+X-REST-USERNAME: MyConfiguredRestUser
+
+----
+
+If the REST API is authentified, the authentified user name will be used in the
+logs.
+
+==== Status
+
++http://localhost/api/status+::
+
+Check if Rudder server is up and return +OK+. 
+If Rudder server is not responding, an error is displayed.
+
+==== Promises regeneration
+
++http://localhost/api/deploy/reload+::
+
+Regenerate promises (same action as the +Regenerate now+ button).
+
+==== Dynamic groups regeneration
+
++http://localhost/api/dyngroup/reload+::
+
+Check all dynamic groups for changes. If changes have occured, regenerate the
+groups in the LDAP and the CFEngine promises.
+
+==== Technique library reload
+
++http://localhost/api/techniqueLibrary/reload+::
+
+Check the technique library for changes. If changes have occured, reload the
+technique library in memory and regenerate the CFEngine promises.
+
+==== Archives manipulation
+
+Various methods are available to import and export items:
+
+===== Archiving:
+
++http://localhost/api/archives/archive/groups+::
+
+Export node groups and node groups categories.
+
++http://localhost/api/archives/archive/directives+::
+
+Export policy library (categories, user polity templates, policy instantes).
+
++http://localhost/api/archives/archive/rules+::
+
+Export configuration rules
+
++http://localhost/api/archives/archive/full+::
+
+Export everything
+
+===== Listing:
+
+
++http://localhost/api/archives/list/groups+::
+
+List available archives datetime for groups (the datetime is in the format
+awaited for restoration).
+
++http://localhost/api/archives/list/directives+::
+
+List available archives datetime for policy library (the datetime is in the
+format awaited for restoration).
+
++http://localhost/api/archives/list/rules+::
+
+List available archives datetime for configuration rules (the datetime is in the
+format awaited for restoration).
+
++http://localhost/api/archives/list/full+::
+
+List available archives datetime for full archives (the datetime is in the
+format awaited for restoration).
+
+===== Restoring a given archive:
+
+`http://localhost/api/archives/restore/groups/datetime/[archiveId]`::
+
+Restore given groups archive.
+
+`http://localhost/api/archives/restore/directives/datetime/[archiveId]`::
+
+Restore given directives archive.
+
+`http://localhost/api/archives/restore/rules/datetime/[archiveId]`::
+
+Restore given rules archive.
+
+`http://localhost/api/archives/restore/full/datetime/[archiveId]`::
+
+Restore everything.
+
+===== Restoring the latest available archive (from a previously archive action, and so from a Git tag):
+
+----
+
+http://localhost/api/archives/restore/groups/latestArchive
+http://localhost/api/archives/restore/directives/latestArchive
+http://localhost/api/archives/restore/rules/latestArchive
+http://localhost/api/archives/restore/full/latestArchive
+
+----
+
+===== Restoring the latest available commit (use Git HEAD):
+
+---- 
+
+http://localhost/api/archives/restore/groups/latestCommit
+http://localhost/api/archives/restore/directives/latestCommit
+http://localhost/api/archives/restore/rules/latestCommit
+http://localhost/api/archives/restore/full/latestCommit
+
+----
+
