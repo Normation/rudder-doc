@@ -1,0 +1,30 @@
+=== Generation of CFEngine promises
+
+Each time a change occurs in the Rudder interface, having an impact on the
+CFEngine promises needed by a node, it is necessary to regenerate the modified
+promises for every impacted node. By default this process is launched after each
+change.
+
+==== +Regenerate now+ button
+
+The button +Regenerate now+ on the top right of the screen permit you to force
+the regeneration of the promises. As changes in the inventory of the nodes are
+not automatically taken into account by Rudder, this feature can be usefull
+after some changes impacting the inventory informations.
+
+==== Disable automatic regeneration of promises
+
+In certain circumstances, it can be necessary to disable the automatic
+regeneration of the promises. It can be done by setting following property to
+false in +/opt/rudder/etc/rudder-web.properties+.
+
+----
+
+rudder.autoDeployOnModification=true
+
+----
+
+When switching to manual deployment of promises, the presence of pending changes
+is advertised on top of the +Regenerate now+ button. Each modification can be
+reviewed before validation.
+
