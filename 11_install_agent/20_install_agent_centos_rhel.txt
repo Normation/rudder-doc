@@ -5,7 +5,7 @@ architecture on
 
 ----
 
-http://www.rudder-project.org/rpm-2.4/RHEL/RPMS/
+http://www.rudder-project.org/rpm-stable/RHEL/RPMS/
 
 ----
 
