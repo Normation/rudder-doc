@@ -8,14 +8,18 @@ Add the URL of the Normation repository, by typing the next command on a SLES 11
 
 ----
 
-root@rudder-node:~# zypper ar -n "Rudder RPM Repositories" http://www.rudder-project.org/rpm-2.3/SLES_11_SP1/ Rudder
+root@rudder-node:~# zypper ar -n "Rudder RPM Repositories" \
+http://www.rudder-project.org/rpm-stable/SLES_11_SP1/ Rudder
 
 ----
 
 Or this one on a SLES 10 node:
 
 ----
-root@rudder-node:~# zypper sa "http://www.rudder-project.org/rpm-2.3/SLES_10_SP3/" Rudder
+
+root@rudder-node:~# zypper sa \
+"http://www.rudder-project.org/rpm-stable/SLES_10_SP3/" Rudder
+
 ----
 
 Then, update your local package database to retrieve the list of packages
