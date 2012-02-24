@@ -3,4 +3,5 @@
 The *Administration > View Event Logs* section allows to see last events logged
 in Rudder.
 
-
+Every action happening in the Rudder web interface are logged and displayed
+here. For every log item, date, actor, event type and category and description

@@ -1,0 +1,63 @@
+digraph data_workflow {
+
+compound=true;
+node [shape=Mrecord, style = filled, color="#6699ff", fillcolor="#ececff",
+fontsize=10];
+edge [fontsize=10];
+rankdir=LR;
+
+subgraph cluster_rudderDataWorkflow { 
+  label = "Rudder Data Workflow";
+  style = filled color="#6699ff" fillcolor="#fefefe" fontsize=12;
+
+  subgraph cluster_filesystemGit { 
+    label = "Filesystem / Git";
+    style = filled color="#6699ff" fillcolor=lightgrey fontsize=12;
+  
+    subgraph cluster_filesystemTechnique { 
+        label = "Technique (Name, Version)";
+        shape = folder ;
+            filesystemMetadata [label = "metadata.xml"];
+            filesystemSTfiles [label = "XXX.st"];
+    };
+
+  };
+
+  subgraph cluster_LDAP { 
+    label = "LDAP";
+    style = filled color="#6699ff" fillcolor=lightgrey fontsize=12;
+
+    subgraph cluster_RudderCore { 
+      label = "Modifiable in Rudder Webapp";
+      style = filled color="#6699ff" fillcolor="#e2e2e2" ;
+      ldapActiveTechniques [label = "Active Techniques"];
+      ldapNodeGroups [label = "Node Groups"];
+      ldapRules [label = "Rules"];
+      };
+
+      ldapNodeConfigurations [label = "Node Configurations"];
+  };
+
+  subgraph cluster_CFEnginePromises { 
+    label = "CFEngine promises";
+    style = filled color="#6699ff" fillcolor=lightgrey fontsize=12;
+    CfPromises [label = "CFEngine promises"];
+  };
+
+  subgraph cluster_inMemory { 
+    label = "In Memory";
+    style = filled color="#6699ff" fillcolor="#ffffee" fontsize=12;
+    Cf3PolicyDraft [label = "Cf3PolicyDraft"];
+    inMemoryMetadata [label = "Map importation"];
+  };
+
+  filesystemMetadata -> inMemoryMetadata ;
+  inMemoryMetadata -> ldapActiveTechniques;
+  {ldapActiveTechniques; ldapNodeGroups} -> ldapRules -> ldapNodeConfigurations;
+  ldapNodeConfigurations -> Cf3PolicyDraft ;
+  cfClerk [label = "cf-clerk"];
+  {filesystemSTfiles; Cf3PolicyDraft}->cfClerk;
+  cfClerk -> CfPromises ;
+};
+
+}
