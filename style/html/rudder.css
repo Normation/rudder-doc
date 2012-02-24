@@ -1,14 +1,30 @@
 /* Rudder CSS - we use standard asciidoc style as a basis */
 
+/* 
+ * dark brown
+      	color: rgb(93,56,29);
+ * light brown
+      	color: rgb(151,72,7);
+ * yellowish
+	color: rgb(232,197,78); 
+ */
+
 body, #toc, #toc *  {
       	background-color: #e2e2e2 ; 
       	color: rgb(93,56,29);
 }
 
+strong, em, dt, div .title, tt, div.tableblock > table, table * {
+	border-color: rgb(93,56,29); 
+      	background-color: transparent ; 
+      	color: rgb(151,72,7);
+}
+
 #header {
       	background-color: #1f1e1e; 
       	color: rgb(232,197,78); 
-      	-moz-border-radius:11px;
+      	padding-bottom: 1em;
+	-moz-border-radius:11px;
       	-webkit-border-radius:11px;
 }
 
@@ -17,9 +33,38 @@ body, #toc, #toc *  {
 	padding-top: 111px;
 }
 
+#header h1, #author, #email *, #revnumber, #revdate  {
+	color: #e2e2e2; 
+}
+
+@media screen {
+  body {
+    max-width: 60em; /* approximately 80 characters wide */
+    margin-left: 33%;
+  }
+
+#toc {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 25%;
+    padding: 0.5em;
+    padding-bottom: 1.5em;
+    margin: 0;
+    overflow: auto;
+    border-right: 3px solid #f8f8f8;
+    background-color: white;
+  }
+}
+
 #content {
       	background-color: #eeebe7 ; 
 	padding: 1em;
+	margin-top: 2em;
+      	border: 1px solid rgb(151,72,7);
+      	-moz-border-radius:11px;
+      	-webkit-border-radius:11px;
 }
 
 h1, h2, h3, h4, h5, h6, #toc .toclevel2, #toctitle {
@@ -70,9 +115,9 @@ div.exampleblock > div.title {
 }
 
 div.exampleblock > div.content {
-      	border: 1px solid #6699ff;
+      	border: 1px solid rgb(151,72,7);
       	background-color: #ececff;
-      	color: #000000;
+      	color: #000000 ;
       	border-radius: 11px;
       	-moz-border-radius:11px;
       	-webkit-border-radius:11px;
