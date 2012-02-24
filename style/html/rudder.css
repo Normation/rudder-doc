@@ -1,16 +1,19 @@
 /* Rudder CSS - we use standard asciidoc style as a basis */
 
-body {
+body, #toc, #toc *  {
       	background-color: #e2e2e2 ; 
       	color: rgb(93,56,29);
 }
 
-#header *{
-	color: rgb(232,197,78);
+#header {
+      	background-color: #1f1e1e; 
+      	color: rgb(232,197,78); 
+      	-moz-border-radius:11px;
+      	-webkit-border-radius:11px;
 }
 
 #header h1 {
-      	background: url('logoRudder.jpg') no-repeat top left; 
+      	background: url('logoRudder.jpg') no-repeat top left transparent; 
 	padding-top: 111px;
 }
 
@@ -19,20 +22,22 @@ body {
 	padding: 1em;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, #toc .toclevel2, #toctitle {
       	color: rgb(151,72,7);
+      	-moz-border-radius:11px;
+      	-webkit-border-radius:11px;
 }
 
-h1, h2, h3 {
-      	border-bottom: 2px solid rgb(232,197,78);
+h1, h2, h3, #toctitle {
+      	border-bottom: 12px solid rgb(232,197,78);
 }
 
 hr {
-      	border: 1px solid rgb(232,197,78);
+      	border: 12px solid rgb(232,197,78);
 }
 
 #footer {
-      	border-top: 2px solid rgb(232,197,78);
+      	border-top: 12px solid rgb(232,197,78);
 }
 div.listingblock > div.content {
       	padding: 0.5em;
@@ -77,18 +82,6 @@ div.exampleblock > div.content {
       	border-top: 1px solid rgb(232,197,78);
 }
 
-#toc {
-	background: #1f1e1e;
-	color: rgb(232,197,78);
-}
-
-#toc .toclevel2 {
-	color: rgb(232,197,78);
-}
-
-#toctitle {
-	color: rgb(232,197,78);
-}
  
 a, a:visited {
 	color: rgb(151,72,7);
@@ -96,9 +89,14 @@ a, a:visited {
 }
    
 #toc a:hover {
-	color: rgb(232,197,78);
-	background: rgb(151,72,7);
+	color: rgb(93,56,29);
+	background: #eeebe7;
 	display: block;
+      	-moz-border-radius:11px;
+      	-webkit-border-radius:11px;
 }
 
+#header h1, #author, #email, #revdate, #revnumber {
+	padding-left: 1em;
+}
 
