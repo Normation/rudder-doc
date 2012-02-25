@@ -1,4 +1,4 @@
-=== Optimize Postgres
+=== Optimize PostgreSQL server
 
 The default (out-of-the-box) configuration of Postgres is really not compliant 
 for large (or normal) machines. It uses a really small amount of memory

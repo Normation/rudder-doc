@@ -1,0 +1,4 @@
+== Reference files
+
+This chapter contains the reference Rudder configuration files
+

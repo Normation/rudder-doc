@@ -77,6 +77,15 @@ h1, h2, h3, #toctitle {
       	border-bottom: 12px solid rgb(232,197,78);
 }
 
+h4 {
+      	border-bottom: 6px solid rgb(232,197,78);
+}
+h3,h4 {
+  float: left;
+}
+h3 + *, h4 + * {
+  clear: left;
+}
 hr {
       	border: 12px solid rgb(232,197,78);
 }

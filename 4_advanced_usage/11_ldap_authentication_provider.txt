@@ -1,5 +1,5 @@
 [[ldap-auth-provider, LDAP authentication provider for Rudder]]
-=== Configuring an LDAP authentication provider for Rudder
+==== Configuring an LDAP authentication provider for Rudder
 
 If you are operating on a corporate network or want to have your users in a
 centralized database, there is a solution for you.

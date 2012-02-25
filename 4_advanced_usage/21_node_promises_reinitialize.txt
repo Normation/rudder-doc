@@ -1,4 +1,4 @@
-=== Reinitialize policies for a Node
+==== Reinitialize policies for a Node
 
 To reinitialize the policies for a Node, delete the local copy of the Applied
 Policies fetched from the Rudder Server, and create a new local copy of the

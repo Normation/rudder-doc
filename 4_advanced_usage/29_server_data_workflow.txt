@@ -1,4 +1,4 @@
-=== Data workflow
+=== Rudder Server data workflow
 
 To have a better understanding of the Archive feature of Rudder, a description
 of the data workflow can be usefull.
