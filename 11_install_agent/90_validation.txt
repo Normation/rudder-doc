@@ -6,7 +6,13 @@ the Rudder web interface.
 You will be able to browse its inventory, and accept it to manage its
 configuration with Rudder.
 
-You may force the agent execution by issuing the following command :
+[TIP]
+
+.Force Rudder Agent execution
+
+====
+
+You may force the agent execution by issuing the following command:
 
 ----
 
@@ -14,3 +20,4 @@ You may force the agent execution by issuing the following command :
 
 ----
 
+====

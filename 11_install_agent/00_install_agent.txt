@@ -11,7 +11,11 @@ be acknowledged in the Rudder Server interface to become a managed Node. For a m
 description of the workflow, please refer to the <<advanced-usage,Advanced Usage>> part
 of this documentation.
 
-=== Components
+[NOTE]
+
+.Components
+
+====
 
 This agent contains the following tools:
 
@@ -33,3 +37,4 @@ installation.
 To get the list of supported Operating systems.please refer to
 <<Nodes_supported_OS, the list of supported Operating Systems for the Nodes>>.
 
+====
