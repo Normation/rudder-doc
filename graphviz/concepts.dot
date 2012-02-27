@@ -3,7 +3,7 @@ digraph concepts{
 rankdir=BT;
 node [shape=Mrecord, style=filled, color="#6699ff", fillcolor="#ececff",
 fontsize=10];
-NN NS NG PT PS CR ;
+NN NS NG TE DI RU ;
 
 NN [label = "New Nodes" ];
 
@@ -11,11 +11,11 @@ NS [label = "Node Search" ];
 
 NG [label = "Node groups"];
 
-PT [label = "Policy Templates"];
+TE [label = "Techniques"];
 
-PS [label = "Policies"];
+DI [label = "Directives"];
 
-CR [label = "Configuration Rules"];
+RU [label = "Rules"];
 
 subgraph cluster0 { 
     label="Asset Management"; 
@@ -25,7 +25,7 @@ subgraph cluster0 {
     NN -> NS ->NG; 
 };
 
-NG -> CR ;
+NG -> RU ;
 
 subgraph cluster1 { 
     label="Configuration Management";
@@ -33,7 +33,7 @@ subgraph cluster1 {
     style="filled";
     color="#6699ff";
     fillcolor="lightgrey";
-    PT -> PS -> CR; 
+    TE -> DI -> RU; 
 };
 
 }

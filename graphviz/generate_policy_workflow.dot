@@ -5,13 +5,13 @@ fontsize=10];
 
 newnode      [label = "New Node validated"];
 nodechanged  [label = "Inventory changed"] ;
-ptchanged    [label = "Policy Template changed"];
-pichanged    [label = "Policy Instance changed"];
+techchanged  [label = "Technique changed"];
+dirchanged   [label = "Directive changed"];
 groupchanged [label = "Group of Node changed"];
-crchanged    [label = "Configuration Rule changed"];
+rchanged     [label = "Rule changed"];
 forcechange  [label = "Regeneration forced by User"];
 preparepol   [label = "Prepare policies for Node"];
 
-{newnode nodechanged ptchanged pichanged groupchanged crchanged forcechange} -> preparepol ;
+{newnode nodechanged techchanged dirchanged groupchanged rchanged forcechange} -> preparepol ;
 
 }
