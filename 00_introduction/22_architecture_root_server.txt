@@ -70,10 +70,10 @@ packages are written in 'Scala'. At compilation time, they are converted into
 application server. It depends on a compatible Java Runtime Environment. It can
 be either 'Oracle Java JRE' or 'OpenJDK 7 JRE'.
 
-+rudder-policy-templates+::
++rudder-techniquess+::
 
-Package for the Policy Templates. They are installed in
-+/opt/rudder/share/policy-templates+. At runtime, the Policy Templates are
+Package for the Techniques. They are installed in
++/opt/rudder/configuration-repository/techniques+. At runtime, the Techniques are
 copied into a 'git' repository in +/var/rudder+. Therefore, the package depends
 on the +git+ package.
 
@@ -194,6 +194,6 @@ git::
 
 The package is not a dependency, but its installation is recommended. The
 running Policy Templates Library is maintained as a git repository in
-+/var/rudder/policy-templates+. It can be useful to have git installed on the
++/var/rudder/configuration-repository/techniques+. It can be useful to have git installed on the
 system for maintenance purpose.
 

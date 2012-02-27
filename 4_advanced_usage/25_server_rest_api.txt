@@ -91,11 +91,11 @@ Export node groups and node groups categories.
 
 +http://localhost/api/archives/archive/directives+::
 
-Export policy library (categories, user polity templates, policy instantes).
+Export policy library (categories, active techniques, directives).
 
 +http://localhost/api/archives/archive/rules+::
 
-Export configuration rules
+Export rules
 
 +http://localhost/api/archives/archive/full+::
 

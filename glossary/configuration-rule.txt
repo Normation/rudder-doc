@@ -1,5 +1,0 @@
-Configuration Rule::
-
-It is the application of a policy to a group of nodes. It is the glue between
-both Asset Management and Configuration Management parts of the application.
-

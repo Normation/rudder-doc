@@ -1,0 +1,8 @@
+Active Techniques:: 
+
+This is an organized list of the Techniques selected and modified by the
+user. By default this list is the same as the Technique Libraryy.
+Techniques can be disabled or deleted, and then activated again with a
+simple drag and drop. Categories can be reorganised according to the desired
+taxonomy. A Technique can appear only once in the Active Techniques list.
+
