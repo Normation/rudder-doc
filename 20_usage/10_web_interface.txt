@@ -21,7 +21,7 @@ and Administration.
 The home page summarizes the content of the other parts and provides quick links
 for the most common actions.
 
-.Home menu 
+.Rudder Homepage  
 
 image::./images/RudderHome.png[Home menu]
 
@@ -31,18 +31,18 @@ In the Asset Management section, you will find the validation tool for new
 Nodes, a search engine for validated Nodes, and the management tool for groups
 of Nodes.
 
-.Asset Management menu 
+.Asset Management welcome screen 
 
-image::./images/RudderMenuAssetManagement.png[Asset Management menu]
+image::./images/RudderMenuAssetManagement.png[Asset Management]
 
 ==== Configuration Management
 
 In the Configuration Management section, you can select the Techniques,
 configure the Directives and manage the Rules.
 
-.Configuration Management menu
+.Configuration Management welcome screen
 
-image::./images/RudderMenuConfigurationManagement.png[Configuration Management menu]
+image::./images/RudderMenuConfigurationManagement.png[Configuration Management]
 
 ==== Administration
 
@@ -50,7 +50,7 @@ The Administration section provides some general settings: you can setup the
 available networks for the Policy Server, view the event logs and manage your
 plugin collection.
 
-.Administration menu
+.Administration welcome screen
 
-image::./images/RudderMenuAdministration.png[Administration menu]
+image::./images/RudderMenuAdministration.png[Administration]
 
