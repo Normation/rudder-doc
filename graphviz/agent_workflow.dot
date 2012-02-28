@@ -65,7 +65,7 @@ subgraph cluster_Server {
     subgraph cluster_ServerGeneric {
       label="Generic services" fontsize=12;
       uuid [label = "UUID" color="#6699ff", fillcolor="#974807"];
-      tools [label = "Tools" color="#6699ff", fillcolor="#974807";
+      tools [label = "Tools" color="#6699ff", fillcolor="#974807"];
     };
 
 };
