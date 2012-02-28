@@ -76,8 +76,9 @@ strong, em, dt, div .title, tt, div.tableblock > table, table * {
       	border-radius:11px;
 }
 
-h1, h2, h3, h4, h5, h6, #toc .toclevel1, #toc .toclevel2, #toctitle {
-      	color: rgb(93,56,29);
+h1, h2, h3, h4, h5, h6, #toc .toclevel1, #toc .toclevel2, #toctitle, img {
+      	background: transparent;
+	color: rgb(93,56,29);
       	-moz-border-radius:11px;
       	-webkit-border-radius:11px;
       	border-radius:11px;
