@@ -1,5 +1,7 @@
 ## Rudder User Documentation Makefile
 
+.PHONY: all clean view
+
 SOURCES = rudder-doc.txt
 TARGETS = html/rudder-doc.html html/rudder-doc.pdf html/README.html
 
@@ -33,7 +35,10 @@ SEE = see
 
 all: $(TARGETS)
 
-html/rudder-doc.pdf : rudder-doc.txt
+html: html/rudder-doc.html
+pdf: html/rudder-doc.pdf
+
+html/rudder-doc.pdf: rudder-doc.txt
 	mkdir -p html	
 	$(ASCIIDOC) --backend docbook $?
 	$(DOCBOOK2PDF) rudder-doc.xml
@@ -55,9 +60,9 @@ slides.html : rudder-doc.txt
 
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
-clean : 
+clean: 
 	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html
 
-view : all
+view: all
 	$(SEE) $(TARGETS)
 
