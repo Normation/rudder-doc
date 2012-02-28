@@ -1,0 +1,85 @@
+=== Archives
+
+In the 'Admnistration > Archives' section of the Rudder Server web interface, you
+can export and import the configuration of Rudder Groups, Directives and Rules.
+You can either archive the complete configuration, or only the subset dedicated
+to Groups, Directives or Rules.
+
+Active Rudder configuration is stored in a LDAP tree.
+
+The content of this tree can be exported into a file tree containing +xml+
+files, into +/var/rudder/configuration-repository+. This file tree is under
+version control, using 'git'. At exportation time, a 'git tag' is created in this
+repository, and referenced in the Rudder Webapp. Each change in the Rudder web
+interface is also commited in the repository.
+
+The content of this repository can be imported into Rudder.
+
+//Change management / Qualification / Checkpoint / Snapshot / Archive
+
+==== Archive usecases
+
+The archive feature of Rudder allows to:
+
+* Exchange configuration between multiple Rudder instances;
+
+* Keep an history of major changes.
+
+===== Changes testing
+
+Export the current configuration of Rudder before you begin to make any change
+you have to test: if anything goes wrong, you can return to this archived state.
+
+===== Changes qualification
+
+Assuming you have multiple Rudder instances, each on dedicated for the
+developement, qualification and production environment. You can prepare the
+changes on the developement instance, export an archive, deploy this archive on
+the qualification environment, then on the production environment.
+
+[TIP]
+
+====
+
+Use 'git' to copy the files from an environment to another.
+
+For instance, using one unique git repository you can follow this workflow:
+
+. On Rudder test: 
+
+.. Use Rudder web interface to prepare your policy;
+
+.. Create an archive;
+
+.. +git push+ to the central repository;
+
+. On Rudder production: 
+
+.. +git pull+ from the central repository;
+
+.. Use  Rudder web interface to import the qualified archive.
+
+====
+
+===== Deploy a preconfigured instance
+
+Assuming you are preparing a complete Policy integration for a client.
+
+. In your labs:
+
+.. Prepare the configuration for Groups, Directives and Rules;
+
+.. Export the Policy
+
+.. Create an archive containing the content of the configuration repository
+(+zip+ file).
+
+. At the client place:
+
+.. Unpack the archive in +/var/rudder/configuration-repository+
+
+.. +git commit -a +
+
+.. Restore the configurations from the last commit
+
+
