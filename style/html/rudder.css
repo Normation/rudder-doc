@@ -21,6 +21,10 @@ body, #toc, #toc *  {
       	color: black;
 }
 
+#toc * {
+	font-family: Arial,Helvetica,sans-serif;
+}
+
 strong, em, dt, div .title, tt, div.tableblock > table, table * {
 	border-color: rgb(93,56,29); 
       	background-color: transparent ; 
