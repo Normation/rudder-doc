@@ -8,7 +8,7 @@ node [
     fillcolor="#e2e2e2",
     fontsize=10
 ];
-NN NS NG PT PS CR ;
+NN NS NG TE DI RU ;
 
 NN [label = "New Nodes" ];
 
