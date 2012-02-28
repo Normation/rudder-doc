@@ -38,7 +38,7 @@ subgraph cluster1 {
     style="filled";
     color="#5d381d"; 
     fillcolor="#eeebe7";
-    PT -> PS -> CR; 
+    TE -> DI -> RU; 
 };
 
 }
