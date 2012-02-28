@@ -1,4 +1,4 @@
-=== Validation
+==== Validate new Node
 
 Several minutes after the start of the agent, a new Node should be pending in
 the Rudder web interface.
@@ -6,11 +6,7 @@ the Rudder web interface.
 You will be able to browse its inventory, and accept it to manage its
 configuration with Rudder.
 
-[TIP]
-
-.Force Rudder Agent execution
-
-====
+===== Force Rudder Agent execution
 
 You may force the agent execution by issuing the following command:
 
@@ -20,4 +16,3 @@ You may force the agent execution by issuing the following command:
 
 ----
 
-====

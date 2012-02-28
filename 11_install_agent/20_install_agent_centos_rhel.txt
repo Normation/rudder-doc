@@ -17,29 +17,4 @@ rpm -Uhv rudder-agent-2.4.0-1.EL.5.x86_64.rpm
 
 ----
 
-Type in the IP address of the Rudder Root Server in the following file
-
-----
-
-echo *root_server_IP_address* > /var/rudder/cfengine-community/policy_server.dat
-
-----
-
-[TIP]
-
-====
-
-We advise you to use the +IP address+ of the Rudder Root Server. The DNS name of
-this server can also be accepted if you have a complete DNS infrastructure
-matching the IP of the Nodes with their hostnames. 
-
-====
-
-Finally, start the agent:
-
-----
-
-service rudder-agent start
-
-----
 
