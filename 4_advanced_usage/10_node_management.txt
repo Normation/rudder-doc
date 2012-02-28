@@ -1,3 +1,5 @@
+=== Node management
+
 ==== Reinitialize policies for a Node
 
 To reinitialize the policies for a Node, delete the local copy of the Applied
