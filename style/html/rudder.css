@@ -148,7 +148,14 @@ a, a:visited {
 	color: rgb(151,72,7);
      	text-decoration:none;
 }
-   
+
+a:hover {
+	color: rgb(93,56,29);
+	background: #e2e2e2;
+    -moz-border-radius:11px;
+    -webkit-border-radius:11px;
+}
+
 #toc a:hover {
 	color: rgb(93,56,29);
 	background: #eeebe7;
