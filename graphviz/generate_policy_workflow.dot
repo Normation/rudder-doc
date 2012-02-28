@@ -1,7 +1,12 @@
 digraph generate_policy_workflow{
 rankdir=LR;
-node [shape=Mrecord, style = filled, color="#6699ff", fillcolor="#ececff",
-fontsize=10];
+node [
+    shape=Mrecord, 
+    style = filled, 
+    color="#5d381d", 
+    fillcolor="#eeebe7",
+    fontsize=10
+];
 
 newnode      [label = "New Node validated"];
 nodechanged  [label = "Inventory changed"] ;

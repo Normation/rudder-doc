@@ -36,7 +36,7 @@ node [
 {rank=same;
   "rudder-inventory-endpoint"
   "rudder-reports"
-  "rudder-policy-templates"
+  "rudder-techniques"
 }
 
 "rudder-inventory-endpoint" -> "rudder-webapp"
