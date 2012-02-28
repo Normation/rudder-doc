@@ -26,4 +26,4 @@ do
 	echo "include::../$entry[] \n" >> $FILE
 done
 
-./images-resolution.sh
+$(dirname $0)/images-resolution.sh

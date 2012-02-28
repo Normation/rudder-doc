@@ -14,7 +14,7 @@ Normation_SAS,_Jonathan_Clarke,_Nicolas_Charles_and_Fabrice_Flore-Thebault <cont
 // Generate the map of content from list of files and alphabetically ordered
 // glossary 
 
-sys::[./generate-map.sh]
+sys::[./tools/generate-map.sh]
 
 include::preface.txt[]
 
