@@ -1,4 +1,4 @@
-=== rules
+=== Rules
 
 include::../glossary/rule.txt[]
 
