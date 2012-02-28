@@ -1,8 +1,13 @@
 digraph agent_workflow {
 
 compound=true;
-node [shape=Mrecord, style = filled, color="#6699ff", fillcolor="#ececff",
-fontsize=10];
+node [
+  shape=Mrecord, 
+  style = filled, 
+  color="#5d381d", 
+  fillcolor="#eeebe7",
+  fontsize=10
+];
 edge [fontsize=10];
 
   inventory [label = "Incoming Inventory"];
