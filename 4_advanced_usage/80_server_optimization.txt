@@ -2,69 +2,85 @@
 
 ==== Optimize PostgreSQL server
 
-The default (out-of-the-box) configuration of Postgres is really not compliant 
-for large (or normal) machines. It uses a really small amount of memory
+The default out-of-the-box configuration of PostgreSQL server is really not
+compliant for high end (or normal) servers. It uses a really small amount of
+memory.
 
-The location of the file is:
-
-. /etc/postgresql/8.x/main/postgresql.conf
-. /var/lib/pgsql/data/postgresql.conf (on a SuSE system)
-
-
-
-The following section presents suggested values on a large node.
-
-===== Amount of System V shared memory
-
-A reasonable starting value for shared_buffers is 1/4 of the memory in your system:
-
-. shared_buffers = 1GB
-
-====
-
-[NOTE]
-Note : you may need to set the proper amount on the system
+The location of the PostgreSQL server configuration file is usually:
 
 ----
 
-$ sysctl -w kernel.shmmax=1073741824
+/etc/postgresql/8.x/main/postgresql.conf
 
 ----
 
-====
+On a SuSE system:
 
-Ref http://www.postgresql.org/docs/8.4/interactive/kernel-resources.html#SYSVIPC
+----
 
-===== Memory for complex operations
+/var/lib/pgsql/data/postgresql.conf
 
-Complex query:
+----
 
-. work_mem = 24MB 
-. max_stack_depth = 4MB
+===== Suggested values on an high end server
 
-Complex maintenance (index, vacuum):
+----
+#
+# Amount of System V shared memory
+# --------------------------------
+#
+# A reasonable starting value for shared_buffers is 1/4 of the memory in your
+# system:
 
-. maintenance_work_mem = 240MB
+shared_buffers = 1GB
 
-===== Write ahead log
+# You may need to set the proper amount of shared memory on the system.
+#
+#   $ sysctl -w kernel.shmmax=1073741824
+#
+# Reference: 
+# http://www.postgresql.org/docs/8.4/interactive/kernel-resources.html#SYSVIPC
+#
+# Memory for complex operations
+# -----------------------------
+#
+# Complex query:
 
-Size of the write ahead log:
+work_mem = 24MB 
+max_stack_depth = 4MB
 
-. wal_buffers = 4MB
+# Complex maintenance: index, vacuum:
 
-===== Query planner
+maintenance_work_mem = 240MB
 
-Gives hint to the query planner about the size of disk cache
+# Write ahead log
+# ---------------
+#
+# Size of the write ahead log:
 
-Setting effective_cache_size to 1/2 of total memory would be a normal conservative setting:
+wal_buffers = 4MB
 
-. effective_cache_size = 1024MB
+# Query planner
+# -------------
+#
+# Gives hint to the query planner about the size of disk cache.
+#
+# Setting effective_cache_size to 1/2 of total memory would be a normal
+# conservative setting:
 
-==== Suggested values on a not so large node
+effective_cache_size = 1024MB
 
-. shared_buffers = 128MB
-. work_mem = 8MB
-. max_stack_depth = 3MB
-. maintenance_work_mem = 64MB
-. wal_buffers = 1MB
-. effective_cache_size = 128MB
+----
+
+===== Suggested values on a low end server
+
+----
+
+shared_buffers = 128MB
+work_mem = 8MB
+max_stack_depth = 3MB
+maintenance_work_mem = 64MB
+wal_buffers = 1MB
+effective_cache_size = 128MB
+
+----
