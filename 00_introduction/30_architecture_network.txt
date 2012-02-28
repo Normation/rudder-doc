@@ -30,7 +30,7 @@ These flows are used to add features to Rudder:
 
 ====
    
-include::../glossary/big-red-button.txt[]
+// include::../glossary/big-red-button.txt[]
 
 include::../glossary/cfengine-nova.txt[]
 

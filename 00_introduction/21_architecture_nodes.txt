@@ -50,7 +50,7 @@ Windows platforms.
 
 It is possible to use Rudder on other platforms than the ones listed here.
 However, we haven't tested the application on them, and can't currently supply
-any packages for them. Moreover, the Policy Templates are likely to fail. If you
+any packages for them. Moreover, the Techniques are likely to fail. If you
 wish to try Rudder on other systems, please contact us.
 
 ====

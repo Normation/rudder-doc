@@ -139,7 +139,7 @@ After validation of the Node, the system log service of the Node is configured
 to send reports regularly to the server. Supported system log providers are:
 +syslogd+, +rsyslogd+ and +syslog-ng+.
 
-===== Apply Policy Instances
+===== Apply Directives
 
 Apply other policies and write reports locally.
 
@@ -256,13 +256,13 @@ generated for Nodes according in the following states:
 
 . Inventory has changed;
 
-. Policy Template has changed;
+. Technique has changed;
 
-. Policy Instance has changed;
+. Directive has changed;
 
 . Group of Node has changed;
 
-. Configuration Rule has changed;
+. Rule has changed;
 
 . Regeneration was forced by the user.
 

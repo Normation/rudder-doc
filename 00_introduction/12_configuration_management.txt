@@ -4,17 +4,17 @@ We adopted the following terms to describe the configurations in Rudder:
 
 ====
 
-include::../glossary/policy-template.txt[]
+include::../glossary/technique.txt[]
 
-include::../glossary/policy-instance.txt[] 
+include::../glossary/directive.txt[] 
 
-include::../glossary/configuration-rule.txt[]
+include::../glossary/rule.txt[]
 
 include::../glossary/applied-policy.txt[]
 
 ====
 
-As illustrated in this summary diagram, the configuration rules are linking the
+As illustrated in this summary diagram, the rules are linking the
 functions of inventory management and configuration management.
 
 ["graphviz", "concepts.png"] 

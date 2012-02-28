@@ -17,7 +17,7 @@ configuration for apache, logrotate and rsyslog.
 
 +/var/rudder/cfengine-community+:: Data for CFEngine Community are stored here.
 
-+/var/rudder/policy-templates+:: Policy Templates are stored here.
++/var/rudder/configuration-repository/techniques+:: Policy Templates are stored here.
 
 +/var/cfengine+:: Data for CFEngine Nova are stored here.
 

@@ -37,8 +37,8 @@ image::./images/RudderMenuAssetManagement.png[Asset Management menu]
 
 ==== Configuration Management
 
-In the Configuration Management section, you can select the Policy Templates,
-configure the Policy Instances and manage the Configuration Rules.
+In the Configuration Management section, you can select the Techniques,
+configure the Directives and manage the Rules.
 
 .Configuration Management menu
 

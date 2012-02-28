@@ -1,7 +1,0 @@
-Policy Instance::
-
-This is an instance of a Policy Template, which allows to set values for the
-parameters of the latter. Each Policy Instance can have an unique name. A Policy
-Instance should be completed with a short and a long description, and a
-collection of parameters for the variables defined by the Policy Template. 
-

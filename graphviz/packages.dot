@@ -15,7 +15,7 @@ node [
 "rudder-inventory-ldap"
 "rudder-inventory-endpoint"
 "rudder-reports"
-"rudder-policy-templates"
+"rudder-techniques"
 "rudder-webapp"
 "rudder-cfengine-community"
 "rudder-server-root"
@@ -41,7 +41,7 @@ node [
 
 "rudder-inventory-endpoint" -> "rudder-webapp"
 
-"rudder-policy-templates" -> "rudder-webapp" 
+"rudder-techniques" -> "rudder-webapp" 
 
 "rudder-reports"-> "rudder-webapp"
 

@@ -14,9 +14,9 @@ these policies will automatically be enforced upon them.
 Why not create policies for emergency situations in advance? You can then put
 your IT infrastructure in "panic" mode in just a few clicks.
 
-For example, using the provided Policy Templates, you could create a Name
-resolution policy to use your own internal DNS servers for normal situations,
-and a second, alternative policy, to use Google's public DNS servers, in case
+For example, using the provided Techniques, you could create a Name
+resolution Directive to use your own internal DNS servers for normal situations,
+and a second, alternative Directive, to use Google's public DNS servers, in case
 your internal DNS servers are no longer available.
 
 === Standardizing configurations

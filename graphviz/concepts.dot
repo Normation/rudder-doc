@@ -4,7 +4,7 @@ rankdir=BT;
 node [
     shape=Mrecord, 
     style=filled, 
-    color="rgb(151,72,7)", 
+    color="#974807", 
     fillcolor="#e2e2e2",
     fontsize=10
 ];
@@ -16,27 +16,27 @@ NS [label = "Node Search" ];
 
 NG [label = "Node groups"];
 
-PT [label = "Policy Templates"];
+TE [label = "Techniques"];
 
-PS [label = "Policies"];
+DI [label = "Directives"];
 
-CR [label = "Configuration Rules"];
+RU [label = "Rules"];
 
 subgraph cluster0 { 
     label="Asset Management"; 
     style=filled;
-    color="rgb(93,56,29)"; 
+    color="#5d381d"; 
     fillcolor="#eeebe7";
     NN -> NS ->NG; 
 };
 
-NG -> CR ;
+NG -> RU ;
 
 subgraph cluster1 { 
     label="Configuration Management";
     shape="component";
     style="filled";
-    color="rgb(93,56,29)"; 
+    color="#5d381d"; 
     fillcolor="#eeebe7";
     PT -> PS -> CR; 
 };
