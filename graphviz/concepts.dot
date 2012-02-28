@@ -1,8 +1,13 @@
 digraph concepts{
 
 rankdir=BT;
-node [shape=Mrecord, style=filled, color="#6699ff", fillcolor="#ececff",
-fontsize=10];
+node [
+    shape=Mrecord, 
+    style=filled, 
+    color="rgb(151,72,7)", 
+    fillcolor="#e2e2e2",
+    fontsize=10
+];
 NN NS NG PT PS CR ;
 
 NN [label = "New Nodes" ];
@@ -20,8 +25,8 @@ CR [label = "Configuration Rules"];
 subgraph cluster0 { 
     label="Asset Management"; 
     style=filled;
-    color="#6699ff"; 
-    fillcolor=lightgrey;
+    color="rgb(93,56,29)"; 
+    fillcolor="#eeebe7";
     NN -> NS ->NG; 
 };
 
@@ -31,8 +36,8 @@ subgraph cluster1 {
     label="Configuration Management";
     shape="component";
     style="filled";
-    color="#6699ff";
-    fillcolor="lightgrey";
+    color="rgb(93,56,29)"; 
+    fillcolor="#eeebe7";
     PT -> PS -> CR; 
 };
 

@@ -3,10 +3,17 @@
 /* 
  * dark brown
       	color: rgb(93,56,29);
+      	color: #5d381d; 
  * light brown
       	color: rgb(151,72,7);
+      	color: #974807;
  * yellowish
 	color: rgb(232,197,78); 
+	color: #e8c54e; 
+ * very light yellowish
+      	background-color: #eeebe7 ; 
+ * very light grey:
+      	background-color: #e2e2e2 ; 
  */
 
 body, #toc, #toc *  {

@@ -1,13 +1,18 @@
 digraph agent_workflow {
 
 compound=true;
-node [shape=Mrecord, style = filled, color="#6699ff", fillcolor="#ececff",
-fontsize=10];
+node [
+    shape=Mrecord, 
+    style = filled, 
+    color="#5d381d", 
+    fillcolor="#eeebe7",
+    fontsize=10
+];
 edge [fontsize=10];
 
 subgraph cluster_Node { 
   label = "On the Node";
-  style = filled color="#6699ff" fillcolor=lightgrey fontsize=12;
+  style = filled color="#1f1e1e" fillcolor="#e2e2e2" fontsize=12;
   gettools [ label = "Get Tools from Server" ];
   getpol [label = "Get Policies from Server" ];
   testcfd [label="Ensure CFEngine daemons running"];
@@ -28,12 +33,12 @@ sendreport -> logs [label="Send Reports"];
 
 subgraph cluster_Server { 
   label = "On the Rudder Server";
-  style = filled color="#6699ff" fillcolor=lightgrey  fontsize=12;
+  style = filled color="#1f1e1e" fillcolor="#e2e2e2"  fontsize=12;
   
   subgraph cluster_AssetManagement {
     label = "Asset Management";
     
-    inventory [label = "Incoming Inventory" fillcolor=yellow];
+    inventory [label = "Incoming Inventory" fillcolor="#e8c54e"];
 
     subgraph cluster_ServerNodeState {
       label="Node State" fontsize=12;
@@ -59,8 +64,8 @@ subgraph cluster_Server {
   
     subgraph cluster_ServerGeneric {
       label="Generic services" fontsize=12;
-      uuid [label = "UUID" color="#6699ff", fillcolor=green];
-      tools [label = "Tools" color="#6699ff", fillcolor=green];
+      uuid [label = "UUID" color="#6699ff", fillcolor="#974807"];
+      tools [label = "Tools" color="#6699ff", fillcolor="#974807";
     };
 
 };
@@ -71,7 +76,7 @@ subgraph cluster_Server {
     subgraph cluster_PolicyDelivery {
       label="Policy Delivery" fontsize=12;
       preparepol [label = "Prepare Policies"];
-      acceptsendpol    [label = "Policies ready to be sent" color="#6699ff", fillcolor=green];
+      acceptsendpol [label = "Policies ready to be sent" color="#6699ff", fillcolor="#974807"];
       configchange [label = "Change Request"];
       {nodenew nodechanged configchange} -> preparepol;
       {preparepol nodeunchanged} -> acceptsendpol;
@@ -79,7 +84,7 @@ subgraph cluster_Server {
 
     subgraph cluster_Compliance {
       label="Compliance" fontsize=12;
-      logs [label = "Incoming Reports" fillcolor=yellow];
+      logs [label = "Incoming Reports" fillcolor="#e8c54e"];
       compliance [label="Compliance"];
       logs -> compliance [label="Process reports"];
     };

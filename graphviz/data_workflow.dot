@@ -1,35 +1,42 @@
 digraph data_workflow {
 
 compound=true;
-node [shape=Mrecord, style = filled, color="#6699ff", fillcolor="#ececff",
-fontsize=10];
+node [
+    shape=Mrecord, 
+    style = filled, 
+    color="#5d381d", 
+    fillcolor="#eeebe7",
+    fontsize=10
+];
 edge [fontsize=10];
-rankdir=LR;
+rankdir=TB;
 
 subgraph cluster_rudderDataWorkflow { 
-  label = "Rudder Data Workflow";
-  style = filled color="#6699ff" fillcolor="#fefefe" fontsize=12;
+  label = "Rudder Server Data Workflow";
+  style = filled color="#5d381d" fillcolor="#fefefe" fontsize=12;
 
+  cfClerk [label = "cf-clerk"];
+  
   subgraph cluster_filesystemGit { 
     label = "Filesystem / Git";
-    style = filled color="#6699ff" fillcolor=lightgrey fontsize=12;
+    style = filled  fillcolor=lightgrey fontsize=12;
   
     subgraph cluster_filesystemTechnique { 
-        label = "Technique (Name, Version)";
-        shape = folder ;
-            filesystemMetadata [label = "metadata.xml"];
-            filesystemSTfiles [label = "XXX.st"];
+      label = "Technique (Name, Version)";
+      style = filled fillcolor="#e2e2e2" ;
+      filesystemMetadata [label = "metadata.xml"];
+      filesystemSTfiles [label = "XXX.st"];
     };
 
   };
 
   subgraph cluster_LDAP { 
     label = "LDAP";
-    style = filled color="#6699ff" fillcolor=lightgrey fontsize=12;
+    style = filled fillcolor=lightgrey fontsize=12;
 
     subgraph cluster_RudderCore { 
       label = "Modifiable in Rudder Webapp";
-      style = filled color="#6699ff" fillcolor="#e2e2e2" ;
+      style = filled fillcolor="#e2e2e2" ;
       ldapActiveTechniques [label = "Active Techniques"];
       ldapNodeGroups [label = "Node Groups"];
       ldapRules [label = "Rules"];
@@ -38,24 +45,23 @@ subgraph cluster_rudderDataWorkflow {
       ldapNodeConfigurations [label = "Node Configurations"];
   };
 
-  subgraph cluster_CFEnginePromises { 
-    label = "CFEngine promises";
-    style = filled color="#6699ff" fillcolor=lightgrey fontsize=12;
-    CfPromises [label = "CFEngine promises"];
-  };
-
   subgraph cluster_inMemory { 
     label = "In Memory";
-    style = filled color="#6699ff" fillcolor="#ffffee" fontsize=12;
+    style = filled fillcolor="#e8c54e" fontsize=12;
     Cf3PolicyDraft [label = "Cf3PolicyDraft"];
     inMemoryMetadata [label = "Map importation"];
+  };
+
+  subgraph cluster_CFEnginePromises { 
+    label = "CFEngine promises";
+    style = filled fillcolor=lightgrey fontsize=12;
+    CfPromises [label = "CFEngine promises"];
   };
 
   filesystemMetadata -> inMemoryMetadata ;
   inMemoryMetadata -> ldapActiveTechniques;
   {ldapActiveTechniques; ldapNodeGroups} -> ldapRules -> ldapNodeConfigurations;
   ldapNodeConfigurations -> Cf3PolicyDraft ;
-  cfClerk [label = "cf-clerk"];
   {filesystemSTfiles; Cf3PolicyDraft}->cfClerk;
   cfClerk -> CfPromises ;
 };
