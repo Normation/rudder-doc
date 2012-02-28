@@ -1,6 +1,6 @@
 [code,python]
 
-./opt/rudder/etc/openldap/slapd.conf
+.+/opt/rudder/etc/openldap/slapd.conf+
 
 ----
 

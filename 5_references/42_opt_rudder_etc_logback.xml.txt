@@ -1,6 +1,6 @@
 [code,python]
 
-./opt/rudder/etc/logback.xml
+.+/opt/rudder/etc/logback.xml+
 
 ----
 

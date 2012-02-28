@@ -1,6 +1,6 @@
 [code,python]
 
-./etc/default/rudder-agent
+.+/etc/default/rudder-agent+
 
 ----
 
