@@ -1,4 +1,4 @@
-=== Generation of CFEngine promises
+=== Policy generation
 
 Each time a change occurs in the Rudder interface, having an impact on the
 CFEngine promises needed by a node, it is necessary to regenerate the modified
