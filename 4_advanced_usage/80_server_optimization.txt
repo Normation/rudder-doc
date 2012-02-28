@@ -1,4 +1,6 @@
-=== Optimize PostgreSQL server
+=== Server optimization
+
+==== Optimize PostgreSQL server
 
 The default (out-of-the-box) configuration of Postgres is really not compliant 
 for large (or normal) machines. It uses a really small amount of memory
@@ -10,7 +12,7 @@ The location of the file is:
 
 
 
-==== Suggested values on a large node
+The following section presents suggested values on a large node.
 
 ===== Amount of System V shared memory
 
