@@ -11,13 +11,13 @@
 
 body, #toc, #toc *  {
       	background-color: #e2e2e2 ; 
-      	color: rgb(93,56,29);
+      	color: black;
 }
 
 strong, em, dt, div .title, tt, div.tableblock > table, table * {
 	border-color: rgb(93,56,29); 
       	background-color: transparent ; 
-      	color: rgb(151,72,7);
+        color: rgb(93,56,29);
 }
 
 #header {
@@ -53,8 +53,8 @@ strong, em, dt, div .title, tt, div.tableblock > table, table * {
     padding-bottom: 1.5em;
     margin: 0;
     overflow: auto;
-    border-right: 3px solid #f8f8f8;
-    background-color: white;
+    border-right: 0px solid #f8f8f8;
+    background-color: transparent;
   }
 }
 
@@ -62,13 +62,13 @@ strong, em, dt, div .title, tt, div.tableblock > table, table * {
       	background-color: #eeebe7 ; 
 	padding: 1em;
 	margin-top: 2em;
-      	border: 1px solid rgb(151,72,7);
+      	border: 1px solid rgb(93,56,29);
       	-moz-border-radius:11px;
       	-webkit-border-radius:11px;
 }
 
-h1, h2, h3, h4, h5, h6, #toc .toclevel2, #toctitle {
-      	color: rgb(151,72,7);
+h1, h2, h3, h4, h5, h6, #toc .toclevel1, #toc .toclevel2, #toctitle {
+      	color: rgb(93,56,29);
       	-moz-border-radius:11px;
       	-webkit-border-radius:11px;
 }
