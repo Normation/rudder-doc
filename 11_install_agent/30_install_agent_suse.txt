@@ -1,69 +1,39 @@
-=== Install Rudder Agent on SuSE
+=== Install Rudder Agent on SLES
 
+Following commands are executed as the +root+ user.
 
-==== Add the Rudder packages repository
+Add the Rudder packages repository:
 
-
-Add the URL of the Normation repository, by typing the next command on a SLES 11 node:
+* on a SLES 11 node:
 
 ----
 
-root@rudder-node:~# zypper ar -n "Rudder RPM Repositories" \
+zypper ar -n "Rudder RPM Repositories" \
 http://www.rudder-project.org/rpm-stable/SLES_11_SP1/ Rudder
 
 ----
 
-Or this one on a SLES 10 node:
+* on a SLES 10 node:
 
 ----
 
-root@rudder-node:~# zypper sa \
-"http://www.rudder-project.org/rpm-stable/SLES_10_SP3/" Rudder
+zypper sa "http://www.rudder-project.org/rpm-stable/SLES_10_SP3/" Rudder
 
 ----
 
-Then, update your local package database to retrieve the list of packages
-available on our repository:
+Update your local package database to retrieve the list of packages available on our repository:
 
 ----
 
-root@rudder-node:~# zypper ref
+zypper ref
 
 ----
 
-==== Install your Rudder Agent
-
-To begin the installation, you should simply install the rudder-agent:
+Install the +rudder-agent+ package:
 
 ----
 
-root@rudder-server:~# zypper install rudder-agent
-
-----
-
-Type in the IP address of the Rudder Root Server in the following file
-
-----
-
-echo *root_server_IP_address* > /var/rudder/cfengine-community/policy_server.dat
-
-----
-
-[TIP]
-
-====
-
-We advise you to use the +IP address+ of the Rudder Root Server. The DNS name of
-this server can also be accepted if you have a complete DNS infrastructure
-matching the IP of the Nodes with their hostnames. 
-
-====
-
-Finally, start the agent:
-
-----
-
-service rudder-agent start
+zypper install rudder-agent
 
 ----
 

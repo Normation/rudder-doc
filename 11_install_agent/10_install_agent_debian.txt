@@ -1,66 +1,48 @@
 === Install Rudder Agent on Debian or Ubuntu
 
-==== Add the Rudder packages repository
-
-To validate the content of the Normation repository, you should import the GPG
-key used to sign it:
+Validate the content of the Rudder project repository by importing the GPG key
+used to sign it:
 
 ----
 
-root@rudder-server:~# apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 474A19E8
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 474A19E8
 
 ----
 
-Then add the URL of the Normation repository, by typing the next command:
+Add Rudder project repository:
+
+* on Debian Squeeze:
 
 ----
 
-root@rudder-server:~# echo 'deb http://www.rudder-project.org/apt-stable/ squeeze main contrib non-free' > /etc/apt/sources.list.d/rudder.list
+sudo tee /etc/apt/sources.list.d/rudder.list <<EOF
+deb http://www.rudder-project.org/apt-stable/ squeeze main contrib non-free
+EOF
 
 ----
 
-Then, update your local package database to retrieve the list of packages
-available on our repository:
+* on Ubuntu 11.10 and following, or Debian wheezy and following:
 
 ----
 
-root@rudder-server:~# aptitude update
+sudo apt-add-repository http://www.rudder-project.org/apt-stable/
 
 ----
 
-==== Install your Rudder Agent
-
-To begin the installation, you should simply install the rudder-agent::
+Update your local package database to retrieve the list of packages available on our repository:
 
 ----
 
-root@rudder-server:~# aptitude install rudder-agent
+sudo aptitude update
 
 ----
 
-Type in the IP address of the Rudder Root Server in the following file
+Install the +rudder-agent+ package:
 
 ----
 
-echo *root_server_IP_address* > /var/rudder/cfengine-community/policy_server.dat
+sudo aptitude install rudder-agent
 
 ----
 
-[TIP]
-
-====
-
-We advise you to use the +IP address+ of the Rudder Root Server. The DNS name of
-this server can also be accepted if you have a complete DNS infrastructure
-matching the IP of the Nodes with their hostnames.
-
-====
-
-Finally, start the agent:
-
-----
-
-/etc/init.d/rudder-agent start
-
-----
 
