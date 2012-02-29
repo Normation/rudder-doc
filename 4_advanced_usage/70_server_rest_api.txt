@@ -24,7 +24,7 @@ rudder.rest.allowNonAuthenticatedUser=true
 
 ===== Apache access rules
 
-By default, the REST API is exposed for localhost only, at +http://localhost/api+.
+By default, the REST API is exposed for localhost only, at +http://localhost/rudder/api+.
 
 .Example usage of non authentified REST API
 
@@ -54,27 +54,27 @@ logs.
 
 ==== Status
 
-+http://localhost/api/status+::
++http://localhost/rudder/api/status+::
 
 Check if Rudder server is up and return +OK+. 
 If Rudder server is not responding, an error is displayed.
 
 ==== Promises regeneration
 
-+http://localhost/api/deploy/reload+::
++http://localhost/rudder/api/deploy/reload+::
 
 Regenerate promises (same action as the +Regenerate now+ button).
 
 ==== Dynamic groups regeneration
 
-+http://localhost/api/dyngroup/reload+::
++http://localhost/rudder/api/dyngroup/reload+::
 
 Check all dynamic groups for changes. If changes have occured, regenerate the
 groups in the LDAP and the CFEngine promises.
 
 ==== Technique library reload
 
-+http://localhost/api/techniqueLibrary/reload+::
++http://localhost/rudder/api/techniqueLibrary/reload+::
 
 Check the technique library for changes. If changes have occured, reload the
 technique library in memory and regenerate the CFEngine promises.
@@ -85,60 +85,60 @@ Various methods are available to import and export items:
 
 ===== Archiving:
 
-+http://localhost/api/archives/archive/groups+::
++http://localhost/rudder/api/archives/archive/groups+::
 
 Export node groups and node groups categories.
 
-+http://localhost/api/archives/archive/directives+::
++http://localhost/rudder/api/archives/archive/directives+::
 
 Export policy library (categories, active techniques, directives).
 
-+http://localhost/api/archives/archive/rules+::
++http://localhost/rudder/api/archives/archive/rules+::
 
 Export rules
 
-+http://localhost/api/archives/archive/full+::
++http://localhost/rudder/api/archives/archive/full+::
 
 Export everything
 
 ===== Listing:
 
 
-+http://localhost/api/archives/list/groups+::
++http://localhost/rudder/api/archives/list/groups+::
 
 List available archives datetime for groups (the datetime is in the format
 awaited for restoration).
 
-+http://localhost/api/archives/list/directives+::
++http://localhost/rudder/api/archives/list/directives+::
 
 List available archives datetime for policy library (the datetime is in the
 format awaited for restoration).
 
-+http://localhost/api/archives/list/rules+::
++http://localhost/rudder/api/archives/list/rules+::
 
 List available archives datetime for configuration rules (the datetime is in the
 format awaited for restoration).
 
-+http://localhost/api/archives/list/full+::
++http://localhost/rudder/api/archives/list/full+::
 
 List available archives datetime for full archives (the datetime is in the
 format awaited for restoration).
 
 ===== Restoring a given archive:
 
-`http://localhost/api/archives/restore/groups/datetime/[archiveId]`::
+`http://localhost/rudder/api/archives/restore/groups/datetime/[archiveId]`::
 
 Restore given groups archive.
 
-`http://localhost/api/archives/restore/directives/datetime/[archiveId]`::
+`http://localhost/rudder/api/archives/restore/directives/datetime/[archiveId]`::
 
 Restore given directives archive.
 
-`http://localhost/api/archives/restore/rules/datetime/[archiveId]`::
+`http://localhost/rudder/api/archives/restore/rules/datetime/[archiveId]`::
 
 Restore given rules archive.
 
-`http://localhost/api/archives/restore/full/datetime/[archiveId]`::
+`http://localhost/rudder/api/archives/restore/full/datetime/[archiveId]`::
 
 Restore everything.
 
@@ -146,10 +146,10 @@ Restore everything.
 
 ----
 
-http://localhost/api/archives/restore/groups/latestArchive
-http://localhost/api/archives/restore/directives/latestArchive
-http://localhost/api/archives/restore/rules/latestArchive
-http://localhost/api/archives/restore/full/latestArchive
+http://localhost/rudder/api/archives/restore/groups/latestArchive
+http://localhost/rudder/api/archives/restore/directives/latestArchive
+http://localhost/rudder/api/archives/restore/rules/latestArchive
+http://localhost/rudder/api/archives/restore/full/latestArchive
 
 ----
 
@@ -157,10 +157,10 @@ http://localhost/api/archives/restore/full/latestArchive
 
 ---- 
 
-http://localhost/api/archives/restore/groups/latestCommit
-http://localhost/api/archives/restore/directives/latestCommit
-http://localhost/api/archives/restore/rules/latestCommit
-http://localhost/api/archives/restore/full/latestCommit
+http://localhost/rudder/api/archives/restore/groups/latestCommit
+http://localhost/rudder/api/archives/restore/directives/latestCommit
+http://localhost/rudder/api/archives/restore/rules/latestCommit
+http://localhost/rudder/api/archives/restore/full/latestCommit
 
 ----
 

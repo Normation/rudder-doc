@@ -44,13 +44,13 @@ $description\n\n";
 
 }
 
-elsif ( $file =~ m/policy.xml$/ )
+elsif ( $file =~ m/metadata.xml$/ )
 
 {
 
 my $xp = XML::XPath->new(filename=>$file);
 
-my $description = $xp->findvalue('/POLICY/DESCRIPTION');
+my $description = $xp->findvalue('/TECHNIQUE/DESCRIPTION');
 
 my $name;
 
