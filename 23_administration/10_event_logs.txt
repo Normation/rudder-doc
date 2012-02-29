@@ -1,7 +1,23 @@
 === Event Logs
 
-The *Administration > View Event Logs* section allows to see last events logged
-in Rudder.
+Every action happening in the Rudder web interface are logged in the
+PostgreSQL database. The last 1000 event log entries are displayed in the
+*Administration > View Event Logs* section of Rudder web application. Each
+log item is described by its 'ID', 'Date', 'Actor', and  'Event' 'Type',
+'Category' and 'Description'. For the most complex events, like changes in
+assets, groups, techniques, directives, deployments, more details can be
+displayed by clicking on the event log line.
 
-Every action happening in the Rudder web interface are logged and displayed
-here. For every log item, date, actor, event type and category and description
+Event Categories::
+
+* User Authentication
+* Application
+* Configuration Rules
+* Policy
+* Technique
+* Policy Deployment
+* Node Group
+* Assets
+* Rudder Agents
+* Policy Node
+* Archives
