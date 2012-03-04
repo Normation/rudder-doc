@@ -2,31 +2,33 @@
 
 .PHONY: all clean view
 
-SOURCES = rudder-doc.txt
-TARGETS = html/rudder-doc.html html/rudder-doc.pdf html/README.html
+BASENAME = rudder-doc
+SOURCES = $(BASENAME).txt
+TARGETS = epub html pdf readme
 
 ## Asciidoc with general options
-ASCIIDOC = $(CURDIR)/bin/asciidoc/asciidoc.py --doctype=book -a docinfo2
+ASCIIDOCTODOCBOOK = $(CURDIR)/bin/asciidoc/asciidoc.py --doctype=book -a docinfo1
+:
+## Specific asciidoc options for EPUB output
+ASCIIDOCTOEPUB = $(CURDIR)/bin/asciidoc/a2x.py -f epub \
+  --doctype=book -a docinfo1 \
+  --dblatex-opts "-P latex.output.revhistory=0"
 
 ## Specific asciidoc options for XHTML output
-ASCIIDOCHTMLOPTS = --backend xhtml11 \
-		   -a stylesheet=$(CURDIR)/style/html/rudder.css \
-		   -a numbered \
-		   -a toc-title="Rudder User Documentation" \
-		   -a toc2 \
-		   -a max-width=50em \
-		   -a icons \
-		   -a badges
+ASCIIDOCTOHTML = $(CURDIR)/bin/asciidoc/asciidoc.py --doctype=book \
+  --backend xhtml11 -a badges -a icons -a numbered -a toc2 \
+  -a stylesheet=$(CURDIR)/style/html/rudder.css \
+  -a toc-title="Rudder User Documentation" \
 
 ## unused options::
 ## stylesdir/stylesheet: 
 ## we use standard asciidoc stylesheets (no specific stylesdir)
 ## and add specific styling for Rudder afterwards (stylesheet option)
-#		   -a stylesdir=$(CURDIR)/style/html \
+# -a stylesdir=$(CURDIR)/style/html \
 ## the search path for 'theme' option cannot be set accurately -> unused
-#		   -a theme=rudder \
+# -a theme=rudder \
 ## embed css into the html file, this option is not used:
-#		   -a linkcss
+# -a linkcss
 
 ## Generate PDF from docbook
 DOCBOOK2PDF = dblatex -tpdf
@@ -34,34 +36,40 @@ DOCBOOK2PDF = dblatex -tpdf
 SEE = see
 
 all: $(TARGETS)
+epub: epub/$(BASENAME).epub
+html: html/$(BASENAME).html
+pdf: html/$(BASENAME).pdf
+readme: html/README.html
 
-html: html/rudder-doc.html
-pdf: html/rudder-doc.pdf
+epub/$(BASENAME).epub: $(SOURCES)
+	mkdir -p html
+	$(ASCIIDOCTOEPUB) $?
+	mv $(BASENAME).epub html/
 
-html/rudder-doc.pdf: rudder-doc.txt
-	mkdir -p html	
-	$(ASCIIDOC) --backend docbook $?
-	$(DOCBOOK2PDF) rudder-doc.xml
-	rm rudder-doc.xml
+html/$(BASENAME).pdf: $(SOURCES)
+	mkdir -p html
+	$(ASCIIDOCTODOCBOOK) --backend docbook $?
+	$(DOCBOOK2PDF) $(BASENAME).xml
+	rm $(BASENAME).xml
 	rm -f *.svg
-	mv rudder-doc.pdf html/
+	mv $(BASENAME).pdf html/
 
-html/rudder-doc.html : rudder-doc.txt
-	mkdir -p html	
-	$(ASCIIDOC) $(ASCIIDOCHTMLOPTS) --out-file $@ $?
+html/$(BASENAME).html: $(SOURCES)
+	mkdir -p html 
+	$(ASCIIDOCTOHTML) --out-file $@ $?
 	cp -R style/html/* images html/
 
-html/README.html : README.asciidoc
-	mkdir -p html	
+html/README.html: README.asciidoc
+	mkdir -p html 
 	$(ASCIIDOC) $(ASCIIDOCHTMLOPTS) --out-file $@ $?
-	
-slides.html : rudder-doc.txt
+
+slides.html: $(SOURCES)
 	$(ASCIIDOC)  -a theme=volnitsky --out-file slides.html --backend slidy $?
 
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
-clean: 
-	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html
+clean:
+	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub
 
 view: all
 	$(SEE) $(TARGETS)

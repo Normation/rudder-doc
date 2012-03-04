@@ -72,9 +72,9 @@ create this 2 lines request:
 
 . Operator: +AND+.
 
-. First search line: +Node+, +Operating System+, +=+, +Linux+.
+. First search line: 'Node', 'Operating System', +=+, 'Linux'.
 
-. Second search line: +Software+, +Name+, +=+, +ssh+.
+. Second search line: 'Software', 'Name', +=+, +ssh+.
  
 ====
 

@@ -1,7 +1,7 @@
 ifdef::backend-xhtml11[]
 
-[float]
-[preface]
+//[float]
+//[preface]
 //== Printable version
 
 You can also read 
@@ -11,7 +11,7 @@ endif::backend-xhtml11[]
 
 ifdef::backend-docbook[]
 
-[preface]
+//[preface]
 
 == Online version
 

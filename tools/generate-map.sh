@@ -17,8 +17,8 @@ done
 FILE=temp/glossary.txt
 
 echo "// Automatically generated list of content - do not edit
-[glossary]
-== Glossary
+//glossary
+== Appendix: Glossary
 " > $FILE
 
 for entry in $(find $(dirname $0)/../glossary -name '*txt' | sort)

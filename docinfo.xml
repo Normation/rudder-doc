@@ -2,63 +2,69 @@
   rudder-doc-docinfo.xml
   DocBook document information file for rudder-doc.txt.
 -->
-
-<authorgroup>
-  <author>
-    <firstname>Jonathan</firstname>
-    <surname>Clarke</surname>
-    <affiliation>
-      <jobtitle>CTO</jobtitle>
-      <orgname>Normation SAS</orgname>
-    </affiliation>
-  </author>
-  <author>
-    <firstname>Nicolas</firstname>
-    <surname>Charles</surname>
-    <affiliation>
-      <jobtitle>CTO</jobtitle>
-      <orgname>Normation SAS</orgname>
-    </affiliation>
-  </author>
-  <author>
-    <firstname>Fabrice</firstname>
-    <surname>Flore-Thebault</surname>
-    <affiliation>
-      <jobtitle>Technical writer</jobtitle>
-      <orgname>Normation SAS</orgname>
-    </affiliation>
-  </author>
-</authorgroup>
-
-<copyright>
-  <year>2011</year>
-  <holder>Normation SAS</holder>
-</copyright>
-
-<legalnotice>
-  <simpara>
-    Rudder User Documentation by Normation is licensed under a Creative Commons
-    Attribution-ShareAlike 3.0 Unported License.  Permissions beyond the scope of
-    this license may be available at normation.com.
-  </simpara>
-</legalnotice>
-
-<revhistory>
-  <revision>
-    <revnumber>2.3.0</revnumber>
-    <date>October 2011</date>
-    <authorinitials>NC, JC, FFT</authorinitials>
-    <revremark>
-      First release of the Rudder User Documentation.
-    </revremark>
-  </revision>
-  <revision>
-    <revnumber>2.4.0</revnumber>
-    <date>February 2011</date>
-    <authorinitials>NC, JC, FFT</authorinitials>
-    <revremark>
-      Rudder User Documentation for 2.4 release of Rudder.
-    </revremark>
-  </revision>
-</revhistory>
+  <authorgroup>
+    <author>
+      <firstname>Jonathan</firstname>
+      <surname>Clarke</surname>
+      <affiliation>
+        <jobtitle>CTO</jobtitle>
+        <orgname>Normation SAS</orgname>
+      </affiliation>
+    </author>
+    <author>
+      <firstname>Nicolas</firstname>
+      <surname>Charles</surname>
+      <affiliation>
+        <jobtitle>CEO</jobtitle>
+        <orgname>Normation SAS</orgname>
+      </affiliation>
+    </author>
+    <author>
+      <firstname>Fabrice</firstname>
+      <surname>Flore-Thebault</surname>
+      <affiliation>
+        <jobtitle>Technical writer</jobtitle>
+        <orgname>Normation SAS</orgname>
+      </affiliation>
+    </author>
+  </authorgroup>
+  
+  <copyright>
+    <year>2011-2012</year>
+    <holder>Normation SAS</holder>
+  </copyright>
+  
+  <legalnotice>
+    <simpara>
+      Rudder User Documentation by Normation is licensed under a Creative Commons
+      Attribution-ShareAlike 3.0 Unported License.  Permissions beyond the scope of
+      this license may be available at normation.com.
+    </simpara>
+  </legalnotice>
+  
+  <revhistory>
+    <revision>
+      <revnumber>2.3.0</revnumber>
+      <date>October 2011</date>
+      <authorinitials>NC, JC, FFT</authorinitials>
+      <revremark>
+        First release of the Rudder User Documentation.
+      </revremark>
+    </revision>
+    <revision>
+      <revnumber>2.4.0</revnumber>
+      <date>February 2012</date>
+      <authorinitials>NC, JC, FFT</authorinitials>
+      <revremark>
+        Rudder User Documentation for 2.4 release of Rudder.
+      </revremark>
+    </revision>
+  </revhistory>
+  
+    <mediaobject role="cover">
+      <imageobject>
+        <imagedata fileref="images/cover.png" format="PNG" align="center" scalefit="1" />
+     </imageobject>
+     <textobject><phrase>Rudder User Documentation</phrase></textobject>
+    </mediaobject>
 
