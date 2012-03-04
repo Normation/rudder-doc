@@ -6,16 +6,19 @@ BASENAME = rudder-doc
 SOURCES = $(BASENAME).txt
 TARGETS = epub html pdf readme
 
+ASCIIDOC = $(CURDIR)/bin/asciidoc/asciidoc.py
+A2X = $(CURDIR)/bin/asciidoc/a2x.py
+
 ## Asciidoc with general options
-ASCIIDOCTODOCBOOK = $(CURDIR)/bin/asciidoc/asciidoc.py --doctype=book -a docinfo1
-:
+ASCIIDOCTODOCBOOK = $(ASCIIDOC) --doctype=book -a docinfo1
+
 ## Specific asciidoc options for EPUB output
-ASCIIDOCTOEPUB = $(CURDIR)/bin/asciidoc/a2x.py -f epub \
+ASCIIDOCTOEPUB = $(A2X) -f epub \
   --doctype=book -a docinfo1 \
   --dblatex-opts "-P latex.output.revhistory=0"
 
 ## Specific asciidoc options for XHTML output
-ASCIIDOCTOHTML = $(CURDIR)/bin/asciidoc/asciidoc.py --doctype=book \
+ASCIIDOCTOHTML = $(ASCIIDOC) --doctype=book \
   --backend xhtml11 -a badges -a icons -a numbered -a toc2 \
   -a stylesheet=$(CURDIR)/style/html/rudder.css \
   -a toc-title="Rudder User Documentation" \
@@ -61,7 +64,7 @@ html/$(BASENAME).html: $(SOURCES)
 
 html/README.html: README.asciidoc
 	mkdir -p html 
-	$(ASCIIDOC) $(ASCIIDOCHTMLOPTS) --out-file $@ $?
+	$(ASCIIDOCTOHTML) --out-file $@ $?
 
 slides.html: $(SOURCES)
 	$(ASCIIDOC)  -a theme=volnitsky --out-file slides.html --backend slidy $?
