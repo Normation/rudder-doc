@@ -56,7 +56,7 @@ strong, em, dt, div .title, tt, div.tableblock > table, table * {
   }
 
   img {
-    max-width: 57em;
+    max-width: 100%;
   }
 
   #toc {
@@ -103,9 +103,11 @@ h4 {
 h3,h4 {
   float: left;
 }
+
 h3 + *, h4 + * {
   clear: left;
 }
+
 hr {
   border: 12px solid rgb(232,197,78);
 }
