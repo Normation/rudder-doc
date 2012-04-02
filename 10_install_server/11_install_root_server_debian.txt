@@ -19,9 +19,13 @@ deb http://security.debian.org/ $(lsb_release -cs)/updates main contrib non-free
 Your mirror may differ, +ftp.fr.debian.org+ is only an example. Also, please
 adapt the distribution name if needed.
 
-Also, the keep in mind that the Rudder root server needs a JVM to run, so you
-will have to install it yourself as the packaging of the Sun JVM is now restricted
-by Oracle(TM) and Rudder is not OpenJDK 6 compatible.
+The Rudder Root server needs a compatible Java Runtime Environment to run.
+
+On Debian Squeeze and Debian Lenny, the available package is Oracle(TM) Java 6
+JRE, namely sun-java-6-jre, which is in the non-free component.
+
+On Debian Wheezy and above, the available package is OpenJDK 7 JRE, namely
+openjdk-7-jre.
 
 You can get the Java JRE 6 here : http://www.java.com
 ====
