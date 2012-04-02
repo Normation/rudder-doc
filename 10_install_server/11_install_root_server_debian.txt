@@ -7,8 +7,8 @@ by checking that +/etc/apt/sources.list+ contains the following lines:
 
 ----
 
-deb http://ftp.fr.debian.org/debian/ squeeze main contrib non-free
-deb http://security.debian.org/ squeeze/updates main contrib non-free
+deb http://ftp.fr.debian.org/debian/ $(lsb_release -cs) main contrib non-free
+deb http://security.debian.org/ $(lsb_release -cs)/updates main contrib non-free
 
 ----
 
@@ -58,7 +58,7 @@ Then add the URL of the Normation repository, by typing the next command:
 
 ----
 
-root@rudder-server:~# echo 'deb http://www.rudder-project.org/apt-2.3/ squeeze main contrib non-free' > /etc/apt/sources.list.d/rudder.list
+root@rudder-server:~# echo 'deb http://www.rudder-project.org/apt-stable/ $(lsb_release -cs) main contrib non-free' > /etc/apt/sources.list.d/rudder.list
 
 ----
 
