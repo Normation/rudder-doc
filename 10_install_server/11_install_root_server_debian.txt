@@ -7,8 +7,8 @@ by checking that +/etc/apt/sources.list+ contains the following lines:
 
 ----
 
-deb http://ftp.fr.debian.org/debian/ $(lsb_release -cs) main contrib non-free
-deb http://security.debian.org/ $(lsb_release -cs)/updates main contrib non-free
+deb http://ftp.fr.debian.org/debian/ squeeze main contrib non-free
+deb http://security.debian.org/ squeeze/updates main contrib non-free
 
 ----
 
@@ -18,6 +18,8 @@ deb http://security.debian.org/ $(lsb_release -cs)/updates main contrib non-free
 
 Your mirror may differ, +ftp.fr.debian.org+ is only an example. Also, please
 adapt the distribution name if needed.
+
+Your linux distribution may differ too, +squeeze+ could be replaced by +lenny+.
 
 The Rudder Root server needs a compatible Java Runtime Environment to run.
 
