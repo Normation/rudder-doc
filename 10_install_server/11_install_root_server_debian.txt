@@ -33,6 +33,8 @@ deb http://security.debian.org/ squeeze/updates main contrib non-free
 Your mirror may differ, +ftp.fr.debian.org+ is only an example. Also, please
 adapt the distribution name if needed.
 
+Your linux distribution may differ too, +squeeze+ could be replaced by +lenny+.
+
 ====
 
 [WARNING]
@@ -77,7 +79,7 @@ Then add the URL of the Normation repository, by typing the next command:
 
 ----
 
-root@rudder-server:~# echo 'deb http://www.rudder-project.org/apt-stable/ squeeze main contrib non-free' > /etc/apt/sources.list.d/rudder.list
+root@rudder-server:~# echo 'deb http://www.rudder-project.org/apt-stable/ $(lsb_release -cs) main contrib non-free' > /etc/apt/sources.list.d/rudder.list
 
 ----
 
