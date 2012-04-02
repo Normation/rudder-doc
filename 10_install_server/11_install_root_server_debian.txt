@@ -1,14 +1,18 @@
-=== Install Rudder Root server on Debian
+=== Install Rudder Root server on Debian or Ubuntu
 
-==== Java on Debian
+==== Java on Debian/Ubuntu
 
 The Rudder Root server needs a compatible 'Java Runtime Environment' to run. 
 
 On 'Debian Squeeze' and 'Debian Lenny', the available package is 'Oracle Java 6
 JRE', namely +sun-java-6-jre+, which is in the 'non-free' component. 
 
-On 'Debian Wheezy' and above, the available package is 'OpenJDK 7 JRE', namely
-+openjdk-7-jre+.
+On 'Debian Wheezy' and above and 'Ubuntu Oneiric' and above, the available package is
+'OpenJDK 7 JRE', namely +openjdk-7-jre+.
+
+On 'Ubuntu Natty' and previous, you will have to install Java yourself as the
+packaging of the Sun JVM is now restricted by Oracle(TM) and Rudder is not
+OpenJDK 6 compatible.
 
 ===== On Debian Squeeze or Lenny, add the main, contrib and non-free components
 
@@ -44,8 +48,8 @@ Debian anymore. The 'Java 6 JRE' is still available here: http://www.java.com.
 ==== Update the system
 
 Prior to beginning the installation of your Rudder Server, we recommend that you
-update your Debian system with the latest versions of available packages.
-Especially, since the release of Debian 6.0 (Squeeze), the signing key of
+update your Debian/Ubuntu system with the latest versions of available packages.
+Especially for Debian, since the release of Debian 6.0 (Squeeze), the signing key of
 packages repositories has changed. If you haven't already done it, you should
 force the upgrade of the +debian-archive-keyring+ package to fetch the new key:
 
