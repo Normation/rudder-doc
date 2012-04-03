@@ -9,7 +9,7 @@ Add the Rudder packages repository:
 ----
 
 zypper ar -n "Rudder RPM Repositories" \
-http://www.rudder-project.org/rpm-stable/SLES_11_SP1/ Rudder
+http://www.rudder-project.org/rpm-2.4/SLES_11_SP1/ Rudder
 
 ----
 
@@ -17,7 +17,7 @@ http://www.rudder-project.org/rpm-stable/SLES_11_SP1/ Rudder
 
 ----
 
-zypper sa "http://www.rudder-project.org/rpm-stable/SLES_10_SP3/" Rudder
+zypper sa "http://www.rudder-project.org/rpm-2.4/SLES_10_SP3/" Rudder
 
 ----
 
