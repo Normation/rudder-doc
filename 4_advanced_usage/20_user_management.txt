@@ -48,11 +48,16 @@ the "secret" password for this algorithm are listed here:
 
 |====
 |Value                 | Algorithm      | Linux command to hash the password
-|"md5"                 | MD5            | +echo -n "secret" \| md5sum+
-|"sha" or "sha1"       | SHA one        | +echo -n "secret" \| shasum+
-|"sha256" or "sha-256" | SHA, 256 bytes | +echo -n "secret" \| sha256sum+
-|"sha512" or "sha-512" | SHA, 512 bytes | +echo -n "secret" \| sha512sum+
+|"md5"                 | MD5            | +read mypass; echo $mypass \| md5sum+
+|"sha" or "sha1"       | SHA one        | +read mypass; echo $mypass \| shasum+
+|"sha256" or "sha-256" | SHA, 256 bytes | +read mypass; echo $mypass \| sha256sum+
+|"sha512" or "sha-512" | SHA, 512 bytes | +read mypass; echo $mypass \| sha512sum+
 |====
+
+When using the suggested commands to hash a password, you must enter the
+command, then type your password, and hit return. The hash will then be
+displayed in your terminal. This avoids storing the password in your shell
+history.
 
 Here is an example of authentication file with hashed password:
 
