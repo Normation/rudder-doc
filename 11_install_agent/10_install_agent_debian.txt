@@ -9,10 +9,17 @@ apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 474A19E8
 
 ----
 
+If your HTTP Keyserver Protocol (11371/tcp) is blocked you can use an alternate command:
+
+----
+
+root@rudder-server:~# wget --quiet -O- "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x474A19E8" | sudo apt-key add -
+
+----
+
 Add Rudder project repository:
 
 * on Debian Squeeze:
-
 ----
 
 sudo tee /etc/apt/sources.list.d/rudder.list <<EOF

@@ -37,16 +37,6 @@ Your linux distribution may differ too, +squeeze+ could be replaced by +lenny+.
 
 ====
 
-[WARNING]
-
-====
-
-The packaging and redistribution of the Sun JVM has been restricted by
-'Oracle'. Starting with 'Debian Wheezy', the package is not distributed by
-Debian anymore. The 'Java 6 JRE' is still available here: http://www.java.com.
-
-====
-
 ==== Update the system
 
 Prior to beginning the installation of your Rudder Server, we recommend that you
@@ -74,6 +64,15 @@ key used to sign it:
 root@rudder-server:~# apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 474A19E8
 
 ----
+
+if your HTTP Keyserver Protocol (11371/tcp) is blocked you can use an alternate command:
+
+----
+
+root@rudder-server:~# wget --quiet -O- "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x474A19E8" | sudo apt-key add -
+
+----
+
 
 Then add the URL of the Normation repository, by typing the next command:
 
