@@ -1,0 +1,166 @@
+=== Technique creation
+
+Rudder provides a set of pre-defined Techniques that cover some basic
+configuration and system administration needs. You can also create your own
+Techniques, to implement new functionality or configure new services. This
+paragraph will walk you through this process.
+
+==== Prequisites
+
+To create a Technique, you'll need a few things:
+
+CFEngine knowledge:: Rudder's Techniques are implemented using CFEngine.
+Rudder takes care of a lot of the work of using CFEngine, but you'll need to
+have a reasonable understanding of the CFEngine syntax.
+
+Rudder installation for testing:: To be able to test your new Technique,
+you'll need a working Rudder installation (at least a server and a node).
+
+Text editor:: The only other tool you need is your favorite text editor!
+
+==== Define your objective
+
+Before starting to create a new Technique, have you checked that it doesn't
+already exist in Rudder? The full list of current Techniques is available from
+GitHub, at http:http://github.com/Normation/rudder-techniques/[GitHub rudder-techniques repository].
+
+OK, now we've got that over with, let's go on.
+
+A Technique should be an abstract configuration. This means that your Technique
+shouldn't just configure something one way, but instead it should implement 
+*how* to configure something, and offer options for users to choose what way
+they want it configured. Before starting, make sure you've thought through what
+you want to create.
+
+Here's a quick checklist to help:
+
+* Do you need to install packages?
+* Do you need to create or edit configuration files?
+* Do you need to copy files from a central location?
+* Do you need to launch processes or check that they're running?
+* Do you need to run commands to get things working?
+
+Once you've made a list of what needs doing, consider what options could be
+presented in the user interface, when you create a Directive from your new
+Technique. Intuitively, the more variables there are, the more flexible your
+Technique will be. However, experience shows that making the Technique *too*
+configurable will actually make it harder to use, so a subtle balance comes in
+to play here.
+
+At this stage, make a list of all the variables that should be presented to
+users configuring a Directive from your Technique.
+
+==== Initialize your new Technique
+
+The simplest way to create a new Technique and be able to test it as you work is
+to start on a Rudder server. Open a terminal and connect to your Rudder server
+by ssh, and cd into the directory where Techniques are stored:
+
+----
+
+$ cd /var/rudder/configuration-repository/techniques
+
+----
+
+Under this directory, you'll find a set of categories, and sub-categories.
+Before creating your Technique, choose a category to put it in, and change to
+that directory. For example:
+
+----
+
+$ cd applications
+
+----
+
+You can consult the description of each category by looking at the
++category.xml+ file in each directory. For this example:
+
+----
+
+$ cat category.xml
+<xml>
+    <name>Application management</name>
+    <description>This category contains Techniques designed to install,
+	configure and manage applications</description>
+</xml>
+
+----
+
+Once you've decided on a category, it's time to create the basic skeleton of
+your Technique. The technical name for your Technique is it's directory name, so
+choose wisely:
+
+----
+
+mkdir sampleTechnique
+
+----
+
+All directories under this one are version numbers. Let's start with a simple
+1.0 version. From now on, we'll work in this directory.
+
+----
+
+mkdir sampleTechnique/1.0
+cd sampleTechnique/1.0
+
+----
+
+Now, you need a minimum of two files to get your Technique working:
+
+metadata.xml:: This file describes the Technique, and configures how it will be
+displayed in the web interface.
+
+st files:: These files are templates for CFEngine configuration files. You need
+at least one, but can have as many as you like. Rudder processes them to
+generate .cf files ready to be used by CFEngine.
+
+To get started, copy and paste these sample files, or download them from GitHub:
+
++metadata.xml+ (original file:
+https://github.com/Normation/rudder-techniques/blob/master/technique-metadata-sample.xml[+technique-metadata-sample.xml+])
+
+----
+
+include::technique-metadata-sample.xml
+
+----
+
++sample_technique.st+ (original file:
+https://github.com/Normation/rudder-techniques/blob/master/technique-st-sample.xml[+technique-st-sample.xml+])
+
+----
+
+include::technique-st-sample.xml
+
+----
+
+===== Define variables
+
+*WORK IN PROGRESS*
+Define metadata.
+Enter the variables in sections in the metadata.xml file.
+Cf http://www.rudder-project.org/foswiki/Development/PolicyTemplateXML
+
+===== First test in the Rudder interface
+
+Load the new Technique into Rudder and check that the variables and sections are
+displayed as you expect.
+
+==== Implement the behavior
+
+*WORK IN PROGRESS*
+Write CFEngine promises to implement the behavior that your Template should
+have.
+
+===== Read in the variables from Rudder
+
+*WORK IN PROGRESS*
+Using StringTemplate notation...
+Cf http://www.rudder-project.org/foswiki/Development/Technique
+
+===== Add reporting
+
+*WORK IN PROGRESS*
+The reports format
+Cf http://www.rudder-project.org/foswiki/Development/ReportsInTechniques
