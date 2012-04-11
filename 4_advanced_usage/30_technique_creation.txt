@@ -22,7 +22,7 @@ Text editor:: The only other tool you need is your favorite text editor!
 
 Before starting to create a new Technique, have you checked that it doesn't
 already exist in Rudder? The full list of current Techniques is available from
-GitHub, at http:http://github.com/Normation/rudder-techniques/[GitHub rudder-techniques repository].
+GitHub, at http://github.com/normation/rudder-techniques/[GitHub rudder-techniques repository].
 
 OK, now we've got that over with, let's go on.
 
@@ -118,7 +118,7 @@ generate .cf files ready to be used by CFEngine.
 To get started, copy and paste these sample files, or download them from GitHub:
 
 +metadata.xml+ (original file:
-https://github.com/Normation/rudder-techniques/blob/master/technique-metadata-sample.xml[+technique-metadata-sample.xml+])
+https://github.com/normation/rudder-techniques/blob/master/technique-metadata-sample.xml[+technique-metadata-sample.xml+])
 
 ----
 
@@ -127,7 +127,7 @@ include::technique-metadata-sample.xml
 ----
 
 +sample_technique.st+ (original file:
-https://github.com/Normation/rudder-techniques/blob/master/technique-st-sample.xml[+technique-st-sample.xml+])
+https://github.com/normation/rudder-techniques/blob/master/technique-st-sample.xml[+technique-st-sample.xml+])
 
 ----
 
