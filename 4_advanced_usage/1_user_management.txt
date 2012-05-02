@@ -48,10 +48,10 @@ the "secret" password for this algorithm are listed here:
 
 |====
 |Value                 | Algorithm      | Linux command to hash the password
-|"md5"                 | MD5            | +read mypass; echo $mypass \| md5sum+
-|"sha" or "sha1"       | SHA one        | +read mypass; echo $mypass \| shasum+
-|"sha256" or "sha-256" | SHA, 256 bytes | +read mypass; echo $mypass \| sha256sum+
-|"sha512" or "sha-512" | SHA, 512 bytes | +read mypass; echo $mypass \| sha512sum+
+|"md5"                 | MD5            | +read mypass; echo -n $mypass \| md5sum+
+|"sha" or "sha1"       | SHA one        | +read mypass; echo -n $mypass \| shasum+
+|"sha256" or "sha-256" | SHA, 256 bytes | +read mypass; echo -n $mypass \| sha256sum+
+|"sha512" or "sha-512" | SHA, 512 bytes | +read mypass; echo -n $mypass \| sha512sum+
 |====
 
 When using the suggested commands to hash a password, you must enter the
