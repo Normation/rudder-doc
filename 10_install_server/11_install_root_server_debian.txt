@@ -33,7 +33,7 @@ deb http://security.debian.org/ squeeze/updates main contrib non-free
 Your mirror may differ, +ftp.fr.debian.org+ is only an example. Also, please
 adapt the distribution name if needed.
 
-Your linux distribution may differ too, +squeeze+ could be replaced by +lenny+.
+Your Linux distribution may differ too, +squeeze+ could be replaced by +lenny+.
 
 ====
 
@@ -65,7 +65,7 @@ root@rudder-server:~# apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4
 
 ----
 
-if your HTTP Keyserver Protocol (11371/tcp) is blocked you can use an alternate command:
+If your HTTP Keyserver Protocol (11371/tcp) is blocked you can use an alternate command:
 
 ----
 
@@ -74,7 +74,7 @@ root@rudder-server:~# wget --quiet -O- "http://keyserver.ubuntu.com/pks/lookup?o
 ----
 
 
-Then add the URL of the Normation repository, by typing the next command:
+Then add the URL of the Normation repository, by typing:
 
 ----
 
