@@ -22,18 +22,13 @@ The following operating systems are supported as a Root server:
 
 * Debian GNU/Linux 6 (Squeeze)
 
+* Red Hat Enterprise Linux (RHEL) / CentOS 6
+
 * SuSE Linux Enterprise Server (SLES) 11 SP1
 
-[WARNING]
+* Ubuntu server 11.10 (Oneiric)
 
-.Unsupported Operating Systems
-
-====
-
-Installing Rudder Servers on other operating systems is planned, but has not
-been tested with the current version.
-
-====
+* Ubuntu server 12.04 LTS (Precise)
 
 ==== Packages
 
