@@ -1,4 +1,4 @@
-==== Policy Template upgrade
+=== Policy Template upgrade
 
 When you upgrade the Rudder Policy Templates packages to a new version, a
 new version of the Policy Template library is copied to /opt/rudder/share/policy-templates.
