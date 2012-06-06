@@ -1,0 +1,43 @@
+==== Policy Template upgrade
+
+When you upgrade the Rudder Policy Templates packages to a new version, a
+new version of the Policy Template library is copied to /opt/rudder/share/policy-templates.
+
+The Policy Template library is managed using a GIT tree.
+Thus, you can not simply copy the files from /opt/rudder/share/policy-templates to Rudder's
+storage, you also have to follow this simple procedure:
+
+[TIP] 
+
+====
+
+Please make sure that any edition you made is on a non existent version of a Policy Template,
+or you are likely to have your editions replaced by the reference implementation !
+Of course, GIT will keep history if your modifications are already commited but this would be
+an annoyance.
+
+====
+
+* Jump to the Rudder Policy Template tree
+
+----
+
+cd /var/rudder/configuration-repository/policy-templates
+
+----
+
+* Copy the reference Policy Template library to your local tree
+
+----
+
+cp -a /opt/rudder/share/policy-templates/* .
+
+----
+
+* Update the GIT repository to match the new tree state
+
+----
+
+git commit -am "Upgraded the Policy Templates library (by $USER)"
+
+----
