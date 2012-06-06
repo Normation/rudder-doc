@@ -1,4 +1,4 @@
-==== Technique upgrade
+=== Technique upgrade
 
 When you upgrade the Rudder Techniques packages to a new version, a
 new version of the Technique library is copied to /opt/rudder/share/techniques.
