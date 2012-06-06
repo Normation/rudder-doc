@@ -1,0 +1,43 @@
+==== Technique upgrade
+
+When you upgrade the Rudder Techniques packages to a new version, a
+new version of the Technique library is copied to /opt/rudder/share/techniques.
+
+The Technique library is managed using a GIT tree.
+Thus, you can not simply copy the files from /opt/rudder/share/techniques to Rudder's
+storage, you also have to follow this simple procedure:
+
+[TIP] 
+
+====
+
+Please make sure that any edition you made is on a non existent version of a Technique,
+or you are likely to have your editions replaced by the reference implementation !
+Of course, GIT will keep history if your modifications are already commited but this would be
+an annoyance.
+
+====
+
+* Jump to the Rudder Technique tree
+
+----
+
+cd /var/rudder/configuration-repository/techniques
+
+----
+
+* Copy the reference Technique library to your local tree
+
+----
+
+cp -a /opt/rudder/share/techniques/* .
+
+----
+
+* Update the GIT repository to match the new tree state
+
+----
+
+git commit -am "Upgraded the Technique library (by $USER)"
+
+----
