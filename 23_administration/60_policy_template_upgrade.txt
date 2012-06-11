@@ -1,18 +1,29 @@
 === Policy Template upgrade
 
-When you upgrade the Rudder Policy Templates packages to a new version, a
-new version of the Policy Template library is copied to /opt/rudder/share/policy-templates.
+New versions of the Policy Template library are made available as packages,
+named rudder-policy-templates, for the 2.3 version of Rudder. Many bug fixes
+and new Policy Templates are added all the time. To benefit from these, we
+recommend you upgrade your Policy Template library from time to time.
 
-The Policy Template library is managed using a GIT tree.
-Thus, you can not simply copy the files from /opt/rudder/share/policy-templates to Rudder's
+Updated are available from rudder-project.org, as standard OS package
+downloads. Please note that nightly builds are also available, and may provide
+the most up to date set of Policy Templates. See
+http://www.rudder-project.org/foswiki/Download/ for full details.
+
+When you upgrade the Rudder Policy Templates packages to a new version, a
+new version of the Policy Template library is installed to /opt/rudder/share/policy-templates.
+
+The Policy Template library used by Rudder is managed using a GIT tree,
+located in /var/rudder/configuration-repository/policy-templates.
+Therefore, you can not simply copy the files from /opt/rudder/share/policy-templates to Rudder's
 storage, you also have to follow this simple procedure:
 
 [TIP] 
 
 ====
 
-Please make sure that any edition you made is on a non existent version of a Policy Template,
-or you are likely to have your editions replaced by the reference implementation !
+Please make sure that any changes you make are on a new version of a Policy Template,
+or you are likely to have your changes replaced by the reference library!
 Of course, GIT will keep history if your modifications are already commited but this would be
 an annoyance.
 
@@ -38,6 +49,6 @@ cp -a /opt/rudder/share/policy-templates/* .
 
 ----
 
-git commit -am "Upgraded the Policy Templates library (by $USER)"
+git commit -am "Upgraded the Policy Template library (by $USER)"
 
 ----
