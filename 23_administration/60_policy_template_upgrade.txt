@@ -57,4 +57,4 @@ git commit -am "Upgraded the Policy Template library (by $USER)"
   menu, then click on the Policy Templates menu item on the left. In the
   screen that appears, click the "Reload" button next to "You can load the
   last available version of the policy template library" at the top of the
-  screen."
+  screen.
