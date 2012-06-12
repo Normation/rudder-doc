@@ -74,7 +74,7 @@ root@rudder-server:~# wget --quiet -O- "http://keyserver.ubuntu.com/pks/lookup?o
 ----
 
 
-Then add the URL of the Normation repository, by typing the next command:
+Then add the URL of the Normation repository, by typing:
 
 ----
 

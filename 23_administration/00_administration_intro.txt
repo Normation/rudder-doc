@@ -2,6 +2,6 @@
 
 This chapter covers basic administration task of Rudder services like
 configuring some parameters of the Rudder policy server, reading the services
-logg, and start, stop or restart Rudder services.
+log, and starting, stopping or restarting Rudder services.
 
 
