@@ -54,7 +54,7 @@ git commit -am "Upgraded the Technique library (by $USER)"
 ----
 
 * Finally, return to the web interface and go the Configuration Management
-  menu, then click on the Policy Templates menu item on the left. In the
+  menu, then click on the Techniques menu item on the left. In the
   screen that appears, click the "Reload" button next to "You can load the
-  last available version of the policy template library" at the top of the
+  last available version of the Technique library" at the top of the
   screen."
