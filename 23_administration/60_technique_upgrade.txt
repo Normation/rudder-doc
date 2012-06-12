@@ -57,4 +57,4 @@ git commit -am "Upgraded the Technique library (by $USER)"
   menu, then click on the Techniques menu item on the left. In the
   screen that appears, click the "Reload" button next to "You can load the
   last available version of the Technique library" at the top of the
-  screen."
+  screen.
