@@ -3,7 +3,7 @@
 ==== Configure the package manager
 
 Ensure that the +zypper+ package manager is configured, and install the required packages:
-+rsyslog+, +rsyslog-pgsql+ and 'Oracle Java JRE'. +rsyslog+ and +rsyslog-pgsql+ are downloadable
++rsyslog+, +rsyslog-pgsql+ and 'Oracle Java 6 JRE' or 'OpenJDK 7 JRE'. +rsyslog+ and +rsyslog-pgsql+ are downloadable
 along Rudder and Java is available through Oracle's website: http://www.java.com.
 
 ==== Update the system
