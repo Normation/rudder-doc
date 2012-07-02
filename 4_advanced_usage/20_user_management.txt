@@ -2,7 +2,8 @@
 
 === User management
 
-Change the users authorized to connect to the application
+Change the users authorized to connect to the application.
+You can define authorization level for each user
 
 ==== Configuration of the users using a XML file
 
@@ -14,13 +15,15 @@ The credentials of a user are defined in the XML file
 ----
 
 <authentication>
-  <user name="jon.doe" password="secret"/>  
-  <user name="alex.bar" password="secret2"/>
+  <user name="jon.doe" password="secret" role="administator"/>
+  <user name="alex.bar" password="secret2" role="administation_only, node_read"/>
+  <user name="custom" password="custom" role="node_read,node_write,configuration_read,rule_read,rule_edit,directive_read,technique_read"
 </authentication>
 
 ----
 
 The name and password attributes are mandatory (non empty) for the user tags.
+The role attribute can be ommited but the user will have no permission.
 Only these attributes are recognized.
 
 Every modification of this file should be followed by a restart of the Rudder
@@ -64,11 +67,43 @@ Here is an example of authentication file with hashed password:
 ----
 
 <authentication hash="sha">
-  <user name="jon.doe"  password="e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4"/>  
-  <user name="alex.bar" password="c636e8e238fd7af97e2e500f8c6f0f4c0bedafb0"/>
+  <user name="jon.doe"  password="e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4" role="administator"/>
+  <user name="alex.bar" password="c636e8e238fd7af97e2e500f8c6f0f4c0bedafb0" role="administation_only"/>
 </authentication>
 
 ----
+
+
+==== Authorization management
+
+For every users you can define an access level.
+Those authorizations allow you to access different pages or to perform different actions.
+
+You can build custom roles with whatever permission you want, but there's some role already defined.
+
+In xml file, the role attribute is a list of permissions/roles, separated by a comma. each add permissions to the user. If one is wrong, or not correctly spelled, the user is set to the lowest rights (NoRights).
+
+===== Pre-defined roles
+
+* administrator -> All authorizations granted, can access and modify everything.
+* administration_only -> Only access to administration part of rudder, can do everything within it.
+* user -> Can access and modify eveything but the administration part
+* configuration -> Can only access and act on configuration section
+* read_only -> Can access to every read only part, can perform no action
+* inventory -> Access to information about nodes, can see their inventory, but can't act on them
+* rule_only -> Access to information about rules, but can't modify them
+
+for each user you can define more than one role, each role adding its authorization to the user.
+
+===== Permissions and custom roles
+
+You can set a custom set of permissions instead of a pre-defined role.
+
+A permission is composed of a kind and a type.
+
+A permission kind is the level granted for a certain type. There's 4 kinds of permission : read, write, edit, all. Depending on that value you have access to different pages and action in rudder.
+
+There's 8 type of permission : configuration, rule, directive, technique, node, group, administration, deployment. that value indicates what kind of datas will be displayed and/or could be set/updated by the user, depending of his access level.
 
 ==== Going further
 
