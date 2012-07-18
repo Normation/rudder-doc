@@ -41,7 +41,7 @@ Your Linux distribution may differ too, +squeeze+ could be replaced by +lenny+.
 
 Prior to beginning the installation of your Rudder Server, we recommend that you
 update your Debian/Ubuntu system with the latest versions of available packages.
-Especially for Debian, since the release of Debian 6.0 (Squeeze), the signing key of
+Especially for Debian 5 (Lenny), since the release of Debian 6.0 (Squeeze), the signing key of
 packages repositories has changed. If you haven't already done it, you should
 force the upgrade of the +debian-archive-keyring+ package to fetch the new key:
 
