@@ -5,9 +5,35 @@ architecture on
 
 ----
 
-http://www.rudder-project.org/rpm-2.4/RHEL/RPMS/
+http://www.rudder-project.org/rpm-2.4/RHEL_5/
+http://www.rudder-project.org/rpm-2.4/RHEL_6/
 
 ----
+
+Or you can define a yum repository for RedHat/CentOS 6:
+
+----
+
+$ echo "[Rudder_2.4]
+name=Rudder 2.4 Repository
+baseurl=http://www.rudder-project.org/rpm-2.4/RHEL_6/
+gpgcheck=0
+" > /etc/yum.repos.d/rudder.repo
+
+----
+
+Or for RedHat/CentOS 5:
+
+----
+
+$ echo "[Rudder_2.4]
+name=Rudder 2.4 Repository
+baseurl=http://www.rudder-project.org/rpm-2.4/RHEL_5/
+gpgcheck=0
+" > /etc/yum.repos.d/rudder.repo
+
+----
+
 
 Install the package:
 
@@ -17,4 +43,10 @@ rpm -Uhv rudder-agent-2.4.0-1.EL.5.x86_64.rpm
 
 ----
 
+Or if a yum repository has been set:
 
+----
+
+yum install rudder-agent
+
+----

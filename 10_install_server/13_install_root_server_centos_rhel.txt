@@ -1,0 +1,35 @@
+=== Install Rudder Root server on RedHat or CentOS
+
+
+Configure the yum repository for RedHat/CentOS 6:
+
+----
+
+$ echo "[Rudder_2.4]
+name=Rudder 2.4 Repository
+baseurl=http://www.rudder-project.org/rpm-2.4/RHEL_6/
+gpgcheck=0
+" > /etc/yum.repos.d/rudder.repo
+
+----
+
+Or for RedHat/CentOS 5:
+
+----
+
+$ echo "[Rudder_2.4]
+name=Rudder 2.4 Repository
+baseurl=http://www.rudder-project.org/rpm-2.4/RHEL_5/
+gpgcheck=0
+" > /etc/yum.repos.d/rudder.repo
+
+----
+
+
+Install the package:
+
+----
+
+yum install rudder-server-root
+
+----
