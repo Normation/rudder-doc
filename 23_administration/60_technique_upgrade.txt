@@ -1,13 +1,13 @@
 === Technique upgrade
 
-New versions of the Policy Template library are made available as packages,
+New versions of the Technique library are made available as packages,
 named rudder-policy-templates, for the 2.3 version of Rudder. Many bug fixes
-and new Policy Templates are added all the time. To benefit from these, we
-recommend you upgrade your Policy Template library from time to time.
+and new Techniques are added all the time. To benefit from these, we
+recommend you upgrade your Technique library from time to time.
 
 Updates are available from rudder-project.org, as standard OS package
 downloads. Please note that nightly builds are also available, and may provide
-the most up to date set of Policy Templates. See
+the most up to date set of Techniques. See
 http://www.rudder-project.org/foswiki/Download/ for full details.
 
 When you upgrade the Rudder Techniques packages to a new version, a

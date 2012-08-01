@@ -60,7 +60,7 @@ root@rudder-server:~# zypper in rudder-server-root
 
 ====
 
-If you want to manage the Policy Templates Library with 'git' on a SLES based
+If you want to manage the Techniques Library with 'git' on a SLES based
 system, you should dowload the 'SDK DVD' and install +git-core+ using +yast2+ or
 +zypper+, or get the RPM using another channel.
 

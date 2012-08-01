@@ -188,7 +188,7 @@ This package is used to send inventory files from
 git::
 
 The package is not a dependency, but its installation is recommended. The
-running Policy Templates Library is maintained as a git repository in
+running Techniques Library is maintained as a git repository in
 +/var/rudder/configuration-repository/techniques+. It can be useful to have git installed on the
 system for maintenance purpose.
 
