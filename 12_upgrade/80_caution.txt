@@ -7,9 +7,11 @@ one. A workaround is to use a plain-text password instead
 (cf http://www.rudder-project.org/redmine/issues/2821).
 
 * Upgrade on SLES 11 doesn't remove rudder-cfengine-community package and will
- install both rudder-agent and rudder-cfengine-community. At this time, no bad
-consequences has been notice but be cautious
+ install both rudder-agent and rudder-cfengine-community. At this time, no
+ consequences of any impact have been noticed but be cautious
 (cf http://www.rudder-project.org/redmine/issues/2806).
 
-* On SLES and RHEL, Techniques associated to the 2.4.0~beta3 rudder-techniques package
-contain a wrong logrotate. (cf http://www.rudder-project.org/redmine/issues/2820)
+* On SLES 11, Techniques associated to the 2.4.0~beta3 rudder-techniques package
+contain a buggy logrotate configuration (cf
+http://www.rudder-project.org/redmine/issues/2820). This is already fixed and
+will be released in subsequent versions (2.4.0~beta4 or 2.4.0~rc1 or 2.4.0).
