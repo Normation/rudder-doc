@@ -1,0 +1,56 @@
+=== Upgrade Rudder on SLES
+
+Following commands are executed as the +root+ user.
+
+Add the Rudder packages repository:
+
+* With zypper on a SLES 11 system:
+
+----
+
+zypper ar -n "Rudder RPM Repositories" \
+http://www.rudder-project.org/rpm-2.4/SLES_11_SP1/ Rudder
+
+----
+
+* With zypper on a SLES 10 system:
+
+----
+
+zypper sa "http://www.rudder-project.org/rpm-2.4/SLES_10_SP3/" Rudder
+
+----
+
+
+Update your local package database to retrieve the list of packages available on our repository:
+
+----
+
+zypper ref
+
+----
+
+
+For Rudder Server (only SLES 11), upgrade all the packages associated to +rudder-server-root+:
+
+----
+
+zypper update rudder*
+
+----
+
+and after the upgrade of these packages, restart jetty to be sure that the changes are applied:
+
+----
+
+/etc/init.d/jetty restart
+
+----
+
+For Rudder Agent, upgrade the +rudder-agent+ package:
+
+----
+
+zypper update rudder-agent
+
+----

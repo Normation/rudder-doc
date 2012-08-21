@@ -1,0 +1,52 @@
+=== Upgrade Rudder on Debian or Ubuntu
+
+Following commands are executed as the +root+ user.
+
+Add Rudder project repository:
+
+* on Debian Squeeze:
+----
+
+echo "deb http://www.rudder-project.org/apt-2.4/ $(lsb_release -cs) main contrib non-free" > /etc/apt/sources.list.d/rudder.list
+
+----
+
+* on Ubuntu 11.10 and following, or Debian wheezy and following:
+
+----
+
+apt-add-repository http://www.rudder-project.org/apt-2.4/
+
+----
+
+Update your local package database to retrieve the list of packages available on our repository:
+
+----
+
+aptitude update
+
+----
+
+For Rudder Server, upgrade all the packages associated to +rudder-server-root+:
+
+----
+
+aptitude install rudder-server-root
+
+----
+
+and after the upgrade of these packages, restart jetty to be sure that the changes are applied:
+
+----
+
+/etc/init.d/jetty restart
+
+----
+
+For Rudder Agent, upgrade the +rudder-agent+ package:
+
+----
+
+aptitude install rudder-agent
+
+----

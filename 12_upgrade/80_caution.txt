@@ -1,0 +1,15 @@
+=== Caution cases
+
+==== Known bugs (2.4.0~beta3)
+
+* Upgrade doesn't work if the user has changed the LDAP password to use a hashed
+one. A workaround is to use a plain-text password instead
+(cf http://www.rudder-project.org/redmine/issues/2821).
+
+* Upgrade on SLES 11 doesn't remove rudder-cfengine-community package and will
+ install both rudder-agent and rudder-cfengine-community. At this time, no bad
+consequences has been notice but be cautious
+(cf http://www.rudder-project.org/redmine/issues/2806).
+
+* On SLES and RHEL, Techniques associated to the 2.4.0~beta3 rudder-techniques package
+contain a wrong logrotate. (cf http://www.rudder-project.org/redmine/issues/2820)

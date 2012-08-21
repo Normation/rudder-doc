@@ -1,0 +1,6 @@
+== Upgrade Rudder
+
+This short chapter covers the upgrade of the Rudder Server Root and Rudder Agent
+from a version 2.3 to the latest version 2.4. 
+
+The upgrade is quite similar to the installation.

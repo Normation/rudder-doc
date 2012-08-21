@@ -1,0 +1,38 @@
+=== Upgrade Rudder on RedHat or CentOS
+
+Following commands are executed as the +root+ user.
+
+Define a yum repository for RedHat/CentOS 6:
+
+----
+
+$ echo "[Rudder_2.4]
+name=Rudder 2.4 Repository
+baseurl=http://www.rudder-project.org/rpm-2.4/RHEL_6/
+gpgcheck=0
+" > /etc/yum.repos.d/rudder.repo
+
+----
+
+Or for RedHat/CentOS 5:
+
+----
+
+$ echo "[Rudder_2.4]
+name=Rudder 2.4 Repository
+baseurl=http://www.rudder-project.org/rpm-2.4/RHEL_5/
+gpgcheck=0
+" > /etc/yum.repos.d/rudder.repo
+
+----
+
+
+For Rudder Agent, upgrade the +rudder-agent+ package:
+
+----
+
+yum update rudder-agent
+
+----
+
+There was no Rudder Server packages for version 2.3.
