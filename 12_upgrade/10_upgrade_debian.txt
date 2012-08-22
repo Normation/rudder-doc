@@ -4,14 +4,14 @@ Following commands are executed as the +root+ user.
 
 Add Rudder project repository:
 
-* on Debian Squeeze:
+* on Debian Squeeze and followings or Ubuntu 11.10 and followings:
 ----
 
 echo "deb http://www.rudder-project.org/apt-2.4/ $(lsb_release -cs) main contrib non-free" > /etc/apt/sources.list.d/rudder.list
 
 ----
 
-* on Ubuntu 11.10 and following, or Debian wheezy and following:
+* or on Ubuntu 11.10 and following, or Debian wheezy and following:
 
 ----
 
@@ -21,17 +21,37 @@ apt-add-repository http://www.rudder-project.org/apt-2.4/
 
 Update your local package database to retrieve the list of packages available on our repository:
 
+* With aptitude:
+
 ----
 
 aptitude update
 
 ----
 
+* With apt-get:
+
+----
+
+apt-get update
+
+----
+
 For Rudder Server, upgrade all the packages associated to +rudder-server-root+:
+
+* With aptitude:
 
 ----
 
 aptitude install rudder-server-root
+
+----
+
+* With apt-get:
+
+----
+
+apt-get install rudder-server-root
 
 ----
 
@@ -45,8 +65,18 @@ and after the upgrade of these packages, restart jetty to be sure that the chang
 
 For Rudder Agent, upgrade the +rudder-agent+ package:
 
+* With aptitude:
+
 ----
 
 aptitude install rudder-agent
+
+----
+
+* With apt-get:
+
+----
+
+apt-get install rudder-agent
 
 ----
