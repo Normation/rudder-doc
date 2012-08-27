@@ -15,3 +15,8 @@ one. A workaround is to use a plain-text password instead
 contain a buggy logrotate configuration (cf
 http://www.rudder-project.org/redmine/issues/2820). This is already fixed and
 will be released in subsequent versions (2.4.0~beta4 or 2.4.0~rc1 or 2.4.0).
+
+* On all systems, any existing users defined in
+  /opt/rudder/etc/rudder-users.xml will no longer have admin rights in 2.4. To
+  fix this manually, add 'role="administrator"' to the users in that file. See
+  http://www.rudder-project.org/redmine/issues/2822.
