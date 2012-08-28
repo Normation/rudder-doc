@@ -15,7 +15,9 @@
  * very light grey:
         background-color: #e2e2e2 ; 
  */
-
+* {
+	overflow-x: hidden
+}
 body, #toc, #toc *  {
         background-color: #e2e2e2 ; 
         color: black;
