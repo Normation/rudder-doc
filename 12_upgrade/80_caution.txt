@@ -20,3 +20,7 @@ will be released in subsequent versions (2.4.0~beta4 or 2.4.0~rc1 or 2.4.0).
   /opt/rudder/etc/rudder-users.xml will no longer have admin rights in 2.4. To
   fix this manually, add 'role="administrator"' to the users in that file. See
   http://www.rudder-project.org/redmine/issues/2822.
+
+* After upgrade if the web interface has display problems, empty you navigator cache
+and/or logout/login or check that the attribute 'base.url' in your '/opt/rudder/etc/rudder-web.properties'
+has not been reset.

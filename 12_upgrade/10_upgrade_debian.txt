@@ -80,3 +80,13 @@ aptitude install rudder-agent
 apt-get install rudder-agent
 
 ----
+
+[WARNING]
+
+====
+
+Rudder include a script for upgrading all the files which needed to. Then, you should not replace your old files by the new ones
+when apt-get/aptitude is asking for, unless you want to reset all your parameters.
+
+====
+
