@@ -15,7 +15,7 @@ Finally, the Techniques will generate a set of reports which are sent to
 the Rudder Root Server, which will let you analyse the percentage of compliance
 of your policies, and soon, detailed reports on their application.
 
-==== Manage the Techniquess
+==== Manage the Techniques
 
 The Techniques shipped with Rudder are presented in a library that you can
 reorganize in *Configuration > Techniques*. The library
