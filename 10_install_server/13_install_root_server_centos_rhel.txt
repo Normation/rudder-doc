@@ -33,3 +33,18 @@ Install the package:
 yum install rudder-server-root
 
 ----
+
+[WARNING]
+
+====
+
+Rudder don't support SELinux yet (see http://www.rudder-project.org/redmine/issues/2882),
+then you should set it as permissive with this command:
+
+----
+
+setenforce 0
+
+----
+
+====
