@@ -33,7 +33,7 @@ d06b1c6c-f59b-4e5e-8049-d55f769ac33f [d06b1c6c-f59b-4e5e-8049-d55f769ac33f]+.
 
 ==== Advanced Search 
 
-In the Advanced Search tool, you create complex research based on Node
+In the Advanced Search tool, you can create complex searches based on Node
 Inventory informations. The benefit of the Advanced Search tool is to save the
 query and create a Group of Nodes based on the search criteria.
 
@@ -77,7 +77,7 @@ and y could be everything. You will to add that line to your search request:
  
 ====
 
-- b. Composite research
+- b. Composite search
 
 Some fields allow you to look for more than one informations at a time.
 That's the case for environment variable. for those fields you have to enter 
