@@ -3,7 +3,7 @@
 
 === Search Nodes
 
-You can navigate to *Asset Management > Search Nodes* to display information
+You can navigate to *Node Management > Search Nodes* to display information
 about the Nodes which have been already validated, and are managed by Rudder.
 
 [[quick-search, Quick Search]]
@@ -33,7 +33,7 @@ d06b1c6c-f59b-4e5e-8049-d55f769ac33f [d06b1c6c-f59b-4e5e-8049-d55f769ac33f]+.
 
 ==== Advanced Search 
 
-In the Advanced Search tool, you create complex research based on Asset
+In the Advanced Search tool, you create complex research based on Node
 Inventory informations. The benefit of the Advanced Search tool is to save the
 query and create a Group of Nodes based on the search criteria.
 
@@ -44,7 +44,8 @@ process. The list of fields is not displayed unordered and extensively. Fields
 have been grouped in the same way they are displayed when you look at
 information about a Node. First you choose among these groups: 'Node', 'Network
 Interface', 'Filesystem', 'Machine', 'RAM', 'Storage', 'BIOS', 'Controller',
-'Port', 'Processor', 'Sound Card', 'Video Card', 'Software'; then you choose
+'Port', 'Processor', 'Sound Card', 'Video Card', 'Software', 'Environment
+ Variable', 'Processes', 'Virtual Machines'; then you choose
 among the list of fields concerning this theme.
 
 - 2. Select the matching rule
@@ -52,9 +53,48 @@ among the list of fields concerning this theme.
 // FIXME: due to a bug in asciidoc, we cannot write '≠' 
 
 The matching rule can be selected between following possibilities: 'Is defined',
-'Is not defined', '=' or ≠  followed by the term you are searching for presence or
+'Is not defined', '=', ≠ or 'Regex'  followed by the term you are searching for presence or
 absence. Depending on the field, the list of searchable terms is either an free
 text field, either the list of available terms. 
+
+- a. Regex matching rule
+
+You can use regular expressions to find whatever you want in Node inventories.
+A search request using a regexp will look for every nodes that match the pattern you
+entered.
+
+Those regexps follow Java Pattern rules. See http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
+for more details.
+
+.Search node having an ip address matching +192.168.x.y+
+
+====
+
+Assuming you want to search every node using an ip address match 192.168.x.y, where x<10 
+and y could be everything. You will to add that line to your search request:
+
+* 'Node summary', 'Ip address', +Regex+, '192\ .168\ .\d\ . .*'
+ 
+====
+
+- b. Composite research
+
+Some fields allow you to look for more than one informations at a time.
+That's the case for environment variable. for those fields you have to enter 
+the first element then the separator then following elements.
+The name of the fields tells you about what is expected. it would look like 
++firstelement<sep>secondelement+ assuming that <sep> is the separator.
+
+.Search Environment Variable +LANG=C+.
+
+====
+
+Assuming you want to search every node having the environment variable LANG set to C.
+You will have to add that search line to your request:
+
+* 'Environment variable', 'key=value', +=+, 'LANG=C'.
+ 
+====
 
 - 3. Add another rule
 
@@ -77,4 +117,3 @@ create this 2 lines request:
 . Second search line: 'Software', 'Name', +=+, +ssh+.
  
 ====
-
