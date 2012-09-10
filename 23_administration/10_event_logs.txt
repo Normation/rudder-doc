@@ -5,7 +5,7 @@ PostgreSQL database. The last 1000 event log entries are displayed in the
 *Administration > View Event Logs* section of Rudder web application. Each
 log item is described by its 'ID', 'Date', 'Actor', and  'Event' 'Type',
 'Category' and 'Description'. For the most complex events, like changes in
-assets, groups, techniques, directives, deployments, more details can be
+nodes, groups, techniques, directives, deployments, more details can be
 displayed by clicking on the event log line.
 
 Event Categories::
@@ -17,7 +17,7 @@ Event Categories::
 * Technique
 * Policy Deployment
 * Node Group
-* Assets
+* Nodes
 * Rudder Agents
 * Policy Node
 * Archives

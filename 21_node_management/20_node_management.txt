@@ -1,10 +1,10 @@
-== Asset Management
+== Node Management
 
-[[inventory, Asset Inventory]]
+[[inventory, Node Inventory]]
 
-=== Asset Inventory
+=== Node Inventory
 
-Rudder integrates an asset inventory tool which harvest useful informations
+Rudder integrates a node inventory tool which harvest useful informations
 about the nodes. These informations are used by Rudder to handle the nodes, and
 you can use the inventory informations for Configuration Management purpose:
 search Nodes, create Groups of Nodes, determine some configuration management

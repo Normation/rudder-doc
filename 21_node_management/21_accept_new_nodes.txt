@@ -7,7 +7,7 @@ At the starting point, the Rudder Server does'nt know anything about the Nodes.
 After the installation of the Rudder Agent, each Node register itself to the
 Rudder Server, and sends a first inventory. Every new Node must be manually
 validated in the Rudder Web Interface to become part of Rudder Managed Nodes.
-This task is performed in the *Asset Management > Accept new Nodes* section of
+This task is performed in the *Node Management > Accept new Nodes* section of
 the application. You can select Nodes waiting for an approval, and determine
 whether you consider them as valid or not. Click on each Node name to display
 the extended inventory. Click on the magnifying glass icon to display the
@@ -22,7 +22,7 @@ policies which will be applied after the validation.
 
 . Wait a few minutes for the first run of the Rudder Agent.
 
-. Navigate to *Asset Management > Accept new Nodes*.
+. Navigate to *Node Management > Accept new Nodes*.
 
 . Select the new Node in the list.
 

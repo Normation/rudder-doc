@@ -13,7 +13,7 @@ procedure.
 === Presentation of Rudder Web Interface
 
 The web interface is organised according to the concepts described earlier. It
-is divided in three logical parts: Asset Management, Configuration Management
+is divided in three logical parts: Node Management, Configuration Management
 and Administration.
 
 ==== Rudder Home
@@ -25,9 +25,9 @@ for the most common actions.
 
 image::./images/RudderHome.png[Home menu]
 
-==== Asset Management
+==== Node Management
 
-In the Asset Management section, you will find the validation tool for new
+In the Node Management section, you will find the validation tool for new
 Nodes, a search engine for validated Nodes, and the management tool for groups
 of Nodes.
 
