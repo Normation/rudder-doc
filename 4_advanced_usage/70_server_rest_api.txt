@@ -164,3 +164,34 @@ http://localhost/rudder/api/archives/restore/full/latestCommit
 
 ----
 
+===== Downloading a ZIP archive
+
+The REST API allows to download a ZIP archive of groups, directives and 
+rules (as XML files) for a given Git commit ID (the commit HASH). 
+
+It is not designed to query for available Git commit ID, so you will need to get 
+it directly from a Git tool (for example with Git log) or from the list API. 
+
+Note that that API allow to download ANY Git commit ID as a ZIP archive, 
+not only the one corresponding to Rudder archives. 
+
+Note 2: you should rename the resulting file with a ".zip" extension as
+most zip utilities won't work correctly on a file not having it. 
+
+`http://localhost/rudder/api/archives/zip/groups/[GitCommitId]`::
+
+Download groups for the given Commit ID as a ZIP archive. 
+
+`http://localhost/rudder/api/archives/zip/directives/[GitCommitId]`::
+
+Download directives for the given Commit ID as a ZIP archive. 
+
+`http://localhost/rudder/api/archives/zip/rules/[archiveId]`::
+
+Download rules for the given Commit ID as a ZIP archive. 
+
+`http://localhost/rudder/api/archives/zip/full/[archiveId]`::
+
+Download groups, directives and rules for the given Commit ID as a ZIP archive. 
+
+
