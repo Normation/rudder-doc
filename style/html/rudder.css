@@ -16,7 +16,7 @@
         background-color: #e2e2e2 ; 
  */
 * {
-	overflow-x: hidden
+	overflow-x: auto;
 }
 body, #toc, #toc *  {
         background-color: #e2e2e2 ; 
