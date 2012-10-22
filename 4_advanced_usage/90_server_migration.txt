@@ -1,0 +1,92 @@
+=== Server migration
+
+==== What files you need
+
+To copy a server on a new location, you need at least to keep the configuration applied by your server.
+
+You need to keep :
+
+- *Rules*
+- *Directives*
+- *Groups*
+- *Techniques*
+
+If you keep your actual nodes, you also have to handle with CFEngine keys.
+New nodes won't have problems with the new server.
+
+If your new server has a different IP, you will have to change it on your nodes.
+
+You will have to accept nodes
+
+There are multiple ways to migrate your server, here are the best we propose you.
+
+==== Handle configuration files
+
+===== Copy /var/rudder/configuration-repository
+
+The simplest way to migrate your server to a new one is to copy /var/rudder/configuration-repository from your former server to the new one.
+In this folder you will find all your Rules/Groups/Directives/Techniques are stored.
+By copying that folder you will keep the git tree used by your server and keep your comments.
+
+- Copy +/var/rudder/configuration-repository+ to your new server
+- In Rudder UI Go to *Administration >  Policy Server*
+- Reload the Technique Library
+- Go to *Administration > Archives*
+- In Global Archive, "Choose an archive" select _Latest git commit_
+- Click on _Restore everything_
+- After deployement, your configuration should be restored
+
+===== Use Archive feature of Rudder
+
+You can download an archive of your configuration in the Rudder UI and use it on your new server
+To keep your Technique you will have to copy the techniques folder in /var/rudder/configuration-repository to your new server
+You will have a new git tree, and you will lose all the history you add before and the all the comments
+
+*Techniques*
+
+- Copy the +/var/rudder/configuration-repository/techniques+ folder from your old server to you new one
+
+*Others*
+
+- On your old server UI, go to *Administration > Archives*
+- In global archive, choose the latest commit, and then click on download as Zip
+- Copy and extract the archive in +/var/rudder/configuration-repository+
+
+*Git*
+
+- use +git add rules techniques groups directives+
+- use +git commit+
+- the latest git commit will now be exactly the same as the old one
+
+*Restore*
+
+- In Rudder UI Go to *Administration >  Policy Server*
+- Reload the Technique Library
+- Go to *Administration > Archives*
+- In Global Archive, "Choose an archive" select _Latest git commit_
+- Click on _Restore everything_
+- After deployement, your configuration should be restored
+
+==== Handle CFEngine keys
+
+===== Keep your CFEngine keys
+
+Copy +/var/rudder/cfengine-community/ppkeys+ to your new server
+
+===== Change CFEngine keys
+
+On every node that were using your old server rudder, you will have to erase the server public key (root-MD5=*.pub file)
+
+Run  +rm /var/rudder/cfengine-community/ppkeys/root-MD5=*.pub+
+
+On the next run of rudder-agent, nodes will get the new public key of the server
+
+==== On your nodes
+
+If your server has changed of IP address you have to modify +/var/rudder/cfengine-community/policy_server.dat+ with the new address
+
+Then you force your nodes to send their inventory while running +/var/rudder/cfengine-community -KI -D force_inventory+
+
+On your Rudder UI, you should now be able to accept the nodes.
+
+You configuration is now totally migrated.
