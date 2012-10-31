@@ -31,7 +31,7 @@ In the Node Management section, you will find the validation tool for new
 Nodes, a search engine for validated Nodes, and the management tool for groups
 of Nodes.
 
-.Asset Management welcome screen 
+.Node Management welcome screen 
 
 image::./images/RudderMenuAssetManagement.png[Asset Management]
 
