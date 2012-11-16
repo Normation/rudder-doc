@@ -1,0 +1,91 @@
+=== Migration, backups ans restores
+
+It is advised to backup frequently your Rudder installation in case
+of a major outage.
+
+These procedures will explain how to backup your Rudder installation.
+
+==== Backup
+
+This backup procedure will operate on the three principal Rudder data sources:
+* The LDAP database
+* The PostgreSQL database
+* The configuration-repository folder
+
+It will also backup the application logs.
+
+[code,python]
+
+.How to backup a Rudder installation
+
+----
+
+# First, backup the LDAP database:
+/opt/rudder/sbin/slapcat -l /tmp/rudder-backup-$(date +%Y%M%d).ldif
+
+# Second, the PostgreSQL database:
+sudo -u postgres pg_dump rudder > /tmp/rudder-backup-$(date +%Y%M%d).sql
+
+# Or without sudo, use the rudder application password:
+pg_dump -U rudder rudder > /tmp/rudder-backup-$(date +%Y%M%d).sql
+
+# Third, backup the configuration repository:
+tar -C /var/rudder -zvcf /tmp/rudder-backup-$(date +%Y%M%d).tar.gz configuration-repository/ cfengine-community/ppkeys/
+
+# Finally, backup the logs:
+tar -C /var/log -zvcf /tmp/rudder-log-backup-$(date +%Y%M%d).tar.gz rudder/
+
+# And put the backups wherever you want, here /root:
+cp /tmp/rudder-backup* /root
+cp /tmp/rudder-log-backup* /root
+
+----
+
+==== Restore
+
+Of course, after a total machine crash, you will have your backups at hand,
+but what should you do with it ?
+
+Here is the restoration procedure:
+
+[code,python]
+
+.How to restore a Rudder backup
+
+----
+
+# First, follow the standard installation procedure, this one assumes you have a working "blank"
+Rudder on the machine
+
+# Stop Rudder
+/etc/init.d/rudder-root-server stop
+
+# Drop the OpenLDAP database
+rm -rf /var/rudder/ldap/openldap-data/alock /var/rudder/ldap/openldap-data/*.bdb /var/rudder/ldap/openldap-data/__db* /var/rudder/ldap/openldap-data/log*
+
+# Import your backups
+
+# Configuration repository
+tar -C /var/rudder -zvxf /root/rudder-backup-XXXXXXXX.tar.gz
+
+# LDAP backup
+/opt/rudder/sbin/slapadd -l /root/rudder-backup-XXXXXXXX.ldif
+
+# PostgreSQL backup
+sudo -u postgres psql -d rudder < /root/rudder-backup-XXXXXXXX.sql
+# or
+psql -u rudder -d rudder -W < /root/rudder-backup-XXXXXXXX.sql
+
+# And restart the machine or just Rudder:
+/etc/init.d/rudder-server-root restart
+
+----
+
+==== Migration
+
+To migrate a Rudder installation, just backup and restore your Rudder installation
+from one machine to another.
+
+Please remember that The CFEngine key restoration is mandatory for the clients to update
+properly, but if the Rudder server address changes, the agents will block. You have to delete
+every root-*.pub key in /var/rudder/cfengine-community/ppkeys/ for things to work again.

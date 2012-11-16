@@ -1,0 +1,69 @@
+=== Database maintenance
+
+Rudder uses two backends to store information as of now: LDAP and SQL
+
+To achieve this, OpenLDAP and PostgreSQL are installed with Rudder.
+
+However, like every database, they require a small amount of maintenance
+to keep operating well. Thus, this chapter will introduce you to the basic
+maintenance procedure you might want to know about these particular database
+implementations.
+
+==== PostgreSQL database vacuum
+
+In some cases, like a large report archiving or deletion, the Rudder interface
+will still display the old database size. This is because even when the database
+have been cleaned as requested, the physical storage backend still has not deleted
+the related entry on the disk.
+
+This task is handled by the autovacuum process, which automatically cleans the storage
+regularly to prevent database bloating.
+
+To force this operation to free storage immediately, you can trigger a vacuum operation
+by yourself, however keep in mind that this operation is very disk and memory intensive,
+and will lock the Rudder interface for quite a long time with a big database.
+
+[code,python]
+
+.Manual vacuuming using the psql binary
+
+----
+
+# You can either use sudo to change owner to the postgres user, or use the rudder connexion credentials.
+
+# With sudo:
+sudo -u postgres psql -d rudder
+
+# With rudder credentials, it will ask the password in this case:
+psql -u rudder -d rudder -W
+
+# And then, when you are connected to the rudder database in the psql shell, trigger a vacuum:
+rudder=# VACUUM ANALYZE;
+rudder=# VACUUM FULL;
+
+# And take a coffee.
+
+----
+
+==== LDAP database reindexing
+
+In some very rare case, you will encounter some LDAP database entries that are not indexed and used
+during searches. In that case, OpenLDAP will output warnings to notify you that they should be.
+
+[code,python]
+
+.LDAP database reindexing
+
+----
+
+# Stop OpenLDAP
+/etc/init.d/slapd stop
+
+# Reindex the databases
+/opt/rudder/sbin/slapindex
+
+# Restart OpenLDAP
+/etc/init.d/slapd restart
+
+----
+

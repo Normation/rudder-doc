@@ -1,0 +1,28 @@
+=== Application tuning
+
+Some applications used by Rudder can be tuned to your needs, like Apache HTTPd.
+
+==== Apache HTTPd
+
+The apache HTTPd is used by Rudder as a proxying server, to connect to the Jetty
+application server.
+
+But it is also widely used as a regular HTTP serving application. You are heavily
+advised if interested to read the tons of documentation about it in your Linux
+distribution website, to learn about what it can do.
+
+==== Jetty
+
+The Jetty 7 (Hightide) application server is the main application that runs the
+Rudder code. It is based on the Java programming language.
+
+About the latter, there is some configuration switches that you might want to
+tune to obtain better performance with Rudder, in /etc/default/jetty, whereas the
+default ones fit the basic recommandations for the minimal Rudder hardware requirements.
+
+* -Xms and Xmx: These parameters tune the total amount of RAM usable / dedicated to the
+java process. It is what you want to tune at first to give Rudder some more RAM.
+
+* -XX:PermSize -XX:MaxPermSize: These parameters are acceptable for most installations,
+but you might want to decrease them a bit if using a machine that is not very powerful /
+RAM abundant. Increasing them is not really useful.
