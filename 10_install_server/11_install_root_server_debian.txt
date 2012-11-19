@@ -42,10 +42,16 @@ Your Linux distribution may differ too, +squeeze+ could be replaced by +lenny+.
 
 ====
 
-On Ubuntu 12.04 or later, the use of rsyslog need to specify another port than 514.
+For users running Rudder on Ubuntu Server 12.04 or later, a bug exist with nodes using syslogd.
 
-This means that a node using syslogd will need to redirect all its 514 port's traffic to
-the port specified on the server in /opt/rudder/etc/rudder-web.properties.
+Rudder will apply rules on nodes but will never get reports from those using syslogd.
+Therefore Rudder will not be able to calculate compliance.
+
+Three workaround still exists:
+
+* 1/ Do not use an Ubuntu Server 12.04
+* 2/ Change the rsyslog config on the Ubuntu server to use port 514 and allow it
+* 3/ Use iptables to send traffic to the correct port
 
 ====
 
