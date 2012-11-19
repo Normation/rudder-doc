@@ -1,5 +1,17 @@
 === Install Rudder Root server on RedHat or CentOS
 
+==== Java on RHEL/CentOS
+
+The Rudder Root server needs a compatible 'Java Runtime Environment' to run.
+
+On RHEL/CentOS 6, the available package compatible with Rudder server is
++java-1.7.0-openjdk+ but Rudder is also compatible with Oracle Java 7 JRE.
+
+JRE 6 and JRE 7 aren't provided by the same virtual package on RHEL/CentOS 6,
+this is why even if Rudder Server would work with Oracle Java 6 JRE, the
+dependencies will not be resolved with it only.
+
+==== Add the Rudder packages repository
 
 Configure the yum repository for RedHat/CentOS 6:
 
@@ -25,6 +37,7 @@ gpgcheck=0
 
 ----
 
+==== Install your Rudder Root Server
 
 Install the package:
 
