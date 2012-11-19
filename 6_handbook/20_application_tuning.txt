@@ -1,3 +1,4 @@
+
 === Application tuning
 
 Some applications used by Rudder can be tuned to your needs, like Apache HTTPd.
@@ -26,3 +27,41 @@ java process. It is what you want to tune at first to give Rudder some more RAM.
 * -XX:PermSize -XX:MaxPermSize: These parameters are acceptable for most installations,
 but you might want to decrease them a bit if using a machine that is not very powerful /
 RAM abundant. Increasing them is not really useful.
+
+==== CFEngine
+
+If you are using Rudder on a highly stressed machine, which has especially slow or busy
+I/O's, you might experience a sluggish CFEngine agent run everytime the machine
+tries to comply with your Rules.
+
+This is because the CFEngine agent tries to update its class database everytime the agent
+executes a promise (the cf-lock.db file in the /var/rudder/cfengine-community/state directory),
+which even if the database is very light, takes some time if the machine has a very high iowait value.
+
+In this case, here is a workaround you can use to restore CFEngine's full speed: you can use
+a RAMdisk to store CFEngine states.
+
+You might use this solution either temporarily, to examine a slowness problem, or permanently, to mitigate a
+known I/O problem on a specific machine. We do not recommend as of now to use this on a whole IT infrastructure.
+
+Be warned, this solution has only one drawback: you should backup and restore the content of this directory
+manually in case of a machine reboot because all the persistent states are stored here, so in case you are using,
+for example the jobScheduler Technique, you might encounter an unwanted job execution because CFEngine will have
+"forgotten" the job state.
+
+Here is the command line to use:
+
+[code,python]
+
+.How to mount a RAMdisk on CFEngine state directory
+
+----
+
+# How to mount the RAMdisk manually, for a "one shot" test:
+mount -t tmpfs -o size=128M tmpfs /var/rudder/cfengine-community/state
+
+# How to put this entry in the fstab, to make the modification permanent
+echo "tmpfs /var/rudder/cfengine-community/state tmpfs defaults,size=128 0 0" >> /etc/fstab
+mount /var/rudder/cfengine-community/state
+
+----
