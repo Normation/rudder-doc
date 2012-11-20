@@ -1,4 +1,4 @@
-=== Migration, backups ans restores
+=== Migration, backups and restores
 
 It is advised to backup frequently your Rudder installation in case
 of a major outage.
