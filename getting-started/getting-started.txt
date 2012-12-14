@@ -10,6 +10,8 @@
 :scrollable: 
 :data-uri:
 
+// you need http://houqp.github.com/asciidoc-deckjs/ to build this files
+
 
 == Getting started with Rudder
 
