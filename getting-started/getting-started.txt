@@ -123,7 +123,8 @@ use the Normation repository.
 ----
 # echo "[Rudder_2.4]
 name=Rudder 2.4 Repository
-baseurl=http://www.rudder-project.org/rpm-stable/RHEL_5/ gpgcheck=0
+baseurl=http://www.rudder-project.org/rpm-stable/RHEL_5/
+gpgcheck=0
 " > /etc/yum.repos.d/rudder.repo
 # yum install rudder-agent
 ----
