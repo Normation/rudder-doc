@@ -34,21 +34,21 @@ To get more deeply in the explanations, please read the full User Documentation.
 * Rudder Server
 
 ** This guide will describe the installation of the Rudder Server on a Debian
-Squeeze, with 1 GB of memory and the IP address +192.168.56.85+. 
+Squeeze, with 1 GB of memory and the 'IP' address +192.168.56.85+.
 
 ** On the Rudder Server, you need a compatible Java Runtime Environment to run,
-namely the Oracle Java 6 JRE or OpenJDK? 7 (the OpenJDK 6 is not supported).
+namely the Oracle Java 6 JRE or OpenJDK 7 JRE (OpenJDK 6 is not supported).
 
 * Rudder Agent
 
 ** The installation of the Rudder Agent will be performed on a CentOS 5.8, with
-384 MB of memory and the IP address +192.168.56.190+.
+384 MB of memory and the 'IP' address +192.168.56.190+.
 
 * Name resolution
 
-** You will also need a proper DNS environement, that allow server and client to
+** You will also need a proper 'DNS' environment, that allow server and client to
 communicate via their hostname. If you don't have the necessary name resolution,
-we recommend that you should fill the IP address and hostname in the /etc/hosts
+we recommend that you should fill the IP address and hostname in the +/etc/hosts+
 file.
 
 == Install the Rudder Server
@@ -58,11 +58,10 @@ validate its content, you should import the GPG key used to sign it
 
 [source,console]
 ----
-# apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 474A19E8 
-# echo "deb http://www.rudder-project.org/apt-stable/ squeeze main contrib non-free" > /etc/apt/sources.list.d/rudder.list 
-# apt-get update 
-# apt-get install
-# rudder-server-root
+# apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 474A19E8
+# echo "deb http://www.rudder-project.org/apt-stable/ squeeze main contrib non-free" > /etc/apt/sources.list.d/rudder.list
+# apt-get update
+# apt-get install rudder-server-root
 ----
 
 == Configure the Rudder Server
