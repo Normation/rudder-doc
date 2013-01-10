@@ -1,67 +1,13 @@
 === Install Rudder Root server on Debian or Ubuntu
 
-==== Java on Debian/Ubuntu
-
-The Rudder Root server needs a compatible 'Java Runtime Environment' to run. 
-
-On 'Debian Squeeze' and 'Debian Lenny', the available package is 'Oracle Java 6
-JRE', namely +sun-java-6-jre+, which is in the 'non-free' component. 
-
-On 'Debian Wheezy' and above and 'Ubuntu Oneiric' and above, the available package is
-'OpenJDK 7 JRE', namely +openjdk-7-jre+.
-
-On 'Ubuntu Natty' and previous, you will have to install Java yourself as the
-packaging of the Sun JVM is now restricted by Oracle(TM) and Rudder is not
-OpenJDK 6 compatible.
-
-===== On Debian Squeeze or Lenny, add the main, contrib and non-free components
-
-Ensure that the +apt+ package manager is configured to use these three components,
-by checking that +/etc/apt/sources.list+ contains the following lines:
-
-----
-
-deb http://ftp.fr.debian.org/debian/ squeeze main contrib non-free
-deb http://security.debian.org/ squeeze/updates main contrib non-free
-
-----
-
-[TIP]
-
-====
-
-Your mirror may differ, +ftp.fr.debian.org+ is only an example. Also, please
-adapt the distribution name if needed.
-
-Your Linux distribution may differ too, +squeeze+ could be replaced by +lenny+.
-
-====
-
-
-[WARNING]
-
-====
-
-For users running Rudder on Ubuntu Server 12.04 or later, a bug exist with nodes using syslogd.
-
-Rudder will apply rules on nodes but will never get reports from those using syslogd.
-Therefore Rudder will not be able to calculate compliance.
-
-Three workaround still exists:
-
-* 1/ Do not use an Ubuntu Server 12.04
-* 2/ Change the rsyslog config on the Ubuntu server to use port 514 and allow it
-* 3/ Use iptables to send traffic to the correct port
-
-====
-
 ==== Update the system
 
 Prior to beginning the installation of your Rudder Server, we recommend that you
 update your Debian/Ubuntu system with the latest versions of available packages.
-Especially for Debian 5 (Lenny), since the release of Debian 6.0 (Squeeze), the signing key of
+
+Specifically for Debian 5 (Lenny), since the release of Debian 6 (Squeeze), the signing key of
 packages repositories has changed. If you haven't already done it, you should
-force the upgrade of the +debian-archive-keyring+ package to fetch the new key:
+also force the upgrade of the +debian-archive-keyring+ package to fetch the new key:
 
 ----
 
@@ -74,7 +20,7 @@ root@rudder-server:~# aptitude safe-upgrade
 
 ==== Add the Rudder packages repository
 
-To validate the content of the Normation repository, you should import the GPG
+To validate the contents of the Rudder repository, you should import the GPG
 key used to sign it:
 
 ----
@@ -83,7 +29,8 @@ root@rudder-server:~# apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4
 
 ----
 
-If your HTTP Keyserver Protocol (11371/tcp) is blocked you can use an alternate command:
+If the HTTP Keyserver Protocol (11371/tcp) port is blocked on your network you
+can use this alternate command:
 
 ----
 
@@ -92,7 +39,7 @@ root@rudder-server:~# wget --quiet -O- "http://keyserver.ubuntu.com/pks/lookup?o
 ----
 
 
-Then add the URL of the Normation repository, by typing:
+Then add the Rudder repository, by typing:
 
 ----
 
@@ -109,6 +56,45 @@ root@rudder-server:~# aptitude update
 
 ----
 
+==== Java on Debian/Ubuntu
+
+The Rudder Root server needs a compatible 'Java Runtime Environment' to run.
+In most cases, this will be installed automatically thanks to packaging
+dependencies, however in some cases manual installation is required.
+
+On 'Debian Squeeze (6)' and 'Debian Lenny (5)', the available package is 'Oracle Java 6
+JRE', namely +sun-java-6-jre+, which is in the 'non-free' component. You must
+make sure this is enabled in your apt sources. Check that
++/etc/apt/sources.list+ contains the following lines:
+
+----
+
+deb http://ftp.fr.debian.org/debian/ squeeze main contrib non-free
+deb http://security.debian.org/ squeeze/updates main contrib non-free
+
+----
+[TIP]
+
+====
+
+Your mirror may differ, +ftp.fr.debian.org+ is only an example. Also, please
+adapt the distribution name if needed (+squeeze+ could be replaced by +lenny+).
+
+====
+
+
+On 'Ubuntu Natty (11.04)' and previous Ubuntu versions, you will have to
+install Java yourself as the packaging of the Oracle JVM is now restricted by
+Oracle(TM) and Rudder is not compatible with OpenJDK 6, which is the only
+available JDK from Ubuntu. See http://www.java.com/fr/download/ to get
+Oracle's JVM.
+
+On 'Debian Wheezy (7)' and above and 'Ubuntu Oneiric (11.10)' and above, the
+available package is 'OpenJDK 7 JRE', namely +openjdk-7-jre+. It will be
+installed automatically as a dependency of the Rudder packages, and does not
+require the non-free component.
+
+
 ==== Install your Rudder Root Server
 
 To begin the installation, you should simply install the rudder-server-root
@@ -124,8 +110,34 @@ root@rudder-server:~# aptitude install rudder-server-root
 
 ====
 
-If you use the 'Oracle Java 6 JRE', you will be asked to accept the license of
-the product during installation.
+If 'Oracle Java 6 JRE' is installed (usually on Debian Lenny (5) or Squeeze
+(6) only), you will be asked to accept the license of the product during
+installation.
+
+====
+
+==== Compatibility with RHEL/CentOS 5 and syslogd
+
+[WARNING]
+
+====
+
+For users running the Rudder *server* on Ubuntu Server 12.04 or later, any
+nodes running syslogd (not syslog-ng or rsyslog) will fail to send any
+reports about the configuration rules they have applied. This is the case by
+default on RHEL/CentOS 5, but not on any other supported platforms.
+
+Rudder will apply rules on nodes but will never get reports from those using syslogd.
+Therefore Rudder will not be able to calculate compliance.
+
+Several workarounds are available to fix this:
+
+. Install another syslog server on your nodes, such as rsyslog or syslog-ng.
+. Change the rsyslog configuration on the Rudder server (running Ubuntu 12.04
+  or later) to use port 514 and authorize this in the rsyslog configuration.
+. Setup iptables on the node to send syslog traffic to the correct port on
+  your Rudder server.
+. Use a different OS for your Rudder server that Ubuntu Server 12.04 or later.
 
 ====
 
