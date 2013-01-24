@@ -1,26 +1,6 @@
 === Caution cases
 
-==== Known bugs (2.4.0~beta3)
-
-* Upgrade doesn't work if the user has changed the LDAP password to use a hashed
-one. A workaround is to use a plain-text password instead
-(cf http://www.rudder-project.org/redmine/issues/2821).
-
-* Upgrade on SLES 11 doesn't remove rudder-cfengine-community package and will
- install both rudder-agent and rudder-cfengine-community. At this time, no
- consequences of any impact have been noticed but be cautious
-(cf http://www.rudder-project.org/redmine/issues/2806).
-
-* On SLES 11, Techniques associated to the 2.4.0~beta3 rudder-techniques package
-contain a buggy logrotate configuration (cf
-http://www.rudder-project.org/redmine/issues/2820). This is already fixed and
-will be released in subsequent versions (2.4.0~beta4 or 2.4.0~rc1 or 2.4.0).
-
-* On all systems, any existing users defined in
-  /opt/rudder/etc/rudder-users.xml will no longer have admin rights in 2.4. To
-  fix this manually, add 'role="administrator"' to the users in that file. See
-  http://www.rudder-project.org/redmine/issues/2822.
+==== Known bugs
 
 * After upgrade if the web interface has display problems, empty you navigator cache
-and/or logout/login or check that the attribute 'base.url' in your '/opt/rudder/etc/rudder-web.properties'
-has not been reset.
+and/or logout/login.
