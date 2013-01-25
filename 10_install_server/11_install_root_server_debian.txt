@@ -43,7 +43,7 @@ Then add the Rudder repository, by typing:
 
 ----
 
-root@rudder-server:~# echo "deb http://www.rudder-project.org/apt-2.4/ $(lsb_release -cs) main contrib non-free" > /etc/apt/sources.list.d/rudder.list
+root@rudder-server:~# echo "deb http://www.rudder-project.org/apt-2.5/ $(lsb_release -cs) main contrib non-free" > /etc/apt/sources.list.d/rudder.list
 
 ----
 

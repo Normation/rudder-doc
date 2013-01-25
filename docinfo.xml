@@ -30,7 +30,7 @@
   </authorgroup>
   
   <copyright>
-    <year>2011-2012</year>
+    <year>2011-2013</year>
     <holder>Normation SAS</holder>
   </copyright>
   
@@ -57,6 +57,14 @@
       <authorinitials>NC, JC, FFT</authorinitials>
       <revremark>
         Rudder User Documentation for 2.4 release of Rudder.
+      </revremark>
+    </revision>
+    <revision>
+      <revnumber>2.5.0</revnumber>
+      <date>January 2013</date>
+      <authorinitials>NC, JC, FFT</authorinitials>
+      <revremark>
+        Rudder User Documentation for 2.5 release of Rudder.
       </revremark>
     </revision>
   </revhistory>
