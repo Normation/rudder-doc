@@ -47,6 +47,14 @@ root@rudder-server:~# echo "deb http://www.rudder-project.org/apt-2.4/ $(lsb_rel
 
 ----
 
+For Ubuntu, type this instead:
+
+----
+
+root@rudder-server:~# echo "deb http://www.rudder-project.org/apt-2.3/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
+
+----
+
 Then, update your local package database to retrieve the list of packages
 available on our repository:
 
