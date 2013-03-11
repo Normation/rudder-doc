@@ -74,7 +74,7 @@ Then add the URL of the Normation repository, by typing:
 
 ----
 
-root@rudder-server:~# echo "deb http://www.rudder-project.org/apt-2.3/ $(lsb_release -cs) main contrib non-free" > /etc/apt/sources.list.d/rudder.list
+root@rudder-server:~# echo "deb http://www.rudder-project.org/apt-2.3/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 
 ----
 
