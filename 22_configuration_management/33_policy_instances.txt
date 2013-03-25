@@ -32,3 +32,20 @@ your organization, like +rudder-project.org+.
 
 ====
 
+[CAUTION]
+
+.Manual escaping of value
+
+====
+
+The values you are inserting within the Policy Instance fields need to be manually
+escaped most of the time, or else you will have deployment error.
+Every quote ( " ) need to be prefixed by a backslash ( \" ), and backslash should
+be prefixed by another backslash ( \\ ).
+Indeed, CFEngine will consider a non-prefixed quote as the end of value, and it
+considers \\ to mean \
+
+However, there are no other escape character ( \n will not be considered as a new
+line, etc).
+
+====
