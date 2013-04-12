@@ -60,11 +60,11 @@
       </revremark>
     </revision>
     <revision>
-      <revnumber>2.5.0</revnumber>
+      <revnumber>2.6.0</revnumber>
       <date>January 2013</date>
       <authorinitials>NC, JC, FFT</authorinitials>
       <revremark>
-        Rudder User Documentation for 2.5 release of Rudder.
+        Rudder User Documentation for 2.6 release of Rudder.
       </revremark>
     </revision>
   </revhistory>
