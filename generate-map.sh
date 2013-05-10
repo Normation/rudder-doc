@@ -11,7 +11,7 @@ echo "// Automatically generated list of content - do not edit" > $FILE
 
 for entry in $(find *_* -name '*txt' | sort)
 do
-	echo "include::../$entry[] \n" >> $FILE
+	echo "include::../$entry[]" >> $FILE
 done
 
 FILE=temp/glossary.txt
@@ -23,6 +23,6 @@ echo "// Automatically generated list of content - do not edit
 
 for entry in $(find glossary -name '*txt' | sort)
 do
-	echo "include::../$entry[] \n" >> $FILE
+	echo "include::../$entry[]" >> $FILE
 done
 
