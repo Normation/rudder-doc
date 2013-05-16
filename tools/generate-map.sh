@@ -11,7 +11,7 @@ echo "// Automatically generated list of content - do not edit" > $FILE
 
 for entry in $(find $(dirname $0)/../*_* -name '*txt' | sort)
 do
-	echo "include::../$entry[] \n" >> $FILE
+	echo "include::../$entry[]" >> $FILE
 done
 
 FILE=temp/glossary.txt
@@ -23,7 +23,7 @@ echo "// Automatically generated list of content - do not edit
 
 for entry in $(find $(dirname $0)/../glossary -name '*txt' | sort)
 do
-	echo "include::../$entry[] \n" >> $FILE
+	echo "include::../$entry[]" >> $FILE
 done
 
 $(dirname $0)/images-resolution.sh
