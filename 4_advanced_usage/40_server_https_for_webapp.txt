@@ -1,0 +1,109 @@
+[[https-for-webapp, HTTP/S for Rudder web application]]
+=== HTTP/S support
+
+HTTP/S support is desirable in most applications, especially environments
+hosting sensitive information.
+
+Currently, Rudder versions prior to 2.8 do not enable HTTP/S by default, but
+adding HTTP/S to the web interface is relatively trivial.
+
+To do so, please run the following commands on the Rudder server to generate a
+self-signed SSL certificate and update the Apache configuration. Choose the
+appropriate walkthrough depending on your server's OS: Debian/SuSE-like or
+RHEL/CentOS-like. You are also most welcome to replace the step to generate a
+self signed certificate (using openssl) by your own certificates if you have them.
+You would only have to put /opt/rudder/etc/ssl/rudder-webapp.key and
+/opt/rudder/etc/ssl/rudder-webapp.crt, or symlink this location to the appropriate
+place.
+
+On the Rudder server, for Debian/SuSE-like OSes:
+----
+## Create the SSL key
+mkdir -p /opt/rudder/etc/ssl
+openssl req -new -x509 -newkey rsa:2048 -subj "/CN=$(hostname --fqdn)/" -keyout /opt/rudder/etc/ssl/rudder-webapp.key -out /opt/rudder/etc/ssl/rudder-webapp.crt -days 1460 -nodes -sha256
+
+## Enable the SSL module in Apache
+a2enmod ssl
+
+## ON SLES ONLY, to enable the SSL flag in Apache
+a2enflag SSL
+
+## Install the SSL vhost and redirection configuration
+curl -o /etc/apache2/sites-available/rudder-default-ssl https://raw.github.com/Normation/rudder/branches/rudder/2.4/rudder-web/src/main/resources/apache2-default-ssl.conf
+a2ensite rudder-default-ssl
+
+## Secure the SSL key
+chmod 600 /opt/rudder/etc/ssl/rudder-webapp.key
+
+## On SuSE:
+chown www /opt/rudder/etc/ssl/rudder-webapp.key
+
+## On Debian:
+chown www-data /opt/rudder/etc/ssl/rudder-webapp.key
+
+## Add this snippet in /etc/apache2/site-available/rudder-default, after "RewriteRule   ^/$  /rudder [R]":
+
+# BEGIN HTTPS REDIRECTION # 
+# If we are not currently in
+RewriteCond %{HTTPS} !=on
+
+# Don't use HTTP/S for these URLs to avoid breaking the compatibility for cURL
+# clients (especially in Techniques)
+RewriteCond %{REQUEST_URI} !^/uuid
+RewriteCond %{REQUEST_URI} !^/inventories/?
+RewriteCond %{REQUEST_URI} !^/inventory-updates/?
+RewriteCond %{REQUEST_URI} !^/api/?
+
+# Optional, restrict redirection to Rudder webapp
+RewriteCond %{REQUEST_URI} ^/rudder/?
+
+RewriteRule  ^/(.*)$  https://%{SERVER_NAME}/$1 [R]
+# END HTTPS REDIRECTION # 
+
+## Restart Apache
+/etc/init.d/apache2 restart
+----
+
+On the Rudder server, for RHEL/CentOS-like OSes:
+----
+## Create the SSL key
+mkdir -p /opt/rudder/etc/ssl
+openssl req -new -x509 -newkey rsa:2048 -subj "/CN=$(hostname --fqdn)/" -keyout /opt/rudder/etc/ssl/rudder-webapp.key -out /opt/rudder/etc/ssl/rudder-webapp.crt -days 1460 -nodes -sha256
+
+## Enable the SSL module in Apache
+yum install mod_ssl openssl
+
+## Install the SSL vhost and redirection configuration
+curl -o /etc/httpd/conf.d/rudder-default-ssl.conf https://raw.github.com/Normation/rudder/branches/rudder/2.4/rudder-web/src/main/resources/apache2-default-ssl.conf
+
+## Secure the SSL key
+chmod 600 /opt/rudder/etc/ssl/rudder-webapp.key
+chown apache /opt/rudder/etc/ssl/rudder-webapp.key
+
+## Add this snippet in /etc/apache2/site-available/rudder-default, after "RewriteRule   ^/$  /rudder [R]":
+
+# BEGIN HTTPS REDIRECTION # 
+# If we are not currently in
+RewriteCond %{HTTPS} !=on
+
+# Don't use HTTP/S for these URLs to avoid breaking the compatibility for cURL
+# clients (especially in Techniques)
+RewriteCond %{REQUEST_URI} !^/uuid
+RewriteCond %{REQUEST_URI} !^/inventories/?
+RewriteCond %{REQUEST_URI} !^/inventory-updates/?
+RewriteCond %{REQUEST_URI} !^/api/?
+
+# Optional, restrict redirection to Rudder webapp
+RewriteCond %{REQUEST_URI} ^/rudder/?
+
+RewriteRule  ^/(.*)$  https://%{SERVER_NAME}/$1 [R]
+# END HTTPS REDIRECTION # 
+
+# Change the logging destination for RHEL
+sed -i "s%/var/log/rudder/apache2/access.log%/var/log/rudder/httpd/access.log%" /etc/httpd/conf.d/rudder-default-ssl.conf
+sed -i "s%/var/log/rudder/apache2/error.log%/var/log/rudder/httpd/error.log%" /etc/httpd/conf.d/rudder-default-ssl.conf
+
+## Restart Apache
+/sbin/service httpd restart
+----
+
