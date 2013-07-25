@@ -6,9 +6,9 @@ Define a yum repository for RedHat/CentOS 6:
 
 ----
 
-$ echo "[Rudder_2.6]
-name=Rudder 2.6 Repository
-baseurl=http://www.rudder-project.org/rpm-2.6/RHEL_6/
+$ echo "[Rudder_2.7]
+name=Rudder 2.7 Repository
+baseurl=http://www.rudder-project.org/rpm-2.7/RHEL_6/
 gpgcheck=0
 " > /etc/yum.repos.d/rudder.repo
 
@@ -18,9 +18,9 @@ Or for RedHat/CentOS 5:
 
 ----
 
-$ echo "[Rudder_2.6]
-name=Rudder 2.6 Repository
-baseurl=http://www.rudder-project.org/rpm-2.6/RHEL_5/
+$ echo "[Rudder_2.7]
+name=Rudder 2.7 Repository
+baseurl=http://www.rudder-project.org/rpm-2.7/RHEL_5/
 gpgcheck=0
 " > /etc/yum.repos.d/rudder.repo
 

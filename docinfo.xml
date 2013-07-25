@@ -67,6 +67,14 @@
         Rudder User Documentation for 2.6 release of Rudder.
       </revremark>
     </revision>
+    <revision>
+      <revnumber>2.7.0</revnumber>
+      <date>July 2013</date>
+      <authorinitials>NC, JC, FFT</authorinitials>
+      <revremark>
+        Rudder User Documentation for 2.7 release of Rudder.
+      </revremark>
+    </revision>
   </revhistory>
   
     <mediaobject role="cover">
