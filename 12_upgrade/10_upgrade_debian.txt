@@ -4,32 +4,13 @@ Following commands are executed as the +root+ user.
 
 Add Rudder project repository:
 
-* on Debian Squeeze and followings or Ubuntu 11.10 and followings:
 ----
 
-echo "deb http://www.rudder-project.org/apt-2.6/ $(lsb_release -cs) main contrib non-free" > /etc/apt/sources.list.d/rudder.list
-
-----
-
-* or on Ubuntu 11.10 and following, or Debian wheezy and following:
-
-----
-
-apt-add-repository http://www.rudder-project.org/apt-2.6/
+echo "deb http://www.rudder-project.org/apt-2.7/ $(lsb_release -cs) main contrib non-free" > /etc/apt/sources.list.d/rudder.list
 
 ----
 
 Update your local package database to retrieve the list of packages available on our repository:
-
-* With aptitude:
-
-----
-
-aptitude update
-
-----
-
-* With apt-get:
 
 ----
 
@@ -38,14 +19,6 @@ apt-get update
 ----
 
 For Rudder Server, upgrade all the packages associated to +rudder-server-root+:
-
-* With aptitude:
-
-----
-
-aptitude install rudder-server-root
-
-----
 
 * With apt-get:
 
@@ -65,16 +38,6 @@ and after the upgrade of these packages, restart jetty to be sure that the chang
 
 For Rudder Agent, upgrade the +rudder-agent+ package:
 
-* With aptitude:
-
-----
-
-aptitude install rudder-agent
-
-----
-
-* With apt-get:
-
 ----
 
 apt-get install rudder-agent
@@ -85,8 +48,9 @@ apt-get install rudder-agent
 
 ====
 
-Rudder include a script for upgrading all the files which needed to. Then, you should not replace your old files by the new ones
-when apt-get/aptitude is asking for, unless you want to reset all your parameters.
+Rudder includes a script for upgrading all files, databases, etcwhich need
+migrating. Therefore, you should not replace your old files by the new ones
+when apt-get/aptitude asks about this, unless you want to reset all your parameters.
 
 ====
 
