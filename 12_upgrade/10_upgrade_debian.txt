@@ -48,7 +48,7 @@ apt-get install rudder-agent
 
 ====
 
-Rudder includes a script for upgrading all files, databases, etcwhich need
+Rudder includes a script for upgrading all files, databases, etc... which need
 migrating. Therefore, you should not replace your old files by the new ones
 when apt-get/aptitude asks about this, unless you want to reset all your parameters.
 
