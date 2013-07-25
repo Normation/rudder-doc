@@ -9,7 +9,7 @@ Normation_SAS,_Jonathan_Clarke,_Nicolas_Charles_and_Fabrice_Flore-Thebault <cont
   CFEngine Nova, CFEngine, Scala, Free Software, Open Source, AGPL +
   User documentation
 :revdate: January 2013
-:revision: 2.6.0
+:revision: 2.7.0
 
 // Generate the map of content from list of files and alphabetically ordered
 // glossary 

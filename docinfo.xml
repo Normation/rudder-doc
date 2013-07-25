@@ -27,6 +27,46 @@
         <orgname>Normation SAS</orgname>
       </affiliation>
     </author>
+    <author>
+      <firstname>Matthieu</firstname>
+      <surname>Cerda</surname>
+      <affiliation>
+        <jobtitle>Systems engineer</jobtitle>
+        <orgname>Normation SAS</orgname>
+      </affiliation>
+    </author>
+    <author>
+      <firstname>Nicolas</firstname>
+      <surname>Perron</surname>
+      <affiliation>
+        <jobtitle>Systems engineer</jobtitle>
+        <orgname>Normation SAS</orgname>
+      </affiliation>
+    </author>
+    <author>
+      <firstname>Arthur</firstname>
+      <surname>Anglade</surname>
+      <affiliation>
+        <jobtitle>Developer</jobtitle>
+        <orgname>Normation SAS</orgname>
+      </affiliation>
+    </author>
+    <author>
+      <firstname>Vincent</firstname>
+      <surname>Membré</surname>
+      <affiliation>
+        <jobtitle>Development engineer</jobtitle>
+        <orgname>Normation SAS</orgname>
+      </affiliation>
+    </author>
+    <author>
+      <firstname>François</firstname>
+      <surname>Armand</surname>
+      <affiliation>
+        <jobtitle>CRO</jobtitle>
+        <orgname>Normation SAS</orgname>
+      </affiliation>
+    </author>
   </authorgroup>
   
   <copyright>
@@ -53,18 +93,34 @@
     </revision>
     <revision>
       <revnumber>2.4.0</revnumber>
-      <date>February 2012</date>
+      <date>December 2012</date>
       <authorinitials>NC, JC, FFT</authorinitials>
       <revremark>
         Rudder User Documentation for 2.4 release of Rudder.
       </revremark>
     </revision>
     <revision>
-      <revnumber>2.6.0</revnumber>
+      <revnumber>2.5.0</revnumber>
       <date>January 2013</date>
-      <authorinitials>NC, JC, FFT</authorinitials>
+      <authorinitials>AA, FA, FFT, JC, NC, NP, MC, VM</authorinitials>
       <revremark>
-        Rudder User Documentation for 2.6 release of Rudder.
+        Rudder User Documentation for 2.5 release of Rudder.
+      </revremark>
+    </revision>
+    <revision>
+      <revnumber>2.6.0</revnumber>
+      <date>April 2013</date>
+      <authorinitials>AA, FA, FFT, JC, NC, NP, MC, VM</authorinitials>
+      <revremark>
+        Rudder User Documentation for 2.7 release of Rudder.
+      </revremark>
+    </revision>
+    <revision>
+      <revnumber>2.7.0</revnumber>
+      <date>July 2013</date>
+      <authorinitials>AA, FA, FFT, JC, NC, NP, MC, VM</authorinitials>
+      <revremark>
+        Rudder User Documentation for 2.7 release of Rudder.
       </revremark>
     </revision>
   </revhistory>
