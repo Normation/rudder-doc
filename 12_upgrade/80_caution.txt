@@ -2,5 +2,5 @@
 
 ==== Known bugs
 
-* After upgrade if the web interface has display problems, empty you navigator cache
+* After upgrade, if the web interface has display problems, empty your navigator cache
 and/or logout/login.

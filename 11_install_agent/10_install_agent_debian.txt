@@ -23,7 +23,7 @@ Add Rudder project repository:
 ----
 
 sudo tee /etc/apt/sources.list.d/rudder.list <<EOF
-deb http://www.rudder-project.org/apt-2.6/ $(lsb_release -cs) main contrib non-free
+deb http://www.rudder-project.org/apt-2.7/ $(lsb_release -cs) main contrib non-free
 EOF
 
 ----
@@ -32,7 +32,7 @@ EOF
 
 ----
 
-sudo apt-add-repository http://www.rudder-project.org/apt-2.6/
+sudo apt-add-repository http://www.rudder-project.org/apt-2.7/
 
 ----
 
