@@ -13,3 +13,5 @@ To synchronize with the RPM repository just type:
 ----
 rsync -av www.rudder-project.org::rudder-rpm /your/local/mirror
 ----
+
+Finally, you have to set up these directories (/your/local/mirror) to be shared by HTTP by a web server (ie, Apache, nginx, lighttpd, etc...).
