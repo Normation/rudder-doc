@@ -1,6 +1,23 @@
+[[rest-api]]
 === REST API
 
 Rudder can be used as a web service using a REST API. 
+
+This documenation covers the version 1 of Rudder's API, that has been present since
+Rudder 2.4.
+
+The version 2 has now been implemented, which is much more complete, in Rudder 2.7, and
+has a dedicated documentation available here: http://www.rudder-project.org/rudder-api-doc/
+
+[WARNING] 
+
+====
+
+The version 1 is to be considered legacy and should not be used anymore. Please migrate to
+version 2 to benefit from the new authentication features and more complete existing methods.
+
+====
+
 
 ==== Default setup
 
