@@ -10,3 +10,21 @@ Architecture chapter.
 
 Ideally, this machine should have Internet access, but this is not a strict requirement.
 
+As Rudder datas can grow really fast depending on your number of managed nodes and number of rules, it is advised to separate partitions to prevent your /var getting full and break your system.
+Special attention should be given to:
+
+======
+
+/var/lib/pgsql::
+Or wherever is located your postgresql database.
+Can grow by several GB per day.
+
+/var/rudder::
+Contains most of your server information, LDAP database, etc..
+Slower growth over time.
+
+/var/log/rudder:: 
+Reports logs can easily grow to 1.5GB per day.
+
+======
+
