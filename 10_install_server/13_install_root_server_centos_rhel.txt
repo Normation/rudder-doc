@@ -23,7 +23,8 @@ Configure the yum repository for RedHat/CentOS 6:
 $ echo "[Rudder_2.4]
 name=Rudder 2.4 Repository
 baseurl=http://www.rudder-project.org/rpm-2.4/RHEL_6/
-gpgcheck=0
+gpgcheck=1
+gpgkey=http://www.rudder-project.org/rpm-2.4/RHEL_6/repodata/repomd.xml.key
 " > /etc/yum.repos.d/rudder.repo
 
 ----
@@ -35,7 +36,8 @@ Or for RedHat/CentOS 5:
 $ echo "[Rudder_2.4]
 name=Rudder 2.4 Repository
 baseurl=http://www.rudder-project.org/rpm-2.4/RHEL_5/
-gpgcheck=0
+gpgcheck=1
+gpgkey=http://www.rudder-project.org/rpm-2.4/RHEL_5/repodata/repomd.xml.key
 " > /etc/yum.repos.d/rudder.repo
 
 ----
