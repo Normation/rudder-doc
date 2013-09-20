@@ -11,14 +11,6 @@ We will take LDAP as an example, however bear in mind that this procedure
 requires that you make modifications to your application that an update will
 replace, we do not officially support it yet.
 
-Also take care of the following limitation of the current process: only *authentication*
-is delegated to LDAP, NOT *authorizations*. So you still have to
-declare user's authorizations in the Rudder user file (rudder-users.xml).
-
-An user whose authentication is accepted by LDAP but not declared in the
-rudder-users.xml file is considered to have no rights at all (and so will
-only see a reduced version of Rudder homepage, with no action nor tabs available). 
-
 If you really want to test this feature, follow this procedure:
 
 First, unzip your webapp to be able to modify some files inside it
@@ -38,30 +30,36 @@ and paste the following code block below </authentication-manager> :
 
 ----
 
-<authentication-manager>
-    <authentication-provider ref="ldapAuthenticationProvider"/>
-</authentication-manager>
-
-<beans:bean id="contextSource" class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
-    <beans:constructor-arg value="ldap://localhost:389/cn=My Company"/>
-    <beans:property name="anonymousReadOnly" value="true"/>
+<beans:bean id="contextSource"
+        class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+  <beans:constructor-arg value="ldap://ldap.mycorp.com:389/dc=mycorp,dc=com"/>
+  <beans:property name="userDn" value="cn=Rudder,ou=AppOU,dc=mycorp,dc=com"/>
+  <beans:property name="password" value="myverysecretpassword"/>
 </beans:bean>
 
-<beans:bean id="ldapAuthenticationProvider" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
-    <beans:constructor-arg>
-        <beans:bean class="org.springframework.security.ldap.authentication.BindAuthenticator">
-            <beans:constructor-arg ref="contextSource"/>
-            <beans:property name="userDnPatterns">
-                <beans:list><beans:value>cn={0},ou=Users</beans:value></beans:list>
-            </beans:property>
-        </beans:bean>
-    </beans:constructor-arg>
-    <beans:property name="userDetailsContextMapper" ref="rudderXMLUserRights"/>
+<beans:bean id="ldapAuthenticationProvider"
+    class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+ <beans:constructor-arg>
+   <beans:bean class="org.springframework.security.ldap.authentication.BindAuthenticator">
+     <beans:constructor-arg ref="contextSource"/>
+     <beans:property name="userDnPatterns">
+       <beans:list><beans:value>uid={0},ou=people</beans:value></beans:list>
+     </beans:property>
+   </beans:bean>
+ </beans:constructor-arg>
+ <beans:constructor-arg>
+   <beans:bean
+     class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">
+     <beans:constructor-arg ref="contextSource"/>
+     <beans:constructor-arg value="ou=groups"/>
+     <beans:property name="groupRoleAttribute" value="ou"/>
+   </beans:bean>
+ </beans:constructor-arg>
 </beans:bean>
 
 ----
 
-You will have to adjust the ldap URI and the userDn to the appropriate values for your infrastructure.
+You will have to adjust the ldap URI, the userDn and password to the appropriate values for your infrastructure.
 
 After that, you need to add some .jar files to the webapp classpath:
 
@@ -69,7 +67,7 @@ After that, you need to add some .jar files to the webapp classpath:
 
 cd /opt/rudder/jetty7/webapps/rudder.war/WEB-INF/lib
 wget --user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101 Firefox/9.0" \
-http://repo2.maven.org/maven2/org/springframework/security/spring-security-ldap/3.1.0.RELEASE/spring-security-ldap-3.1.0.RELEASE.jar
+http://repo2.maven.org/maven2/org/springframework/security/spring-security-ldap/3.0.5.RELEASE/spring-security-ldap-3.0.5.RELEASE.jar
 wget --user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101 Firefox/9.0" \
 http://repo2.maven.org/maven2/ldapsdk/ldapsdk/4.1/ldapsdk-4.1.jar
 wget --user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101 Firefox/9.0" \
