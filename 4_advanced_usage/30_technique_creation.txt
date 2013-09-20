@@ -164,3 +164,4 @@ Cf http://www.rudder-project.org/foswiki/Development/Technique
 *WORK IN PROGRESS*
 The reports format
 Cf http://www.rudder-project.org/foswiki/Development/ReportsInTechniques
+
