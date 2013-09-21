@@ -56,7 +56,7 @@ and paste the following code block below </authentication-manager> :
      </beans:property>
    </beans:bean>
  </beans:constructor-arg>
- <beans:property name="userDetailsContextMapper" ref="rudderXMLUserRights"/>
+ <beans:property name="userDetailsContextMapper" ref="rudderXMLUserDetails"/>
 </beans:bean>
 
 ----
