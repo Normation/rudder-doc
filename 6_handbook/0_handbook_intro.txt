@@ -1,3 +1,4 @@
 == Handbook
 
 This chapter contains some tips and tricks you might want to know about using Rudder in a production environment, with some useful optimizations and procedures.
+
