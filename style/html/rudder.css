@@ -15,8 +15,11 @@
  * very light grey:
         background-color: #e2e2e2 ; 
  */
-* {
+pre {
 	overflow-x: auto;
+}
+#content, #header, #toc {
+  overflow-x: hidden;
 }
 body, #toc, #toc *  {
         background-color: #e2e2e2 ; 
