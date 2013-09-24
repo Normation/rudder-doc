@@ -19,3 +19,4 @@ This directory contains the JAR files of the plugins.
 +/opt/rudder/etc/plugins/+::
 
 This directory contains the configuration files of the plugins.
+

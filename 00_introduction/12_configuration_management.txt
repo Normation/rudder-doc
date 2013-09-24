@@ -26,3 +26,4 @@ functions of inventory management and configuration management.
 include::../graphviz/concepts.dot[] 
 
 -------
+

@@ -65,3 +65,4 @@ echo "tmpfs /var/rudder/cfengine-community/state tmpfs defaults,size=128 0 0" >>
 mount /var/rudder/cfengine-community/state
 
 ----
+

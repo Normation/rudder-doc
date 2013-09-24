@@ -89,3 +89,4 @@ from one machine to another.
 Please remember that The CFEngine key restoration is mandatory for the clients to update
 properly, but if the Rudder server address changes, the agents will block. You have to delete
 every root-*.pub key in /var/rudder/cfengine-community/ppkeys/ for things to work again.
+
