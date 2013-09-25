@@ -84,3 +84,4 @@ wal_buffers = 1MB
 effective_cache_size = 128MB
 
 ----
+

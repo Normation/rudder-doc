@@ -24,3 +24,4 @@ configuration for apache, logrotate and rsyslog.
 +/usr/share/doc/rudder*+:: Documentation about Rudder packages.
 
 ====
+

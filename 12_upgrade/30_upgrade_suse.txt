@@ -54,3 +54,4 @@ For Rudder Agent, upgrade the +rudder-agent+ package:
 zypper update rudder-agent
 
 ----
+

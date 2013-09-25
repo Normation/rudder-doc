@@ -38,3 +38,4 @@ yum update rudder-agent
 ----
 
 There was no Rudder Server packages for version 2.3.
+
