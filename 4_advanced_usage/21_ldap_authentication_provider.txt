@@ -63,6 +63,47 @@ and paste the following code block below </authentication-manager> :
 
 You will have to adjust the ldap URI, the userDn and password to the appropriate values for your infrastructure.
 
+The precedent exemple use direct Bind DN pattern to authenticate user. A common other solution in LDAP 
+is to use a different login attribute than the RDN attribute of the user entry, and so we use a two-steps
+process:
+
+* first, we search for the unique entry with the given login in a given branch and get its DN, 
+* then, we try to authenticate the user with the DN and the password. 
+
+If you want to use that approach, you will have to change the precedent XML code so that in place
+of "userDnPatterns", you have the search logic, as it is demonstrated in the next example:
+
+----
+
+<beans:bean id="contextSource"
+        class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+  <beans:constructor-arg value="ldap://ldap.mycorp.com:389/dc=mycorp,dc=com"/>
+  <beans:property name="userDn" value="cn=Rudder,ou=AppOU,dc=mycorp,dc=com"/>
+  <beans:property name="password" value="myverysecretpassword"/>
+</beans:bean>
+
+
+<beans:bean id="userLookup" class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">
+  <beans:constructor-arg index="0" value="ou=people"/>
+  <beans:constructor-arg index="1" value="(&amp;(uuid={0})(objectclass=user))"/>
+  <beans:constructor-arg index="2" ref="contextSource" />
+</beans:bean>
+
+<beans:bean id="ldapAuthenticationProvider"
+    class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+   <beans:constructor-arg>
+     <beans:bean class="org.springframework.security.ldap.authentication.BindAuthenticator">
+       <beans:constructor-arg ref="contextSource"/>
+       <beans:property name="userSearch" ref="userLookup"/>
+     </beans:bean>
+   </beans:constructor-arg>
+ <beans:property name="userDetailsContextMapper" ref="rudderXMLUserDetails"/>
+</beans:bean>
+
+----
+
+
+
 And you are all done !
 
 [TIP]
