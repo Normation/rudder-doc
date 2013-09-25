@@ -52,3 +52,4 @@ Or if a yum repository has been set:
 yum install rudder-agent
 
 ----
+

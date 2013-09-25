@@ -9,3 +9,4 @@ A big effort has been made to ensure that all upgrade steps are performed
 automatically by packaging scripts. Therefore, you shouldn't have to do any
 upgrade procedures manually, but you will note that several data migrations
 occur during the upgrade process.
+

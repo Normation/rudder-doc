@@ -87,6 +87,7 @@ If your server has changed of IP address you have to modify +/var/rudder/cfengin
 
 Then you force your nodes to send their inventory while running +/var/rudder/cfengine-community -KI -D force_inventory+
 
-On your Rudder UI, you should now be able to accept the nodes.
+In your Rudder UI, you should now be able to accept the nodes.
 
-You configuration is now totally migrated.
+Your configuration is now totally migrated.
+
