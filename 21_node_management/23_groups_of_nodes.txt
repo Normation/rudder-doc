@@ -30,3 +30,4 @@ with group type set to +Dynamic+. Then you have to set it's search request to :
 Finally you have to Click on Search to populate the group and click on Save to actually save it.
 
 ====
+
