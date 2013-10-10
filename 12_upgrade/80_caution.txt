@@ -2,9 +2,9 @@
 
 ==== Upgrading from Rudder 2.4, 2.6 or 2.7
 
-Rudder 2.8.* contains CFEngine 3.5.3 which is more strict with the parsing of its promises. To have a successful upgrade these steps should be followed:
+Rudder 2.8.* contains CFEngine 3.5.2 which is more strict with the parsing of its promises. To have a successful upgrade these steps should be followed:
 
-* Make sure the Rudder server to be upgraded is in a version that is at least 2.4.9, 2.6.6 and 2.7.3 before attempting to upgrade to 2.8.*
+* Make sure the Rudder server to be upgraded is in a version that is at least 2.4.11, 2.6.8 and 2.7.5 before attempting to upgrade to 2.8.*
 
 * Ensure that all node's promises have been regenerated since the server upgrade to this version (don't forget that your Techniques will not be upgraded automatically)
 ** On Rudder WebUI, at the top right of the screen, click on 'Regenerate now'
@@ -13,7 +13,6 @@ Rudder 2.8.* contains CFEngine 3.5.3 which is more strict with the parsing of it
 * Upgrade all agents connected to that server to 2.8.*
 
 * Upgrade the Rudder server to 2.8
-
 
 ==== Known bugs
 
