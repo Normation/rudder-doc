@@ -1,3 +1,4 @@
+[[install-agent]]
 == Install Rudder Agent
 
 This chapter gives a general presentation of the Rudder Agent, and describes
