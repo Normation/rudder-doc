@@ -89,7 +89,7 @@ Oracle(TM) and Rudder is not compatible with OpenJDK 6, which is the only
 available JDK from Ubuntu. See http://www.java.com/fr/download/ to get
 Oracle's JVM.
 
-On 'Debian Wheezy (7)' and above and 'Ubuntu Oneiric (11.10)' and above, the
+On 'Debian Wheezy (7)' and above and 'Ubuntu Precise (12.04)' and above, the
 available package is 'OpenJDK 7 JRE', namely +openjdk-7-jre+. It will be
 installed automatically as a dependency of the Rudder packages, and does not
 require the non-free component.

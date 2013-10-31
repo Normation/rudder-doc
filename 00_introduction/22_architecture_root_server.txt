@@ -26,9 +26,9 @@ The following operating systems are supported as a Root server:
 
 * SuSE Linux Enterprise Server (SLES) 11 SP1
 
-* Ubuntu server 11.10 (Oneiric)
-
 * Ubuntu server 12.04 LTS (Precise)
+
+* Ubuntu server 12.10 (Quantal)
 
 ==== Packages
 
