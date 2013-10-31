@@ -25,11 +25,9 @@ available for these platforms:
 
 * Ubuntu 10.04 LTS (lucid)
 
-* Ubuntu 10.10 (maverick)
-
-* Ubuntu 11.10 (oneiric)
-
 * Ubuntu 12.04 LTS (precise)
+
+* Ubuntu 12.10 (quantal)
 
 [TIP]
 

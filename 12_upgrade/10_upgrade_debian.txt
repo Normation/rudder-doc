@@ -4,14 +4,14 @@ Following commands are executed as the +root+ user.
 
 Add Rudder project repository:
 
-* on Debian Squeeze and followings or Ubuntu 11.10 and followings:
+* on Debian Squeeze and followings or Ubuntu 12.04 and followings:
 ----
 
 echo "deb http://www.rudder-project.org/apt-2.4/ $(lsb_release -cs) main contrib non-free" > /etc/apt/sources.list.d/rudder.list
 
 ----
 
-* or on Ubuntu 11.10 and following, or Debian wheezy and following:
+* or on Ubuntu 12.04 and following, or Debian wheezy and following:
 
 ----
 
