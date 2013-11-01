@@ -74,8 +74,8 @@ on the +git+ package.
 
 +rudder-inventory-ldap+::
 
-Package for the database containing the inventory and configuration informations
-for each pending and validated Nodes. This 'LDAP' database is build upon
+Package for the database containing the inventory and configuration information
+for each pending and validated Node. This 'LDAP' database is build upon
 'OpenLDAP' server.  The 'OpenLDAP' engine is contained in the package.
 
 +rudder-reports+::
@@ -93,7 +93,7 @@ Policies converted into CFEngine promises.
 
 +rudder-server-root+::
 
-Package to ease installation of every Rudder services. This package depends on
+Package to ease installation of all Rudder services. This package depends on
 all above packages. It also 
 
 - installs the Rudder configuration script:

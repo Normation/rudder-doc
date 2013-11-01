@@ -6,7 +6,7 @@ To enabled it you have to change the propriety 'rudder.workflow.enable' to true 
 Workflow main goals are to improve safety and knowledge sharing between your team.
 
 When the validation workflow is enabled in Rudder, all changes made will needs to be validated.
-Almost every changes about Rule, Directives or Groups will be embedded in a Change request.
+Almost every change about Rules, Directives or Groups will be embedded in a Change request.
 
 ==== What is a Change request ? 
 
@@ -22,7 +22,7 @@ A Change request has:
 - A status.
 - Its own history.
 
-Those informations can be updated on the change request detail page.
+This information can be updated on the change request detail page.
 For now, a Change request is linked to one change at a time.
 
 ===== Change request status
@@ -65,7 +65,7 @@ image::./images/workflows/Details.png[]
 
 The page is divided into two sections:
 
-Change request informations::
+Change request information::
 
 display common information (title, description, status, id) and a form to edit them.
 
