@@ -76,12 +76,12 @@ Here is an example of authentication file with hashed password:
 
 ==== Authorization management
 
-For every users you can define an access level.
+For every user you can define an access level.
 Those authorizations allow you to access different pages or to perform different actions.
 
 You can build custom roles with whatever permission you want, but there's some role already defined.
 
-In xml file, the role attribute is a list of permissions/roles, separated by a comma. each add permissions to the user. If one is wrong, or not correctly spelled, the user is set to the lowest rights (NoRights).
+In the xml file, the role attribute is a list of permissions/roles, separated by a comma. Each adds permissions to the user. If one is wrong, or not correctly spelled, the user is set to the lowest rights (NoRights).
 
 ===== Pre-defined roles
 
