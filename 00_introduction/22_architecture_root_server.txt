@@ -22,6 +22,8 @@ The following operating systems are supported as a Root server:
 
 * Debian GNU/Linux 6 (Squeeze)
 
+* Debian GNU/Linux 7 (Wheezy)
+
 * Red Hat Enterprise Linux (RHEL) / CentOS 6
 
 * SuSE Linux Enterprise Server (SLES) 11 SP1
