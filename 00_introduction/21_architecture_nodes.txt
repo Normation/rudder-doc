@@ -9,11 +9,15 @@ available for these platforms:
 
 * Debian GNU/Linux 6 (Squeeze)
 
+* Debian GNU/Linux 7 (Wheezy)
+
 * <<install-on-windows, Microsoft Windows>> Server 2000
 
 * <<install-on-windows, Microsoft Windows>> Server 2003
 
 * <<install-on-windows, Microsoft Windows>> Server 2008
+
+* Red Hat Enterprise Linux (RHEL) / CentOS 3
 
 * Red Hat Enterprise Linux (RHEL) / CentOS 5
 
