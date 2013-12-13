@@ -34,18 +34,21 @@ See <<install-agent, here>> for the complete reference about agent installation.
 To complete this step, please make sure that your node is configured successfully
 and appears in your Rudder web interface.
 
-===== Install the required dependencies
+===== Install the required dependencies and enable required modules
 
 ----
 
 # RHEL-like (RHEL, CentOS, Scientific)
 yum install httpd httpd-tools rsyslog
+# All required modules are enabled by default
 
 # Debian-like (Debian, Ubuntu)
 apt-get install apache2 apache2-utils rsyslog
+a2enmod dav dav_fs
 
 # SuSE
 zypper install apache2 apache2-utils rsyslog
+a2enmod dav dav_fs
 
 ----
 
