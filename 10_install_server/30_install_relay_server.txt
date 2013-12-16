@@ -1,5 +1,0 @@
-// === Install Rudder Relay Server
-//
-// FIXME: This feature has not been implemented yet. 
-// Add the section in the documentation when it has been implemented.
-
