@@ -1,5 +1,11 @@
 === Caution cases
 
+==== Upgrading from Rudder 2.8
+
+Rudder 2.9.* and Rudder 2.8.* use the same CFEngine version, and no changes were made to the agent package apart its name. Therefore Rudder agent 2.8.* are fully compatible with Rudder server 2.9.*, so it is not necessary to update your agents to 2.9.*.
+
+To have a successful upgrade, you only need to upgrade Rudder server to 2.9.
+ 
 ==== Upgrading from Rudder 2.4, 2.6 or 2.7
 
 Rudder 2.9.* contains CFEngine 3.5.2 which is more strict with the parsing of its promises. To have a successful upgrade these steps should be followed:
@@ -10,7 +16,7 @@ Rudder 2.9.* contains CFEngine 3.5.2 which is more strict with the parsing of it
 ** On Rudder WebUI, at the top right of the screen, click on 'Regenerate now'
 ** On Rudder 2.6 or later, you can use the API from the server with this command: 'curl http://localhost/rudder/api/deploy/reload'
 
-* Upgrade all agents connected to that server to 2.9.*
+* Upgrade all agents connected to that server to 2.9.* or 2.8.*
 
 * Upgrade the Rudder server to 2.9
 
