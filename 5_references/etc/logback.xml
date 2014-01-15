@@ -93,7 +93,7 @@
   <logger name="org.springframework" level="warn" />
  
   <!-- 
-    We don't need to have a timing information for each 
+    We don't need to have timing information for each 
     HTTP request.
     If you want to have these information, set the log
     level for that logger to (at least) "info"

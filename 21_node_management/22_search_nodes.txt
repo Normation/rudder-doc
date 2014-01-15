@@ -12,7 +12,7 @@ about the Nodes which have been already validated, and are managed by Rudder.
 
 The easiest search tool is the Quick search: type in the search field the first
 letters of the 'Rudder ID', 'Reference', or 'Hostname'; choose the accurate Node in
-the autocompletion list; validate and look at the Node informations. This search
+the autocompletion list; validate and look at the Node information. This search
 tool can be very useful to help you create a new search in the Advanced Search.
 
 .Quick search the Node called +debian-node+
@@ -34,7 +34,7 @@ d06b1c6c-f59b-4e5e-8049-d55f769ac33f [d06b1c6c-f59b-4e5e-8049-d55f769ac33f]+.
 ==== Advanced Search 
 
 In the Advanced Search tool, you can create complex searches based on Node
-Inventory informations. The benefit of the Advanced Search tool is to save the
+Inventory information. The benefit of the Advanced Search tool is to save the
 query and create a Group of Nodes based on the search criteria.
 
 - 1. Select a field
@@ -60,7 +60,7 @@ text field, either the list of available terms.
 - a. Regex matching rule
 
 You can use regular expressions to find whatever you want in Node inventories.
-A search request using a regexp will look for every nodes that match the pattern you
+A search request using a regexp will look for every node that match the pattern you
 entered.
 
 Those regexps follow Java Pattern rules. See http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
@@ -79,7 +79,7 @@ and y could be everything. You will to add that line to your search request:
 
 - b. Composite search
 
-Some fields allow you to look for more than one informations at a time.
+Some fields allow you to look for more than one piece of information at a time.
 That's the case for environment variable. for those fields you have to enter 
 the first element then the separator then following elements.
 The name of the fields tells you about what is expected. it would look like 
@@ -107,7 +107,7 @@ and 'OR' operands are not available at the moment.
 
 ====
 
-Assuming you want to search every Linux Nodes having +ssh+ installed. You will
+Assuming you want to search all Linux Nodes having +ssh+ installed. You will
 create this 2 lines request:
 
 . Operator: +AND+.

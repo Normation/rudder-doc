@@ -75,7 +75,7 @@ Copy +/var/rudder/cfengine-community/ppkeys+ to your new server
 
 ===== Change CFEngine keys
 
-On every node that were using your old server rudder, you will have to erase the server public key (root-MD5=*.pub file)
+On every node that were using your old rudder server, you will have to erase the server public key (root-MD5=*.pub file)
 
 Run  +rm /var/rudder/cfengine-community/ppkeys/root-MD5=*.pub+
 
