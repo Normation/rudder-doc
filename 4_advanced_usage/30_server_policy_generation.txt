@@ -10,7 +10,7 @@ change.
 The button +Regenerate now+ on the top right of the screen permit you to force
 the regeneration of the promises. As changes in the inventory of the nodes are
 not automatically taken into account by Rudder, this feature can be usefull
-after some changes impacting the inventory informations.
+after some changes impacting the inventory information.
 
 ==== Disable automatic regeneration of promises
 
