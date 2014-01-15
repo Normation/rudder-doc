@@ -30,8 +30,8 @@ No answer::
 The system didn't sent any reports. Rudder waited for 10 minutes and no report
 was received.
 
-A Directive has gained conformity on a Node is every reports for each
-components, for each key, are in 'Success' state. This is the only condition.
+A Directive has gained conformity on a Node if every report for each
+component, for each key, is in 'Success' state. This is the only condition.
 
 Based on these facts, the compliance of a Rule is calculated like
 this :

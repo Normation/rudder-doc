@@ -14,6 +14,6 @@ their characteristics which can be useful to perform configuration management.
 The purpose of configuration management is to apply rules on Nodes. A rule can
 include the installation of a tool, the configuration of a service, the
 execution of a daemon, etc. To apply rules on Nodes, Rudder uses the
-informations produced by the asset management function to identify these Nodes
-and evaluate some specific informations about them.
+information produced by the asset management function to identify these Nodes
+and evaluate some specific information about them.
 

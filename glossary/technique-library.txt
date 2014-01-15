@@ -1,6 +1,6 @@
 Technique Library:: 
 
-This is an organized list of every available Techniques. This list can't
-be modified: every changes made by an user will be applied to the Active 
+This is an organized list of all available Techniques. This list can't
+be modified: every change made by an user will be applied to the Active 
 Techniques.
 

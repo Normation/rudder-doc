@@ -67,7 +67,7 @@ validate its content, you should import the GPG key used to sign it
 == Configure the Rudder Server
 
 Once the package has been installed, you have to perform the one-time
-configuration by running the post-install script. Two basic informations will be
+configuration by running the post-install script. Two basic pieces of information will be
 asked:
 
 [quote, Hostname of the Rudder server root, which can be used by the client Nodes to reach the server.]

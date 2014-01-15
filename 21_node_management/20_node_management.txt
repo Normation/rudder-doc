@@ -4,26 +4,26 @@
 
 === Node Inventory
 
-Rudder integrates a node inventory tool which harvest useful informations
-about the nodes. These informations are used by Rudder to handle the nodes, and
-you can use the inventory informations for Configuration Management purpose:
+Rudder integrates a node inventory tool which harvest useful information
+about the nodes. This information is used by Rudder to handle the nodes, and
+you can use the inventory information for Configuration Management purposes:
 search Nodes, create Groups of Nodes, determine some configuration management
 variables. 
 
 In the Rudder Web Interface, each time you see a Node name, you can click on it
-and display the collection of informations about this Node. The inventory is
-organized as following: first tab is a 'summary' of administrative informations
+and display the collection of information about this Node. The inventory is
+organized as following: first tab is a 'summary' of administrative information
 about the Node; other tabs are specialized for 'hardware', 'network' interfaces,
-and 'software' for every Nodes; tabs for 'reports' and 'logs' are added on
+and 'software' for every Node; tabs for 'reports' and 'logs' are added on
 Rudder managed Nodes.
 
-The 'Node Summary' presents administrative informations like the Node
+The 'Node Summary' presents administrative information like the Node
 'Hostname', 'Operating System', 'Rudder Client name', 'Rudder ID' and 'Date'
 when the inventory was 'last received'. When the Node has been validated, some
-more informations are displayed like the Node 'Name' and the 'Date first
+more information is displayed like the Node 'Name' and the 'Date first
 accepted in Rudder'.
 
-The 'hardware' informations are organized as following: 'General', 'File
+The 'hardware' information is organized as following: 'General', 'File
 systems', 'Bios', 'Controllers', 'Memory', 'Port', 'Processor', 'Slot', 'Sound',
 'Storage', 'Video'.
 
@@ -31,10 +31,10 @@ systems', 'Bios', 'Controllers', 'Memory', 'Port', 'Processor', 'Slot', 'Sound',
 system, 'IP address', 'Network Mask', usage of 'DHCP' or static configuration,
 'MAC address', 'Type' of connexion, 'Speed' of the connexion and 'Status'.
 
-And finally, you get the list of every packaged 'software' present on the
+And finally, you get the list of every 'software' package present on the
 system, including version and description.
 
-On Nodes managed by Rudder, the 'Reports' tab displays informations about the
+On Nodes managed by Rudder, the 'Reports' tab displays information about the
 status of latest run of Rudder Agent, whereas the 'Logs' tab displays
-informations about changes for the Node.
+information about changes for the Node.
 
