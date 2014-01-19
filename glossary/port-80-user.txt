@@ -1,4 +1,4 @@
-Port 80, TCP, for users::
+Port 443, TCP, for users::
 
-HTTP communication port, used by the users to access to the web interface.
+HTTPS communication port, used by the users to access to the web interface.
 
