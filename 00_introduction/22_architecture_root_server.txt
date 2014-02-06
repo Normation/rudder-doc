@@ -8,11 +8,39 @@ A dedicated server is strongly recommended.
 
 Your Rudder Root Server can be either a physical or a virtual machine. 
 
+Rudder Server is running on both 32 and 64 bit versions of every supported
+Operating System. 
+
+Any CPU provided on commodity servers available nowaday should be fine. On
+a VM server, you should dedicate at least one core to the Rudder server.
+
 At least 1024 MB of RAM must be available on the server, depending on the
 base requirements of your operating system.
 
-Rudder Server is running on both 32 and 64 bit versions of every supported
-Operating System. 
+If you have a large number of nodes (more than 300), it is recommanded to
+give to Rudder web application more RAM (2GB) as explained in 
+the chapter [[jetty, about Jetty configuration]], and so to have at least
+3GB of RAM available on the server.  
+
+The PostgresSQL database is the main storage user. The disk space 
+necessary for the database can be estimated by counting around
+150 to 400kB of storage used by Directive, by Node and by day of storage of node's
+execution reports (default to 30 days):
+
+----
+max_space = number of Directives * number of Nodes * archive.TTL * 400 kB
+----
+
+The retention duration for node's execution reports can be configured in 
++/opt/rudder/etc/rudder-web.properties+ file with the options:
+ 
++rudder.batch.reportscleaner.archive.TTL=30+
+
++rudder.batch.reportscleaner.delete.TTL=90+
+
+For example, an installation managing 150 nodes, with an average of 
+100 Directives by node, and keeping execution reports for one week 
+should anticipate the use of between 20Go and 60Go of disk size for PostgreSQL. 
 
 ==== Supported Operating Systems
 
