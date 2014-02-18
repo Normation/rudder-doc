@@ -64,6 +64,42 @@ then you should set it as permissive with this command:
 setenforce 0
 
 ----
+[WARNING]
+
+====
+
+The webapp runs on HTTPS/443 port so you need to allow access to your server on this port.
+The file to edit is /etc/sysconfig/iptables and should look like 
+
+----
+
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+# allow SSH access
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+# allow HTTP access
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+# allow HTTPS access
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+
+----
+
+The important line is 
+
+----
+
+# allow HTTPS access
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
+
+----
 
 ====
 
