@@ -64,6 +64,8 @@ then you should set it as permissive with this command:
 setenforce 0
 
 ----
+====
+
 [WARNING]
 
 ====
