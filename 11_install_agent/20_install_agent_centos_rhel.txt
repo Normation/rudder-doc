@@ -5,8 +5,8 @@ architecture on
 
 ----
 
-http://www.rudder-project.org/rpm-2.9/RHEL_5/
-http://www.rudder-project.org/rpm-2.9/RHEL_6/
+http://www.rudder-project.org/rpm-2.10/RHEL_5/
+http://www.rudder-project.org/rpm-2.10/RHEL_6/
 
 ----
 
@@ -14,11 +14,11 @@ Or you can define a yum repository for RedHat/CentOS 6:
 
 ----
 
-$ echo "[Rudder_2.9]
-name=Rudder 2.9 Repository
-baseurl=http://www.rudder-project.org/rpm-2.9/RHEL_6/
+$ echo "[Rudder_2.10]
+name=Rudder 2.10 Repository
+baseurl=http://www.rudder-project.org/rpm-2.10/RHEL_6/
 gpgcheck=1
-gpgkey=http://www.rudder-project.org/rpm-2.9/RHEL_6/repodata/repomd.xml.key
+gpgkey=http://www.rudder-project.org/rpm-2.10/RHEL_6/repodata/repomd.xml.key
 " > /etc/yum.repos.d/rudder.repo
 
 ----
@@ -27,11 +27,11 @@ Or for RedHat/CentOS 5:
 
 ----
 
-$ echo "[Rudder_2.9]
-name=Rudder 2.9 Repository
-baseurl=http://www.rudder-project.org/rpm-2.9/RHEL_5/
+$ echo "[Rudder_2.10]
+name=Rudder 2.10 Repository
+baseurl=http://www.rudder-project.org/rpm-2.10/RHEL_5/
 gpgcheck=1
-gpgkey=http://www.rudder-project.org/rpm-2.9/RHEL_5/repodata/repomd.xml.key
+gpgkey=http://www.rudder-project.org/rpm-2.10/RHEL_5/repodata/repomd.xml.key
 " > /etc/yum.repos.d/rudder.repo
 
 ----
@@ -41,7 +41,7 @@ Install the package:
 
 ----
 
-rpm -Uhv rudder-agent-2.9.0-1.EL.5.x86_64.rpm
+rpm -Uhv rudder-agent-2.10.0-1.EL.5.x86_64.rpm
 
 ----
 
