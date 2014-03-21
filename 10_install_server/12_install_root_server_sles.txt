@@ -24,7 +24,7 @@ Add the URL of the Normation repository, by typing the next command on a SLES 11
 ----
 
 root@rudder-server:~# zypper ar -n "Normation RPM Repositories" \
-http://www.rudder-project.org/rpm-2.9/SLES_11_SP1/ Normation
+http://www.rudder-project.org/rpm-2.10/SLES_11_SP1/ Normation
 
 ----
 
@@ -32,7 +32,7 @@ Or this one on a SLES 10:
 
 ----
 
-root@rudder-server:~# zypper sa "http://www.rudder-project.org/rpm-2.9/SLES_10_SP3/" Normation
+root@rudder-server:~# zypper sa "http://www.rudder-project.org/rpm-2.10/SLES_10_SP3/" Normation
 
 ----
 
