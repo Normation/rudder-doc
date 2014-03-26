@@ -110,6 +110,20 @@ And you are all done !
 
 ====
 
+Don't forget to modify your rudder-users.xml to add LDAP password type.
+
+----
+<authentication>
+  <user name="jon.doe" password="LDAP" role="administator"/>
+</authentication>
+----
+
+====
+
+[TIP]
+
+====
+
 This procedure is still hacky, we are considering several solutions to have a standardized procedure that does not require
 to touch the WAR archive and just edit some configuration files.
 
