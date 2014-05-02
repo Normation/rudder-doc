@@ -8,8 +8,8 @@ Normation_SAS,_Jonathan_Clarke,_Nicolas_Charles_and_Fabrice_Flore-Thebault <cont
   Configuration Management, FusionInventory, CFEngine Community, +
   CFEngine Nova, CFEngine, Scala, Free Software, Open Source, AGPL +
   User documentation
-:revdate: March 2014
-:revision: 2.10.0
+:revdate: May 2014
+:revision: 2.11.0
 
 // Generate the map of content from list of files and alphabetically ordered
 // glossary 
