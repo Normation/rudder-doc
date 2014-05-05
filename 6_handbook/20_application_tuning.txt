@@ -49,6 +49,13 @@ manually in case of a machine reboot because all the persistent states are store
 for example the jobScheduler Technique, you might encounter an unwanted job execution because CFEngine will have
 "forgotten" the job state.
 
+Also, note that the mode=0700 is important as CFEngine will refuse to run correctly if the state directory is
+world readable, with an error like:
+
+----
+error: UNTRUSTED: State directory /var/rudder/cfengine-community (mode 770) was not private!
+----
+
 Here is the command line to use:
 
 [code,python]
@@ -58,10 +65,10 @@ Here is the command line to use:
 ----
 
 # How to mount the RAMdisk manually, for a "one shot" test:
-mount -t tmpfs -o size=128M tmpfs /var/rudder/cfengine-community/state
+mount -t tmpfs -o size=128M,nr_inodes=2k,mode=0700,noexec,nosuid,noatime,nodiratime tmpfs /var/rudder/cfengine-community/state
 
 # How to put this entry in the fstab, to make the modification permanent
-echo "tmpfs /var/rudder/cfengine-community/state tmpfs defaults,size=128 0 0" >> /etc/fstab
+echo "tmpfs /var/rudder/cfengine-community/state tmpfs defaults,size=128M,nr_inodes=2k,mode=0700,noexec,nosuid,noatime,nodiratime 0 0" >> /etc/fstab
 mount /var/rudder/cfengine-community/state
 
 ----
