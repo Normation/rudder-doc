@@ -15,8 +15,8 @@ The credentials of a user are defined in the XML file
 ----
 
 <authentication>
-  <user name="jon.doe" password="secret" role="administator"/>
-  <user name="alex.bar" password="secret2" role="administation_only, node_read"/>
+  <user name="jon.doe" password="secret" role="administrator"/>
+  <user name="alex.bar" password="secret2" role="administration_only, node_read"/>
   <user name="custom" password="custom" role="node_read,node_write,configuration_read,rule_read,rule_edit,directive_read,technique_read"
 </authentication>
 
@@ -31,7 +31,7 @@ web application to be taken into account:
 
 ----
 
-/etc/init.d/jetty restart
+/etc/init.d/rudder-jetty restart
 
 ----
 
@@ -67,11 +67,90 @@ Here is an example of authentication file with hashed password:
 ----
 
 <authentication hash="sha">
-  <user name="jon.doe"  password="e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4" role="administator"/>
-  <user name="alex.bar" password="c636e8e238fd7af97e2e500f8c6f0f4c0bedafb0" role="administation_only"/>
+  <user name="jon.doe"  password="e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4" role="administrator"/>
+  <user name="alex.bar" password="c636e8e238fd7af97e2e500f8c6f0f4c0bedafb0" role="administration_only"/>
 </authentication>
 
 ----
+
+[[ldap-auth-provider, LDAP authentication provider for Rudder]]
+==== Configuring an LDAP authentication provider for Rudder
+
+If you are operating on a corporate network or want to have your users in a
+centralized database, you can enable LDAP authentication for Rudder users. 
+
+===== LDAP is only for authentication
+
+Take care of the following limitation of the current process: only *authentication*
+is delegated to LDAP, NOT *authorizations*. So you still have to
+declare user's authorizations in the Rudder user file (rudder-users.xml).
+
+An user whose authentication is accepted by LDAP but not declared in the
+rudder-users.xml file is considered to have no rights at all (and so will
+only see a reduced version of Rudder homepage, with no action nor tabs available).
+
+
+The credentials of a user are defined in the XML file
++/opt/rudder/etc/rudder-users.xml+. This file expects the following format:
+
+----
+
+<authentication>
+  <user name="jon.doe" password="LDAP" role="administrator"/>
+  <user name="alex.bar" password="LDAP" role="administration_only, node_read"/>
+  <user name="custom" password="LDAP" role="node_read,node_write,configuration_read,rule_read,rule_edit,directive_read,technique_read"
+</authentication>
+
+----
+
+Where 'name' is the login used in Rudder to find the user. 
+When LDAP authentication is enabled, the 'password' field is ignored and by convention, 
+it is set to 'LDAP' value (so that there is an insight about the authentication used).
+ 
+
+Every modification of this file should be followed by a restart of the Rudder
+web application to be taken into account:
+
+----
+
+/etc/init.d/rudder-jetty restart
+
+----
+
+===== Enable LDAP authentication
+
+LDAP authentication is enabled by setting the property +rudder.auth.ldap.enable+ to +true+
+in file +/opt/rudder/etc/rudder-web.properties+
+
+The LDAP authentication process is a bind/search/rebind in which an application
+connection (bind) is used to search (search) for an user entry given some base and
+filter parameters, and then, a bind (rebind) is tried on that entry with the
+credential provided by the user.
+
+
+So next, you have to set-up the connection parameters to the LDAP directory to use. 
+There is three properties to change:
+
+- rudder.auth.ldap.connection.url
+- rudder.auth.ldap.connection.bind.dn
+- rudder.auth.ldap.connection.bind.password
+
+
+#
+# Search base and filter to use to find the user. 
+# The search base can be left empty. 
+# In the filter, {0} denotes the value provided as
+# login by the user. 
+#
+rudder.auth.ldap.searchbase=ou=People
+rudder.auth.ldap.filter=(&(uid={0})(objectclass=person))
+
+#
+# An AD example would be:
+# 
+#rudder.auth.ldap.searchbase=
+#rudder.auth.ldap.filter=(&(sAMAccountName={0})(objectclass=user))
+
 
 
 ==== Authorization management
@@ -111,7 +190,8 @@ Rudder aims at integrating with your IT system transparently, so it can't force
 its own authentication system.
 
 To meet this need, Rudder relies on the modular authentication system Spring
-Security that allows to easily integrate with databases, LDAP directory, or an
+Security that allows to easily integrate with databases or an
 entreprise SSO like CAS, OpenID or SPNEGO. The documentation for this
 integration is not yet available, but don't hesitate to reach us on this topic.
+
 
