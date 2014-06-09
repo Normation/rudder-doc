@@ -1,14 +1,7 @@
 === Authentication
 
 When accessing the Rudder web interface, a login / password is required.  The
-default accounts are:
-
-|====
-|*Login*  | *Password* | *Privilege level*
-|jon.doe  | secret     | Administrator
-|alex.bar | secret2    | Read-only
-|bob.foo  | secret3    | User and validator (workflows)
-|====
+default account is "admin" (Password: admin).
 
 You can change the user accounts by following the <<user-management, User management>>
 procedure.
