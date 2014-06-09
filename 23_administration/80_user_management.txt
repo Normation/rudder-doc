@@ -94,22 +94,11 @@ only see a reduced version of Rudder homepage, with no action nor tabs available
 
 
 The credentials of a user are defined in the XML file
-+/opt/rudder/etc/rudder-users.xml+. This file expects the following format:
++/opt/rudder/etc/rudder-users.xml+. It expects the same format as regular file-based
+user login, but in this case "name" will be the login used to connect to LDAP and the
+'password' field will be ignored and should be set to "LDAP" to make it clear that
+this Rudder installation uses LDAP to log users in.
 
-----
-
-<authentication>
-  <user name="alice" password="LDAP" role="administrator"/>
-  <user name="bob"   password="LDAP" role="administration_only, node_read"/>
-  <user name="carol" password="LDAP" role="node_read,node_write,configuration_read,rule_read,rule_edit,directive_read,technique_read"
-</authentication>
-
-----
-
-Where 'name' is the login used in Rudder to find the user. 
-When LDAP authentication is enabled, the 'password' field is ignored and by convention, 
-it is set to 'LDAP' value (so that there is an insight about the authentication used).
- 
 
 Every modification of this file should be followed by a restart of the Rudder
 web application to be taken into account:
@@ -132,28 +121,36 @@ credential provided by the user.
 
 
 So next, you have to set-up the connection parameters to the LDAP directory to use. 
-There is three properties to change:
+There are five properties to change:
 
 - rudder.auth.ldap.connection.url
 - rudder.auth.ldap.connection.bind.dn
 - rudder.auth.ldap.connection.bind.password
+- rudder.auth.ldap.searchbase
+- rudder.auth.ldap.filter
 
+The search base and filter are used to find the user. The search base may be left empty, and
+in the filter, {0} will be replaced by the value provided as user login.
 
-#
-# Search base and filter to use to find the user. 
-# The search base can be left empty. 
-# In the filter, {0} denotes the value provided as
-# login by the user. 
-#
+Here are some usage examples,
+
+on standard LDAP:
+
+----
+
 rudder.auth.ldap.searchbase=ou=People
 rudder.auth.ldap.filter=(&(uid={0})(objectclass=person))
 
-#
-# An AD example would be:
-# 
-#rudder.auth.ldap.searchbase=
-#rudder.auth.ldap.filter=(&(sAMAccountName={0})(objectclass=user))
+----
 
+on Active Directory:
+
+----
+
+rudder.auth.ldap.searchbase=
+rudder.auth.ldap.filter=(&(sAMAccountName={0})(objectclass=user))
+
+----
 
 
 ==== Authorization management

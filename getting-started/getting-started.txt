@@ -142,7 +142,7 @@ creating a file on the system
 
 With your web browser, go to the Login page of the Rudder Server - in this case
 http://rudder-server. You'll arrive on the login page. The default credentials
-are : jon.doe / secret
+are : admin / admin
 
 .Login page
 image::http://www.rudder-project.org/images/getting-started/login.png[]
