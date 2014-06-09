@@ -1,25 +1,49 @@
-<!-- 
- The "authentication" tag can have a "hash" argument, with these allowed values: 
- "md5", "sha1", "sha256", "sha-256", "sha512", "sha-512"
+<!--
+  Authorizations
+    You must define a role attribute to every user you add.
+  A role is defined by a list of authorizations separated by commas.
+  There are two kind of authorizations :
 
- For example: <authentication hash="sha">
+  Predefined authorizations
 
- To hash passwords for this format, run these commands:
- "md5"                    read mypass; echo -n $mypass | md5sum
- "sha" or "sha1"          read mypass; echo -n $mypass | shasum
- "sha256" or "sha-256"    read mypass; echo -n $mypass | sha256sum
- "sha512" or "sha-512"    read mypass; echo -n $mypass | sha512sum
+  There are 7 predefined authorization levels:
+    - administrator (all rights)
+    - administration_only (all administration)
+    - user (all node, configuration)
+    - configuration(all configuration)
+    - read_only (read all)
+    - compliance(read rule)
+    - inventory (read node)
 
-  After changing this file, the rudder webapp must be restarted to take changes
-  into account: /etc/init.d/jetty restart
- -->
+  There is three predefined roles for change request rights:
+    - validator (Can valid changes)
+    - deployer  (Can deploy changes)
+    - workflow  (Both deployer and validator)
+  The administrator role include the workflow ones
 
-<!-- example with hash -->
-<!-- <authentication hash="sha"> -->
-<authentication>
-  <user name="jon.doe"  password="secret"/>  
-  <user name="alex.bar" password="secret2"/>
-  <!--  exemple of bad lines -->
-  <!--  <user name="" password="secret2"/>-->
-  <!--  <user name="name" password=""/>-->
-</authentication>
+  Custom authorizations
+
+  Custom authorisations are composed of two elements:
+    - A type of authorization, which define what is concerned
+      there's is 10 types, which are : node, group, deployement,
+      administration, configuration, rule, technique, directive,
+      validator and deployer.
+    - A level of authorization,
+      levels are: read, write, edit, all(read, write, edit)
+      They are not inclusive (write and edit don't include read,)
+      a custom authorisation has a format like that "type_level" like "node_all", "group_read"
+
+  Examples
+
+      <user name="alice"  password="xxxxxxx" role="administrator" />
+      <user name="bob"    password="xxxxxxx" role="read_only"/>
+      <user name="carol"  password="xxxxxxx" role="user,validator"/>
+
+      <user name="custom" password="custom" role="node_all,configuration_read,rule_read,rule_edit,directive_read,technique_read">
+      - can read everything but administration,groups and deployement
+      - can do everything about node
+
+  exemple of bad lines
+  <user name="" password="secret2" role="administrator"/>
+  <user name="name" password="" role="administrator"/>
+-->
