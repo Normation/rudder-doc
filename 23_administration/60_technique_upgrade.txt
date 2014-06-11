@@ -49,6 +49,7 @@ cp -a /opt/rudder/share/techniques/* .
 
 ----
 
+git add -A
 git commit -am "Upgraded the Technique library (by $USER)"
 
 ----
