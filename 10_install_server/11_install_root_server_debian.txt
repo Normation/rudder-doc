@@ -1,66 +1,46 @@
 === Install Rudder Root server on Debian or Ubuntu
 
-==== Update the system
-
-Prior to beginning the installation of your Rudder Server, we recommend that you
-update your Debian/Ubuntu system with the latest versions of available packages.
-
-Specifically for Debian 5 (Lenny), since the release of Debian 6 (Squeeze), the signing key of
-packages repositories has changed. If you haven't already done it, you should
-also force the upgrade of the +debian-archive-keyring+ package to fetch the new key:
-
-----
-
-root@rudder-server:~# aptitude update
-root@rudder-server:~# aptitude install debian-archive-keyring
-root@rudder-server:~# aptitude update
-root@rudder-server:~# aptitude safe-upgrade
-
-----
-
 ==== Add the Rudder packages repository
 
-To validate the contents of the Rudder repository, you should import the GPG
-key used to sign it:
+Run the following commands as root:
 
 ----
 
-root@rudder-server:~# apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 474A19E8
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 474A19E8
+echo "deb http://www.rudder-project.org/apt-2.11/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
+aptitude update
 
 ----
+
+This will add the GPG key used to sign the Rudder repository, then add the
+package repository itself and finally update the local package cache.
+
+
+[TIP]
+
+====
 
 If the HTTP Keyserver Protocol (11371/tcp) port is blocked on your network you
 can use this alternate command:
 
 ----
 
-root@rudder-server:~# wget --quiet -O- "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x474A19E8" | sudo apt-key add -
+wget --quiet -O- "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x474A19E8" | sudo apt-key add -
 
 ----
 
-
-Then add the Rudder repository, by typing:
-
-----
-
-root@rudder-server:~# echo "deb http://www.rudder-project.org/apt-2.11/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
-
-----
-
-Then, update your local package database to retrieve the list of packages
-available on our repository:
-
-----
-
-root@rudder-server:~# aptitude update
-
-----
+====
 
 ==== Java on Debian/Ubuntu
 
 The Rudder Root server needs a compatible 'Java Runtime Environment' to run.
 In most cases, this will be installed automatically thanks to packaging
 dependencies, however in some cases manual installation is required.
+
+On 'Debian Wheezy (7)' and above and 'Ubuntu Precise (12.04)' and above, the
+available package is 'OpenJDK 7 JRE', namely +openjdk-7-jre+. It will be
+installed automatically as a dependency of the Rudder packages, and does not
+require the non-free component.
 
 On 'Debian Squeeze (6)' and 'Debian Lenny (5)', the available package is 'Oracle Java 6
 JRE', namely +sun-java-6-jre+, which is in the 'non-free' component. You must
@@ -89,12 +69,6 @@ Oracle(TM) and Rudder is not compatible with OpenJDK 6, which is the only
 available JDK from Ubuntu. See http://www.java.com/fr/download/ to get
 Oracle's JVM.
 
-On 'Debian Wheezy (7)' and above and 'Ubuntu Precise (12.04)' and above, the
-available package is 'OpenJDK 7 JRE', namely +openjdk-7-jre+. It will be
-installed automatically as a dependency of the Rudder packages, and does not
-require the non-free component.
-
-
 ==== Install your Rudder Root Server
 
 To begin the installation, you should simply install the rudder-server-root
@@ -102,9 +76,11 @@ metapackage, which will install the required components:
 
 ----
 
-root@rudder-server:~# aptitude install rudder-server-root
+aptitude install rudder-server-root
 
 ----
+
+Now jump to <<initial-config,the next section to configure your server>>.
 
 [NOTE]
 
