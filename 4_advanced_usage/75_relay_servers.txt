@@ -45,6 +45,7 @@ yum install httpd httpd-tools rsyslog
 # Debian-like (Debian, Ubuntu)
 apt-get install apache2 apache2-utils rsyslog
 a2enmod dav dav_fs
+a2dissite default
 
 # SuSE
 zypper install apache2 apache2-utils rsyslog
@@ -56,7 +57,7 @@ a2enmod dav dav_fs
 
 ----
 
-mkdir -p /var/log/rudder/apache2
+mkdir -p /opt/rudder/etc /var/log/rudder/apache2 /var/rudder/share
 
 for i in /var/rudder/inventories/incoming /var/rudder/inventories/accepted-nodes-updates
 do
@@ -65,12 +66,12 @@ do
         chmod -R 1770 ${i}
 done
 
-mkdir /var/rudder/share
-
 for i in /opt/rudder/etc/htpasswd-webdav-initial /opt/rudder/etc/htpasswd-webdav
 do
-        /usr/bin/htpasswd -b ${i} rudder rudder
+        /usr/bin/htpasswd -bc ${i} rudder rudder
 done
+
+touch /opt/rudder/etc/rudder-networks.conf
 
 ----
 
@@ -130,6 +131,19 @@ done
 
 </VirtualHost>
 ----
+
+Finally, restart Apache to take these changes into account:
+
+----
+
+# RHEL-like (RHEL, CentOS, Scientific)
+service httpd restart
+
+# Debian-like (Debian, Ubuntu) and SuSE
+service apache2 restart
+
+----
+
 
 ==== Installation procedure - On the root server
 
