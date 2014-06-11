@@ -16,11 +16,13 @@ dependencies will not be resolved with them.
 
 ==== Add the Rudder packages repository
 
-Configure the yum repository for RedHat/CentOS 6:
+Run the following command as root:
+
+**RedHat/CentOS 6:**
 
 ----
 
-$ echo "[Rudder_2.9]
+echo "[Rudder_2.9]
 name=Rudder 2.9 Repository
 baseurl=http://www.rudder-project.org/rpm-2.9/RHEL_6/
 gpgcheck=1
@@ -29,11 +31,11 @@ gpgkey=http://www.rudder-project.org/rpm-2.9/RHEL_6/repodata/repomd.xml.key
 
 ----
 
-Or for RedHat/CentOS 5:
+**RedHat/CentOS 5:**
 
 ----
 
-$ echo "[Rudder_2.9]
+echo "[Rudder_2.9]
 name=Rudder 2.9 Repository
 baseurl=http://www.rudder-project.org/rpm-2.9/RHEL_5/
 gpgcheck=1
@@ -44,7 +46,8 @@ gpgkey=http://www.rudder-project.org/rpm-2.9/RHEL_5/repodata/repomd.xml.key
 
 ==== Install your Rudder Root Server
 
-Install the package:
+To begin the installation, you should simply install the rudder-server-root
+metapackage, which will install the required components:
 
 ----
 
@@ -52,12 +55,14 @@ yum install rudder-server-root
 
 ----
 
+Now jump to <<initial-config,the next section to configure your server>>.
+
 [WARNING]
 
 ====
 
-Rudder don't support SELinux yet (see http://www.rudder-project.org/redmine/issues/2882),
-then you should set it as permissive with this command:
+Rudder doesn't support SELinux yet (see http://www.rudder-project.org/redmine/issues/2882),
+so you should set it to be permissive with this command:
 
 ----
 
