@@ -62,8 +62,10 @@ mkdir -p /opt/rudder/etc /var/log/rudder/apache2 /var/rudder/share
 for i in /var/rudder/inventories/incoming /var/rudder/inventories/accepted-nodes-updates
 do
         mkdir -p ${i}
-        chown -R root:apache ${i}
         chmod -R 1770 ${i}
+        for group in apache www-data www; do
+                if getent group ${group} > /dev/null; then chown -R root:${group} ${i}; break; fi
+        done
 done
 
 for i in /opt/rudder/etc/htpasswd-webdav-initial /opt/rudder/etc/htpasswd-webdav
