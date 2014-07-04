@@ -28,6 +28,13 @@ gpgkey=http://www.rudder-project.org/rpm-2.6/RHEL_5/repodata/repomd.xml.key
 
 ----
 
+For Rudder Server (RHEL 6 only), upgrade the +rudder-*+ packages:
+
+----
+
+yum update "rudder-*"
+
+----
 
 For Rudder Agent, upgrade the +rudder-agent+ package:
 
@@ -36,6 +43,4 @@ For Rudder Agent, upgrade the +rudder-agent+ package:
 yum update rudder-agent
 
 ----
-
-There was no Rudder Server packages for version 2.3.
 
