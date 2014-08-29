@@ -87,7 +87,7 @@ The script will also ask if you want to add sample data, which is not something
 that we want for a real usage.
 
 ----
-# /opt/rudder/bin/rudder-init.sh
+# /opt/rudder/bin/rudder-init
 
 Welcome to the Rudder initialization script
 
