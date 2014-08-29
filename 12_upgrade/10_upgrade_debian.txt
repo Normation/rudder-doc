@@ -7,7 +7,7 @@ Add Rudder project repository:
 * on Debian Squeeze and followings or Ubuntu 11.10 and followings:
 ----
 
-echo "deb http://www.rudder-project.org/apt-2.6/ $(lsb_release -cs) main contrib non-free" > /etc/apt/sources.list.d/rudder.list
+echo "deb http://www.rudder-project.org/apt-2.6/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 
 ----
 
