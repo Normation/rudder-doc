@@ -59,7 +59,7 @@ validate its content, you should import the GPG key used to sign it
 [source,console]
 ----
 # apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 474A19E8
-# echo "deb http://www.rudder-project.org/apt-stable/ squeeze main contrib non-free" > /etc/apt/sources.list.d/rudder.list
+# echo "deb http://www.rudder-project.org/apt-stable/ squeeze main" > /etc/apt/sources.list.d/rudder.list
 # apt-get update
 # apt-get install rudder-server-root
 ----
@@ -87,7 +87,7 @@ The script will also ask if you want to add sample data, which is not something
 that we want for a real usage.
 
 ----
-# /opt/rudder/bin/rudder-init.sh
+# /opt/rudder/bin/rudder-init
 
 Welcome to the Rudder initialization script
 
