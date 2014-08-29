@@ -6,7 +6,7 @@ the following initialization script:
 
 ----
 
-/opt/rudder/bin/rudder-init.sh
+/opt/rudder/bin/rudder-init
 
 ----
 
