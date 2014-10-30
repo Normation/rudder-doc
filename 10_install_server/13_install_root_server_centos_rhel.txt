@@ -22,11 +22,11 @@ Run the following command as root:
 
 ----
 
-echo "[Rudder_2.11]
-name=Rudder 2.11 Repository
-baseurl=http://www.rudder-project.org/rpm-2.11/RHEL_6/
+echo "[Rudder_3.0]
+name=Rudder 3.0 Repository
+baseurl=http://www.rudder-project.org/rpm-3.0/RHEL_6/
 gpgcheck=1
-gpgkey=http://www.rudder-project.org/rpm-2.11/RHEL_6/repodata/repomd.xml.key
+gpgkey=http://www.rudder-project.org/rpm-3.0/RHEL_6/repodata/repomd.xml.key
 " > /etc/yum.repos.d/rudder.repo
 
 ----
@@ -35,11 +35,11 @@ gpgkey=http://www.rudder-project.org/rpm-2.11/RHEL_6/repodata/repomd.xml.key
 
 ----
 
-echo "[Rudder_2.11]
-name=Rudder 2.11 Repository
-baseurl=http://www.rudder-project.org/rpm-2.11/RHEL_5/
+echo "[Rudder_3.0]
+name=Rudder 3.0 Repository
+baseurl=http://www.rudder-project.org/rpm-3.0/RHEL_5/
 gpgcheck=1
-gpgkey=http://www.rudder-project.org/rpm-2.11/RHEL_5/repodata/repomd.xml.key
+gpgkey=http://www.rudder-project.org/rpm-3.0/RHEL_5/repodata/repomd.xml.key
 " > /etc/yum.repos.d/rudder.repo
 
 ----

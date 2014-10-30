@@ -7,7 +7,7 @@ Run the following commands as root:
 ----
 
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 474A19E8
-echo "deb http://www.rudder-project.org/apt-2.11/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
+echo "deb http://www.rudder-project.org/apt-3.0/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 aptitude update
 
 ----
