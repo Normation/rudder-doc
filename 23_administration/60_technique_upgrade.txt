@@ -29,19 +29,11 @@ an annoyance.
 
 ====
 
-* Jump to the Rudder Technique tree
-
-----
-
-cd /var/rudder/configuration-repository/techniques
-
-----
-
 * Copy the reference Technique library to your local tree
 
 ----
 
-cp -a /opt/rudder/share/techniques/* .
+cp -a /opt/rudder/share/techniques/* /var/rudder/configuration-repository/techniques/
 
 ----
 
@@ -49,8 +41,9 @@ cp -a /opt/rudder/share/techniques/* .
 
 ----
 
-git add -A
-git commit -am "Upgraded the Technique library (by $USER)"
+cd /var/rudder/configuration-repository/techniques
+git add .
+git commit -m "Upgraded the Technique library (by $USER)"
 
 ----
 
