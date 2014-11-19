@@ -176,3 +176,37 @@ from a node to a relay.
 
 image::./images/RudderRelay.png[Relay]
 
+==== Adding nodes to a relay server
+
+When you have at least one relay, you will likely want to add nodes
+on it.
+
+You then have two possible cases:
+
+- You want to switch an already existing node to the relay
+- You want to add a new one
+
+The procedure on both cases is the same, you have to:
+
+- Create / update the file /var/rudder/cfengine-community/policy_server.dat
+with the IP address or the fully qualified domain name of the relay server
+(instead of the root server)
+
+----
+
+echo "rudder-relay.example.com" > /var/rudder/cfengine-community/policy_server.dat
+
+----
+
+
+- Trigger an inventory immediately to make sure the node is registered correctly
+
+----
+
+/var/rudder/cfengine-community/bin/cf-agent -KI -D force_inventory
+
+----
+
+After those steps, the node should be registered correctly on your Rudder
+infrastructure.
+
