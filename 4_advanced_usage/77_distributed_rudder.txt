@@ -1,7 +1,7 @@
 [[multiserver-rudder]]
 === Multiserver Rudder
 
-From version 2.11 Rudder can be divided into 4 different components :
+From version 3.0 Rudder can be divided into 4 different components :
 
 - rudder-web : an instance with the webapp and the central policy server
 - rudder-ldap : the inventory endpoint and its ldap backend
