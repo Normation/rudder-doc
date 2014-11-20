@@ -70,12 +70,6 @@ Once the package has been installed, you have to perform the one-time
 configuration by running the post-install script. Two basic pieces of information will be
 asked:
 
-[quote, Hostname of the Rudder server root, which can be used by the client Nodes to reach the server.]
-____
-Hostname: +rudder-server+
-____
-
-
 [quote, A list of IP networks that you will authorize to connect to the server.]
 ____
 Allowed Networks: +192.168.56.0/24+
@@ -94,9 +88,6 @@ Welcome to the Rudder initialization script
 This script will configure your Rudder root server.
 It can be run as many times as you want.
 
-Please enter the fully qualified domain name that will be used to access the web
-interface of the Rudder server (i.e rudder.example.com): rudder-server
-
 Enter network allowed to access server (i.e 192.168.0.0/24): 192.168.56.0/24
 192.168.56.0/24
 Network(s) added:
@@ -104,8 +95,25 @@ Network(s) added:
 Add more networks? (yes/no) no
 no
 
-Do you want to add sample data (for demos)? (yes/no)
-no
+SUMMARY OF OPTIONS:
+
+Allowed networks: 192.168.56.0/24
+
+Hit any key to continue....
+Configuring and installing initial CFEngine promises... Done.
+Initializing LDAP database... done.
+
+Updating Rudder password file with random passwords...  done.
+Cleaning up temporary directories... done.
+Restarting services... done.
+
+Reinitialization complete, Rudder is currently reloading.
+
+You can access it via https://<hostname>/rudder
+
+( Example: https://rudder.example.com/rudder )
+
+Thank you for using Rudder.
 ----
 
 //.Post install script
