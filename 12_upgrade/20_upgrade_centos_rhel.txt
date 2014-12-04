@@ -28,11 +28,11 @@ gpgkey=http://www.rudder-project.org/rpm-2.10/RHEL_5/repodata/repomd.xml.key
 
 ----
 
-For Rudder Server (RHEL 6 only), upgrade the +rudder-*+ packages:
+For Rudder Server (RHEL 6 only), upgrade the +rudder-*+ and +ncf+ packages:
 
 ----
 
-yum update "rudder-*"
+yum update "rudder-*" "ncf"
 
 ----
 
