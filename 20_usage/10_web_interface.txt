@@ -17,9 +17,9 @@ and Administration.
 The home page summarizes the content of the other parts and provides quick links
 for the most common actions.
 
-.Rudder Homepage  
+.Rudder Homepage
 
-image::./images/RudderHome.png[Home menu]
+image::./images/rudder-home.png[Home menu]
 
 ==== Node Management
 
@@ -27,18 +27,18 @@ In the Node Management section, you will find the validation tool for new
 Nodes, a search engine for validated Nodes, and the management tool for groups
 of Nodes.
 
-.Node Management welcome screen 
+.Accept new nodes screen
 
-image::./images/RudderMenuAssetManagement.png[Asset Management]
+image::./images/rudder-nodemanagement-acceptnewnodes.png[Accept new nodes]
 
 ==== Configuration Management
 
 In the Configuration Management section, you can select the Techniques,
 configure the Directives and manage the Rules.
 
-.Configuration Management welcome screen
+.Configuration Policy (Rules) screen
 
-image::./images/RudderMenuConfigurationManagement.png[Configuration Management]
+image::./images/rudder-configurationpolicy-rules.png[Configuration Policy]
 
 ==== Administration
 
@@ -46,7 +46,7 @@ The Administration section provides some general settings: you can setup the
 available networks for the Policy Server, view the event logs and manage your
 plugin collection.
 
-.Administration welcome screen
+.Settings screen
 
-image::./images/RudderMenuAdministration.png[Administration]
+image::./images/rudder-admin-settings.png[Settings]
 

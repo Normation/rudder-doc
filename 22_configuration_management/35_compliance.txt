@@ -40,7 +40,14 @@ Number of Nodes for which conformity is reached for every Directive of the
 Rule / Total number of Nodes on which the Rule has
 been applied
 
-.Reports
+.Compliance on a Rule
 
-image::./images/Reports.png[Reports]
+image::./images/rudder-rule-compliance.png[Rule compliance]
+
+The Rule detailed compliance screen will also graph compliance deviations on
+a recent period as well as display a deviation log history for this period.
+
+.Compliance history on a Rule
+
+image::./images/rudder-rule-compliance-history.png[Rule compliance history]
 
