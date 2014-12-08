@@ -18,6 +18,7 @@ Special attention should be given to:
 /var/lib/pgsql::
 Or wherever is located your postgresql database.
 Can grow by several GB per day.
+Please see the <<_database_maintenance, database maintenance>> chapter for more details about this
 
 /var/rudder::
 Contains most of your server information, LDAP database, etc..
