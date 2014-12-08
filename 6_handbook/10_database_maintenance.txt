@@ -9,6 +9,35 @@ to keep operating well. Thus, this chapter will introduce you to the basic
 maintenance procedure you might want to know about these particular database
 implementations.
 
+==== Automatic PostgreSQL table maintenance
+
+Rudder uses an automatic mechanism to automate the archival and pruning of the reports
+database.
+
+By default, this system will:
+
+* Archive reports older that 3 days (30 in Rudder 2.6)
+* Remove reports older than 90 days
+
+It thus reduces the work overhead by only making Rudder handle relevant reports (fresh enough)
+and putting aside old ones.
+
+This is obviously configurable in /opt/rudder/etc/rudder-web.properties, by altering the following
+configuration elements:
+
+* rudder.batch.reportscleaner.archive.TTL: Set the maximum report age before archival
+* rudder.batch.reportscleaner.delete.TTL: Set the maximum report age before deletion
+
+The default values are OK for systems under moderate load, and should be adjusted in case of
+excessive database bloating.
+
+The estimated disk space consumption, with a 5 minute agent run frequency, is 150 to 400 kB per Directive,
+per day and per node, which is roughly 5 to 10 MB per Directive per month and per node.
+
+Thus, 25 directives on 100 nodes, with a 7 day log retention policy, would take 2.5 to 10 GB, and
+25 directives on 1000 nodes with a 1 hour agent execution period and a 30 day log retention policy
+would take 9 to 35 GB.
+
 ==== PostgreSQL database vacuum
 
 In some cases, like a large report archiving or deletion, the Rudder interface
