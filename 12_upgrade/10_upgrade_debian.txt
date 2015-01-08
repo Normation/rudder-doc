@@ -24,7 +24,7 @@ For Rudder Server, upgrade all the packages associated to +rudder-server-root+:
 
 ----
 
-apt-get install rudder-server-root
+apt-get install rudder-server-root ncf ncf-api-virtualenv
 
 ----
 
