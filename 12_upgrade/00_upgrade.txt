@@ -3,8 +3,8 @@
 This short chapter covers the upgrade of the Rudder Server Root and Rudder Agent
 from olders versions to the latest version, 3.0.
 
-Please note that you can upgrade directly from Rudder 2.6.x, 2.10.x or 2.11.x
-to Rudder 3.0. However, direct upgrades from 2.6.x and older are no longer
+Please note that you can upgrade directly from Rudder 2.10.x or 2.11.x
+to Rudder 3.0. However, direct upgrades from 2.9.x and older are no longer
 supported.
 If you are still running one of those, please first upgrade to one of
 the supported versions above.

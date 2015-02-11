@@ -20,8 +20,7 @@ Rudder 2.6.* and 2.10.* contain an older CFEngine version. To have a successful 
 
 * Upgrade the Rudder server to 3.0
 
-==== Known bugs
+==== Known issues
 
-* After upgrade, if the web interface has display problems, empty your navigator cache
-and/or logout/login.
+* After upgrade, if the web interface has display problems, empty your navigator cache and/or logout/login.
 

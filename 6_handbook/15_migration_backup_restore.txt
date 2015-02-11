@@ -58,7 +58,7 @@ Here is the restoration procedure:
 Rudder on the machine
 
 # Stop Rudder
-/etc/init.d/rudder-root-server stop
+service rudder-root-server stop
 
 # Drop the OpenLDAP database
 rm -rf /var/rudder/ldap/openldap-data/alock /var/rudder/ldap/openldap-data/*.bdb /var/rudder/ldap/openldap-data/__db* /var/rudder/ldap/openldap-data/log*
@@ -77,7 +77,7 @@ sudo -u postgres psql -d rudder < /root/rudder-backup-XXXXXXXX.sql
 psql -u rudder -d rudder -W < /root/rudder-backup-XXXXXXXX.sql
 
 # And restart the machine or just Rudder:
-/etc/init.d/rudder-server-root restart
+service rudder-server-root restart
 
 ----
 

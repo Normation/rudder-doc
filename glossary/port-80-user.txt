@@ -1,4 +1,0 @@
-Port 443, TCP, for users::
-
-HTTPS communication port, used by the users to access to the web interface.
-

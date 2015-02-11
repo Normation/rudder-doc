@@ -10,7 +10,7 @@ The location of the PostgreSQL server configuration file is usually:
 
 ----
 
-/etc/postgresql/8.x/main/postgresql.conf
+/etc/postgresql/9.x/main/postgresql.conf
 
 ----
 

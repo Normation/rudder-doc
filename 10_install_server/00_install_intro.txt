@@ -10,22 +10,27 @@ Architecture chapter.
 
 Ideally, this machine should have Internet access, but this is not a strict requirement.
 
-As Rudder datas can grow really fast depending on your number of managed nodes and number of rules, it is advised to separate partitions to prevent your /var getting full and break your system.
+As Rudder datas can grow really fast depending on your number of managed nodes and number of rules, it is advised to separate partitions to prevent /var from getting full and break your system.
 Special attention should be given to:
 
 ======
 
 /var/lib/pgsql::
-Or wherever is located your postgresql database.
-Can grow by several GB per day.
-Please see the <<_database_maintenance, database maintenance>> chapter for more details about this
+( OS dependent ).
+Please see the <<_database_maintenance, database maintenance>> chapter for more details about the
+PostgreSQL database size estimation.
 
 /var/rudder::
-Contains most of your server information, LDAP database, etc..
-Slower growth over time.
+Contains most of your server information, the configuration-repository, LDAP database, etc..
+Rudder application-related files should stay under 1GB, but the size of the configuration-repository will
+depend of the amount of data you store in it, especially in the shared-files folder (files that will get
+distributed to the agents using the "Download a file for the shared folder" Technique).
 
 /var/log/rudder:: 
-Reports logs can easily grow to 1.5GB per day.
-
+Report logs (/var/log/rudder/reports) size will depend on the amount of nodes you manage.
+It is possible to reduce this drastically by unticking "Log all reports received to /var/log/rudder/reports/all.log"
+under the Administration - Settings tab in the Rudder web interface. This will prevent Rudder from recording this logs
+in a text file on disk, and will only store them in the SQL database. This saves on space, and doesn't remove any
+functionality, but does however make debugging harder.
 ======
 

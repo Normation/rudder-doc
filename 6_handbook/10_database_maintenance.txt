@@ -85,13 +85,13 @@ during searches. In that case, OpenLDAP will output warnings to notify you that 
 ----
 
 # Stop OpenLDAP
-/etc/init.d/slapd stop
+service rudder-slapd stop
 
 # Reindex the databases
-/opt/rudder/sbin/slapindex
+service rudder-slapd reindex
 
 # Restart OpenLDAP
-/etc/init.d/slapd restart
+service rudder-slapd restart
 
 ----
 

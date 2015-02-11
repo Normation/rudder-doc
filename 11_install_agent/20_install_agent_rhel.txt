@@ -1,0 +1,43 @@
+=== Install Rudder Agent on RedHat-like systems
+
+Define a yum repository for Rudder:
+
+----
+
+$ echo "[Rudder_3.0]
+name=Rudder 3.0 EL repository
+baseurl=http://www.rudder-project.org/rpm-3.0/RHEL_7/
+gpgcheck=1
+gpgkey=http://www.rudder-project.org/rpm-3.0/RHEL_7/repodata/repomd.xml.key" > /etc/yum.repos.d/rudder.repo
+
+----
+
+====
+
+[TIP]
+
+====
+
+Replace RHEL_7 with your Enterprise Linux version if necessary.
+
+The RPM can be directly downloaded for a standalone installation,
+from the following URL: http://www.rudder-project.org/rpm-3.0/RHEL_7/
+
+====
+
+Install the package:
+
+----
+
+yum install rudder-agent
+
+----
+
+Or:
+
+----
+
+yum install rudder-agent-3.0.0-1.EL.7.x86_64.rpm
+
+----
+

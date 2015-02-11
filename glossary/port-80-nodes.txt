@@ -1,4 +1,4 @@
 Port 80, TCP, for nodes::
 
-HTTP communication port, used to send inventory and fetch the id of the Rudder Server.
+WebDAV/HTTP communication port, used to send inventory and fetch the id of the Rudder Server.
 

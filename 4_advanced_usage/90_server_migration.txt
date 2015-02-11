@@ -85,7 +85,7 @@ On the next run of rudder-agent, nodes will get the new public key of the server
 
 If your server has changed of IP address you have to modify +/var/rudder/cfengine-community/policy_server.dat+ with the new address
 
-Then you force your nodes to send their inventory while running +/var/rudder/cfengine-community/bin/cf-agent -KI -D force_inventory+
+Then you force your nodes to send their inventory while running +rudder agent inventory+
 
 In your Rudder UI, you should now be able to accept the nodes.
 

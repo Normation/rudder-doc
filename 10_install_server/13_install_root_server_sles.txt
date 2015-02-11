@@ -1,0 +1,58 @@
+=== Install Rudder Root server on SLES
+
+==== Configure the package manager
+
+Rudder requires three packages that are not always packaged by SuSE on all versions:
+
+* rsyslog-psql
+* PostgreSQL 9
+* Java RE (version 7 at least).
+
+The first one is present in Rudder's repositories and can be downloaded alongside Rudder as a dependency, but you
+will need to install PostgeSQL 9 and a Java RE separately.
+
+PostgreSQL 9 can be installed through the OpenSuSE build service: https://build.opensuse.org/project/show/server:database:postgresql
+
+The Java RE 7 can be found either using the OpenSuSE build service, or through Oracle's website: http://www.java.com
+
+Also, Rudder server requires the +git+ software, that can be found on SLES SDK DVD under the name +git-core+.
+
+==== Add the Rudder packages repository
+
+Run the following commands as root:
+
+----
+
+zypper ar -n "Rudder SLES repository" http://www.rudder-project.org/rpm-3.0/SLES_11/ Rudder
+zypper ref
+
+----
+
+This will add the Rudder package repository, then update the local package
+cache.
+
+==== Install your Rudder Root Server
+
+To begin the installation, you should simply install the rudder-server-root
+metapackage, which will install the required components:
+
+----
+
+zypper in rudder-server-root
+
+----
+
+Now jump to <<initial-config,the next section to configure your server>>.
+
+[WARNING]
+
+====
+
+Zypper seems to be quite tolerant to missing dependencies and will let you install rudder-server-root even if you are missing
+something like +git-core+ for example, if nothing provides it or you did not install it beforehand.
+
+Special care should be taken during initial installation not to say "Continue anyway" if Zypper does complain a dependency can
+not be resolved and asks what to do.
+
+====
+

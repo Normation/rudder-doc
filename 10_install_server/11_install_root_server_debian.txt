@@ -2,19 +2,15 @@
 
 ==== Add the Rudder packages repository
 
-Run the following commands as root:
+Run the following commands as root to add the package repository GPG key and the repository itself:
 
 ----
 
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 474A19E8
 echo "deb http://www.rudder-project.org/apt-3.0/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
-aptitude update
+apt-get update
 
 ----
-
-This will add the GPG key used to sign the Rudder repository, then add the
-package repository itself and finally update the local package cache.
-
 
 [TIP]
 
@@ -25,49 +21,11 @@ can use this alternate command:
 
 ----
 
-wget --quiet -O- "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x474A19E8" | sudo apt-key add -
+wget --quiet -O- "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x474A19E8" | apt-key add -
 
 ----
 
 ====
-
-==== Java on Debian/Ubuntu
-
-The Rudder Root server needs a compatible 'Java Runtime Environment' to run.
-In most cases, this will be installed automatically thanks to packaging
-dependencies, however in some cases manual installation is required.
-
-On 'Debian Wheezy (7)' and above and 'Ubuntu Precise (12.04)' and above, the
-available package is 'OpenJDK 7 JRE', namely +openjdk-7-jre+. It will be
-installed automatically as a dependency of the Rudder packages, and does not
-require the non-free component.
-
-On 'Debian Squeeze (6)' and 'Debian Lenny (5)', the available package is 'Oracle Java 6
-JRE', namely +sun-java-6-jre+, which is in the 'non-free' component. You must
-make sure this is enabled in your apt sources. Check that
-+/etc/apt/sources.list+ contains the following lines:
-
-----
-
-deb http://ftp.fr.debian.org/debian/ squeeze main contrib non-free
-deb http://security.debian.org/ squeeze/updates main contrib non-free
-
-----
-[TIP]
-
-====
-
-Your mirror may differ, +ftp.fr.debian.org+ is only an example. Also, please
-adapt the distribution name if needed (+squeeze+ could be replaced by +lenny+).
-
-====
-
-
-On 'Ubuntu Natty (11.04)' and previous Ubuntu versions, you will have to
-install Java yourself as the packaging of the Oracle JVM is now restricted by
-Oracle(TM) and Rudder is not compatible with OpenJDK 6, which is the only
-available JDK from Ubuntu. See http://www.java.com/fr/download/ to get
-Oracle's JVM.
 
 ==== Install your Rudder Root Server
 
@@ -76,23 +34,11 @@ metapackage, which will install the required components:
 
 ----
 
-aptitude install rudder-server-root
+apt-get install rudder-server-root
 
 ----
 
 Now jump to <<initial-config,the next section to configure your server>>.
-
-[NOTE]
-
-====
-
-If 'Oracle Java 6 JRE' is installed (usually on Debian Lenny (5) or Squeeze
-(6) only), you will be asked to accept the license of the product during
-installation.
-
-====
-
-==== Compatibility with RHEL/CentOS 5 and syslogd
 
 [WARNING]
 

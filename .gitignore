@@ -1,12 +1,18 @@
+# Generated text
 rudder-doc.xml
+html/
+*.html
 *.pdf
 *.tex
-*.html
-*.swp
-*~
-*.bak
-*.off
+
+# Generated images
 main_*.png
 _*.png
 temp/*
 graphs/*
+
+# Backup files
+*.swp
+*~
+*.bak
+*.off

@@ -4,16 +4,15 @@ Following commands are executed as the +root+ user.
 
 Add the Rudder packages repository:
 
-* With zypper on a SLES 11 system:
+* On a SLES 11 system:
 
 ----
 
-zypper ar -n "Rudder RPM Repositories" \
-http://www.rudder-project.org/rpm-3.0/SLES_11_SP1/ Rudder
+zypper ar -n "Rudder SLES repository" http://www.rudder-project.org/rpm-3.0/SLES_11_SP1/ Rudder
 
 ----
 
-* With zypper on a SLES 10 system:
+* On a SLES 10 system:
 
 ----
 
@@ -43,7 +42,7 @@ and after the upgrade of these packages, restart jetty to be sure that the chang
 
 ----
 
-/etc/init.d/jetty restart
+service rudder-jetty restart
 
 ----
 

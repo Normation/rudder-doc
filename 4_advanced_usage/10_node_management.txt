@@ -8,18 +8,17 @@ initial promises.
 
 ----
 
-root@node:~# rm -rf /var/rudder/cfengine-community/inputs/*
-root@node:~# cp -a /opt/rudder/share/initial-promises/* /var/rudder/cfengine-community/inputs/
+rudder agent reset
 
 ----
 
-At next run of the Rudder Agent (it runs every five minuts), the initial promises will be used. 
+At next run of the Rudder Agent (it runs every five minutes), the initial promises will be used. 
 
 [CAUTION]
 
 ====
 
-Use this procedure with caution: the Applied Policies of a Node should never get
+Use this procedure with caution: the Applied policies of a node should never get
 broken, unless some major change has occured on the Rudder infrastructure, like
 a full reinstallation of the Rudder Server.
 
