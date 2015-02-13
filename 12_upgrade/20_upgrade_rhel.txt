@@ -14,8 +14,6 @@ gpgkey=http://www.rudder-project.org/rpm-3.0/RHEL_7/repodata/repomd.xml.key" > /
 
 ----
 
-====
-
 [TIP]
 
 ====
