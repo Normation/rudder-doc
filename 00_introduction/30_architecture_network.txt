@@ -20,7 +20,7 @@ Open the following flow from the clients desktop to the Rudder Root Server:
 
 ====
 
-include::../glossary/port-80-user.txt[]
+include::../glossary/port-443-user.txt[]
 
 ====
 
@@ -32,21 +32,21 @@ These flows are used to add features to Rudder:
    
 // include::../glossary/big-red-button.txt[]
 
-include::../glossary/cfengine-nova.txt[]
+include::../glossary/cfengine-enterprise.txt[]
 
 ====
 
 ==== DNS - Name resolution
 
-Currently, Rudder relies on the Node declared hostnames to identify them. So it
-is required that each Node hostname can be resolved to its IP address that will
-be used to contact the Rudder Server. We are aware that it is far from being
-ideal in most cases (no DNS environement, private sub-networks, NAT, etc...),
-and we are currently working on an alternative solution.
-
-If you do not have the wished name resolution, we advice that you should fill
-the IP address and hostname of the +/etc/hosts+ file of the Rudder Root Server.
+By default, Rudder relies on the Node declared hostnames to identify them, for
+security reasons. It is required that each Node hostname can be resolved to its
+IP address that will be used to contact the Rudder Server.
 
 Similarly, each Rudder Node must be able to resolve the Rudder Root Server
 hostname given in the step described in <<initial-config>>.
+
+If you can not make every node resolution consistent, it is possible to remove
+this constraint by unticking "Use reverse DNS lookups on nodes to reinforce
+authentication to policy server:" in the Administration - Settings tab of the
+Rudder web interface.
 

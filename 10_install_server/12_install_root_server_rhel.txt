@@ -1,0 +1,110 @@
+=== Install Rudder Root server on Enterprise Linux ( RedHat or RedHat-like )
+
+==== Add the Rudder packages repository
+
+Run the following command as root:
+
+----
+
+echo "[Rudder_3.0]
+name=Rudder 3.0 EL repository
+baseurl=http://www.rudder-project.org/rpm-3.0/RHEL_7/
+gpgcheck=1
+gpgkey=http://www.rudder-project.org/rpm-3.0/RHEL_7/repodata/repomd.xml.key" > /etc/yum.repos.d/rudder.repo
+
+----
+
+====
+
+[TIP]
+
+====
+
+Replace RHEL_7 with your Enterprise Linux version if necessary.
+
+====
+
+==== Install your Rudder Root Server
+
+To begin the installation, you should simply install the rudder-server-root
+metapackage, which will install the required components:
+
+----
+
+yum install rudder-server-root
+
+----
+
+Now jump to <<initial-config,the next section to configure your server>>.
+
+[WARNING]
+
+====
+
+Rudder server doesn't support SELinux yet (see http://www.rudder-project.org/redmine/issues/2882),
+so you should set it to be permissive with these commands:
+
+----
+
+sed -i "s%^\s*SELINUX=.*%SELINUX=disabled%" /etc/sysconfig/selinux
+setenforce 0
+
+----
+
+====
+
+[WARNING]
+
+====
+
+The webapp runs on HTTP/S (443 TCP) so you need to allow access to your server on this port.
+
+On EL6, a iptables firewall setup is enabled by default, and would need to be adjusted
+for Rudder to operate properly.
+
+The /etc/sysconfig/iptables file configures this firewall: 
+
+----
+
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+# Allow SSH access (Maintenance)
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+# Allow HTTPS access (Rudder)
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+
+----
+
+The important line to add being:
+
+----
+
+# Allow HTTPS access (Rudder)
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
+
+----
+
+On EL7, the default firewall is firewalld, and you can enable HTTP/S access by running
+
+----
+
+firewall-cmd --permanent --zone=public --add-port=443/tcp
+
+----
+
+Don't forget to also enable access for other Rudder services:
+
+* HTTP (80 TCP)
+* Syslog (514 UDP/TCP)
+* CFEngine (5309 TCP)
+
+====
+

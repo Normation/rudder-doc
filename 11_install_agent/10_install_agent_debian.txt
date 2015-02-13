@@ -9,7 +9,7 @@ apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 474A19E8
 
 ----
 
-If your HTTP Keyserver Protocol (11371/tcp) is blocked you can use an alternate command:
+If the HTTP Keyserver Protocol (11371 TCP) is blocked, you can try an alternate command:
 
 ----
 
@@ -19,20 +19,9 @@ root@rudder-server:~# wget --quiet -O- "http://keyserver.ubuntu.com/pks/lookup?o
 
 Add Rudder project repository:
 
-* on Debian Squeeze:
 ----
 
-sudo tee /etc/apt/sources.list.d/rudder.list <<EOF
-deb http://www.rudder-project.org/apt-3.0/ $(lsb_release -cs) main
-EOF
-
-----
-
-* on Ubuntu 12.04 and following, or Debian wheezy and following:
-
-----
-
-sudo apt-add-repository http://www.rudder-project.org/apt-3.0/
+echo "deb http://www.rudder-project.org/apt-3.0/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 
 ----
 
@@ -40,7 +29,7 @@ Update your local package database to retrieve the list of packages available on
 
 ----
 
-sudo aptitude update
+sudo apt-get update
 
 ----
 
@@ -48,7 +37,7 @@ Install the +rudder-agent+ package:
 
 ----
 
-sudo aptitude install rudder-agent
+sudo apt-get install rudder-agent
 
 ----
 

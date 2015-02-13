@@ -14,11 +14,14 @@ This script will ask you to fill in the following details:
 
 ====
 
-Allowed networks:: A list of IP networks authorized to connect to the server. We
-recommend that you specify all the networks of your infrastructure. The syntax
-is the standard network/mask notation, for instance +192.168.0.0/24+ or
-+10.0.0.0/8+. To add several networks, first type the first network, then press
+Allowed networks:: A list of IP networks authorized to connect to the server.
+It uses the network/CIDR mask notation, for instance +192.168.0.0/24+ or
++10.0.0.0/8+.
+To add several networks, first type the first network, then press
 the return key - the script will ask if you wish to add some more networks.
+Also, the allowed networks can be adjusted later in the web interface
+in the Administration - Settings tab without having to run the script
+again.
 
 ====
 

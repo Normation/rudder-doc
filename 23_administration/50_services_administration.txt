@@ -6,7 +6,7 @@ To restart the Rudder Agent, use following command on a node:
 
 ----
 
-/etc/init.d/rudder-agent restart
+service rudder-agent restart
 
 ----
 
@@ -27,7 +27,7 @@ You can restart all components of the Rudder Root Server at once:
 
 ----
 
-/etc/init.d/rudder-server-root restart
+service rudder-server-root restart
 
 ----
 
@@ -40,7 +40,7 @@ include::../glossary/cfengine-server.txt[]
 
 ----
 
-/etc/init.d/cfengine-community restart
+service rudder-agent restart
 
 ----
 
@@ -48,7 +48,7 @@ include::../glossary/web-server-application.txt[]
 
 ----
 
-/etc/init.d/jetty restart
+service rudder-jetty restart
 
 ----
 
@@ -56,7 +56,7 @@ include::../glossary/web-server-front-end.txt[]
 
 ----
 
-/etc/init.d/apache2 restart
+service apache2 restart
 
 ----
 
@@ -64,7 +64,7 @@ include::../glossary/ldap-server.txt[]
 
 ----
 
-/etc/init.d/slapd restart
+service rudder-slapd restart
 
 ----
 
@@ -72,7 +72,7 @@ include::../glossary/sql-server.txt[]
 
 ----
 
-/etc/init.d/postgresql* restart
+service postgresql* restart
 
 ----
 

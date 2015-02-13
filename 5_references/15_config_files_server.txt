@@ -1,0 +1,16 @@
+=== Configuration files for Rudder Server
+
+* /opt/rudder/etc/htpasswd-webdav
+
+* /opt/rudder/etc/inventory-web.properties
+
+* /opt/rudder/etc/logback.xml
+
+* /opt/rudder/etc/openldap/slapd.conf
+
+* /opt/rudder/etc/reportsInfo.xml
+
+* /opt/rudder/etc/rudder-users.xml
+
+* /opt/rudder/etc/rudder-web.properties
+

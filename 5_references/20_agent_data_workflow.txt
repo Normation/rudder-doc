@@ -62,7 +62,7 @@ requested (class +force_inventory+ is defined), do and send an inventory to the
 server.
 ----
 
-user@node:~$ sudo /var/rudder/cfengine-community/bin/cf-agent -KI -Dforce_inventory
+rudder agent inventory
 
 ----
 
@@ -77,5 +77,4 @@ to send reports regularly to the server. Supported system log providers are:
 ==== Apply Directives
 
 Apply other policies and write reports locally.
-
 

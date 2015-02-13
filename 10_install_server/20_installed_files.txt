@@ -15,11 +15,11 @@ configuration for apache, logrotate and rsyslog.
 
 +/var/rudder+:: Variable data for Rudder services are stored here.
 
-+/var/rudder/cfengine-community+:: Data for CFEngine Community are stored here.
-
 +/var/rudder/configuration-repository/techniques+:: Techniques are stored here.
 
-+/var/cfengine+:: Data for CFEngine Nova are stored here.
++/var/rudder/cfengine-community+:: Data for CFEngine Community is stored here.
+
++/var/cfengine+:: Data for CFEngine Enterprise is stored here.
 
 +/usr/share/doc/rudder*+:: Documentation about Rudder packages.
 

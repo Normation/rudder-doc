@@ -67,5 +67,3 @@ include::../graphviz/data_workflow.dot[]
 
 ----
 
-
-

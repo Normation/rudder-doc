@@ -6,13 +6,23 @@ the Rudder web interface.
 You will be able to browse its inventory, and accept it to manage its
 configuration with Rudder.
 
+===== Force Rudder Agent inventory generation
+
+You may force the agent to run and send an inventory by issuing the following command:
+
+----
+
+rudder agent inventory
+
+----
+
 ===== Force Rudder Agent execution
 
 You may force the agent execution by issuing the following command:
 
 ----
 
-/var/rudder/cfengine-community/bin/cf-agent -KI
+rudder agent run
 
 ----
 

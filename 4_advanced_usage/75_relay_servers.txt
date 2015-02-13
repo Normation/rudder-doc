@@ -203,7 +203,7 @@ echo "rudder-relay.example.com" > /var/rudder/cfengine-community/policy_server.d
 
 ----
 
-/var/rudder/cfengine-community/bin/cf-agent -KI -D force_inventory
+rudder agent inventory
 
 ----
 

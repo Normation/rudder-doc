@@ -67,7 +67,7 @@ You can force the Rudder Agent to run from the console and observe what happens.
 
 ----
 
-user@node:~$ sudo /var/rudder/cfengine-community/bin/cf-agent -KI
+rudder agent run
 
 ----
 
@@ -82,7 +82,7 @@ this error:
 
 ----
 
-user@node:~$ sudo /var/rudder/cfengine-community/bin/cf-agent -KI 
+rudder agent run
 
 Unable to lookup hostname (rudder-root) or cfengine service: Name or service not known
 
@@ -96,7 +96,7 @@ The Rudder Root Server name is defined in this file
 
 ----
 
-root@node:~# echo *IP_of_root_server* > /var/rudder/cfengine-community/policy_server.dat
+echo *IP_of_root_server* > /var/rudder/cfengine-community/policy_server.dat
 
 ----
 
@@ -112,7 +112,7 @@ If the CFEngine is stopped on the Rudder Root Server you will get this error:
 
 ----
 
-user@node:~$ sudo /var/rudder/cfengine-community/bin/cf-agent -KI 
+# rudder agent run
  !! Error connecting to server (timeout)
  !!! System error for connect: "Operation now in progress"
  !! No server is responding on this port
@@ -124,7 +124,7 @@ Restart the CFEngine service:
 
 ----
 
-user@rudder-root:~$ sudo /var/rudder/cfengine-community/bin/cf-serverd
+service rudder-agent restart
 
 ----
 
@@ -156,7 +156,7 @@ You can force the execution of CFEngine agent on the console:
 
 ----
 
-user@rudder-root:~$ sudo /var/rudder/cfengine-community/bin/cf-agent -KI
+rudder agent run
 
 ----
 
