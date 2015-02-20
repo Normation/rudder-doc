@@ -30,11 +30,11 @@ zypper ref
 ----
 
 
-For Rudder Server (SLES 11 only), upgrade all the packages associated to +rudder-server-root+:
+For Rudder Server, upgrade all the packages associated to +rudder-server-root+:
 
 ----
 
-zypper update rudder*
+zypper update "rudder*" "ncf*"
 
 ----
 
