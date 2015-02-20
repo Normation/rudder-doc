@@ -1,27 +1,20 @@
 === Caution cases
 
-==== Upgrading from Rudder 2.9 or 2.10
+Rudder 2.11.* onwards contains a new CFEngine version (3.6) which is more strict with the parsing of its promises and introduces new promise attributes.
 
-Rudder 2.10.* and 2.9.* use a compatible CFEngine version, and no changes were made to the agent package apart its name. Therefore Rudder agent 2.9.*/2.10.* are fully compatible with Rudder server 2.11.*, so it is not necessary to update your agents to 2.11.*.
+To have a successful upgrade these steps should be followed:
 
-To have a successful upgrade, you only need to upgrade Rudder server to 2.11.
- 
-==== Upgrading from Rudder 2.6, or 2.7
-
-Rudder 2.10.* onwards contains a CFEngine version which is more strict with the parsing of its promises. To have a successful upgrade these steps should be followed:
-
-* Make sure the Rudder server to be upgraded is in a version that is at least 2.4.11, 2.6.8 and 2.7.5 before attempting to upgrade to 2.11.*
+* Make sure the Rudder server to be upgraded to the last 2.6 or 2.10 version, depending on the one you are currently running.
 
 * Ensure that all node's promises have been regenerated since the server upgrade to this version (don't forget that your Techniques will not be upgraded automatically)
 ** On Rudder WebUI, at the top right of the screen, click on 'Regenerate now'
-** On Rudder 2.6 or later, you can use the API from the server with this command: 'curl http://localhost/rudder/api/deploy/reload'
+** You can use the API from the server with this command: 'curl http://localhost/rudder/api/deploy/reload'
 
-* Upgrade all agents connected to that server to 2.11.*, 2.10.* or 2.9.*.
+* Upgrade all agents connected to that server to 2.11.*
 
 * Upgrade the Rudder server to 2.11
 
 ==== Known bugs
 
-* After upgrade, if the web interface has display problems, empty your navigator cache
-and/or logout/login.
+* After upgrade, if the web interface has display problems, empty your navigator cache and/or logout/login.
 
