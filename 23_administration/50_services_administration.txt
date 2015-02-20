@@ -40,7 +40,7 @@ include::../glossary/cfengine-server.txt[]
 
 ----
 
-/etc/init.d/cfengine-community restart
+/etc/init.d/rudder-agent restart
 
 ----
 
@@ -48,7 +48,7 @@ include::../glossary/web-server-application.txt[]
 
 ----
 
-/etc/init.d/jetty restart
+/etc/init.d/rudder-jetty restart
 
 ----
 
@@ -64,7 +64,7 @@ include::../glossary/ldap-server.txt[]
 
 ----
 
-/etc/init.d/slapd restart
+/etc/init.d/rudder-slapd restart
 
 ----
 

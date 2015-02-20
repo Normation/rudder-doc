@@ -32,7 +32,7 @@ and after the upgrade of these packages, restart jetty to be sure that the chang
 
 ----
 
-/etc/init.d/jetty restart
+/etc/init.d/rudder-jetty restart
 
 ----
 
