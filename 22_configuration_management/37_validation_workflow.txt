@@ -1,12 +1,14 @@
 === Validation workflow in Rudder
 
-In Rudder 2.6.0, We added a feature to validate changes made by users before they are applied in the configuration.
-This feature is optionnal and be disabled without any problem.
-To enabled it you have to change the propriety 'rudder.workflow.enable' to true in */opt/rudder/etc/rudder-properties.xml*
-Workflow main goals are to improve safety and knowledge sharing between your team.
+The validation workflow is a feature whose purpose is to hold any change (Rule, Directive, Group) made by users in the web interface,
+to be reviewed first by other users with the adequate privileges before actual deployment.
 
-When the validation workflow is enabled in Rudder, all changes made will needs to be validated.
-Almost every change about Rules, Directives or Groups will be embedded in a Change request.
+The goal is to improve safety and knowledge sharing in the team that is using Rudder.
+
+To enable it, you only have to tick "Enable Change Requests" in the Administration - Settings tab of the web interface. (This feature
+is optional and can be disabled at any time without any problem, besides risking the invalidation of yet-unapproved changes)
+
+image::./images/workflows/Enabling.png[]
 
 ==== What is a Change request ? 
 
