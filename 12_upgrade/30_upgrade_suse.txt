@@ -38,6 +38,19 @@ zypper update "rudder*" "ncf*"
 
 ----
 
+[WARNING]
+
+====
+
+SLES 11 uses PostgreSQL 8.3 by default, which is not supported by Rudder and will cause various glitches
+in the web interface, as well as reporting failures.
+
+It is really mandatory to migrate to PostgreSQL 8.4 at least (9.1+ is recommended).
+
+Please look at <<install-server-sles>> for details.
+
+====
+
 and after the upgrade of these packages, restart jetty to be sure that the changes are applied:
 
 ----

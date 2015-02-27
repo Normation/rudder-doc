@@ -1,3 +1,4 @@
+[[install-server-sles, Install Rudder Root server on SLES]]
 === Install Rudder Root server on SLES
 
 ==== Configure the package manager
@@ -12,10 +13,23 @@ The first one is present in Rudder's repositories and can be downloaded alongsid
 will need to install PostgeSQL 9 and a Java RE separately.
 
 PostgreSQL 9 can be installed through the OpenSuSE build service: https://build.opensuse.org/project/show/server:database:postgresql
+or through the system repositories, on post-SP1 systems.
 
 The Java RE 7 can be found either using the OpenSuSE build service, or through Oracle's website: http://www.java.com
 
 Also, Rudder server requires the +git+ software, that can be found on SLES SDK DVD under the name +git-core+.
+
+[WARNING]
+
+====
+
+SLES 11 will try to install PostgreSQL 8.3 by default, which is not supported by Rudder and will cause various glitches
+in the web interface, as well as reporting failures.
+
+It is really mandatory to either add the OpenSuSE build service repository, or install postgresql91-server (if available)
+beforehand to prevent the system from choosing the default PostgreSQL implementation.
+
+====
 
 ==== Add the Rudder packages repository
 
