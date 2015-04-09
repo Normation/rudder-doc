@@ -1,27 +1,12 @@
+[[archives, Archives]]
 === Archives
-
-In the 'Admnistration > Archives' section of the Rudder Server web interface, you
-can export and import the configuration of Rudder Groups, Directives and Rules.
-You can either archive the complete configuration, or only the subset dedicated
-to Groups, Directives or Rules.
-
-Active Rudder configuration is stored in a LDAP tree.
-
-The content of this tree can be exported into a file tree containing +xml+
-files, into +/var/rudder/configuration-repository+. This file tree is under
-version control, using 'git'. At exportation time, a 'git tag' is created in this
-repository, and referenced in the Rudder Webapp. Each change in the Rudder web
-interface is also commited in the repository.
-
-The content of this repository can be imported into Rudder.
-
-//Change management / Qualification / Checkpoint / Snapshot / Archive
 
 ==== Archive usecases
 
 The archive feature of Rudder allows to:
 
-* Exchange configuration between multiple Rudder instances;
+* Exchange configuration between multiple Rudder instances, in particular when
+having distinct environments;
 
 * Keep an history of major changes.
 
@@ -34,14 +19,72 @@ you have to test: if anything goes wrong, you can return to this archived state.
 
 Assuming you have multiple Rudder instances, each on dedicated for the
 developement, qualification and production environment. You can prepare the
-changes on the developement instance, export an archive, deploy this archive on
+changes on the development instance, export an archive, deploy this archive on
 the qualification environment, then on the production environment.
+
+====
+
+[WARNING]
+
+.Versions of the Rudder servers 
+
+====
+
+If you want to export and import configurations between environments, the version
+of the source and target Rudder server must be exactly the same. If the versions
+don't match (even if only the minor versions are different), there is a risk that
+the import will break the configuration on the target Rudder server.
+
+====
+
+
+
+=== Concepts
+
+In the 'Administration > Archives' section of the Rudder Server web interface, you
+can export and import the configuration of Rudder Groups, Directives and Rules.
+You can either archive the complete configuration, or only the subset dedicated
+to Groups, Directives or Rules.
+
+When archiving configuration, a 'git tag' is created into +/var/rudder/configuration-repository+.
+This tag is then referenced in the Rudder web interface, and available for download
+as a zip file. Please note that each change in the Rudder web interface is also
+commited in the repository.
+
+The content of this repository can be imported into any Rudder server (with the same version).
+
+=== Archiving
+
+To archive Rudder Rules, Groups, Directives, or make a global archive, you need to go to 
+the 'Administration > Archives' section of the Rudder Server web interface.
+
+To perform a global archive, the steps are:
+. Click on 'Archive everything' - it will update the drop down list 'Choose an archive' with
+the latest data
+. In the drop down list 'Choose an archive', select the newly created archive (archives are sorted
+by date), for example 2015-01-08 16:39
+. Click on 'Download as zip' to download an archive that will contains all elements.
+
+=== Importing configuration
+
+On the target server, importing the configuration will "merge" them with the existing configuration:
+every groups, rules, directives or techniques with the same identifier will be replaced by the import,
+and all others will remain untouched.
+
+To import the archive on the target Rudder server, you cn follow the following steps:
+. Uncompress the zip archive in /var/rudder/configuration-repository
+. If necessary, correct all files permissions: +chown -R root:rudder directives groups parameters ruleCategories rules techniques+
+. Add all files in the git repository: +git add . && git commit -am "Importing configuration"+
+. Finally, in the Web interface, go to the 'Administration > Archives' section, and select
+'Latest Git commit' in the drop down list in the Global archive section, and click on 'Restore
+everything' to restore the configuration.
 
 [TIP]
 
 ====
 
-Use 'git' to copy the files from an environment to another.
+You can also perform the synchronisation from on environment to another by
+using git, through a unique git repository referenced on both environment.
 
 For instance, using one unique git repository you can follow this workflow:
 
@@ -63,23 +106,8 @@ For instance, using one unique git repository you can follow this workflow:
 
 ===== Deploy a preconfigured instance
 
-Assuming you are preparing a complete Policy integration for a client.
-
-. In your labs:
-
-.. Prepare the configuration for Groups, Directives and Rules;
-
-.. Export the Policy
-
-.. Create an archive containing the content of the configuration repository
-(+zip+ file).
-
-. At the client place:
-
-.. Unpack the archive in +/var/rudder/configuration-repository+
-
-.. +git commit -a +
-
-.. Restore the configurations from the last commit
-
+You can use the procedures of Archiving and Restoring configuration to deploy
+preconfigured instance. You would prepare first in your labs the configuration for
+Groups, Directives and Rules, create an Archive, and import the Archive on the
+new Rudder server installation
 
