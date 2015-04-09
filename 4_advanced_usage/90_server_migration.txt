@@ -38,34 +38,7 @@ By copying that folder you will keep the git tree used by your server and keep y
 
 ===== Use Archive feature of Rudder
 
-You can download an archive of your configuration in the Rudder UI and use it on your new server
-To keep your Technique you will have to copy the techniques folder in /var/rudder/configuration-repository to your new server
-You will have a new git tree, and you will lose all the history you add before and the all the comments
-
-*Techniques*
-
-- Copy the +/var/rudder/configuration-repository/techniques+ folder from your old server to you new one
-
-*Others*
-
-- On your old server UI, go to *Administration > Archives*
-- In global archive, choose the latest commit, and then click on download as Zip
-- Copy and extract the archive in +/var/rudder/configuration-repository+
-
-*Git*
-
-- use +git add rules techniques groups directives+
-- use +git commit+
-- the latest git commit will now be exactly the same as the old one
-
-*Restore*
-
-- In Rudder UI Go to *Administration >  Policy Server*
-- Reload the Technique Library
-- Go to *Administration > Archives*
-- In Global Archive, "Choose an archive" select _Latest git commit_
-- Click on _Restore everything_
-- After deployement, your configuration should be restored
+Alternatively, you can follow the Archive/Import procedures described in <<archives>>
 
 ==== Handle CFEngine keys
 
