@@ -22,20 +22,18 @@ developement, qualification and production environment. You can prepare the
 changes on the development instance, export an archive, deploy this archive on
 the qualification environment, then on the production environment.
 
-====
 
-[WARNING]
 
 .Versions of the Rudder servers 
-
-====
+[WARNING]
+===========
 
 If you want to export and import configurations between environments, the version
 of the source and target Rudder server must be exactly the same. If the versions
 don't match (even if only the minor versions are different), there is a risk that
 the import will break the configuration on the target Rudder server.
 
-====
+===========
 
 
 
