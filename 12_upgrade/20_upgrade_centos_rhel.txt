@@ -32,7 +32,7 @@ For Rudder Server (RHEL 6 only), upgrade the +rudder-*+ and +ncf+ packages:
 
 ----
 
-yum update "rudder-*" "ncf"
+yum update "rudder-*" "ncf*"
 
 ----
 
