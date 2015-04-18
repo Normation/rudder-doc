@@ -34,7 +34,7 @@ For Rudder Server, upgrade all the packages associated to +rudder-server-root+:
 
 ----
 
-zypper update "rudder*" "ncf*"
+zypper update "rudder-*" "ncf*"
 
 ----
 
