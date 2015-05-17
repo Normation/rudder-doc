@@ -57,6 +57,7 @@ To archive Rudder Rules, Groups, Directives, or make a global archive, you need 
 the 'Administration > Archives' section of the Rudder Server web interface.
 
 To perform a global archive, the steps are:
+
 . Click on 'Archive everything' - it will update the drop down list 'Choose an archive' with
 the latest data
 . In the drop down list 'Choose an archive', select the newly created archive (archives are sorted
@@ -70,6 +71,7 @@ every groups, rules, directives or techniques with the same identifier will be r
 and all others will remain untouched.
 
 To import the archive on the target Rudder server, you cn follow the following steps:
+
 . Uncompress the zip archive in /var/rudder/configuration-repository
 . If necessary, correct all files permissions: +chown -R root:rudder directives groups parameters ruleCategories rules techniques+
 . Add all files in the git repository: +git add . && git commit -am "Importing configuration"+
