@@ -13,11 +13,11 @@ image::./images/workflows/Enabling.png[]
 ==== What is a Change request ? 
 
 A Change request represents a modification of a Rule/Directive/Group from an old state to a new one.
-The Chnage is not saved and applied by the configuration, before that, it needs to be reviewed and approved by other members of the team.
+The Change is not saved and applied by the configuration, before that, it needs to be reviewed and approved by other members of the team.
 
 A Change request has:
 
-- An Id (an integet > 0)
+- An Id (an integer > 0)
 - A title.
 - A description.
 - A creator.
@@ -141,21 +141,21 @@ Those two behaviours can be changed in the property file */opt/rudder/etc/rudder
 
 ==== Change request and conflicts
 
-When the initial state of a Change request has changed (ie: you want to modify a Directive, but someone else change about that Directive has been accepted before yours), your change can't be validated anymore.
+When the initial state of a Change request has changed (i.e.: you want to modify a Directive, but someone else changes about that Directive has been accepted before yours), your change can't be validated anymore.
 
 image::./images/workflows/Conflict.png[]
 
-For now, we decided to reduce to the possibility of an error or inconsitency when there is concurrent changes.
+For now, we decided to reduce to the possibility of an error or inconsistency when there are concurrent changes.
 In a future version of Rudder, there will be a system to handle those conflicts, and make sure actual changes are not overwritten.
 
 ==== Notifications:
 
-In several parts of Rudder webapp there is some Notifications about Change requests.
+In several parts of Rudder webapp there are some Notifications about Change requests.
 
 ===== Pending change requests
 
 This notification is displayed only if the validator/deployer role is active on your user account.
-It show you how many Change requests are waiting to be reviewed/deployed.
+It shows you how many Change requests are waiting to be reviewed/deployed.
 clicking on it will lead you to the Change request management page, with a filter already applied. 
 
 image::./images/workflows/Notification.png[]

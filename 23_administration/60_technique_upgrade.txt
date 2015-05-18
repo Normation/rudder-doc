@@ -24,7 +24,7 @@ storage, you also have to follow this simple procedure:
 
 Please make sure that any changes you make are on a new version of a Technique,
 or you are likely to have your changes replaced by the reference implementation!
-Of course, GIT will keep history if your modifications are already commited but this would be
+Of course, GIT will keep history if your modifications are already committed but this would be
 an annoyance.
 
 ====

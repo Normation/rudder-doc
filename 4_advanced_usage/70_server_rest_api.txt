@@ -3,7 +3,7 @@
 
 Rudder can be used as a web service using a REST API. 
 
-This documenation covers the version 1 of Rudder's API, that has been present since
+This documentation covers the version 1 of Rudder's API, that has been present since
 Rudder 2.4.
 
 The version 2 has now been implemented, which is much more complete, in Rudder 2.7, and
@@ -43,7 +43,7 @@ rudder.rest.allowNonAuthenticatedUser=true
 
 By default, the REST API is exposed for localhost only, at +http://localhost/rudder/api+.
 
-.Example usage of non authentified REST API
+.Example usage of non authenticated REST API
 
 ====
 
@@ -66,7 +66,7 @@ X-REST-USERNAME: MyConfiguredRestUser
 
 ----
 
-If the REST API is authentified, the authentified user name will be used in the
+If the REST API is authenticated, the authenticated user name will be used in the
 logs.
 
 ==== Status
@@ -86,14 +86,14 @@ Regenerate promises (same action as the +Regenerate now+ button).
 
 +http://localhost/rudder/api/dyngroup/reload+::
 
-Check all dynamic groups for changes. If changes have occured, regenerate the
+Check all dynamic groups for changes. If changes have occurred, regenerate the
 groups in the LDAP and the CFEngine promises.
 
 ==== Technique library reload
 
 +http://localhost/rudder/api/techniqueLibrary/reload+::
 
-Check the technique library for changes. If changes have occured, reload the
+Check the technique library for changes. If changes have occurred, reload the
 technique library in memory and regenerate the CFEngine promises.
 
 ==== Archives manipulation
@@ -159,7 +159,7 @@ Restore given rules archive.
 
 Restore everything.
 
-===== Restoring the latest available archive (from a previously archive action, and so from a Git tag):
+===== Restoring the latest available archive (from a previously archived action, and so from a Git tag):
 
 ----
 
@@ -189,7 +189,7 @@ rules (as XML files) for a given Git commit ID (the commit HASH).
 It is not designed to query for available Git commit ID, so you will need to get 
 it directly from a Git tool (for example with Git log) or from the list API. 
 
-Note that that API allow to download ANY Git commit ID as a ZIP archive, 
+Note that that API allows to download ANY Git commit ID as a ZIP archive, 
 not only the one corresponding to Rudder archives. 
 
 Note 2: you should rename the resulting file with a ".zip" extension as

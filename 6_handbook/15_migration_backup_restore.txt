@@ -21,19 +21,19 @@ It will also backup the application logs.
 ----
 
 # First, backup the LDAP database:
-/opt/rudder/sbin/slapcat -l /tmp/rudder-backup-$(date +%Y%M%d).ldif
+/opt/rudder/sbin/slapcat -l /tmp/rudder-backup-$(date +%Y%m%d).ldif
 
 # Second, the PostgreSQL database:
-sudo -u postgres pg_dump rudder > /tmp/rudder-backup-$(date +%Y%M%d).sql
+sudo -u postgres pg_dump rudder > /tmp/rudder-backup-$(date +%Y%m%d).sql
 
 # Or without sudo, use the rudder application password:
-pg_dump -U rudder rudder > /tmp/rudder-backup-$(date +%Y%M%d).sql
+pg_dump -U rudder rudder > /tmp/rudder-backup-$(date +%Y%m%d).sql
 
 # Third, backup the configuration repository:
-tar -C /var/rudder -zvcf /tmp/rudder-backup-$(date +%Y%M%d).tar.gz configuration-repository/ cfengine-community/ppkeys/
+tar -C /var/rudder -zvcf /tmp/rudder-backup-$(date +%Y%m%d).tar.gz configuration-repository/ cfengine-community/ppkeys/
 
 # Finally, backup the logs:
-tar -C /var/log -zvcf /tmp/rudder-log-backup-$(date +%Y%M%d).tar.gz rudder/
+tar -C /var/log -zvcf /tmp/rudder-log-backup-$(date +%Y%m%d).tar.gz rudder/
 
 # And put the backups wherever you want, here /root:
 cp /tmp/rudder-backup* /root

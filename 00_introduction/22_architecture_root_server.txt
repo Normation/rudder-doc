@@ -11,7 +11,7 @@ Your Rudder Root Server can be either a physical or a virtual machine.
 Rudder Server is running on both 32 and 64 bit versions of every supported
 Operating System. 
 
-Any CPU provided on commodity servers available nowaday should be fine. On
+Any CPU provided on commodity servers available nowadays should be fine. On
 a VM server, you should dedicate at least one core to the Rudder server.
 
 The amount of RAM needed by the server depends mainly on the number of managed nodes.
@@ -24,7 +24,7 @@ Then, the default rule is to add 1GB of RAM by 500 nodes above 1000 nodes,
 so for example for 1500-2000 nodes, you need at minimum 6GB of RAM, and
 for 2500-3000 you need 8GB.
 
-For environment with more than 1000 nodes, we advice to use a multiserver
+For environment with more than 1000 nodes, we advise to use a multiserver
 installation for Rudder as described in chapter <xref linkend="multiserver-rudder"/>.
 
 The RAM given to the web application must be augmented as explained in 
@@ -81,7 +81,7 @@ Rudder components are distributed as a set of packages.
 
 ["graphviz", "packages.png"]
 
-.Rudder packages and their dependancies
+.Rudder packages and their dependencies
 
 ----
 
@@ -125,7 +125,7 @@ for each pending and validated Node. This 'LDAP' database is build upon
 
 Package for the database containing the logs sent by each Node and the reports
 computed by Rudder. This is a 'PostgreSQL' database using the 'PostgreSQL'
-engine of the distribution. The package has a dependancy on the +postgresl+
+engine of the distribution. The package has a dependency on the +postgresl+
 package, creates the database named +rudder+ and installs the inialisation
 scripts for that database in +/opt/rudder/etc/postgresql/*.sql+.
 
@@ -220,7 +220,7 @@ distribution, it can be downloaded alongside Rudder packages.
 Oracle Java JRE or OpenJDK 7 JRE::
 
 The Java runtime is needed by the Jetty application server. On Debian, the
-package from the distribution is used. On SLES, the package must be dowloaded
+package from the distribution is used. On SLES, the package must be downloaded
 from Oracle website.
 
 curl::

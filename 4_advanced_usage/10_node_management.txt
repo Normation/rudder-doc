@@ -20,7 +20,7 @@ At next run of the Rudder Agent (it runs every five minuts), the initial promise
 ====
 
 Use this procedure with caution: the Applied Policies of a Node should never get
-broken, unless some major change has occured on the Rudder infrastructure, like
+broken, unless some major change has occurred on the Rudder infrastructure, like
 a full reinstallation of the Rudder Server.
 
 ====
