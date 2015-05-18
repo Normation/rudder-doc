@@ -19,7 +19,7 @@ Rudder code. It is based on the Java programming language.
 
 About the latter, there is some configuration switches that you might want to
 tune to obtain better performance with Rudder, in /opt/rudder/etc/rudder-jetty.conf, whereas
-the default ones fit the basic recommandations for the minimal Rudder hardware requirements.
+the default ones fit the basic recommendations for the minimal Rudder hardware requirements.
 
 * -Xms and Xmx: These parameters tune the total amount of RAM usable / dedicated to the
 java process. It is what you want to tune at first to give Rudder some more RAM.

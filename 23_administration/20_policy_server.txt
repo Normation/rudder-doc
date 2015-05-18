@@ -13,7 +13,7 @@ You can add as many network as you want, the expected format is:
 
 ==== Clear caches
 
-Clear cached datas, like node configuration. That will trigger a full
+Clear cached data, like node configuration. That will trigger a full
 redeployment, with regeneration of all promises files.
 
 ==== Reload dynamic groups

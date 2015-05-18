@@ -35,8 +35,8 @@ _1234
 
 ==== Supported units
 
-Units used are non binary units, and a mutliplication factor of 1024 is applied
-between each unit. Units are case insensitive. Therefore, +Mb+ is identical to
+Units used are non binary units, and a multiplication factor of 1024 is applied
+between each unit. Units are case-insensitive. Therefore, +Mb+ is identical to
 +mB+ or +mb+ or +MB+.
 
 In detail, the following units are supported (provided in lower case, see

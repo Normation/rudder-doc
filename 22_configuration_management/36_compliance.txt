@@ -27,7 +27,7 @@ During this period, the Directive is said 'Applying'.
 
 No answer::
 
-The system didn't sent any reports. Rudder waited for 10 minutes and no report
+The system didn't send any reports. Rudder waited for 10 minutes and no report
 was received.
 
 A Directive has gained conformity on a Node if every report for each
