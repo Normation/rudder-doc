@@ -3,7 +3,7 @@
 
 === Accept new Nodes
 
-At the starting point, the Rudder Server does'nt know anything about the Nodes.
+At the starting point, the Rudder Server doesn't know anything about the Nodes.
 After the installation of the Rudder Agent, each Node registers itself to the
 Rudder Server, and sends a first inventory. Every new Node must be manually
 validated in the Rudder Web Interface to become part of Rudder Managed Nodes.

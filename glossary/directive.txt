@@ -1,7 +1,7 @@
 Directive::
 
 This is an instance of a Technique, which allows to set values for the
-parameters of the latter. Each Directive can have an unique name. A Directive
+parameters of the latter. Each Directive can have a unique name. A Directive
 should be completed with a short and a long description, and a
 collection of parameters for the variables defined by the Technique.
 

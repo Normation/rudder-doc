@@ -27,14 +27,14 @@ The 'hardware' information is organized as following: 'General', 'File
 systems', 'Bios', 'Controllers', 'Memory', 'Port', 'Processor', 'Slot', 'Sound',
 'Storage', 'Video'.
 
-'Network' connexions are detailled as following: 'Name' of the interface on the
+'Network' connections are detailed as following: 'Name' of the interface on the
 system, 'IP address', 'Network Mask', usage of 'DHCP' or static configuration,
-'MAC address', 'Type' of connexion, 'Speed' of the connexion and 'Status'.
+'MAC address', 'Type' of connection, 'Speed' of the connection and 'Status'.
 
 And finally, you get the list of every 'software' package present on the
 system, including version and description.
 
 On Nodes managed by Rudder, the 'Reports' tab displays information about the
-status of latest run of Rudder Agent, whereas the 'Logs' tab displays
+status of the latest run of Rudder Agent, whereas the 'Logs' tab displays
 information about changes for the Node.
 

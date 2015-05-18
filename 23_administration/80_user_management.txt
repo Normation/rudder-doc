@@ -23,7 +23,7 @@ The credentials of a user are defined in the XML file
 ----
 
 The name and password attributes are mandatory (non empty) for the user tags.
-The role attribute can be ommited but the user will have no permission, and
+The role attribute can be omited but the user will have no permission, and
 only valid attributes are recognized.
 
 Every modification of this file should be followed by a restart of the Rudder
@@ -126,7 +126,7 @@ LDAP authentication is enabled by setting the property +rudder.auth.ldap.enable+
 in file +/opt/rudder/etc/rudder-web.properties+
 
 The LDAP authentication process is a bind/search/rebind in which an application
-connection (bind) is used to search (search) for an user entry given some base and
+connection (bind) is used to search (search) for a user entry given some base and
 filter parameters, and then, a bind (rebind) is tried on that entry with the
 credential provided by the user.
 

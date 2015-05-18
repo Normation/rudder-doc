@@ -41,10 +41,10 @@ include::../glossary/cfengine-nova.txt[]
 Currently, Rudder relies on the Node declared hostnames to identify them. So it
 is required that each Node hostname can be resolved to its IP address that will
 be used to contact the Rudder Server. We are aware that it is far from being
-ideal in most cases (no DNS environement, private sub-networks, NAT, etc...),
+ideal in most cases (no DNS environment, private sub-networks, NAT, etc...),
 and we are currently working on an alternative solution.
 
-If you do not have the wished name resolution, we advice that you should fill
+If you do not have the wished name resolution, we advise that you should fill
 the IP address and hostname of the +/etc/hosts+ file of the Rudder Root Server.
 
 Similarly, each Rudder Node must be able to resolve the Rudder Root Server
