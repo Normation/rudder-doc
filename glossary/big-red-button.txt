@@ -1,8 +1,0 @@
-"Big red button":: 
-
-A button, on the right top side of every page of Rudder web interface, to
-command the emergency stop of the agents. This stop will be implicitly done in
-less than 10 minutes, or can be done immediately if the port 5309 TCP from the
-Rudder Root Server (or each relay server) is open to each nodes. This feature is
-detailed in the user documentation.
-
