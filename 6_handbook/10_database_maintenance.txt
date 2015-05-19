@@ -48,7 +48,7 @@ and new reports sent by the nodes to Rudder will fill the blanks in the database
 steady growth of the database. This task is handled by the autovacuum process, which periodically
 cleans the storage regularly to prevent database bloating.
 
-Howewer, to force this operation to free storage immediately, you can trigger a "vacuum full" operation
+However, to force this operation to free storage immediately, you can trigger a "vacuum full" operation
 by yourself, however keep in mind that this operation is very disk and memory intensive,
 and will lock both the Rudder interface and the reporting system for quite a long time with a big database.
 

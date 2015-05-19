@@ -10,7 +10,7 @@ Architecture chapter.
 
 Ideally, this machine should have Internet access, but this is not a strict requirement.
 
-As Rudder datas can grow really fast depending on your number of managed nodes and number of rules, it is advised to separate partitions to prevent /var from getting full and break your system.
+As Rudder data can grow really fast depending on your number of managed nodes and number of rules, it is advised to separate partitions to prevent /var getting full and break your system.
 Special attention should be given to:
 
 ======

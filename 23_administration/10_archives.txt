@@ -47,7 +47,7 @@ to Groups, Directives or Rules.
 When archiving configuration, a 'git tag' is created into +/var/rudder/configuration-repository+.
 This tag is then referenced in the Rudder web interface, and available for download
 as a zip file. Please note that each change in the Rudder web interface is also
-commited in the repository.
+committed in the repository.
 
 The content of this repository can be imported into any Rudder server (with the same version).
 

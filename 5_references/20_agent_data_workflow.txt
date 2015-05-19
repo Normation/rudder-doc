@@ -1,6 +1,6 @@
 === Rudder Agent workflow 
 
-In this chapter, we will have a more detailled view of the Rudder Agent
+In this chapter, we will have a more detailed view of the Rudder Agent
 workflow. What files and processes are created or modified at the installation
 of the Rudder Agent? What is happening when a new Node is created? What are the
 recurrent tasks performed by the Rudder Agent? How does the Rudder Server handle
@@ -20,7 +20,7 @@ include::../graphviz/agent_workflow.dot[]
 Let's consider the Rudder Agent is installed and configured on the new Node.
 
 The Rudder Agent is regularly launched and performs following tasks
-sequencially, in this order: 
+sequentially, in this order: 
 
 ==== Request data from Rudder Server
 
