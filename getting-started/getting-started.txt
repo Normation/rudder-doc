@@ -142,8 +142,8 @@ creating a file on the system
 [source,console]
 ----
 # echo 'rudder-server' > /var/rudder/cfengine-community/policy_server.dat
-# chkconfig rudder-agent on
-# service rudder-agent start
+# chkconfig rudder on
+# service rudder start
 ----
 
 == Manage your system with Rudder

@@ -24,7 +24,7 @@ with proper reverse resolutions.
 
 ----
 
-service rudder-agent start
+service rudder start
 
 ----
 
