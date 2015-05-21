@@ -13,7 +13,7 @@ root@node:~# cp -a /opt/rudder/share/initial-promises/* /var/rudder/cfengine-com
 
 ----
 
-At next run of the Rudder Agent (it runs every five minuts), the initial promises will be used. 
+At next run of the Rudder Agent (it runs every five minutes), the initial promises will be used. 
 
 [CAUTION]
 

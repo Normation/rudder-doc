@@ -23,7 +23,7 @@ The credentials of a user are defined in the XML file
 ----
 
 The name and password attributes are mandatory (non empty) for the user tags.
-The role attribute can be omited but the user will have no permission, and
+The role attribute can be omitted but the user will have no permission, and
 only valid attributes are recognized.
 
 Every modification of this file should be followed by a restart of the Rudder
@@ -88,7 +88,7 @@ Take care of the following limitation of the current process: only *authenticati
 is delegated to LDAP, NOT *authorizations*. So you still have to
 declare user's authorizations in the Rudder user file (rudder-users.xml).
 
-An user whose authentication is accepted by LDAP but not declared in the
+A user whose authentication is accepted by LDAP but not declared in the
 rudder-users.xml file is considered to have no rights at all (and so will
 only see a reduced version of Rudder homepage, with no action nor tabs available).
 
@@ -172,7 +172,7 @@ dashboard and nothing else.
 |Name                | Access level
 |administrator | All authorizations granted, can access and modify everything
 |administration_only | Only access to administration part of rudder, can do everything within it.
-|user | Can access and modify eveything but the administration part
+|user | Can access and modify everything but the administration part
 |configuration | Can only access and act on configuration section
 |read_only | Can access to every read only part, can perform no action
 |inventory | Access to information about nodes, can see their inventory, but can't act on them

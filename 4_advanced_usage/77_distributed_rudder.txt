@@ -90,7 +90,7 @@ cd rudder-multiserver-setup
 
 Copy the rudder-multiserver-setup directory to you instance.
 
-Run rudder-relay-top.sh as root, replace <rudder-*> with the hostname of the corrseponding instance:
+Run rudder-relay-top.sh as root, replace <rudder-*> with the hostname of the corresponding instance:
 
 ----
 

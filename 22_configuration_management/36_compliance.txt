@@ -1,7 +1,7 @@
 === Compliance
 
 A Directive contains one or multiple components. Each component generates
-one ore multiple reports, based on the number of keys in this component. For
+one or multiple reports, based on the number of keys in this component. For
 example, for a Sudoers Directive, each user is a key. These states are
 available in reports:
 

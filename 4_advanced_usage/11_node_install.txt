@@ -88,7 +88,7 @@ Unable to lookup hostname (rudder-root) or cfengine service: Name or service not
 
 ----
 
-To fix it, either you set up the agent to use the IP adress of the Rudder root
+To fix it, either you set up the agent to use the IP address of the Rudder root
 server instead of its Domain name, either you set up accurately the name
 resolution of your Rudder Root Server, in your DNS server or in the hosts file.
 
@@ -149,7 +149,7 @@ ls /var/rudder/inventories/incoming/
 
 On the next run of the CFEngine agent on Rudder Root Server, the new inventory
 will be detected and sent to the Inventory Endpoint. The inventory will be then
-moved in the directory of received inventories. The the Inventory Endpoint do
+moved in the directory of received inventories. The Inventory Endpoint do
 its job and the new Node appears in the interface. 
 
 You can force the execution of CFEngine agent on the console:
