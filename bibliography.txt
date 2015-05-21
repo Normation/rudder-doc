@@ -15,10 +15,10 @@ ifdef::backend-xhtml11[]
 //
 
 - [[[cfengine-doc]]] 'CFEngine Community Reference Manual'.
-  http://cfengine.com/manuals/cf3-reference.html
+  https://docs.cfengine.com/latest/reference.html
 
 - [[[fusioninventory-doc]]] 'FusionInventory Documentation'.
-  http://fusioninventory.org/wordpress/documentation/
+  http://www.fusioninventory.org/documentation/
 
 endif::backend-xhtml11[]
 
