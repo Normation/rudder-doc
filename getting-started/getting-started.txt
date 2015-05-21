@@ -111,7 +111,7 @@ Reinitialization complete, Rudder is currently reloading.
 
 You can access it via https://<hostname>/rudder
 
-( Example: https://rudder.example.com/rudder )
+(Example: https://rudder.example.com/rudder)
 
 Thank you for using Rudder.
 ----
@@ -150,7 +150,7 @@ creating a file on the system
 
 With your web browser, go to the Login page of the Rudder Server - in this case
 http://rudder-server. You'll arrive on the login page. The default credentials
-are : admin / admin
+are: admin / admin
 
 .Login page
 image::http://www.rudder-project.org/images/getting-started/login.png[]

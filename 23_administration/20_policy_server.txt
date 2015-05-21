@@ -8,7 +8,7 @@ Rudder policy server and its parameters.
 Here you can configure the networks from which nodes are allowed to connect to
 Rudder policy server to get their updated rules.
 
-You can add as many network as you want, the expected format is:
+You can add as many networks as you want, the expected format is:
 +networkip/mask+, for example +42.42.0.0/16+. 
 
 ==== Clear caches

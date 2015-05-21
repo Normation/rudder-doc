@@ -16,7 +16,7 @@ address, OS, versions, etc.)
 
 ===== Groups of Nodes 
 
-You will have to create sets of Nodes, called groups. These groups are derived from search results, and can either be static or a dynamic :
+You will have to create sets of Nodes, called groups. These groups are derived from search results, and can either be static or a dynamic:
 
 ======
 
