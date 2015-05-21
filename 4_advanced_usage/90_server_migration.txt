@@ -34,7 +34,7 @@ By copying that folder you will keep the git tree used by your server and keep y
 - Go to *Administration > Archives*
 - In Global Archive, "Choose an archive" select _Latest git commit_
 - Click on _Restore everything_
-- After deployement, your configuration should be restored
+- After deployment, your configuration should be restored
 
 ===== Use Archive feature of Rudder
 

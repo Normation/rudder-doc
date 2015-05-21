@@ -58,7 +58,7 @@ and will lock both the Rudder interface and the reporting system for quite a lon
 
 ----
 
-# You can either use sudo to change owner to the postgres user, or use the rudder connexion credentials.
+# You can either use sudo to change owner to the postgres user, or use the rudder connection credentials.
 
 # With sudo:
 sudo -u postgres psql -d rudder

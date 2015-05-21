@@ -1,6 +1,6 @@
 === Policy Server
 
-The *Administartion > Policy Server Management* section sum-up information about
+The *Administration > Policy Server Management* section sum-up information about
 Rudder policy server and its parameters. 
 
 ==== Configure allowed networks

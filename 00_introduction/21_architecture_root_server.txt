@@ -25,7 +25,7 @@ so for example for 1500-2000 nodes, you need at minimum 6GB of RAM, and
 for 2500-3000 you need 8GB.
 
 For environment with more than 1000 nodes, we advise to use a multiserver
-installation for Rudder as described in chapter <xref linkend="multiserver-rudder"/>.
+installation for Rudder as described in chapter <<multiserver-rudder, Multiserver Rudder>>.
 
 The RAM given to the web application must be augmented as explained in 
 the chapter [[jetty, about Jetty configuration]] so that it is
@@ -38,7 +38,7 @@ necessary for the database can be estimated by counting around
 execution reports (default to 30 days):
 
 The PostgresSQL memory configuration must be customized for large installation
-accordingly to the chapter <xref linkend="_optimize_postgresql_server"/>.
+accordingly to the chapter <<_optimize_postgresql_server, Optimize PostgreSQL Server>>.
 
 ----
 max_space = number of Directives * number of Nodes * archive.TTL * 400 kB
