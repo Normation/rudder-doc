@@ -17,7 +17,7 @@ include::../glossary/static-group.txt[]
 ====
 
 To create that dynamic group like described above, You first have to create a new group
-with group type set to +Dynamic+. Then you have to set it's search request to :
+with group type set to +Dynamic+. Then you have to set its search request to :
 
 . Operator: +AND+.
 
@@ -27,7 +27,7 @@ with group type set to +Dynamic+. Then you have to set it's search request to :
 
 . Third search line: 'Node summary', 'Ip address', +Regex+, '192\ .168\ .\d\ . .*' .
 
-Finally you have to Click on Search to populate the group and click on Save to actually save it.
+Finally, you have to click on Search to populate the group and click on Save to actually save it.
 
 ====
 

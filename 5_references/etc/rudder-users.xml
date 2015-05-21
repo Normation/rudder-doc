@@ -25,7 +25,7 @@
 
   Custom authorisations are composed of two elements:
     - A type of authorization, which define what is concerned
-      there's is 10 types, which are : node, group, deployement,
+      there's is 10 types, which are : node, group, deployment,
       administration, configuration, rule, technique, directive,
       validator and deployer.
     - A level of authorization,
@@ -40,7 +40,7 @@
       <user name="carol"  password="xxxxxxx" role="user,validator"/>
 
       <user name="custom" password="custom" role="node_all,configuration_read,rule_read,rule_edit,directive_read,technique_read">
-      - can read everything but administration,groups and deployement
+      - can read everything but administration,groups and deployment
       - can do everything about node
 
   exemple of bad lines

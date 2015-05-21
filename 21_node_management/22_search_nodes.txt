@@ -80,9 +80,9 @@ and y could be everything. You will to add that line to your search request:
 - b. Composite search
 
 Some fields allow you to look for more than one piece of information at a time.
-That's the case for environment variable. for those fields you have to enter 
+That's the case for environment variable. For those fields you have to enter 
 the first element then the separator then following elements.
-The name of the fields tells you about what is expected. it would look like 
+The name of the fields tells you about what is expected. It would look like 
 +firstelement<sep>secondelement+ assuming that <sep> is the separator.
 
 .Search Environment Variable +LANG=C+.
