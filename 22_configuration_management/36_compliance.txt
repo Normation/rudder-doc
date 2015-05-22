@@ -34,7 +34,7 @@ A Directive has gained conformity on a Node if every report for each
 component, for each key, is in 'Success' state. This is the only condition.
 
 Based on these facts, the compliance of a Rule is calculated like
-this :
+this:
 
 Number of Nodes for which conformity is reached for every Directive of the
 Rule / Total number of Nodes on which the Rule has

@@ -6,7 +6,7 @@ of the data workflow can be useful.
 All the logic of Rudder Techniques is stored on the filesystem in
 +/var/rudder/configuration-repository/techniques+. 
 The files are under version control, using git.
-The tree is organized as following : 
+The tree is organized as following: 
 
 . At the first level, techniques are classified in categories: applications,
 fileConfiguration, fileDistribution,  jobScheduling,  system,  systemSettings.

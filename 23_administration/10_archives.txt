@@ -18,7 +18,7 @@ you have to test: if anything goes wrong, you can return to this archived state.
 ===== Changes qualification
 
 Assuming you have multiple Rudder instances, each on dedicated for the
-developement, qualification and production environment. You can prepare the
+development, qualification and production environment. You can prepare the
 changes on the development instance, export an archive, deploy this archive on
 the qualification environment, then on the production environment.
 
@@ -70,7 +70,7 @@ On the target server, importing the configuration will "merge" them with the exi
 every groups, rules, directives or techniques with the same identifier will be replaced by the import,
 and all others will remain untouched.
 
-To import the archive on the target Rudder server, you cn follow the following steps:
+To import the archive on the target Rudder server, you can follow the following steps:
 
 . Uncompress the zip archive in /var/rudder/configuration-repository
 . If necessary, correct all files permissions: +chown -R root:rudder directives groups parameters ruleCategories rules techniques+

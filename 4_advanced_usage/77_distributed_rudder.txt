@@ -1,17 +1,17 @@
 [[multiserver-rudder]]
 === Multiserver Rudder
 
-From version 3.0 Rudder can be divided into 4 different components :
+From version 3.0 Rudder can be divided into 4 different components:
 
-- rudder-web : an instance with the webapp and the central policy server
-- rudder-ldap : the inventory endpoint and its ldap backend
-- rudder-db : the postgresql storage
-- rudder-relay-top : the contact point for nodes
+- rudder-web: an instance with the webapp and the central policy server
+- rudder-ldap: the inventory endpoint and its ldap backend
+- rudder-db: the postgresql storage
+- rudder-relay-top: the contact point for nodes
 
 ==== Preliminary steps
 
 
-You need the setup scripts provided at https://github.com/Normation/rudder-tools/tree/master/scripts/rudder-multiserver-setup . 
+You need the setup scripts provided at https://github.com/Normation/rudder-tools/tree/master/scripts/rudder-multiserver-setup. 
 You can download them with this command:
 
 ----
@@ -34,7 +34,7 @@ Only the rudder-web instance need at least 2GB of RAM.
 
 Register the 4 names in the DNS or add them in /etc/hosts on each instance.
 
-Add firewall rules :
+Add firewall rules:
 
 - from rudder-web to rudder-db port pgsql TCP
 - from rudder-* to rudder-web port rsyslog 514 TCP

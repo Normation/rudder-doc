@@ -156,7 +156,7 @@ In several parts of Rudder webapp there are some Notifications about Change requ
 
 This notification is displayed only if the validator/deployer role is active on your user account.
 It shows you how many Change requests are waiting to be reviewed/deployed.
-clicking on it will lead you to the Change request management page, with a filter already applied. 
+Clicking on it will lead you to the Change request management page, with a filter already applied. 
 
 image::./images/workflows/Notification.png[]
 

@@ -16,12 +16,12 @@ Special attention should be given to:
 ======
 
 /var/lib/pgsql::
-( OS dependent ).
+(OS dependent).
 Please see the <<_database_maintenance, database maintenance>> chapter for more details about the
 PostgreSQL database size estimation.
 
 /var/rudder::
-Contains most of your server information, the configuration-repository, LDAP database, etc..
+Contains most of your server information, the configuration-repository, LDAP database, etc...
 Rudder application-related files should stay under 1GB, but the size of the configuration-repository will
 depend of the amount of data you store in it, especially in the shared-files folder (files that will get
 distributed to the agents using the "Download a file for the shared folder" Technique).

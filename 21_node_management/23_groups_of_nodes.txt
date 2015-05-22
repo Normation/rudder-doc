@@ -17,7 +17,7 @@ include::../glossary/static-group.txt[]
 ====
 
 To create that dynamic group like described above, You first have to create a new group
-with group type set to +Dynamic+. Then you have to set its search request to :
+with group type set to +Dynamic+. Then you have to set its search request to:
 
 . Operator: +AND+.
 

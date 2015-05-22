@@ -212,7 +212,7 @@ distribution, it can be downloaded alongside Rudder packages.
 Java 7 JRE::
 
 The Java runtime is needed by the Jetty application server. Where possible, the
-package from the distribution is used, else a Java RE must be dowloaded
+package from the distribution is used, else a Java RE must be downloaded
 from Oracle's website (http://www.java.com).
 
 curl::

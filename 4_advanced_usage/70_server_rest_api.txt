@@ -49,7 +49,7 @@ By default, the REST API is exposed for localhost only, at +http://localhost/rud
 
 Unrestricted access can be granted to local scripts accessing to +localhost+,
 whereas remote access to the REST API will be either denied, or restricted
-through autentication at apache level.
+through authentication at apache level.
 
 ====
 
