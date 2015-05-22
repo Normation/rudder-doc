@@ -152,7 +152,7 @@ all above packages. It also
 
 ----
 
-/etc/init.d/rudder-server-root
+/etc/init.d/rudder
 
 ----
 
@@ -172,7 +172,7 @@ Node. It also contains an init script:
 
 ----
 
-/etc/init.d/rudder-agent 
+/etc/init.d/rudder 
 
 ----
 
