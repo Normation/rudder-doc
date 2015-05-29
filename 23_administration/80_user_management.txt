@@ -179,7 +179,7 @@ dashboard and nothing else.
 |rule_only | Access to information about rules, but can't modify them
 |====
 
-for each user you can define more than one role, each role adding its authorization to the user.
+For each user you can define more than one role, each role adding its authorization to the user.
 
 Example: "rule_only,administration_only" will only give access to the "Administration" tab as well as the
 Rules.
@@ -209,7 +209,7 @@ its own authentication system.
 
 To meet this need, Rudder relies on the modular authentication system Spring
 Security that allows to easily integrate with databases or an
-entreprise SSO like CAS, OpenID or SPNEGO. The documentation for this
+enterprise SSO like CAS, OpenID or SPNEGO. The documentation for this
 integration is not yet available, but don't hesitate to reach us on this topic.
 
 

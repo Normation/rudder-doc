@@ -1,4 +1,4 @@
-=== Install Rudder Root server on Enterprise Linux ( RedHat or RedHat-like )
+=== Install Rudder Root server on Enterprise Linux (RedHat or RedHat-like)
 
 ==== Add the Rudder packages repository
 

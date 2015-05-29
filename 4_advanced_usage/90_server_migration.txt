@@ -4,7 +4,7 @@
 
 To copy a server on a new location, you need at least to keep the configuration applied by your server.
 
-You need to keep :
+You need to keep:
 
 - *Rules*
 - *Directives*
