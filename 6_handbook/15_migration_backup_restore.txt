@@ -58,7 +58,7 @@ Here is the restoration procedure:
 Rudder on the machine
 
 # Stop Rudder
-service rudder-root-server stop
+service rudder-server-root stop
 
 # Drop the OpenLDAP database
 rm -rf /var/rudder/ldap/openldap-data/alock /var/rudder/ldap/openldap-data/*.bdb /var/rudder/ldap/openldap-data/__db* /var/rudder/ldap/openldap-data/log*
