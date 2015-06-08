@@ -7,7 +7,7 @@ available for these platforms:
 
 GNU/Linux:
 
-* Debian 5 to 7
+* Debian 5 to 8
 
 * RedHat Enterprise Linux (RHEL) / RHEL-like 3 to 7
 
