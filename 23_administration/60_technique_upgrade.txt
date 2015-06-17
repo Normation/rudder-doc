@@ -1,14 +1,15 @@
 === Technique upgrade
 
 New versions of the Technique library are made available as packages,
-named rudder-policy-templates, for the 2.3 version of Rudder. Many bug fixes
-and new Techniques are added all the time. To benefit from these, we
-recommend you upgrade your Technique library from time to time.
+named rudder-techniques. Many bug fixes and new Techniques are added
+all the time. To benefit from these, we recommend you upgrade your
+Technique library from time to time.
 
 Updates are available from rudder-project.org, as standard OS package
 downloads. Please note that nightly builds are also available, and may provide
-the most up to date set of Techniques. See
-http://www.rudder-project.org/foswiki/Download/ for full details.
+the most up to date set of Techniques. See the
+https://www.rudder-project.org/site/get-rudder/downloads/[download page]
+on Rudder's website for full details.
 
 When you upgrade the Rudder Techniques packages to a new version, a
 new version of the Technique library is copied to /opt/rudder/share/techniques.
@@ -18,7 +19,7 @@ located in /var/rudder/configuration-repository/techniques.
 Thus, you can not simply copy the files from /opt/rudder/share/techniques to Rudder's
 storage, you also have to follow this simple procedure:
 
-[TIP] 
+[TIP]
 
 ====
 
@@ -52,4 +53,3 @@ git commit -m "Upgraded the Technique library (by $USER)"
   screen that appears, click the "Reload" button next to "You can load the
   last available version of the Technique library" at the top of the
   screen.
-
