@@ -13,7 +13,7 @@ GNU/Linux:
 
 * Fedora 18
 
-* SuSE Linux Enterprise Server (SLES) 10 SP3, 11 SP1, 11 SP3
+* SuSE Linux Enterprise Server (SLES) 10 SP3, 11 SP1 and SP3
 
 * Ubuntu 10.04 LTS (Lucid), 12.04 LTS (Precise), 12.10 (Quantal), 14.04 LTS (Trusty)
 

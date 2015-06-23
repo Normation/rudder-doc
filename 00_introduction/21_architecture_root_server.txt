@@ -8,7 +8,7 @@ A dedicated server is strongly recommended to deploy Rudder Root Server.
 
 Your Rudder Root Server can be either a physical or a virtual machine. 
 
-Rudder Server is running on both 32 and 64 bit versions of every supported
+Rudder Server is running on both 32 (if available) and 64 bit versions of every supported
 Operating System. 
 
 Any CPU provided on commodity servers available nowadays should be fine. On
@@ -27,9 +27,8 @@ for 2500-3000 you need 8GB.
 For environment with more than 1000 nodes, we advise to use a multiserver
 installation for Rudder as described in chapter <<multiserver-rudder, Multiserver Rudder>>.
 
-The RAM given to the web application must be augmented as explained in 
-the chapter [[jetty, about Jetty configuration]] so that it is
-the half of the RAM of the server, rounded down to the GB.
+The RAM given to the web application must be augmented so that it is half of the RAM
+of the server, rounded down to the GB.
 For example, if the server has 5GB of RAM, 2GB should be used. 
 
 The PostgresSQL database is the main storage user. The disk space 
@@ -65,7 +64,7 @@ GNU/Linux:
 
 * RedHat Enterprise Linux (RHEL) / RHEL-like 6 and 7
 
-* SuSE Linux Enterprise Server (SLES) 11 SP1, 11 SP3
+* SuSE Linux Enterprise Server (SLES) 11 SP1 and SP3
 
 * Ubuntu 12.04 LTS (Precise), 14.04 LTS (Trusty)
 
@@ -186,7 +185,7 @@ The +rudder-agent+ package depends on a few libraries and utilities:
 ==== Software dependencies and third party components
 
 The Rudder Web application requires the installation of 'Apache 2 httpd',
-'Oracle Java 6 JRE' or 'OpenJDK 7 JRE', and 'cURL'; the LDAP Inventory service needs 'rsyslog' and
+'JRE 7+', and 'cURL'; the LDAP Inventory service needs 'rsyslog' and
 the report service requires 'PostgreSQL'.
 
 When available, packages from your distribution are used. These packages are:
@@ -209,7 +208,7 @@ The rsyslog server is receiving the logs from the nodes and insert them into a
 PostgreSQL database. On SLES, the +rsyslog-pgsql+ package is not part of the
 distribution, it can be downloaded alongside Rudder packages.
 
-Java 7 JRE::
+Java 7+ JRE::
 
 The Java runtime is needed by the Jetty application server. Where possible, the
 package from the distribution is used, else a Java RE must be downloaded
