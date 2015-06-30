@@ -21,12 +21,136 @@ About the latter, there is some configuration switches that you might want to
 tune to obtain better performance with Rudder, in /opt/rudder/etc/rudder-jetty.conf, whereas
 the default ones fit the basic recommendations for the minimal Rudder hardware requirements.
 
-* -Xms and Xmx: These parameters tune the total amount of RAM usable / dedicated to the
+* JAVA_XMX : That parameter tune the total amount of RAM usable / dedicated to the
 java process. It is what you want to tune at first to give Rudder some more RAM.
 
-* -XX:PermSize -XX:MaxPermSize: These parameters are acceptable for most installations,
+* JAVA_MAXPERMSIZE: That parameter is acceptable for most installations,
 but you might want to decrease them a bit if using a machine that is not very powerful /
 RAM abundant. Increasing them is not really useful.
+
+==== Java "Out Of Memory Error"
+
+It may happen that you get java.lang.OutOfMemoryError. 
+They can be of several types,
+but the most common is: "java.lang.OutOfMemoryError: Java heap space".
+
+This error means that the web application needs more RAM than what was given.
+It may be linked to a bug where some process consumed much more memory than
+needed, but most of the time, it simply means that your system has grownn and needs
+more memory.
+
+You can follow the configuration steps described in the following paragraph.
+
+==== Configure RAM allocated to Jetty
+
+To change the RAM given to Jetty, you have to: 
+
+----
+
+# edit /opt/rudder/etc/rudder-jetty.conf with your preferred text editor, for example vim:
+vim /opt/rudder/etc/rudder-jetty.conf
+
+# modify JAVA_XMX to set the value to your need. 
+# The value is given in MB by default, but you can also use the "G" unit to specify a size in GB.
+
+JAVA_XMX=2G
+
+# save your changes, and restart Jetty: 
+service restart rudder-jetty
+
+----
+
+The heuristic to choose the amount of memory needed for the web application is described in <<_hardwareh_specifications, the Rudder hardware 
+specification chapter>>
+
+
+==== Optimize PostgreSQL server
+
+The default out-of-the-box configuration of PostgreSQL server is really not
+compliant for high end (or normal) servers. It uses a really small amount of
+memory.
+
+The location of the PostgreSQL server configuration file is usually:
+
+----
+
+/etc/postgresql/9.x/main/postgresql.conf
+
+----
+
+On a SuSE system:
+
+----
+
+/var/lib/pgsql/data/postgresql.conf
+
+----
+
+
+
+===== Suggested values on an high end server
+
+----
+#
+# Amount of System V shared memory
+# --------------------------------
+#
+# A reasonable starting value for shared_buffers is 1/4 of the memory in your
+# system:
+
+shared_buffers = 1GB
+
+# You may need to set the proper amount of shared memory on the system.
+#
+#   $ sysctl -w kernel.shmmax=1073741824
+#
+# Reference:
+# http://www.postgresql.org/docs/8.4/interactive/kernel-resources.html#SYSVIPC
+#
+# Memory for complex operations
+# -----------------------------
+#
+# Complex query:
+
+work_mem = 24MB
+max_stack_depth = 4MB
+
+# Complex maintenance: index, vacuum:
+
+maintenance_work_mem = 240MB
+
+# Write ahead log
+# ---------------
+#
+# Size of the write ahead log:
+
+wal_buffers = 4MB
+
+# Query planner
+# -------------
+#
+# Gives hint to the query planner about the size of disk cache.
+#
+# Setting effective_cache_size to 1/2 of total memory would be a normal
+# conservative setting:
+
+effective_cache_size = 1024MB
+
+----
+
+===== Suggested values on a low end server
+
+----
+
+shared_buffers = 128MB
+work_mem = 8MB
+max_stack_depth = 3MB
+maintenance_work_mem = 64MB
+wal_buffers = 1MB
+effective_cache_size = 128MB
+
+----
+
 
 ==== CFEngine
 
