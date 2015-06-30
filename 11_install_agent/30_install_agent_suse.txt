@@ -4,11 +4,19 @@ Following commands are executed as the +root+ user.
 
 Add the Rudder packages repository:
 
+* on SLES 12:
+
+----
+
+zypper ar -n 'Rudder SLES 12 repository' http://www.rudder-project.org/rpm-3.1/SLES_12/ Rudder
+
+----
+
 * on SLES 11:
 
 ----
 
-zypper ar -n 'Rudder SLES repository' http://www.rudder-project.org/rpm-3.0/SLES_11_SP1/ Rudder
+zypper ar -n 'Rudder SLES repository' http://www.rudder-project.org/rpm-3.1/SLES_11_SP1/ Rudder
 
 ----
 
@@ -16,7 +24,7 @@ zypper ar -n 'Rudder SLES repository' http://www.rudder-project.org/rpm-3.0/SLES
 
 ----
 
-zypper sa 'http://www.rudder-project.org/rpm-3.0/SLES_10_SP3/' Rudder
+zypper sa 'http://www.rudder-project.org/rpm-3.1/SLES_10_SP3/' Rudder
 
 ----
 

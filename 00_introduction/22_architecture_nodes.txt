@@ -13,7 +13,7 @@ GNU/Linux:
 
 * Fedora 18
 
-* SuSE Linux Enterprise Server (SLES) 10 SP3, 11 SP1 and SP3
+* SuSE Linux Enterprise Server (SLES) 10 SP3, 11 SP1 and SP3, 12
 
 * Ubuntu 10.04 LTS (Lucid), 12.04 LTS (Precise), 12.10 (Quantal), 14.04 LTS (Trusty)
 
@@ -23,9 +23,9 @@ Windows:
 
 [TIP]
 
-[[install-on-windows, Install on Microsoft Windows]] 
+[[install-on-windows, Install on Microsoft Windows]]
 
-.Windows Nodes 
+.Windows Nodes
 
 ====
 
@@ -38,7 +38,7 @@ Windows platforms.
 
 [WARNING]
 
-.Unsupported Operating Systems 
+.Unsupported Operating Systems
 
 ====
 

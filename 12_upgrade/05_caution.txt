@@ -1,24 +1,17 @@
 === Caution cases
 
-==== Upgrading from Rudder 2.11
+==== Compatibility between Rudder server 3.1 and older agent versions
 
-Rudder 2.11.* use a compatible CFEngine version. Therefore, Rudder agent 2.11.* are fully compatible with Rudder server 3.0.*, so it is not necessary to update your agents to 3.0.*.
+===== 2.11.x and 3.0.x agents
 
-To have a successful upgrade, you only need to upgrade Rudder server to 3.0.
- 
-==== Upgrading from Rudder 2.6 or 2.10
+As they use a compatible CFEngine version, Rudder agent 2.11.x and 3.0.x are fully compatible with Rudder server 3.1.x. It is therefore not necessary to update your agents to 3.1.x.
 
-Rudder 2.6.* and 2.10.* contain an older CFEngine version. To have a successful upgrade these steps should be followed:
+However, Rudder 3.1 provides a new inventory signing feature which will only be enabled on nodes running Rudder 3.1 agents. On nodes running an older agent version, the inventories won't be signed. 
 
-* Make sure the Rudder server to be upgraded to the latest 2.6 or 2.10 version before attempting to upgrade to 3.0.*
+===== 2.10.x or older
 
-* Ensure that all node's promises have been regenerated since the server upgrade to this version (don't forget that your Techniques will not be upgraded automatically)
-** On Rudder WebUI, at the top right of the screen, click on 'Regenerate now'
-** You can use the API from the server with this command: 'curl http://localhost/rudder/api/deploy/reload'
-
-* Upgrade all agents connected to that server to 3.0.*.
-
-* Upgrade the Rudder server to 3.0
+These agents are not compatible with Rudder 3.1, and you have to upgrade them. 
+Be careful to follow the upgrade path explained <<_upgrade_from_rudder_2_10_or_older, above>>.
 
 ==== Known issues
 
