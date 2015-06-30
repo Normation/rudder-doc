@@ -6,11 +6,11 @@ Update your yum repository:
 
 ----
 
-$ echo "[Rudder_3.0]
-name=Rudder 3.0 Repository
-baseurl=http://www.rudder-project.org/rpm-3.0/RHEL_7/
+$ echo "[Rudder_3.1]
+name=Rudder 3.1 Repository
+baseurl=http://www.rudder-project.org/rpm-3.1/RHEL_7/
 gpgcheck=1
-gpgkey=http://www.rudder-project.org/rpm-3.0/RHEL_7/repodata/repomd.xml.key" > /etc/yum.repos.d/rudder.repo
+gpgkey=http://www.rudder-project.org/rpm-3.1/RHEL_7/repodata/repomd.xml.key" > /etc/yum.repos.d/rudder.repo
 
 ----
 
@@ -22,6 +22,8 @@ Replace RHEL_7 with your Enterprise Linux version if necessary.
 
 ====
 
+==== Rudder server
+
 For Rudder server, upgrade the +rudder-*+ and +ncf+-related packages:
 
 ----
@@ -29,6 +31,17 @@ For Rudder server, upgrade the +rudder-*+ and +ncf+-related packages:
 yum update "rudder-*" ncf ncf-api-virtualenv
 
 ----
+
+From version 3.1, Rudder provides an SELinux policy. You can enable it after upgrading your server with:
+
+----
+
+sed -i "s%^\s*SELINUX=.*%SELINUX=enabled%" /etc/sysconfig/selinux
+setenforce 1
+
+----
+
+==== Rudder agent
 
 For Rudder agent, upgrade the +rudder-agent+ package:
 

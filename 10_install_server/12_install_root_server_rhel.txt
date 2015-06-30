@@ -39,28 +39,12 @@ Now jump to <<initial-config,the next section to configure your server>>.
 
 ====
 
-Rudder server doesn't support SELinux yet (see http://www.rudder-project.org/redmine/issues/2882),
-so you should set it to be permissive with these commands:
-
-----
-
-sed -i "s%^\s*SELINUX=.*%SELINUX=disabled%" /etc/sysconfig/selinux
-setenforce 0
-
-----
-
-====
-
-[WARNING]
-
-====
-
 The webapp runs on HTTP/S (443 TCP) so you need to allow access to your server on this port.
 
 On EL6, a iptables firewall setup is enabled by default, and would need to be adjusted
 for Rudder to operate properly.
 
-The /etc/sysconfig/iptables file configures this firewall: 
+The /etc/sysconfig/iptables file configures this firewall:
 
 ----
 
