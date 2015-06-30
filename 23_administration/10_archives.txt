@@ -37,7 +37,7 @@ the import will break the configuration on the target Rudder server.
 
 
 
-=== Concepts
+==== Concepts
 
 In the 'Administration > Archives' section of the Rudder Server web interface, you
 can export and import the configuration of Rudder Groups, Directives and Rules.
@@ -51,7 +51,7 @@ committed in the repository.
 
 The content of this repository can be imported into any Rudder server (with the same version).
 
-=== Archiving
+==== Archiving
 
 To archive Rudder Rules, Groups, Directives, or make a global archive, you need to go to 
 the 'Administration > Archives' section of the Rudder Server web interface.
@@ -64,7 +64,7 @@ the latest data
 by date), for example 2015-01-08 16:39
 . Click on 'Download as zip' to download an archive that will contains all elements.
 
-=== Importing configuration
+==== Importing configuration
 
 On the target server, importing the configuration will "merge" them with the existing configuration:
 every groups, rules, directives or techniques with the same identifier will be replaced by the import,
@@ -104,7 +104,7 @@ For instance, using one unique git repository you can follow this workflow:
 
 ====
 
-===== Deploy a preconfigured instance
+==== Deploy a preconfigured instance
 
 You can use the procedures of Archiving and Restoring configuration to deploy
 preconfigured instance. You would prepare first in your labs the configuration for
