@@ -27,8 +27,9 @@ for 2500-3000 you need 8GB.
 For environment with more than 1000 nodes, we advise to use a multiserver
 installation for Rudder as described in chapter <<multiserver-rudder, Multiserver Rudder>>.
 
-The RAM given to the web application must be augmented so that it is half of the RAM
-of the server, rounded down to the GB.
+The RAM given to the web application must be augmented as explained in 
+the chapter <<_configure_ram_allocated_to_jetty, about webapplication RAM configuration>> 
+so that it is the half of the RAM of the server, rounded down to the nearest GB.
 For example, if the server has 5GB of RAM, 2GB should be used. 
 
 The PostgresSQL database is the main storage user. The disk space 
