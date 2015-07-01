@@ -60,7 +60,7 @@ service restart rudder-jetty
 
 ----
 
-The heuristic to choose the amount of memory needed for the web application is described in <<_hardwareh_specifications, the Rudder hardware 
+The heuristic to choose the amount of memory needed for the web application is described in <<_hardware_specifications, the Rudder hardware 
 specification chapter>>
 
 
