@@ -8,6 +8,7 @@ These procedures will explain how to backup your Rudder installation.
 ==== Backup
 
 This backup procedure will operate on the three principal Rudder data sources:
+
 * The LDAP database
 * The PostgreSQL database
 * The configuration-repository folder
