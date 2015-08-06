@@ -1,7 +1,17 @@
-=== Application tuning
+=== Performance tuning
 
-Some applications used by Rudder can be tuned to your needs, like the Apache web
-server, or Jetty.
+Rudder and some applications used by Rudder (like the Apache web server, or Jetty)
+can be tuned to your needs.
+
+==== Reports retention
+
+To lower Rudder server's disk usage, you can configure the retention duration 
+for node's execution reports in 
++/opt/rudder/etc/rudder-web.properties+ file with the options:
+ 
++rudder.batch.reportscleaner.archive.TTL=30+
+
++rudder.batch.reportscleaner.delete.TTL=90+
 
 ==== Apache web server
 
@@ -31,7 +41,7 @@ but the most common is: "java.lang.OutOfMemoryError: Java heap space".
 
 This error means that the web application needs more RAM than what was given.
 It may be linked to a bug where some process consumed much more memory than
-needed, but most of the time, it simply means that your system has grownn and needs
+needed, but most of the time, it simply means that your system has grown and needs
 more memory.
 
 You can follow the configuration steps described in the following paragraph.
@@ -55,9 +65,8 @@ service restart rudder-jetty
 
 ----
 
-The heuristic to choose the amount of memory needed for the web application is described in <<_hardware_specifications, the Rudder hardware 
-specification chapter>>
-
+The amount of memory should be the half of the RAM of the server, rounded down to the nearest GB.
+For example, if the server has 5GB of RAM, 2GB should be used.
 
 ==== Optimize PostgreSQL server
 
