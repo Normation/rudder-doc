@@ -12,7 +12,7 @@ Rudder 2.10.* contains CFEngine 3.5.2 which is more strict with the parsing of i
 
 * Make sure the Rudder server to be upgraded is in a version that is at least 2.4.11, 2.6.8 and 2.7.5 before attempting to upgrade to 2.10.*
 
-* Ensure that all node's promises have been regenerated since the server upgrade to this version (don't forget that your Techniques will not be upgraded automatically)
+* Ensure that all node's promises have been regenerated since the server upgrade to this version (don't forget that your Techniques will not be upgraded automatically, follow the <<_technique_upgrade, Technique Upgrade>> section to upgrade them manually)
 ** On Rudder WebUI, at the top right of the screen, click on 'Regenerate now'
 ** On Rudder 2.6 or later, you can use the API from the server with this command: 'curl http://localhost/rudder/api/deploy/reload'
 
