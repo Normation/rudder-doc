@@ -31,8 +31,6 @@ zypper in rudder-server-root
 
 ----
 
-Now jump to <<initial-config,the next section to configure your server>>.
-
 [TIP]
 
 ====
@@ -42,3 +40,6 @@ system, you should download the 'SDK DVD' and install +git-core+ using +yast2+ o
 +zypper+, or get the RPM using another channel.
 
 ====
+
+Now jump to <<initial-config,the next section to configure your server>>.
+
