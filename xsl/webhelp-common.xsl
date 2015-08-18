@@ -61,7 +61,7 @@ xmlns:exsl="http://exslt.org/common"
     <xsl:param name="admon.graphics.path"><xsl:value-of select="$webhelp.common.dir"/>images/admon-icons/</xsl:param>
     <xsl:param name="admon.graphics" select="1"/>
     <!--xsl:param name="generate.toc">book toc</xsl:param-->
-    <xsl:param name="webhelp.include.search.tab" select="0"/>
+    <xsl:param name="webhelp.include.search.tab" select="1"/>
     
 <xsl:param name="generate.toc">
 appendix  toc,title
