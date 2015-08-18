@@ -5,6 +5,7 @@
 BASENAME = rudder-doc
 SOURCES = $(BASENAME).txt
 TARGETS = epub html pdf readme
+DOCBOOK_DIST = xsl/xsl-ns-stylesheets
 
 ASCIIDOC = $(CURDIR)/bin/asciidoc/asciidoc.py
 A2X = $(CURDIR)/bin/asciidoc/a2x.py
@@ -24,7 +25,7 @@ ASCIIDOCTOHTML = $(ASCIIDOC) --doctype=book \
   -a toc-title="Rudder User Documentation" \
 
 ## unused options::
-## stylesdir/stylesheet: 
+## stylesdir/stylesheet:
 ## we use standard asciidoc stylesheets (no specific stylesdir)
 ## and add specific styling for Rudder afterwards (stylesheet option)
 # -a stylesdir=$(CURDIR)/style/html \
@@ -40,6 +41,7 @@ SEE = see
 
 all: $(TARGETS)
 epub: epub/$(BASENAME).epub
+webhelp: docs/index.html
 html: html/$(BASENAME).html
 pdf: html/$(BASENAME).pdf
 readme: html/README.html
@@ -57,13 +59,22 @@ html/$(BASENAME).pdf: $(SOURCES)
 	rm -f *.svg
 	mv $(BASENAME).pdf html/
 
+docs/index.html: $(SOURCES)
+	mkdir -p docs
+	$(ASCIIDOC) --doctype=book --backend docbook $?
+	xsltproc  --xinclude --output xincluded-profiled.xml  \
+        	$(DOCBOOK_DIST)/profiling/profile.xsl $(BASENAME).xml
+	xsltproc xsl/webhelp.xsl xincluded-profiled.xml
+	cp -r style/html/* images common *.png docs/
+	cp -r style/html/images/icons docs/common/images/admon-icons
+
 html/$(BASENAME).html: $(SOURCES)
-	mkdir -p html 
+	mkdir -p html
 	$(ASCIIDOCTOHTML) --out-file $@ $?
 	cp -R style/html/* images html/
 
 html/README.html: README.asciidoc
-	mkdir -p html 
+	mkdir -p html
 	$(ASCIIDOCTOHTML) --out-file $@ $?
 
 slides.html: $(SOURCES)
@@ -72,8 +83,7 @@ slides.html: $(SOURCES)
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
 clean:
-	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub
+	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub docs xincluded-profiled.xml $(BASENAME).xml
 
 view: all
 	$(SEE) $(TARGETS)
-
