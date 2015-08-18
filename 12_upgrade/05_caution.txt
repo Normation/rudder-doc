@@ -6,7 +6,7 @@ To have a successful upgrade these steps should be followed:
 
 * Make sure the Rudder server to be upgraded to the last 2.6 or 2.10 version, depending on the one you are currently running.
 
-* Ensure that all node's promises have been regenerated since the server upgrade to this version (don't forget that your Techniques will not be upgraded automatically)
+* Ensure that all node's promises have been regenerated since the server upgrade to this version (don't forget that your Techniques will not be upgraded automatically, follow the <<_technique_upgrade, Technique Upgrade>> section to upgrade them manually)
 ** On Rudder WebUI, at the top right of the screen, click on 'Regenerate now'
 ** You can use the API from the server with this command: 'curl http://localhost/rudder/api/deploy/reload'
 

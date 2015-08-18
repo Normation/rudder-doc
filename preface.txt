@@ -10,6 +10,7 @@ link:rudder-doc.pdf[the Rudder User Documentation in PDF format].
 endif::backend-xhtml11[]
 
 ifdef::backend-docbook[]
+ifdef::docinfo1[]
 
 //[preface]
 
@@ -17,5 +18,6 @@ ifdef::backend-docbook[]
 
 You can also read 
 http://rudder-project.org[the Rudder User Documentation on the Web].
+endif::docinfo1[]
 endif::backend-docbook[]
 
