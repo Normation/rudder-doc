@@ -24,7 +24,30 @@ a full reinstallation of the Rudder Server.
 
 ====
 
+==== Completely reinitialize a Node
 
+You may want to completely reinitialize a Node to make it seen as a new node
+on the server, for example after cloning a VM.
 
+[WARNING]
 
+====
+
+This command will permanently delete your node uuid and keys, and no configuration will
+be applied before re-accepting and configuring the node on the server.
+
+====
+
+The command to reinitialize a Node is:
+
+----
+
+rudder agent reinit
+
+----
+
+This command will delete all local agent data, including its uuid and keys, and
+also reset the agent internal state. The only configuration kept is the server
+hostname or ip configured in +policy_server.dat+. It will also send an inventory
+to the server, which will treat it as a new node inventory. 
 

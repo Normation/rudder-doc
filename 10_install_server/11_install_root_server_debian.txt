@@ -38,21 +38,18 @@ apt-get install rudder-server-root
 
 ----
 
-Now jump to <<initial-config,the next section to configure your server>>.
 
 [WARNING]
 
 ====
 
-For users running the Rudder *server* on Ubuntu Server 12.04 or later, any
-nodes running syslogd (not syslog-ng or rsyslog) will fail to send any
-reports about the configuration rules they have applied. This is the case by
-default on RHEL/CentOS 5, but not on any other supported platforms.
+Any nodes running *syslogd* (not syslog-ng or rsyslog) will *fail* to send any
+reports about the configuration rules they have applied to a Rudder Server running
+on Ubuntu (and only on Ubuntu). Rudder will apply rules on nodes but will never get
+reports from them. Therefore Rudder will not be able to calculate compliance.
 
-Rudder will apply rules on nodes but will never get reports from those using syslogd.
-Therefore Rudder will not be able to calculate compliance.
-
-Several workarounds are available to fix this:
+The only supported platform using syslogd by default is *RHEL/CentOS 5*, and several
+workarounds are available to fix this:
 
 . Install another syslog server on your nodes, such as rsyslog or syslog-ng.
 . Change the rsyslog configuration on the Rudder server (running Ubuntu 12.04
@@ -62,4 +59,6 @@ Several workarounds are available to fix this:
 . Use a different OS for your Rudder server that Ubuntu Server 12.04 or later.
 
 ====
+
+Now jump to <<initial-config,the next section to configure your server>>.
 
