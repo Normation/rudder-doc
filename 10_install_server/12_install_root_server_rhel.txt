@@ -1,4 +1,4 @@
-=== Install Rudder Root server on Enterprise Linux (RedHat or RedHat-like)
+=== Install Rudder Root server on RedHat-like systems
 
 ==== Add the Rudder packages repository
 
@@ -33,7 +33,9 @@ yum install rudder-server-root
 
 ----
 
-Now jump to <<initial-config,the next section to configure your server>>.
+On Red Hat-like systems, a firewall setup is enabled by default, and would need to be adjusted
+for Rudder to operate properly. You have to allow all the flows described in the
+<<configure_the_network, Network>> section.
 
 [WARNING]
 
@@ -51,16 +53,11 @@ setenforce 0
 
 ====
 
-[WARNING]
+[TIP]
 
 ====
 
-The webapp runs on HTTP/S (443 TCP) so you need to allow access to your server on this port.
-
-On EL6, a iptables firewall setup is enabled by default, and would need to be adjusted
-for Rudder to operate properly.
-
-The /etc/sysconfig/iptables file configures this firewall: 
+On EL6, the /etc/sysconfig/iptables file configures the firewall:
 
 ----
 
@@ -81,7 +78,7 @@ COMMIT
 
 ----
 
-The important line to add being:
+The important line to have access to the Web interface being:
 
 ----
 
@@ -89,6 +86,12 @@ The important line to add being:
 -A INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
 
 ----
+
+====
+
+[TIP]
+
+====
 
 On EL7, the default firewall is firewalld, and you can enable HTTP/S access by running
 
@@ -98,11 +101,7 @@ firewall-cmd --permanent --zone=public --add-port=443/tcp
 
 ----
 
-Don't forget to also enable access for other Rudder services:
-
-* HTTP (80 TCP)
-* Syslog (514 UDP/TCP)
-* CFEngine (5309 TCP)
-
 ====
+
+Now jump to <<initial-config,the next section to configure your server>>.
 
