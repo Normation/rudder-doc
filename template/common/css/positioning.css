@@ -192,7 +192,7 @@ p.breadcrumbs a {
 	font-size: 10px;
 }
 
-p.breadcrumbs a:first-child {background: url(../images/breadcrumb-arrow-white.png) no-repeat right center;}
+/* p.breadcrumbs a:first-child {background: url(../images/breadcrumb-arrow-white.png) no-repeat right center;} */
 
 p.breadcrumbs a:hover {text-decoration: underline;}
 
