@@ -56,8 +56,6 @@ zypper in rudder-server-root
 
 ----
 
-Now jump to <<initial-config,the next section to configure your server>>.
-
 [WARNING]
 
 ====
@@ -69,4 +67,6 @@ Special care should be taken during initial installation not to say "Continue an
 not be resolved and asks what to do.
 
 ====
+
+Now jump to <<initial-config,the next section to configure your server>>.
 
