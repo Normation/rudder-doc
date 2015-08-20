@@ -10,7 +10,7 @@ The following flows from the Nodes to the Rudder Root Server has to be allowed:
 
 include::../glossary/port-5309.txt[]
 
-include::../glossary/port-80-nodes.txt[]
+include::../glossary/port-443-nodes.txt[]
 
 include::../glossary/port-514.txt[]
 
