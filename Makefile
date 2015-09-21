@@ -7,6 +7,8 @@ SOURCES = $(BASENAME).txt
 TARGETS = epub html pdf readme
 DOCBOOK_DIST = xsl/xsl-ns-stylesheets
 
+RUDDER_VERSION = 3.0
+
 ASCIIDOC = $(CURDIR)/bin/asciidoc/asciidoc.py
 A2X = $(CURDIR)/bin/asciidoc/a2x.py
 
@@ -67,6 +69,14 @@ html/$(BASENAME).pdf: $(SOURCES)
 	rm -f *.svg
 	mv $(BASENAME).pdf html/
 
+rudder-command:
+	git clone https://github.com/Normation/rudder-agent.git rudder-command
+
+man: rudder-command
+	cd rudder-command && git pull && git checkout branches/rudder/$(RUDDER_VERSION)
+	cd rudder-command/man && sh rudder.asciidoc.sh
+	sed 's/^=/===/' -i rudder-command/man/rudder.asciidoc
+
 $(INDEXER_JAR):
 	mkdir -p $(DOCBOOK_EXTENSIONS_DIR)
 	wget http://central.maven.org/maven2/net/sf/docbook/docbook-xsl-webhelpindexer/1.0.1-pre/docbook-xsl-webhelpindexer-1.0.1-pre.jar -O $(INDEXER_JAR)
@@ -85,9 +95,9 @@ $(LUCENE_ANALYZER_JAR):
 
 jars: $(INDEXER_JAR) $(TAGSOUP_JAR) $(LUCENE_ANALYZER_JAR) $(LUCENE_CORE_JAR)
 
-docs/index.html: $(SOURCES)
+docs/index.html: man $(SOURCES)
 	mkdir -p docs
-	$(ASCIIDOC) --doctype=book --backend docbook $?
+	$(ASCIIDOC) --doctype=book --backend docbook $(SOURCES)
 	xsltproc  --xinclude --output xincluded-profiled.xml  \
         	$(DOCBOOK_DIST)/profiling/profile.xsl $(BASENAME).xml
 	xsltproc xsl/webhelp.xsl xincluded-profiled.xml
@@ -121,7 +131,9 @@ slides.html: $(SOURCES)
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
 clean:
-	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub docs xincluded-profiled.xml $(BASENAME).xml extensions
+	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub docs xincluded-profiled.xml $(BASENAME).xml rudder-command extensions
 
 view: all
 	$(SEE) $(TARGETS)
+
+.PHONY: man
