@@ -1,6 +1,6 @@
 ## Rudder User Documentation Makefile
 
-.PHONY: all clean view
+.PHONY: all clean view man
 
 BASENAME = rudder-doc
 SOURCES = $(BASENAME).txt
@@ -56,14 +56,14 @@ html: html/$(BASENAME).html
 pdf: html/$(BASENAME).pdf
 readme: html/README.html
 
-epub/$(BASENAME).epub: $(SOURCES)
+epub/$(BASENAME).epub: man $(SOURCES)
 	mkdir -p html
-	$(ASCIIDOCTOEPUB) $?
+	$(ASCIIDOCTOEPUB) $(SOURCES)
 	mv $(BASENAME).epub html/
 
-html/$(BASENAME).pdf: $(SOURCES)
+html/$(BASENAME).pdf: man $(SOURCES)
 	mkdir -p html
-	$(ASCIIDOCTODOCBOOK) --backend docbook $?
+	$(ASCIIDOCTODOCBOOK) --backend docbook $(SOURCES)
 	$(DOCBOOK2PDF) $(BASENAME).xml
 	rm $(BASENAME).xml
 	rm -f *.svg
@@ -116,17 +116,17 @@ index: docs/index.html jars
 		                com.nexwave.nquindexer.IndexerMain
 	cp -r template/search/* docs/search
 
-html/$(BASENAME).html: $(SOURCES)
+html/$(BASENAME).html: man $(SOURCES)
 	mkdir -p html
-	$(ASCIIDOCTOHTML) --out-file $@ $?
+	$(ASCIIDOCTOHTML) --out-file $@ $(SOURCES)
 	cp -R style/html/* images html/
 
 html/README.html: README.asciidoc
 	mkdir -p html
 	$(ASCIIDOCTOHTML) --out-file $@ $?
 
-slides.html: $(SOURCES)
-	$(ASCIIDOC)  -a theme=volnitsky --out-file slides.html --backend slidy $?
+slides.html: man $(SOURCES)
+	$(ASCIIDOC)  -a theme=volnitsky --out-file slides.html --backend slidy $(SOURCES)
 
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
@@ -136,4 +136,3 @@ clean:
 view: all
 	$(SEE) $(TARGETS)
 
-.PHONY: man
