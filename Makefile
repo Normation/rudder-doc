@@ -7,7 +7,7 @@ SOURCES = $(BASENAME).txt
 TARGETS = epub html pdf readme
 DOCBOOK_DIST = xsl/xsl-ns-stylesheets
 
-RUDDER_VERSION = 3.1
+RUDDER_VERSION = 3.2
 
 ASCIIDOC = $(CURDIR)/bin/asciidoc/asciidoc.py
 A2X = $(CURDIR)/bin/asciidoc/a2x.py
