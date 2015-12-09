@@ -10,14 +10,14 @@ Technique Editor in Rudder or by coding them by hand.
 
 The use of the Technique Editor (code name: ncf-builder [http://www.ncf.io/pages/ncf-builder.html]) 
 is the easiest way to create new Techniques and is fully integrated with Rudder. On the other hand, 
-it does not allow the same level of complexity and expressivness than coding a Technique by hand. 
+it does not allow the same level of complexity and expressiveness than coding a Technique by hand. 
 Of course, coding new Techniques by hand is a more involved process that needs to learn how the 
 Technique description language and Technique reporting works.
 
 We advice to always start to try to create new Techniques with the Technique Editor and switch to 
 the hand-coding creation only if you discover specific needs not addressed that way.
 
-==== Recommanded solution: Technique Editor
+==== Recommended solution: Technique Editor
 
 The easiest way to create your own Techniques is to use the Technique editor,
 a web interface to create and manage Techniques based on the ncf framework.
@@ -47,12 +47,12 @@ These logs are sent to Apache system error logs:
 - On RedHat, by default: /var/log/httpd/error_log
 
 
-===== Understanding how Technique Editor works
+==== Understanding how Technique Editor works
 
-In this chapter, we are giving an overwiew about how the Technique Editor works and how it is 
+In this chapter, we are giving an overview about how the Technique Editor works and how it is 
 integrated with the main Rudder application. 
 
-====== Directory layout 
+===== Directory layout 
 
 As explained in http://www.ncf.io/, ncf uses a structured directory tree composed of several layers of logic, 
 from internal libraries to Techniques and user services. All the files and logic in these folders will be named
@@ -68,7 +68,7 @@ package so you should never modify anything here: it will be lost at some point.
 * /var/rudder/configuration-repository/ncf
 ** This is were you add your own ncf Generic Methods and Techniques.
 Techniques created with the Technique Editor will be located here, and both Generic Methods
-and Techniques in that place will be accessible in the Technique Editor alongs what is 
+and Techniques in that place will be accessible in the Technique Editor alongside what is 
 provided by the standard library. 
 
 To share those folders to all nodes, Rudder makes a copy of these folders in /var/rudder/ncf:
@@ -82,14 +82,14 @@ in files in these directories will be lost at the next synchronization.
 A node updates its ncf local library by copying the content of these two folders during its
 promise update phase. 
 
-====== Technique Editor integration with Rudder 
+===== Technique Editor integration with Rudder 
 
 Here we will explain Technique Editor behavior and what workflow are initialized by different 
 action on the Technique Editor.
 
 Each action in the Technique Editor interface produces requests to an API defined over ncf.
 
-All of the requests are authentiticated thanks to a token passed in the JSESSIONID header. 
+All of the requests are authenticated thanks to a token passed in the JSESSIONID header. 
 The token is generated when an authenticated user is connected to the Rudder interface 
 (typically thanks to his browser). 
 
@@ -126,7 +126,7 @@ The main difference with get requests is that hooks are launched before and afte
 
 We will see all hooks behavior in the following dedicated hooks section.
 
-====== Hooks
+===== Hooks
 
 On each POST request, pre- and post- hooks are executed by the Technique Editor. 
 These hooks are used for the Rudder integration to help transform pure ncf Techniques into Rudder one.
@@ -149,7 +149,7 @@ If you want to run post hooks by hand, you can use the following command:
 
 ==== Create Technique manually
 
-===== Prequisites
+===== Prerequisite
 
 To create a Technique, you'll need a few things:
 
@@ -279,14 +279,14 @@ include::technique-st-sample.xml
 
 ----
 
-====== Define variables
+===== Define variables
 
 *WORK IN PROGRESS*
 Define metadata.
 Enter the variables in sections in the metadata.xml file.
 Cf http://www.rudder-project.org/foswiki/Development/PolicyTemplateXML
 
-====== First test in the Rudder interface
+===== First test in the Rudder interface
 
 Load the new Technique into Rudder and check that the variables and sections are
 displayed as you expect.
@@ -297,13 +297,13 @@ displayed as you expect.
 Write CFEngine promises to implement the behavior that your Template should
 have.
 
-====== Read in the variables from Rudder
+===== Read in the variables from Rudder
 
 *WORK IN PROGRESS*
 Using StringTemplate notation...
 Cf http://www.rudder-project.org/foswiki/Development/Technique
 
-====== Add reporting
+===== Add reporting
 
 *WORK IN PROGRESS*
 The reports format
