@@ -6,8 +6,8 @@ Normation_SAS_and_Fabrice_Flore-Thebault <contact@normation.com>
   Rudder is a Free Software developped by Normation.
 :keywords: Rudder, Drift Assessment, Normation, Asset management, +
   Configuration Management, FusionInventory, CFEngine Community, +
-  CFEngine Enterprise, CFEngine, Scala, Free Software, Open Source, +
-  AGPL + User documentation
+  CFEngine Nova, CFEngine, Scala, Free Software, Open Source, GPL +
+  User documentation
 :revdate: Nov 2014
 :revision: 3.0.0
 
