@@ -39,8 +39,8 @@ and appears in your Rudder web interface.
 ===== Set the node as a Rudder relay
 
 Launch the rudder-node-to-relay script on the root server, supplying the UUID of the
-host to be added as a relay to it. You can find the UUID of your node in
-'/opt/rudder/etc/uuid.hive'.
+host to be added as a relay to it. You can find the UUID of your node with the
+'rudder agent info' command.
 
 ----
 
