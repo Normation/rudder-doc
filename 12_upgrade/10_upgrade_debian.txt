@@ -6,7 +6,7 @@ Add the Rudder project repository:
 
 ----
 
-echo "deb http://www.rudder-project.org/apt-3.1/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
+echo "deb http://www.rudder-project.org/apt-3.2/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 
 ----
 

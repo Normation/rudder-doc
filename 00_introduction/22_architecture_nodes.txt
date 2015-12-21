@@ -17,6 +17,10 @@ GNU/Linux:
 
 * Ubuntu 10.04 LTS (Lucid), 12.04 LTS (Precise), 12.10 (Quantal), 14.04 LTS (Trusty)
 
+Other Unix systems:
+
+* Solaris 10
+
 Windows:
 
 * <<install-on-windows, Microsoft Windows>> Server 2000, 2003, 2008, 2008 R2, 2012

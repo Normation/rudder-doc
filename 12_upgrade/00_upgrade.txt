@@ -1,7 +1,7 @@
 == Upgrade Rudder
 
 This short chapter covers the upgrade of the Rudder Server Root and Rudder Agent
-from older versions to the latest version, 3.1.
+from older versions to the latest version, 3.2.
 
 The upgrade is quite similar to the installation.
 
@@ -10,13 +10,13 @@ automatically by packaging scripts. Therefore, you shouldn't have to do any
 upgrade procedures manually, but you will note that several data migrations
 occur during the upgrade process.
 
-==== Upgrade from Rudder 2.11 or 3.0
+==== Upgrade from Rudder 2.11, 3.0 or 3.1
 
-Migration from 2.11 or 3.0 are supported, so you can upgrade directly to 3.1.
+Migration from 2.11, 3.0 or 3.1 are supported, so you can upgrade directly to 3.2.
 
 ==== Upgrade from Rudder 2.10 or older
 
-Direct upgrades from 2.10.x and older are no longer supported on 3.1.
+Direct upgrades from 2.10.x and older are no longer supported on 3.2.
 If you are still running one of those, either on servers or nodes,
-please first upgrade to one of the supported versions above, and then upgrade to 3.1.
+please first upgrade to one of the supported versions above, and then upgrade to 3.2.
 
