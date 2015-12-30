@@ -28,4 +28,3 @@ Slower growth over time.
 Reports logs can easily grow to 1.5GB per day.
 
 ======
-

@@ -1,6 +1,6 @@
-==== Agent execution frequency on nodes
+=== Agent execution frequency on nodes
 
-===== Checking configuration (CFEngine)
+==== Checking configuration (CFEngine)
 
 Rudder is configured to check and repair configurations using the CFEngine
 agent every 5 minutes, at 5 minutes past the hour, 10 minutes past the hour,
@@ -15,7 +15,7 @@ Up to and including Rudder 2.10.x, this random interval is between 0 and 1
 minutes. As of Rudder 2.10.x and later, this random interval is between 0 and
 5 minutes.
 
-===== Inventory (FusionInventory)
+==== Inventory (FusionInventory)
 
 The FusionInventory agent collects data about the node it's running on such as
 machine type, OS details, hardware, software, networks, running virtual
