@@ -4,7 +4,7 @@
 
 BASENAME = rudder-doc
 SOURCES = $(BASENAME).txt
-TARGETS = epub html pdf readme
+TARGETS = epub html pdf readme manpage
 DOCBOOK_DIST = xsl/xsl-ns-stylesheets
 
 RUDDER_VERSION = 3.2
@@ -54,6 +54,7 @@ epub: epub/$(BASENAME).epub
 webhelp: docs/index.html index
 html: html/$(BASENAME).html
 pdf: html/$(BASENAME).pdf
+manpage: html/rudder.8
 readme: html/README.html
 
 epub/$(BASENAME).epub: man $(SOURCES)
@@ -69,12 +70,16 @@ html/$(BASENAME).pdf: man $(SOURCES)
 	rm -f *.svg
 	mv $(BASENAME).pdf html/
 
+html/rudder.8: man
+	mkdir -p html
+	cp rudder-command/man/rudder.8 html/
+
 rudder-command:
 	git clone https://github.com/Normation/rudder-agent.git rudder-command
 
 man: rudder-command
 	cd rudder-command && git pull && git checkout branches/rudder/$(RUDDER_VERSION)
-	cd rudder-command/man && sh rudder.asciidoc.sh
+	cd rudder-command/man && make rudder.8
 	sed 's/^=/===/' -i rudder-command/man/rudder.asciidoc
 
 $(INDEXER_JAR):
