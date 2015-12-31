@@ -16,6 +16,14 @@ include::../glossary/port-514.txt[]
 
 ====
 
+And this one is optional: 
+
+====
+
+include::../glossary/port-5310.txt[]
+
+====
+
 Open the following flow from the clients desktop to the Rudder Root Server:
 
 ====
