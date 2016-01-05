@@ -33,18 +33,26 @@ available for these platforms:
 
 * Ubuntu 12.10 (quantal)
 
+* IBM AIX 5.3
+
+* IBM AIX 6.1
+
+* IBM AIX 7.1
+
 [TIP]
 
 [[install-on-windows, Install on Microsoft Windows]] 
 
-.Windows Nodes 
+.Windows and AIX Nodes
 
 ====
 
-Installing Rudder on Windows requires the commercial version of CFEngine (named Nova).
+* On Windows, installing Rudder requires the commercial version of CFEngine (named CFEngine Enterprise)
+* For IBM AIX, pre-built RPM packages are distributed by Normation only
+
 Hence, as a starting point, we suggest that you only use Linux machines. Once
 you are accustomed to Rudder, contact Normation to obtain a demo version for
-Windows platforms.
+these platforms.
 
 ====
 
