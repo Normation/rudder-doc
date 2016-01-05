@@ -25,14 +25,16 @@ Windows:
 
 [[install-on-windows, Install on Microsoft Windows]]
 
-.Windows Nodes
+.Windows and AIX Nodes
 
 ====
 
-Installing Rudder on Windows requires the commercial version of CFEngine (CFEngine Enterprise).
+* On Windows, installing Rudder requires the commercial version of CFEngine (named CFEngine Enterprise)
+* For IBM AIX, pre-built RPM packages are distributed by Normation only
+
 Hence, as a starting point, we suggest that you only use Linux machines. Once
-you are accustomed to Rudder, please contact Normation to obtain a demo version for
-Windows platforms.
+you are accustomed to Rudder, contact Normation to obtain a demo version for
+these platforms.
 
 ====
 
