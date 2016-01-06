@@ -6,3 +6,6 @@ given on the step described in <<initial-config, the section about initial confi
 You should see a loading screen, then a login prompt. The default login is "admin" with
 password "admin", authenticating you in the Rudder web interface with full administrative privileges.
 
+The setup of the Rudder server is now over. If you plan to manage hundreds or thousands of Nodes,
+please note that some <<_performance_tuning, performance tuning>> can be necessary on the system.
+
