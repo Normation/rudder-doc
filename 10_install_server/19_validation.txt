@@ -6,3 +6,6 @@ given on the step described in <<initial-config, the section about initial confi
 You should see a loading, then a login screen. Only two demo accounts are configured, without
 any right restriction as of now.
 
+The setup of the Rudder server is now over. If you plan to manage hundreds or thousands of Nodes,
+please note that some <<_performance_tuning, performance tuning>> can be necessary on the system.
+
