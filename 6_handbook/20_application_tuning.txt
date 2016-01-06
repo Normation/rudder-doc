@@ -208,3 +208,72 @@ mount /var/rudder/cfengine-community/state
 
 ----
 
+==== Rsyslog
+
+On Rudder policy servers (root or relay), when managing a large number of nodes,
+you can experience issues with rsyslog. This happens because Rudder uses TCP by
+default for sending reports to rsyslog, which implies the system has to keep track of
+the connections. It can lead to reach some limits, especially:
+
+* max number of open files for the user running rsyslog
+* size of network backlogs
+* size of the conntrack table
+
+All settings needing to modify '/etc/sysctl.conf' require to run 'sysctl -p'
+to be applied.
+
+===== Maximum number of file descriptors
+
+If you plan to manage hundreds of Nodes behind a relay or a root server, you should increase
+the open file limit (10k is a good starting point, you might have to get to 100k with
+thousands of Nodes).
+
+You can change the system-wide maximum number of file descriptors in '/etc/sysctl.conf' if necessary:
+
+----
+fs.file-max = 100000
+----
+
+Then you have to get the user running rsyslog enough file descriptors. To do so,
+you have to:
+
+* Have a high enough hard limit for rsyslog
+* Set the limit used by rsyslog
+
+The first one can be set in '/etc/security/limits.conf':
+
+----
+username hard nofile 8192
+----
+
+For the second one, you have two options:
+
+* Set the soft limit (which will be used by default) in '/etc/security/limits.conf' (with 'username soft nofile 8192')
+* If you want to avoid changing soft limit (particularly if rsyslog is running as root), you
+  can configure rsyslog to change its limit to a higher value (but not higher than the hard limit)
+  with the '$MaxOpenFiles' configuration directive in '/etc/rsyslog.conf'
+  
+You have to restart rsyslog for these settings to take effect.
+
+You can check current soft and hard limits by running the following commands as the user you want to check:
+
+----
+$ ulimit -Sn
+$ ulimit -Hn
+----
+
+===== Network backlog
+
+You can also have issues with the network queues (which may for example lead to sending SYN cookies):
+
+* You can increase the maximum number of connection requests awaiting acknowledgment by changing
+  'net.ipv4.tcp_max_syn_backlog = 4096' (for example, the default is 1024) in '/etc/sysctl.conf'.
+* You may also have to increase the socket listen() backlog in case of bursts, by changing
+  'net.core.somaxconn = 1024' (for example, default is 128) in '/etc/sysctl.conf'.
+
+===== Conntrack table
+
+You may reach the size of the conntrack table, especially if you have other applications 
+running on the same server. You can increase its size in '/etc/sysctl.conf', 
+see http://www.netfilter.org/documentation/FAQ/netfilter-faq.html#toc3.7[the Netfilter FAQ]
+for details.
