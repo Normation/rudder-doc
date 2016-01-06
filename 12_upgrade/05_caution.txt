@@ -13,6 +13,20 @@ However, Rudder 3.1 provides a new inventory signing feature which will only be 
 These agents are not compatible with Rudder 3.1, and you have to upgrade them. 
 Be careful to follow the upgrade path explained <<_upgrade_from_rudder_2_10_or_older, above>>.
 
+==== Protocol for reporting
+
+Rudder 3.1 uses syslog messages over UDP by default for reporting, but if you upgraded
+your server from a previous version, you will keep the previous setting which uses
+syslog messages over TCP.
+
+You should consider switching to UDP (in *Administration* -> *Settings* -> *Protocol*),
+as it will prevent breaking your server in
+case of networking or load issues, or if you want to manage a lot of nodes.
+The only drawback is that you can lose reports in these situations. It does not
+affects the reliability of policy enforcement, but may only temporarily affects
+reporting on the server.
+Read <<_rsyslog, perfomance notes>> about rsyslog for detailed information.
+
 ==== Known issues
 
 * After upgrade, if the web interface has display problems, empty your navigator cache and/or logout/login.

@@ -204,14 +204,24 @@ mount /var/rudder/cfengine-community/state
 
 ==== Rsyslog
 
-On Rudder policy servers (root or relay), when managing a large number of nodes,
-you can experience issues with rsyslog. This happens because Rudder uses TCP by
-default for sending reports to rsyslog, which implies the system has to keep track of
+If you are using syslog over TCP as reporting protocol (it is set in *Administration* -> *Settings* -> *Protocol*), 
+you can experience issues with rsyslog on Rudder
+policy servers (root or relay) when managing a large number of nodes.
+This happens because using TCP implies the system has to keep track of
 the connections. It can lead to reach some limits, especially:
 
 * max number of open files for the user running rsyslog
 * size of network backlogs
 * size of the conntrack table
+
+You have two options in this situation:
+
+* Switch to UDP (in *Administration* -> *Settings* -> *Protocol*). It is less reliable
+  than TCP and you can lose reports in case of networking or load issues, but it will
+  prevent breaking your server, and allow to manage more Nodes.
+* Stay on TCP. Do this only if you need to be sure you will get all your reports
+  to the server. You will should follow the instructions below to tune your system
+  to handle more connections.
 
 All settings needing to modify '/etc/sysctl.conf' require to run 'sysctl -p'
 to be applied.
