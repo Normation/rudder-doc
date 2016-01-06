@@ -1,0 +1,6 @@
+[[advancedusage]]
+
+== Advanced configuration management
+
+This chapter describe advanced usage of Rudder for configuration management.
+
