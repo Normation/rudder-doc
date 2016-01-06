@@ -1,0 +1,95 @@
+=== Monitoring
+
+This section will give recommendations for:
+
+* Monitoring Rudder itself (besides standard monitoring)
+* Monitoring the state of your configuration management
+
+==== Monitoring Rudder itself
+
+===== Monitoring a Node
+
+The monitoring of a node mainly consists in checking that the Node can speak with
+its policy server, and that the agent is run regularly.
+
+A good place to start is to check the content of the last run log file.
+It can be found in '/var/rudder/cfengine-community/output/previous'.
+
+You can search lines containing 'FATAL:', 'Fatal :', or 'could not get an updated configuration'
+with a log monitoring tool to automatically detect communication issues with the policy server.
+
+To get the last run time, you can lookup the modification date of
+'/var/rudder/cfengine-community/last_successful_inputs_update'.
+
+===== Monitoring a Server
+
+You can use use regular API calls to check the server is running and has access to its data.
+For example, you can issue the following command to get the list of currently defined rules:
+
+----
+curl -X GET -H "X-API-Token: yourToken" http://your.rudder.server/rudder/api/latest/rules
+----
+
+You can then check the status code (which should be 200). See the <<rest-api, API documentation>> for more information.
+
+You can also check the webapp logs (in '/var/log/rudder/webapp/year_month_day.stderrout.log')
+for error messages.
+
+==== Monitoring your configuration management
+
+There are two interesting types of information:
+
+* *Events*: all the changes made by the the agents on your Nodes
+* *Compliance*: the current state of your Nodes compared with the expected configuration
+
+The Web interface gives access to this, but we will here see how to process events
+automatically. They are available on the root server, in '/var/log/rudder/compliance/non-compliant-reports.log'.
+This file contains two types of reports about all the nodes managed by this server:
+
+* All the modifications made by the agent
+* All the errors that prevented the application of a policy
+
+The lines have the following format:
+
+----
+[%DATE%] N: %NODE_UUID% [%NODE_NAME%] S: [%RESULT%] R: %RULE_UUID% [%RULE_NAME%] D: %DIRECTIVE_UUID% [%DIRECTIVE_NAME%] T: %TECHNIQUE_NAME%/%TECHNIQUE_VERSION% C: [%COMPONENT_NAME%] V: [%KEY%] %MESSAGE%
+----
+
+In particular, the 'RESULT' field contains the type of event (change or error, respectively 'result_repaired' and 'result_error').
+
+Below is a basic https://www.elastic.co/products/logstash[Logstash] configuration file for parsing Rudder events.
+You can then use https://www.elastic.co/products/kibana[Kibana] to explore the data, and create graphs and
+dashboards to visualize the changes in your infrastructure.
+
+----
+input {
+   file {
+      path => "/var/log/rudder/compliance/non-compliant-reports.log"
+   }
+}
+
+filter {
+   grok {
+      match => { "message" => "^\[%{DATA:date}\] N: %{DATA:node_uuid} \[%{DATA:node}\] S: \[%{DATA:result}\] R: %{DATA:rule_uuid} \[%{DATA:rule}\] D: %{DATA:directive_uuid} \[%{DATA:directive}\] T: %{DATA:technique}/%{DATA:technique_version} C: \[%{DATA:component}\] V: \[%{DATA:key}\] %{DATA:message}$" }
+   }
+   # Replace the space in the date by a "T" to make it parseable by Logstash
+   mutate {
+      gsub => [ "date", " ", "T" ]
+   }
+   # Parse the event date
+   date {
+      match => [ "date" , "ISO8601" ]
+   }
+   # Remove the date field
+   mutate { remove => "date" }
+   # Remove the key field if it has the "None" value
+   if [key] == "None" {
+      mutate { remove => "key" }
+   }
+}
+
+output {
+    stdout { codec => rubydebug }
+}
+----
+
