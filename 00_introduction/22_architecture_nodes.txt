@@ -19,7 +19,7 @@ GNU/Linux:
 
 Other Unix systems:
 
-* Solaris 10
+* IBM AIX 5.3, 6.1 and 7.1
 
 Windows:
 
