@@ -2,6 +2,8 @@
 
 Following commands are executed as the +root+ user.
 
+include::../10_install_server/snippets/zypper_segfault.txt.snippet[]
+
 Add the Rudder packages repository:
 
 * on SLES 11:
