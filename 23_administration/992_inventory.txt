@@ -7,7 +7,7 @@ We well here give a few examples.
 ==== Export to a spreadsheet
 
 You can export the list of your nodes to a spreadsheet file (xls format) by using a 
-https://github.com/Normation/rudder-tools/tree/master/contrib/rudder_nodes_list[tool] available in the rudder-tools repository.
+https://github.com/normation/rudder-tools/tree/master/contrib/rudder_nodes_list[tool] available in the rudder-tools repository.
 
 Simple follow the installation instructions, and run it against your Rudder server.
 You will get a file containing:
