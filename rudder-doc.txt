@@ -1,15 +1,15 @@
-Rudder User Documentation
+Rudder 2.11 - User Manual
 =========================
 Normation_SAS,_Jonathan_Clarke,_Nicolas_Charles_and_Fabrice_Flore-Thebault <contact@normation.com>
 :description: User Documentation for the Rudder Drift Assessment Software. +
   Rudder associates Asset Management and Configuration Management. +
-  Rudder is a Free Software developped by Normation.
+  Rudder is a Free Software developed by Normation.
 :keywords: Rudder, Drift Assessment, Normation, Asset management, +
   Configuration Management, FusionInventory, CFEngine Community, +
   CFEngine Nova, CFEngine, Scala, Free Software, Open Source, GPL +
   User documentation
 :revdate: May 2014
-:revision: 2.11.0
+:revision: 2.11
 
 // Generate the map of content from list of files and alphabetically ordered
 // glossary 
@@ -44,6 +44,10 @@ http://normation.com[Normation SAS].
 
 External contributions:
 
-http://mazenl77.deviantart.com/art/I-like-buttons-3a-113122067[I like buttons 3a]
-icon set for admonition blocks by http://mazenl77.deviantart.com/[MazeNL77] is
-free for commercial usage.
+https://github.com/openstack/openstack-manuals[CSS styles from the OpenStack manuals]
+under Apache License version 2.0.
+
+Font Awesome by Dave Gandy - http://fontawesome.io
+
+http://www.latofonts.com/lato-free-fonts/[Lato fonts] by Łukasz Dziedzic, 
+under SIL Open Font License 1.1.

@@ -33,8 +33,9 @@
                 ,       stateManagement__cookie__name:    "sidebar_state" 
 		});
 
-
-
+    // Workaround for the left tree overflow issue in Chromium 44
+		$("#leftnavigation").css("width","auto");
+    $("#leftnavigation").css("width","inherit");
 
  	});
 

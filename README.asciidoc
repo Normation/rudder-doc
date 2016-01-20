@@ -58,11 +58,10 @@ themes:: contains material for visual formatting of the output.
 
 == Build
 
-Create HTML and PDF output suitable for distribution.
+Create HTML, epub and PDF output suitable for distribution.
 
 ----
 make
-make view
 ----
 
 == Cleanup
