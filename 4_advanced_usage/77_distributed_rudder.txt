@@ -11,7 +11,7 @@ From version 3.0 Rudder can be divided into 4 different components:
 ==== Preliminary steps
 
 
-You need the setup scripts provided at https://github.com/Normation/rudder-tools/tree/master/scripts/rudder-multiserver-setup. 
+You need the setup scripts provided at https://github.com/normation/rudder-tools/tree/master/scripts/rudder-multiserver-setup. 
 You can download them with this command:
 
 ----
