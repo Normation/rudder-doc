@@ -42,6 +42,24 @@ There are two interesting types of information:
 * *Events*: all the changes made by the the agents on your Nodes
 * *Compliance*: the current state of your Nodes compared with the expected configuration
 
+===== Monitor compliance
+
+You can use the Rudder API to get the current compliance state of your infrastructure.
+It can be used to simply check for configuration errors, or be integrated in
+other tools.
+
+Here is an very simple example of API call to check for errors (exits with 1 when there is an error):
+
+----
+curl -s -H "X-API-Token: yourToken" -X GET 'https:/your.rudder.server/rudder/api/latest/compliance/rules' | grep -qv '"status": "error"'
+----
+
+See the <<rest-api, API documentation>> for more information about general API usage, and the
+http://www.rudder-project.org/rudder-api-doc/#api-compliance[compliance API documentation]
+for a list of available calls.
+
+===== Monitor events
+
 The Web interface gives access to this, but we will here see how to process events
 automatically. They are available on the root server, in '/var/log/rudder/compliance/non-compliant-reports.log'.
 This file contains two types of reports about all the nodes managed by this server:
