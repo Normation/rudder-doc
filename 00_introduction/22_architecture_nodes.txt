@@ -1,4 +1,4 @@
-[[Nodes_supported_OS, the list of supported Operating Systems for Nodes]]
+[[nodes_supported_OS, the list of supported Operating Systems for Nodes]]
 
 === Specifications for Rudder Nodes
 
