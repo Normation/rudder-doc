@@ -55,11 +55,6 @@ engine of the distribution. The package has a dependency on the +postgresl+
 package, creates the database named +rudder+ and installs the inialisation
 scripts for that database in +/opt/rudder/etc/postgresql/*.sql+.
 
-+rudder-cfengine-community+::
-
-Package for the CFEngine server. This server delivers to the Nodes the Applied
-Policies converted into CFEngine promises.
-
 +rudder-server-root+::
 
 Package to ease installation of all Rudder services. This package depends on
