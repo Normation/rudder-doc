@@ -1,6 +1,6 @@
 [[configure_the_network, Configure the network]]
 
-=== Configure the network
+=== Requirements
 
 ==== Mandatory flows
 
