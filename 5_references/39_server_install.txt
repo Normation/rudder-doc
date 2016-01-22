@@ -1,62 +1,7 @@
-[[Server_supported_OS, the list of supported Operating Systems for Root server]]
+=== Packages organization
 
-=== Specifications for Rudder Root Server
+==== Packages
 
-==== Hardware specifications and sizing
-
-A dedicated server is strongly recommended, either physical or virtual with at least one dedicated core.
-Rudder Server runs on both 32 (if available) and 64 bit versions of every supported Operating System.
-
-===== Memory
-
-The required amount of RAM mainly depends on the number of managed nodes. A general rule for the minimal value is:
-
-* less than 50 nodes: 2GB
-* between 50 and 1000 nodes: 4GB
-* more than 1000 nodes: 4GB + 1GB of RAM by 500 nodes above 1000.
-
-When managing more than 1000 nodes, we also recommend you to use a multiserver
-installation for Rudder as described in chapter <<multiserver-rudder, Multiserver Rudder>>.
-
-For large installations, you should also tune the amount of RAM given to:
-
-* the web application, as explained in the section
-<<_configure_ram_allocated_to_jetty, about webapplication RAM configuration>> 
-* PostgresSQL, as explained in the <<_optimize_postgresql_server, Optimize PostgreSQL Server>> section
-
-===== Disk
-
-The PostgresSQL database is the main storage user. The disk space 
-necessary for the database can be estimated by counting around
-150 to 400kB of storage used by Directive, by Node and by day of storage of node's
-execution reports (default to 30 days):
-
-----
-max_space = number of Directives * number of Nodes * retention duration in days * 400 kB
-----
-
-For example, an installation managing 150 nodes, with an average of 
-100 Directives by node, and keeping execution reports for one week 
-should anticipate the use of between 20GB and 60GB of disk size for PostgreSQL. 
-
-You can follow the <<_reports_retention, Reports Retention>> section to configure the
-retention duration.
-
-==== Supported Operating Systems
-
-The following operating systems are supported as a Root server:
-
-GNU/Linux:
-
-* Debian 7 and 8
-
-* RedHat Enterprise Linux (RHEL) / RHEL-like 6 and 7
-
-* SuSE Linux Enterprise Server (SLES) 11 SP1 and SP3
-
-* Ubuntu 12.04 LTS (Precise), 14.04 LTS (Trusty)
-
-<<<<<<< HEAD
 Rudder components are distributed as a set of packages.
 
 //image::./images/rudder-packages.png[Rudder packages]
@@ -92,8 +37,8 @@ application server. It depends on a compatible Java 7 Runtime Environment.
 +rudder-techniquess+::
 
 Package for the Techniques. They are installed in
-+/opt/rudder/configuration-repository/techniques+. At runtime, the Techniques are
-copied into a 'git' repository in +/var/rudder+. Therefore, the package depends
++/opt/rudder/share/techniques+. At runtime, the Techniques are
+copied into a 'git' repository in +/var/rudder/configuration-repository+. Therefore, the package depends
 on the +git+ package.
 
 +rudder-inventory-ldap+::
@@ -213,5 +158,3 @@ git::
 The running Techniques Library is maintained as a git repository in
 +/var/rudder/configuration-repository/techniques+.
 
-=======
->>>>>>> branches/rudder/3.0

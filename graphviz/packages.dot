@@ -17,7 +17,6 @@ node [
 "rudder-reports"
 "rudder-techniques"
 "rudder-webapp"
-"rudder-cfengine-community"
 "rudder-server-root"
 
 {rank=same;
@@ -46,8 +45,6 @@ node [
 "rudder-reports"-> "rudder-webapp"
 
 "rudder-webapp" -> "rudder-server-root"
-
-"rudder-cfengine-community" ->"rudder-server-root"
 
 }
 
