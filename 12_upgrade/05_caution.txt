@@ -1,6 +1,6 @@
 === Caution cases
 
-==== Compatibility between Rudder server 3.1 and older agent versions
+==== Compatibility between Rudder server 3.2 and older agent versions
 
 ===== 2.11.x, 3.0.X and 3.1.x agents
 
