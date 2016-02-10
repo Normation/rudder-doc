@@ -25,7 +25,19 @@ a full reinstallation of the Rudder Server.
 
 ====
 
+==== Change the agent run schedule
 
+By default, the agent runs on all nodes every 5 minutes. You can modify this value in
+*Administration* -> *Settings* -> *Agent Run Schedule*, as well as the "splay time"
+across nodes (a random delay that alters scheduled run time, intended to spread
+load across nodes).
 
+[WARNING]
 
+====
+
+When reducing notably the run interval length, reporting can be in 'No report' state
+until the next run of the agent, which can take up to the previous (longer) interval.
+
+====
 
