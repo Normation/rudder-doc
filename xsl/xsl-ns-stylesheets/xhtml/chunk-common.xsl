@@ -1209,7 +1209,9 @@ xmlns:exsl="http://exslt.org/common" xmlns:cf="http://docbook.sourceforge.net/xm
     <xsl:if test="//d:legalnotice                   and not($generate.legalnotice.link = 0)                   and not($html.head.legalnotice.link.types = '')">
       <xsl:call-template name="make.legalnotice.head.links"/>
     </xsl:if>
-
+    <xsl:choose><xsl:when test="$webhelp.include.search.tab = '0'">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    </xsl:when></xsl:choose>
     <xsl:call-template name="user.head.content"/>
   </head>
 </xsl:template>
