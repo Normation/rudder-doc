@@ -1,4 +1,4 @@
-Rudder 3.1 - User Manual
+Rudder 3.2 - User Manual
 ========================
 Normation_SAS_and_Fabrice_Flore-Thebault <contact@normation.com>
 :description: User Documentation for the Rudder Drift Assessment Software. +
