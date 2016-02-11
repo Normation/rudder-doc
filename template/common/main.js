@@ -9,26 +9,6 @@
 var noAnimations=false;
 
 $(document).ready(function() {
-	// When you click on a link to an anchor, scroll down 
-	// 105 px to cope with the fact that the banner
-	// hides the top 95px or so of the page.
-	// This code deals with the problem when 
-	// you click on a link within a page.
-	$('a[href*=#]').click(function() {
-		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
-		    && location.hostname == this.hostname) {
-		    var $target = $(this.hash);
-		    $target = $target.length && $target
-			|| $('[name=' + this.hash.slice(1) +']');
-		if (!(this.hash == "#searchDiv" || this.hash == "#treeDiv"  || this.hash == "") && $target.length) {
-			var targetOffset = $target.offset().top - 120;
-			$('html,body')
-			    .animate({scrollTop: targetOffset}, 200);
-			return false;
-		    }
-		}
-	    });
-
     //  $("#showHideHighlight").button(); //add jquery button styling to 'Go' button
     //Generate tabs in nav-pane with JQuery
     $(function() {
@@ -114,10 +94,10 @@ function syncToc() {
             var ulNode = a.getElementsByTagName("ul")[0];
             if (ulNode != undefined) {
                 if (ulNode.hasAttribute("style")) {
-                    ulNode.setAttribute("style", "display: block; background-color: #D8D8D8 !important;");
+                    ulNode.setAttribute("style", "display: block; background-color: #FFCA8E !important;");
                 } else {
                     var ulStyle = document.createAttribute("style");
-                    ulStyle.nodeValue = "display: block; background-color: #D8D8D8 !important;";
+                    ulStyle.nodeValue = "display: block; background-color: #FFCA8E !important;";
                     ulNode.setAttributeNode(ulStyle);
             }   }
             //adjust tree's + sign to -
@@ -139,13 +119,13 @@ function syncToc() {
             //Setting the background for selected node.
             var style = a.getAttribute("style", 2);
             if (style != null && !style.match(/background-color: Background;/)) {
-                a.setAttribute("style", "background-color: #D8D8D8;  " + style);
+                a.setAttribute("style", "background-color: #C2C2C2;  " + style);
                 b.setAttribute("style", "color: black;");
             } else if (style != null) {
-                a.setAttribute("style", "background-color: #D8D8D8;  " + style);
+                a.setAttribute("style", "background-color: #C2C2C2;  " + style);
                 b.setAttribute("style", "color: black;");
             } else {
-                a.setAttribute("style", "background-color: #D8D8D8;  ");
+                a.setAttribute("style", "background-color: #C2C2C2;  ");
                 b.setAttribute("style", "color: black;");
             }
         }

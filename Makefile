@@ -4,7 +4,7 @@
 
 BASENAME = rudder-doc
 SOURCES = $(BASENAME).txt
-TARGETS = epub html pdf readme
+TARGETS = epub html pdf readme webhelp webhelp-localsearch
 DOCBOOK_DIST = xsl/xsl-ns-stylesheets
 
 ASCIIDOC = $(CURDIR)/bin/asciidoc/asciidoc.py
@@ -49,7 +49,8 @@ SEE = see
 
 all: $(TARGETS)
 epub: epub/$(BASENAME).epub
-webhelp: docs/index.html index
+webhelp: webhelp/index.html
+webhelp-localsearch: webhelp-localsearch/index.html index
 html: html/$(BASENAME).html
 pdf: html/$(BASENAME).pdf
 readme: html/README.html
@@ -85,18 +86,34 @@ $(LUCENE_ANALYZER_JAR):
 
 jars: $(INDEXER_JAR) $(TAGSOUP_JAR) $(LUCENE_ANALYZER_JAR) $(LUCENE_CORE_JAR)
 
-docs/index.html: $(SOURCES)
-	mkdir -p docs
+webhelp/index.html: $(SOURCES)
+	mkdir -p webhelp
 	$(ASCIIDOC) --doctype=book --backend docbook $?
 	xsltproc  --xinclude --output xincluded-profiled.xml  \
         	$(DOCBOOK_DIST)/profiling/profile.xsl $(BASENAME).xml
-	xsltproc xsl/webhelp.xsl xincluded-profiled.xml
-	cp -r style/html/* images template/common *.png docs/
-	cp -r style/html/images/icons docs/common/images/admon-icons
+	xsltproc --stringparam webhelp.base.dir "webhelp" \
+	         --stringparam webhelp.include.search.tab "0" \
+	         --stringparam webhelp.embedded "0" \
+	         --stringparam rudder.version "2.11" \
+	         xsl/webhelp.xsl xincluded-profiled.xml
+	cp -r style/html/favicon.ico images template/common *.png webhelp/
 
-index: docs/index.html jars
+webhelp-localsearch/index.html: $(SOURCES)
+	mkdir -p webhelp-localsearch
+	$(ASCIIDOC) --doctype=book --backend docbook $?
+	xsltproc  --xinclude --output xincluded-profiled.xml \
+        	 $(DOCBOOK_DIST)/profiling/profile.xsl $(BASENAME).xml
+	xsltproc --stringparam webhelp.base.dir "webhelp-localsearch" \
+	         --stringparam webhelp.include.search.tab "1" \
+	         --stringparam webhelp.embedded "1" \
+	         --stringparam rudder.version "2.11" \
+	         xsl/webhelp.xsl xincluded-profiled.xml
+	cp -r style/html/favicon.ico images template/common *.png webhelp-localsearch/
+
+index: webhelp-localsearch/index.html jars
+	mkdir -p webhelp-localsearch/search
 	java \
-	                	-DhtmlDir=docs \
+	                	-DhtmlDir=webhelp-localsearch \
 		                -DindexerLanguage=en \
 		                -DhtmlExtension=html \
 		                -DdoStem=true \
@@ -104,7 +121,7 @@ index: docs/index.html jars
 		                -Djavax.xml.parsers.SAXParserFactory=org.ccil.cowan.tagsoup.jaxp.SAXFactoryImpl \
 		                -classpath $(classpath) \
 		                com.nexwave.nquindexer.IndexerMain
-	cp -r template/search/* docs/search
+	cp -r template/search/* webhelp-localsearch/search
 
 html/$(BASENAME).html: $(SOURCES)
 	mkdir -p html
@@ -121,7 +138,7 @@ slides.html: $(SOURCES)
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
 clean:
-	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub docs xincluded-profiled.xml $(BASENAME).xml extensions
+	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub webhelp webhelp-localsearch xincluded-profiled.xml $(BASENAME).xml extensions
 
 view: all
 	$(SEE) $(TARGETS)

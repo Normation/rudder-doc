@@ -10,3 +10,6 @@ main_*.png
 _*.png
 temp/*
 graphs/*
+webhelp*
+html/
+extensions/
