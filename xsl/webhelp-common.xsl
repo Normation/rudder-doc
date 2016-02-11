@@ -534,7 +534,7 @@ border: none; background: none; font-weight: none; color: none; }
                     inputSelector: '#searchfield',
                     algoliaOptions: {
                       'hitsPerPage': 5,
-                      'facetFilters': '(tags:v3.0)'
+                      'facetFilters': '(tags:v3.1)'
                     }
                   }); 
                   </script>
@@ -669,8 +669,8 @@ border: none; background: none; font-weight: none; color: none; }
                              <a href="http://www.rudder-project.org/changelog-{$rudder.version}">Changelog</a> | 
                              <a href="http://http://www.rudder-project.org/rudder-api-doc/">API reference</a></span>
       <span>Version: <a href="http://www.rudder-project.org/doc-2.11/">2.11 (ESR)</a> | 
-                                                   <strong>3.0</strong> | 
-                                                   <a href="http://www.rudder-project.org/doc-3.1/">3.1</a> |
+                                                   <a href="http://www.rudder-project.org/doc-3.0/">3.0</a> | 
+                                                   <strong>3.1</strong> | 
                                                    <a href="http://www.rudder-project.org/doc-3.2/">3.2</a></span>
     <xsl:choose>
       <xsl:when test="$webhelp.embedded != '1'">
