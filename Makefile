@@ -105,25 +105,25 @@ jars: $(INDEXER_JAR) $(TAGSOUP_JAR) $(LUCENE_ANALYZER_JAR) $(LUCENE_CORE_JAR)
 
 webhelp/index.html: man $(SOURCES)
 	mkdir -p webhelp
-	$(ASCIIDOC) --doctype=book --backend docbook $?
+	$(ASCIIDOC) --doctype=book --backend docbook $(SOURCES)
 	xsltproc  --xinclude --output xincluded-profiled.xml  \
         	$(DOCBOOK_DIST)/profiling/profile.xsl $(BASENAME).xml
 	xsltproc --stringparam webhelp.base.dir "webhelp" \
 	         --stringparam webhelp.include.search.tab "0" \
 	         --stringparam webhelp.embedded "0" \
-	         --stringparam rudder.version "2.11" \
+	         --stringparam rudder.version $(RUDDER_VERSION) \
 	         xsl/webhelp.xsl xincluded-profiled.xml
 	cp -r style/html/favicon.ico images template/common *.png webhelp/
 
-webhelp-localsearch/index.html: $(SOURCES)
+webhelp-localsearch/index.html: man $(SOURCES)
 	mkdir -p webhelp-localsearch
-	$(ASCIIDOC) --doctype=book --backend docbook $?
+	$(ASCIIDOC) --doctype=book --backend docbook $(SOURCES)
 	xsltproc  --xinclude --output xincluded-profiled.xml \
         	 $(DOCBOOK_DIST)/profiling/profile.xsl $(BASENAME).xml
 	xsltproc --stringparam webhelp.base.dir "webhelp-localsearch" \
 	         --stringparam webhelp.include.search.tab "1" \
 	         --stringparam webhelp.embedded "1" \
-	         --stringparam rudder.version "2.11" \
+	         --stringparam rudder.version $(RUDDER_VERSION) \
 	         xsl/webhelp.xsl xincluded-profiled.xml
 	cp -r style/html/favicon.ico images template/common *.png webhelp-localsearch/
 
