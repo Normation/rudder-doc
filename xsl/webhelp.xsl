@@ -18,6 +18,5 @@ xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
 
 <xsl:import href="xsl-ns-stylesheets/xhtml/chunk.xsl"/>
 <xsl:include href="webhelp-common.xsl"/>
-<xsl:include href="titlepage.templates.xsl"/>
 
 </xsl:stylesheet>

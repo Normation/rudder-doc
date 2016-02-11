@@ -70,7 +70,7 @@
   </authorgroup>
   
   <copyright>
-    <year>2011-2013</year>
+    <year>2011-2016</year>
     <holder>Normation SAS</holder>
   </copyright>
   
@@ -81,49 +81,6 @@
       this license may be available at normation.com.
     </simpara>
   </legalnotice>
-  
-  <revhistory>
-    <revision>
-      <revnumber>2.3.0</revnumber>
-      <date>October 2011</date>
-      <authorinitials>NC, JC, FFT</authorinitials>
-      <revremark>
-        First release of the Rudder User Documentation.
-      </revremark>
-    </revision>
-    <revision>
-      <revnumber>2.4.0</revnumber>
-      <date>December 2012</date>
-      <authorinitials>NC, JC, FFT</authorinitials>
-      <revremark>
-        Rudder User Documentation for 2.4 release of Rudder.
-      </revremark>
-    </revision>
-    <revision>
-      <revnumber>2.5.0</revnumber>
-      <date>January 2013</date>
-      <authorinitials>AA, FA, FFT, JC, NC, NP, MC, VM</authorinitials>
-      <revremark>
-        Rudder User Documentation for 2.5 release of Rudder.
-      </revremark>
-    </revision>
-    <revision>
-      <revnumber>2.6.0</revnumber>
-      <date>April 2013</date>
-      <authorinitials>AA, FA, FFT, JC, NC, NP, MC, VM</authorinitials>
-      <revremark>
-        Rudder User Documentation for 2.8 release of Rudder.
-      </revremark>
-    </revision>
-    <revision>
-      <revnumber>2.8.0</revnumber>
-      <date>July 2013</date>
-      <authorinitials>AA, FA, FFT, JC, NC, NP, MC, VM</authorinitials>
-      <revremark>
-        Rudder User Documentation for 2.8 release of Rudder.
-      </revremark>
-    </revision>
-  </revhistory>
   
     <mediaobject role="cover">
       <imageobject>
