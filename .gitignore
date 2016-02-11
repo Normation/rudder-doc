@@ -16,3 +16,6 @@ graphs/*
 *~
 *.bak
 *.off
+webhelp*
+html/
+extensions/

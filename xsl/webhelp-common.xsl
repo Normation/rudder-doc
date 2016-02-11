@@ -53,7 +53,7 @@ xmlns:exsl="http://exslt.org/common"
     <xsl:param name="part.autolabel" select="0"/>
     <xsl:param name="section.label.includes.component.label" select="1"/>
 
-    <xsl:param name="generate.section.toc.level" select="5"/>
+    <xsl:param name="generate.section.toc.level" select="2"/>
     <xsl:param name="component.label.includes.part.label" select="1"/>
     <xsl:param name="suppress.footer.navigation">0</xsl:param>
     <xsl:param name="callout.graphics.path"><xsl:value-of select="$webhelp.common.dir"/>images/callouts/</xsl:param>
@@ -61,13 +61,13 @@ xmlns:exsl="http://exslt.org/common"
     <xsl:param name="admon.graphics.path"><xsl:value-of select="$webhelp.common.dir"/>images/admon-icons/</xsl:param>
     <xsl:param name="admon.graphics" select="1"/>
     <!--xsl:param name="generate.toc">book toc</xsl:param-->
-    <xsl:param name="webhelp.include.search.tab" select="1"/>
+    <xsl:param name="webhelp.include.search.tab" select="0"/>
     
 <xsl:param name="generate.toc">
 appendix  toc,title
 article/appendix  nop
 article   toc,title
-book      title,figure,table,example,equation
+book      toc,title
 chapter   toc,title
 part      toc,title
 preface   toc,title
@@ -79,7 +79,7 @@ sect2     toc
 sect3     toc
 sect4     toc
 sect5     toc
-section   toc
+section   toc,title
 set       toc,title
 </xsl:param>
 
@@ -162,6 +162,7 @@ The meta tag tells the IE rendering engine that it should use the latest, or edg
         <link rel="stylesheet" type="text/css" href="common/css/positioning.css"/>
         <link rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css"/>
         <link rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css"/>
+        <link rel="stylesheet" type="text/css" href="common/LatoLatin/latolatinfonts.css"/>
 
         <style type="text/css">
 
@@ -204,10 +205,11 @@ span.searchTab {
     margin-top: 4px;
 }
 #webhelp-currentid {
-    background-color: #D8D8D8 !important;
+    background-color: #FFCA8E !important;
 }
 .treeview .hover { color: black; }
-.filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+.filetree li span a { text-decoration: none; font-size: 13px; color: black; }
+.filetree li span a:hover { color: #EE7F00; }
 
 /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
 .ui-widget-content {
@@ -237,8 +239,8 @@ border: none; background: none; font-weight: none; color: none; }
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
     color: black; text-decoration: none;
     background: #C6C6C6; /* old browsers */
-    background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+    background: -moz-linear-gradient(top, #C6C6C6 0%, #FFCA8E 100%); /* firefox */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#FFCA8E)); /* webkit */
     -webkit-border-radius:15px; -moz-border-radius:10px;
     border: 1px solid #f1f1f1;
 }
@@ -255,8 +257,7 @@ border: none; background: none; font-weight: none; color: none; }
 	 */
 
 	.ui-layout-pane { /* all 'panes' */
-		background: #FFF;
-		border: 1px solid #BBB;
+		background: #fafafa;
 		padding: 05x;
 		overflow: auto;
 	}
@@ -525,6 +526,19 @@ border: none; background: none; font-weight: none; color: none; }
                 </div>
 
                 <xsl:call-template name="user.footer.navigation"/>
+                <xsl:choose><xsl:when test="$webhelp.include.search.tab = '0'">
+                  <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script> 
+                  <script type="text/javascript"> docsearch({
+                    apiKey: '339fdb9d06e694d14046ad9a5cd4fbb3',
+                    indexName: 'rudder_project',
+                    inputSelector: '#searchfield',
+                    algoliaOptions: {
+                      'hitsPerPage': 5,
+                      'facetFilters': '(tags:v2.11)'
+                    }
+                  }); 
+                  </script>
+                </xsl:when></xsl:choose>
             </body>
         </html>
         <xsl:value-of select="$chunk.append"/>
@@ -548,7 +562,7 @@ border: none; background: none; font-weight: none; color: none; }
             <!-- Display the page title and the main heading(parent) of it-->
             <h1>
               <span class="bigtitle"><xsl:apply-templates select="/*[1]" mode="title.markup"/></span>
-	      <br/>
+	      <span>
                 <xsl:choose>
                     <xsl:when
 			test="count($up) &gt; 0 and generate-id($up) != generate-id($home)">
@@ -558,8 +572,13 @@ border: none; background: none; font-weight: none; color: none; }
 		      <xsl:apply-templates select="." mode="object.title.markup"/>
 		    </xsl:when>
                     <xsl:otherwise>&#160;</xsl:otherwise>
-                </xsl:choose>
+                </xsl:choose></span>
 	    </h1>
+
+      <xsl:call-template name="otherlinks"/>
+    <xsl:choose><xsl:when test="$webhelp.include.search.tab = '0'">
+        <xsl:call-template name="searchbox"/>
+      </xsl:when></xsl:choose>
             <!-- Prev and Next links generation-->
             <div id="navheader">
 	      <xsl:call-template name="user.webhelp.navheader.content"/>
@@ -639,8 +658,36 @@ border: none; background: none; font-weight: none; color: none; }
     <xsl:template name="webhelpheader.logo">
 	<a href="index.html">
 	<img style='margin-right: 2px; height: 59px; padding-right: 25px; padding-top: 8px' align="right"
-	    src='{$webhelp.common.dir}images/logo.png' alt="{$brandname} Documentation"/>
+	    src='{$webhelp.common.dir}images/logo_Rudder.png' alt="{$brandname} Documentation"/>
 	</a>
+    </xsl:template>
+    
+    
+    <xsl:template name="otherlinks">
+    <div id="otherlinks">
+      <span>Resources: <strong>User manual</strong> |
+                             <a href="http://www.rudder-project.org/changelog-{$rudder.version}">Changelog</a> | 
+                             <a href="http://http://www.rudder-project.org/rudder-api-doc/">API reference</a></span>
+      <span>Version: <strong>2.11 (ESR)</strong> | <a href="http://www.rudder-project.org/doc-3.0/">3.0</a> | 
+                                                   <a href="http://www.rudder-project.org/doc-3.1/">3.1</a> |
+                                                   <a href="http://www.rudder-project.org/doc-3.2/">3.2</a></span>
+    <xsl:choose>
+      <xsl:when test="$webhelp.embedded != '1'">
+        <span>Download as: <a href="http://www.rudder-project.org/rudder-doc-{$rudder.version}/rudder-doc.epub">epub</a> | <a href="http://www.rudder-project.org/rudder-doc-{$rudder.version}/rudder-doc.pdf">pdf</a></span>
+      </xsl:when>
+      <xsl:otherwise>
+        <span>Download as: <a href="http://www.rudder-project.org/rudder-doc-{$rudder.version}/rudder-doc.epub">epub</a> | <a href="rudder-doc.pdf">pdf</a></span>
+      </xsl:otherwise>
+    </xsl:choose>
+    </div>
+    </xsl:template>
+    
+    <xsl:template name="searchbox">
+    <div id="searchbox">
+    <span class="algolia-autocomplete">
+        <input type="text" size="35" id="searchfield" name="search" placeholder="Search the docs..." />
+    </span>
+    </div>
     </xsl:template>
 
     <xsl:template name="user.webhelp.navheader.content"/>
@@ -702,11 +749,12 @@ border: none; background: none; font-weight: none; color: none; }
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>
-
+              
                 <div id="sidebar"> <!--#sidebar id is used for showing and hiding the side bar -->
                     <div id="leftnavigation" style="padding-top:3px;">
                         <div id="tabs">
                             <ul>
+                              <xsl:choose><xsl:when test="$webhelp.include.search.tab != '0'">
                                 <li>
                                     <a href="#treeDiv" style="outline:0;" tabindex="1">
                                         <span class="contentsTab">
@@ -730,6 +778,7 @@ border: none; background: none; font-weight: none; color: none; }
                                     </li>
                                 </xsl:if>
 				<xsl:call-template name="user.webhelp.tabs.title"/>
+                              </xsl:when></xsl:choose>
                             </ul>
                             <div id="treeDiv">
                                 <img src="{$webhelp.common.dir}images/loading.gif" alt="loading table of contents..."
