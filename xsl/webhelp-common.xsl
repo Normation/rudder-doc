@@ -667,7 +667,7 @@ border: none; background: none; font-weight: none; color: none; }
     <div id="otherlinks">
       <span>Resources: <strong>User manual</strong> |
                              <a href="http://www.rudder-project.org/changelog-{$rudder.version}">Changelog</a> | 
-                             <a href="http://http://www.rudder-project.org/rudder-api-doc/">API reference</a></span>
+                             <a href="http://www.rudder-project.org/rudder-api-doc/">API reference</a></span>
       <span>Version: <a href="http://www.rudder-project.org/doc-2.11/">2.11 (ESR)</a> | 
                                                    <a href="http://www.rudder-project.org/doc-3.0/">3.0</a> | 
                                                    <strong>3.1</strong> | 
