@@ -665,12 +665,17 @@ border: none; background: none; font-weight: none; color: none; }
     
     <xsl:template name="otherlinks">
     <div id="otherlinks">
-      <span>Resources: <strong>User manual</strong> |
-                             <a href="http://www.rudder-project.org/changelog-{$rudder.version}">Changelog</a> | 
-                             <a href="http://www.rudder-project.org/rudder-api-doc/">API reference</a></span>
-      <span>Version: <strong>2.11 (ESR)</strong> | <a href="http://www.rudder-project.org/doc-3.0/">3.0</a> | 
-                                                   <a href="http://www.rudder-project.org/doc-3.1/">3.1</a> |
-                                                   <a href="http://www.rudder-project.org/doc-3.2/">3.2</a></span>
+      <span>Resources:
+        <strong>User manual</strong> |
+        <a href="http://www.rudder-project.org/changelog-{$rudder.version}">Changelog</a> |
+        <a href="http://www.rudder-project.org/rudder-api-doc/">API reference</a>
+      </span>
+      <span>Version:
+        <strong>2.11</strong> |
+        <a href="http://www.rudder-project.org/doc-3.0/">3.0</a> |
+        <a href="http://www.rudder-project.org/doc-3.1/">3.1 (ESR)</a> |
+        <a href="http://www.rudder-project.org/doc-3.2/">3.2</a>
+      </span>
     <xsl:choose>
       <xsl:when test="$webhelp.embedded != '1'">
         <span>Download as: <a href="http://www.rudder-project.org/rudder-doc-{$rudder.version}/rudder-doc.epub">epub</a> | <a href="http://www.rudder-project.org/rudder-doc-{$rudder.version}/rudder-doc.pdf">pdf</a></span>
