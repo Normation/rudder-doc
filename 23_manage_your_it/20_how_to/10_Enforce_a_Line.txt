@@ -1,0 +1,19 @@
+==== Enforce a line is present in a file only once 
+
+Enforcing that a line to be present in a single occurence in a file is not an easy process to automate. Providing templates is an easy way to achieve this but not always possible.
+
+If you don't want to use a template, you can use Technique *Enforce a File content* to control the content of a file.
+
+The whole logic to edit a file so it contain only one occurence of a line is:
+
+* Add the line, so it will be added if missing)
+* Replace line that looks almost like our line by the line
+* Delete all duplicated lines 
+
+With these 3 steps, You will end with one line!
+
+So, here is a small example: let's say you want /etc/sysconfig/sysctl to contain line 'ENABLE_SYSRQ="yes"'
+
+You will need to create a Directive based on Enforce a File content with the following content:
+
+image::./images/oneLine.png[oneLine]
