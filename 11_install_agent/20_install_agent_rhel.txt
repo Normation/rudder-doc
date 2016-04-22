@@ -4,11 +4,12 @@ Define a yum repository for Rudder:
 
 ----
 
-$ echo "[Rudder_3.0]
+version=$(grep "release [0-10]" /etc/redhat-release | sed "s/^.*release \([0-9]\).*$/\1/")
+echo "[Rudder_3.0]
 name=Rudder 3.0 EL repository
-baseurl=http://www.rudder-project.org/rpm-3.0/RHEL_7/
+baseurl=http://www.rudder-project.org/rpm-3.0/RHEL_${version}/
 gpgcheck=1
-gpgkey=http://www.rudder-project.org/rpm-3.0/RHEL_7/repodata/repomd.xml.key" > /etc/yum.repos.d/rudder.repo
+gpgkey=http://www.rudder-project.org/rpm-3.0/RHEL_${version}/repodata/repomd.xml.key" > /etc/yum.repos.d/rudder.repo
 
 ----
 
@@ -16,10 +17,9 @@ gpgkey=http://www.rudder-project.org/rpm-3.0/RHEL_7/repodata/repomd.xml.key" > /
 
 ====
 
-Replace RHEL_7 with your Enterprise Linux version if necessary.
-
 The RPM can be directly downloaded for a standalone installation,
 from the following URL: http://www.rudder-project.org/rpm-3.0/RHEL_7/
+(or RHEL_6, RHEL_5, etc, depending on your host's OS version)
 
 ====
 
