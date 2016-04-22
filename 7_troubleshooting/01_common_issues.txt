@@ -1,0 +1,158 @@
+=== Some reports are in "No Answer"
+
+==== If you get no reports at all for the Node
+
+First thing to check is to see if reports were received by Rudder server.
+
+Check the last report time (called *Last seen*) in *List Nodes* page.
+If you see:
+
+* *Never*: your Node is misconfigured or has a communication issue with the server
+* A date far (more than 15 minutes) from current time:	Synchronize server and node time
+* A recent date: check if the node has correctly updated
+
+Now we will check if promises were updated on the Node. Maybe the node could not
+update its promises anymore, even if the reporting looks ok and Rules seems to
+be applied but report keeps in ‘No Answer’.
+
+To check if a node can update its promises, run (one the node) '/var/rudder/cfengine-community/bin/cf-agent -KI | grep Update@@None'
+You’ll get the result of the ‘Update‘ component in the execution.
+The message at the end of the line will tell you if the update succeed of fail:
+'R: @@Common@@result_error@@hasPolicyServer-root@@common-root@@00@@Update@@None@@2014-01-07 07:40:45-02:00##dda3cba8-f6ca-4766-a3cb-09d61f53f6c5@#Cannot update node’s policy or dependencies'
+
+To update its promises, a Node needs to get a directory on Rudder server
+(/var/rudder/share/node_uuid), and Rudder checks if the node is authorized to
+access that directory. This check is based on the capability to resolve the ip
+as an accepted node. So if your node can’t update its promises, it’s
+probably because of a DNS issue!
+
+==== If you get incomplete reporting for the Node
+
+Some executions may be truncated, leading to incomplete reports.
+Rudder executions start with a 'StartRun' report and ends with an 'EndRun'.
+If the execution is incomplete and the 'EndRun' never sent some reports will be missing. reasons could be:
+
+* the execution of the agent encountered an error during its execution and could
+not complete, please http://www.rudder-project.org/redmine/projects/rudder/issues/new[report a bug]
+* the agent is executed to launch specific bundles
+* reporting is missing on a Technique, in this case http://www.rudder-project.org/redmine/projects/rudder/issues/new[report a bug]
+
+=== Communication issues between agent and server
+
+==== DNS issues
+
+If one of the following problems happen:
+
+* the agent does not manage to get its configuration back from the server with weird errors
+* the server complains about being unable to resolve the node hostname
+* when starting or restarting Rudder (or rudder-agent) service, 'cf-serverd' start hangs
+
+You probably have a name resolution problem. Please keep in mind that Rudder needs a working
+name resolution environment to operate properly, and therefore every machine should be at
+least able to resolve the name of their peer.
+
+You have two options:
+
+* Fix your DNS server or the '/etc/hosts' on both the server and the node, so
+they can resolve each other (you can check using nslookup). You need to
+restart rudder-agent on the server to apply it
+* Disable hostname checking
+on the server in *Administration* -> *Settings* -> *Use reverse DNS lookups on nodes
+to reinforce authentication to policy server*. This is the preferred solution if you
+have nodes behind a NAT.
+
+==== Inventory issues
+
+If you cannot send inventories to the server, it may be because of a proxy configured in
+'/etc/profile' or shell configuration. Rudder agents use cURL to send inventories to
+their server, and the server actually uses it too to send received inventories to the
+inventory web application. There are two solutions usable to prevent this problem:
+
+* Disable the proxy temporarily in your shell session, so Rudder can operate freely:
+
+----
+unset http_proxy; unset https_proxy; unset ftp_proxy; unset ftps_proxy; unset HTTP_PROXY; unset HTTPS_PROXY; unset FTP_PROXY; unset FTPS_PROXY
+----
+
+* If you are using the Squid proxy, you are in luck, as the workaround might simply
+be to add this entry to your '/etc/squid/squid.conf': 'ignore_expect_100 on', it will
+make Squid more tolerant to programs like cURL than send some terse http requests.
+(Thanks to Albaro A. for this tip!)
+
+=== Technique editing
+
+If you have committed an invalid technique, then fixed it and commited it again,
+but the webapp still doesn't  start, you have to force Technique library reloading.
+
+To do this, deleting the attribute techniqueLibraryVersion from entry 
+'techniqueCategoryId=Active Techniques,ou=Rudder,cn=rudder-configuration' in your
+Rudder LDAP backend. When re-starting, the webapp should now reload latest techniques.
+
+=== Database is using too much space
+
+Rudder stores a lot of data in the Postgresql database, and most historical data 
+is removed from it. You can <<_automatic_postgresql_table_maintenance,configure>> how many days of logs you want to keep in 
+the database. However, due to the nature of Postgresql, when data are removed,
+space is not reclaimed on the storage system, it is simply marked as “free” for 
+the database to write again in the removed rows. This space can be reclaimed by 
+a VACUUM FULL, but it needs at least as much free space on the drive as the database size.
+Moreover, if you are using Postgresql 8.3 (or in a lesser extend 8.4), you’ll be 
+likely to experience indexes bloating, where the physical size of the indexes grows
+without real reason, and need to be regularly purged.
+
+There are two ways to reclaim space, the fast one (which doesn’t reclaim completely
+all wasted space), and the complete one (which is unfortunately very slow)
+
+Fast solution (especially for 8.x version of postgresql):
+Simply reindexing the database will save some space; depending on the size of your
+database, it may take several minutes to a couple of hours
+
+----
+# First, stop the Rudder server
+touch /opt/rudder/etc/disable-agent
+/etc/init.d/rudder-jetty stop
+
+# Then log into postgresql
+psql -U rudder -h localhost
+REINDEX TABLE ruddersysevents;
+
+#Exit postgresql
+\q
+
+# Restart the Rudder server
+rm /opt/rudder/etc/disable-agent
+/etc/init.d/rudder-jetty start
+----
+
+Complete solution:
+this solution will reclaim all that can be reclaimed, but is really really slow (can last several hours)
+
+----
+# First, stop the Rudder server
+touch /opt/rudder/etc/disable-agent
+/etc/init.d/rudder-jetty stop
+
+# Then log into postgresql
+psql -U rudder -h localhost
+drop index component_idx;
+drop index composite_node_execution_idx;
+drop index keyvalue_idx;
+drop index nodeid_idx;
+drop index ruleid_idx;
+drop index executiontimestamp_idx;
+vacuum full ruddersysevents; — this will take several hours
+
+create index nodeid_idx on RudderSysEvents (nodeId);
+CREATE INDEX executionTimeStamp_idx on RudderSysEvents (executionTimeStamp);
+CREATE INDEX composite_node_execution_idx on RudderSysEvents (nodeId, executionTimeStamp);
+CREATE INDEX component_idx on RudderSysEvents (component);
+CREATE INDEX keyValue_idx on RudderSysEvents (keyValue);
+CREATE INDEX ruleId_idx on RudderSysEvents (ruleId);
+
+# Exit postgresql
+\q
+
+# Restart the Rudder server
+rm /opt/rudder/etc/disable-agent
+/etc/init.d/rudder-jetty start
+----
