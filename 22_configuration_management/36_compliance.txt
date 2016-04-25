@@ -25,7 +25,7 @@ Applying::
 When a Directive is applied, Rudder waits during 10 minutes for a report.
 During this period, the Directive is said 'Applying'.
 
-No answer::
+No report::
 
 The system didn't send any reports. Rudder waited for 10 minutes and no report
 was received.
