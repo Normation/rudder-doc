@@ -1,4 +1,4 @@
-=== Some reports are in "No Answer"
+=== Some reports are in "No report"
 
 ==== If you get no reports at all for the Node
 
@@ -13,7 +13,7 @@ If you see:
 
 Now we will check if promises were updated on the Node. Maybe the node could not
 update its promises anymore, even if the reporting looks ok and Rules seems to
-be applied but report keeps in ‘No Answer’.
+be applied but report keeps in ‘No report’.
 
 To check if a node can update its promises, run (one the node) '/var/rudder/cfengine-community/bin/cf-agent -KI | grep Update@@None'
 You’ll get the result of the ‘Update‘ component in the execution.
@@ -156,3 +156,4 @@ CREATE INDEX ruleId_idx on RudderSysEvents (ruleId);
 rm /opt/rudder/etc/disable-agent
 /etc/init.d/rudder-jetty start
 ----
+
