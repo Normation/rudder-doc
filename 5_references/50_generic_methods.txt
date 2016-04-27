@@ -1,0 +1,3 @@
+=== Generic methods
+
+include::../generic_methods.asciidoc[]

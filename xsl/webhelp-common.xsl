@@ -62,7 +62,7 @@ xmlns:exsl="http://exslt.org/common"
     <xsl:param name="admon.graphics" select="1"/>
     <!--xsl:param name="generate.toc">book toc</xsl:param-->
     <xsl:param name="webhelp.include.search.tab" select="0"/>
-    
+
 <xsl:param name="generate.toc">
 appendix  toc,title
 article/appendix  nop
@@ -86,7 +86,9 @@ set       toc,title
     <!-- Localizations of webhelp specific words. Your contributions for other languages are appreciated.
 	Currently, only around 10 translations needed. -->
     <!-- Moved to files under 'gentext/locale/', search for WebHelp -->
-
+    <xsl:template match="processing-instruction('asciidoc-hr')">
+      <hr/>
+    </xsl:template>
     <xsl:template name="user.head.title">
       <xsl:param name="node" select="."/>
       <xsl:param name="title">
