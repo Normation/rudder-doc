@@ -6,21 +6,14 @@ Run the following command as root:
 
 ----
 
+version=$(grep "release [0-10]" /etc/redhat-release | sed "s/^.*release \([0-9]\).*$/\1/")
 echo "[Rudder_3.1]
 name=Rudder 3.1 EL repository
-baseurl=http://www.rudder-project.org/rpm-3.1/RHEL_7/
+baseurl=http://www.rudder-project.org/rpm-3.1/RHEL_${version}/
 gpgcheck=1
-gpgkey=http://www.rudder-project.org/rpm-3.1/RHEL_7/repodata/repomd.xml.key" > /etc/yum.repos.d/rudder.repo
+gpgkey=http://www.rudder-project.org/rpm-3.1/RHEL_${version}/repodata/repomd.xml.key" > /etc/yum.repos.d/rudder.repo
 
 ----
-
-[TIP]
-
-====
-
-Replace RHEL_7 with your Enterprise Linux version if necessary.
-
-====
 
 ==== Install your Rudder Root Server
 
