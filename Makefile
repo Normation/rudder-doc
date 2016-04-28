@@ -58,14 +58,14 @@ pdf: html/$(BASENAME).pdf
 readme: html/README.html
 ncf-doc: generic-methods.asciidoc
 
-epub/$(BASENAME).epub: $(SOURCES)
+epub/$(BASENAME).epub: ncf-doc $(SOURCES)
 	mkdir -p html
-	$(ASCIIDOCTOEPUB) $?
+	$(ASCIIDOCTOEPUB) $(SOURCES)
 	mv $(BASENAME).epub html/
 
-html/$(BASENAME).pdf: $(SOURCES)
+html/$(BASENAME).pdf: ncf-doc $(SOURCES)
 	mkdir -p html
-	$(ASCIIDOCTODOCBOOK) --backend docbook $?
+	$(ASCIIDOCTODOCBOOK) --backend docbook $(SOURCES)
 	$(DOCBOOK2PDF) $(BASENAME).xml
 	rm $(BASENAME).xml
 	rm -f *.svg
