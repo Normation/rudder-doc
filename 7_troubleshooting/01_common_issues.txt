@@ -15,10 +15,8 @@ Now we will check if promises were updated on the Node. Maybe the node could not
 update its promises anymore, even if the reporting looks ok and Rules seems to
 be applied but report keeps in ‘No report’.
 
-To check if a node can update its promises, run (one the node) '/var/rudder/cfengine-community/bin/cf-agent -KI | grep Update@@None'
-You’ll get the result of the ‘Update‘ component in the execution.
-The message at the end of the line will tell you if the update succeed of fail:
-'R: @@Common@@result_error@@hasPolicyServer-root@@common-root@@00@@Update@@None@@2014-01-07 07:40:45-02:00##dda3cba8-f6ca-4766-a3cb-09d61f53f6c5@#Cannot update node’s policy or dependencies'
+To check if a node can update its promises, run (on the node) 'rudder agent run'.
+You’ll get the result of the ‘Update‘ component in the execution (in the 'Common' Technique).
 
 To update its promises, a Node needs to get a directory on Rudder server
 (/var/rudder/share/node_uuid), and Rudder checks if the node is authorized to
@@ -28,13 +26,15 @@ probably because of a DNS issue!
 
 ==== If you get incomplete reporting for the Node
 
-Some executions may be truncated, leading to incomplete reports.
-Rudder executions start with a 'StartRun' report and ends with an 'EndRun'.
-If the execution is incomplete and the 'EndRun' never sent some reports will be missing. reasons could be:
+
+
+When the agent does not perform a normal execution, the reports
+will be incomplete, and some components will appear as missing on the server. Reasons could be:
 
 * the execution of the agent encountered an error during its execution and could
-not complete, please http://www.rudder-project.org/redmine/projects/rudder/issues/new[report a bug]
-* the agent is executed to launch specific bundles
+not complete. In this case, an error message is displayed when running 'rudder agent run'. 
+It is very likely a bug in the agent, please http://www.rudder-project.org/redmine/projects/rudder/issues/new[report a bug]
+* the agent is executed to launch specific bundles (with the '-b' option)
 * reporting is missing on a Technique, in this case http://www.rudder-project.org/redmine/projects/rudder/issues/new[report a bug]
 
 === Communication issues between agent and server
@@ -109,8 +109,8 @@ database, it may take several minutes to a couple of hours
 
 ----
 # First, stop the Rudder server
-touch /opt/rudder/etc/disable-agent
-/etc/init.d/rudder-jetty stop
+rudder agent disable
+service rudder-jetty stop
 
 # Then log into postgresql
 psql -U rudder -h localhost
@@ -120,8 +120,8 @@ REINDEX TABLE ruddersysevents;
 \q
 
 # Restart the Rudder server
-rm /opt/rudder/etc/disable-agent
-/etc/init.d/rudder-jetty start
+rudder agent enable
+service rudder-jetty start
 ----
 
 Complete solution:
@@ -129,8 +129,8 @@ this solution will reclaim all that can be reclaimed, but is really really slow 
 
 ----
 # First, stop the Rudder server
-touch /opt/rudder/etc/disable-agent
-/etc/init.d/rudder-jetty stop
+rudder agent disable
+service rudder-jetty stop
 
 # Then log into postgresql
 psql -U rudder -h localhost
@@ -153,7 +153,7 @@ CREATE INDEX ruleId_idx on RudderSysEvents (ruleId);
 \q
 
 # Restart the Rudder server
-rm /opt/rudder/etc/disable-agent
-/etc/init.d/rudder-jetty start
+rudder agent enable
+service rudder-jetty start
 ----
 
