@@ -23,6 +23,8 @@ Inkscape:: http://inkcape.org to convert SVG for PDF output.
 
 ImageMagick:: http://www.imagemagick.org/ to normalize the resolution of illustrations.
 
+Pandoc:: www.pandoc.org to convert ncf markdown doc to asciidoc
+
 === Install the dependencies on Debian and Ubuntu:
 
 ----
