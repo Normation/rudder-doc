@@ -1,6 +1,6 @@
 ## Rudder User Documentation Makefile
 
-.PHONY: all clean view man
+.PHONY: all clean view ncf-doc man
 
 BASENAME = rudder-doc
 SOURCES = $(BASENAME).txt
@@ -9,6 +9,7 @@ TARGETS = epub html pdf readme manpage webhelp webhelp-localsearch
 DOCBOOK_DIST = xsl/xsl-ns-stylesheets
 
 RUDDER_VERSION = 3.2
+NCF_VERSION = master
 
 ASCIIDOC = $(CURDIR)/bin/asciidoc/asciidoc.py
 A2X = $(CURDIR)/bin/asciidoc/a2x.py
@@ -58,13 +59,14 @@ html: html/$(BASENAME).html
 pdf: html/$(BASENAME).pdf
 manpage: html/rudder.8
 readme: html/README.html
+ncf-doc: generic-methods.asciidoc
 
-epub/$(BASENAME).epub: man $(SOURCES)
+epub/$(BASENAME).epub: man ncf-doc  $(SOURCES)
 	mkdir -p html
 	$(ASCIIDOCTOEPUB) $(SOURCES)
 	mv $(BASENAME).epub html/
 
-html/$(BASENAME).pdf: man $(SOURCES)
+html/$(BASENAME).pdf: man ncf-doc $(SOURCES)
 	mkdir -p html
 	$(ASCIIDOCTODOCBOOK) --backend docbook $(SOURCES)
 	$(DOCBOOK2PDF) $(BASENAME).xml
@@ -84,6 +86,15 @@ man: rudder-command
 	cd rudder-command/man && make rudder.8
 	sed 's/^=/===/' -i rudder-command/man/rudder.asciidoc
 
+ncf:
+	git clone https://github.com/Normation/ncf.git
+
+generic-methods.asciidoc: ncf
+	cd ncf && git pull && git checkout $(NCF_VERSION)
+	cp tools/ncf_doc_rudder.py ncf/tools/
+	./ncf/tools/ncf_doc_rudder.py
+	pandoc -t asciidoc -f markdown generic_methods.md > generic_methods.asciidoc
+
 $(INDEXER_JAR):
 	mkdir -p $(DOCBOOK_EXTENSIONS_DIR)
 	wget http://central.maven.org/maven2/net/sf/docbook/docbook-xsl-webhelpindexer/1.0.1-pre/docbook-xsl-webhelpindexer-1.0.1-pre.jar -O $(INDEXER_JAR)
@@ -102,8 +113,7 @@ $(LUCENE_ANALYZER_JAR):
 
 jars: $(INDEXER_JAR) $(TAGSOUP_JAR) $(LUCENE_ANALYZER_JAR) $(LUCENE_CORE_JAR)
 
-
-webhelp/index.html: man $(SOURCES)
+webhelp/index.html: man ncf-doc $(SOURCES)
 	mkdir -p webhelp
 	$(ASCIIDOC) --doctype=book --backend docbook $(SOURCES)
 	xsltproc  --xinclude --output xincluded-profiled.xml  \
@@ -115,7 +125,7 @@ webhelp/index.html: man $(SOURCES)
 	         xsl/webhelp.xsl xincluded-profiled.xml
 	cp -r style/html/favicon.ico images template/common *.png webhelp/
 
-webhelp-localsearch/index.html: man $(SOURCES)
+webhelp-localsearch/index.html: man ncf-doc $(SOURCES)
 	mkdir -p webhelp-localsearch
 	$(ASCIIDOC) --doctype=book --backend docbook $(SOURCES)
 	xsltproc  --xinclude --output xincluded-profiled.xml \
@@ -140,7 +150,7 @@ index: webhelp-localsearch/index.html jars
 		                com.nexwave.nquindexer.IndexerMain
 	cp -r template/search/* webhelp-localsearch/search
 
-html/$(BASENAME).html: man $(SOURCES)
+html/$(BASENAME).html: man ncf-doc $(SOURCES)
 	mkdir -p html
 	$(ASCIIDOCTOHTML) --out-file $@ $(SOURCES)
 	cp -R style/html/* images html/
@@ -155,7 +165,7 @@ slides.html: man $(SOURCES)
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
 clean:
-	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub webhelp webhelp-localsearch xincluded-profiled.xml $(BASENAME).xml rudder-command extensions
+	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub webhelp webhelp-localsearch xincluded-profiled.xml $(BASENAME).xml rudder-command extensions ncf generic_methods.{asciidoc,md}
 
 view: all
 	$(SEE) $(TARGETS)
