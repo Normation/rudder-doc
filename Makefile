@@ -11,8 +11,8 @@ DOCBOOK_DIST = xsl/xsl-ns-stylesheets
 RUDDER_VERSION = 3.2
 NCF_VERSION = master
 
-ASCIIDOC = $(CURDIR)/bin/asciidoc/asciidoc.py
-A2X = $(CURDIR)/bin/asciidoc/a2x.py
+ASCIIDOC = asciidoc
+A2X = a2x
 
 ## Asciidoc with general options
 ASCIIDOCTODOCBOOK = $(ASCIIDOC) --doctype=book -a docinfo1
