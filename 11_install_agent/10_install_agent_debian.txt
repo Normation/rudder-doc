@@ -28,7 +28,7 @@ EOF
 
 ----
 
-* on Ubuntu 12.04 and following, or Debian wheezy and following:
+* on Ubuntu 12.04 and following, or Debian Wheezy and following:
 
 ----
 
