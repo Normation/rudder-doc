@@ -1,6 +1,6 @@
-=== Install Rudder Agent on RedHat or CentOS
+=== Install Rudder Agent on RHEL or CentOS
 
-Download the package applicable to your version of RedHat/CentOS and to its
+Download the package applicable to your version of RHEL/CentOS and to its
 architecture on 
 
 ----
@@ -10,7 +10,7 @@ http://www.rudder-project.org/rpm-2.11/RHEL_6/
 
 ----
 
-Or you can define a yum repository for RedHat/CentOS 6:
+Or you can define a yum repository for RHEL/CentOS 6:
 
 ----
 
@@ -23,7 +23,7 @@ gpgkey=http://www.rudder-project.org/rpm-2.11/RHEL_6/repodata/repomd.xml.key
 
 ----
 
-Or for RedHat/CentOS 5:
+Or for RHEL/CentOS 5:
 
 ----
 

@@ -1,8 +1,8 @@
-=== Upgrade Rudder on RedHat or CentOS
+=== Upgrade Rudder on RHEL or CentOS
 
 Following commands are executed as the +root+ user.
 
-Define a yum repository for RedHat/CentOS 6:
+Define a yum repository for RHEL/CentOS 6:
 
 ----
 
@@ -15,7 +15,7 @@ gpgkey=http://www.rudder-project.org/rpm-2.11/RHEL_6/repodata/repomd.xml.key
 
 ----
 
-Or for RedHat/CentOS 5:
+Or for RHEL/CentOS 5:
 
 ----
 

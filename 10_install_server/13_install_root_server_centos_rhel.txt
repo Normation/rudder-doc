@@ -1,4 +1,4 @@
-=== Install Rudder Root server on RedHat-like systems
+=== Install Rudder Root server on RHEL-like systems
 
 ==== Java on RHEL/CentOS
 
@@ -18,7 +18,7 @@ dependencies will not be resolved with them.
 
 Run the following command as root:
 
-**RedHat/CentOS 6:**
+**RHEL/CentOS 6:**
 
 ----
 
@@ -31,7 +31,7 @@ gpgkey=http://www.rudder-project.org/rpm-2.11/RHEL_6/repodata/repomd.xml.key
 
 ----
 
-**RedHat/CentOS 5:**
+**RHEL/CentOS 5:**
 
 ----
 
@@ -55,7 +55,7 @@ yum install rudder-server-root
 
 ----
 
-On Red Hat-like systems, a firewall setup is enabled by default, and would need to be adjusted
+On RHEL-like systems, a firewall setup is enabled by default, and would need to be adjusted
 for Rudder to operate properly. You have to allow all the flows described in the
 <<configure_the_network, Network>> section.
 
