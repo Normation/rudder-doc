@@ -1,4 +1,4 @@
-=== Install Rudder Root server on RedHat-like systems
+=== Install Rudder Root server on RHEL-like systems
 
 ==== Add the Rudder packages repository
 

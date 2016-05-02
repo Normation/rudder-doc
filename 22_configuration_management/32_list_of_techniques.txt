@@ -25,7 +25,7 @@ Package management for Debian / Ubuntu / APT based systems:: Install, update or
 delete packages, automatically and consistently on GNU/Linux Debian and Ubuntu.
    
 Package management for RHEL / CentOS / RPM based systems:: Install, update or
-delete packages, automatically and consistently on GNU/Linux CentOS and RedHat.
+delete packages, automatically and consistently on GNU/Linux CentOS and RHEL.
 
 ===== Distributing files
 
