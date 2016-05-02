@@ -44,7 +44,7 @@ In case of any issue with the Technique Editor, the first step should always be 
 These logs are sent to Apache system error logs:
 
 - On Debian, by default: /var/log/apache2/error.log
-- On RedHat, by default: /var/log/httpd/error_log
+- On RHEL, by default: /var/log/httpd/error_log
 
 
 ==== Understanding how Technique Editor works
