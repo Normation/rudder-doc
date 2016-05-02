@@ -1,6 +1,6 @@
-=== Configure and validate
+==== Configure and validate
 
-==== Configure Rudder Agent
+===== Configure Rudder Agent
 
 Configure the IP address of the Rudder Root Server in the following file
 
@@ -13,15 +13,15 @@ EOF
 
 [TIP]
 
-====
+=====
 
 We advise you to use the +IP address+ of the Rudder Root Server. The DNS name of
 this server can also be accepted if you have a complete DNS infrastructure
 matching the IP of the Nodes with their hostnames.
 
-====
+=====
 
-==== Start Rudder Agent:
+===== Start Rudder Agent:
 
 ----
 

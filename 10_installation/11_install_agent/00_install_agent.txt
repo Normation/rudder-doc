@@ -1,5 +1,5 @@
 [[install-agent]]
-== Install Rudder Agent
+=== Install Rudder Agent
 
 This chapter gives a general presentation of the Rudder Agent, and describes
 the different configuration steps to deploy the Rudder agent on the Nodes you
@@ -16,7 +16,7 @@ of this documentation.
 
 .Components
 
-====
+=====
 
 This agent contains the following tools:
 
@@ -38,5 +38,5 @@ installation.
 To get the list of supported Operating systems, please refer to
 <<nodes_supported_OS, the list of supported Operating Systems for the Nodes>>.
 
-====
+=====
 

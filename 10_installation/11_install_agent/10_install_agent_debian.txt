@@ -1,4 +1,4 @@
-=== Install Rudder Agent on Debian or Ubuntu
+==== Install Rudder Agent on Debian or Ubuntu
 
 Validate the content of the Rudder project repository by importing the GPG key
 used to sign it:

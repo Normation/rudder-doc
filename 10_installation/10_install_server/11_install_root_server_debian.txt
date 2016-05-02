@@ -1,6 +1,6 @@
-=== Install Rudder Root server on Debian or Ubuntu
+==== Install Rudder Root server on Debian or Ubuntu
 
-==== Add the Rudder packages repository
+===== Add the Rudder packages repository
 
 Run the following commands as root:
 
@@ -18,7 +18,7 @@ package repository itself and finally update the local package cache.
 
 [TIP]
 
-====
+=====
 
 If the HTTP Keyserver Protocol (11371/tcp) port is blocked on your network you
 can use this alternate command:
@@ -29,9 +29,9 @@ wget --quiet -O- "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x474A19E
 
 ----
 
-====
+=====
 
-==== Java on Debian/Ubuntu
+===== Java on Debian/Ubuntu
 
 The Rudder Root server needs a compatible 'Java Runtime Environment' to run.
 In most cases, this will be installed automatically thanks to packaging
@@ -55,12 +55,12 @@ deb http://security.debian.org/ squeeze/updates main contrib non-free
 ----
 [TIP]
 
-====
+=====
 
 Your mirror may differ, +ftp.fr.debian.org+ is only an example. Also, please
 adapt the distribution name if needed (+squeeze+ could be replaced by +lenny+).
 
-====
+=====
 
 
 On 'Ubuntu Natty (11.04)' and previous Ubuntu versions, you will have to
@@ -69,7 +69,7 @@ Oracle(TM) and Rudder is not compatible with OpenJDK 6, which is the only
 available JDK from Ubuntu. See http://www.java.com/fr/download/ to get
 Oracle's JVM.
 
-==== Install your Rudder Root Server
+===== Install your Rudder Root Server
 
 To begin the installation, you should simply install the rudder-server-root
 metapackage, which will install the required components:
@@ -82,19 +82,19 @@ aptitude install rudder-server-root
 
 [NOTE]
 
-====
+=====
 
 If 'Oracle Java 6 JRE' is installed (usually on Debian Lenny (5) or Squeeze
 (6) only), you will be asked to accept the license of the product during
 installation.
 
-====
+=====
 
-==== Incompatibility between Rudder server on Ubuntu and Rudder agents using syslog (RHEL/CentOS 5)
+===== Incompatibility between Rudder server on Ubuntu and Rudder agents using syslog (RHEL/CentOS 5)
 
 [WARNING]
 
-====
+=====
 
 Any nodes running *syslogd* (not syslog-ng or rsyslog) will *fail* to send any
 reports about the configuration rules they have applied to a Rudder Server running
@@ -111,7 +111,7 @@ workarounds are available to fix this:
   your Rudder server.
 . Use a different OS for your Rudder server that Ubuntu Server 12.04 or later.
 
-====
+=====
 
 Now jump to <<initial-config,the next section to configure your server>>.
 

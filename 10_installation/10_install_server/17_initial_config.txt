@@ -1,5 +1,5 @@
 [[initial-config, Initial configuration of your Rudder Root Server]]
-=== Initial configuration of your Rudder Root Server
+==== Initial configuration of your Rudder Root Server
 
 After the installation, you have to configure some system elements, by launching
 the following initialisation script:
@@ -12,7 +12,7 @@ the following initialisation script:
 
 This script will ask you to fill in the following details:
 
-====
+=====
 
 Allowed networks:: A list of IP networks authorized to connect to the server. We
 recommend that you specify all the networks of your infrastructure. The syntax
@@ -20,14 +20,14 @@ is the standard network/mask notation, for instance +192.168.0.0/24+ or
 +10.0.0.0/8+. To add several networks, first type the first network, then press
 the return key - the script will ask if you wish to add some more networks.
 
-====
+=====
 
 [TIP]
 
-====
+=====
 
 In case of typing error, or if you wish to reconfigure Rudder, you can
 execute this script again as many times as you want.
 
-====
+=====
 

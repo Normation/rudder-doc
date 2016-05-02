@@ -1,6 +1,8 @@
 [[nodes_supported_OS, the list of supported Operating Systems for Nodes]]
 
-=== Specifications for Rudder Nodes
+==== Supported Operating Systems
+
+===== For Rudder Nodes
 
 The following operating systems are supported for Rudder Nodes and packages are
 available for these platforms:
@@ -45,7 +47,7 @@ available for these platforms:
 
 .Windows and AIX Nodes
 
-====
+=====
 
 * On Windows, installing Rudder requires the commercial version of CFEngine (named CFEngine Enterprise)
 * For IBM AIX, pre-built RPM packages are distributed by Normation only
@@ -54,19 +56,19 @@ Hence, as a starting point, we suggest that you only use Linux machines. Once
 you are accustomed to Rudder, contact Normation to obtain a demo version for
 these platforms.
 
-====
+=====
 
 [WARNING]
 
 .Unsupported Operating Systems 
 
-====
+=====
 
 It is possible to use Rudder on other platforms than the ones listed here.
 However, we haven't tested the application on them, and can't currently supply
 any packages for them. Moreover, the Techniques are likely to fail. If you
 wish to try Rudder on other systems, please contact us.
 
-====
+=====
 
 
