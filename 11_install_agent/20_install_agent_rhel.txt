@@ -1,4 +1,4 @@
-=== Install Rudder Agent on RedHat-like systems
+=== Install Rudder Agent on RHEL-like systems
 
 Define a yum repository for Rudder:
 
