@@ -1,4 +1,4 @@
-=== Upgrade Rudder on RedHat-like
+=== Upgrade Rudder on RHEL-like
 
 Following commands are executed as the +root+ user.
 
