@@ -84,6 +84,10 @@ if __name__ == '__main__':
       bundle_name = generic_method["bundle_name"]
       content.append('\n#### '+ bundle_name)
       content.append(generic_method["description"])
+      if "deprecated" in generic_method:
+        content.append('\n**WARNING**: This generic method is deprecated.')
+        content.append(generic_method["deprecated"])
+
       content.append('\nCompatible with nodes running Rudder '+rudder_version_needed+' or higher.')
       
       if "documentation" in generic_method:
