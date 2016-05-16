@@ -1,4 +1,4 @@
-=== Install Rudder Agent on RHEL or CentOS
+==== Install Rudder Agent on RHEL or CentOS
 
 Download the package applicable to your version of RHEL/CentOS and to its
 architecture on 

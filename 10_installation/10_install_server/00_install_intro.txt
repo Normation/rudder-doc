@@ -1,4 +1,4 @@
-== Install Rudder Server
+=== Install Rudder Server
 
 This chapter covers the installation of a Rudder Root Server, from the
 specification of the underlying server, to the initial setup of the application.
@@ -13,7 +13,7 @@ Ideally, this machine should have Internet access, but this is not a strict requ
 As Rudder data can grow really fast depending on your number of managed nodes and number of rules, it is advised to separate partitions to prevent your /var getting full and break your system.
 Special attention should be given to:
 
-======
+=======
 
 /var/lib/pgsql::
 Or wherever is located your postgresql database.
@@ -27,5 +27,5 @@ Slower growth over time.
 /var/log/rudder:: 
 Reports logs can easily grow to 1.5GB per day.
 
-======
+=======
 
