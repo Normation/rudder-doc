@@ -2,17 +2,19 @@
 
 === Requirements
 
-==== Mandatory flows
+==== Networking
 
-The following flows from the Nodes to the Rudder Root Server has to be allowed:
+===== Mandatory flows
+
+The following flows from the Nodes to the Rudder Root Server have to be allowed:
 
 ====
 
-include::../glossary/port-5309.txt[]
+include::../../glossary/port-5309.txt[]
 
-include::../glossary/port-443-nodes.txt[]
+include::../../glossary/port-443-nodes.txt[]
 
-include::../glossary/port-514.txt[]
+include::../../glossary/port-514.txt[]
 
 ====
 
@@ -28,11 +30,11 @@ Open the following flow from the clients desktop to the Rudder Root Server:
 
 ====
 
-include::../glossary/port-443-user.txt[]
+include::../../glossary/port-443-user.txt[]
 
 ====
 
-==== Optional flows
+===== Optional flows
 
 These flows are used to add features to Rudder:
 
@@ -40,11 +42,11 @@ These flows are used to add features to Rudder:
    
 // include::../glossary/big-red-button.txt[]
 
-include::../glossary/cfengine-enterprise.txt[]
+include::../../glossary/cfengine-enterprise.txt[]
 
 ====
 
-==== DNS - Name resolution
+===== DNS - Name resolution
 
 By default, Rudder relies on the Node declared hostnames to identify them, for
 security reasons. It is required that each Node hostname can be resolved to its

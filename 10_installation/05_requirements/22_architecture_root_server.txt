@@ -1,8 +1,21 @@
 [[Server_supported_OS, the list of supported Operating Systems for Root server]]
 
-=== Specifications for Rudder Root Server
+===== For Rudder Root Server
 
-==== Hardware specifications and sizing
+The following operating systems are supported as a Root server:
+
+GNU/Linux:
+
+* Debian 7 and 8
+
+* RedHat Enterprise Linux (RHEL) / RHEL-like 6 and 7
+
+* SuSE Linux Enterprise Server (SLES) 11 SP1 and SP3
+
+* Ubuntu 12.04 LTS (Precise), 14.04 LTS (Trusty), 16.04 LTS (Xenial)
+
+
+==== Hardware specifications and sizing for Rudder Root Server
 
 A dedicated server is strongly recommended, either physical or virtual with at least one dedicated core.
 Rudder Server runs on both 32 (if available) and 64 bit versions of every supported Operating System.
@@ -41,18 +54,4 @@ should anticipate the use of between 20GB and 60GB of disk size for PostgreSQL.
 
 You can follow the <<_reports_retention, Reports Retention>> section to configure the
 retention duration.
-
-==== Supported Operating Systems
-
-The following operating systems are supported as a Root server:
-
-GNU/Linux:
-
-* Debian 7 and 8
-
-* RedHat Enterprise Linux (RHEL) / RHEL-like 6 and 7
-
-* SuSE Linux Enterprise Server (SLES) 11 SP1 and SP3
-
-* Ubuntu 12.04 LTS (Precise), 14.04 LTS (Trusty), 16.04 LTS (Xenial)
 

@@ -1,6 +1,8 @@
 [[nodes_supported_OS, the list of supported Operating Systems for Nodes]]
 
-=== Specifications for Rudder Nodes
+==== Supported Operating Systems
+
+===== For Rudder Nodes
 
 The following operating systems are supported for Rudder Nodes and packages are
 available for these platforms:

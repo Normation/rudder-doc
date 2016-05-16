@@ -40,7 +40,7 @@ xmlns:exsl="http://exslt.org/common"
     <xsl:param name="para.propagates.style" select="1"/>
     <xsl:param name="phrase.propagates.style" select="1"/>
     <xsl:param name="chunk.first.sections" select="1"/>
-    <xsl:param name="chunk.section.depth" select="1"/>
+    <xsl:param name="chunk.section.depth" select="2"/>
     <xsl:param name="use.id.as.filename" select="1"/>
     <xsl:param name="branding">not set</xsl:param>
     <xsl:param name="brandname"> </xsl:param>
