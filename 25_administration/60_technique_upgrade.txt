@@ -33,12 +33,11 @@ root@node:~# git status
 # Now, inspect the differences. If no conflict is noticeable, then go ahead.
 root@node:~# git add techniques/
 root@node:~# git commit -m "Technique upgrade" # Here, put a meaningful message about why you are updating.
+root@node:~# rudder server reload-techniques
 
 ----
 
-After the commit has been validated by GIT, please go to the Rudder web interface, to the Administration tab,
-Policy Server tab, and click on "Reload Techniques". It will reload the Technique library and trigger a full
-redeployment on nodes.
+This last command will reload the Technique library and trigger a full redeployment on nodes.
 
-Please check that the deployment is successful before logging out.
+Please check that the deployment is successful in the Rudder web interface.
 
