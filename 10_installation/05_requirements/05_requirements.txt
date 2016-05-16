@@ -22,7 +22,7 @@ And this one is optional:
 
 ====
 
-include::../glossary/port-5310.txt[]
+include::../../glossary/port-5310.txt[]
 
 ====
 
