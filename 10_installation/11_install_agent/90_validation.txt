@@ -1,12 +1,8 @@
-==== Validate new Node
+===== Validate new Node
 
 Several minutes after the start of the agent, a new Node should be pending in
-the Rudder web interface.
-
-You will be able to browse its inventory, and accept it to manage its
+the Rudder web interface. You will be able to browse its inventory, and accept it to manage its
 configuration with Rudder.
-
-===== Force Rudder Agent inventory generation
 
 You may force the agent to run and send an inventory by issuing the following command:
 
@@ -15,8 +11,6 @@ You may force the agent to run and send an inventory by issuing the following co
 rudder agent inventory
 
 ----
-
-===== Force Rudder Agent execution
 
 You may force the agent execution by issuing the following command:
 

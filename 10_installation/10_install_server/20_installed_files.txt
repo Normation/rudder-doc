@@ -2,7 +2,7 @@
 
 .Files installed by the application
 
-====
+=====
 
 +/etc+:: System-wide configuration files are stored here: init scripts,
 configuration for apache, logrotate and rsyslog.
@@ -23,5 +23,5 @@ configuration for apache, logrotate and rsyslog.
 
 +/usr/share/doc/rudder*+:: Documentation about Rudder packages.
 
-====
+=====
 
