@@ -1,6 +1,6 @@
-=== Install Rudder Root server on RHEL-like systems
+==== Install Rudder Root server on RHEL-like systems
 
-==== Add the Rudder packages repository
+===== Add the Rudder packages repository
 
 Run the following command as root:
 
@@ -15,7 +15,7 @@ gpgkey=http://www.rudder-project.org/rpm-3.0/RHEL_${version}/repodata/repomd.xml
 
 ----
 
-==== Install your Rudder Root Server
+===== Install your Rudder Root Server
 
 To begin the installation, you should simply install the rudder-server-root
 metapackage, which will install the required components:

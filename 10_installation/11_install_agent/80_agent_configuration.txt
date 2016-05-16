@@ -1,6 +1,6 @@
-=== Configure and validate
+==== Configure and validate
 
-==== Configure Rudder Agent
+===== Configure Rudder Agent
 
 Configure the IP address or hostname of the Rudder Root Server in the following file
 
@@ -12,15 +12,15 @@ echo '<rudder server ip or hostname>' > /var/rudder/cfengine-community/policy_se
 
 [TIP]
 
-====
+=====
 
 We advise you to use the +IP address+ of the Rudder Root Server. The DNS name of
 this server can also be accepted if you have a trusted DNS infrastructure
 with proper reverse resolutions.
 
-====
+=====
 
-==== Start Rudder Agent:
+You can now start the Rudder service with:
 
 ----
 
