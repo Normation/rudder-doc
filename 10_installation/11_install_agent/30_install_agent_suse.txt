@@ -1,4 +1,4 @@
-=== Install Rudder Agent on SLES
+==== Install Rudder Agent on SLES
 
 Following commands are executed as the +root+ user.
 
