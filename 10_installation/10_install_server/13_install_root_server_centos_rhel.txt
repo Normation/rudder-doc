@@ -6,7 +6,7 @@ Run the following command as root:
 
 ----
 
-version=$(grep "release [0-10]" /etc/redhat-release | sed "s/^.*release \([0-9]\).*$/\1/")
+version=$(grep "release [0-9]" /etc/redhat-release | sed "s/^.*release \([0-9]\).*$/\1/")
 echo "[Rudder_3.2]
 name=Rudder 3.2 EL repository
 baseurl=http://www.rudder-project.org/rpm-3.2/RHEL_${version}/
