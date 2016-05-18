@@ -42,19 +42,18 @@ For large installations, you should also tune the amount of RAM given to:
 
 ===== Disk
 
-The PostgresSQL database is the main storage user. The disk space 
+The PostgreSQL database will take up most disk space needed by Rudder. The storage
 necessary for the database can be estimated by counting around
-150 to 400kB of storage used by Directive, by Node and by day of storage of node's
-execution reports (default to 30 days):
+150 to 400 kB by Directive, by Node and by day of retention of node's
+execution reports (the default is 4 days):
 
 ----
 max_space = number of Directives * number of Nodes * retention duration in days * 400 kB
 ----
 
-For example, an installation managing 150 nodes, with an average of 
-100 Directives by node, and keeping execution reports for one week 
-should anticipate the use of between 20GB and 60GB of disk size for PostgreSQL. 
+For example, a default installation with 500 nodes and an average of 
+50 Directives by node, should require between 14 GB and 38 GB of disk space for PostgreSQL. 
 
-You can follow the <<_reports_retention, Reports Retention>> section to configure the
+Follow the <<_reports_retention, Reports Retention>> section to configure the
 retention duration.
 
