@@ -1,5 +1,5 @@
 [[relay-servers]]
-=== Relay servers
+=== Install Rudder Relay (optional)
 
 Relay servers can be added to Rudder, for example to manage a DMZ or to isolate specific
 nodes from the main environment for security reasons. 
@@ -23,9 +23,7 @@ The procedure will:
 - Configure the relay components (Syslog, Apache HTTPd, CFEngine)
 - Switch this node to the relay server role (from the root server point of view)
 
-==== Installation procedure - On the relay
-
-===== Install Rudder server relay
+==== On the relay
 
 To begin, please install a regular Rudder agent on the OS, following the
 <<install-agent, installation instructions>>, and install the 'rudder-server-relay'
@@ -34,12 +32,11 @@ package in addition to the 'rudder-agent' package.
 To complete this step, please make sure that your node is configured successfully
 and appears in your Rudder web interface.
 
-==== Installation procedure - On the root server
+==== On the root server
 
-===== Set the node as a Rudder relay
-
-Launch the rudder-node-to-relay script on the root server, supplying the UUID of the
-host to be added as a relay to it. You can find the UUID of your node with the
+You have to tell the Rudder Root server that a node will be a relay. To do so,
+launch the rudder-node-to-relay script on the root server, supplying the UUID of the
+host to be considered as a relay. You can find the UUID of your node with the
 'rudder agent info' command.
 
 ----
@@ -48,7 +45,7 @@ host to be added as a relay to it. You can find the UUID of your node with the
 
 ----
 
-==== Result
+==== Validation
 
 When every step has completed successfully:
 
