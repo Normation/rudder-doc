@@ -26,12 +26,6 @@ include::temp/content.txt[]
 
 include::bibliography.txt[]
 
-// Man page
-
-== Man pages
-
-include::rudder-command/man/rudder.asciidoc[]
-
 // Glossaries entries are AsciiDoc labeled lists.
 
 include::temp/glossary.txt[]
