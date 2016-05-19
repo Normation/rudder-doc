@@ -84,7 +84,7 @@ rudder-command:
 man: rudder-command
 	cd rudder-command && git pull && git checkout branches/rudder/$(RUDDER_VERSION)
 	cd rudder-command/man && make rudder.8
-	sed 's/^=/===/' -i rudder-command/man/rudder.asciidoc
+	sed 's/^=/====/' -i rudder-command/man/rudder.asciidoc
 
 ncf:
 	git clone https://github.com/Normation/ncf.git
