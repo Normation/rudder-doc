@@ -1,4 +1,4 @@
-=== Upgrade Rudder on SLES
+=== On SLES
 
 Following commands are executed as the +root+ user.
 
@@ -66,4 +66,6 @@ For Rudder Agent, upgrade the +rudder-agent+ package:
 zypper update rudder-agent
 
 ----
+
+You can now <<_technique_upgrade,upgrade your local techniques>>.
 

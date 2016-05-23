@@ -1,4 +1,4 @@
-=== Upgrade Rudder on RHEL-like
+=== On RHEL or CentOS
 
 Following commands are executed as the +root+ user.
 
@@ -38,3 +38,4 @@ yum update rudder-agent
 
 ----
 
+You can now <<_technique_upgrade,upgrade your local techniques>>.
