@@ -1,4 +1,4 @@
-=== Upgrade Rudder on Debian or Ubuntu
+=== On Debian or Ubuntu
 
 Following commands are executed as the +root+ user.
 
@@ -53,4 +53,6 @@ migrating. Therefore, you should not replace your old files by the new ones
 when apt-get/aptitude asks about this, unless you want to reset all your parameters.
 
 ====
+
+You can now <<_technique_upgrade,upgrade your local techniques>>.
 

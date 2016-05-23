@@ -1,14 +1,10 @@
 === Technique upgrade
 
-==== Initial installation
-
 At the first installation, Rudder will automatically deploy a Technique library in the
-/var/rudder/configuration-repository/techniques directory.
-
-==== Upgrade
+`/var/rudder/configuration-repository/techniques` directory.
 
 When upgrading Rudder to another version, a new (updated) Technique library will be deployed
-in /opt/rudder/share/techniques, and Rudder will automatically take care of updating the system
+in `/opt/rudder/share/techniques`, and Rudder will automatically take care of updating the system
 Techniques in the configuration-repository directory.
 
 However, the other Techniques will not be updated automatically (yet), so you will have to do
@@ -23,7 +19,7 @@ or created new versions of them, you will have some merging work to do.
 
 ====
 
-===== Upgrading the Technique library
+To upgrade you local techniques, run the following commands on the Rudder Root Server:
 
 ----
 
@@ -36,7 +32,7 @@ root@node:~# git commit -m "Technique upgrade" # Here, put a meaningful message 
 
 ----
 
-After the commit has been validated by GIT, please go to the Rudder web interface, to the Administration tab,
+After the commit has been validated by git, please go to the Rudder web interface, to the Administration tab,
 Policy Server tab, and click on "Reload Techniques". It will reload the Technique library and trigger a full
 redeployment on nodes.
 
