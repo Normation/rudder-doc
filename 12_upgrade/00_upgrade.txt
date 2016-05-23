@@ -1,4 +1,4 @@
-== Upgrade Rudder
+== Upgrade
 
 This short chapter covers the upgrade of the Rudder Server Root and Rudder Agent
 from older versions to the latest version, 3.1.
