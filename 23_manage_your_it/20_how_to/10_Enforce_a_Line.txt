@@ -17,3 +17,4 @@ So, here is a small example: let's say you want /etc/sysconfig/sysctl to contain
 You will need to create a Directive based on Enforce a File content with the following content:
 
 image::./images/oneLine.png[oneLine]
+
