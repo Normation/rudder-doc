@@ -32,6 +32,14 @@ yum update "rudder-*" ncf ncf-api-virtualenv
 
 ----
 
+and after the upgrade of these packages, restart jetty to apply the changes on the Web application:
+
+----
+
+service rudder-jetty restart
+
+----
+
 From version 3.1, Rudder provides an SELinux policy. You can enable it after upgrading your server with:
 
 ----
