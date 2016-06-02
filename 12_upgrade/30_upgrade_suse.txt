@@ -51,7 +51,7 @@ Please look at <<install-server-sles>> for details.
 
 ====
 
-and after the upgrade of these packages, restart jetty to be sure that the changes are applied:
+and after the upgrade of these packages, restart jetty to apply the changes on the Web application:
 
 ----
 
