@@ -166,4 +166,4 @@ When there is a change about the Rule/Directive/Group already proposed but not d
 You will be provided a Link to those change request, So you can check if the change is already proposed.
 
 image::./images/workflows/Warning.png[]
- 
+
