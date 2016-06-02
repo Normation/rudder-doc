@@ -156,3 +156,4 @@ CREATE INDEX ruleId_idx on RudderSysEvents (ruleId);
 rm /opt/rudder/etc/disable-agent
 /etc/init.d/rudder-jetty start
 ----
+
