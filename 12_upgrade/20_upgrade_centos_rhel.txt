@@ -36,6 +36,14 @@ yum update "rudder-*" "ncf*"
 
 ----
 
+and after the upgrade of these packages, restart jetty to apply the changes on the Web application:
+
+----
+
+service rudder-jetty restart
+
+----
+
 For Rudder Agent, upgrade the +rudder-agent+ package:
 
 ----

@@ -28,11 +28,11 @@ apt-get install rudder-server-root ncf ncf-api-virtualenv
 
 ----
 
-and after the upgrade of these packages, restart jetty to be sure that the changes are applied:
+and after the upgrade of these packages, restart jetty to apply the changes on the Web application:
 
 ----
 
-/etc/init.d/rudder-jetty restart
+service rudder-jetty restart
 
 ----
 
