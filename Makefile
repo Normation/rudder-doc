@@ -60,6 +60,7 @@ pdf: html/$(BASENAME).pdf
 manpage: html/rudder.8
 readme: html/README.html
 ncf-doc: generic-methods.asciidoc
+links: xsl/links.xsl
 
 epub/$(BASENAME).epub: man ncf-doc  $(SOURCES)
 	mkdir -p html
@@ -113,7 +114,10 @@ $(LUCENE_ANALYZER_JAR):
 
 jars: $(INDEXER_JAR) $(TAGSOUP_JAR) $(LUCENE_ANALYZER_JAR) $(LUCENE_CORE_JAR)
 
-webhelp/index.html: man ncf-doc $(SOURCES)
+xsl/links.xsl:
+	./tools/generate_header_info.py $(RUDDER_VERSION) > xsl/links.xsl
+
+webhelp/index.html: links man ncf-doc $(SOURCES)
 	mkdir -p webhelp
 	$(ASCIIDOC) --doctype=book --backend docbook $(SOURCES)
 	xsltproc  --xinclude --output xincluded-profiled.xml  \
@@ -125,7 +129,7 @@ webhelp/index.html: man ncf-doc $(SOURCES)
 	         xsl/webhelp.xsl xincluded-profiled.xml
 	cp -r style/html/favicon.ico images template/common *.png webhelp/
 
-webhelp-localsearch/index.html: man ncf-doc $(SOURCES)
+webhelp-localsearch/index.html: links man ncf-doc $(SOURCES)
 	mkdir -p webhelp-localsearch
 	$(ASCIIDOC) --doctype=book --backend docbook $(SOURCES)
 	xsltproc  --xinclude --output xincluded-profiled.xml \
@@ -168,7 +172,7 @@ test:
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
 clean:
-	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub webhelp webhelp-localsearch xincluded-profiled.xml $(BASENAME).xml rudder-command extensions ncf generic_methods.{asciidoc,md}
+	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub webhelp webhelp-localsearch xincluded-profiled.xml $(BASENAME).xml rudder-command extensions ncf generic_methods.{asciidoc,md} xsl/links.xsl
 
 view: all
 	$(SEE) $(TARGETS)
