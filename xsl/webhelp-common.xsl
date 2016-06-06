@@ -664,31 +664,6 @@ border: none; background: none; font-weight: none; color: none; }
 	</a>
     </xsl:template>
     
-    
-    <xsl:template name="otherlinks">
-    <div id="otherlinks">
-      <span>Resources:
-        <strong>User manual</strong> |
-        <a href="http://www.rudder-project.org/changelog-{$rudder.version}">Changelog</a> |
-        <a href="http://www.rudder-project.org/rudder-api-doc/">API reference</a>
-      </span>
-      <span>Version:
-        <a href="http://www.rudder-project.org/doc-2.11/">2.11</a> |
-        <a href="http://www.rudder-project.org/doc-3.0/">3.0</a> |
-        <a href="http://www.rudder-project.org/doc-3.1/">3.1 (ESR)</a> |
-        <strong>3.2</strong>
-      </span>
-    <xsl:choose>
-      <xsl:when test="$webhelp.embedded != '1'">
-        <span>Download as: <a href="http://www.rudder-project.org/rudder-doc-{$rudder.version}/rudder-doc.epub">epub</a> | <a href="http://www.rudder-project.org/rudder-doc-{$rudder.version}/rudder-doc.pdf">pdf</a></span>
-      </xsl:when>
-      <xsl:otherwise>
-        <span>Download as: <a href="http://www.rudder-project.org/rudder-doc-{$rudder.version}/rudder-doc.epub">epub</a> | <a href="rudder-doc.pdf">pdf</a></span>
-      </xsl:otherwise>
-    </xsl:choose>
-    </div>
-    </xsl:template>
-    
     <xsl:template name="searchbox">
     <div id="searchbox">
     <span class="algolia-autocomplete">
@@ -984,5 +959,7 @@ border: none; background: none; font-weight: none; color: none; }
             </xsl:with-param>
         </xsl:call-template>
     </xsl:template>
+
+    <xsl:include href="links.xsl"/>
 
 </xsl:stylesheet>
