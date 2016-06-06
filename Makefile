@@ -7,6 +7,7 @@ SOURCES = $(BASENAME).txt
 TARGETS = epub html pdf readme webhelp webhelp-localsearch
 DOCBOOK_DIST = xsl/xsl-ns-stylesheets
 
+RUDDER_VERSION = 2.11
 NCF_VERSION = v0.x
 
 ASCIIDOC = $(CURDIR)/bin/asciidoc/asciidoc.py
@@ -57,6 +58,7 @@ html: html/$(BASENAME).html
 pdf: html/$(BASENAME).pdf
 readme: html/README.html
 ncf-doc: generic-methods.asciidoc
+links: xsl/links.xsl
 
 epub/$(BASENAME).epub: ncf-doc $(SOURCES)
 	mkdir -p html
@@ -98,7 +100,10 @@ $(LUCENE_ANALYZER_JAR):
 
 jars: $(INDEXER_JAR) $(TAGSOUP_JAR) $(LUCENE_ANALYZER_JAR) $(LUCENE_CORE_JAR)
 
-webhelp/index.html: ncf-doc $(SOURCES)
+xsl/links.xsl:
+	./tools/generate_header_info.py $(RUDDER_VERSION) > xsl/links.xsl
+
+webhelp/index.html: links ncf-doc $(SOURCES)
 	mkdir -p webhelp
 	$(ASCIIDOC) --doctype=book --backend docbook $(SOURCES)
 	xsltproc  --xinclude --output xincluded-profiled.xml  \
@@ -106,11 +111,11 @@ webhelp/index.html: ncf-doc $(SOURCES)
 	xsltproc --stringparam webhelp.base.dir "webhelp" \
 	         --stringparam webhelp.include.search.tab "0" \
 	         --stringparam webhelp.embedded "0" \
-	         --stringparam rudder.version "2.11" \
+	         --stringparam rudder.version $(RUDDER_VERSION) \
 	         xsl/webhelp.xsl xincluded-profiled.xml
 	cp -r style/html/favicon.ico images template/common *.png webhelp/
 
-webhelp-localsearch/index.html: ncf-doc $(SOURCES)
+webhelp-localsearch/index.html: links ncf-doc $(SOURCES)
 	mkdir -p webhelp-localsearch
 	$(ASCIIDOC) --doctype=book --backend docbook $(SOURCES)
 	xsltproc  --xinclude --output xincluded-profiled.xml \
@@ -118,7 +123,7 @@ webhelp-localsearch/index.html: ncf-doc $(SOURCES)
 	xsltproc --stringparam webhelp.base.dir "webhelp-localsearch" \
 	         --stringparam webhelp.include.search.tab "1" \
 	         --stringparam webhelp.embedded "1" \
-	         --stringparam rudder.version "2.11" \
+	         --stringparam rudder.version $(RUDDER_VERSION) \
 	         xsl/webhelp.xsl xincluded-profiled.xml
 	cp -r style/html/favicon.ico images template/common *.png webhelp-localsearch/
 
@@ -153,7 +158,7 @@ test:
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
 clean:
-	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub webhelp webhelp-localsearch xincluded-profiled.xml $(BASENAME).xml extensions ncf generic_methods.{asciidoc,md}
+	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub webhelp webhelp-localsearch xincluded-profiled.xml $(BASENAME).xml extensions ncf generic_methods.{asciidoc,md} xsl/links.xsl
 
 view: all
 	$(SEE) $(TARGETS)
