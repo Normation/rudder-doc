@@ -57,7 +57,7 @@ if __name__ == '__main__':
   versions = get_min_versions()
 
   # Get all generic methods
-  generic_methods = ncf.get_all_generic_methods_metadata()["data"]
+  generic_methods = ncf.get_all_generic_methods_metadata()["data"]["generic_methods"]
   
   categories = {}
   for method_name in sorted(generic_methods.keys()):
