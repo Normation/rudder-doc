@@ -1,6 +1,6 @@
 ## Rudder User Documentation Makefile
 
-.PHONY: all clean view ncf-doc
+.PHONY: all clean view ncf-doc links
 
 BASENAME = rudder-doc
 SOURCES = $(BASENAME).txt
@@ -34,16 +34,6 @@ LUCENE_ANALYZER_JAR   := $(DOCBOOK_EXTENSIONS_DIR)/lucene-analyzers-common-5.2.1
 LUCENE_CORE_JAR   := $(DOCBOOK_EXTENSIONS_DIR)/lucene-core-5.2.1.jar
 
 classpath := $(INDEXER_JAR):$(TAGSOUP_JAR):$(LUCENE_ANALYZER_JAR):$(LUCENE_CORE_JAR)
-
-## unused options::
-## stylesdir/stylesheet:
-## we use standard asciidoc stylesheets (no specific stylesdir)
-## and add specific styling for Rudder afterwards (stylesheet option)
-# -a stylesdir=$(CURDIR)/style/html \
-## the search path for 'theme' option cannot be set accurately -> unused
-# -a theme=rudder \
-## embed css into the html file, this option is not used:
-# -a linkcss
 
 ## Generate PDF from docbook
 DOCBOOK2PDF = dblatex -tpdf
@@ -101,7 +91,7 @@ $(LUCENE_ANALYZER_JAR):
 jars: $(INDEXER_JAR) $(TAGSOUP_JAR) $(LUCENE_ANALYZER_JAR) $(LUCENE_CORE_JAR)
 
 xsl/links.xsl:
-	./tools/generate_header_info.py $(RUDDER_VERSION) > xsl/links.xsl
+	./tools/generate_dynamic_content.py $(RUDDER_VERSION) xsl
 
 webhelp/index.html: links ncf-doc $(SOURCES)
 	mkdir -p webhelp
@@ -114,6 +104,9 @@ webhelp/index.html: links ncf-doc $(SOURCES)
 	         --stringparam rudder.version $(RUDDER_VERSION) \
 	         xsl/webhelp.xsl xincluded-profiled.xml
 	cp -r style/html/favicon.ico images template/common *.png webhelp/
+	# Awful hack to replace home content
+	sed -ri 's/(<div class="titlepage">).*/\1<\/div>/' webhelp/index.html
+	sed -i '/<div class="titlepage">/ r xsl/index.html' webhelp/index.html
 
 webhelp-localsearch/index.html: links ncf-doc $(SOURCES)
 	mkdir -p webhelp-localsearch
@@ -126,6 +119,9 @@ webhelp-localsearch/index.html: links ncf-doc $(SOURCES)
 	         --stringparam rudder.version $(RUDDER_VERSION) \
 	         xsl/webhelp.xsl xincluded-profiled.xml
 	cp -r style/html/favicon.ico images template/common *.png webhelp-localsearch/
+	# Awful hack to replace home content
+	sed -ri 's/(<div class="titlepage">).*/\1<\/div>/' webhelp-localsearch/index.html
+	sed -i '/<div class="titlepage">/ r xsl/index.html' webhelp-localsearch/index.html
 
 index: webhelp-localsearch/index.html jars
 	mkdir -p webhelp-localsearch/search
@@ -158,7 +154,7 @@ test:
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
 clean:
-	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub webhelp webhelp-localsearch xincluded-profiled.xml $(BASENAME).xml extensions ncf generic_methods.{asciidoc,md} xsl/links.xsl
+	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub webhelp webhelp-localsearch xincluded-profiled.xml $(BASENAME).xml extensions ncf generic_methods.{asciidoc,md} xsl/links.xsl xsl/index.html
 
 view: all
 	$(SEE) $(TARGETS)
