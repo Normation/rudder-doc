@@ -50,7 +50,7 @@ DOCBOOK2PDF = dblatex -tpdf
 
 SEE = see
 
-all: test $(TARGETS)
+all: $(TARGETS) test
 epub: epub/$(BASENAME).epub
 webhelp: webhelp/index.html
 webhelp-localsearch: webhelp-localsearch/index.html index
@@ -152,8 +152,9 @@ html/README.html: README.asciidoc
 slides.html: $(SOURCES)
 	$(ASCIIDOC)  -a theme=volnitsky --out-file slides.html --backend slidy $(SOURCES)
 
-test:
+test: webhelp/index.html
 	./tests/check_title_syntax.sh
+	./tests/check_broken_links.sh
 
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
