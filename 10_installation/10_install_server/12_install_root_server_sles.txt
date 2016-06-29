@@ -2,9 +2,8 @@
 
 ===== Configure the package manager
 
-Ensure that the +zypper+ package manager is configured, and install the required packages:
-+rsyslog+, +rsyslog-pgsql+ and 'Oracle Java 6 JRE' or 'OpenJDK 7 JRE'. +rsyslog+ and +rsyslog-pgsql+ are downloadable
-alongside Rudder and Java is available through Oracle's website: http://www.java.com.
+Ensure that the +zypper+ package manager is configured, and install 'Oracle Java 6 JRE' or 'OpenJDK 7 JRE',
+for example available on Oracle's website: http://www.java.com.
 
 include::snippets/zypper_segfault.txt.snippet[]
 
@@ -15,7 +14,7 @@ Run the following commands as root:
 ----
 
 zypper ar -n "Normation RPM Repositories" http://www.rudder-project.org/rpm-2.11/SLES_11_SP1/ Normation
-zypper up
+zypper refresh
 
 ----
 
