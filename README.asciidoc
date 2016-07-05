@@ -25,16 +25,20 @@ ImageMagick:: http://www.imagemagick.org/ to normalize the resolution of illustr
 
 Pandoc:: www.pandoc.org to convert ncf markdown doc to asciidoc
 
+For the tests only: 
+
+Linkchecker:: http://wummel.github.io/linkchecker/ to check for broken links
+
 === Install the dependencies on Debian and Ubuntu:
 
 ----
-apt-get install python docbook dblatex graphviz inkscape imagemagick
+apt-get install python docbook dblatex graphviz inkscape imagemagick linkchecker
 ----
 
 === Install the dependencies On Fedora, Centos and RHEL
 
 ----
-yum install docbook-utils inkscape ImageMagick
+yum install docbook-utils inkscape ImageMagick linkchecker
 ----
 
 To install +asciidoc+ see: http://www.methods.co.nz/asciidoc/INSTALL.html.
