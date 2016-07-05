@@ -60,7 +60,7 @@ $(document).ready(function() {
     // This code deals with the problem when 
     // you click on a link from another page. 
     var hash = window.location.hash;
-    if(hash){ 
+    if($(hash).offset()!==null){
 	var targetOffset = $(hash).offset().top - 120;
 	$('html,body').animate({scrollTop: targetOffset}, 200);
 	return false;
