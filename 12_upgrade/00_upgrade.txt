@@ -14,6 +14,9 @@ occur during the upgrade process.
 
 Migration from 2.11, 3.0 or 3.1 are supported, so you can upgrade directly to 3.2.
 
+If you migrate from 2.11, 3.0 or 3.1 older than 3.1.11, you have to upgrade
+you server before your agents (as 3.2 agents are not compatible with older servers).
+
 ==== Upgrade from Rudder 2.10 or older
 
 Direct upgrades from 2.10.x and older are no longer supported on 3.2.
