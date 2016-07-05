@@ -1,8 +1,19 @@
 === Caution cases
 
+==== Compatibility between Rudder agent 3.2 and older server versions
+
+===== 3.1.x (>= 3.1.11) agents
+
+Rudder agents 3.2.x are fully compatible with Rudder server 3.1.x starting from 3.1.11.
+
+===== 2.11.x, 3.0.x and 3.1.x agents
+
+Rudder agents 3.2.x are not compatible with Rudder server 2.11.x, 3.0.x or
+3.1.x lower than 3.1.11.
+
 ==== Compatibility between Rudder server 3.2 and older agent versions
 
-===== 2.11.x, 3.0.X and 3.1.x agents
+===== 2.11.x, 3.0.x and 3.1.x agents
 
 As they use a compatible CFEngine version, Rudder agent 2.11.x, 3.0.x and 3.1.x are fully compatible with Rudder server 3.2.x. It is therefore not necessary to update your agents to 3.2.x.
 
