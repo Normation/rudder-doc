@@ -85,7 +85,10 @@ rudder-command:
 man: rudder-command
 	cd rudder-command && git pull && git checkout branches/rudder/$(RUDDER_VERSION)
 	cd rudder-command/man && make rudder.8
+	# Adapt title level to be insertable in the manual
 	sed 's/^=/====/' -i rudder-command/man/rudder.asciidoc
+	# Avoid going too far (the maximum level is 5)
+	sed 's/^======/=====/' -i rudder-command/man/rudder.asciidoc
 
 ncf:
 	git clone https://github.com/Normation/ncf.git
