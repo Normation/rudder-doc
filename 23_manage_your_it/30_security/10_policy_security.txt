@@ -1,0 +1,44 @@
+==== Data confidentiality
+
+Rudder is designed to strictly separate policies between nodes,
+and to only let a node access its own policies.
+
+This section will give details about how the policies are secured, and which
+content is node-specific or global.
+
+===== Private data
+
+All confidential information should be stored in private data, namely:
+
+* the directives, groups, rules, and their parameters
+* the techniques parameters in the Technique Editor
+* the shared-files directory
+
+There are:
+
+* always transfered encrypted between nodes (using agent copy protocol or https for the interface and the API)
+* only available to the nodes that need it
+* only accessible locally by the users that need it
+
+More precisely:
+
+* root server:
+** all the data is present on it
+** files are readable and writable only by the root user and (for some of them) the rudder group
+** some data is also accessible from our backends (PostgreSQL, OpenLDAP), but only locally (the services are listenning on loopback) and from Rudder-specific users, whith passwords only accessible to the root user
+** accessible remotely by the Web interface (needs an authorized user account) or the API (needs a token)
+* relay: only the data needed for the served nodes and the relay itself are available and stored locally, only accessible to the root user
+* node: only the data needed to configure the node is available and stored locally, only accessible to the root user
+
+
+===== Common data
+
+This refers to content available from all nodes in the authorized networks, readable from all users
+on the nodes, and that can be transfered withtout encryption.
+
+These unprotected contents are:
+
+* the tools (`/var/rudder/tools`)
+* the common ncf part (`/var/rudder/ncf/common`), which includes all the content distibuted in the `ncf` package
+* the Rudder techniques sources (without parameters), which includes all the content distibuted in the `rudder-techniques` package
+
