@@ -1,0 +1,63 @@
+=== Script evaluation in Directives
+
+It is possible to execute Javascript commands in Directives. The feature is disabled by default, but can be enabled in the Administration/Settings page, with the *Enable script evaluation in Directives with ${eval ...}* parameter
+
+==== Usage
+
+You can use scripts in all Directives fields (as subpart of the value, or as the value itself), that are evaluated during the policies generation. So the generated policies contains the results of the script execution. The syntax of script is as follow.
+----
+${eval javascript_command}
+----
+
+for example, to get the first 3 letters of the hostname, you can use
+----
+${eval "${rudder.node.hostname}".substring(0,3)}
+----
+
+====
+
+[TIP]
+
+[[limits-of-scripts, Limitation of the scripting language]]
+
+.Limitation of the scripting language
+
+====
+
+Scripting language runs in a sandboxed Javascript environment. It has some limitation, such as:
+* It cannot write on the Filesystem
+* Scripts are killed after 5 seconds of execution, to prevent overloading the system
+* Scripts are only evaluated in Directive fields, not in the Techniques created in the Technique editor.
+
+====
+
+==== Hash password-compatible
+
+We provide methods to generate hashes password compatible, for both AIX and Unix-like (Linux, BSD, ...). Available methods are:
+
+* rudder.password.unix(algo, password [, salt])
+* rudder.password.aix(algo, password [, salt])
+* rudder.password.auto(algo, password [, salt])
+
+where *algo* can be "MD5", "SHA-512", "SHA512", "SHA-256", "SHA256" (case insensitive), *password* is the password to hash, and *salt* is the optionnal salt to use in the password.
+
+Method *unix* generates Unix crypt password compatible hashes, *aix* generates AIX password compatible hashes, *auto* automatically choose the encryption based on the node type (AIX nodes will have a AIX compatible hash, others will have a Unix compatible hash).
+
+====
+
+[WARNING]
+
+.Usage of salt
+
+It is strongly recommended to provide a *salt* to the methods. If no salt is provided, a random salt is created, and it is recreated at each policies generation. So hashes will change at each generation, causing a "repaired" status after application of the new policies. 
+
+====
+
+[WARNING]
+
+.Limitations based on the JVM
+
+AIX password generation depends on the availability of *PBKDF2WithHmac256* and *PBKDF2WithHmac512* in the JVM. Some JVMs don't include these libraries. In this case, the hashing algorithm falls back to *SHA1*, and an error message can be found in the logs of the application
+
+====
+
