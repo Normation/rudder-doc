@@ -1,16 +1,16 @@
 === Node properties
 
-==== Defining properties
-
 Node properties can be found in the "properties" tab of each node in Rudder.
 
 Node properties can be modified using Rudder API, see http://www.rudder-project.org/rudder-api-doc/#api-Nodes-updateNodeProperties
 
-Currently a property is interpreted as a string value. So properties can be seen as a list of key=value pairs. Example: datacenter=Paris.
+Currently a property is interpreted as a string value. So properties can be
+seen as a list of key=value pairs. Example: `datacenter=Paris`.
 
 ==== Using properties
 
 You can use a node property almost everywhere in Rudder:
+
 * in directive parameters
 * in the technique editor
 * in your own techniques an generic methods code
@@ -25,21 +25,26 @@ ${node.properties[datacenter]}
 
 ----
 
-WARNING: currently node properties can not be used inside ${eval } JavaScript blocks, since they are evaluated during policy generation and node properties are only made available in the agents. A workaround for this will be provided in a future version of Rudder.
+WARNING: Currently node properties can not be used in JavaScript expressions (see following paragraph), since they are evaluated during policy generation and node properties are only made available in the agents. A workaround for this will be provided in a future version of Rudder.
 
 ==== Under the hood
 
-On the server, one or more properties files are written for each node in the /var/rudder/share/<uuid>/rules/cfengine-community/properties.d/ directory.
+On the server, one or more properties files are written for each node in the
+`/var/rudder/share/<uuid>/rules/cfengine-community/properties.d/` directory.
 This directory is then synchronized by the agent with all other promise files.
 
-In the agent, properties are made available in the node.<namespace> container that contains the values.
-Those values are read from /var/rudder/cfengine-community/inputs/properties/*.json
-All files are taken in order and override the previous ones, the last one wins.
+In the agent, properties are made available in the `node.<namespace>` container that contains the values.
+Those values are read from
+`/var/rudder/cfengine-community/inputs/properties/*.json`. All files are taken
+in order and override the previous ones - the last one wins.
 
 Each file must contain at least 2 levels of JSON content, the first level is the namespace level
 and the second level is the key level.
-The namespace name must be an ASCII name that doesn't start with '_' and must match the following regex: [a-zA-Z0-9][a-zA-Z0-9_]*
-Example: 
+
+The namespace name must be an ASCII name that doesn't start with `_` and must
+match the following regex: `[a-zA-Z0-9][a-zA-Z0-9_]*`
+
+For example: 
 
 ----
 
@@ -54,15 +59,23 @@ Example:
 
 ----
 
-The merge is a first level merge done at the namespace level.
-This means that:
+The merge is a first level merge done at the namespace level. This means that:
+
 * a key in a namespace is fully overridden by the same key in the same namespace in a later file.
 * a key in a namespace is never overriden by the same key in a different namespace
 * a key that is overriden never retains original data even if it is a data container itself
 
-The result key is available in the node.<namespace> data variable
-usage example: ${node.properties[datacenter]}
+The result key is available in the `node.<namespace>` data variable. A usage
+example:
 
-To get the original data (for debug only) there is the properties.property_<fileid> variable.
-usage example: ${properties.property__var_rudder_cfengine_community_inputs_properties_d_properties_json[properties][datacenter]}
+----
+${node.properties[datacenter]}
+----
+
+To get the original data (for debug only) there is the
+`properties.property_<fileid>` variable. A usage example:
+
+----
+${properties.property__var_rudder_cfengine_community_inputs_properties_d_properties_json[properties][datacenter]}
+----
 
