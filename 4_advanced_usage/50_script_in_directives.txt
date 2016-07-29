@@ -1,20 +1,36 @@
-=== Script evaluation in Directives
+=== JavaScript evaluation in Directives
 
-It is possible to execute Javascript commands in Directives. The feature is disabled by default, but can be enabled in the Administration/Settings page, with the *Enable script evaluation in Directives with ${eval ...}* parameter
+It is possible to use JavaScript expressions to build Directive values. The
+resulting values will be computed during policy generation, and can therefore
+provide unique values for each node.
+
+==== Feature availability
+
+This feature was introduced in Rudder 3.1.12, Rudder 3.2.5 and Rudder 4.0.
+
+If you upgraded to 3.1.12 (or a later 3.1.x version) or 3.2.5 (or a later 3.2.x
+version) from a previous Rudder version, this feature is disabled by default
+in order to mitigate any risk of undesired side effects on existing
+installations. You can enable it in the Administration/Settings page, using the
+*Enable script evaluation in Directives* parameter.
+
+Rudder installations from 4.0 onwards have this feature enabled by default.
 
 ==== Usage
 
-You can use scripts in all Directives fields (as subpart of the value, or as the value itself), that are evaluated during the policies generation. So the generated policies contains the results of the script execution. The syntax of script is as follow.
-----
-${eval javascript_command}
-----
+Currently, use of JavaScript is only supported in the "password" variable type
+in Directives, for example in the "User Management" technique. Its
+availability will be extended to all Directive fields in the near future (see
+below).
 
-for example, to get the first 3 letters of the hostname, you can use
-----
-${eval "${rudder.node.hostname}".substring(0,3)}
-----
+All standard JavaScript methods are available, and a Rudder-specific
+library, prefixed with `rudder.` also provides some extra utilities. This
+library is documented below.
 
-====
+For example, to get the first 3 letters of each node's hostname, you can write:
+----
+"${rudder.node.hostname}".substring(0,3)
+----
 
 [TIP]
 
@@ -24,40 +40,101 @@ ${eval "${rudder.node.hostname}".substring(0,3)}
 
 ====
 
-Scripting language runs in a sandboxed Javascript environment. It has some limitation, such as:
-* It cannot write on the Filesystem
+JavaScript expressions are evaluated in a sandboxed JavaScript environment. It has some
+limitations, such as:
+
+* It cannot write on the filesystem
 * Scripts are killed after 5 seconds of execution, to prevent overloading the system
-* Scripts are only evaluated in Directive fields, not in the Techniques created in the Technique editor.
 
 ====
 
-==== Hash password-compatible
+==== Rudder utility library
 
-We provide methods to generate hashes password compatible, for both AIX and Unix-like (Linux, BSD, ...). Available methods are:
+===== Standard hash methods
 
-* rudder.password.unix(algo, password [, salt])
-* rudder.password.aix(algo, password [, salt])
-* rudder.password.auto(algo, password [, salt])
+The following methods allow to simply hash a value using standard algorithms:
 
-where *algo* can be "MD5", "SHA-512", "SHA512", "SHA-256", "SHA256" (case insensitive), *password* is the password to hash, and *salt* is the optionnal salt to use in the password.
+* `rudder.hash.md5(string)`
+* `rudder.hash.sha256(string)`
+* `rudder.hash.sha512(string)`
 
-Method *unix* generates Unix crypt password compatible hashes, *aix* generates AIX password compatible hashes, *auto* automatically choose the encryption based on the node type (AIX nodes will have a AIX compatible hash, others will have a Unix compatible hash).
+These methods do not use a salt for hashing, and as such are not suitable for
+distributing passwords for user accounts on UNIX systems. See below for a
+preferable approach for this.
 
-====
+===== UNIX password-compatible hash methods
+
+The following methods are specially designed to provided hashes that can be
+used as user passwords on UNIX systems (in `/etc/shadow`, for example). Use
+these if you want to distribute hashes of unique passwords for each of your
+nodes, for example.
+
+Two different cases exist: support for generic Unix-like systems (Linux, BSD,
+...) and support for AIX systems (which use a different hash algorithm).
+
+Available methods are:
+
+* `rudder.password.auto(algorithm, password [, salt])`
+* `rudder.password.unix(algorithm, password [, salt])`
+* `rudder.password.aix(algorithm, password [, salt])`
+
+The parameters are:
+
+* `algorithm` can be "MD5", "SHA-512", "SHA512", "SHA-256", "SHA256" (case insensitive)
+* `password` is the plain text password to hash
+* `salt` is the optional salt to use in the password (we *strongly* recommend providing this value - see warning below)
+
+The `unix` method generates Unix crypt password compatible hashes (for use on
+Linux, BSD, etc), while the `aix` method generates AIX password compatible
+hashes. The `auto` method automatically uses the appropriate algorithm for
+each node type (AIX nodes will have a AIX compatible hash, others will
+have a Unix compatible hash). We recommend always using `auto` for simplicity.
+
+For example, to use the first 8 letters of each node's hostname as a password,
+you could write:
+----
+rudder.password.auto("SHA-256", "${rudder.node.hostname}".substring(0,8), "abcdefg")
+----
 
 [WARNING]
 
-.Usage of salt
-
-It is strongly recommended to provide a *salt* to the methods. If no salt is provided, a random salt is created, and it is recreated at each policies generation. So hashes will change at each generation, causing a "repaired" status after application of the new policies. 
+.Providing a salt
 
 ====
 
-[WARNING]
-
-.Limitations based on the JVM
-
-AIX password generation depends on the availability of *PBKDF2WithHmac256* and *PBKDF2WithHmac512* in the JVM. Some JVMs don't include these libraries. In this case, the hashing algorithm falls back to *SHA1*, and an error message can be found in the logs of the application
+It is strongly recommended to provide a *salt* to the methods above. If no
+salt is provided, a random salt is created, and will be recreated at each
+policy generation, causing the resulting hashes to change each time. This, in
+turn, will generate an unnecessary "repaired" status for the password component on all nodes
+at each policy generation.
 
 ====
+
+[TIP]
+
+.JVM requirements for AIX password hashes
+
+====
+
+AIX password generation depends on the availability of *PBKDF2WithHmac256* and
+*PBKDF2WithHmac512* in the JVM. Some JVMs don't include these libraries. In
+this case, the hashing algorithm falls back to *SHA1*, and an error message
+will be logged.
+
+====
+
+==== Status and future support
+
+In a future version of Rudder, JavaScript evaluation will be supported in all
+fields in Directives.
+
+In the meantime, you can already test this functionality out by entering a JavaScript
+expression in any Directive field, prefixed by "evaljs:". Please be aware that
+this is unsupported and untested, so do this at your own risk.
+
+If you do encounter any issues, please get in touch or open a ticket - we'd
+love to hear about them!
+
+There is currently no plan to extend this support to the fields in the
+Technique editor.
 
