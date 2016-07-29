@@ -77,7 +77,7 @@ ncf:
 	git clone https://github.com/Normation/ncf.git
 
 generic-methods.asciidoc: ncf
-	cd ncf && git pull && git checkout $(NCF_VERSION)
+	cd ncf && git checkout $(NCF_VERSION) && git pull
 	cp tools/ncf_doc_rudder.py ncf/tools/
 	./ncf/tools/ncf_doc_rudder.py
 	pandoc -t asciidoc -f markdown generic_methods.md > generic_methods.asciidoc
