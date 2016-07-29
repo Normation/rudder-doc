@@ -83,7 +83,7 @@ rudder-command:
 	git clone https://github.com/Normation/rudder-agent.git rudder-command
 
 man: rudder-command
-	cd rudder-command && git pull && git checkout branches/rudder/$(RUDDER_VERSION)
+	cd rudder-command && git checkout branches/rudder/$(RUDDER_VERSION) && git pull
 	cd rudder-command/man && make rudder.8
 	# Adapt title level to be insertable in the manual
 	sed 's/^=/====/' -i rudder-command/man/rudder.asciidoc
