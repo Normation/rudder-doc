@@ -1,0 +1,16 @@
+=== Upgrade manually installed relays
+
+With Rudder 2.11, there were no relay package and the configuration had to be done by hand.
+
+To migrate a manually installed relay to 3.1 using the package, run the following intructions:
+
+* Delete the previous Apache configuration file:
+ 
+** `/etc/httpd/conf.d/rudder-default.conf file` on RHEL-like
+** `/etc/apache2/sites-enabled/rudder-default` file on Debian-like
+** `/etc/apache2/vhosts.d/rudder-default.conf` file on SuSE 
+
+* Install the relay package named *rudder-server-relay*.
+
+This is enough to replace the relay configuration, and no change is needed on the root server.
+
