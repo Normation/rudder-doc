@@ -1,0 +1,106 @@
+=== Use a database on a separate server
+
+This section allows installing a separate database only without splitting the rest of the server components
+like when using the rudder-multiserver-setup script. 
+The setup is done in two places: on the database server and on the Rudder root server.
+
+It also allows moving an existing database to another server.
+
+==== On the database server
+
+* Install and configure the agent on the node, and install the *rudder-reports* package.
+
+* Change the `postgresql.conf` file (usually in `/var/lib/pgsql` or `/etc/postgresql`), to listen on the right interface to communicate with the server:
+
+----
+# you can use '*' to listen on all interfaces
+listen_addresses = 'IP_TO_USE' 
+----
+
+* Add an authorization line for the server (in `pg_hba.conf`, in the same directory):
+
+----
+
+host    all         all      ROOT_SERVER_IP  trust
+
+----
+
+* Execute the following command to configure the password (that should be the same as in `/opt/rudder/etc/rudder-passwords.conf` on the server) :
+
+----
+
+su - postgres -c "psql -c \"ALTER USER rudder WITH PASSWORD 'RUDDER_SERVER_DATABASE_PASSWORD'\""
+
+----
+
+* Restart postgresql to apply the new settings
+
+----
+
+service postgresql restart
+
+----
+
+* Run an inventory to the server:
+
+----
+
+rudder agent inventory
+
+----
+
+==== On the root server
+
+In the following section, DATABASE_HOST refers to the hostname of the new database server, and SERVER_HOST to the hostname of
+the root server.
+
+* Remove the rudder-server-root and rudder-reports packages if installed. You can also remove the postgresql package and database from the server if installed,
+but keep in mind you will lose all existing data. You can follow the <<_migration_backups_and_restores, backup and restore>> procedure to migrate the data
+to the new database.
+
+* Change the hostname in `/opt/rudder/etc/rudder-web.properties`
+
+----
+
+rudder.jdbc.url=jdbc:postgresql://DATABASE_HOST:5432/rudder
+
+----
+
+* Edit `/var/rudder/cfengine-community/inputs/rudder-server-roles.conf` and set the following line:
+
+----
+
+rudder-db:DATABASE_HOST
+
+----
+
+* Edit the /etc/rsyslog.d/rudder.conf file and change the hostname in:
+
+----
+
+:ompgsql:DATABASE_HOST,rudder,rudder,...
+
+----
+
+* Run an inventory:
+
+----
+
+rudder agent inventory
+
+----
+
+* Clear the cache (in Administration -> Settings)
+
+* Restart rudder services: 
+
+----
+
+service rsyslog restart
+service rudder restart
+
+----
+
+You should now have finished configuring the database server. You can check the technical logs to see if reports are correctly
+written into the database and read by the web application.
+
