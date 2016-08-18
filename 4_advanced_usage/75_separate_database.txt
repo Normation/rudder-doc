@@ -19,15 +19,17 @@ listen_addresses = 'IP_TO_USE'
 
 ----
 
+* Also ensure that network policies (i.e. the firewalls settings) allow PostgreSQL flows from the root server to the database server.
+
 * Add an authorization line for the server (in `pg_hba.conf`, in the same directory):
 
 ----
 
-host    all         all      ROOT_SERVER_IP  trust
+host    rudder          rudder          ROOT_SERVER_IP/32       md5
 
 ----
 
-* Restart postgresql to apply the new settings
+* Restart postgresql to apply the new settings:
 
 ----
 
@@ -35,7 +37,7 @@ service postgresql restart
 
 ----
 
-* Execute the following command to configure the password (that should be the same as RUDDER_PSQL_PASSWORD in `/opt/rudder/etc/rudder-passwords.conf` on the root server) :
+* Execute the following command to configure the password (that should be the same as RUDDER_PSQL_PASSWORD in `/opt/rudder/etc/rudder-passwords.conf` on the root server):
 
 ----
 
@@ -60,7 +62,7 @@ the root server.
 but keep in mind you will lose all existing data. You can follow the <<_migration_backups_and_restores, backup and restore>> procedure to migrate the data
 to the new database.
 
-* Change the hostname in `/opt/rudder/etc/rudder-web.properties`
+* Change the hostname in `/opt/rudder/etc/rudder-web.properties`:
 
 ----
 
