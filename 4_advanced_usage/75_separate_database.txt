@@ -25,7 +25,7 @@ host    all         all      ROOT_SERVER_IP  trust
 
 ----
 
-* Execute the following command to configure the password (that should be the same as in `/opt/rudder/etc/rudder-passwords.conf` on the server) :
+* Execute the following command to configure the password (that should be the same as RUDDER_PSQL_PASSWORD in `/opt/rudder/etc/rudder-passwords.conf` on the root server) :
 
 ----
 
