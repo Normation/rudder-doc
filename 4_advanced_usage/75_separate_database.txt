@@ -13,31 +13,35 @@ It also allows moving an existing database to another server.
 * Change the `postgresql.conf` file (usually in `/var/lib/pgsql` or `/etc/postgresql`), to listen on the right interface to communicate with the server:
 
 ----
+
 # you can use '*' to listen on all interfaces
 listen_addresses = 'IP_TO_USE' 
+
 ----
+
+* Also ensure that network policies (i.e. the firewall settings) allow PostgreSQL flows from the root server to the database server.
 
 * Add an authorization line for the server (in `pg_hba.conf`, in the same directory):
 
 ----
 
-host    all         all      ROOT_SERVER_IP  trust
+host    rudder          rudder          ROOT_SERVER_IP/32       md5
 
 ----
 
-* Execute the following command to configure the password (that should be the same as in `/opt/rudder/etc/rudder-passwords.conf` on the server) :
-
-----
-
-su - postgres -c "psql -c \"ALTER USER rudder WITH PASSWORD 'RUDDER_SERVER_DATABASE_PASSWORD'\""
-
-----
-
-* Restart postgresql to apply the new settings
+* Restart postgresql to apply the new settings:
 
 ----
 
 service postgresql restart
+
+----
+
+* Execute the following command to configure the password (that should be the same as RUDDER_PSQL_PASSWORD in `/opt/rudder/etc/rudder-passwords.conf` on the root server):
+
+----
+
+su - postgres -c "psql -c \"ALTER USER rudder WITH PASSWORD 'RUDDER_SERVER_DATABASE_PASSWORD'\""
 
 ----
 
@@ -54,11 +58,20 @@ rudder agent inventory
 In the following section, DATABASE_HOST refers to the hostname of the new database server, and SERVER_HOST to the hostname of
 the root server.
 
-* Remove the rudder-server-root and rudder-reports packages if installed. You can also remove the postgresql package and database from the server if installed,
-but keep in mind you will lose all existing data. You can follow the <<_migration_backups_and_restores, backup and restore>> procedure to migrate the data
-to the new database.
+* Remove the rudder-server-root and rudder-reports packages if installed. For example, you can run on Debian:
 
-* Change the hostname in `/opt/rudder/etc/rudder-web.properties`
+----
+
+service rudder restart
+apt-mark manual rudder-webapp rudder-inventory-endpoint
+apt-get remove --purge rudder-reports
+
+----
+
+* You can also remove the postgresql package and database from the server if installed, but keep in mind you will lose all existing data.
+You can follow the <<_migration_backups_and_restores, backup and restore>> procedure to migrate the data to the new database.
+
+* Change the hostname in `/opt/rudder/etc/rudder-web.properties`:
 
 ----
 
