@@ -13,8 +13,10 @@ It also allows moving an existing database to another server.
 * Change the `postgresql.conf` file (usually in `/var/lib/pgsql` or `/etc/postgresql`), to listen on the right interface to communicate with the server:
 
 ----
+
 # you can use '*' to listen on all interfaces
 listen_addresses = 'IP_TO_USE' 
+
 ----
 
 * Add an authorization line for the server (in `pg_hba.conf`, in the same directory):
@@ -25,19 +27,19 @@ host    all         all      ROOT_SERVER_IP  trust
 
 ----
 
-* Execute the following command to configure the password (that should be the same as RUDDER_PSQL_PASSWORD in `/opt/rudder/etc/rudder-passwords.conf` on the root server) :
-
-----
-
-su - postgres -c "psql -c \"ALTER USER rudder WITH PASSWORD 'RUDDER_SERVER_DATABASE_PASSWORD'\""
-
-----
-
 * Restart postgresql to apply the new settings
 
 ----
 
 service postgresql restart
+
+----
+
+* Execute the following command to configure the password (that should be the same as RUDDER_PSQL_PASSWORD in `/opt/rudder/etc/rudder-passwords.conf` on the root server) :
+
+----
+
+su - postgres -c "psql -c \"ALTER USER rudder WITH PASSWORD 'RUDDER_SERVER_DATABASE_PASSWORD'\""
 
 ----
 
