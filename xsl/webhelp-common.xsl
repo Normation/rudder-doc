@@ -43,7 +43,7 @@ xmlns:exsl="http://exslt.org/common"
     <xsl:param name="chunk.section.depth" select="2"/>
     <xsl:param name="use.id.as.filename" select="1"/>
     <xsl:param name="branding">not set</xsl:param>
-    <xsl:param name="brandname"> </xsl:param>
+    <xsl:param name="brandname">Rudder</xsl:param>
 
     <xsl:param name="section.autolabel" select="0"/>
     <xsl:param name="chapter.autolabel" select="0"/>
@@ -67,7 +67,6 @@ xmlns:exsl="http://exslt.org/common"
 appendix  toc,title
 article/appendix  nop
 article   toc,title
-book      toc,title
 chapter   toc,title
 part      toc,title
 preface   toc,title
@@ -880,81 +879,20 @@ border: none; background: none; font-weight: none; color: none; }
         </script>
     </xsl:template>
 
-    <!-- Generates index.html file at docs/. This is simply a redirection to content/$default.topic -->
-    <xsl:template name="index.html">
-        <xsl:variable name="default.topic">
-            <xsl:choose>
-                <xsl:when test="$webhelp.default.topic != ''">
-                    <xsl:value-of select="$webhelp.default.topic"/>
-                </xsl:when>
-                <xsl:when test="$htmlhelp.default.topic != ''">
-                    <xsl:value-of select="$htmlhelp.default.topic"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:call-template name="make-relative-filename">
-                        <xsl:with-param name="base.dir"/>
-                        <xsl:with-param name="base.name">
-                            <xsl:choose>
-                                <xsl:when test="$rootid != ''">
-                                    <xsl:apply-templates select="key('id',$rootid)" mode="chunk-filename"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:apply-templates
-                                            select="*/*[self::d:preface|self::d:chapter|self::d:appendix|self::d:part][1]"
-                                            mode="chunk-filename"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:with-param>
-                    </xsl:call-template>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:call-template name="write.chunk">
-            <xsl:with-param name="filename">
-                <!--       <xsl:if test="$manifest.in.base.dir != 0"> -->
-                <!--         <xsl:value-of select="$base.dir"/> -->
-                <!--       </xsl:if> -->
-                <xsl:choose>
-                    <xsl:when test="$webhelp.start.filename">
-                        <xsl:value-of select="concat($webhelp.base.dir,'/',$webhelp.start.filename)"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="'index.html'"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:with-param>
-            <xsl:with-param name="method" select="'xml'"/>
-            <xsl:with-param name="encoding" select="'utf-8'"/>
-            <xsl:with-param name="indent" select="'yes'"/>
-            <xsl:with-param name="content">
-                <html>
-                    <head>
-		      <link rel="shortcut icon" href="favicon.ico"/>
-		      <meta http-equiv="Refresh" content="1; URL=content/{$default.topic}"/>
-		      <title><xsl:value-of select="//d:title[1]"/>&#160;</title>
-                    </head>
-                    <body>
-		      If not automatically redirected, click <a href="content/{$default.topic}">content/<xsl:value-of select="$default.topic"/></a>
-                    </body>
-                </html>
-            </xsl:with-param>
-        </xsl:call-template>
-    </xsl:template>
-
     <xsl:template name="l10n.js">
         <xsl:call-template name="write.chunk">
             <xsl:with-param name="filename">
-	      <xsl:value-of select="concat($base.dir,'search/l10n.js')"/>
+             <xsl:value-of select="concat($base.dir,'search/l10n.js')"/>
             </xsl:with-param>
             <xsl:with-param name="method" select="'text'"/>
             <xsl:with-param name="encoding" select="'utf-8'"/>
             <xsl:with-param name="indent" select="'no'"/>
             <xsl:with-param name="content">
-	      //Resource strings for localization
-	      var localeresource = new Object;
-	      localeresource["search_no_results"]="<xsl:call-template name="gentext.template">
+             //Resource strings for localization
+             var localeresource = new Object;
+             localeresource["search_no_results"]="<xsl:call-template name="gentext.template">
                 <xsl:with-param name="name" select="'Your_search_returned_no_results'"/>
-		<xsl:with-param name="context" select="'webhelp'"/>
+               <xsl:with-param name="context" select="'webhelp'"/>
                 </xsl:call-template>";
             </xsl:with-param>
         </xsl:call-template>
