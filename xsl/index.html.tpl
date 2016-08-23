@@ -17,6 +17,7 @@ or if you have a suggestion, <a href="https://www.rudder-project.org/redmine/pro
                  types of nodes:</li>
 <ul>
 <li>The central <a href="_install_rudder_server.html">server</a> </li>
+<li>The (optional) <a href="relay-servers.html">relays</a> </li>
 <li>The managed <a href="install-agent.html">nodes</a></li>
 </ul>
 <li>Learn how to use the <a href ="_rudder_web_interface.html">Web interface</a>, to <a href="_node_management_2.html">manage nodes</a> and to <a href="_configuration_management_2.html">configure them</a>.</li>
