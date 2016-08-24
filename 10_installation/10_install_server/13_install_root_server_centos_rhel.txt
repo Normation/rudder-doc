@@ -16,7 +16,9 @@ dependencies will not be resolved with them.
 
 ===== Add the Rudder packages repository
 
-Run the following command as root:
+include::snippets/rpm_key.txt.snippet[]
+
+Then run the following command as root:
 
 **RHEL/CentOS 6:**
 
@@ -26,7 +28,7 @@ echo "[Rudder_2.11]
 name=Rudder 2.11 Repository
 baseurl=http://www.rudder-project.org/rpm-2.11/RHEL_6/
 gpgcheck=1
-gpgkey=http://www.rudder-project.org/rpm-2.11/RHEL_6/repodata/repomd.xml.key
+gpgkey=https://www.rudder-project.org/rpm-2.11/RHEL_6/repodata/repomd.xml.key
 " > /etc/yum.repos.d/rudder.repo
 
 ----
@@ -39,7 +41,7 @@ echo "[Rudder_2.11]
 name=Rudder 2.11 Repository
 baseurl=http://www.rudder-project.org/rpm-2.11/RHEL_5/
 gpgcheck=1
-gpgkey=http://www.rudder-project.org/rpm-2.11/RHEL_5/repodata/repomd.xml.key
+gpgkey=https://www.rudder-project.org/rpm-2.11/RHEL_5/repodata/repomd.xml.key
 " > /etc/yum.repos.d/rudder.repo
 
 ----
