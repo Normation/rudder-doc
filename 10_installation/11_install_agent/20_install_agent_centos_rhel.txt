@@ -1,6 +1,8 @@
 ==== Install Rudder Agent on RHEL-like systems
 
-Define a yum repository for Rudder:
+include::../10_install_server/snippets/rpm_key.txt.snippet[]
+
+Then define a yum repository for Rudder:
 
 ----
 

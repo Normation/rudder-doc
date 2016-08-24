@@ -2,30 +2,18 @@
 
 ===== Add the Rudder packages repository
 
-Run the following commands as root to add the package repository GPG key and the repository itself:
+include::snippets/apt_key.txt.snippet[]
+
+Then run the following commands as root:
 
 ----
 
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 474A19E8
 echo "deb http://www.rudder-project.org/apt-3.1/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 apt-get update
 
 ----
 
-[TIP]
-
-=====
-
-If the HTTP Keyserver Protocol (11371/tcp) port is blocked on your network you
-can use this alternate command:
-
-----
-
-wget --quiet -O- "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x474A19E8" | apt-key add -
-
-----
-
-=====
+This will add the package repository and finally update the local package cache.
 
 ===== Install your Rudder Root Server
 
