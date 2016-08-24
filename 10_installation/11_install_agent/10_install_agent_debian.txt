@@ -1,23 +1,8 @@
 ==== Install Rudder Agent on Debian or Ubuntu
 
-Validate the content of the Rudder project repository by importing the GPG key
-used to sign it:
+include::../10_install_server/snippets/apt_key.txt.snippet[]
 
-----
-
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 474A19E8
-
-----
-
-If the HTTP Keyserver Protocol (11371 TCP) is blocked, you can try an alternate command:
-
-----
-
-root@rudder-server:~# wget --quiet -O- "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x474A19E8" | sudo apt-key add -
-
-----
-
-Add Rudder project repository:
+Then add Rudder's package repository:
 
 ----
 

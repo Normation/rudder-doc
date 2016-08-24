@@ -2,7 +2,9 @@
 
 ===== Add the Rudder packages repository
 
-Run the following command as root:
+include::snippets/rpm_key.txt.snippet[]
+
+Then run the following command as root:
 
 ----
 
