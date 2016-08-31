@@ -262,8 +262,8 @@ You have to restart rsyslog for these settings to take effect.
 You can check current soft and hard limits by running the following commands as the user you want to check:
 
 ----
-$ ulimit -Sn
-$ ulimit -Hn
+ulimit -Sn
+ulimit -Hn
 ----
 
 ===== Network backlog

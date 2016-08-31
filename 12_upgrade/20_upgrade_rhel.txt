@@ -6,7 +6,7 @@ Update your yum repository:
 
 ----
 
-$ echo "[Rudder_3.2]
+echo "[Rudder_3.2]
 name=Rudder 3.2 Repository
 baseurl=http://www.rudder-project.org/rpm-3.2/RHEL_7/
 gpgcheck=1
