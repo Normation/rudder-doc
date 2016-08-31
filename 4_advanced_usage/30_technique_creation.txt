@@ -8,7 +8,7 @@ paragraph will walk you through this process.
 There is two ways to configure new Techniques, either thanks to the web 
 Technique Editor in Rudder or by coding them by hand.
 
-The use of the Technique Editor (code name: ncf-builder [http://www.ncf.io/pages/ncf-builder.html]) 
+The use of the Technique Editor (code name: http://www.ncf.io/pages/ncf-builder.html[ncf-builder]) 
 is the easiest way to create new Techniques and is fully integrated with Rudder. On the other hand, 
 it does not allow the same level of complexity and expressiveness than coding a Technique by hand. 
 Of course, coding new Techniques by hand is a more involved process that needs to learn how the 
@@ -103,7 +103,7 @@ Get request::
 Get request will get all Techniques and Generic Methods in a path passed as parameters of the
 request in the "path" javascript variable:
 
-https://you-rudder/ncf-builder/#!?path=/var/rudder/configuration-repository/ncf
+https://your.rudder.server/ncf-builder/#!?path=/var/rudder/configuration-repository/ncf
 
 Get requests are triggered when accessing Technique editor. 
 
@@ -202,7 +202,7 @@ by ssh, and cd into the directory where Techniques are stored:
 
 ----
 
-$ cd /var/rudder/configuration-repository/techniques
+cd /var/rudder/configuration-repository/techniques
 
 ----
 
@@ -212,7 +212,7 @@ that directory. For example:
 
 ----
 
-$ cd applications
+cd applications
 
 ----
 
@@ -221,7 +221,14 @@ You can consult the description of each category by looking at the
 
 ----
 
-$ cat category.xml
+cat category.xml
+
+----
+
+Will output:
+
+----
+
 <xml>
     <name>Application management</name>
     <description>This category contains Techniques designed to install,
