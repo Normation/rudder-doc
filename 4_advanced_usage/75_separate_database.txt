@@ -6,6 +6,84 @@ The setup is done in two places: on the database server and on the Rudder root s
 
 It also allows moving an existing database to another server.
 
+[TIP]
+
+.Use different user and database names
+
+====
+
+It can be useful, for example if you want to share you database server between several Rudder root servers (see note below),
+to use a different database for your Rudder root server. To do so:
+
+* Create the new database (replace `alternate_user_name`, `alternate_base_name` and specify a password):
+
+----
+
+su - postgres -c "psql -q -c \"CREATE USER alternate_user_name WITH PASSWORD 'GENERATE_A_PASSWORD'\""
+su - postgres -c "psql -q -c \"CREATE DATABASE alternate_base_name WITH OWNER = alternate_user_name\""
+
+----
+
+* Initialize it. First copy the initialization script:
+
+----
+
+ cp /opt/rudder/etc/postgresql/reportsSchema.sql /opt/rudder/etc/postgresql/reportsSchema-alternate.sql
+
+----
+
+* In the copied file, change the:
+
+----
+
+ALTER database rudder SET standard_conforming_strings=true;
+
+----
+
+To:
+
+----
+
+ALTER database alternate_base_name SET standard_conforming_strings=true;
+
+----
+
+* Then apply the script:
+
+----
+
+su - postgres -c "psql -q -U alternate_user_name -h localhost -d alternate_base_name \
+     -f /opt/rudder/etc/postgresql/reportsSchema-alternate.sql"
+
+----
+
+* Follow the standard instructions of this section, with two differences:
+
+** You need to adjust the line added to `pg_hba.conf` to match your user and database name.
+
+** You need to also change the database name and user in `rudder-web.properties`.
+
+====
+
+[CAUTION]
+
+.Use the same database server for several Rudder root servers
+
+====
+
+It is possible to share the same database server between several Rudder instances,
+by following the preceding tip to use a different database than the default one.
+However, there are some important points to know:
+
+* This database server can only be used with the rudder-db role in case of multiserver setup.
+
+* This database server can only be a node for one of the Rudder servers. This also means that this
+root server will have indirect access to the content of the other databases.
+
+====
+
+
+
 ==== On the database server
 
 * Install and configure the agent on the node, and install the *rudder-reports* package.
