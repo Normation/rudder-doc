@@ -23,13 +23,13 @@ To upgrade you local techniques, run the following commands on the Rudder Root S
 
 ----
 
-root@node:~# cd /var/rudder/configuration-repository
-root@node:~# cp -a /opt/rudder/share/techniques/* techniques/
-root@node:~# git status
+cd /var/rudder/configuration-repository
+cp -a /opt/rudder/share/techniques/* techniques/
+git status
 # Now, inspect the differences. If no conflict is noticeable, then go ahead.
-root@node:~# git add techniques/
-root@node:~# git commit -m "Technique upgrade" # Here, put a meaningful message about why you are updating.
-root@node:~# rudder server reload-techniques
+git add techniques/
+git commit -m "Technique upgrade" # Here, put a meaningful message about why you are updating.
+rudder server reload-techniques
 
 ----
 
