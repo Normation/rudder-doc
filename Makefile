@@ -8,7 +8,7 @@ TARGETS = epub html pdf readme manpage webhelp webhelp-localsearch
 
 DOCBOOK_DIST = xsl/xsl-ns-stylesheets
 
-RUDDER_VERSION = 3.2
+RUDDER_VERSION = 4.0
 NCF_VERSION = master
 
 ASCIIDOC = asciidoc

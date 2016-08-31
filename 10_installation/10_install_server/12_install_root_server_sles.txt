@@ -37,7 +37,7 @@ Then run the following commands as root:
 
 ----
 
-zypper ar -n "Rudder SLES repository" http://www.rudder-project.org/rpm-3.2/SLES_11/ Rudder
+zypper ar -n "Rudder SLES repository" http://www.rudder-project.org/rpm-4.0/SLES_11/ Rudder
 zypper refresh
 
 ----

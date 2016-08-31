@@ -8,7 +8,7 @@ Then run the following commands as root:
 
 ----
 
-echo "deb http://www.rudder-project.org/apt-3.2/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
+echo "deb http://www.rudder-project.org/apt-4.0/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 apt-get update
 
 ----

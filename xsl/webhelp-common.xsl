@@ -535,7 +535,7 @@ border: none; background: none; font-weight: none; color: none; }
                     inputSelector: '#searchfield',
                     algoliaOptions: {
                       'hitsPerPage': 5,
-                      'facetFilters': '(tags:v3.2)'
+                      'facetFilters': '(tags:v4.0)'
                     }
                   }); 
                   </script>

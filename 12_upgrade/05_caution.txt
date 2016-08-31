@@ -1,28 +1,25 @@
 === Caution cases
 
-==== Compatibility between Rudder agent 3.2 and older server versions
+==== Compatibility between Rudder agent 4.0 and older server versions
 
-===== 3.1.x (>= 3.1.11) agents
+===== 3.1.x (>= 3.1.11), 3.2 servers
 
-Rudder agents 3.2.x are fully compatible with Rudder server 3.1.x starting from 3.1.11.
+Rudder agents 4.0.x are fully compatible with Rudder server 3.1.x starting from 3.1.11 and 3.2 servers.
 
-===== 2.11.x, 3.0.x and 3.1.x agents
+===== <3.0.x and 3.1.x (< 3.1.11) servers
 
-Rudder agents 3.2.x are not compatible with Rudder server 2.11.x, 3.0.x or
-3.1.x lower than 3.1.11.
+Rudder agents 4.0.x are not compatible with Rudder servers older than than 3.1.11.
 
-==== Compatibility between Rudder server 3.2 and older agent versions
+==== Compatibility between Rudder server 4.0 and older agent versions
 
-===== 2.11.x, 3.0.x and 3.1.x agents
+===== 3.1.x and 3.2.x agents
 
-As they use a compatible CFEngine version, Rudder agent 2.11.x, 3.0.x and 3.1.x are fully compatible with Rudder server 3.2.x. It is therefore not necessary to update your agents to 3.2.x.
+As they use a compatible CFEngine version, Rudder agent 3.1.x and 3.2.x are fully compatible with Rudder server 4.0.x. It is therefore not strictly necessary to update your agents to 4.0.x.
 
-However, Rudder 3.1 provided a new inventory signing feature which will only be enabled on nodes running Rudder 3.1 or 3.2 agents. On nodes running an older agent version, the inventories won't be signed. 
+===== 3.0.x or older
 
-===== 2.10.x or older
-
-These agents are not compatible with Rudder 3.2, and you have to upgrade them. 
-Be careful to follow the upgrade path explained <<_upgrade_from_rudder_2_10_or_older, above>>.
+These agents are not compatible with Rudder 4.0, and you have to upgrade them. 
+Be careful to follow the upgrade path explained <<_upgrade_from_rudder_3_0_or_older, above>>.
 
 ==== Protocol for reporting
 
