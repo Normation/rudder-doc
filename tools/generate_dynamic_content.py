@@ -76,6 +76,7 @@ def format_index(version_info, template):
 def format_header(versions, manual_version):
   
   output = []
+  versions_output = []
   first = True
   found = False
 
@@ -86,26 +87,28 @@ def format_header(versions, manual_version):
         <a href="http://www.rudder-project.org/changelog-{$rudder.version}">Changelog</a> |
         <a href="http://www.rudder-project.org/rudder-api-doc/">API reference</a>
       </span>
-      <span>Version:""")
+      <span>Version: """)
   
   for version in versions:
     (current_version, esr) = version
     
     if esr:
-      esr_text = " (ESR)"
+      esr_text = " ESR"
     else:
       esr_text = ""
     
     if current_version == manual_version:
       found = True
-      output.append("<strong>" + manual_version + esr_text + "</strong>")
+      versions_output.append("<strong>" + manual_version + esr_text + "</strong>")
     else:     
-      output.append("<a href=\"http://www.rudder-project.org/doc-" + current_version + "/\">" + current_version + esr_text + "</a>")
+      versions_output.append("<a href=\"http://www.rudder-project.org/doc-" + current_version + "/\">" + current_version + esr_text + "</a>")
   
   # Unsupported version
   if not found:
-    output.append("<strong>" + manual_version + esr_text + "</strong>")
-  
+    versions_output.append("<strong>" + manual_version + esr_text + "-dev </strong>")
+
+  output.append(" | \n".join(versions_output))
+
   output.append("""</span>
     <xsl:choose>
       <xsl:when test="$webhelp.embedded != '1'">
@@ -118,7 +121,7 @@ def format_header(versions, manual_version):
     </div>
     </xsl:template>""")
 
-  return " | \n".join(output) + "\n"
+  return "".join(output) + "\n"
   
 
 if __name__ == '__main__':
