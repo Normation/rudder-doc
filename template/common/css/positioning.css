@@ -21,7 +21,7 @@ h1 { font: 18pt Lato, Helvetica, geneva;
 h2 { font: normal 16pt Lato, Helvetica, geneva; }
 
 #header {
-    background-image: linear-gradient(#FFA033, #EE7F00 50%, #B86200);
+    background: #f08004;
     position: fixed;
     width: 100%;
     height: 79px;
@@ -30,6 +30,7 @@ h2 { font: normal 16pt Lato, Helvetica, geneva; }
     bottom: auto;
     left: 0;
     border-bottom: 1px solid #bbc4c5;
+    color: white;
     z-index: 1 !important;
 }
 
@@ -38,7 +39,7 @@ h2 { font: normal 16pt Lato, Helvetica, geneva; }
     position: fixed;
     top: 20px;
 
-    color: #2E2D2D !important;
+    color: white !important;
 }
 
 #header h1 {
@@ -209,7 +210,7 @@ table {
 table.navLinks td a {
 	text-decoration: none;
 	text-transform: uppercase;
-	color: black;
+	color: white;
 	font-size: 11px;
 }
 
@@ -422,7 +423,7 @@ div#otherlinks {
 }
 
 div#otherlinks a {
-  color: black;
+  color: white;
   text-decoration: none;
 }
 div#otherlinks span {
