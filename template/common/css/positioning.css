@@ -432,10 +432,8 @@ div#otherlinks span {
 
 div#searchbox {
   position: fixed;
-  left: 700px;
+  right: 330px;
   top: 25px;
-  width: 550px;
-  height: 30px;
   white-space: nowrap;
 }
 
