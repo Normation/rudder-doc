@@ -116,10 +116,12 @@ at each policy generation.
 
 ====
 
-AIX password generation depends on the availability of *PBKDF2WithHmac256* and
-*PBKDF2WithHmac512* in the JVM. Some JVMs don't include these libraries. In
-this case, the hashing algorithm falls back to *SHA1*, and an error message
-will be logged.
+AIX password generation depends on the availability of *PBKDF2WithHmacSHA256* and
+*PBKDF2WithHmacSHA512* in the JVM. These algorithms are included by default on 
+HotSpot 1.8 and OpenJDK 1.8 and upward. In the case where your JVM does not support these
+algorithms, typically on an IBM JDK or a JVM 1.7 version of HotSpot and OpenJDK, the hashing 
+algorithm falls back to *SHA1* with *PBKDF2WithHmacSHA1*, and an error message will be 
+logged. You can also check your JVM editor manual to add support for these algorithms. 
 
 ====
 
