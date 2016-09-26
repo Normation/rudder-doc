@@ -509,3 +509,11 @@ div.navfooter hr {
     color: #4E4726;
   }
 }
+
+#content > .section > .toc + p + p + div.tip > table > tbody > tr:last-child > td:first-child {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  width: 100%;
+}
