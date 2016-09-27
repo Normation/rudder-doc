@@ -10,24 +10,153 @@ about the Nodes which have been already validated, and are managed by Rudder.
 
 ==== Quick Search
 
-The easiest search tool is the Quick search: type in the search field the first
-letters of the 'Rudder ID', 'Reference', or 'Hostname'; choose the accurate Node in
-the autocompletion list; validate and look at the Node information. This search
-tool can be very useful to help you create a new search in the Advanced Search.
+You might have noticed the small text area at the top of the Rudder interface:
+it is the Quick Search bar. Its purpose is to enable a user to easily search for
+Rudder elements (Nodes, Groups, Directives, Parameters, Rules)  based on their
+name, id, description, inventory...
 
-.Quick search the Node called +debian-node+
+image::./images/rudder-quicksearch.png[Quicksearch]
+
+An autocompletion list will appear as soon as Rudder detects an element it can
+identify, you just have to click on it to be redirected to the element
+configuration page.
+
+More complex search queries can be input using the "in:" and "is:" keywords,
+"is" targets Rudder objects by type, and "in" targets elements like name,
+description...
+
+Those keywords are used to refine a research in case a search query returns
+too many results.
+
+The available search keywords are:
+
+.is: keywords
+[frame="topbot",options="header"]
+|======================
+|keyword |Description
+|node      |Nodes
+|group     |Groups
+|parameter |Parameters
+|directive |Directives
+|rule      |Rules
+|======================
+
+.in: keywords (common)
+[frame="topbot",options="header"]
+|======================
+|keyword |Search for
+|name |Names
+|id |IDs
+|description, long_description |Descriptions
+|isenabled |Enabled elements
+|======================
+
+.in: keywords (nodes)
+[frame="topbot",options="header"]
+|======================
+|keyword |Search for
+|hostname |Hostnames
+|os_type |OS types (windows, linux, aix...)
+|os_name |OS Names (Windows Server 2008, Debian... )
+|os_version |OS versions (8, 2008 R2, ...)
+|os |OS Full Names (Debian GNU/Linux 6.0.10 (squeeze)...)
+|os_kernel_version |OS Kernel versions (3.16, 5.1...)
+|os_service_pack |OS Service Packs (for Windows and SuSE Linux)
+|architecture |OS Architectures (amd64, x86_64, i386)
+|ram |Machine memory
+|ips |Network IP addresses
+|policy_server_id |ID of a node's policy server (root...)
+|properties |Node properties (arbitrary key=values associated to a node)
+|rudder_roles |Rudder roles (rudder-reports, rudder-ldap...)
+|======================
+
+.in: keywords (groups)
+[frame="topbot",options="header"]
+|======================
+|keyword |Search for
+|dynamic |Dynamic groups
+|======================
+
+.in: keywords (directives)
+[frame="topbot",options="header"]
+|======================
+|keyword |Search for
+|dir_param_name |Directive parameter names, as in the Techniques metadata.xml ("GENERIC_FILE_CONTENT_PATH"...)
+|dir_param_value |Directive parameter values
+|technique_id |Technique IDs
+|technique_name |Technique names ("Enforce a file content"...)
+|technique_version |Technique version
+|======================
+
+.in: keywords (parameters)
+[frame="topbot",options="header"]
+|======================
+|keyword |Search for
+|parameter_name |Parameter names
+|parameter_value |Parameter values
+|======================
+
+.in: keywords (rules)
+[frame="topbot",options="header"]
+|======================
+|keyword |Search for
+|directives |Rules containing those Directive IDs
+|groups |Rules containing those Group IDs
+|======================
+
+.Example: Search for a Node called +debian-node+
 
 ====
 
 Assuming you have one managed Node called +debian-node.rudder-project.org+,
-which ID in Rudder is +d06b1c6c-f59b-4e5e-8049-d55f769ac33f+. 
+whose ID in Rudder is +d06b1c6c-f59b-4e5e-8049-d55f769ac33f+.
 
 . Type in the Quick Search field the +de+ or +d0+.
 
-. Autocompletion will propose you this Node: +debian-node.rudder-project.org --
+. The search result will return this Node: +debian-node.rudder-project.org --
 d06b1c6c-f59b-4e5e-8049-d55f769ac33f [d06b1c6c-f59b-4e5e-8049-d55f769ac33f]+.
 
 ====
+
+.Example: Search for a directive called +Common users+
+
+====
+
+Assuming you have one Directive called +Common users+,
+whose ID in Rudder is +6e8ce05b-3f77-4fed-a424-edf0fdaa4231+.
+
+. Type in the Quick Search field +is:directive common+.
+
+. The search result will return this Directive: +Common users --
+4a6aaea7-6471-4ca9-8c27-9ee9f44ed882 [6e8ce05b-3f77-4fed-a424-edf0fdaa4231]+.
+
+====
+
+
+[TIP]
+
+====
+
+This feature is enabled by default on +new+ installations of Rudder from the
+following versions:
+
+* 3.1.14
+* 3.2.7
+* 4.0.0
+
+and may be enabled after an upgrade of a Rudder installation in the Settings tab.
+
+====
+
+[[old-style-quick-search, Old style Quick Search]]
+
+==== Old-style Quick Search
+
+The previous versions of Rudder (pre-3.1.14, 3.2.7 and 4.0.0) do include a simpler
+version of the Quick search bar: type the first letters of the 'Rudder ID',
+'Reference', or 'Hostname', you want in the bar, click the result relevant to your
+needs in the autocompletion list and its details will open. This search tool
+can be very useful to help you create a new search in the Advanced Search. 
 
 [[advanced-search, Advanced Search]]
 
