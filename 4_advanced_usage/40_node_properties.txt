@@ -4,8 +4,12 @@ Node properties can be found in the "properties" tab of each node in Rudder.
 
 Node properties can be modified using Rudder API, see http://www.rudder-project.org/rudder-api-doc/#api-Nodes-updateNodeProperties
 
-Currently a property is interpreted as a string value. So properties can be
-seen as a list of key=value pairs. Example: `datacenter=Paris`.
+Properties can be seen as a list of key=value pairs. 
+
+The value can be a string or a well formatter JSON data structure. 
+
+Example: `datacenter=Paris`. `datacenter= { "Europe": { "France": "Paris" } }`
+
 
 ==== Using properties
 
@@ -25,7 +29,7 @@ ${node.properties[datacenter]}
 
 ----
 
-WARNING: Currently node properties can not be used in JavaScript expressions (see following paragraph), since they are evaluated during policy generation and node properties are only made available in the agents. A workaround for this will be provided in a future version of Rudder.
+WARNING: Currently node properties can not be used in JavaScript expressions (see following paragraph), since they are evaluated during policy generation and node properties are only made available in the agents. Starting with Rudder 3.1.14 and 3.2.7, you can enable a feature swith in "Administration / Setting" to allow node properties expansion in directive parameters. More details can be found at <<_node_properties_expansion_in_directives>>.
 
 ==== Under the hood
 
