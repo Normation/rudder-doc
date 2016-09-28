@@ -1,0 +1,88 @@
+=== Node properties expansion in directives
+
+It is possible to use properties defined on nodes to build Directive values. The
+resulting values will be computed during policy generation, and can therefore
+provide unique values for each node or be used in Javascript expression.
+
+Properties on nodes are defined using Rudder REST API, using 'Update Node properties' api call.
+More details in our http://www.rudder-project.org/rudder-api-doc[API documentation].
+
+==== Feature availability
+
+This feature was introduced in Rudder 3.1.14, Rudder 3.2.7 and Rudder 4.0.
+
+If you upgraded to 3.1.14 (or a later 3.1.x version) or 3.2.7 (or a later 3.2.x
+version) from a previous Rudder version, this feature is disabled by default
+in order to mitigate any risk of undesired side effects on existing
+installations. You can enable it in the Administration/Settings page, using the
+*Enable node properties expansion in Directives* parameter.
+
+Rudder installations from 4.0 onwards have this feature enabled by default.
+
+==== Usage
+
+In any directive text field, you can access property defined on nodes, with the following format:
+
+----
+
+${node.properties[keyone][keytwo]}
+
+----
+
+
+where:
+
+- keyone, keytwo are path on json values
+- the return value is the string representation, in compact mode, of the resulting access
+- if the key is not found, we raise an error and stop the policy generation
+- spaces are authorized around separators ([,],|,}..)
+
+===== Providing a default value
+
+Most of the time, you will need to provide a default value to node properties expansion to avoid a policy generation
+error due to a missing node properties.
+It's also a perfect to provide a simple specialisation of values for some nodes which have the property.
+
+You can also use other node properties, or other rudder parameters has default.
+
+Some examples:
+
+----
+
+${node.properties[datacenter][Europe] | "a simple value" }
+${node.properties[datacenter][Europe] | """ a "value" with quotes""" }
+${node.properties[datacenter][Europe] | ${rudder.param.some_value} }
+${node.properties[datacenter][Europe] | ${rudder.node.hostname}
+${node.properties[datacenter][Europe] | ${node.properties[other_on_node] | node }
+${node.properties[datacenter][Europe] |${node.properties[other] | "some value ${rudder.node.id}" }
+
+----
+
+
+===== Requesting expansion on the node
+
+In some cases, you will want to use a `${node.properties[key]}` in a directive parameter, but you don't want to expand it during
+policy generation, and let the value expanded during the agent run on the node. Typically if the value is to be used by a templating
+tool, or if the value is known only on the node.
+
+For these cases, you can add the option "node" to the properties expression:
+
+----
+
+${node.properties[datacenter][Europe] | node }
+
+----
+
+This will be rewritten during policy generation into:
+
+----
+
+${node.properties[datacenter][Europe]}
+
+----
+
+Which will be treated as a variable by the agent (replace by its value if defined, kept as is if unknown).
+
+The variable is content is read from /var/rudder/cfengine-community/inputs/properties.d/properties.json.
+You can find more information on node properties can be found in <<_node_properties>>.
+
