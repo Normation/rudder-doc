@@ -6,7 +6,8 @@ provide unique values for each node.
 
 ==== Feature availability
 
-This feature was introduced in Rudder 3.1.12, Rudder 3.2.5 and Rudder 4.0.
+This feature was introduced in Rudder 3.1.12, Rudder 3.2.5  for password fields
+only, and generalized for all fields in Rudder 3.1.14, Rudder 3.2.7 and Rudder 4.0.
 
 If you upgraded to 3.1.12 (or a later 3.1.x version) or 3.2.5 (or a later 3.2.x
 version) from a previous Rudder version, this feature is disabled by default
@@ -17,11 +18,6 @@ installations. You can enable it in the Administration/Settings page, using the
 Rudder installations from 4.0 onwards have this feature enabled by default.
 
 ==== Usage
-
-Currently, use of JavaScript is only supported in the "password" variable type
-in Directives, for example in the "User Management" technique. Its
-availability will be extended to all Directive fields in the near future (see
-below).
 
 All standard JavaScript methods are available, and a Rudder-specific
 library, prefixed with `rudder.` also provides some extra utilities. This
@@ -107,6 +103,17 @@ salt is provided, a random salt is created, and will be recreated at each
 policy generation, causing the resulting hashes to change each time. This, in
 turn, will generate an unnecessary "repaired" status for the password component on all nodes
 at each policy generation.
+
+====
+
+[TIP]
+
+.JVM requirements
+
+====
+
+This features is tested only on HotSpot 1.7 and 1.8, OpenJDK 1.7 and 1.8, 
+IBM JVM 1.7 and 1.8.
 
 ====
 
