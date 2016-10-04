@@ -48,7 +48,7 @@ The available search keywords are:
 |name |Names
 |id |IDs
 |description, long_description |Descriptions
-|isenabled |Enabled elements
+|enabled |Enabled elements (true or false)
 |======================
 
 .in: keywords (nodes)
