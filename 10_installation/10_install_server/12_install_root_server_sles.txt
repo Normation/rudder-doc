@@ -3,13 +3,12 @@
 
 ===== Configure the package manager
 
-Rudder requires three packages that are not always packaged by SuSE on all versions:
+Rudder requires Java RE (version 7 at least) that is not always packaged by SuSE on all versions
 
-* PostgreSQL 9
-* Java RE (version 7 at least).
+It is also recommended to PostgreSQL >= 9.2 for optimal performances.
 
-PostgreSQL 9 can be installed through the OpenSuSE build service: https://build.opensuse.org/project/show/server:database:postgresql
-or through the system repositories, on post-SP1 systems.
+PostgreSQL 9.4 can be installed through the OpenSuSE build service: https://build.opensuse.org/project/show/server:database:postgresql
+or through the system repositories, on SLES 11 SP4 and later systems.
 
 The Java RE 7 can be found either using the OpenSuSE build service, or through Oracle's website: http://www.java.com
 
@@ -19,11 +18,9 @@ Also, Rudder server requires the +git+ software, that can be found on SLES SDK D
 
 ====
 
-SLES 11 will try to install PostgreSQL 8.3 by default, which is not supported by Rudder and will cause various glitches
-in the web interface, as well as reporting failures.
+SLES 11 pre SP4 will try to install PostgreSQL 8.x by default, which is not recommended for Rudder and will cause serious performance degradation, and requires much more disk space in the long run.
 
-It is really mandatory to either add the OpenSuSE build service repository, or install postgresql91-server (if available)
-beforehand to prevent the system from choosing the default PostgreSQL implementation.
+It is really recommended to either add the OpenSuSE build service repository, or install postgresql9x-server (if available) beforehand to prevent the system from choosing the default PostgreSQL implementation.
 
 ====
 
