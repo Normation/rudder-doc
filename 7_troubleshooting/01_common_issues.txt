@@ -32,7 +32,7 @@ When the agent does not perform a normal execution, the reports
 will be incomplete, and some components will appear as missing on the server. Reasons could be:
 
 * the execution of the agent encountered an error during its execution and could
-not complete. In this case, an error message is displayed when running 'rudder agent run'. 
+not complete. In this case, an error message is displayed when running 'rudder agent run'.
 It is very likely a bug in the agent, please http://www.rudder-project.org/redmine/projects/rudder/issues/new[report a bug]
 * the agent is executed to launch specific bundles (with the '-b' option)
 * reporting is missing on a Technique, in this case http://www.rudder-project.org/redmine/projects/rudder/issues/new[report a bug]
@@ -84,21 +84,21 @@ make Squid more tolerant to programs like cURL than send some terse http request
 If you have committed an invalid technique, then fixed it and commited it again,
 but the webapp still doesn't  start, you have to force Technique library reloading.
 
-To do this, deleting the attribute techniqueLibraryVersion from entry 
+To do this, deleting the attribute techniqueLibraryVersion from entry
 'techniqueCategoryId=Active Techniques,ou=Rudder,cn=rudder-configuration' in your
 Rudder LDAP backend. When re-starting, the webapp should now reload latest techniques.
 
 === Database is using too much space
 
-Rudder stores a lot of data in the Postgresql database, and most historical data 
-is removed from it. You can <<_automatic_postgresql_table_maintenance,configure>> how many days of logs you want to keep in 
+Rudder stores a lot of data in the Postgresql database, and most historical data
+is removed from it. You can <<_automatic_postgresql_table_maintenance,configure>> how many days of logs you want to keep in
 the database. However, due to the nature of Postgresql, when data are removed,
-space is not reclaimed on the storage system, it is simply marked as “free” for 
-the database to write again in the removed rows. This space can be reclaimed by 
+space is not reclaimed on the storage system, it is simply marked as “free” for
+the database to write again in the removed rows. This space can be reclaimed by
 a VACUUM FULL, but it needs at least as much free space on the drive as the database size.
-Moreover, if you are using Postgresql 8.3 (or in a lesser extend 8.4), you’ll be 
-likely to experience indexes bloating, where the physical size of the indexes grows
-without real reason, and need to be regularly purged.
+If you are using Postgresql 8.4, which is not a recommended version, you’ll be likely to experience indexes bloating, where the physical size of the indexes grows without real reason, and need to be regularly purged.
+With PostgreSQL 9.2 and later, database size should remain stable, based on the number of
+nodes and configurations applied as described in <<_automatic_postgresql_table_maintenance,this estimation of disk usage>>.
 
 There are two ways to reclaim space, the fast one (which doesn’t reclaim completely
 all wasted space), and the complete one (which is unfortunately very slow)
