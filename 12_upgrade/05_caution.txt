@@ -2,13 +2,10 @@
 
 ==== Compatibility between Rudder agent 4.0 and older server versions
 
-===== 3.1.x (>= 3.1.11), 3.2 servers
+===== 3.1.x and 3.2.x servers
 
-Rudder agents 4.0.x are fully compatible with Rudder server 3.1.x starting from 3.1.11 and 3.2 servers.
-
-===== <3.0.x and 3.1.x (< 3.1.11) servers
-
-Rudder agents 4.0.x are not compatible with Rudder servers older than than 3.1.11.
+Rudder agents 4.0.x are not compatible with Rudder servers older than 4.0.0.
+You need to upgrade your server to 4.0 before the agents.
 
 ==== Compatibility between Rudder server 4.0 and older agent versions
 
