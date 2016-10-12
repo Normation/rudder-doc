@@ -1,0 +1,4 @@
+Port 80, TCP, for nodes and potentially users::
+
+WebDAV/HTTP communication port, kept for legacy purpose.
+
