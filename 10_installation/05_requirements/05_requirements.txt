@@ -36,6 +36,14 @@ include::../../glossary/port-443-user.txt[]
 
 ===== Optional flows
 
+These flows are recommended for compatibility:
+
+====
+
+include::../../glossary/port-80.txt[]
+
+====
+
 These flows are used to add features to Rudder:
 
 ====
