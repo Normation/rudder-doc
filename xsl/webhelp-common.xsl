@@ -658,8 +658,8 @@ border: none; background: none; font-weight: none; color: none; }
 
     <xsl:template name="webhelpheader.logo">
 	<a href="index.html">
-	<img style='margin-right: 2px; height: 59px; padding-right: 25px; padding-top: 8px' align="right"
-	    src='{$webhelp.common.dir}images/logo_Rudder.png' alt="{$brandname} Documentation"/>
+	<img style='margin-right: 2px; height: 70px; padding-right: 25px;' align="right"
+	    src='{$webhelp.common.dir}images/logo_Rudder.svg' alt="{$brandname} Documentation"/>
 	</a>
     </xsl:template>
     
