@@ -5,11 +5,12 @@
 BASENAME = rudder-doc
 SOURCES = $(BASENAME).txt
 TARGETS = epub html pdf readme manpage webhelp webhelp-localsearch
+RELEASE_INFO   := http://www.rudder-project.org/release-info
 
 DOCBOOK_DIST = xsl/xsl-ns-stylesheets
 
 RUDDER_VERSION = 3.2
-NCF_VERSION = master
+NCF_VERSION = $(shell curl -s "$(RELEASE_INFO)/rudder/versions/$(RUDDER_VERSION)/components/ncf")
 
 ASCIIDOC = $(CURDIR)/bin/asciidoc/asciidoc.py
 A2X = $(CURDIR)/bin/asciidoc/a2x.py
