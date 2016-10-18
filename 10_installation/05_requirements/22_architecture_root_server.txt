@@ -12,7 +12,7 @@ GNU/Linux:
 
 * SuSE Linux Enterprise Server (SLES) 11 SP1 and SP3
 
-* Ubuntu 12.04 LTS (Precise), 14.04 LTS (Trusty), 16.04 LTS (Xenial)
+* Ubuntu 14.04 LTS (Trusty), 16.04 LTS (Xenial)
 
 
 ==== Hardware specifications and sizing for Rudder Root Server

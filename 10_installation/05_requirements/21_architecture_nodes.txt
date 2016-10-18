@@ -11,11 +11,11 @@ GNU/Linux:
 
 * Debian 5 to 8
 
-* RedHat Enterprise Linux (RHEL) / RHEL-like 3 to 7
+* RedHat Enterprise Linux (RHEL) / RHEL-like 3 and 5 to 7
 
 * Fedora 18
 
-* SuSE Linux Enterprise Server (SLES) 10 SP3, 11 SP1 and SP3, 12
+* SuSE Linux Enterprise Server (SLES) 10 SP3, 11 SP1, 11 SP3, 12
 
 * Ubuntu 10.04 LTS (Lucid), 12.04 LTS (Precise), 12.10 (Quantal), 14.04 LTS (Trusty), 16.04 LTS (Xenial)
 
