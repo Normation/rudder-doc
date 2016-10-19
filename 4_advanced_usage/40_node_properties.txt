@@ -2,26 +2,26 @@
 
 Node properties can be found in the "properties" tab of each node in Rudder.
 
-Node properties can be modified using Rudder API, see http://www.rudder-project.org/rudder-api-doc/#api-Nodes-updateNodeProperties
+Node properties can be modified using Rudder's API, see http://www.rudder-project.org/rudder-api-doc/#api-Nodes-updateNodeProperties
 
-Properties can be seen as a list of key=value pairs. 
+Each property is a key=value pair. The value can be a string or a well-formatted JSON data structure.
 
-The value can be a string or a well formatter JSON data structure. 
-
-Example: `datacenter=Paris`. `datacenter= { "Europe": { "France": "Paris" } }`
+Some examples:
+`datacenter=Paris`
+`datacenter= { "id": "FRA1", "name": "Colo 1, Paris", "location": "Paris, France", "dns_suffix": "paris.example.com" }`
 
 
 ==== Using properties
 
-You can use a node property almost everywhere in Rudder:
+You can use node properties almost everywhere in Rudder:
 
 * in directive parameters
 * in the technique editor
-* in your own techniques an generic methods code
+* in your own techniques and generic methods
 
 To use a property, simply use the variable node.properties with the variable call syntax.
 
-Example with a string property named datacenter:
+Example with a property named 'datacenter':
 
 ----
 
@@ -29,13 +29,13 @@ ${node.properties[datacenter]}
 
 ----
 
-WARNING: Currently node properties can not be used in JavaScript expressions (see following paragraph), since they are evaluated during policy generation and node properties are only made available in the agents. Starting with Rudder 3.1.14 and 3.2.7, you can enable a feature swith in "Administration / Setting" to allow node properties expansion in directive parameters. More details can be found at <<_node_properties_expansion_in_directives>>.
+WARNING: Before Rudder 3.1.14 and 3.2.7, node properties could not be used in JavaScript expressions (see following section), since they are evaluated during policy generation and node properties were only made available to agents at runtime. Since Rudder 3.1.14, 3.2.7 and 4.0.0 and later, you can enable a feature switch in "Administration/Settings" to enable node properties expansion in directive parameters. More details are available at <<_node_properties_expansion_in_directives>>.
 
 ==== Under the hood
 
 On the server, one or more properties files are written for each node in the
 `/var/rudder/share/<uuid>/rules/cfengine-community/properties.d/` directory.
-This directory is then synchronized by the agent with all other promise files.
+This directory is then copied to each node by the agent with all other promise files.
 
 In the agent, properties are made available in the `node.<namespace>` container that contains the values.
 Those values are read from
