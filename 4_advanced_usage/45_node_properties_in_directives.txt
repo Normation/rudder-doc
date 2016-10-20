@@ -72,7 +72,7 @@ ${node.properties[datacenter][id] | node }
 
 ----
 
-This will be rewritten during policy generation into::
+This will be rewritten during policy generation into:
 
 ----
 
