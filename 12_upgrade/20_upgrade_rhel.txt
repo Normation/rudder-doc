@@ -8,9 +8,9 @@ Update your yum repository:
 
 echo "[Rudder_3.1]
 name=Rudder 3.1 Repository
-baseurl=http://www.rudder-project.org/rpm-3.1/RHEL_7/
+baseurl=http://www.rudder-project.org/rpm-3.1/RHEL_$releasever/
 gpgcheck=1
-gpgkey=http://www.rudder-project.org/rpm-3.1/RHEL_7/repodata/repomd.xml.key" > /etc/yum.repos.d/rudder.repo
+gpgkey=http://www.rudder-project.org/rpm-3.1/RHEL_$releasever/repodata/repomd.xml.key" > /etc/yum.repos.d/rudder.repo
 
 ----
 
