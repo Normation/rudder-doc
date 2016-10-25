@@ -29,7 +29,6 @@ h2 { font: normal 16pt Lato, Helvetica, geneva; }
     right: 0;
     bottom: auto;
     left: 0;
-    border-bottom: 1px solid #bbc4c5;
     color: white;
     z-index: 1 !important;
 }
