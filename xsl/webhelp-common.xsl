@@ -239,9 +239,7 @@ border: none; background: none; font-weight: none; color: none; }
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
     color: black; text-decoration: none;
-    background: #C6C6C6; /* old browsers */
-    background: -moz-linear-gradient(top, #C6C6C6 0%, #FFCA8E 100%); /* firefox */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#FFCA8E)); /* webkit */
+    background: #C6C6C6;
     -webkit-border-radius:15px; -moz-border-radius:10px;
     border: 1px solid #f1f1f1;
 }
