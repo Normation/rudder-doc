@@ -26,46 +26,41 @@ end = "</xsl:stylesheet>"
 # URL of the rudder_info api
 release_info_url = "http://www.rudder-project.org/release-info/rudder/"
 
+def api_bool_to_boolean(api_response):
+    return api_response.lower() == "true"
+
 def get_current_version_info(manual_version):
 
   info = {}
   info["version"] = manual_version
 
   try:
-    info["supported"] = bool(requests.get(release_info_url + "versions/" + manual_version + "/supported").content.decode('ascii'))
-    info["released"] = bool(requests.get(release_info_url + "versions/" + manual_version + "/released").content.decode('ascii'))
+    info["supported"] = api_bool_to_boolean(requests.get(release_info_url + "versions/" + manual_version + "/supported").content.decode('ascii'))
+    info["release-status"] = requests.get(release_info_url + "versions/" + manual_version + "/release-status").content.decode('ascii')
     info["release-date"] = requests.get(release_info_url + "versions/" + manual_version + "/release-date").content.decode('ascii')
     info["eol-date"] = requests.get(release_info_url + "versions/" + manual_version + "/eol-date").content.decode('ascii')
-    info["lts"] = bool(requests.get(release_info_url + "versions/" + manual_version + "/lts").content.decode('ascii'))
+    info["lts"] = api_bool_to_boolean(requests.get(release_info_url + "versions/" + manual_version + "/lts").content.decode('ascii'))
   except requests.exceptions.RequestException as e:
     print(e)
     sys.exit(1)
 
   return info
 
-def get_supported_versions():
-  "Get a list of all supported versions with the lts status"
+def get_versions():
+  "Get a list of all versions"
   
   versions = []
   
   try:
-    supported_versions = requests.get(release_info_url + "versions/supported").content.decode('ascii').splitlines()
+    raw_versions = requests.get(release_info_url + "versions").content.decode('ascii').splitlines()
   except requests.exceptions.RequestException as e:
     print(e)
     sys.exit(1)
   
-  supported_versions.sort(key=StrictVersion)
+  raw_versions.sort(key=StrictVersion)
 
-  for rudder_version in supported_versions:
-    try:
-      esr_version_raw = requests.get(release_info_url + "versions/" + rudder_version + "/lts").content.decode('ascii')
-      esr_version = (esr_version_raw == "true")
-      
-    except requests.exceptions.RequestException as e:
-      print(e)
-      sys.exit(1)
-
-    versions.append((rudder_version, esr_version))
+  for rudder_version in raw_versions:
+    versions.append(get_current_version_info(rudder_version))
 
   return versions
 
@@ -89,23 +84,29 @@ def format_header(versions, manual_version):
       </span>
       <span>Version: """)
   
-  for version in versions:
-    (current_version, esr) = version
-    
-    if esr:
+  for version_info in versions:
+    current_version = version_info["version"]
+
+    if version_info["lts"]:
       esr_text = " ESR"
     else:
       esr_text = ""
-    
+
+    if version_info["release-status"] not in ["final", "rc"]:
+      release_text = "-dev"
+    else:
+      release_text = ""
+
     if current_version == manual_version:
       found = True
-      versions_output.append("<strong>" + manual_version + esr_text + "</strong>")
-    else:     
-      versions_output.append("<a href=\"http://www.rudder-project.org/doc-" + current_version + "/\">" + current_version + esr_text + "</a>")
+      versions_output.append("<strong>" + manual_version + release_text + esr_text + "</strong>")
+    else:
+      if version_info["supported"]:
+        versions_output.append("<a href=\"http://www.rudder-project.org/doc-" + current_version + "/\">" + current_version + esr_text + "</a>")
   
-  # Unsupported version
+  # Unknown version
   if not found:
-    versions_output.append("<strong>" + manual_version + esr_text + "-dev </strong>")
+    versions_output.append("<strong>" + manual_version + "-dev </strong>")
 
   output.append(" | \n".join(versions_output))
 
@@ -130,7 +131,7 @@ if __name__ == '__main__':
     sys.exit(1)
 
   # Write header file
-  versions = get_supported_versions()
+  versions = get_versions()
 
   header_file = open(sys.argv[2] + "/links.xsl", "w")
   header_file.write(beginning)
