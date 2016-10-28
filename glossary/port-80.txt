@@ -1,0 +1,4 @@
+Port 80, TCP, for nodes::
+
+WebDAV/HTTP communication port, kept for compatibility with pre-3.1 nodes and AIX nodes.
+
