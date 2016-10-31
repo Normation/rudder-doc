@@ -1,0 +1,117 @@
+=== Best Practices for Techniques
+
+==== Naming convention
+
+   * The name of bundle and classes should be written with underscore (i.e: this_is_a_good_example) instead of CamelCase (i.e: ThisIsABadExample)
+   * All variable, class and bundle names should be prefixed by "rudder_"
+   * The bundle entry point for the Technique should be named rudder_<name_of_the_technique>
+   * The bundles which makes all the actions should be suffixed by a meaningful name ( "rudder_<name_of_the_Technique>_installation", "rudder_<name_of_the_Technique>_configuration", "rudder_<name_of_the_Technique>_reporting", ..). This rule applies even if there is only one bundle
+   * The prefix of classes should all be "rudder_<name of the Technique>_"
+   * The classes defined as an outcome should be named:
+
+      * `rudder_<name of the Technique>_<action>_kept`
+      * `rudder_<name of the Technique>_<action>_repaired`
+      * `rudder_<name of the Technique>_<action>_failed`
+      * `rudder_<name of the Technique>_<action>_denied`
+      * `rudder_<name of the Technique>_<action>_timeout`
+      * `rudder_<name of the Technique>_<action>_error` (error include failed, denied and timeout)
+
+   * The name of the bodies written in the Rudder Library should be prefixed: `rudder_common_`
+
+==== Raising classes
+
+   * `rudder_<name of the Technique>_<action>_error` should be raised simultaneously as `rudder_<name of the Technique>_<action>_failed`, `rudder_<name of the Technique>_<action>_denied` or `rudder_<name of the Technique>_<action>_timeout`.
+   * The body *rudder_common_classes* automatically abide by this rule
+
+==== Writing convention
+
+===== In the Technique
+
+   * We try to follow CFEngine conventions but with some exceptions like using brackets "{}" instead of parenthesis "()"
+   * When defining bundles or bodies, the opening bracket should be on a dedicated line. Exemple:
+
+----
+
+bundle common control
+{
+  bundlesequence => { "exemple" };
+}
+
+----
+
+   * Indentation should be made by spaces. A incrementation of indentation is equal to two spaces
+   * The promise type should be indented by two spaces (instead of being at the same indentation level than the bundle name)
+   * The class expression should be indented by four spaces (two spaces after the promise type)
+   * The promiser should be indented by six spaces (two spaces after the class expression or four spaces after the promise type if no class expression is defined)
+   * Attributes of promises should be indented by eight spaces (two spaces after the promiser) and it should be only one attribute by line.
+   * Attribute's arrows '=>' should all be at the same level, one character after the largest attribute name
+
+----
+
+bundle agent example
+{
+  type:
+      "promiser"
+        attribute  => "value1";
+
+    class::
+      "promiser2"
+        attribute2 => "value2";
+}
+
+----
+
+   * Attributes of promise type "vars" and "classes" should be on only one line except if there are more than one attribute.
+   * For promise type "vars" and "classes" on one line, attribute names and the arrows should be aligned
+   * A list should be written multilines if it needs more than 80 characters in one line
+   * Multilines list should have comma after each element, except the last one.
+   * Multilines list should begin with only a bracket "{"
+
+----
+
+    vars:
+        "value" slist =>
+          {
+            "one",
+            "two",
+            "three"
+          };
+
+----
+
+   * The name of the variable in argument of the bundle should be named "params"
+   * The call of the variables should be made with by using brackets `${var_correctly_called}` instead of parenthesis `$(var_wrongly_called)`
+   * Alternance of brackets and parenthesis are tolerated when lots of variables are imbricated for more readability: `${var_lv1[$(var_lvl2[${var_lvl3}])]}`
+   * A Technique should have its bundle wrote with parameters
+   * All the bundles should have as first argument "prefix" which contains the prefix to use for all the classes made from an outcome. This prefix should never be hardcoded in the bundle.
+   * Always write comments with # when a promise needs more than 30 seconds of thought.
+   * If classes should be created in order to iterate for make a workaround of the normal ordering (i.e: "iteration_1", "iteration_2", "iteration_3"), they should always be defined at the end of the promise type "classes".
+   * The order to the promise type must always be in the order of the normal ordering : http://cfengine.com/manuals/cf3-Reference#Normal-ordering
+   * StringTemplate variables should always be written in UPPERCASE
+   * StringTemplate variables should be written with underscore
+   * StringTemplate variables should always be prefixed by the Technique name in uppecase too. i.e: `CHECK_GENERIC_FILE_FILE_NAME`
+
+===== In the metadata.xml
+
+   * Name of sections should always be written in literary English (no CamelCase or underscores).
+   * The value of variable "Don't change" should always be "dontchange" or "" if the easier.
+
+==== Files convention
+
+   * File names in a Technique should not be prefixed by the name of the Technique
+   * When a Technique needs specific bodies, the bodies should be written in a bodies.st file
+   * The file containing the bundle which makes all the actions (and containing the bundle "run") should be named "main.cf"
+   * The file containing all the variables and calling the bundle "run" should be name config.st
+   * Initialization of a new Technique should always be made from the file "technique-metadata-sample.xml" which is present on the root of the "rudder-techniques" repository
+   * Rudder standard library should be located in "common" Technique
+
+==== Maintenance
+
+   * These rules were introduced after the 2.5 release of Rudder and before the 2.6 release. Therefore, they were enforced as of rudder-techniques-2.6.*.
+   * Always follow the conventions above when Techniques are updated but only for the lines edited. This rule concerns the Techniques on all the branches of git.
+   * On any branches that have released versions on them, we only allow minimal modifications. No lines should be modified if not to fix a bug (respecting these best practices is not currently considered a bug).
+
+==== Testing
+
+   * There is a test suite in scripts/check-techniques.sh that check metadata.xml and normal ordering in code
+   * The list of all maintained techniques (techniques and versions) is in maintained-techniques file, and should be updated when new techniques or versions are created.
