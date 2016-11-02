@@ -75,22 +75,22 @@ A report has the following format :
 | result_na 
 | result 
 | one per component/key 
-| Defines the status of the Component to Not Applicable (if there are no result_success, result_repaired, result_error) Should be used only when everything is already in the correct state in this component for this key
+| Defines the status of the Component to Not Applicable (if there are no result_success, result_repaired, result_error). Should be used only when everything is already in the correct state in this component for this key
 
 | result_success 
 | result 
 | one per component/key 
-| Defines the status of the Component to Success (if there are no result_repaired or result_error) Should be used only when everything is already in the correct state in this component for this key
+| Defines the status of the Component to Success (if there are no result_repaired or result_error). Should be used only when everything is already in the correct state in this component for this key
 
 | result_repaired 
 | result 
 | one per component/key 
-| Defines the status of the Component to Repaired (if there are no result_error) Should be used only when something was not in the correct state, but could be corrected
+| Defines the status of the Component to Repaired (if there are no result_error). Should be used only when something was not in the correct state, but could be corrected
 
 | result_error 
 | result 
 | infinity per component/key 
-| Defines the status of the Component to Error Should be used when something was not in the correct state, and could not be corrected
+| Defines the status of the Component to Error. Should be used when something was not in the correct state, and could not be corrected
 |===
 
 Variables used to generate the reports
