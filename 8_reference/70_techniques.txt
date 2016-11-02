@@ -274,8 +274,6 @@ To configure a password, you must specify two things in the `<CONSTRAINT>` secti
 
 ----
 
-Other examples are available http://www.rudder-project.org/redmine/projects/clerk/repository/revisions/master/entry/src/test/resources/testVariable.xml[here].
-
 ==== Known limitations
 
 There are several known limitations at the moment, that are acknowleged, and will be solved in a "not too distant" future:
