@@ -76,6 +76,11 @@ All the tag name in the .xml are in upper case, all the attributes are in camel 
     <INCLUDED>true/false</INCLUDED>                           <!-- Optional; defines if the template must be in the inputs list of the generated promises; default : true -->
    </TML>
   </TMLS>
+  <FILES>                                                     <!-- List of files to be copied "as-is" with this Technique. StringTemplate parser is NOT used on these. -->
+    <FILE name="file.txt">                                    <!-- Container for a FILE. name (mandatory) = path to the file to copy, can be relative or absolute from RUDDER_CONFIGURATION_REPOSITORY/ (see below) -->
+    <FILE name="file2.txt"><OUTPATH>technique_name/newname.txt</OUTPATH></FILE>
+    <FILE name="RUDDER_CONFIGURATION_REPOSITORY/directory/other/file.txt"><OUTPATH>technique_name/filename</OUTPATH></FILE>
+  </FILES>
   <TRACKINGVARIABLE>                                          <!-- Defines a special system variable TRACKINGKEY that contains all the necessary information to track which Directive generated the promises -->
     <SAMESIZEAS>VariableName</SAMESIZEAS>                     <!-- Optional; defines the cardinality of this variable based on the cardinality of the VariableName -->
   </TRACKINGVARIABLE>
@@ -174,6 +179,22 @@ NOTE: INPUT fields are automatically escaped, meaning any quote will be written 
    * *size-<unit>* : (size-b, size-kb, size-mb, size-gb ou size-tb)
    * *raw* : the content of this field will not be escaped when written in the promises (Rudder >= 2.6)
    * *password* : the content of this field will be handled as a password, and thus be hidden and transformed if necessary (see "Password handling" below) (Rudder >= 2.6)
+
+===== The <FILES> tag
+
+Example:
+
+----
+
+<FILES>
+<FILE name="file.txt"><OUTPATH>foo/bar/other-name.txt</OUTPATH></FILE>
+<FILE name="RUDDER_CONFIGURATION_REPOSITORY/some/absolute/file.txt"><OUTPATH>foo/bar/some-name.txt</OUTPATH></FILE>
+</FILES>
+
+----
+
+   *  *name* is mandatory. It's the path to file to copy, either relative to the technique directory (i.e, at the same level as metadata.xml) or absolute from the configuration repository directory if it starts with RUDDER_CONFIGURATION_REPOSITORY (usually /var/rudder/configuration-repository) (and yes, this forbids the use case where you want to have a sub-directory named RUDDER_CONFIGURATION_REPOSITORY under the technique directory - I'm sure one will find other way to do it if really needed :). The file will be taken from git, at the same git revision as other tehniques files.
+   *  *OUTPATH* is optional. If not specified, the file will be copied into the target node promises at the same place as other files for the technique, with the same name. If specified, you have to give a path+name, where path is relative to the directory for agent promises on the node (i.e, if you want to put the file in the technique directory, you need to use "techniqueName/new-file-name.txt")
 
 ==== Examples
 
