@@ -1,0 +1,86 @@
+=== Syntax of the Techniques
+
+==== Generalities
+
+The Techniques use the http://www.stringtemplate.org/[StringTemplate] engine. A Technique *must* have the .st extension to be extended by Rudder (have some variables replaced, some part removed or added given some parameters).
+
+==== Variable remplacement
+
+Note : Rudder use a StringTemplate grammar slighlty different from the default one. Rather than using "$" as a variable identifier, the Techniques use "&" to avoid collision with the CFEngine variables
+
+===== Single-valued variable remplacement
+
+----
+
+&UUID&
+
+----
+
+   * Will be remplaced by the value of the variable UUID
+
+===== Remplacement of variable with one or more values
+
+----
+
+&DNS_RESOLVERS: { "&it&" };separator=", "&
+
+----
+
+   * Will be remplaced by `"8.8.8.8", "8.8.4.4"`
+   * Here, `&it&` is an alias for the current item in the list (with no confusion, because there is only one variable)
+
+----
+
+&POLICYCHILDREN, CHILDRENID : {host, uuid |
+"/var/rudder/share/&uuid&/"
+maproot => { host2ip("&host&"), escape("&host&") },
+admit => { host2ip("&host&"), escape("&host&") };
+   
+} &
+
+----
+
+   * `host` is an alias for the current value of POLICYCHILDREN
+   * `uuid` is an alias for the current value of CHILDRENID
+   * Both item are iterated at the same time, so both list must have the same length
+
+===== Remplacement of variable with one or more value, and writing an index all along
+
+----
+
+&FILE_AND_FOLDER_MANAGEMENT_PATH:{path |"file[&i&][path]" string => "&path&";
+}&
+
+----
+
+   * _i_ is an iterator, starting at 1
+
+The result would be:
+
+----
+
+"file[1][path]" string => "/var";
+"file[2][path]" string => "/bin";
+
+----
+
+===== Conditionnal writing of a section
+
+----
+
+&if(NOVA)&
+
+something
+
+&endif&
+
+----
+
+The variable must either be:
+
+   * A boolean: If its value is true, then the section will be displayed
+   * A variable with the parameter `MAYBEEMPTY="true"`: If the value is not set, then the section won't be displayed, otherwise it will be displayed
+
+More information can be found here: http://www.antlr.org/wiki/display/ST/ST+condensed+--+Templates+and+expressions
+
+
