@@ -88,6 +88,8 @@ generic-methods.asciidoc: ncf
 	cd ncf && git checkout $(NCF_VERSION) && git pull
 	cp tools/ncf_doc_rudder.py ncf/tools/
 	./ncf/tools/ncf_doc_rudder.py
+	# Remove language setting on code field (#9621)
+	sed -i 's/```.*/```/' generic_methods.md
 	pandoc -t asciidoc -f markdown generic_methods.md > generic_methods.asciidoc
 
 $(INDEXER_JAR):
