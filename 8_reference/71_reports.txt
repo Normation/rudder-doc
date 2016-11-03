@@ -43,54 +43,90 @@ A report has the following format :
 .Report Types
 |===
 | Name
-| Type 
+| Type
+| Mode 
 | Max number 
 | Details
 
 | log_trace 
 | log 
+| any
 | infinity 
 | Should be used for advanced debuging purpose only.
 
 | log_debug 
-| log 
+| log
+| any 
 | infinity 
 | Should be used for debug purpose only.
 
 | log_info 
 | log 
+| any
 | infinity 
 | Use for standard logging purposes.
 
 | log_warn 
-| log 
+| log
+| any 
 | infinity 
 | Used for logging only for the moment. Should be used when something unexpected happens.
 
 | log_repaired 
-| log 
+| log
+| enforce
 | infinity 
 | Used for logging purposes, to list all that is repaired by the promises.
 
 | result_na 
-| result 
+| result
+| enforce 
 | one per component/key 
 | Defines the status of the Component to Not Applicable (if there are no result_success, result_repaired, result_error). Should be used only when the component is not applicable because it does not match the target context.
 
 | result_success 
 | result 
+| enforce
 | one per component/key 
 | Defines the status of the Component to Success (if there are no result_repaired or result_error). Should be used only when everything is already in the correct state in this component for this key.
 
 | result_repaired 
 | result 
+| enforce
 | one per component/key 
 | Defines the status of the Component to Repaired (if there are no result_error). Should be used only when something was not in the correct state, but could be corrected.
 
 | result_error 
 | result 
+| enforce
 | infinity per component/key 
 | Defines the status of the Component to Error. Should be used when something was not in the correct state, and could not be corrected.
+
+| audit_na
+| result
+| audit
+| one per component/key
+| Defines the status of an Component to Not Applicable (if there are no result_success, result_repaired, result_error). Should be used only when the component is not applicable because it does not match the target context.
+
+| audit_compliant
+nent was not applicable to the node.
+| result
+| audit
+| one per component/key
+| Defines the status of the Component to Compliant (if there are no audit_noncompliant or audit_error). Should be used only when everything is already in the correct state in this component for this key.
+
+| audit_noncompliant
+| result
+| audit
+| one per component/key
+| Defines the status of the Component to Non Compliant (if there are no audit_error). Should be used only when something was not in the correct state.
+
+| audit_error
+| result
+| audit
+| infinity per component/key
+| Defines the status of the Component to Error. Should be used when the audit could not be done or was interrupted.
+
 |===
 
 Variables used to generate the reports
