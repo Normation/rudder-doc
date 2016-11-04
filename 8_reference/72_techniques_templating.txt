@@ -81,6 +81,6 @@ The variable must either be:
    * A boolean: If its value is true, then the section will be displayed
    * A variable with the parameter `MAYBEEMPTY="true"`: If the value is not set, then the section won't be displayed, otherwise it will be displayed
 
-More information can be found here: http://www.antlr.org/wiki/display/ST/ST+condensed+--+Templates+and+expressions
+More information can be found here: https://theantlrguy.atlassian.net/wiki/display/ST/ST+condensed+--+Templates+and+expressions
 
 
