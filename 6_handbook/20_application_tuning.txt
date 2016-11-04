@@ -52,8 +52,12 @@ To change the RAM given to Jetty, you have to:
 
 ----
 
-# edit /opt/rudder/etc/rudder-jetty.conf with your preferred text editor, for example vim:
-vim /opt/rudder/etc/rudder-jetty.conf
+# edit +/etc/default/rudder-jetty+ with your preferred text editor, for example vim:
+vim /etc/default/rudder-jetty
+
+Notice: that file is alike to +/opt/rudder/etc/rudder-jetty.conf+, which is the file with
+default values. +/opt/rudder/etc/rudder-jetty.conf+ should never be modified directly because
+modification would be erased by packaging in the following Rudder versuib update. 
 
 # modify JAVA_XMX to set the value to your need. 
 # The value is given in MB by default, but you can also use the "G" unit to specify a size in GB.
