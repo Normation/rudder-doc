@@ -30,15 +30,58 @@ More precisely:
 * relay: only the data needed for the served nodes and the relay itself are available and stored locally, only accessible to the root user
 * node: only the data needed to configure the node is available and stored locally, only accessible to the root user
 
-
 ===== Common data
 
 This refers to content available from all nodes in the authorized networks, readable from all users
-on the nodes, and that can be transfered withtout encryption.
+on the nodes (and that can be transfered withtout encryption when using initial promises of a pre-4.0 node).
 
 These unprotected contents are:
 
 * the tools (`/var/rudder/tools`)
 * the common ncf part (`/var/rudder/ncf/common`), which includes all the content distibuted in the `ncf` package
 * the Rudder techniques sources (without parameters), which includes all the content distibuted in the `rudder-techniques` package
+
+==== Node-Server communication security
+
+This section gives more details about the different flows between nodes and servers.
+
+===== File copy
+
+File copy is used to get policies and files copied during policy execution (named *shared-files*).
+
+In 4.0 servers, two protocols are available:
+
+* The old protocol (CFEngine "1" protocol), which is plain text by default with the ability to encrypt certain file transfers,
+  kept for compatibility with older Rudder releases. It is deprecated and will disappear in future releases.
+* The new protocol (CFEngine "2" protocol), which is TLS based. Everything is encrypted, still using the CFEngine keys.
+
+Note: The new protocol was already available on the server since Rudder 2.11, but never used by the nodes.
+
+The access policy is:
+
+* Peer to peer key exchange, without central authority
+* TOFU (Trust On First Use): keys are sent and accepted at first connection (from the policy server on nodes
+  and from nodes with an IP in the Allowed Networks on policy servers).
+* Node-specific files have an ACL containg the public key of the node, as found in the inventory
+* Common files have an IP-based ACL based on the Allowed Networks
+
+The old hostame and IP ACL are still generated for node-specific files to ensure compatibility with older nodes,
+but will be removed in the future.
+
+===== Inventory
+
+Nodes send an inventory to the server after installation or upgrade, and once a day.
+
+This inventory contains various information, including:
+
+* The node's public key
+* The node's policy server
+
+The inventory security policy is:
+
+* Inventories are sent by the node to its configured policy_server over HTTPS, currently whithout certificate validation.
+* Inventories are signed by the node using its private key, which allows the server to check this signature using
+  the public key coming from previous inventory and to ensure it really comes from the right node.It avoids treating a
+  malicious (or bogus) inventory coming from another node, and you should check the public key when accepting a new node.
+* Once a node has sent a signed inventory, no unsigned inventory will be accepted for this node.
 
