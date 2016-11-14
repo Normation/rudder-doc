@@ -1,15 +1,26 @@
-# Generated text
+# Generated files
 rudder-doc.xml
 html/
 *.html
 *.pdf
 *.tex
+webhelp*
+html/
+extensions/
+xsl/links.xsl
+xsl/index.html
+generic_methods.asciidoc
+generic_methods.md
+xincluded-profiled.xml
+/rudder-command/
+/ncf/
 
 # Generated images
 main_*.png
 _*.png
 temp/*
 graphs/*
+/*.png
 
 # Backup files
 *.swp
@@ -21,3 +32,4 @@ html/
 extensions/
 xsl/links.xsl
 xsl/index.html
+
