@@ -9,14 +9,25 @@ installation of a plugin.
 
 ==== Install a plugin
 
-To install a plugin, just copy the JAR file and the configuration file in the
+To install a plugin, copy the JAR file and the configuration file in the
 according directories.
 
-+/opt/rudder/jetty7/plugins/+::
++/opt/rudder/share/rudder-plugins/+::
 
 This directory contains the JAR files of the plugins.
 
 +/opt/rudder/etc/plugins/+::
 
 This directory contains the configuration files of the plugins.
+
+Then, register the plugin, using its name without the ".jar" extension and
+restart Rudder: 
+
+----
+# register plugin
+/opt/rudder/bin/rudder-plugin register plugin-name-without-jar-extension
+# restart Rudder
+/etc/init.d/rudder-jetty restart
+----
+
 
