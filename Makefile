@@ -9,7 +9,7 @@ RELEASE_INFO   := http://www.rudder-project.org/release-info
 
 DOCBOOK_DIST = xsl/xsl-ns-stylesheets
 
-RUDDER_VERSION = 4.0
+RUDDER_VERSION = 4.1
 NCF_VERSION = $(shell curl -s "$(RELEASE_INFO)/rudder/versions/$(RUDDER_VERSION)/components/ncf")
 
 ASCIIDOC = asciidoc
