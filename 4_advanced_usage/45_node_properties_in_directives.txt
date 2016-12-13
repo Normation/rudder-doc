@@ -50,11 +50,14 @@ Some examples:
 
 ----
 
-${node.properties[datacenter][id] | "LON2" }
-${node.properties[datacenter][name] | """Co-location with "Hosting Company" in Paris (allows quotes)""" }
-${node.properties[datacenter][id] | ${rudder.param.default_datacenter} }
-${node.properties[netbios_name] | ${rudder.node.hostname} }
-${node.properties[dns_suffix] | ${node.properties[datacenter][dns_suffix] | "${rudder.node.hostname}.example.com" }
+${node.properties[datacenter][id] | default = "LON2" }
+${node.properties[datacenter][name] | default = """Co-location with "Hosting Company" in Paris (allows quotes)""" }
+${node.properties[datacenter][id] | default = ${rudder.param.default_datacenter} }
+${node.properties[netbios_name] | default = ${rudder.node.hostname} }
+${node.properties[dns_suffix] | default = ${node.properties[datacenter][dns_suffix] | default = "${rudder.node.hostname}.example.com" }
+
+#or even use cfengine variables in the default
+${node.properties[my_override] | default = "${cfengine.key}"}
 
 ----
 
