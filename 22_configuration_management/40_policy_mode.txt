@@ -17,3 +17,5 @@ commands will be run (like listing installed packages or refreshing package list
 
 Nodes are fully aware of exactly what directives need to be executed in Audit or in Enforce mode, and the "rudder agent" command line has been enhanced to let you see the result with a glimpse: the first column in `rudder agent run` output is now the mode (*A* for *Audit* and *E* for *Enforce*), and the compliance summary is split by audit mode.
 In addition to pre-existing technical reports, new ones have been added to report on "audit-compliant" (the check was OK), "audit-non-compliant" (the check was done, but the result is not the one expected), "audit-not-applicable" (the check is not applicable for that node, for example because of a limitation on the OS type), "audit-error" (the check wasn't able to finish correctly) status.
+
+
