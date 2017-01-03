@@ -1,21 +1,25 @@
 === Caution cases
 
-==== Compatibility between Rudder agent 4.0 and older server versions
+==== Compatibility between Rudder agent 4.1 and older server versions
+
+===== 4.0.x servers
+
+Rudder agents 4.1.x are compatible with 4.0 Rudder servers.
 
 ===== 3.1.x and 3.2.x servers
 
-Rudder agents 4.0.x are not compatible with Rudder servers older than 4.0.0.
-You need to upgrade your server to 4.0 before the agents.
+Rudder agents 4.1.x are not compatible with Rudder servers older than 4.0.0.
+You need to upgrade your server to 4.1 before the agents.
 
-==== Compatibility between Rudder server 4.0 and older agent versions
+==== Compatibility between Rudder server 4.1 and older agent versions
 
-===== 3.1.x and 3.2.x agents
+===== 3.1.x, 3.2.x and 4.0.x agents
 
-As they use a compatible CFEngine version, Rudder agent 3.1.x and 3.2.x are fully compatible with Rudder server 4.0.x. It is therefore not strictly necessary to update your agents to 4.0.x.
+As they use a compatible CFEngine version, Rudder agent 3.1.x, 3.2.x and 4.0.x are fully compatible with Rudder server 4.1.x. It is therefore not strictly necessary to update your agents to 4.1.x.
 
 ===== 3.0.x or older
 
-These agents are not compatible with Rudder 4.0, and you have to upgrade them. 
+These agents are not compatible with Rudder 4.1, and you have to upgrade them. 
 Be careful to follow the upgrade path explained <<_upgrade_from_rudder_3_0_or_older, above>>.
 
 ==== Protocol for reporting

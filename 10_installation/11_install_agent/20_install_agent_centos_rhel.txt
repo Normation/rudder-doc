@@ -6,11 +6,11 @@ Then define a yum repository for Rudder:
 
 ----
 
-echo '[Rudder_4.0]
-name=Rudder 4.0 EL repository
-baseurl=http://www.rudder-project.org/rpm-4.0/RHEL_$releasever/
+echo '[Rudder_4.1]
+name=Rudder 4.1 EL repository
+baseurl=http://www.rudder-project.org/rpm-4.1/RHEL_$releasever/
 gpgcheck=1
-gpgkey=http://www.rudder-project.org/rpm-4.0/RHEL_$releasever/repodata/repomd.xml.key' > /etc/yum.repos.d/rudder.repo
+gpgkey=http://www.rudder-project.org/rpm-4.1/RHEL_$releasever/repodata/repomd.xml.key' > /etc/yum.repos.d/rudder.repo
 
 ----
 
@@ -19,7 +19,7 @@ gpgkey=http://www.rudder-project.org/rpm-4.0/RHEL_$releasever/repodata/repomd.xm
 ====
 
 The RPM can be directly downloaded for a standalone installation,
-from the following URL: http://www.rudder-project.org/rpm-4.0/RHEL_7/
+from the following URL: http://www.rudder-project.org/rpm-4.1/RHEL_7/
 (or RHEL_6, RHEL_5, etc, depending on your host's OS version)
 
 ====
@@ -36,7 +36,7 @@ Or:
 
 ----
 
-yum install rudder-agent-4.0.0-1.EL.7.x86_64.rpm
+yum install rudder-agent-4.1.0-1.EL.7.x86_64.rpm
 
 ----
 

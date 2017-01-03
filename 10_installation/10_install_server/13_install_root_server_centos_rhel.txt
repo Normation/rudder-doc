@@ -8,11 +8,11 @@ Then run the following command as root:
 
 ----
 
-echo '[Rudder_4.0]
-name=Rudder 4.0 EL repository
-baseurl=http://www.rudder-project.org/rpm-4.0/RHEL_$releasever/
+echo '[Rudder_4.1]
+name=Rudder 4.1 EL repository
+baseurl=http://www.rudder-project.org/rpm-4.1/RHEL_$releasever/
 gpgcheck=1
-gpgkey=http://www.rudder-project.org/rpm-4.0/RHEL_$releasever/repodata/repomd.xml.key' > /etc/yum.repos.d/rudder.repo
+gpgkey=http://www.rudder-project.org/rpm-4.1/RHEL_$releasever/repodata/repomd.xml.key' > /etc/yum.repos.d/rudder.repo
 
 ----
 
