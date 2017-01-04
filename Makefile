@@ -168,10 +168,11 @@ html/README.html: README.asciidoc
 slides.html: man $(SOURCES)
 	$(ASCIIDOC)  -a theme=volnitsky --out-file slides.html --backend slidy $(SOURCES)
 
-test: webhelp/index.html
+quicktest:
 	# Disable link tests on master beacause it is normal some links do not exist yet
-	[ "`git rev-parse --abbrev-ref HEAD`" == "master" ] || ./tests/check_title_syntax.sh
-	./tests/check_broken_links.sh
+	[ "`git rev-parse --abbrev-ref HEAD`" = "master" ] || ./tests/check_title_syntax.sh
+
+test: webhelp/index.html quicktest
 
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
