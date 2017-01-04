@@ -168,8 +168,10 @@ html/README.html: README.asciidoc
 slides.html: man $(SOURCES)
 	$(ASCIIDOC)  -a theme=volnitsky --out-file slides.html --backend slidy $(SOURCES)
 
-test: webhelp/index.html
+quicktest:
 	./tests/check_title_syntax.sh
+
+test: webhelp/index.html quicktest
 	./tests/check_broken_links.sh
 
 ## WARNING: at cleanup, delete png files that were produced by output only !
