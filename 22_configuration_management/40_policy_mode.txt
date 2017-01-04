@@ -41,3 +41,5 @@ The result is:
 ** If *N* uses the *global* value and *D* is overriden to *Audit* or *Enforce*, the *D* value is used.
 ** If *D* uses the *global* value and *N* is overriden to *Audit* or *Enforce*, the *N* value is used.
 ** If *N* and *D* are overriden to *Audit* or *Enforce*, the value is *Audit* if at least one of *N* or *D* is *Audit*, *Enforce* if both are in *Enforce* mode
+
+
