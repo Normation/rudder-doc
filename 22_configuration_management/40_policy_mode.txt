@@ -18,4 +18,26 @@ commands will be run (like listing installed packages or refreshing package list
 Nodes are fully aware of exactly what directives need to be executed in Audit or in Enforce mode, and the "rudder agent" command line has been enhanced to let you see the result with a glimpse: the first column in `rudder agent run` output is now the mode (*A* for *Audit* and *E* for *Enforce*), and the compliance summary is split by audit mode.
 In addition to pre-existing technical reports, new ones have been added to report on "audit-compliant" (the check was OK), "audit-non-compliant" (the check was done, but the result is not the one expected), "audit-not-applicable" (the check is not applicable for that node, for example because of a limitation on the OS type), "audit-error" (the check wasn't able to finish correctly) status.
 
+==== How is the effective mode computed?
 
+We will here explain what is the computation made during generation to
+decide which mode to apply to a directive on a node, based on the current settings.
+
+The short rule is: *Override wins, then Audit wins*
+
+For a given directive on a given node at a given time, we have three different policy mode
+settings:
+
+* The global mode, called *G*, which can be *Audit* or *Enforce*
+* The node mode called *N*, which can be *Global* (if not overridden), *Audit, or *Enforce*
+* The directive mode, called *D*, which can be *Global* (if not overridden), *Audit, or *Enforce*
+
+The result is:
+
+* If override is not allowed, the policy mode is *always* the global mode *G*.
+* If override is allowed:
+
+** If *N* and *D* are set to use the *Global* default value (i.e. no override), the policy mode is the global mode *G*.
+** If *N* uses the *global* value and *D* is overriden to *Audit* or *Enforce*, the *D* value is used.
+** If *D* uses the *global* value and *N* is overriden to *Audit* or *Enforce*, the *N* value is used.
+** If *N* and *D* are overriden to *Audit* or *Enforce*, the value is *Audit* if at least one of *N* or *D* is *Audit*, *Enforce* if both are in *Enforce* mode
