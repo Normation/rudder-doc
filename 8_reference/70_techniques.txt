@@ -107,11 +107,13 @@ A SECTION has the following attributes:
 
    * name : mandatory, the name of the section
    * multivalued : optional, default false, defines if the section is repetable or not. If so, the Web Interface will display a "Add another" and "Delete" button for this section
-   * component : optional, default false; defines if the section is a component (for the reporting)
-   * componentKey: optional, default None; defines the variable that is the key of the component. Note that the componentKey can only be defines if component is true
-   * displayPriority: optional, default high; defines if the section is displayed by default (high) or hidden by default (low) (2.6 and higher only)
+   * component : optional, default false; defines if the section is a component, and if true, the section will appear in the reporting, with its section name
+   * componentKey: optional, default None; defines the variable that is the key of the component. Note that the componentKey can only be defined if 'component' is 'true'
+   * displayPriority: optional, default high; defines if the section is displayed by default (high) or hidden by default (low)
 
-NOTE : A multivalued section can only contain variable, and cannot contain section (for the moment)
+NOTE: A multivalued section can only contain variable, and cannot contain section
+
+NOTE: If there are no SECTION defined with 'component="true"', a default SECTION for reporting will be generated, named after the id of the Technique (the folder name of the Technique) 
 
 ===== Variables definitions in the <SECTION> tags
 
