@@ -1,0 +1,108 @@
+=== Inventory workflow, from nodes to Root server
+
+One of the main information workflow in a Rudder managed system is the node's
+inventory one.
+
+Node inventories are generated on nodes, are sent to the node policy server (be
+it a Relay or the Root server) up to the Root server, and stored in the
+Rudder database (technically an LDAP server), waiting for later use.
+
+The goal of that section is to detail the different steps and explain how to
+spot and solve a problem on the inventory workflow. Following schema sum up
+the whole process.
+
+image:./images/rudder-inventory-workflow.png[Inventory workflow, from node to
+Root server]
+
+
+==== Processing inventories on node
+
+Inventories are generated daily during an agent run in the 00:00-06:00 time
+frame window local to the node. The exact time is randomly spread on the time
+frame for a set of nodes, but each node will always keep the same time (modulo
+the exact time of the run).
+
+User can request the generation and upload of inventory with the command:
+
+----
+
+$ rudder agent inventory
+
+----
+
+In details, generating inventory does:
+
+* ask the node policy server for its UUID with an HTTP GET on
+  `https://server/uuid`,
+* generate an inventory by scanning the node hardware and software components,
+* optionally make a digital signature of the generated inventory file,
+* send file(s) to the node's policy server on `https://POLICY-SERVER/inventory-updates/`
+
+The individual commands can be displayed with the `-i` option to `rudder agent
+inventory` command.
+
+
+==== Processing inventories on relays
+
+On the Relay server:
+
+* the inventory is received by a `webdav` endpoint,
+* the `webdav` service store the file in the folder
+  `/var/rudder/inventories/incoming`
+* on each agent runs, files in `/var/rudder/inventories/incoming` are
+  forwarded to the Relay own policy server.
+
+==== Processing inventories on root server
+
+On the Root server, the start of the workflow is the same than on a relay:
+
+* the inventory is received by a `webdav` endpoint,
+* the `webdav` service store the file in the folder
+  `/var/rudder/inventories/incoming`
+
+Then, on each run, the agent:
+
+* look for inventory / signature pairs:
+** inventories without a corresponding signature file are processed only if
+   they are older than 2 minutes,
+* POST the inventory or inventory+signature pair to the local API of
+  "inventory-endpoint" application on `http://localhost:8080/endpoint/upload/`
+* the API makes some quick checks on inventory (well formed, mandatory fields...)
+  and :
+** if checks are OK, *ACCEPTS* (HTTP code `200`) the inventory,
+** if signature is configured to be mandatory and is missing, or if the
+   signature is not valid, refuses with *UNAUTHORIZED* error (HTTP code `401`)
+** else fails with a *PRECONDITION FAILED* error (HTTP code `412`)
+* on error, inventory file is moved to `/var/rudder/inventories/failed`,
+* on success:
+** the inventory file is moved to `/var/rudder/inventories/received`,
+** in parallel, _inventory web_ parses and updates Rudder database.
+
+==== Queue of inventories waiting to be parsed
+
+The _inventory endpoint_ has a limited number of slot available for succesfully
+uploaded inventories to be queued waiting for parsing.
+That number can be configured in file `/opt/rudder/etc/inventory-web.properties`:
+
+----
+
+waiting.inventory.queue.size=50
+
+----
+
+Since Rudder 3.1.18 / 3.2.11 / 4.0.3, the number of currently waiting
+inventories can be obtained via a local REST API call to
+`http://localhost:8080/endpoint/api/info`:
+
+----
+
+$ curl http://localhost:8080/endpoint/api/info
+
+{
+  "queueMaxSize": 50,
+  "queueFillCount": 50,
+  "queueSaturated": true
+}
+
+----
+
