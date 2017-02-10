@@ -41,6 +41,7 @@ This API provides the following methods:
 The general parameters are:
 
 * `keep_output` = *true* or *false*: Should the agent output be returned (default: *false*)
+* `asynchronous` = *true* or *false*: Should the server return immediately after trigerring the agent or wait for remote runs to end (default: *false*)
 * `classes` = *class* or *class1,class2,etc.* for multiple classes: Classes to pass to the agent (default: none)
 
 And, only for the `/rudder/relay-api/remote-run/nodes` call:
