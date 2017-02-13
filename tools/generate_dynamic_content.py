@@ -79,7 +79,7 @@ def format_header(versions, manual_version):
     <div id="otherlinks">
       <span>Resources:
         <strong>User manual</strong> |
-        <a href="http://http://faq.rudder-project.org/">FAQ</a> |
+        <a href="http://faq.rudder-project.org/">FAQ</a> |
         <a href="http://www.rudder-project.org/changelog-{$rudder.version}">Changelog</a> |
         <a href="http://www.rudder-project.org/rudder-api-doc/">API reference</a>
       </span>
