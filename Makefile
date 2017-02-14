@@ -1,6 +1,6 @@
 ## Rudder User Documentation Makefile
 
-.PHONY: all clean view ncf-doc man links
+.PHONY: all clean view man links hooks.asciidoc generic-methods.asciidoc
 
 BASENAME = rudder-doc
 SOURCES = $(BASENAME).txt
@@ -53,12 +53,14 @@ readme: html/README.html
 ncf-doc: generic-methods.asciidoc
 links: xsl/links.xsl
 
-epub/$(BASENAME).epub: man ncf-doc  $(SOURCES)
+content: man ncf-doc hooks.asciidoc $(SOURCES)
+
+epub/$(BASENAME).epub: content
 	mkdir -p html
 	$(ASCIIDOCTOEPUB) $(SOURCES)
 	mv $(BASENAME).epub html/
 
-html/$(BASENAME).pdf: man ncf-doc $(SOURCES)
+html/$(BASENAME).pdf: content
 	mkdir -p html
 	$(ASCIIDOCTODOCBOOK) --backend docbook $(SOURCES)
 	$(DOCBOOK2PDF) $(BASENAME).xml
@@ -68,26 +70,40 @@ html/$(BASENAME).pdf: man ncf-doc $(SOURCES)
 
 html/rudder.8: man
 	mkdir -p html
-	cp rudder-command/man/rudder.8 html/
+	cp rudder-agent-repo/man/rudder.8 html/
 
-rudder-command:
-	git clone https://github.com/Normation/rudder-agent.git rudder-command
+rudder-agent-repo:
+	git clone https://github.com/Normation/rudder-agent.git rudder-agent-repo
 
-man: rudder-command
-	cd rudder-command && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
-	cd rudder-command/man && make rudder.8
+man: rudder-agent-repo
+	cd rudder-agent-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
+	cd rudder-agent-repo/man && make rudder.8
 	# Adapt title level to be insertable in the manual
-	sed 's/^=/====/' -i rudder-command/man/rudder.asciidoc
+	sed 's/^=/====/' -i rudder-agent-repo/man/rudder.asciidoc
 	# Avoid going too far (the maximum level is 5)
-	sed 's/^======/=====/' -i rudder-command/man/rudder.asciidoc
+	sed 's/^======/=====/' -i rudder-agent-repo/man/rudder.asciidoc
 
-ncf:
-	git clone https://github.com/Normation/ncf.git
+rudder-repo:
+	git clone https://github.com/fanf/rudder.git rudder-repo
 
-generic-methods.asciidoc: ncf
-	cd ncf && git checkout $(NCF_VERSION) && git pull
-	cp tools/ncf_doc_rudder.py ncf/tools/
-	./ncf/tools/ncf_doc_rudder.py
+hooks.asciidoc: rudder-repo
+	cd rudder-repo && git checkout bug_10200/change_readme_layout_for_hooks 2>/dev/null || git checkout master
+	cp rudder-repo/rudder-core/src/main/resources/hooks.d/readme.adoc hooks.asciidoc
+	echo "" >> hooks.asciidoc
+	for hook in `ls rudder-repo/rudder-core/src/main/resources/hooks.d/*/readme.adoc`; do \
+	  echo "" >> hooks.asciidoc ; \
+	  sed 's/^=/=/' $$hook >> hooks.asciidoc ; \
+	done
+	# Adapt title level to be insertable in the manual
+	sed 's/^=/===/' -i hooks.asciidoc 
+
+ncf-repo:
+	git clone https://github.com/Normation/ncf.git ncf-repo
+
+generic-methods.asciidoc: ncf-repo
+	cd ncf-repo && git checkout $(NCF_VERSION) && git pull
+	cp tools/ncf_doc_rudder.py ncf-repo/tools/
+	./ncf-repo/tools/ncf_doc_rudder.py
 	# Remove language setting on code field (#9621)
 	sed -i 's/```.*/```/' generic_methods.md
 	pandoc -t asciidoc -f markdown generic_methods.md > generic_methods.asciidoc
@@ -113,7 +129,7 @@ jars: $(INDEXER_JAR) $(TAGSOUP_JAR) $(LUCENE_ANALYZER_JAR) $(LUCENE_CORE_JAR)
 xsl/links.xsl:
 	./tools/generate_dynamic_content.py $(RUDDER_VERSION) xsl
 
-webhelp/index.html: links man ncf-doc $(SOURCES)
+webhelp/index.html: links content
 	mkdir -p webhelp
 	$(ASCIIDOC) --doctype=book --backend docbook $(SOURCES)
 	xsltproc  --xinclude --output xincluded-profiled.xml  \
@@ -128,7 +144,7 @@ webhelp/index.html: links man ncf-doc $(SOURCES)
 	sed -ri 's/(<div class="titlepage">).*/\1<\/div>/' webhelp/index.html
 	sed -i '/<div class="titlepage">/ r xsl/index.html' webhelp/index.html
 
-webhelp-localsearch/index.html: links man ncf-doc $(SOURCES)
+webhelp-localsearch/index.html: links content
 	mkdir -p webhelp-localsearch
 	$(ASCIIDOC) --doctype=book --backend docbook $(SOURCES)
 	xsltproc  --xinclude --output xincluded-profiled.xml \
@@ -156,7 +172,7 @@ index: webhelp-localsearch/index.html jars
 		                com.nexwave.nquindexer.IndexerMain
 	cp -r template/search/* webhelp-localsearch/search
 
-html/$(BASENAME).html: man ncf-doc $(SOURCES)
+html/$(BASENAME).html: content
 	mkdir -p html
 	$(ASCIIDOCTOHTML) --out-file $@ $(SOURCES)
 	cp -R style/html/* images html/
@@ -164,9 +180,6 @@ html/$(BASENAME).html: man ncf-doc $(SOURCES)
 html/README.html: README.asciidoc
 	mkdir -p html
 	$(ASCIIDOCTOHTML) --out-file $@ $?
-
-slides.html: man $(SOURCES)
-	$(ASCIIDOC)  -a theme=volnitsky --out-file slides.html --backend slidy $(SOURCES)
 
 quicktest:
 	# Disable link tests on master beacause it is normal some links do not exist yet
@@ -177,7 +190,7 @@ test: webhelp/index.html quicktest
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
 clean:
-	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub webhelp webhelp-localsearch xincluded-profiled.xml $(BASENAME).xml rudder-command extensions ncf generic_methods.{asciidoc,md} xsl/links.xsl xsl/index.html
+	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub webhelp webhelp-localsearch xincluded-profiled.xml $(BASENAME).xml rudder-agent-repo rudder-repo extensions ncf generic_methods.{asciidoc,md} hooks.asciidoc xsl/links.xsl xsl/index.html
 
 view: all
 	$(SEE) $(TARGETS)
