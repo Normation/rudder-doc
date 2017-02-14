@@ -173,6 +173,7 @@ quicktest:
 	[ "`git rev-parse --abbrev-ref HEAD`" = "master" ] || ./tests/check_title_syntax.sh
 
 test: webhelp/index.html quicktest
+	./tests/check_broken_links.sh
 
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
