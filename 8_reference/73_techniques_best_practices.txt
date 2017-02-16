@@ -25,6 +25,21 @@
 
 ==== Writing convention
 
+===== Technique naming guidelines
+
+The following rules should be followed when naming a new Technique:
+
+   * Try to keep names as short as possible, to improve readability
+   * Read the existing technique list, and particularly techniques related to what you are writing. The new names should be consistent with existing ones.
+   * The name should be a nominal group, use "File content" and "Service state" but never "Manage file content" or "Set Service state". It describes the target of the action, not the action itself.
+   * The name should look like: General Concept (package, file, etc.) + Source (from file, etc.) + Implementation details (platform, software name, etc.)
+     * Package sources (Zypper)
+     * HTTP server (Apache)
+     * Variable from local file (string)
+   * The general idea is to go from the most general information to the most precise.
+   * Use "directory" and never "folder"
+   * Use *sentence case*, only the first word is capitalised, like in a normal sentence ("Variable from local file" and not "Variable from Local File").
+
 ===== In the Technique
 
    * We try to follow CFEngine conventions but with some exceptions like using brackets "{}" instead of parenthesis "()"
