@@ -38,6 +38,7 @@ The following rules should be followed when naming a new Technique:
      * Variable from local file (string)
    * The general idea is to go from the most general information to the most precise.
    * Use "directory" and never "folder"
+   * Use "settings" and never "configuration"
    * Use *sentence case*, only the first word is capitalised, like in a normal sentence ("Variable from local file" and not "Variable from Local File").
 
 ===== In the Technique
