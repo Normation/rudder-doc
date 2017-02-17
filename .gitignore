@@ -11,9 +11,11 @@ xsl/links.xsl
 xsl/index.html
 generic_methods.asciidoc
 generic_methods.md
+hooks.asciidoc
 xincluded-profiled.xml
-/rudder-command/
-/ncf/
+/rudder-agent-repo/
+/ncf-repo/
+/rudder-repo/
 
 # Generated images
 main_*.png
