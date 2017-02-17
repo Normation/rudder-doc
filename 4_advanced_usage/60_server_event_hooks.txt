@@ -1,7 +1,7 @@
 === Server Event Hooks
 
-Rudder 4.1 introducs the possibility to execute files (hooks), typically scripts,
-when some predefined event occures on Rudder.
+Rudder 4.1 introduces the possibility to execute files (hooks), typically scripts,
+when some predefined event occurs on Rudder.
 
 include::../hooks.asciidoc[]
 

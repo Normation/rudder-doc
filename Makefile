@@ -84,18 +84,17 @@ man: rudder-agent-repo
 	sed 's/^======/=====/' -i rudder-agent-repo/man/rudder.asciidoc
 
 rudder-repo:
-	git clone https://github.com/fanf/rudder.git rudder-repo
+	git clone https://github.com/normation/rudder.git rudder-repo
 
 hooks.asciidoc: rudder-repo
-	cd rudder-repo && git checkout bug_10200/change_readme_layout_for_hooks 2>/dev/null || git checkout master
+	cd rudder-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
 	cp rudder-repo/rudder-core/src/main/resources/hooks.d/readme.adoc hooks.asciidoc
-	echo "" >> hooks.asciidoc
 	for hook in `ls rudder-repo/rudder-core/src/main/resources/hooks.d/*/readme.adoc`; do \
 	  echo "" >> hooks.asciidoc ; \
-	  sed 's/^=/=/' $$hook >> hooks.asciidoc ; \
+	  cat $$hook >> hooks.asciidoc ; \
 	done
 	# Adapt title level to be insertable in the manual
-	sed 's/^=/===/' -i hooks.asciidoc 
+	sed 's/^=/====/' -i hooks.asciidoc 
 
 ncf-repo:
 	git clone https://github.com/Normation/ncf.git ncf-repo
