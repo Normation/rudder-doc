@@ -13,12 +13,12 @@ span.changed { background-color: #99ff99; }
 span.off     {  }
 
 
-body { font: 14px Lato, Geneva, sans-serif; }
-p, ul, ol, li { font: 12pt Lato, Geneva, sans-serif; }
-h1 { font: 18pt Lato, Helvetica, geneva;
+body { font: 14px LatoLatinWeb, Geneva, sans-serif; }
+p, ul, ol, li { font: 12pt LatoLatinWeb, Geneva, sans-serif; }
+h1 { font: 18pt LatoLatinWeb, Helvetica, geneva;
      color: black!important;
 }
-h2 { font: normal 16pt Lato, Helvetica, geneva; }
+h2 { font: normal 16pt LatoLatinWeb, Helvetica, geneva; }
 
 #header {
     background: #f08004;
