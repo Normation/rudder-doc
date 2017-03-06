@@ -51,7 +51,7 @@ Here is a diagram about all those states and transitions:
 
 image::./images/workflows/States.png[]
 
-===== Change request management page 
+==== Change request management page 
 
 All Change requests can be seen on the /secure/utilities/changeRequests page.
 There is a table containing all requests, you can access to each of them by clicking on their id.

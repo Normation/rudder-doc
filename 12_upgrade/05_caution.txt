@@ -1,4 +1,31 @@
-=== Caution cases
+=== Upgrade notes
+
+==== Upgrade from Rudder 3.0 or older
+
+Direct upgrades from 3.0.x and older are no longer supported on 4.1.
+If you are still running one of those, either on servers or nodes,
+please first upgrade to one of the supported versions above, and then upgrade to 4.1.
+
+==== Upgrade from Rudder 3.1, 3.2 or 4.0
+
+Migration from 3.1, 3.2 or 4.0 are supported, so you can upgrade directly to 4.1.
+
+[WARNING]
+
+====
+
+In Rudder 4.0, we changed the default communication protocol between agent and server,
+but still stay compatible with the old protocol. Hence, you can perfectly keep using
+pre-4.0 agents with a 4.0 or 4.1 server.
+
+However, some networking issues may appear when using 4.0 or 4.1 agents with older servers with the
+reverse DNS lookup option disabled in the settings (*Security* ->
+*Use reverse DNS lookups on nodes to reinforce authentication to policy server*).
+
+Therefore, you need to upgrade your server to 4.1 *before* upgrading the nodes so that the
+configuration distributed to the nodes include the use of the new protocol.
+
+====
 
 ==== Compatibility between Rudder agent 4.1 and older server versions
 
@@ -35,6 +62,22 @@ The only drawback is that you can lose reports in these situations. It does not
 affects the reliability of policy enforcement, but may only temporarily affects
 reporting on the server.
 Read <<_rsyslog, perfomance notes>> about rsyslog for detailed information.
+
+==== Upgrade manually installed relays (installed before 3.0)
+
+With Rudder 2.11, there were no relay package and the configuration had to be done by hand.
+
+To migrate a manually installed relay to 3.1 using the package, run the following intructions:
+
+* Delete the previous Apache configuration file:
+ 
+** `/etc/httpd/conf.d/rudder-default.conf file` on RHEL-like
+** `/etc/apache2/sites-enabled/rudder-default` file on Debian-like
+** `/etc/apache2/vhosts.d/rudder-default.conf` file on SuSE 
+
+* Install the relay package named *rudder-server-relay*.
+
+This is enough to replace the relay configuration, and no change is needed on the root server.
 
 ==== Known issues
 

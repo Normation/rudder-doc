@@ -1,4 +1,4 @@
-=== Rudder components
+==== Rudder components
 
 The Rudder infrastructure uses three types of machines: 
 

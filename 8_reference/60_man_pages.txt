@@ -2,5 +2,5 @@
 
 === Man pages
 
-include::../rudder-command/man/rudder.asciidoc[]
+include::../rudder-agent-repo/man/rudder.asciidoc[]
 

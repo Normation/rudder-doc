@@ -40,7 +40,7 @@ xmlns:exsl="http://exslt.org/common"
     <xsl:param name="para.propagates.style" select="1"/>
     <xsl:param name="phrase.propagates.style" select="1"/>
     <xsl:param name="chunk.first.sections" select="1"/>
-    <xsl:param name="chunk.section.depth" select="2"/>
+    <xsl:param name="chunk.section.depth" select="1"/>
     <xsl:param name="use.id.as.filename" select="1"/>
     <xsl:param name="branding">not set</xsl:param>
     <xsl:param name="brandname">Rudder</xsl:param>
@@ -53,7 +53,7 @@ xmlns:exsl="http://exslt.org/common"
     <xsl:param name="part.autolabel" select="0"/>
     <xsl:param name="section.label.includes.component.label" select="1"/>
 
-    <xsl:param name="generate.section.toc.level" select="2"/>
+    <xsl:param name="generate.section.toc.level" select="1"/>
     <xsl:param name="component.label.includes.part.label" select="1"/>
     <xsl:param name="suppress.footer.navigation">0</xsl:param>
     <xsl:param name="callout.graphics.path"><xsl:value-of select="$webhelp.common.dir"/>images/callouts/</xsl:param>

@@ -1,8 +1,8 @@
-== Node Management
+== Node management
 
 [[inventory, Node Inventory]]
 
-=== Node Inventory
+=== Node inventory
 
 Rudder integrates a node inventory tool which harvest useful information
 about the nodes. This information is used by Rudder to handle the nodes, and

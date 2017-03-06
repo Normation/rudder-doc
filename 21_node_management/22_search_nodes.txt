@@ -8,7 +8,7 @@ about the Nodes which have been already validated, and are managed by Rudder.
 
 [[quick-search, Quick Search]]
 
-==== Quick Search
+==== Quick search
 
 You might have noticed the small text area at the top of the Rudder interface:
 it is the Quick Search bar. Its purpose is to enable a user to easily search for

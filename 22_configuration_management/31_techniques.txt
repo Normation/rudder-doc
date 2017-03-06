@@ -47,5 +47,3 @@ is an advanced task which is currently not covered by this guide.
 
 ====
 
-==== Available Techniques
-
