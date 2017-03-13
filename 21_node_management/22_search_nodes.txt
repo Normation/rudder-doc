@@ -148,16 +148,6 @@ and may be enabled after an upgrade of a Rudder installation in the Settings tab
 
 ====
 
-[[old-style-quick-search, Old style Quick Search]]
-
-==== Old-style Quick Search
-
-The previous versions of Rudder (pre-3.1.14, 3.2.7 and 4.0.0) do include a simpler
-version of the Quick search bar: type the first letters of the 'Rudder ID',
-'Reference', or 'Hostname', you want in the bar, click the result relevant to your
-needs in the autocompletion list and its details will open. This search tool
-can be very useful to help you create a new search in the Advanced Search. 
-
 [[advanced-search, Advanced Search]]
 
 ==== Advanced Search 
