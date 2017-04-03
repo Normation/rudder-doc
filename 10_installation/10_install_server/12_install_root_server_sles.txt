@@ -6,12 +6,12 @@
 Rudder requires three packages that are not always packaged by SuSE on all versions:
 
 * PostgreSQL 9
-* Java RE (version 7 at least).
+* Java RE (version 8 at least).
 
 PostgreSQL 9 can be installed through the OpenSuSE build service: https://build.opensuse.org/project/show/server:database:postgresql
 or through the system repositories, on post-SP1 systems.
 
-The Java RE 7 can be found either using the OpenSuSE build service, or through Oracle's website: http://www.java.com
+The Java RE 8 for SLES11 can be found through Oracle's website: https://www.java.com
 
 Also, Rudder server requires the +git+ software, that can be found on SLES SDK DVD under the name +git-core+.
 

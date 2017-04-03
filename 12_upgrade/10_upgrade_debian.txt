@@ -54,5 +54,16 @@ when apt-get/aptitude asks about this, unless you want to reset all your paramet
 
 ====
 
+[WARNING]
+
+====
+
+Rudder 4.1 requires Java RE version 8 or more, which is not packaged be default on Debian 7 nor Ubuntu 14.04
+On these platforms, prior to upgrade Rudder, you will need to install Java RE 8, either from Oracle site https://www.java.com
+or through any other means of your choice
+
+====
+
+
 You can now <<_technique_upgrade,upgrade your local techniques>>.
 

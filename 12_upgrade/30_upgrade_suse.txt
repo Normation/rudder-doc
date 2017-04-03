@@ -51,6 +51,16 @@ Please look at <<install-server-sles>> for details.
 
 ====
 
+[WARNING]
+
+====
+
+Rudder 4.1 requires Java RE version 8 or more, which is not packaged be default on SLES 11
+On this platform, prior to upgrade Rudder, you will need to install Java RE 8, either from Oracle site https://www.java.com
+or through any other means of your choice
+
+====
+
 and after the upgrade of these packages, restart jetty to apply the changes on the Web application:
 
 ----
