@@ -4,30 +4,33 @@ Rudder is an extensible software. The *Administration > Plugin Management*
 section sum-up information about loaded plugins, their version and their
 configuration.
 
-A plugin is a JAR archive. The web application must be restarted after
-installation of a plugin.
+A plugin is an `.rpkg` file (for "Rudder package").
 
 ==== Install a plugin
 
-To install a plugin, copy the JAR file and the configuration file in the
-according directories.
-
-+/opt/rudder/share/rudder-plugins/+::
-
-This directory contains the JAR files of the plugins.
-
-+/opt/rudder/etc/plugins/+::
-
-This directory contains the configuration files of the plugins.
-
-Then, register the plugin, using its name without the ".jar" extension and
-restart Rudder: 
+To install a plugin, copy the `.rpkg` file on your server, and run:
 
 ----
-# register plugin
-/opt/rudder/bin/rudder-plugin register plugin-name-without-jar-extension
-# restart Rudder
-/etc/init.d/rudder-jetty restart
+rudder-pkg install-file <package.rpkg>
 ----
 
+You can list currently installed plugins using:
+
+----
+rudder-pkg list
+----
+
+You can also enable or disable, or remove a plugin with:
+
+----
+rudder-pkg plugin enable <plugin>
+rudder-pkg plugin disable <plugin>
+rudder-pkg remove <package>
+----
+
+See all available commands with:
+
+----
+rudder-pkg --help
+----
 
