@@ -25,7 +25,7 @@ In any directive text field, you can access properties defined on nodes using th
 
 ----
 
-${node.properties[key_one][key_two]}
+${node.properties[property_name][key_one][key_two]}
 
 ----
 
