@@ -82,5 +82,6 @@ firewall-cmd --permanent --zone=public --add-port=443/tcp
 
 ====
 
-Now jump to <<initial-config,the next section to configure your server>>.
+include::snippets/initial_config.txt.snippet[]
+
 

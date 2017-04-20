@@ -68,5 +68,6 @@ not be resolved and asks what to do.
 
 ====
 
-Now jump to <<initial-config,the next section to configure your server>>.
+include::snippets/initial_config.txt.snippet[]
+
 
