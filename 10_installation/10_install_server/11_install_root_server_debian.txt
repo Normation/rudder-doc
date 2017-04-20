@@ -47,5 +47,5 @@ workarounds are available to fix this:
 
 =====
 
-Now jump to <<initial-config,the next section to configure your server>>.
+include::snippets/initial_config.txt.snippet[]
 
