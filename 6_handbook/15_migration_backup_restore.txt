@@ -56,9 +56,12 @@ Here is the restoration procedure:
 ----
 
 # First, follow the standard installation procedure, this one assumes you have a working "blank"
-Rudder on the machine
+# Rudder on the machine
 
-# Stop Rudder
+# Disable Rudder agent
+rudder agent disable
+
+# Stop Rudder services
 service rudder stop
 
 # Drop the OpenLDAP database
@@ -76,6 +79,9 @@ tar -C /var/rudder -zvxf /root/rudder-backup-XXXXXXXX.tar.gz
 sudo -u postgres psql -d rudder < /root/rudder-backup-XXXXXXXX.sql
 # or
 psql -u rudder -d rudder -W < /root/rudder-backup-XXXXXXXX.sql
+
+# Enable Rudder agent
+rudder agent enable
 
 # And restart the machine or just Rudder:
 service rudder restart
