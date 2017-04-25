@@ -5,9 +5,9 @@ policy needed by a node, it is necessary to regenerate the modified
 promises for every impacted node. By default this process is launched after each
 change.
 
-==== +Update+ button
+==== +Update policies+ button
 
-The button +Update+ on the top right of the screen, in the +Status+ menu, allows you to force
+The button +Update policies+ on the top right of the screen, in the +Status+ menu, allows you to force
 the regeneration of the policies. As changes in the inventory of the nodes are
 not automatically taken into account by Rudder, this feature can be useful
 after some changes impacting the inventory information.
