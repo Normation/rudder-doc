@@ -10,26 +10,26 @@ and centralising real-time status data, Rudder can show a high-level summary
 (_ISO 27001 rules are at 100%!_) and break down noncompliance issues to a deep
 technical level (_Host prod-web-03: SSH server configuration allows root logins_).
 
-A few things that make Rudder stand out: 
+A few things that make Rudder stand out:
 
 * A *simple framework* allows you to *extend the built-in rules* to implement
   specific low-level configuration patterns, however complex they may be, using
   simple building blocks (_ensure package installed in version X_, _ensure file content_,
-  _ensure line in file_, etc.). A graphical builder lowers the technical level required to use this. 
-* Each policy can be independently set to be automatically *checked or enforced* 
+  _ensure line in file_, etc.). A graphical builder lowers the technical level required to use this.
+* Each policy can be independently set to be automatically *checked or enforced*
   on a policy or host level. In Enforce mode, each remediation action is recorded,
-  showing the value of these invisible fixes. 
-* Rudder works on almost *every kind of device*, so you’ll be managing physical 
+  showing the value of these invisible fixes.
+* Rudder works on almost *every kind of device*, so you’ll be managing physical
   and virtual servers in the data center, cloud instances, and embedded IoT devices
-  in the same way. 
+  in the same way.
 * Rudder is designed for *critical environments* where a *security* breach can mean
-  more than a blip in the sales stats. Built-in features include change requests, 
-  audit logs, and strong authentication. 
-* Rudder relies on an agent that needs to be installed on all hosts to audit. 
+  more than a blip in the sales stats. Built-in features include change requests,
+  audit logs, and strong authentication.
+* Rudder relies on an agent that needs to be installed on all hosts to audit.
   The *agent is very lightweight* (10 to 20 MB of RAM at peak) and *blazingly fast*
   (it’s written in C and takes less than 10 seconds to verify 100 rules). Installation
   is self-contained, via a single package, and can auto-update to limit agent
-  management burden. 
+  management burden.
 * Rudder is a *true and professional open source* solution—the team behind Rudder
   doesn’t believe in the dual-speed licensing approach that makes you reinstall
   everything and promotes open source as little more than a “demo version.”
@@ -39,4 +39,51 @@ from small to biggest-in-their-field. Typical deployments manage 100s to 1000s o
 The biggest known deployment in 2017 is about 7000 nodes.
 
 image::./images/dashboard-overview.png[Rudder dashboard]
+
+==== Made for the Production
+
+We believe that there is a growing impedence mismatch between the Short Time of
+application development and deployement, and the Long Time of the infrastructure.
+The latter need rationalisation, stability and conformity before catching the hyped
+techno of the day, to be able to deliver reliable technical platform, continuously
+working with a minimum of risks.
+
+Rudder was made for the Long Time, to help team deliver efficient infrastructures with
+simplicity, giving them feedback where needed, keeping them alert of possible
+incoming problem, continously checking conformity to their rules, and all of that
+whatever the infrastructure they choose to build.
+
+image::./images/introduction/build_run_devops.png[Modern IT production of services and Open Source automation tools stack]
+
+To achieve these goals, Rudder goes beyond simple automation of commands or
+configurations. Rudder continuously maintains your infrastructure to keep it
+conform with your configurations and security rules.
+
+At each level (global, by configuration policy, by node, etc), you can choose to
+either *Audit* the component - and no modification at all will made on it -, or to
+*Enforce* the policy, automatically correcting a drift if needed.
+
+==== Different roles for a better accessibility
+
+Rudder was thought from the start for plug&play-ability: easy to install and to
+upgrade, easy to start with and growth with.
+
+Rudder comes with a graphical interface, a standard library of configuration
+policy ready to use, and a graphical rule editor.
+
+image::./images/introduction/web_api_cli.png[Use what best feets your need: Web interface, API, or console]
+
+Developers can script Rudder throught its APIs and security teams can check
+conformity level to their policies or inventory (both software and hardware) of a
+server at any time.
+
+
+==== Universality
+
+Rudder agent is extremely fast, light, and versatile. It works on a wide variety
+of OS or hardware, from physical server to cloud instance, user laptops or even
+Digital Cities and IoT objects.
+
+image::./images/introduction/agent_output.png[Versatile agent]
+
 

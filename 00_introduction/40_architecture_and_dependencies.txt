@@ -1,0 +1,16 @@
+[[architecture]]
+=== Technical architecture and software dependencies
+
+==== Functionnal architecture of Rudder
+
+image::./images/introduction/rudder_functional_component_diagram-simple-v1.png[Rudder functionnal architecture]
+
+
+==== Network architecture in client/server mode
+
+image::./images/introduction/network_connections.png[Network architecture]
+
+
+==== Agents
+
+

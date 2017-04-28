@@ -1,0 +1,50 @@
+[[key-features]]
+=== Key Features
+
+==== Os independent target configuration state definition
+
+image::./images/core_techniques.png[Standard Technique Library]
+
+
+
+==== Centralize and aggregate real configuration state
+
+image::./images/introduction/general_behavior_workflow.png[Define target, check, report, remediate]
+
+image::./images/introduction/rules_compliance.png[Rules compliance reporting]
+
+image::./images/introduction/rule_compliance_details.png[Fine grained reporting on configuration components]
+
+
+==== Automatic inventory
+
+
+
+==== REST API
+
+
+
+
+==== Audit trace and Change Requests
+
+image::./images/introduction/audit_trace.png[Trace events and display changes]
+
+image::./images/introduction/change_request.png[Change Request]
+
+
+==== Centralized authentication (LDAP, Active Directory, plugins)
+
+
+
+==== Extensibilty
+
+image::./images/introduction/generic_methods_list.png[Non exhaustive list of generic methods]
+
+image::./images/introduction/rule_directive_generic_method_stack.png[Build your own configuration, matching your requirements]
+
+image::./images/introduction/ncf_language.png[high level definition language]
+
+image::./images/introduction/technique_editor_overview.png[Graphical Technique Editor - the simplest way to build new configuration]
+
+
+
