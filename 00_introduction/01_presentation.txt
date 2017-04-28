@@ -1,4 +1,6 @@
-== What is Rudder?
+== Introduction
+
+=== What is Rudder?
 
 Rudder is an easy to use, web-driven, role-based solution for IT Infrastructure Automation and Compliance. With a focus on continuously checking configurations and centralising real-time status data, Rudder can show a high-level summary (“ISO 27001 rules are at 100%!”) and break down noncompliance issues to a deep technical level (“Host prod-web-03: SSH server configuration allows root logins”).
 
