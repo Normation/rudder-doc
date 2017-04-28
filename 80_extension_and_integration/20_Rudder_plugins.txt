@@ -1,0 +1,79 @@
+
+
+[[extending_rudder_with_plugins]]
+
+=== Extending Rudder with plugins
+
+Rudder can be extended with Plugins so that new features or API endpoints are
+available in Rudder web application.
+
+==== Rudder Plugin
+
+A plugin is an archive in the `.rpkg` file format that can be manipulated with the
+`rudder-pkg` command (see <<rpkg_plugin_management, Plugins Administration>>)
+
+A Rudder plugin has full access to all Rudder internal APIs, datas, and process.
+Its power is very large, but some care must be taken to ensure that the plugin
+does not break Rudder main use cases.
+That is why we prefer to build smaller plugin, adding only one feature, and
+doing it in the least impacting way.
+
+Here come a list of some plugin so that one can grasp the kind of feature that a
+plugin can bring to Rudder:
+
+===== Extending API: rudder-plugin-itop
+
+Link: https://github.com/Normation/rudder-plugin-itop
+
+This plugin was used to add new API endpoint dedicated to the integration with
+https://www.combodo.com/itop-193[iTop CMDB software].
+
+As of Rudder 4.0, the plugin is superseeded by Rudder Compliance API.
+
+===== Adding information to node details: rudder-plugin-external-node-information
+
+Link: https://github.com/Normation/rudder-plugin-external-node-information
+
+This plugin allows to add new tabs in Rudder "node details" page and display
+node specific files, stored in node-dedicated places. It also use a
+self-managed and hot-reloading configuration of its properties.
+
+===== Providing new authentication methods
+
+Rudder plugins can be used to provide new authentication methods. There is no
+open source version of such module, but at least a Radius Authentication Plugin
+exists.
+
+===== Providing a full new feature: rudder-plugin-datasources
+
+Link: https://github.com/Normation/rudder-plugin-datasources
+
+As we said, Rudder plugins can be quite powerful. For example, the "Data sources
+Plugin" brings a completely new feature to Rudder by allowing to configure external
+API data sources from which Rudder will get node properties. The plugin set-up
+its own data base table, comes with its own UI (available in Rudder "administration"
+page), and interacts with node properties.
+
+
+==== Building your own plugins
+
+As of Rudder 4.1, there is no dedicated, frozen plugin API for plugins. A plugin
+is built in Scala, and the normal starting point is to clone and study the
+template plugin project,
+https://github.com/Normation/rudder-plugin-helloworld[rudder-plugin-helloworld].
+
+The project code source is documented to be didactic and provides:
+
+- an example of the packaging resources needed to build a ".rpkg" package,
+- example of configuration file for the plugin,
+- plugin definition and plugin registration when Rudder starts,
+- how to interact with Rudder internal services,
+- how to define new APIs.
+
+Of course, you can look to the other open source plugins listed above to get
+other, more involved example about how to do things.
+
+You also can interact with Rudder developpers throught the
+https://www.rudder-project.org/site/community/mailing-lists/[community] regular
+communication channels.
+
