@@ -1,6 +1,6 @@
 Port 5310, TCP::
 
-CFEngine communication port, used to communicate the policies to the Rudder
+Agent communication port, used to communicate the policies to the Rudder
 nodes when debugging communication between a Node and a policy server
 with the `rudder server debug` command.
 

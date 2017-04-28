@@ -1,0 +1,4 @@
+Port 5309, TCP::
+
+Agent communication port, used to trigger an agent run on a node from its policy server.
+

@@ -1,4 +1,4 @@
 Port 443, TCP, for users::
 
-HTTP/S communication port, used to access the Rudder web interface.
+HTTPS communication port, used to access the Rudder web interface or API.
 
