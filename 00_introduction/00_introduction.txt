@@ -1,8 +1,0 @@
-== Introduction
-
-This chapter presents the main concepts and the architecture of Rudder: what are the
-server types and their interactions.
-
-Reading this chapter will help you to learn the terms used, and to prepare the
-deployment of a Rudder installation. 
-
