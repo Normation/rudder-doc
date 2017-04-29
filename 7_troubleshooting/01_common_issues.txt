@@ -96,9 +96,9 @@ the database. However, due to the nature of Postgresql, when data are removed,
 space is not reclaimed on the storage system, it is simply marked as “free” for 
 the database to write again in the removed rows. This space can be reclaimed by 
 a VACUUM FULL, but it needs at least as much free space on the drive as the database size.
-Moreover, if you are using Postgresql 8.3 (or in a lesser extend 8.4), you’ll be 
-likely to experience indexes bloating, where the physical size of the indexes grows
-without real reason, and need to be regularly purged.
+If you are using Postgresql 8.4, which is not a recommended version, you’ll be likely to experience indexes bloating, where the physical size of the indexes grows without real reason, and need to be regularly purged.
+With PostgreSQL 9.2 and later, database size should remain stable, based on the number of
+nodes and configurations applied as described in <<_automatic_postgresql_table_maintenance,this estimation of disk usage>>
 
 There are two ways to reclaim space, the fast one (which doesn’t reclaim completely
 all wasted space), and the complete one (which is unfortunately very slow)
