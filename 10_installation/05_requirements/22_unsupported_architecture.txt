@@ -1,0 +1,50 @@
+==== Partially supported Operating Systems
+
+Fully supported Operating Systems are systems that are frequently built and tested on our servers.
+Partially suported Operating Systems are systems that have been built and tested at least once but that have not seen continuous flow of fixes.
+
+===
+      
+[WARNING]
+
+.Partially supported Operating Systems
+
+====
+
+It is possible to use Rudder on other platforms than the fully supported ones.
+However, we haven't tested the application on them, and can't currently supply
+any packages for them. Moreover, some Techniques may not work properly. If you
+wish to get Rudder support on those systems, please get in touch with us!
+
+A reference about how to manually build a Rudder agent is available on Rudder's
+documentation here: <<_building_the_rudder_agent, Building the Rudder Agent>>
+
+====
+
+===== For Rudder Nodes
+
+The following operating systems have had an agent built using <<_building_the_rudder_agent, Building the Rudder Agent>>:
+
+* FreeBSD
+
+* Slackware
+
+* Solaris 10 and 11
+
+* Raspbian, based on jessie (via dpkg)
+
+* Debian 8 on ARM (armhf version) (via dpkg)
+
+* OpenSUSE (via rpm)
+
+
+You can also follow the documentation instructions to build and install Rudder Agent locally on your favorite linux distribution.
+Even if this distribution has not been tested by us, it has a reasonable chance of success.
+
+
+===== For Rudder Root Server
+
+We advise against using an unsupported OS for Rudder server because the server contains
+much more code than the agent. This code is tailored against specific OS versions
+to work around many system limitations and specificities.
+

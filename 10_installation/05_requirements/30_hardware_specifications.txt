@@ -1,19 +1,3 @@
-[[Server_supported_OS, the list of supported Operating Systems for Root server]]
-
-===== For Rudder Root Server
-
-The following operating systems are supported as a Root server:
-
-GNU/Linux:
-
-* Debian 7 and 8
-
-* RedHat Enterprise Linux (RHEL) / RHEL-like 6 and 7
-
-* SuSE Linux Enterprise Server (SLES) 11 SP1 and SP3
-
-* Ubuntu 14.04 LTS (Trusty), 16.04 LTS (Xenial)
-
 ==== Hardware specifications for Rudder Agent
 
 Rudder agent has a very small footprint, and only consumes:
@@ -64,4 +48,5 @@ For example, a default installation with 500 nodes and an average of
 
 Follow the <<_reports_retention, Reports Retention>> section to configure the
 retention duration.
+
 
