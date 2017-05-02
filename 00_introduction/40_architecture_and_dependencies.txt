@@ -13,4 +13,5 @@ image::./images/introduction/network_connections.png[Network architecture]
 
 ==== Agents
 
+TODO
 

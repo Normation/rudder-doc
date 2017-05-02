@@ -3,7 +3,7 @@
 
 ==== Os independent target configuration state definition
 
-image::./images/core_techniques.png[Standard Technique Library]
+// image::./images/core_techniques.png[Standard Technique Library]
 
 
 
@@ -18,12 +18,11 @@ image::./images/introduction/rule_compliance_details.png[Fine grained reporting 
 
 ==== Automatic inventory
 
-
+TODO
 
 ==== REST API
 
-
-
+TODO
 
 ==== Audit trace and Change Requests
 
@@ -34,7 +33,7 @@ image::./images/introduction/change_request.png[Change Request]
 
 ==== Centralized authentication (LDAP, Active Directory, plugins)
 
-
+TODO
 
 ==== Extensibilty
 
