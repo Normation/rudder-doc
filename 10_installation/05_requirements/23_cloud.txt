@@ -1,0 +1,8 @@
+==== Cloud compatibility
+
+The agent provides an abstraction that permits a high level management of the infrastructure.
+This abstraction is independant of the underlying hardware. This also works for the cloud -
+we can define configuration rules in Rudder that will be applied as well inside a cloud instance as in a virtual server or in a physical machine of a datacenter.
+
+Any cloud instance based on one of the supported operating system is automatically supported.
+
