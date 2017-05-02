@@ -5,7 +5,7 @@
 
 // image::./images/core_techniques.png[Standard Technique Library]
 
-
+TODO
 
 ==== Centralize and aggregate real configuration state
 
