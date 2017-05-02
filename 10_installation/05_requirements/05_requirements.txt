@@ -6,7 +6,7 @@
 
 ===== Mandatory flows
 
-The following flows from the Nodes to the Rudder Root Server have to be allowed:
+The following flows from the Nodes to the Rudder Root Server (or Relay Server) have to be allowed:
 
 ====
 
@@ -50,18 +50,16 @@ These flows are used to add features to Rudder:
    
 // include::../glossary/big-red-button.txt[]
 
+include::../../glossary/port-5309-node.txt[]
+
 include::../../glossary/cfengine-enterprise.txt[]
 
 ====
 
 ===== DNS - Name resolution
 
-By default, Rudder relies on the Node declared hostnames to identify them, for
-security reasons. It is required that each Node hostname can be resolved to its
-IP address that will be used to contact the Rudder Server.
-
-If you can not make every node resolution consistent, it is possible to remove
-this constraint by unticking "Use reverse DNS lookups on nodes to reinforce
-authentication to policy server:" in the Administration - Settings tab of the
-Rudder web interface.
+If you want to be able to trigger agent runs from the Root Server (without
+having to wait for regular automated run),
+you will need your Root Server (or Relay Server) to be able to resolve your nodes
+using the provided hostname.
 
