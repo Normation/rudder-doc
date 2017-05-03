@@ -14,7 +14,7 @@ Rudder is natively integrated with the supported OS (Linux, Windows, AIX - see
 [TODO]) so that it provides generic, abstract, OS independant primitives to the
 user who can:
 
-image::./images/core_techniques.png["Standard Technique Library", float="right"]
+image::./images/introduction/core_techniques.png["Standard Technique Library", float="right"]
 
 * install software in OS native packaging system (RPM on RHEL, Windows software
   components, or even direct install from sources),
