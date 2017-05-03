@@ -1,6 +1,5 @@
 
-[[rudder_integration_in_infrastructure]]
-
+[[rudder-integration]]
 === Rudder integration in your infrastructure
 
 The other mains way to integrate Rudder into an existing infrastructure is
@@ -37,6 +36,8 @@ compliance level. With that integration, you can see in real time in your CMDB w
 a server managed by Rudder is drifting away from its expecting configuration, and
 use iTop to understand the impact of such a drift for your IT services.
 
+
+[[rudder-api-integration]]
 ==== Integrate Rudder thanks to its APIs
 
 All the above plugins are using http://www.rudder-project.org/rudder-api-doc/[Rudder APIs]

@@ -1,5 +1,6 @@
 == Introduction
 
+[[what-is-rudder]]
 === What is Rudder?
 
 image::./images/big-rudder-logo.png[Rudder logo]

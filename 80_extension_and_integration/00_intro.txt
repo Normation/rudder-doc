@@ -1,6 +1,5 @@
 
-[[extending_and_integrating_rudder]]
-
+[[extending-and-integrating-rudder]]
 == Rudder extension and integration with third party software
 
 Rudder was thought from the begining to be a good citizen in you infrastructure.

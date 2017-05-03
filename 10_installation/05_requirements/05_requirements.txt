@@ -1,7 +1,5 @@
-[[configure_the_network, Configure the network]]
 
-=== Requirements
-
+[[configure-the-network]]
 ==== Networking
 
 ===== Mandatory flows
@@ -18,7 +16,7 @@ include::../../glossary/port-514.txt[]
 
 ====
 
-And this one is optional: 
+And this one is optional:
 
 ====
 
@@ -47,7 +45,7 @@ include::../../glossary/port-80.txt[]
 These flows are used to add features to Rudder:
 
 ====
-   
+
 // include::../glossary/big-red-button.txt[]
 
 include::../../glossary/port-5309-node.txt[]

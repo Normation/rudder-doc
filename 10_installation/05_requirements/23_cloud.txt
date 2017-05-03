@@ -1,3 +1,5 @@
+
+[[rudder-cloud-compatibility]]
 ==== Cloud compatibility
 
 The agent provides an abstraction that permits a high level management of the infrastructure.

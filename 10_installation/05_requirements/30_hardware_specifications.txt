@@ -1,3 +1,5 @@
+
+[[node-hardware-requirements]]
 ==== Hardware specifications for Rudder Agent
 
 Rudder agent has a very small footprint, and only consumes:
@@ -7,9 +9,11 @@ Rudder agent has a very small footprint, and only consumes:
 * a few kB on the network to report
 * around 100 MB of disk space for the installed files and the workspace
 
-These figures will vary depending on your configuration (backup retention, 
+These figures will vary depending on your configuration (backup retention,
 number of configured components to check, etc...).
 
+
+[[server-hardware-requirements]]
 ==== Hardware specifications and sizing for Rudder Root Server
 
 A dedicated server is strongly recommended, either physical or virtual with at least one dedicated core.
@@ -29,7 +33,7 @@ installation for Rudder as described in chapter <<multiserver-rudder, Multiserve
 For large installations, you should also tune the amount of RAM given to:
 
 * the web application, as explained in the section
-<<_configure_ram_allocated_to_jetty, about webapplication RAM configuration>> 
+<<_configure_ram_allocated_to_jetty, about webapplication RAM configuration>>
 * PostgresSQL, as explained in the <<_optimize_postgresql_server, Optimize PostgreSQL Server>> section
 
 ===== Disk
@@ -43,8 +47,8 @@ execution reports (the default is 4 days):
 max_space = number of Directives * number of Nodes * retention duration in days * 400 kB
 ----
 
-For example, a default installation with 500 nodes and an average of 
-50 Directives by node, should require between 14 GB and 38 GB of disk space for PostgreSQL. 
+For example, a default installation with 500 nodes and an average of
+50 Directives by node, should require between 14 GB and 38 GB of disk space for PostgreSQL.
 
 Follow the <<_reports_retention, Reports Retention>> section to configure the
 retention duration.

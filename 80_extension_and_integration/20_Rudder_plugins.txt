@@ -1,7 +1,6 @@
 
 
-[[extending_rudder_with_plugins]]
-
+[[extending-rudder-with-plugins]]
 === Extending Rudder with plugins
 
 Rudder can be extended with Plugins so that new features or API endpoints are

@@ -1,5 +1,5 @@
 
-[[rpkg_plugin_management]]
+[[plugins-management]]
 
 === Plugins
 

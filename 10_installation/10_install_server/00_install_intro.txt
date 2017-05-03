@@ -1,9 +1,11 @@
+
+[[install-server]]
 === Install Rudder Server
 
 This chapter covers the installation of a Rudder Root Server, from the
 specification of the underlying server, to the initial setup of the application.
 
-Before all, you need to setup a server according to 
+Before all, you need to setup a server according to
 <<Server_supported_OS, the server specifications>>. You should also
 <<configure_the_network, configure the network>>. These topics are covered in the
 Architecture chapter.
@@ -26,7 +28,7 @@ Rudder application-related files should stay under 1GB, but the size of the conf
 depend of the amount of data you store in it, especially in the shared-files folder (files that will get
 distributed to the agents using the "Download a file for the shared folder" Technique).
 
-/var/log/rudder:: 
+/var/log/rudder::
 Report logs (/var/log/rudder/reports) size will depend on the amount of nodes you manage.
 It is possible to reduce this drastically by unticking "Log all reports received to /var/log/rudder/reports/all.log"
 under the Administration - Settings tab in the Rudder web interface. This will prevent Rudder from recording this logs

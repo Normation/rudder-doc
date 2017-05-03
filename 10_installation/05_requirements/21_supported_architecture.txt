@@ -1,4 +1,4 @@
-[[nodes_supported_OS, the list of supported Operating Systems for Nodes]]
+[[node-supported-os, the list of supported Operating Systems for Nodes]]
 
 ==== Fully supported Operating Systems
 
@@ -48,7 +48,7 @@ these platforms.
 ====
 
 
-[[Server_supported_OS, the list of supported Operating Systems for Root server]]
+[[server-supported-os, the list of supported Operating Systems for Root server]]
 
 ===== For Rudder Root Server
 
