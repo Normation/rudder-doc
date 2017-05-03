@@ -3,7 +3,7 @@
 [[what-is-rudder]]
 === What is Rudder?
 
-image::./images/big-rudder-logo.png[Rudder logo]
+image::./images/big-rudder-logo.png["Rudder logo", align="center"]
 
 Rudder is an easy to use, web-driven, role-based solution for IT Infrastructure
 Automation and Compliance. With a focus on continuously checking configurations
@@ -39,7 +39,7 @@ Rudder is an established project with *several 10000s of node managed*, in compa
 from small to biggest-in-their-field. Typical deployments manage 100s to 1000s of nodes.
 The biggest known deployment in 2017 is about 7000 nodes.
 
-image::./images/dashboard-overview.png[Rudder dashboard]
+image::./images/dashboard-overview.png["Rudder dashboard", align="center"]
 
 ==== Made for production environments
 
@@ -54,7 +54,7 @@ simplicity, giving them feedback where needed, keeping them alert of possible
 incoming problem, continously checking conformity to their rules, and all of that
 whatever the infrastructure they choose to build.
 
-image::./images/introduction/build_run_devops.png[Modern IT production of services and Open Source automation tools stack]
+image::./images/introduction/build_run_devops.png["Modern IT production of services and Open Source automation tools stack", align="center"]
 
 To achieve these goals, Rudder goes beyond simple automation of commands or
 configurations. Rudder continuously maintains your infrastructure to keep it
@@ -72,7 +72,7 @@ upgrade, easy to start with and growth with.
 Rudder comes with a graphical interface, a standard library of configuration
 policy ready to use, and a graphical rule editor.
 
-image::./images/introduction/web_api_cli.png[Use what best feets your need: Web interface, API, or console]
+image::./images/introduction/web_api_cli.png["Use what best feets your need: Web interface, API, or console", align="center"]
 
 Developers can script Rudder throught its APIs and security teams can check
 conformity level to their policies or inventory (both software and hardware) of a
@@ -85,6 +85,6 @@ Rudder agent is extremely fast, light, and versatile. It works on a wide variety
 of OS or hardware, from physical server to cloud instance, user laptops or even
 Digital Cities and IoT objects.
 
-image::./images/introduction/agent_output.png[Versatile agent]
+image::./images/introduction/agent_output.png["Versatile agent", align="center"]
 
 
