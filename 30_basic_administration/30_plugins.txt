@@ -1,3 +1,6 @@
+
+[[rpkg_plugin_management]]
+
 === Plugins
 
 Rudder is an extensible software. The *Administration > Plugin Management*
@@ -33,4 +36,3 @@ See all available commands with:
 ----
 rudder-pkg --help
 ----
-

@@ -1,0 +1,64 @@
+
+[[rudder_integration_in_infrastructure]]
+
+=== Rudder integration in your infrastructure
+
+The other mains way to integrate Rudder into an existing infrastructure is
+by making existing process or software take advantage of Rudder.
+
+==== Existing third party integration
+
+==== Rundeck
+
+http://rundeck.org[Rundeck] is a tool that helps automating infrastructures, by
+defining jobs that can be run manually or automatically. There is a
+https://github.com/Normation/rundeck-plugin-rudder[plugin] for Rundeck
+that allows using Rudder inventory data in Rundeck.
+
+With that plugin, you can execute commands on node registered in Rudder, taking
+advantage of the groups defined for you policies.
+
+==== Ansible
+
+There is an https://github.com/ansible/ansible/blob/devel/contrib/inventory/rudder.py[inventory plugin]
+for Ansible that makes possible to use Rudder inventory (including groups, nodes,
+group ids, node ids, and node properties) as inventory for Ansible, for example
+for orchestration tasks on your platform.
+It is part of Ansible as of version 2.0.
+
+===== iTop
+
+https://www.combodo.com/itop-193[iTop] is an Open Source CMDB solution. It allows
+to describe you IT services and analyse impact of problems.
+
+There is a prototype integration of iTop and Rudder which allows iTop to Rudder
+as a source of information about the server content (inventory) and current
+compliance level. With that integration, you can see in real time in your CMDB when
+a server managed by Rudder is drifting away from its expecting configuration, and
+use iTop to understand the impact of such a drift for your IT services.
+
+==== Integrate Rudder thanks to its APIs
+
+All the above plugins are using http://www.rudder-project.org/rudder-api-doc/[Rudder APIs]
+under the hood to operate or get data from Rudders. Rudder APIs are as powerful
+as the UI, and anything that can be done throught the main graphical interface
+can also be scripted away with the APIs.
+
+The documentation provided on APIs is exhaustive, but here comes a summary of
+what can be done with them:
+
+- accept, delete a node and manage its parameters,
+- get information with a parametrable depth about node inventories,
+- search for nodes,
+- manage (create, update, delete) groups, directives, rules and parameters,
+- interact with the Techniques library,
+- get compliance details about a node or a rule, with a parameterized depth of
+  information,
+- manage change requests.
+
+And of course, any plugin can provide new API endpoints, as is doing the
+data source plugin.
+
+These API can also be used to automate Rudder action, like node acceptation or compliance
+export and archiving for nodes.
+
