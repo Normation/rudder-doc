@@ -26,24 +26,8 @@ include::../glossary/technique-library.txt[]
 
 include::../glossary/active-techniques.txt[]
 
-[TIP] 
+==== Create new Techniques
 
-====
-
-The current version of Rudder has only an handful of *Techniques*.  We are
-aware that it considerably limits the use of the application, but we choose to
-hold back other Techniques that did not, from our point of view, have the
-sufficient quality. In the future, there will be some upgrades including more
-Techniques.
-
-====
-
-[WARNING] 
-
-====
-
-The creation of new Techniques is not covered by the Web interface. This
-is an advanced task which is currently not covered by this guide.
-
-====
+The standard library only provides the most common Techniques. You can create
+new Technique with the <<technique-editor, Technique Editor>>.
 
