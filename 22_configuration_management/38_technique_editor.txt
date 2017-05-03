@@ -98,6 +98,7 @@ Now, we have to find and add the generic methods which correspond to the actions
 
 * Service restart (You can find it in the *Service category*)
   - This method only take one parameter, the name of the service we want to restart. So here, fill in the *service_name* field with the value _ntp_.
+  - Also, we want to restart the service only if it has just been installed, so only if the result classes defined following the execution of *Package install* method is *Repaired* (package_install_ntp_repaired). So here, fill in the *Other CFEngine classes* field in the Conditions panel with the value _package_install_ntp_repaired_.
 
 * Service ensure running (You can find it in the *Service category*)
   - This method only take one parameter, the name of the service we want to check. Again, here, fill in the *service_name* field with the value _ntp_.
