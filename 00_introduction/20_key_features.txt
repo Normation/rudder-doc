@@ -11,8 +11,8 @@ resilient to changes than a step by step, procedural description of the commands
 to execute.
 
 Rudder is natively integrated with the supported OS (Linux, Windows, AIX - see
-[TODO]) so that it provides generic, abstract, OS independant primitives to the
-user who can:
+<<node-supported-os>>) so that it provides generic, abstract, OS independant
+primitives to the user who can:
 
 image::./images/introduction/core_techniques.png["Standard Technique Library", float="right"]
 
@@ -31,7 +31,9 @@ image::./images/introduction/core_techniques.png["Standard Technique Library", f
 * manage service start-up at boot time and ensure that a service is correctly
   running at any time, starting it up again if needed.
 
-The simple primitives can be simply mixed and todo_link[extended] to provide
+unfloat::[]
+
+The simple primitives can be simply mixed and <<intro-rudder-extensibility,extended>> to provide
 solutions for any and all of your unique use cases of software stacks,
 deployments, IT services or configuration that can't be natively supported.
 
@@ -71,13 +73,13 @@ used to defined coniguration rule targets. Typically, some configurations are
 linked to the kind of server (physical or virtual), the quantity of RAM
 available, the version of an OS library which contains a security bug, etc.
 
-All of these data are also available throught Rudder APIs (see link[TOTO]).
+All of these data are also available <<rudder-api-integration, throught Rudder APIs>>.
 
 ==== REST API
 
 All Rudder commands are available throught an exhaustive REST API. That API is
 http://www.rudder-project.org/rudder-api-doc/[fully documented online] and can
-be used to todo_link[quickly and smoothly integrate Rudder with you existing infrastructure].
+be used to <<rudder-api-integration, quickly and smoothly integrate Rudder with you existing infrastructure>>.
 
 
 ==== Audit trace and Change Requests
@@ -95,8 +97,8 @@ image::./images/introduction/change_request.png[Change Request]
 
 The validation process can be externalized to third party ticketing system, like
 a CMDB, so that it can integrated into an existing company workflow. This
-integration is done thanks to link_toward_thir_party_integration[an existing
-plugin or a dedicated synchronisation tool].
+integration is done thanks to <<rudder-integration, an existing
+plugin or a dedicated synchronisation tool>>.
 
 ==== Centralized authentication (LDAP, Active Directory, plugins)
 
@@ -104,8 +106,9 @@ Rudder can use enterprise directories (LDAP, Active Directory)
 or be connected to an SSO to manage users authentication.
 
 Moreover, Rudder authentication layer is plugable and can be extended to other
-authentication protocol link_to_plugins[like Radius or SPNEGO with plugins].
+authentication protocol <<extending-rudder-with-plugins, like Radius or SPNEGO with plugins>>.
 
+[[intro-rudder-extensibility]]
 ==== Extensibilty
 
 Rudder has a built-in library of common software components and configuration.
@@ -118,7 +121,7 @@ To achieve that goal, Rudder provided a big set of OS independent and generic,
 unitary modules. Rudder agent is able to translate these abstract modules to
 native OS specific commands and configurations.
 
-Module are atomic tasks, that can be extremelly simple (for example, check the
+Modules are atomic tasks, that can be extremelly simple (for example, check the
 existence of a file, create an user or a group, update a software package) or
 more complexe (for example, import JSON data from a REST API).
 For information, the following image provides a NON-exhaustive list of
@@ -133,7 +136,7 @@ policies for your IT services:
 
 image::./images/introduction/rule_directive_generic_method_stack.png[Build your own configuration, matching your requirements]
 
-The unitary configuration module can be configured thanks to a high level
+The unitary configuration modules can be configured thanks to a high level
 programming language:
 
 image::./images/introduction/ncf_language.png[high level definition language]

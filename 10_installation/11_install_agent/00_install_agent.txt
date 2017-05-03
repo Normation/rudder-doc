@@ -37,7 +37,7 @@ We grouped all these tools in one package, to ease the Rudder Agent
 installation.
 
 To get the list of supported Operating systems, please refer to
-<<nodes_supported_OS, the list of supported Operating Systems for the Nodes>>.
+<<node-supported-os, the list of supported Operating Systems for the Nodes>>.
 
 =====
 

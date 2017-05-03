@@ -41,7 +41,7 @@ The biggest known deployment in 2017 is about 7000 nodes.
 
 image::./images/dashboard-overview.png[Rudder dashboard]
 
-==== Made for the Production
+==== Made for production environments
 
 We believe that there is a growing impedence mismatch between the Short Time of
 application development and deployement, and the Long Time of the infrastructure.

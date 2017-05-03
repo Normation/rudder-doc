@@ -6,8 +6,8 @@ This chapter covers the installation of a Rudder Root Server, from the
 specification of the underlying server, to the initial setup of the application.
 
 Before all, you need to setup a server according to
-<<Server_supported_OS, the server specifications>>. You should also
-<<configure_the_network, configure the network>>. These topics are covered in the
+<<server-supported-os, the server specifications>>. You should also
+<<configure-the-network, configure the network>>. These topics are covered in the
 Architecture chapter.
 
 Ideally, this machine should have Internet access, but this is not a strict requirement.

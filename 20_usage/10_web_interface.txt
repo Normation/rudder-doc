@@ -44,7 +44,7 @@ image::./images/rudder-configurationpolicy-rules.png[Configuration Policy]
 
 The Administration section provides some general settings: you can setup the
 available networks for the Policy Server, view the event logs and manage your
-plugin collection.
+plugins collection.
 
 .Settings screen
 

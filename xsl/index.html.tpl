@@ -13,7 +13,7 @@ or if you have a suggestion, <a href="https://www.rudder-project.org/redmine/pro
 <p>If you are new to Rudder you can follow these steps to discover and start using Rudder:</p>
 <ul>
 <li>Read <a href="_introduction.html">introduction</a> to get familiar with Rudder architecture and concepts.</li>
-<li>Follow the <a href="_installation.html">installation</a> section wich explains the <a href="configure_the_network.html">requirements</a> and the installation steps for the different
+<li>Follow the <a href="_installation.html">installation</a> section wich explains the <a href="configure-the-network.html">requirements</a> and the installation steps for the different
                  types of nodes:</li>
 <ul>
 <li>The central <a href="_install_rudder_server.html">server</a> </li>
@@ -36,5 +36,5 @@ or if you have a suggestion, <a href="https://www.rudder-project.org/redmine/pro
 <li>Join the <a href="https://www.rudder-project.org/site/support/chat-mailing-lists/">IRC channel</a></li>
 </ul>
 <li>You need training,  or commercial support? Normation provides <a href="http://www.normation.com/en/rudder/services/">services</a> for Rudder</li>
-<li>Browse the <a href="http://www.rudder-project.org/foswiki/Development/WebHome">developper documentation</a> if you want to contribute or dive into Rudder internals</li>
+<li>Browse the <a href="http://www.rudder-project.org/foswiki/Development/WebHome">developer documentation</a> if you want to contribute or dive into Rudder internals</li>
 </ul></div>

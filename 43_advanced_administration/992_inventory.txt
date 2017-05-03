@@ -20,6 +20,6 @@ You can easily modify the script to add other information.
 
 There are plugins for Rundeck and Ansible that can be used with each tool to make
 them aware of inventory data from Rudder. For more information, see details in
-the <<rudder_integration_in_infrastructure, Third party integration with Rudder>>
+the <<rudder-integration, Third party integration with Rudder>>
 paragraph.
 

@@ -1,9 +1,9 @@
 [[architecture]]
 === Technical architecture and software dependencies
 
-==== Functionnal architecture of Rudder
+==== Functional architecture of Rudder
 
-Rudder contains several functionnaly independant components, illustrated in the diagram below:
+Rudder contains several functionaly independant components, illustrated in the diagram below:
 
 * Inventory database
 * Configuration policies database
@@ -13,7 +13,7 @@ Rudder contains several functionnaly independant components, illustrated in the 
 * Node interface: inventory reception, state reports reception, configuration policy sharing
 * Relay server to centralize networks flows of an isolated network zone
 
-image::./images/introduction/rudder_functional_component_diagram-simple-v1.png[Rudder functionnal architecture]
+image::./images/introduction/rudder_functional_component_diagram-simple-v1.png[Rudder functional architecture]
 
 ==== Network architecture in client/server mode
 
@@ -21,7 +21,7 @@ The Rudder server listens for incoming connections from the agents installed on 
 and communicates with them. The connection frequency from nodes to server is configurable, from several
 minutes to several hours.
 
-The following schema shows the network architecture of a Rudder installation:
+The following diagram shows the network architecture of a Rudder installation:
 
 image::./images/introduction/network_connections.png[Network architecture]
 

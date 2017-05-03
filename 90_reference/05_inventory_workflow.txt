@@ -8,7 +8,7 @@ it a Relay or the Root server) up to the Root server, and stored in the
 Rudder database (technically an LDAP server), waiting for later use.
 
 The goal of that section is to detail the different steps and explain how to
-spot and solve a problem on the inventory workflow. Following schema sum up
+spot and solve a problem on the inventory workflow. Following diagram sum up
 the whole process.
 
 image:./images/rudder-inventory-workflow.png[Inventory workflow, from node to

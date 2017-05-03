@@ -9,7 +9,7 @@ available in Rudder web application.
 ==== Rudder Plugin
 
 A plugin is an archive in the `.rpkg` file format that can be manipulated with the
-`rudder-pkg` command (see <<rpkg_plugin_management, Plugins Administration>>)
+`rudder-pkg` command (see <<plugins-management, Plugins Administration>>)
 
 A Rudder plugin has full access to all Rudder internal APIs, datas, and process.
 Its power is very large, but some care must be taken to ensure that the plugin
@@ -17,7 +17,7 @@ does not break Rudder main use cases.
 That is why we prefer to build smaller plugin, adding only one feature, and
 doing it in the least impacting way.
 
-Here come a list of some plugin so that one can grasp the kind of feature that a
+Here come a list of some plugins so that one can grasp the kind of feature that a
 plugin can bring to Rudder:
 
 ===== Extending API: rudder-plugin-itop
@@ -56,7 +56,7 @@ page), and interacts with node properties.
 
 ==== Building your own plugins
 
-As of Rudder 4.1, there is no dedicated, frozen plugin API for plugins. A plugin
+As of Rudder 4.1, there is no dedicated, frozen plugins API for plugins. A plugin
 is built in Scala, and the normal starting point is to clone and study the
 template plugin project,
 https://github.com/normation/rudder-plugin-helloworld[rudder-plugin-helloworld].
@@ -72,7 +72,7 @@ The project code source is documented to be didactic and provides:
 Of course, you can look to the other open source plugins listed above to get
 other, more involved example about how to do things.
 
-You also can interact with Rudder developpers throught the
+You also can interact with Rudder developers throught the
 https://www.rudder-project.org/site/community/mailing-lists/[community] regular
 communication channels.
 
