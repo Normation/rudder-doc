@@ -20,7 +20,7 @@ Generic methods calls are conditioned by class expressions, which are boolean ex
 
 ===== Utility
 
-Rudder provides a set of pre-defined Techniques that cover some basic configuration and system administration needs. Of course,this set of techniques cannot responds to all of the specific needs of each client. That’s why Rudder integrate the *Technique editor*, a tool to create advanced Techniques.
+Rudder provides a set of pre-defined Techniques that cover some basic configuration and system administration needs. Of course,this set of techniques cannot responds to all of the specific needs of each client. That’s why Rudder integrate the *Technique _editor_*, a tool to create advanced Techniques.
 Directly accessible from Ruder menu (_Utilities > Technique editor_), this tool has an easy-to-use interface, which doesn’t require any programming skills but nevertheless allows to create complex Techniques.
 
 ===== Interface
@@ -36,7 +36,7 @@ The interface is divided into 3 columns:
 
 image::./images/technique_editor/2-list-techniques.png[]
 
-Here, we can see our previously created Techniques. We can click on them to see their details/edit them, or create a new one by clicking on the “New” button. Theses Techniques are visible in the *ncf techniques* category in the *Active Techniques Directive tree*, so can be used to create new Directives.
+Here, we can see our previously created Techniques. We can click on them to see their details/edit them, or create a new one by clicking on the “New” button. Theses Techniques are visible in the *ncf techniques* category in the *Directives _tree_*, so can be used to create new Directives.
 
 - A column with the Technique content
 
@@ -78,12 +78,12 @@ Now we are going to see how to create a simple technique to configure a ntp serv
 
 ===== 1. General information
 
-Let's start from the beginning. Click on the "New Technique" button and start filling in the General information fields (only name is required).
-
+Let's start from the beginning. Click on the "_New_ Technique" button and start filling in the General information fields (only name is required).
 
 In our case:
-**Name*: _Configure NTP_
-**Description*: _Install, configure and ensure the ntpd is running. Uses a template file to configuration._
+
+- *Name*: _Configure NTP_
+- *Description*: _Install, configure and ensure the ntpd is running. Uses a template file to configuration._
 
 ===== 2. Add and configure generic methods
 
@@ -105,5 +105,5 @@ Now, we have to find and add the generic methods which correspond to the actions
 
 ===== 3. Save and apply your technique
 
-And… It’s already done. Rather fast, right? Don't forget to save. Now you can see it in the *Directive _tree_*, and  use that it to create a Directive that will be applied on your _Nodes_ thanks to a _Rule_.
+And… It’s already done. Rather fast, right? Don't forget to save. Now you can see it in the *Directives _tree_*, and  use that it to create a Directive that will be applied on your _Nodes_ thanks to a _Rule_.
 
