@@ -161,6 +161,8 @@ pages or to perform different actions depending on its level.
 You can also build custom roles with whatever permission you want, using a type
 and a level as specified below.
 
+image::./..//images/workflow_roles.png[Roles can match different types of users]
+
 In the xml file, the role attribute is a list of permissions/roles, separated by
 a comma. Each one adds permissions to the user. If one is wrong, or not correctly
 spelled, the user is set to the lowest rights (NoRights), having access only to the
