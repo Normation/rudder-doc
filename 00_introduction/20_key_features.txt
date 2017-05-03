@@ -140,9 +140,9 @@ programming language:
 
 image::./images/introduction/ncf_language.png["High level definition language", align="center"]
 
-But the natural, common strategy to use them is with the provided graphical
-editor which allows to use all the same modules, but with a web UI and
-drag'n'drop. Of course, you can configure each unitary module to use data from
+But the *natural*, *common* strategy to use them is with the <<technique-editor, "provided graphical editor">>
+which allows to use all the same modules, but with a *web UI* and
+with *drag'n'drop*. Of course, you can configure each unitary module to use data from
 a node and behave specifically on each one.
 
 image::./images/introduction/technique_editor_overview.png["Graphical Technique Editor - the simplest way to build new configuration", align="center"]
