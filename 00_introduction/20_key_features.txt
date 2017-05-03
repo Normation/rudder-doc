@@ -14,7 +14,6 @@ Rudder is natively integrated with the supported OS (Linux, Windows, AIX - see
 <<node-supported-os>>) so that it provides generic, abstract, OS independant
 primitives to the user who can:
 
-image::./images/introduction/core_techniques.png["Standard Technique Library", float="right"]
 
 * install software in OS native packaging system (RPM on RHEL, Windows software
   components, or even direct install from sources),
@@ -31,7 +30,7 @@ image::./images/introduction/core_techniques.png["Standard Technique Library", f
 * manage service start-up at boot time and ensure that a service is correctly
   running at any time, starting it up again if needed.
 
-unfloat::[]
+image::./images/introduction/core_techniques.png["Standard Technique Library", align="center"]
 
 The simple primitives can be simply mixed and <<intro-rudder-extensibility,extended>> to provide
 solutions for any and all of your unique use cases of software stacks,
@@ -43,7 +42,7 @@ The nominal working mode of Rudder is a **continuous verification** mode, which
 makes Rudder manage the whole application life cycle and check that configurations
 remain valid at any time.
 
-image::./images/introduction/general_behavior_workflow.png[Define target, check, report, remediate]
+image::./images/introduction/general_behavior_workflow.png["Define target, check, report, remediate", align="center"]
 
 Rudder can also *continuously check* that rules are valid and *proactively* correct
 any drift from the desired application state when needed. A *graphical reporting*
@@ -56,7 +55,7 @@ Understanding what the problem is is made simpler by the graphical reporting
 which allows to drill down toward the technical root cause and see in a blink
 where the drift comes from.
 
-image::./images/introduction/rule_compliance_details.png[Fine grained reporting on configuration components]
+image::./images/introduction/rule_compliance_details.png["Fine grained reporting on configuration components", align="center"]
 
 
 ==== Automatic inventory
@@ -73,13 +72,13 @@ used to defined coniguration rule targets. Typically, some configurations are
 linked to the kind of server (physical or virtual), the quantity of RAM
 available, the version of an OS library which contains a security bug, etc.
 
-All of these data are also available <<rudder-api-integration, throught Rudder APIs>>.
+All of these data are also available <<rudder-api-integration, through Rudder APIs>>.
 
 ==== REST API
 
-All Rudder commands are available throught an exhaustive REST API. That API is
+All Rudder commands are available through an exhaustive REST API. That API is
 http://www.rudder-project.org/rudder-api-doc/[fully documented online] and can
-be used to <<rudder-api-integration, quickly and smoothly integrate Rudder with you existing infrastructure>>.
+be used to <<rudder-api-integration, quickly and smoothly integrate Rudder with your existing infrastructure>>.
 
 
 ==== Audit trace and Change Requests
@@ -88,12 +87,12 @@ Any change done thanks to Rudder in your infrastructure is automatically
 recorded in an *Audit Log* which allows a full traceability of all changes.
 That feature also allows rollbacks of the recorded change.
 
-image::./images/introduction/audit_trace.png[Trace events and display changes]
+image::./images/introduction/audit_trace.png["Trace events and display changes", align="center"]
 
 All changes can be forced to go through a peer review or validation step and
 so be part of a conformity process.
 
-image::./images/introduction/change_request.png[Change Request]
+image::./images/introduction/change_request.png["Change Request", align="center"]
 
 The validation process can be externalized to third party ticketing system, like
 a CMDB, so that it can integrated into an existing company workflow. This
@@ -127,24 +126,24 @@ more complexe (for example, import JSON data from a REST API).
 For information, the following image provides a NON-exhaustive list of
 available modules:
 
-image::./images/introduction/generic_methods_list.png[Non exhaustive list of generic methods]
+image::./images/introduction/generic_methods_list.png["Non exhaustive list of generic methods", align="center"]
 
 These generic, unitary modules can be used to build new higher level,
 OS independent, parametrizable configuration modules. By combining these module,
 you are able to manage any configuration and build advanced configuration
 policies for your IT services:
 
-image::./images/introduction/rule_directive_generic_method_stack.png[Build your own configuration, matching your requirements]
+image::./images/introduction/rule_directive_generic_method_stack.png["Build your own configuration, matching your requirements", align="center"]
 
 The unitary configuration modules can be configured thanks to a high level
 programming language:
 
-image::./images/introduction/ncf_language.png[high level definition language]
+image::./images/introduction/ncf_language.png["High level definition language", align="center"]
 
 But the natural, common strategy to use them is with the provided graphical
 editor which allows to use all the same modules, but with a web UI and
 drag'n'drop. Of course, you can configure each unitary module to use data from
 a node and behave specifically on each one.
 
-image::./images/introduction/technique_editor_overview.png[Graphical Technique Editor - the simplest way to build new configuration]
+image::./images/introduction/technique_editor_overview.png["Graphical Technique Editor - the simplest way to build new configuration", align="center"]
 

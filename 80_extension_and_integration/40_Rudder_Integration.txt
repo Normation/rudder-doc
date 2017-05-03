@@ -42,7 +42,7 @@ use iTop to understand the impact of such a drift for your IT services.
 
 All the above plugins are using http://www.rudder-project.org/rudder-api-doc/[Rudder APIs]
 under the hood to operate or get data from Rudders. Rudder APIs are as powerful
-as the UI, and anything that can be done throught the main graphical interface
+as the UI, and anything that can be done through the main graphical interface
 can also be scripted away with the APIs.
 
 The documentation provided on APIs is exhaustive, but here comes a summary of

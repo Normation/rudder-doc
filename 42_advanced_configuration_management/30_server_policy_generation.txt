@@ -14,6 +14,8 @@ The process of policy generation:
 * Replace the old version of the policies by the new one for impacted node
 * Restart the policy server on the Rudder central server is authorizations have changed
 
+image::./images/objects-used-in-generation.png[Objects and parameters used in policy generation]
+
 You can customize some of these actions and add new ones using the <<_server_event_hooks, Server Event Hooks>>.
 
 image::./images/policy_generation.png[Status of policy generation]

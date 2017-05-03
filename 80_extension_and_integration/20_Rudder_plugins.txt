@@ -72,7 +72,7 @@ The project code source is documented to be didactic and provides:
 Of course, you can look to the other open source plugins listed above to get
 other, more involved example about how to do things.
 
-You also can interact with Rudder developers throught the
+You also can interact with Rudder developers through the
 https://www.rudder-project.org/site/community/mailing-lists/[community] regular
 communication channels.
 

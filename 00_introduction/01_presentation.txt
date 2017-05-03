@@ -74,7 +74,7 @@ policy ready to use, and a graphical rule editor.
 
 image::./images/introduction/web_api_cli.png[Use what best feets your need: Web interface, API, or console]
 
-Developers can script Rudder throught its APIs and security teams can check
+Developers can script Rudder through its APIs and security teams can check
 conformity level to their policies or inventory (both software and hardware) of a
 server at any time.
 
