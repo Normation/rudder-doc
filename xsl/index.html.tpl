@@ -6,10 +6,10 @@
 <p>If you are new to Rudder you can follow these steps to discover and start using Rudder:</p>
 <ul>
 <li>Read about <a href="what-is-rudder.html">what is Rudder</a>, which are its <a href="key-features.html">key features</a> and <a href="architecture.html">technical architecture</a>.</li>
-<li>Follow the <a href="_installation.html">installation</a> section wich explains the <a href="configure-the-network.html">requirements</a> and the installation steps for the different
+<li>Follow the <a href="_installation.html">installation</a> section wich explains the <a href="rudder-installation-requirements.html">requirements</a> and the installation steps for the different
                  types of nodes:</li>
 <ul>
-<li>The central <a href="_install_rudder_server.html">server</a> </li>
+<li>The central <a href="install-server.html">server</a> </li>
 <li>The (optional) <a href="relay-servers.html">relays</a> </li>
 <li>The managed <a href="install-agent.html">nodes</a></li>
 </ul>
