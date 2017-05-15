@@ -22,20 +22,37 @@ Rudder Server runs on both 32 (if available) and 64 bit versions of every suppor
 
 ===== Memory
 
-The required amount of RAM mainly depends on the number of managed nodes. A general rule for the minimal value is:
+The required amount of RAM mainly depends on the number of managed nodes. A general rule for the minimal value on a stand-alone installation is:
 
 * less than 50 nodes: 2GB
 * between 50 and 1000 nodes: 4GB
 * more than 1000 nodes: 4GB + 1GB of RAM by 500 nodes above 1000.
+* more than 4000 nodes: 10GB + 2GB of RAM by 500 nodes above 4000.
 
 When managing more than 1000 nodes, we also recommend you to use a multiserver
 installation for Rudder as described in chapter <<multiserver-rudder, Multiserver Rudder>>.
 
-For large installations, you should also tune the amount of RAM given to:
-
-* the web application, as explained in the section
+When your server has more than 2 GB of RAM, you have to configure the RAM allocated
+to the Java Virtual Machine as explained in the section
 <<_configure_ram_allocated_to_jetty, about webapplication RAM configuration>> 
-* PostgresSQL, as explained in the <<_optimize_postgresql_server, Optimize PostgreSQL Server>> section
+
+When your server has more than 4 GB, you may need to also tune the PostgresSQL
+server, as explained in the <<_optimize_postgresql_server, Optimize PostgreSQL Server>> section
+
+[TIP]
+
+====
+
+As an example, a Rudder server which manages 2600 nodes (with a lot of policies
+checked) will need:
+
+* A server with 8 GB of RAM,
+* 4 GB of RAM will be allocated to the JVM.
+
+In our load-tests, with such a configuration, the server is not stressed and
+the user experience is good.
+
+====
 
 ===== Disk
 
