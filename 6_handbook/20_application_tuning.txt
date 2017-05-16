@@ -69,8 +69,8 @@ service restart rudder-jetty
 
 ----
 
-The amount of memory should be the half of the RAM of the server, rounded down to the nearest GB.
-For example, if the server has 5GB of RAM, 2GB should be used.
+The amount of memory should be the half of the RAM of the server, rounded up to the nearest GB.
+For example, if the server has 5GB of RAM, 3GB should be allocated to Jetty.
 
 
 ==== Optimize PostgreSQL server
