@@ -30,7 +30,7 @@ infrastructure with more than *7000* nodes.
 
 ===== Memory
 
-The required amount of RAM mainly depends on the number of managed nodes. A general rule for the minimal value is:
+The required amount of RAM mainly depends on the number of managed nodes. A general rule for the minimal value on a stand-alone server is:
 
 * less than 50 nodes: 2 GB
 * between 50 and 1000 nodes: 4 GB
