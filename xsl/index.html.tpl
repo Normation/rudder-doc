@@ -22,8 +22,7 @@
 <li>The <a href="https://www.rudder-project.org/site">Rudder project website</a></li>
 <li>The <a href="http://faq.rudder-project.org/">FAQ</a>, particularly:
 <ul>
-<li><a href="http://faq.rudder-project.org/topics/9-what-is-the-end-of-life-eol-mainteance-period-for-each-major-version/">What is the mainteance period for each major version?</a></li>
-<li><a href="http://faq.rudder-project.org/topics/2-what-is-an-extended-support-release-esr/">What is an ESR release</a> and <a href="http://faq.rudder-project.org/topics/7-how-long-are-esr-releases-maintained/">how long is it maintainted?</a></li>
+<li>What is an ESR version? How long are Rudder versions supported? All the answers are in the <a href="http://faq.rudder-project.org/topics/9-when-are-versions-published-and-how-long-are-they-maintained/">versionning policy</a></li>.
 </ul>
 <li>You need help or have questions about Rudder? You can:</li>
 <ul>
