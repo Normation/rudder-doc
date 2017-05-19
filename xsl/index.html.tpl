@@ -28,7 +28,7 @@ or if you have a suggestion, <a href="https://www.rudder-project.org/redmine/pro
 <li>The <a href="http://www.rudder-project.org/changelog-{rudder_version}">Changelog</a> for this version. It describes the changes in each release.</li>
 <li>The <a href="https://www.rudder-project.org/site">Rudder project website</a>, particularly:
 <ul>
-<li>What is an ESR version? How long are Rudder versions supported? All the answers are in the <a href="https://www.rudder-project.org/site/documentation/faq/#versioning">versionning policy</a>.
+<li>What is an ESR version? How long are Rudder versions supported? All the answers are in the <a href="http://faq.rudder-project.org/topics/9-when-are-versions-published-and-how-long-are-they-maintained/">versionning policy</a>.
 </ul>
 <li>You need help or have questions about Rudder? You can:</li>
 <ul>
