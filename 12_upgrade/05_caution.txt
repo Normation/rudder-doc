@@ -11,7 +11,10 @@ You need to upgrade your server to 4.0 before the agents.
 
 ===== 3.1.x and 3.2.x agents
 
-As they use a compatible CFEngine version, Rudder agent 3.1.x and 3.2.x are fully compatible with Rudder server 4.0.x. It is therefore not strictly necessary to update your agents to 4.0.x.
+Rudder agent 3.1.x and 3.2.x are compatible with Rudder server 4.0.x, but they
+do not support the new "Audit" policy mode. It is therefore not strictly
+necessary to update your agents to 4.0.x, unless you want to be able to use
+the "Audit" policy mode.
 
 ===== 3.0.x or older
 
