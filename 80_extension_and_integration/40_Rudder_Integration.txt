@@ -22,8 +22,34 @@ advantage of the groups defined for you policies.
 There is an https://github.com/ansible/ansible/blob/devel/contrib/inventory/rudder.py[inventory plugin]
 for Ansible that makes possible to use Rudder inventory (including groups, nodes,
 group ids, node ids, and node properties) as inventory for Ansible, for example
-for orchestration tasks on your platform.
-It is part of Ansible as of version 2.0.
+for orchestration tasks on your platform. An inventory in Ansible is the list of managed nodes,
+their groups and some pre-defined variables.
+The Rudder plugin is part of Ansible as of version 2.0 (but also works with previous versions).
+
+You need to download the https://github.com/ansible/ansible/blob/devel/contrib/inventory/rudder.py[rudder.py]
+and https://github.com/ansible/ansible/blob/devel/contrib/inventory/rudder.ini[rudder.ini] files, then you have to
+edit `rudder.ini` to fill (at least):
+
+* Your Rudder server URL
+* A valid API token
+
+Then you can start using it with the `-i rudder.py` option (to the Ansible command-line).
+The plugin defines:
+
+* An Ansible group for each Rudder group, with a group variable named `rudder_group_id` that contains the uuid of the group
+* An host variable named `rudder_node_id` that contains the uuid of the node
+* Host variables containing the Rudder node properties
+
+You can then use them in the configuration, for example:
+
+----
+ansible -i rudder.py All_nodes_managed_by_root_policy_server -a "echo {{rudder_node_id}} {{rudder_group_id}} {{node_property}} {{node_property.key}}"
+----
+
+Will try to connect over SSH to all nodes managed by your Rudder server and display the given information.
+
+You can defined the `ansible_host`, `ansible_user` and `ansible_port` node properties to control
+the way Ansible connects to the nodes.
 
 ===== iTop
 
