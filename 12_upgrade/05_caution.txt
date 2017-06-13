@@ -27,11 +27,34 @@ configuration distributed to the nodes include the use of the new protocol.
 
 ====
 
+[CAUTION]
+
+===
+
+In Rudder 4.1, we changed the name of '/opt/rudder/etc/ssl/rudder-webapp.crt' to '/opt/rudder/etc/ssl/rudder.crt'
+and the name of '/opt/rudder/etc/ssl/rudder-webapp.key' to '/opt/rudder/etc/ssl/rudder.key'.
+
+These certificates are used for Rudder internal implementation, but if you are using them for anything 
+else, please update the paths to the files. 
+
+For example, if you were using these certificates for configuring sasl in slapd with:
+
+    TLSCertificateFile /opt/rudder/etc/ssl/rudder-webapp.crt
+    TLSCertificateKeyFile /opt/rudder/etc/ssl/rudder-webapp.key
+
+Then, you now need to use: 
+
+    TLSCertificateFile /opt/rudder/etc/ssl/rudder.crt
+    TLSCertificateKeyFile /opt/rudder/etc/ssl/rudder.key
+
+===
+
 ==== Compatibility between Rudder agent 4.1 and older server versions
 
 ===== 4.0.x servers
 
 Rudder agents 4.1.x are compatible with 4.0 Rudder servers.
+
 
 ===== 3.1.x and 3.2.x servers
 
