@@ -75,6 +75,12 @@ The lines have the following format:
 
 In particular, the 'RESULT' field contains the type of event (change or error, respectively 'result_repaired' and 'result_error').
 
+You can use the following regex to match the different fields:
+
+----
+^\[(?P<Date>[^\]]+)\] N: (?P<NodeUUID>[^ ]+) \[(?P<NodeFQDN>[^\]]+)\] S: \[(?P<Result>[^\]]+)\] R: (?P<RuleUUID>[^ ]+) \[(?P<RuleName>[^\]]+)\] D: (?P<DirectiveUUID>[^ ]+) \[(?P<DirectiveName>[^\]]+)\] T: (?P<TechniqueName>[^/]+)/(?P<TechniqueVersion>[^ ]+) C: \[(?P<ComponentName>[^\]]+)\] V: \[(?P<ComponentKey>[^\]]+)\] (?P<Message>.+)$
+----
+
 Below is a basic https://www.elastic.co/products/logstash[Logstash] configuration file for parsing Rudder events.
 You can then use https://www.elastic.co/products/kibana[Kibana] to explore the data, and create graphs and
 dashboards to visualize the changes in your infrastructure.
