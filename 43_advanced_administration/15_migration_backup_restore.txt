@@ -65,7 +65,7 @@ rudder agent disable
 service rudder stop
 
 # Drop the OpenLDAP database
-rm -rf /var/rudder/ldap/openldap-data/alock /var/rudder/ldap/openldap-data/*.bdb /var/rudder/ldap/openldap-data/__db* /var/rudder/ldap/openldap-data/log*
+rm -rf /var/rudder/ldap/openldap-data/*.mdb
 
 # Import your backups
 
