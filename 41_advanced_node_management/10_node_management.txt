@@ -54,9 +54,16 @@ to the server, which will treat it as a new node inventory.
 ==== Change the agent run schedule
 
 By default, the agent runs on all nodes every 5 minutes. You can modify this value in
-*Administration* -> *Settings* -> *Agent Run Schedule*, as well as the "splay time"
+ *Settings* -> *General* page in *Agent Run Schedule* section, as well as the "splay time"
 across nodes (a random delay that alters scheduled run time, intended to spread
 load across nodes).
+
+image::../images/Global_run_settings.png[]
+
+This settings can also be modified Node by Node, allowing you to customize the agent behavior (Node with little ressource like a Raspberry Pi or with limited bandwith). To do that, go into the Node details in the *Settings* tab
+
+image::../images/Node_settings.png[]
+
 
 [WARNING]
 

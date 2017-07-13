@@ -2,7 +2,7 @@
 
 ===== Checking configuration (CFEngine)
 
-Rudder is configured to check and repair configurations using the CFEngine
+By default, Rudder is configured to check and repair configurations using the CFEngine
 agent every 5 minutes, at 5 minutes past the hour, 10 minutes past the hour,
 etc.
 
@@ -11,9 +11,8 @@ order to "smooth" the load across your infrastructure (also known as "splay
 time"). This reduces simultaneous connections on relay and root servers (both
 for the CFEngine server and for sending reports).
 
-Up to and including Rudder 2.10.x, this random interval is between 0 and 1
-minutes. As of Rudder 2.10.x and later, this random interval is between 0 and
-5 minutes.
+See <<_change_the_agent_run_schedule>> Section to see how to configure it 
+
 
 ===== Inventory (FusionInventory)
 
