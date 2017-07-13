@@ -7,17 +7,18 @@ include::../glossary/directive.txt[]
 
 The screen is divided in three parts:
 
-- on the left, your list of Techniques and Directives, 
+- on the left, The list of Directives, grouped by Technique 
 
-- on the right the description of the selected Technique or Directive.
+- on the right, The selected Directive form.
 
-- at the bottom, the configuration items of the selected Directive. 
-
-Click on the name of a Technique to show its description. 
+Click on the name of a Technique to show its description, and how to Create a Directive base on it. 
 
 Click on the name of a Directive to see the Directive Summary containing the
 description of the Technique its derived from, and the configuration items
 of the Directive.
+
+
+image::./images/Directive_management.png[]
 
 .Create a Directive for Name resolution
 

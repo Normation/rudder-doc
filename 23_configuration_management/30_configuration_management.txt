@@ -17,14 +17,7 @@ include::../glossary/applied-policy.txt[]
 As illustrated in this summary diagram, the rules are linking the
 functions of inventory management and configuration management.
 
-["graphviz", "concepts.png"]
-
 .Concepts diagram
 
--------
-
-include::../graphviz/concepts.dot[]
-
--------
-
+image::./images/configuration_concepts.svg[]
 

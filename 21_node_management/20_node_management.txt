@@ -2,7 +2,11 @@
 
 [[inventory, Node Inventory]]
 
+image::./images/node_workflow.svg[]
+
 === Node inventory
+
+image::../images/Nodes.png[]
 
 Rudder integrates a node inventory tool which harvest useful information
 about the nodes. This information is used by Rudder to handle the nodes, and
@@ -34,7 +38,10 @@ system, 'IP address', 'Network Mask', usage of 'DHCP' or static configuration,
 And finally, you get the list of every 'software' package present on the
 system, including version and description.
 
-On Nodes managed by Rudder, the 'Reports' tab displays information about the
-status of the latest run of Rudder Agent, whereas the 'Logs' tab displays
+On Nodes managed by Rudder, the 'Compliance Reports' tab displays information about the
+status of the latest run of Rudder Agent, whereas the 'Technical Logs' tab displays
 information about changes for the Node.
+
+image::../images/Node_compliance.png[]
+
 

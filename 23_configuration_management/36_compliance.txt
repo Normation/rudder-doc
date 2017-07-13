@@ -42,7 +42,7 @@ been applied
 
 .Compliance on a Rule
 
-image::./images/rudder-rule-compliance.png[Rule compliance]
+image::./images/Rule_compliance.png[Rule compliance]
 
 The Rule detailed compliance screen will also graph compliance deviations on
 a recent period as well as display a deviation log history for this period.
