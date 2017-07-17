@@ -12,7 +12,7 @@ include::../glossary/dynamic-group.txt[]
 
 include::../glossary/static-group.txt[]
 
-image::../images/Group.png[]
+image::./images/groups.png[]
 
 .Create a dynamic group for Linux Nodes with +ssh+ having an ip address in 192.18.42.x.
 

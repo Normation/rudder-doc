@@ -6,7 +6,7 @@ image::./images/node_workflow.svg[]
 
 === Node inventory
 
-image::../images/Nodes.png[]
+image::./images/nodes.png[]
 
 Rudder integrates a node inventory tool which harvest useful information
 about the nodes. This information is used by Rudder to handle the nodes, and
@@ -42,6 +42,6 @@ On Nodes managed by Rudder, the 'Compliance Reports' tab displays information ab
 status of the latest run of Rudder Agent, whereas the 'Technical Logs' tab displays
 information about changes for the Node.
 
-image::../images/Node_compliance.png[]
+image::./images/node-compliance.png[]
 
 
