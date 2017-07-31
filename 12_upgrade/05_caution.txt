@@ -6,9 +6,9 @@ Direct upgrades from 3.0.x and older are no longer supported on 4.1.
 If you are still running one of those, either on servers or nodes,
 please first upgrade to one of the supported versions above, and then upgrade to 4.1.
 
-==== Upgrade from Rudder 3.1, 3.2 or 4.0
+==== Upgrade from Rudder 3.1, 3.2 4.0 or 4.1
 
-Migration from 3.1, 3.2 or 4.0 are supported, so you can upgrade directly to 4.1.
+Migration from 3.1, 3.2, 4.0 or 4.1 are supported, so you can upgrade directly to 4.2.
 
 [WARNING]
 
@@ -16,9 +16,9 @@ Migration from 3.1, 3.2 or 4.0 are supported, so you can upgrade directly to 4.1
 
 In Rudder 4.0, we changed the default communication protocol between agent and server,
 but still stay compatible with the old protocol. Hence, you can perfectly keep using
-pre-4.0 agents with a 4.0 or 4.1 server.
+pre-4.0 agents with a 4.0, 4.1 or 4.2 server.
 
-However, some networking issues may appear when using 4.0 or 4.1 agents with older servers with the
+However, some networking issues may appear when using 4.0, 4.1 or 4.2 agents with older servers with the
 reverse DNS lookup option disabled in the settings (*Security* ->
 *Use reverse DNS lookups on nodes to reinforce authentication to policy server*).
 
@@ -49,40 +49,40 @@ Then, you now need to use:
 
 ====
 
-==== Compatibility between Rudder agent 4.1 and older server versions
+==== Compatibility between Rudder agent 4.2 and older server versions
 
-===== 4.0.x servers
+===== 4.0.x and 4.1.x servers
 
-Rudder agents 4.1.x are compatible with 4.0 Rudder servers.
+Rudder agents 4.2.x are compatible with 4.0 Rudder servers.
 
 
 ===== 3.1.x and 3.2.x servers
 
-Rudder agents 4.1.x are not compatible with Rudder servers older than 4.0.0.
-You need to upgrade your server to 4.1 before the agents.
+Rudder agents 4.2.x are not compatible with Rudder servers older than 4.0.0.
+You need to upgrade your server to 4.2 before the agents.
 
-==== Compatibility between Rudder server 4.1 and older agent versions
+==== Compatibility between Rudder server 4.2 and older agent versions
 
-===== 4.0.x agents
+===== 4.0.x and 4.1.x agents
 
-Rudder agent 4.0.x are fully compatible with Rudder server 4.1.x. It is
-therefore not strictly necessary to update your agents to 4.1.x.
+Rudder agent 4.0.x and 4.1.x are fully compatible with Rudder server 4.2.x. It is
+therefore not strictly necessary to update your agents to 4.2.x.
 
 ===== 3.1.x and 3.2.x agents
 
-Rudder agent 3.1.x and 3.2.x are compatible with Rudder server 4.1.x, but they
+Rudder agent 3.1.x and 3.2.x are compatible with Rudder server 4.2.x, but they
 do not support the new "Audit" policy mode. It is therefore not strictly
-necessary to update your agents to 4.0.x, unless you want to be able to use
+necessary to update your agents to 4.2.x, unless you want to be able to use
 the "Audit" policy mode.
 
 ===== 3.0.x or older
 
-These agents are not compatible with Rudder 4.1, and you have to upgrade them. 
+These agents are not compatible with Rudder 4.2, and you have to upgrade them. 
 Be careful to follow the upgrade path explained <<_upgrade_from_rudder_3_0_or_older, above>>.
 
 ==== Protocol for reporting
 
-Rudder 3.1 uses syslog messages over UDP by default for reporting, but if you upgraded
+Rudder uses syslog messages over UDP by default for reporting (since 3.1), but if you upgraded
 your server from a previous version, you will keep the previous setting which uses
 syslog messages over TCP.
 
