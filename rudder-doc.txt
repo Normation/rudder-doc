@@ -1,4 +1,4 @@
-Rudder 4.1 - User Manual
+Rudder 4.2 - User Manual
 ========================
 Normation_SAS_and_Fabrice_Flore-Thebault <contact@normation.com>
 :description: User Documentation for the Rudder Drift Assessment Software. +
@@ -9,7 +9,7 @@ Normation_SAS_and_Fabrice_Flore-Thebault <contact@normation.com>
   CFEngine Nova, CFEngine, Scala, Free Software, Open Source, GPL +
   User documentation
 :revdate: Sep 2016
-:revision: 4.1
+:revision: 4.2
 
 // Generate the map of content from list of files and alphabetically ordered
 // glossary 
@@ -33,7 +33,7 @@ include::temp/glossary.txt[]
 [colophon]
 == License
 
-Copyright (C) 2011-2016 Normation SAS
+Copyright (C) 2011-2017 Normation SAS
 
 Rudder User Documentation by http://normation.com[Normation SAS] is licensed under
 a http://creativecommons.org/licenses/by-sa/3.0/[Creative Commons
