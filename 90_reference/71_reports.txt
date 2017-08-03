@@ -39,7 +39,7 @@ A report has the following format :
 
 ===== Valid report types
 
-[cols="1,1,1,4", options="header"]
+[cols="1,1,1,1,4", options="header"]
 .Report Types
 |===
 | Name
