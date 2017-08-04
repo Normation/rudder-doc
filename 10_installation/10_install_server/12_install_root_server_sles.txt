@@ -29,6 +29,18 @@ beforehand to prevent the system from choosing the default PostgreSQL implementa
 
 include::snippets/zypper_segfault.txt.snippet[]
 
+[WARNING]
+
+====
+
+Zypper seems to be quite tolerant to missing dependencies and will let you install rudder-server-root even if you are missing
+something like +git-core+ for example, if nothing provides it or you did not install it beforehand.
+
+Special care should be taken during initial installation not to say "Continue anyway" if Zypper does complain a dependency can
+not be resolved and asks what to do.
+
+====
+
 ===== Add the Rudder packages repository
 
 include::snippets/rpm_key.txt.snippet[]
@@ -55,18 +67,6 @@ metapackage, which will install the required components:
 zypper in rudder-server-root
 
 ----
-
-[WARNING]
-
-====
-
-Zypper seems to be quite tolerant to missing dependencies and will let you install rudder-server-root even if you are missing
-something like +git-core+ for example, if nothing provides it or you did not install it beforehand.
-
-Special care should be taken during initial installation not to say "Continue anyway" if Zypper does complain a dependency can
-not be resolved and asks what to do.
-
-====
 
 include::snippets/initial_config.txt.snippet[]
 
