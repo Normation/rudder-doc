@@ -24,7 +24,7 @@ cd rudder-agent
 
 ----
 
-Now choose one of the 3 next chapter, depending on your case: dpkg (debian like package), rpm (redhat like package) or other.
+Now choose one of the 3 next chapter, depending on your case: dpkg (debian-like package), rpm (redhat-like package) or other.
 
 ==== Build a dpkg package
 
@@ -33,7 +33,7 @@ Set the version to build:
 * Update the debian/changelog file to make the first entry match the version you want to build.
 * Edit the SOURCES/Makefile file and set the value of RUDDER_VERSION_TO_PACKAGE: see http://www.rudder-project.org/archives/ for a complete list of available versions.
 
-Run the debian package builder
+Run the dpkg package builder:
 
 ----
 
@@ -43,12 +43,13 @@ dpkg-buildpackage
 
 The package will be stored in the parent directory.
 
-==== Build a rpm package
-
-Run the redhat package builder
+==== Build an rpm package
 
 Set the version to build:
+
 * Edit the SOURCES/Makefile file and set the value of RUDDER_VERSION_TO_PACKAGE: see http://www.rudder-project.org/archives/ for a complete list of available versions.
+
+Run the rpm package builder:
 
 ----
 
