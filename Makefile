@@ -88,6 +88,7 @@ rudder-repo:
 
 hooks.asciidoc: rudder-repo
 	cd rudder-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
+	cd rudder-repo && git pull
 	cp rudder-repo/rudder-core/src/main/resources/hooks.d/readme.adoc hooks.asciidoc
 	for hook in `ls rudder-repo/rudder-core/src/main/resources/hooks.d/*/readme.adoc`; do \
 	  echo "" >> hooks.asciidoc ; \
@@ -190,7 +191,7 @@ test: webhelp/index.html quicktest
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
 clean:
-	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub webhelp webhelp-localsearch xincluded-profiled.xml $(BASENAME).xml rudder-agent-repo rudder-repo extensions ncf generic_methods.{asciidoc,md} hooks.asciidoc xsl/links.xsl xsl/index.html
+	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub webhelp webhelp-localsearch xincluded-profiled.xml $(BASENAME).xml rudder-agent-repo rudder-repo extensions ncf-repo generic_methods.{asciidoc,md} hooks.asciidoc xsl/links.xsl xsl/index.html
 
 view: all
 	$(SEE) $(TARGETS)
