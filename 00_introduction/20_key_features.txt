@@ -10,6 +10,9 @@ destination depending of the path you actually took. This process is much more
 resilient to changes than a step by step, procedural description of the commands
 to execute.
 
+image::./images/continuous-configuration.png[Continuous Configuration]
+
+
 Rudder is natively integrated with the supported OS (Linux, Windows, AIX - see
 <<node-supported-os>>) so that it provides generic, abstract, OS independant
 primitives to the user who can:
