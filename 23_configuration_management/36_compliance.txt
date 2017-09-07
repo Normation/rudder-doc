@@ -7,7 +7,7 @@
 
 Rudder is build to continuously assesses drift compared to defined policies, with or without auto-healing. By auto-healing, 
 we mean that optionally, Rudder can continuously enforces configuration over time, correcting the assessed drift so that 
-your configuration converge toward desired states (for how to configure policy mode by node, rule or directive, see <<policy_mode_audit_enforce>>).
+your configuration converge toward desired states (for how to configure policy mode by node, rule or directive, see <<_policy_mode_audit_enforce>>).
 
 Rudder is able to adapt to complex process and only do the minimal required work so that the server converges to the desired state, 
 and so whatever was the starting state point. Rudder works as a GPS would, adapting the path to your destination depending of the path 
