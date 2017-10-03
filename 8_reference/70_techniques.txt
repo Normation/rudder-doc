@@ -40,7 +40,7 @@ These files must reside in a folder with a version number. For each Technique, t
 
 ===== Version number formating
 
-The version number follows a formating "a la Debian" as described here: http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Version, (without the debian_revision version)
+The version number follows a formating "a la Debian" as described here: https://www.debian.org/doc/debian-policy/index.html#s-f-version, (without the debian_revision version)
 
 ==== General Rules
 
