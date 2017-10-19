@@ -4,6 +4,8 @@ Node properties can be found in the "properties" tab of each node in Rudder.
 
 Node properties can be modified using Rudder's API, see http://www.rudder-project.org/rudder-api-doc/#api-Nodes-updateNodeProperties
 
+Properties can also be defined on the node itself, to override locally properties.
+
 Each property is a key=value pair. The value can be a string or a well-formatted JSON data structure.
 
 Some examples:
@@ -39,6 +41,37 @@ In a mustache template, use:
 
 ----
 
+==== Local override
+
+The agent searches for optionnal properties files `/var/rudder/local/properties.d/*.json`, and will override existing properties.
+
+As a result, if you have node properties defined server side as
+`"sysctls_postgresql":{"kernel.shmall":"903330","kernel.shmmax":"3700041320"}` and
+`"vm":{"vm.dirty_ratio":"10"}`
+
+and a local property file `/var/rudder/local/properties.d/postgresql_config.json` as
+
+----
+
+{ 
+  "properties": 
+  {
+    "sysctls_postgresql": {
+      "kernel.shmmax":"5368709120"
+    }
+  }
+}
+
+----
+
+The resulting properties will be:
+
+`"sysctls_postgresql":{"kernel.shmmax":"5368709120"}` and
+`"vm":{"vm.dirty_ratio":"10"}`
+
+`sysctls_postgresql` has been overriden by local property, and `vm` has been left untouched
+
+
 ==== Under the hood
 
 On the server, one or more properties files are written for each node in the
@@ -49,6 +82,9 @@ In the agent, properties are made available in the `node.<namespace>` container 
 Those values are read from
 `/var/rudder/cfengine-community/inputs/properties/*.json`. All files are taken
 in order and override the previous ones - the last one wins.
+
+The agent searches for optionnal properties files `/var/rudder/local/properties.d/*.json`, and will define variables
+or override existing properties.
 
 Each file must contain at least 2 levels of JSON content, the first level is the namespace level
 and the second level is the key level.
