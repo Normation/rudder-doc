@@ -2,14 +2,14 @@
 
 [WARNING]
 
-===
+====
 
 This is a bit like the insecure `curl | sh`, this is because it is intended for quick testing.
 Please read the full installation section if you want the complete procedure.
 
 However the URL is HTTPS with a valid certificate.
 
-===
+====
 
 We have a quick procedure for people who just want to test Rudder:
 
