@@ -1,4 +1,4 @@
 Port 443, TCP, for nodes::
 
 WebDAV/HTTPS communication port, used to send inventory and fetch the id of the Rudder Server.
-
+Powershell DSC agent communication port, used to fetch policy and shared files from the policy server on Windows

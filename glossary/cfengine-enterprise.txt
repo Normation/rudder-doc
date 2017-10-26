@@ -1,8 +1,0 @@
-CFEngine Enterprise::
-
-Managing Windows machines used to require the commercial version of CFEngine, called
-Enterprise. It needs to open the port 5308 TCP from the Node to the Rudder Root
-Server.
-
-This version used to be called Nova before.
-

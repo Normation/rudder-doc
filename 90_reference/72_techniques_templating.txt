@@ -68,7 +68,7 @@ The result would be:
 
 ----
 
-&if(NOVA)&
+&if(INITIAL)&
 
 something
 

@@ -1,4 +1,0 @@
-Port 5308, TCP::
-
-CFEngine Enterprise communication port, which is required to manage Windows nodes.
-
