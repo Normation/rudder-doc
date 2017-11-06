@@ -10,7 +10,6 @@ RELEASE_INFO   := http://www.rudder-project.org/release-info
 DOCBOOK_DIST = xsl/xsl-ns-stylesheets
 
 RUDDER_VERSION = 3.1
-NCF_VERSION = $(shell curl -s "$(RELEASE_INFO)/rudder/versions/$(RUDDER_VERSION)/components/ncf")
 
 ASCIIDOC = $(CURDIR)/bin/asciidoc/asciidoc.py
 A2X = $(CURDIR)/bin/asciidoc/a2x.py
@@ -85,7 +84,7 @@ ncf:
 	git clone https://github.com/Normation/ncf.git
 
 generic-methods.asciidoc: ncf
-	cd ncf && git checkout $(NCF_VERSION) && git pull
+	cd ncf && git checkout branches/rudder/$(RUDDER_VERSION) && git pull
 	cp tools/ncf_doc_rudder.py ncf/tools/
 	./ncf/tools/ncf_doc_rudder.py
 	# Remove language setting on code field (#9621)
