@@ -73,7 +73,7 @@ rudder-command:
 	git clone https://github.com/Normation/rudder-agent.git rudder-command
 
 man: rudder-command
-	cd rudder-command && git checkout branches/rudder/$(RUDDER_VERSION) && git pull
+	cd rudder-command && git fetch && git checkout branches/rudder/$(RUDDER_VERSION) && git pull
 	cd rudder-command/man && make rudder.8
 	# Adapt title level to be insertable in the manual
 	sed 's/^=/====/' -i rudder-command/man/rudder.asciidoc
@@ -84,7 +84,7 @@ ncf:
 	git clone https://github.com/Normation/ncf.git
 
 generic-methods.asciidoc: ncf
-	cd ncf && git checkout branches/rudder/$(RUDDER_VERSION) && git pull
+	cd ncf && git fetch && git checkout branches/rudder/$(RUDDER_VERSION) && git pull
 	cp tools/ncf_doc_rudder.py ncf/tools/
 	./ncf/tools/ncf_doc_rudder.py
 	# Remove language setting on code field (#9621)
