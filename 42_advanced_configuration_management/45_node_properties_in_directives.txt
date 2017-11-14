@@ -7,6 +7,10 @@ provide unique values for each node or be used in JavaScript expressions.
 Properties on nodes are defined using Rudder's REST API, with the 'Update Node properties' API call.
 More details in our http://www.rudder-project.org/rudder-api-doc[API documentation].
 
+Properties can also be defined directly on the nodes, by creating properties files 
+`/var/rudder/local/properties.d/*.json/`
+
+
 ==== Feature availability
 
 This feature was introduced in Rudder 3.1.14, Rudder 3.2.7 and Rudder 4.0.0.
@@ -85,6 +89,6 @@ ${node.properties[datacenter][id]}
 
 Which will be considered as a standard variable by the agent, which will replaced this expression by its value if it's defined, or kept as is if it's unknown.
 
-The variable is content is read from /var/rudder/cfengine-community/inputs/properties.d/properties.json.
+The variable content is read from `/var/rudder/cfengine-community/inputs/properties.d/properties.json`, and from the optionally defined `/var/rudder/local/properties.d/*.json` files.
 You can find more information on node properties in <<_node_properties>>.
 
