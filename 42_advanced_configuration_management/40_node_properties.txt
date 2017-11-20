@@ -60,6 +60,7 @@ and a local property file `/var/rudder/local/properties.d/postgresql_config.json
       "kernel.shmmax":"5368709120"
     }
   }
+
 }
 
 ----
@@ -69,7 +70,50 @@ The resulting properties will be:
 `"sysctls_postgresql":{"kernel.shmmax":"5368709120"}` and
 `"vm":{"vm.dirty_ratio":"10"}`
 
-`sysctls_postgresql` has been overriden by local property, and `vm` has been left untouched
+`sysctls_postgresql` has been overriden by local property, and `vm` has been left untouched.
+Note that it is an override, as the semantic of merging is not deterministic with literal values, and it does not allow to unset values. If you need to merge, please refer to the next paragraph.
+
+
+==== Merging properties
+
+If you want to merge server defined properties with local defined properties, rather than override them, you will need to use the generic method variable_dict_merge_tolerant to define which variables you need to merge, and define the local variables in a different namespace than properties.
+
+For instance, if you have defined in the node properties the following properties
+
+`"sysctls_postgresql":{"kernel.shmall":"903330","kernel.shmmax":"3700041320"}`
+
+and you wish to merge these values on a node with locally defined variable, to change the value of kernel.shmmax and set the value of kernel.shmmni, you can define the file /var/rudder/local/properties.d/postgresql_config.json with the following content
+
+----
+
+{ 
+    "local_properties": 
+    {
+        "sysctls_postgresql": {
+            "kernel.shmmax":"5368709120",
+            "kernel.shmmni":"4096"
+        }
+    }
+
+}
+
+----
+
+and use the generic method `variable_dict_merge_tolerant` to merge `node.properties[sysctls_postgresql]` and `node.local_properties[sysctls_postgresql]`, and set the result in merged_properties.sysctls_postgresql (for instance): `variable_dict_merge_tolerant("merged_properties", "sysctls_postgresql", "node.properties[sysctls_postgresql]", "node.local_properties[sysctls_postgresql]")`
+
+As a result, merged_properties.sysctls_postgresql will contain 
+
+---
+
+"sysctls_postgresql": {
+    "kernel.shmall":"903330",
+    "kernel.shmmax":"5368709120",
+    "kernel.shmmni":"4096"
+}
+
+
+---
+
 
 
 ==== Under the hood
