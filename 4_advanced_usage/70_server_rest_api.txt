@@ -207,7 +207,7 @@ Download directives for the given Commit ID as a ZIP archive.
 
 Download rules for the given Commit ID as a ZIP archive. 
 
-`http://localhost/rudder/api/archives/zip/full/[archiveId]`::
+`http://localhost/rudder/api/archives/zip/all/[archiveId]`::
 
 Download groups, directives and rules for the given Commit ID as a ZIP archive. 
 
