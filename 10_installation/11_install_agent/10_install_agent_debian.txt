@@ -1,5 +1,7 @@
 ==== Install Rudder Agent on Debian or Ubuntu
 
+include::snippets/syslog.snippet[]
+
 include::../10_install_server/snippets/apt_key.txt.snippet[]
 
 Then add Rudder's package repository:
