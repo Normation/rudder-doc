@@ -1,5 +1,7 @@
 ==== Install Rudder Agent on SLES
 
+include::snippets/syslog.snippet[]
+
 Following commands are executed as the +root+ user.
 
 include::../10_install_server/snippets/zypper_segfault.txt.snippet[]
