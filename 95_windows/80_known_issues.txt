@@ -1,0 +1,16 @@
+
+[[dsc-agent-knwown-issues]]
+=== Known issues
+
+On the first run of the Rudder DSC agent CLI in a Powershell terminal, you may have the following error message:
+
+----
+
+Import-LocalizedData : Cannot find the Windows PowerShell data file 'MSFT_ServiceResource.strings.psd1' in directory 'C:\Windows\system32\WindowsPowershell\v1.0\Modules\PSDesiredStateConfiguration\PSProviders\MSFT_ServiceResource\\', or in any parent culture directories.
+
+----
+
+This does not prevent the correct execution of the agent, and next runs in the same terminal will not exhibit the error
+
+image:./images/rudder-agent-windows-known-issue.png[Error on first DSC agent execution in a terminal]
+

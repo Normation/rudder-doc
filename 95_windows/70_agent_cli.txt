@@ -1,0 +1,31 @@
+
+[[dsc-agent-cli]]
+=== DSC Agent CLI
+
+The Rudder agent CLI is available as a Powershell module, by running, in a Powershell terminal
+
+----
+
+rudder agent <action>
+
+----
+
+where action can be one of the following
+
+* disable: Disable the agent, and prevent its execution
+
+* enable: Enable the agent
+
+* info: Show information about the agent and the node (hostname, Rudder ID, policy server, etc)
+
+* inventory: Generate an inventory, and send it to the server
+
+* run: Run the agent (see example output below)
+
+* update: Update agent policy from the Rudder Server
+
+* version: Show the version of the DSC Rudder agent
+
+
+image:./images/rudder-agent-dsc-cli.png[Example of a Rudder DSC agent output on Windows]
+

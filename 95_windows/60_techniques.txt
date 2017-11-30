@@ -1,0 +1,11 @@
+
+[[dsc-techniques]]
+=== DSC Techniques
+
+Techniques compatible with DSC agent appear, in the Directives and Techniques trees, with a DSC symbol, as shown in the screenshot below.
+
+Unfortunately, not all Techniques are compatible with DSc agent, as some are deprecated, or some will be completely rewritten, but the coverage is increasing regularly.
+
+
+image:./images/rudder-technique-dsc.png[DSC compatible Techniques]
+
