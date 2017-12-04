@@ -3,8 +3,6 @@
 Fully supported Operating Systems are systems that are frequently built and tested on our servers.
 Partially suported Operating Systems are systems that have been built and tested at least once but that have not seen continuous flow of fixes.
 
-===
-      
 [WARNING]
 
 .Partially supported Operating Systems

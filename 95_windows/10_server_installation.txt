@@ -1,0 +1,20 @@
+[[dsc-server-installation]]
+=== Install Windows DSC plugin on the server
+
+The installation and upgrade processes are exactly the same.
+Download the *rpkg* file, and run, on the server:
+
+====
+
+/opt/rudder/bin/rudder-pkg install-file rudder-plugin-dsc-<Rudder version>-<plugin version>.rpkg	
+
+====
+
+It will add:
+
+* The ability to generate policies for Windows Nodes
+* New generic methods in the technique editor
+* New techniques
+
+See the following sections for usage documentation.
+

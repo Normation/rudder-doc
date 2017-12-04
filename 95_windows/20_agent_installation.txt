@@ -1,0 +1,34 @@
+[[dsc-agent-installation]]
+=== Install Windows DSC agent
+
+The installation and upgrade processes are exactly the same.
+Download the *exe* file, and run, on your node:
+
+====
+
+rudder-agent-dsc-<Rudder version>-<plugin version>.exe	
+
+====
+
+The installer will ask you the policy server to use.
+If a policy server is already configured (for example during upgrade), you can leave this field empty.
+
+The installer will install the agent files and create the scheduled
+tasks to run the agent and the the inventory.
+
+If you want to do an automated unattended installation, you can re-configure the policy server in:
+
+====
+C:\Program Files\Rudder\etc\policy-server.conf
+====
+
+Before running the installer with:
+
+====
+
+rudder-agent-dsc-<Rudder version>-<plugin version>.exe \S
+
+====
+
+This will install the agent without asking questions.
+
