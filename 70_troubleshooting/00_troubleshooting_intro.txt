@@ -1,4 +1,4 @@
 == Troubleshooting and common issues
 
-This chapter covers common issues and the available solutions.
+All technical and general answers are on http://faq.rudder-project.org/.
 
