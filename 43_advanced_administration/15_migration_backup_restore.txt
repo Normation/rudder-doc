@@ -93,7 +93,9 @@ service rudder restart
 To migrate a Rudder installation, just backup and restore your Rudder installation
 from one machine to another.
 
-Please remember that The CFEngine key restoration is mandatory for the clients to update
-properly, but if the Rudder server address changes, the agents will block. You have to delete
-every root-*.pub key in /var/rudder/cfengine-community/ppkeys/ for things to work again.
+If your server address changed, you will also have to do the following on
+every node that is directly connected to it (managed nodes or relays):
+
+* Remove the server public key +rm /var/rudder/cfengine-community/ppkeys/root-MD5=*.pub+
+* Modify +/var/rudder/cfengine-community/policy_server.dat+ with the new address, then you can force your nodes to send their inventory by running +rudder agent inventory+
 
