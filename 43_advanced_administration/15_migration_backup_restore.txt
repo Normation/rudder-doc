@@ -75,6 +75,9 @@ tar -C /var/rudder -zvxf /root/rudder-backup-XXXXXXXX.tar.gz
 # LDAP backup
 /opt/rudder/sbin/slapadd -l /root/rudder-backup-XXXXXXXX.ldif
 
+# Start PostgreSQL
+service postgresql start
+
 # PostgreSQL backup
 sudo -u postgres psql -d rudder < /root/rudder-backup-XXXXXXXX.sql
 # or
