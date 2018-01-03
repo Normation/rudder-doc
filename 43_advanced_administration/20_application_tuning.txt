@@ -230,6 +230,19 @@ You have two options in this situation:
 All settings needing to modify '/etc/sysctl.conf' require to run 'sysctl -p'
 to be applied.
 
+===== Maximum number of TCP sessions in rsyslog
+
+You may need to increase the maximum number of TCP sessions that rsyslog will accept.
+Add to your '/etc/rsyslog.conf':
+
+----
+$ModLoad imtcp
+# 500 for example, depends on the number of nodes and the agent run frequency
+$InputTCPMaxSessions 500
+----
+
+Note: You can use 'MaxSessions' instead of 'InputTCPMaxSessions' on rsyslog >= 7.
+
 ===== Maximum number of file descriptors
 
 If you plan to manage hundreds of Nodes behind a relay or a root server, you should increase
