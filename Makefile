@@ -9,7 +9,7 @@ RELEASE_INFO   := http://www.rudder-project.org/release-info
 
 DOCBOOK_DIST = xsl/xsl-ns-stylesheets
 
-RUDDER_VERSION = 4.2
+RUDDER_VERSION = 4.3
 
 ASCIIDOC = asciidoc
 A2X = a2x
