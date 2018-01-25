@@ -1,7 +1,7 @@
 == Upgrade
 
 This short chapter covers the upgrade of the Rudder Server Root and Rudder Agent
-from older versions to the latest version, 4.2.
+from older versions to the latest version.
 
 The upgrade is quite similar to the installation.
 

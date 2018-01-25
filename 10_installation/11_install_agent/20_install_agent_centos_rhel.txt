@@ -8,11 +8,11 @@ Then define a yum repository for Rudder:
 
 ----
 
-echo '[Rudder_4.2]
-name=Rudder 4.1 EL repository
-baseurl=http://www.rudder-project.org/rpm-4.2/RHEL_$releasever/
+echo '[Rudder_4.3]
+name=Rudder 4.3 EL repository
+baseurl=http://www.rudder-project.org/rpm-4.3/RHEL_$releasever/
 gpgcheck=1
-gpgkey=http://www.rudder-project.org/rpm-4.2/RHEL_$releasever/repodata/repomd.xml.key' > /etc/yum.repos.d/rudder.repo
+gpgkey=http://www.rudder-project.org/rpm-4.3/RHEL_$releasever/repodata/repomd.xml.key' > /etc/yum.repos.d/rudder.repo
 
 ----
 

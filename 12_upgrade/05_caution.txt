@@ -1,84 +1,37 @@
 === Upgrade notes
 
-==== Upgrade from Rudder 3.0 or older
+==== Upgrade from Rudder 4.0 or older
 
-Direct upgrades from 3.0.x and older are no longer supported on 4.1.
+Direct upgrades from 4.0.x and older are no longer supported on 4.3.
 If you are still running one of those, either on servers or nodes,
-please first upgrade to one of the supported versions above, and then upgrade to 4.1.
+please first upgrade to one of the supported versions, and then upgrade to 4.3.
 
-==== Upgrade from Rudder 3.1, 3.2 4.0 or 4.1
+==== Upgrade from Rudder 4.1 or 4.2
 
-Migration from 3.1, 3.2, 4.0 or 4.1 are supported, so you can upgrade directly to 4.2.
+Migration from 4.1 or 4.2 are supported, so you can upgrade directly to 4.3.
 
-[WARNING]
+==== Compatibility between Rudder agent 4.3 and older server versions
 
-====
+===== 4.1.x and 4.2.x servers
 
-In Rudder 4.0, we changed the default communication protocol between agent and server,
-but still stay compatible with the old protocol. Hence, you can perfectly keep using
-pre-4.0 agents with a 4.0, 4.1 or 4.2 server.
+Rudder agents 4.3.x are compatible with 4.1 and 4.2 Rudder servers.
 
-However, some networking issues may appear when using 4.0, 4.1 or 4.2 agents with older servers with the
-reverse DNS lookup option disabled in the settings (*Security* ->
-*Use reverse DNS lookups on nodes to reinforce authentication to policy server*).
+===== Older servers
 
-Therefore, you need to upgrade your server to 4.1 *before* upgrading the nodes so that the
-configuration distributed to the nodes include the use of the new protocol.
+Rudder agents 4.3.x are not compatible with Rudder servers older than 4.1.
+You need to upgrade your server to a compatible version before the agents.
 
-====
+==== Compatibility between Rudder server 4.3 and older agent versions
 
-[CAUTION]
+===== 4.1.x and 4.2.x agents
 
-====
+Rudder agent 4.1.x and 4.2.x are fully compatible with Rudder server 4.3.x. It is
+therefore not strictly necessary to update your agents to 4.3.x.
 
-In Rudder 4.1, we changed the name of '/opt/rudder/etc/ssl/rudder-webapp.crt' to '/opt/rudder/etc/ssl/rudder.crt'
-and the name of '/opt/rudder/etc/ssl/rudder-webapp.key' to '/opt/rudder/etc/ssl/rudder.key'.
+===== Older agents
 
-These certificates are used for Rudder internal implementation, but if you are using them for anything 
-else, please update the paths to the files. 
-
-For example, if you were using these certificates for configuring sasl in slapd with:
-
-    TLSCertificateFile /opt/rudder/etc/ssl/rudder-webapp.crt
-    TLSCertificateKeyFile /opt/rudder/etc/ssl/rudder-webapp.key
-
-Then, you now need to use: 
-
-    TLSCertificateFile /opt/rudder/etc/ssl/rudder.crt
-    TLSCertificateKeyFile /opt/rudder/etc/ssl/rudder.key
-
-====
-
-==== Compatibility between Rudder agent 4.2 and older server versions
-
-===== 4.0.x and 4.1.x servers
-
-Rudder agents 4.2.x are compatible with 4.0 Rudder servers.
-
-
-===== 3.1.x and 3.2.x servers
-
-Rudder agents 4.2.x are not compatible with Rudder servers older than 4.0.0.
-You need to upgrade your server to 4.2 before the agents.
-
-==== Compatibility between Rudder server 4.2 and older agent versions
-
-===== 4.0.x and 4.1.x agents
-
-Rudder agent 4.0.x and 4.1.x are fully compatible with Rudder server 4.2.x. It is
-therefore not strictly necessary to update your agents to 4.2.x.
-
-===== 3.1.x and 3.2.x agents
-
-Rudder agent 3.1.x and 3.2.x are compatible with Rudder server 4.2.x, but they
-do not support the new "Audit" policy mode. It is therefore not strictly
-necessary to update your agents to 4.2.x, unless you want to be able to use
-the "Audit" policy mode.
-
-===== 3.0.x or older
-
-These agents are not compatible with Rudder 4.2, and you have to upgrade them. 
-Be careful to follow the upgrade path explained <<_upgrade_from_rudder_3_0_or_older, above>>.
+These agents are not compatible with Rudder 4.3, and you have to upgrade them. 
+Be careful to follow the upgrade path explained <<_upgrade_from_rudder_4_0_or_older, above>>.
 
 ==== Protocol for reporting
 
@@ -94,23 +47,4 @@ affects the reliability of policy enforcement, but may only temporarily affects
 reporting on the server.
 Read <<_rsyslog, perfomance notes>> about rsyslog for detailed information.
 
-==== Upgrade manually installed relays (installed before 3.0)
-
-With Rudder 2.11, there were no relay package and the configuration had to be done by hand.
-
-To migrate a manually installed relay to 3.1 using the package, run the following intructions:
-
-* Delete the previous Apache configuration file:
- 
-** `/etc/httpd/conf.d/rudder-default.conf file` on RHEL-like
-** `/etc/apache2/sites-enabled/rudder-default` file on Debian-like
-** `/etc/apache2/vhosts.d/rudder-default.conf` file on SuSE 
-
-* Install the relay package named *rudder-server-relay*.
-
-This is enough to replace the relay configuration, and no change is needed on the root server.
-
-==== Known issues
-
-* After upgrade, if the web interface has display problems, empty your navigator cache and/or logout/login.
 

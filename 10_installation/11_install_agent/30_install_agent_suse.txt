@@ -14,7 +14,7 @@ Then add the Rudder packages repository:
 
 ----
 
-zypper ar -n 'Rudder SLES 12 repository' http://www.rudder-project.org/rpm-4.2/SLES_12/ Rudder
+zypper ar -n 'Rudder SLES 12 repository' http://www.rudder-project.org/rpm-4.3/SLES_12/ Rudder
 
 ----
 
@@ -22,7 +22,7 @@ zypper ar -n 'Rudder SLES 12 repository' http://www.rudder-project.org/rpm-4.2/S
 
 ----
 
-zypper ar -n 'Rudder SLES repository' http://www.rudder-project.org/rpm-4.2/SLES_11_SP1/ Rudder
+zypper ar -n 'Rudder SLES repository' http://www.rudder-project.org/rpm-4.3/SLES_11_SP1/ Rudder
 
 ----
 
@@ -30,7 +30,7 @@ zypper ar -n 'Rudder SLES repository' http://www.rudder-project.org/rpm-4.2/SLES
 
 ----
 
-zypper sa 'http://www.rudder-project.org/rpm-4.2/SLES_10_SP3/' Rudder
+zypper sa 'http://www.rudder-project.org/rpm-4.3/SLES_10_SP3/' Rudder
 
 ----
 
