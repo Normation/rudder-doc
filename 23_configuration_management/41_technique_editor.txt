@@ -13,7 +13,7 @@ These different Generic method calls are conditional.
 
 A generic method is a description of an elementary state independent of the operating system (ex: a package is installed, a file contains such line, etc...).
 Generic methods are independent of the operating system (It has to work on any operating system).
-Generic methods calls are conditioned by class expressions, which are boolean expression combining basic conditions with classic boolean operators (ex : operating system is Debian, such generic method produced a modification, did not produce any modification, produced an error, etc…)
+Generic methods calls are conditioned by condition expressions, which are boolean expression combining basic conditions with classic boolean operators (ex : operating system is Debian, such generic method produced a modification, did not produce any modification, produced an error, etc…)
 
 
 ==== Technique Editor
@@ -63,13 +63,13 @@ The Generic method details are divided into 3 blocks :
   - Conditions allow user to restrict the execution of the method.
 . Parameters
   - Parameters are in mono or multi line text format. They can contains variables which will be extended at the time of the execution.
-. Result classes
-  - One result class of three will be defined following the execution of a generic method:
+. Result conditions
+  - One result condition of three will be defined following the execution of a generic method:
     * Success, when the configuration is correct and no action are needed
     * Repaired, when the configuration is wrong and actions to fix it were executed with success
     * Error, when the configuration is wrong but actions to fix it failed
 
-Theses classes can be used in another Generic methods conditions. ie, you can execute a command if a previous one failed or was repaired.
+Theses conditions can be used in another Generic methods conditions. ie, you can execute a command if a previous one failed or was repaired.
 
 
 ==== Create your first Technique
@@ -98,7 +98,7 @@ Now, we have to find and add the generic methods which correspond to the actions
 
 * Service restart (You can find it in the *Service category*)
   - This method only take one parameter, the name of the service we want to restart. So here, fill in the *service_name* field with the value _ntp_.
-  - Also, we want to restart the service only if it has just been installed, so only if the result classes defined following the execution of *Package install* method is *Repaired* (package_install_ntp_repaired). So here, fill in the *Other CFEngine classes* field in the Conditions panel with the value _package_install_ntp_repaired_.
+  - Also, we want to restart the service only if it has just been installed, so only if the result conditions defined following the execution of *Package install* method is *Repaired* (package_install_ntp_repaired). So here, fill in the *Other conditions* field in the Conditions panel with the value _package_install_ntp_repaired_.
 
 * Service ensure running (You can find it in the *Service category*)
   - This method only take one parameter, the name of the service we want to check. Again, here, fill in the *service_name* field with the value _ntp_.
