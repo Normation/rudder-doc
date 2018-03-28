@@ -28,4 +28,5 @@ sudo apt-get install rudder-agent
 
 ----
 
+You can now <<_configure_and_validate, configure the agent>>.
 
