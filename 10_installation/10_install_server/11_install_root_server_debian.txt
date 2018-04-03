@@ -1,29 +1,8 @@
 ==== Install Rudder Root server on Debian or Ubuntu
 
-[WARNING]
-
-=====
-
-Any nodes running *syslogd* (not syslog-ng or rsyslog) will *fail* to send any
-reports about the configuration rules they have applied to a Rudder Server running
-on Ubuntu (and only on Ubuntu). Rudder will apply rules on nodes but will never get
-reports from them. Therefore Rudder will not be able to calculate compliance.
-
-The only supported platform using syslogd by default is *RHEL/CentOS 5*, and several
-workarounds are available to fix this:
-
-. Install another syslog server on your nodes, such as rsyslog or syslog-ng.
-. Change the rsyslog configuration on the Rudder server (running Ubuntu 12.04
-  or later) to use port 514 and authorize this in the rsyslog configuration.
-. Setup iptables on the node to send syslog traffic to the correct port on
-  your Rudder server.
-. Use a different OS for your Rudder server that Ubuntu Server 12.04 or later.
-
-=====
-
 ===== Add the Rudder packages repository
 
-Rudder requires Java RE (version 8 at least) which is not packaged by default on Debian 7 nor Ubuntu 14.04.
+Rudder requires Java RE (version 8 at least) which is not packaged by default on Debian 8 nor Ubuntu 14.04.
 
 The Java RE 8 for Debian or Ubuntu can be found through Oracle's website: https://www.java.com
 

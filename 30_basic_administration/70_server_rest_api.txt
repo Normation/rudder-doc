@@ -3,10 +3,9 @@
 
 Rudder can be used as a web service using a REST API. 
 
-This documentation covers the version 1 of Rudder's API, that has been present since
-Rudder 2.4.
+This documentation covers the version 1 of Rudder's API.
 
-The version 2 has now been implemented, which is much more complete, in Rudder 2.7, and
+The version 2 has now been implemented, which is much more complete and
 has a dedicated documentation available here: http://www.rudder-project.org/rudder-api-doc/
 
 [WARNING] 
