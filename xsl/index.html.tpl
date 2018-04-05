@@ -31,7 +31,7 @@
 <li>Join the <a href="https://www.rudder-project.org/site/support/chat-mailing-lists/">IRC channel</a></li>
 </ul>
 <li>You need training,  or commercial support? Normation provides <a href="http://www.normation.com/en/rudder/services/">services</a> for Rudder</li>
-<li>Browse the <a href="http://www.rudder-project.org/foswiki/Development/WebHome">developer documentation</a> if you want to contribute or dive into Rudder internals</li>
+<li>Browse the <a href="https://www.rudder-project.org/site/documentation/how-to-contribute/">contribution documentation</a> if you want to help improve Rudder</li>
 </ul>
 
 <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="common/images/admon-icons/tip.png"></img></td><th align="left">About this documentation</th></tr><tr><td align="left" valign="top">
