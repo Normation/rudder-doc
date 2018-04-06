@@ -27,7 +27,7 @@ You can restart all components of the Rudder Root Server at once:
 
 ----
 
-service rudder restart
+service rudder-server restart
 
 ----
 
