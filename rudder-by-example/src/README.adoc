@@ -1,0 +1,3 @@
+= Rudder by example
+
+This document gives examples of Rudder usecase examples with a step by step explanation.

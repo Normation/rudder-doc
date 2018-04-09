@@ -1,0 +1,119 @@
+= Configuration file from template
+
+== Usecase
+
+When you need to maintain configuration files including dynamic content, 
+depending on external data (node properties, group, external API, etc...),
+and if you do not need the file to be editable manually by users,
+the usage of templates is recommended!
+
+== Policy design
+
+Now we decided to use templating to achieve our goal, we need to choose a method.
+We have two available languages for templating:
+
+* https://www.rudder-project.org/doc/_generic_methods.html#file_from_template_mustache[Mustache]: it is Rudder's native
+templating engine, with a very simple syntax, and the best performance. It should be the default choice for most cases.
+* https://www.rudder-project.org/doc/_generic_methods.html#file_from_template_jinja2[Jinja2]: it provides more
+features to manipulate displayed data, and is compatible with a lot of other automation. It is a bit slower
+than mustache though (as it uses an external python library).
+
+For a quick templating syntax reference, use the https://github.com/Normation/rudder-tools/raw/master/documents/cheatsheet-advanced/rudder-cheatsheet-advanced.pdf[Rudder chatsheet].
+Here we have no specific reason to use Jinja2, so we will stick with Mustache!
+
+== Advanced example: Nginx load balancer configuration
+
+We will here see step by step how to use file templating for an Nginx loadbalancer configuration.
+We suppose that we need to serve various sites, relying on different backends, all of them beeing
+defined dynamically.
+
+=== Source data
+
+We define the following node property in our reverse proxy node details, named `nginx`:
+
+[source,json]
+----
+{
+  "port": 80,
+  "upstreams": [
+    {
+      "name": "pool1",
+      "location": "/path1",
+      "servers": [
+        { "host": "server1.rudder.local", "weight": 3 },
+        { "host": "server2.rudder.local", "weight": 2 }
+      ]
+    },
+    {
+      "name": "pool2",
+      "location": "/path2",
+      "servers": [
+        { "host": "server4.rudder.local", "weight": 1 },
+        { "host": "server5.rudder.local", "weight": 1 }
+      ]
+    }
+  ]
+}
+----
+
+=== Configuration policy
+
+The template that will be shared from the Rudder server:
+
+nginx.conf.tpl
+[source,mustache]
+----
+{% raw %}
+http {
+    server {
+        listen {{{vars.node.properties.nginx.port}}};
+        listen {{{vars.node.properties.nginx.port}}};
+
+        {{#vars.node.properties.nginx.upstreams}}
+        location {{{location}}} {
+            proxy_pass http://{{{name}}};
+        }
+        {{/vars.node.properties.nginx.upstreams}}
+    }
+    
+    {{#vars.node.properties.nginx.upstreams}}
+    upstream {{{name}}} {
+        {{#servers}}
+        server {{{host}}} weight={{{weight}}};
+        {{/servers}}
+    }
+    {{/vars.node.properties.nginx.upstreams}}
+}
+{% endraw %}
+----
+
+Note that for the second level of iteration, we use a name relative to the first iterator's value.
+
+=== Result
+
+The generated `/etc/nginx/nginx.conf`:
+
+[source,nginx]
+----
+http {
+    server {
+        listen 80;
+
+        location /path1 {
+            proxy_pass http://pool1;
+        }
+        location /path2 {
+            proxy_pass http://pool2;
+        }
+    }
+
+    upstream pool1 {
+        server server1.rudder.local weight=3;
+        server server2.rudder.local weight=2;
+    }
+    upstream pool2 {
+        server server5.rudder.local weight=1;
+        server server6.rudder.local weight=1;
+    }
+}
+----

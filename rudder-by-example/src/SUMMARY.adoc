@@ -1,0 +1,7 @@
+= Summary
+
+. link:files/README.adoc[Files management]
+.. link:files/advanced-file-templating.adoc[Advanced file templating]
+.. link:files/edition-one-line.adoc[Enforce a line is present in a file only once]
+. API usage
+. Technique Editor

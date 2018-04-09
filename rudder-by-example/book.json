@@ -1,0 +1,10 @@
+{
+    "root": "./src",
+    "plugins": [ "-sharing", "edit-link" ],
+    "pluginsConfig": {
+        "edit-link": {
+            "base": "https://github.com/Normation/rudder-doc/edit/master/rudder-by-example/src",
+            "label": "Edit"
+        }
+    }
+}
