@@ -1,0 +1,112 @@
+[[extend-nodes-inventory, Extend node inventory]]
+
+=== Extend node inventory
+
+
+It is quite common to need to gather information on your nodes that are not present
+in the standard Rudder inventory information. 
+
+As of Rudder 4.3.0, you can get more information about a node thanks to 
+`inventory hooks`. These information will be available as standard *node properties*.
+
+
+==== Overview
+
+On the node, you create `inventory hooks` executable and place them in `/var/rudder/hooks.d`.
+These binaries are executed in the alphanumerical order, only if executable, and their output is checked to
+ensure that it is proper JSON.
+
+For example, one hook can output: 
+
+----
+
+{
+    "my_prop1": ["a", "json", "array"],
+    "my_prop2": {"some": "more", "key": "value"}
+}
+
+----
+
+When the node inventory is processed server side, the node properties will get new values, one per 
+first-level key of all hooks. 
+
+These node properties are marked as "provided by inventory" and can not be deleted nor overwritten. 
+Appart from that characteristic, they are normal node properties that can be used to create group, or as
+variables in Directives parameters. 
+
+==== Creating a node inventory hook
+
+An inventory hook can be any kind of executable that can be called without parameters, from a shell script to a C program. 
+
+Hooks are located in directory `/var/rudder/hooks.d`. You may need to create that directory the first time you want to add hooks:
+
+----
+
+mkdir /var/rudder/hooks.d
+
+----
+
+They need to be executable by rudder agent. 
+
+For example, this hook will create a new "hello_inventory" node property:
+
+----
+
+% cd /var/rudder/hooks.d
+
+% cat <<EOF > hello-world
+#!/bin/sh
+echo '{"hello_inventory": "a simple string value from inventory"}'
+EOF
+
+% chmod +x hello-world
+
+% rudder agent inventory
+
+----
+
+And then, after the server has processed the inventory, the node (here with ID '74d10806-b41d-4575-ab86-8becb419949b') has the corresponding property: 
+
+----
+% curl -k -H "X-API-Token: ......" -H "Content-Type: application/json" -X GET 'https://..../rudder/api/latest/nodes/74d10806-b41d-4575-ab86-8becb419949b?include=minimal,properties' | jq '.'
+{
+  "action": "nodeDetails",
+  "id": "74d10806-b41d-4575-ab86-8becb419949b",
+  "result": "success",
+  "data": {
+    "nodes": [
+      {
+        "id": "74d10806-b41d-4575-ab86-8becb419949b",
+        ....
+        "properties": [
+          {
+            "name": "hello_inventory",
+            "value": "a simple string value from inventory",
+            "provider": "inventory"
+          }
+        ]
+      }
+    ]
+  }
+}
+----
+
+
+==== Overriding
+
+If two hooks provide the same first-level key, then the last executed hook values for that key are kept. 
+
+You should always use the first level keys as a namespace for your hooks to avoid unwanted overriding. 
+
+
+==== Inventory XML format
+
+Properties comming from inventory hooks are stored in a tag named `<CUSTOM_PROPERTIES>`. The tag contains a 
+JSON array with all the inventory hook properties merged: 
+
+----
+
+<CUSTOM_PROPERTIES>[{ "key1" : "values"},{ "key2" : "values"}]</CUSTOM_PROPERTIES>
+
+----
+
