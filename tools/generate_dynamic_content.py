@@ -4,7 +4,7 @@
 # Usage: ./generate_info.py
 #
 # This is a Python module to generate html code for the manual.
-# The parameter is the manual beeing built.
+# The parameter is the manual being built.
 
 import requests
 import sys
