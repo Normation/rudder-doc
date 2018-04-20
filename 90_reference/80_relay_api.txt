@@ -73,7 +73,7 @@ There are ncf generic method that allow easy access to those methods from the no
 ===== Security
 
 This call is open to all nodes in the allowed networks of the target relay.
-The sent files are signed with the node's key, and the signature is checked before beeing traited.
+The sent files are signed with the node's key, and the signature is checked before being traited.
 
 ===== Usage
 
