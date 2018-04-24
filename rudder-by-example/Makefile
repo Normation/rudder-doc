@@ -1,6 +1,6 @@
 NAME = rudder-by-example
 
-all: depends html pdf epub
+all: html pdf epub
 
 depends:
 	gitbook install
@@ -8,17 +8,18 @@ depends:
 serve:
 	gitbook serve
 
-html: target/$(NAME)
+html: depends target/$(NAME)
 
 target/$(NAME):
 	gitbook build . target/$(NAME)
+	cp src/favicon.ico target/$(NAME)/gitbook/images/favicon.ico
 
-pdf: target/$(NAME).pdf
+pdf: depends target/$(NAME).pdf
 
 target/$(NAME).pdf:
 	gitbook pdf . target/$(NAME).pdf
 
-epub: target/$(NAME).epub
+epub: depends target/$(NAME).epub
 
 target/$(NAME).epub:
 	gitbook epub . target/$(NAME).epub
