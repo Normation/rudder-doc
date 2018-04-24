@@ -29,3 +29,18 @@ where action can be one of the following
 
 image:./images/rudder-agent-dsc-cli.png[Example of a Rudder DSC agent output on Windows]
 
+=== Agent logs
+
+Rudder logs are visible in the output of the agent. You can get more details about what is done with the 
+`-Verbose` option:
+
+----
+
+rudder agent run -Verbose
+
+----
+
+You can also explore all agent logs (including those from unattended runs) in the Windows Event Viewer,
+in the *Windows Logs -> Application* view, with the *Rudder* source and the *101* Event ID.
+
+
