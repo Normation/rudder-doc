@@ -24,7 +24,7 @@ You can now start the Rudder service with:
 
 ----
 
-service rudder start
+service rudder-agent start
 
 ----
 
