@@ -4,11 +4,9 @@
 The installation and upgrade processes are exactly the same.
 Download the *rpkg* file, and run, on the server:
 
-====
-
+----
 /opt/rudder/bin/rudder-pkg install-file rudder-plugin-dsc-<Rudder version>-<plugin version>.rpkg	
-
-====
+----
 
 It will add:
 
