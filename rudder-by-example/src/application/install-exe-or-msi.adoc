@@ -1,0 +1,78 @@
+= Install a software from .exe or .msi installer
+
+== Usecase
+
+When you need to make sure a given software is installed and its version is
+recent enough, you should be using the "Windows Software" technique.
+
+== Parameters
+Let's pretend we need to install 7zip on the latest version on our agent.
+We will use the "Windows Software" technique to do that.
+
+The technique offers the following parameters:
+
+image::windows_software_technique.png[Windows Software Technique]
+
+Where:
+
+* `Name of the software` will be the software name, as Windows understands it.
+* `Path` is the relative path of the installer (.exe or .msi file), on the server side.
+* `Options` are parameters that will be given to the installer wizard.
+* `Minimal version` is the minimal version of the software that we expect on the node.
+
+
+
+The technique behaviour is quite simple:
+
+- If the software is not found on the node or its version is lower to the expected one, Rudder will execute the installer wizard with the given parameters and the given .exe/.msi file.
+- If the version found is newer, Rudder will report that the software is already installed on a sufficient version.
+
+== Setup
+The main task here is to find correct parameters to pass to Rudder. The best way to do so
+is to install manually via command line the software on a testing machine.
+
+In our example, we will get the corresponding `.msi` on https://www.7-zip.org/download.html.
+We will then look for the needed arguments to pass to the installer to make a `Silent mode installation` in order to automate the process.
+
+_How can I install 7-Zip in silent mode?_
+
+_For exe installer: Use the "/S" parameter to do a silent installation and the "/D=dir" parameter to specify the "output directory". These options are case-sensitive.i_
+
+_For #msi installer: Use the /q parameters#._
+
+We will try that by executing in a Powershell console:
+
+----
+msiexec /i "<path-to-7zip-msi-file>" /q
+----
+
+7zip should now be installed! We can now read from the Windows registry our missing parameters from the output of the following
+commands or by looking in the given registry with regedit.
+
+----
+Get-ItemProperty 'Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\*' |select DisplayName, DisplayVersion, Version
+
+Get-ItemProperty 'Registry::HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*' |select DisplayName, DisplayVersion, Version
+----
+
+Find the current version of the software (with dot separated syntax) and its name.
+
+WARNING: The name may be truncated, make sure to get the full name and not just the truncated version.
+
+=== Back to Rudder
+
+Now that we have gathered all the parameters needed we can define our directive!
+First, to make the installer accessible to all authorized nodes, put it on your Rudder server in
+
+----
+/var/rudder/configuration-repository/shared-files
+----
+
+On the directive page, fill the different parameters, assign the directive to a rule, you are all done!
+
+WARNING: Keep in mind that this software management is sensible to version named softwares and is more suited to deploy an .exe/.msi application to your nodes than to really manage the different programs versions present on your infrastructure.
+
+
+image::windows_software_technique_filled.png[Windows Software directive]
+
+
