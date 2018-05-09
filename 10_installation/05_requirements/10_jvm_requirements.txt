@@ -1,0 +1,25 @@
+
+[[jvm-requirements]]
+==== JVM Security Policy
+
+Rudder needs `unlimited strength` security policy because it uses a variety of advanced 
+hashing and cryptographic algorithms only available in that mode. 
+
+Any recent JVM (JDK 8 > 8u161, all JDK 9 and more recent) is configured by default with this policy. 
+
+You can check your case by running the following command on your server: 
+
+----
+
+jrunscript -e 'exit (javax.crypto.Cipher.getMaxAllowedKeyLength("RC5") >= 256 ? 0 : 1);'; echo $?
+
+----
+
+If it returns 0, you have the correct policy. In other cases, you will need to change it.
+
+For that, you can download the  
+http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html[`unlimited strength` policy for JDK 8 here].
+
+
+Then, simply copy the `java.policy` file into `$JAVA_HOME/jre/lib/security/java.policy`.
+
