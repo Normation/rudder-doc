@@ -18,13 +18,13 @@ templating engine, with a very simple syntax, and the best performance. It shoul
 features to manipulate displayed data, and is compatible with a lot of other automation. It is a bit slower
 than mustache though (as it uses an external python library).
 
-For a quick templating syntax reference, use the https://github.com/Normation/rudder-tools/raw/master/documents/cheatsheet-advanced/rudder-cheatsheet-advanced.pdf[Rudder chatsheet].
+For a quick templating syntax reference, use the https://github.com/Normation/rudder-tools/raw/master/documents/cheatsheet-advanced/rudder-cheatsheet-advanced.pdf[Rudder cheatsheet].
 Here we have no specific reason to use Jinja2, so we will stick with Mustache!
 
 == Advanced example: Nginx load balancer configuration
 
-We will here see step by step how to use file templating for an Nginx loadbalancer configuration.
-We suppose that we need to serve various sites, relying on different backends, all of them beeing
+We will here see step by step how to use file templating for an Nginx load-balancer configuration.
+We suppose that we need to serve various sites, relying on different backends, all of them being
 defined dynamically.
 
 === Source data

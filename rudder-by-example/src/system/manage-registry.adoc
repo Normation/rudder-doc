@@ -2,31 +2,31 @@
 
 == Usecase
 
-Windows softwares often come with some configuration directly taken form the Windows registry.
+Windows software often stores its configuration in the Windows registry.
 The software and system configuration of your Windows nodes hence relies on a clear and correct registry management.
 
 == Base
 Rudder offers different ways to manage the Windows registry:
 
-* By using the Technique Editor and dedicated generic methods.
+* By using the Technique Editor and dedicated generic methods
 * By using the technique `Registry key edition`
 
-The technique is only a fancy overlay of the `registry_entry_present` generic method.
+The technique is only a fancy overlay of the `registry_entry_*` generic method.
 
 ==== Quick recall
 A `Registry Key` is the path containing `Registry entries`.
 On this image we can see:
 
-* Registry Keys on the left
-* Registry Entries for the Registry Key Computer\HKEY_CURRENT_USER\Environment
+* Registry keys on the left
+* Registry entries for the Registry Key `Computer\HKEY_CURRENT_USER\Environment`
 
 image::regedit.png[Regedit view]
 
-Each `Registry Entry` is a typed key/value pair. The different supported types are described on the
+Each `Registry entry` is a typed key/value pair. The different supported types are described on the
 Microsoft Powershell documentation https://docs.microsoft.com/fr-fr/powershell/scripting/getting-started/cookbooks/working-with-registry-entries?view=powershell-6[here].
 
 
-WARNING: This is the types name given by powershell, if you try to read/access registry by another way than powershell, the types name will most likely be different.
+WARNING: This is the types name given by Powershell, if you try to read/access registry by another way than Powershell, the types name will most likely be different.
 
 
 In Rudder we chose to keep the same types:
@@ -52,20 +52,19 @@ NOTE: Non Char based type values must be entered via hexadecimal syntax: like 0x
 There are two types of generic methods to handle registry keys:
 
 * Registry_Key_{present/absent} which handle registry keys
-* Registry_Entry_{present/absent} which handle registry Entries and their associated values
+* Registry_Entry_{present/absent} which handle registry entries and their associated values
 
 To make sure a key is present/absent on the node you can use the generic methods as-is.
 
 [NOTE]
 ===============================
-Rudder only support local Windows registry at the moment and registry key have to be relative to `Computer`.
+Rudder only supports local Windows registry at the moment and registry keys have to be relative to `Computer`.
 
 * For the key `Computer\HKEY_CURRENT_USER\Environment` pass `HKEY_CURRENT_USER\Environment` as Key parameter.
 
 ===============================
 
-If you want to manage the value of a registry Entry, you can use the genric method associated. If the registry Key associated is not already
-existings, Rudder will not create it.
-In some rare case, if you really want to manage a registry Entry even if it is not already existing, you can always couple
+If you want to manage the value of a registry entry, you can use the associated generic method. If the associated registry key is not already existing, Rudder will not create it.
+In some rare case, if you really want to manage a registry entry even if it is not already existing, you can always couple
 the `registry_entry_key_present` with the `registry_entry_present` to enforce this behaviour.
 

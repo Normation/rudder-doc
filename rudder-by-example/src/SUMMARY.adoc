@@ -4,7 +4,7 @@
 .. link:files/advanced-file-templating.adoc[Advanced file templating]
 .. link:files/edition-one-line.adoc[Enforce a line is present in a file only once]
 . link:application/README.adoc[Application management]
-.. link:application/install-exe-or-msi.adoc[Ensure the presence of a windows software]
+.. link:application/install-exe-or-msi.adoc[Ensure the presence of Windows software]
 . link:system/README.adoc[System management]
 .. link:system/manage-registry.adoc[Manage Windows registry content]
 . API usage
