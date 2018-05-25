@@ -1,5 +1,3 @@
-NAME = rudder-by-example
-
 all: html pdf epub
 
 depends:

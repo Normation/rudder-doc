@@ -1,0 +1,52 @@
+== Setup a test environment
+
+This section will help you setup a test environment. The rest of the tutorial assumes you are
+using this `rudder-vagrant` environment (you can also setup your own,
+you will only have to substitute hostnames/IP addresses when necessary).
+
+This installation method is cross-platform, and you can use it on Linux, Microsoft Windows, Mac OS X
+and more.
+
+You will need:
+
+* VirtualBox, tu run the demo virtual machines (https://www.virtualbox.org/wiki/Downloads[Download])
+* Vagrant, to handle the virtual machines configuration and provisionning (https://www.vagrantup.com/downloads.html[Download])
+
+On Debian/Ubuntu systems, just run `sudo apt-get install -y virtualbox vagrant`, and on RHEL/Fedora systems,
+run `sudo yum install -y VirtualBox vagrant`.
+
+Once they are installed, run:
+
+----
+git clone https://github.com/Normation/rudder-vagrant.git
+cd rudder-vagrant
+----
+
+You can also directly download the rudder-vagrant content with this https://github.com/Normation/rudder-vagrant/archive/master.zip[link].
+
+And then, to create the environement:
+
+----
+vagrant up
+----
+
+This will download the virtual machine image if needed, and will setup a Rudder environment using two virtual machines.
+This will likely take some time, so feel free to grab a coffee before we dive into Rudder.
+
+[TIP]
+
+.Vagrant commands
+
+====
+
+Here are the basic vagrant commands useful to manage your environment:
+
+* `vagrant up` to bring the environment up, wether the VM need to created or only started
+* `vagrant halt` to stop the virtual machines (but keep them for later use)
+* `vagrant destroy` to totally remove virtual machines
+* `vagrant ssh server|agent` to connect to one of your nodes using SSH
+
+====
+
+Once the command returns, you are ready to get started! You now have two virtual machines,
+`server` and `agent`.
