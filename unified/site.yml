@@ -1,0 +1,15 @@
+site:
+  title: Rudder Documentation
+  start_page: rudder-by-example::index
+content:
+  sources:
+  - url: ../
+    branches: HEAD
+    start_path: unified/rudder-by-example
+  - url: ../
+    branches: HEAD
+    start_path: unified/get-started
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true

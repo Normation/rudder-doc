@@ -1,0 +1,25 @@
+= Define configuration policies
+
+Rudder's goal is to manage the configuration of your machines:
+
+* Package httpd installed in version 2.4.12
+* Service ntpd is currently running
+* SSH connection using passwords are disabled
+* A specific prompt is deployed on production nodes
+* etc.
+
+Configuration is managed through the definition of an desired state for each machine.
+This means you will not define a list of steps towards the expected state, like in a script,
+but a set of states for each item you want to manage (which
+is key to create reliable configuration policies).
+
+[NOTE]
+
+====
+
+A managed machine is called a *node* in Rudder.
+
+====
+
+The desired state is applied by Rudder agents on each node, and the information about its application
+is continuously updated on the server. In this section, we will see two ways to define configuration policies, let's get started!

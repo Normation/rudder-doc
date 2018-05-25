@@ -1,0 +1,69 @@
+== Classify machines
+
+In Rudder, we never apply policies to individual nodes, but always to sets of nodes.
+
+[NOTE]
+
+====
+
+A *group* is query over inventory data that defines a set of nodes,
+on which policies can be applied.
+
+====
+
+In this section, you will learn how to specify such queries, and build
+consistent groups.
+
+Go to the "Node Management -> Groups" page, you will see a tree on the left.
+
+This is the tree of groups, with a hierarchy made of group categories
+
+[NOTE]
+
+====
+
+*Group categories* are just there to visually organize groups and have no effect on
+the content of the groups or applied configuration.
+
+====
+
+There is a set of pre-defined groups (called system groups), that
+covers Rudder-related classification.
+
+We will define a group made of all nodes running Ubuntu 16.04 LTS.
+Click on "Create" in the groups tree. You will then see a popup asking for several parameters.
+
+image::./ubuntu.png["Group of Ubuntu 16.04 nodes", align="center"]
+
+The group type is "dynamic", which means the content of the group will be automatically
+updated whenever a nodes should enter or leave the group depending on its inventory data.
+
+Then click on "Create", and the new group will appear in the tree.
+Scroll down to go to the group definition.
+
+image::./ubuntu-2.png["Group of Ubuntu 16.04 nodes", align="center"]
+
+Click on "Search" to make the actual search over node information, you should see
+the "node" machine in the list. The server does not appear as Rudder servers are excluded from groups by default. Click on "Save".
+
+We now have defined a first custom group. You can use any acombination of criteria based
+on the inventory data.
+
+[TIP]
+.How to design groups in Rudder?
+====
+
+The best practice advice to:
+
+* Create multiple layers of groups:
+
+** Geograpic (Datacenter, rack, etc.)
+** Business (Production, QA, etc.)
+** Applicative (Installed application, etc.)
+** System (Operating system, etc.)
+** etc.
+
+* Build subgroups using the belonging to another group as a criteria,
+which allows expressing complex cases without duplicating query definition
+
+====

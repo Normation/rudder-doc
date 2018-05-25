@@ -1,0 +1,22 @@
+= Configuration policies management
+
+It the beginning of this guide, we defined static configuration policies and attached them to all of our nodes.
+Even if this may happen in real life, this is not common, and you will often
+need more flexible solutions.
+
+In this section, we will deploy a complete example of a website deployment,
+that will look like real usecases.
+
+[NOTE]
+
+====
+
+In this section, we will see:
+
+* How to organize configuration policies and link them to groups
+* How to define more advanced techniques
+* How to parametrize techniques
+* How to check policy compliance
+
+====
+

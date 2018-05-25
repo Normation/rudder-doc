@@ -1,0 +1,19 @@
+= Get started with Rudder
+
+This document will guide you through the installation of a test Rudder platform
+and the configuration of a real use-case, explaining how to:
+
+* Define your configuration policies
+* Manage machines with Rudder
+* Apply and control the enforcement of configuration policies
+
+[NOTE]
+
+====
+
+No prior knowledge about configuration management is required,
+only basic Unix command-line skills.
+
+====
+
+image::./dashboard-overview.png["Rudder dashboard", align="center"]

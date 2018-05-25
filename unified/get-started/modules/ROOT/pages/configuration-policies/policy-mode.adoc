@@ -1,0 +1,40 @@
+== Audit vs. Enforce - Policy Mode
+
+As you saw just before, we configured one of our directives in "Audit mode".
+You may have guessed, according to its name, what this means.
+
+Rudder has two available policy modes:
+
+* Enforce
+* Audit
+
+The enforce mode will modify the target system, if necessary, to achieve the expected state.
+The audit mode will only report about non-compliances.
+
+What we can do now is to change the policy mode of the directive to use the default value, and re run the agent.
+
+Go back to the directive. You can use the Directive page, or use the quick search field, in the
+header bar. Here you can search for any Rudder item (there is even a small query language).
+
+image::./quicksearch.png["Quicksearch field", align="center"]
+
+And click on your directive to go to its configuration page.Now change policy mode to
+default.
+
+You can get back to your SSH session, and re-run
+
+----
+rudder agent update
+rudder agent run
+----
+
+You will see the actual modification happening, with a "repaired" state. If you go back to the dashboard, everything is green and compliance has reached 100%.
+
+This policy mode can be used in different cases:
+
+* Adding an existing machine, to check if its state matches the expected state, and only
+enable modification mode if it is correct, to avoid breaking anything
+* Adding a configuration item on nodes chere it was not previously managed. It allows easily checking if
+assumptions about the current state are correct before changing anything.
+
+We will now see how to manage other nodes, and more advanced configuration features.

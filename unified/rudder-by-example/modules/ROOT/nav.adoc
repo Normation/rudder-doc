@@ -1,0 +1,8 @@
+* xref:index.adoc[Introduction]
+* xref:application/index.adoc[Application management]
+** xref:application/install-exe-or-msi.adoc[Ensure the presence of Windows software]
+* xref:files/index.adoc[Files management]
+** xref:files/advanced-file-templating.adoc[Advanced file templating]
+** xref:files/edition-one-line.adoc[Enforce a line is present in a file only once]
+* xref:system/index.adoc[System management]
+** xref:system/manage-registry.adoc[Manage Windows registry content]
