@@ -83,4 +83,7 @@ The variable must either be:
 
 More information can be found here: https://theantlrguy.atlassian.net/wiki/display/ST/ST+condensed+--+Templates+and+expressions
 
+===== Unique identifier of Directive for Techniques with separated policy generation
+
+As of Rudder 4.3, Techniques with separated policy generation (see tag POLICYGENERATION in metadata.xml) need to have a way to identify uniquely their generated files, and bundles and methods. The special placeholder RudderUniqueID is replaced at generation by the identifier of the Directive. It can be used anywhere in the .st files, or even in the OUTPATH. 
 

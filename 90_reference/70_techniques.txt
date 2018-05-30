@@ -34,7 +34,7 @@ techniques
 
 ----
 
-===== metadata.xml and CFEngine templates (*.st)
+===== metadata.xml and Techniques templates (*.st)
 
 These files must reside in a folder with a version number. For each Technique, there can be several versions, Rudder will let you choose the version when creating a Directive.
 
@@ -61,19 +61,21 @@ All the tag name in the .xml are in upper case, all the attributes are in camel 
   <LONG_DESCRIPTION>Long description of the technique</LONG_DESCRIPTION>
   <DEPRECATED>Deprecation message</DEPRECATED>                <!-- Mark the Technique as deprecated, deprecation message is mandatory, Only available since Rudder 3.0 -->
   <DISPLAY>true/false</DISPLAY>                               <!-- Define if the Technique is displayed in the interface or not. Default value : true -->
-  <COMPATIBLE>                                                <!-- Optional, describe the version of the OS and CFEngine Agent the Technique has been tested on. Only for information purpose -->
+  <COMPATIBLE>                                                <!-- Optional, describe the version of the OS and Agent the Technique has been tested on. Only for information purpose -->
     <OS version=">=2.5">OS Name</OS>                          <!-- Optional; OS Name and version on which the Technique has been tested --> 
     <AGENT version=">=3.6">cfengine-community</AGENT>         <!-- Optional; Agent name and version on which the Technique has been tested -->
   </COMPATIBLE>
-  <MULTIINSTANCE>true/false</MULTIINSTANCE>                   <!-- Optional; defines if several instances of this template with differents variables can be deployed on a node; default value : false -->
-  <SYSTEM>true/false</SYSTEM>                                 <!-- Optional, defines if this Technique is a system Technique (internal Rudder usage); default value : false -->
+  <MULTIINSTANCE>true/false</MULTIINSTANCE>                   <!-- Optional; defines if several instances of this template with differents variables can be deployed on a node; default value: false -->
+  <POLICYGENERATION>separated</POLICYGENERATION>              <!-- Optional; defines if each Directives based on this Technique will be in a separated folder; default value: false. Note, if this parameter is set, you'll have to use the RudderUniqueID special placeholder to avoid duplicate names for methods and bundles -->
+
+  <SYSTEM>true/false</SYSTEM>                                 <!-- Optional, defines if this Technique is a system Technique (internal Rudder usage); default value: false -->
   <BUNDLES>                                                   <!-- List of the bundles that must be included in the bundlesequence -->
     <NAME>BundleName</NAME>
   </BUNDLES>
   <TMLS>                                                      <!-- List of all the templates defined by this Technique -->
    <TML name="tmlName">                                       <!-- Container for a TML (without the trailing .st -->
-    <OUTPATH>relativ/path/of/file</OUTPATH>                   <!-- Optional; defines the relative path for the generated file for this template; default : techniqueName/version/tmlName.cf -->
-    <INCLUDED>true/false</INCLUDED>                           <!-- Optional; defines if the template must be in the inputs list of the generated promises; default : true -->
+    <OUTPATH>relativ/path/of/file</OUTPATH>                   <!-- Optional; defines the relative path for the generated file for this template; default: techniqueName/version/tmlName.cf -->
+    <INCLUDED>true/false</INCLUDED>                           <!-- Optional; defines if the template must be in the inputs list of the generated promises; default: true -->
    </TML>
   </TMLS>
   <FILES>                                                     <!-- List of files to be copied "as-is" with this Technique. StringTemplate parser is NOT used on these. -->
@@ -84,6 +86,19 @@ All the tag name in the .xml are in upper case, all the attributes are in camel 
   <TRACKINGVARIABLE>                                          <!-- Defines a special system variable TRACKINGKEY that contains all the necessary information to track which Directive generated the promises -->
     <SAMESIZEAS>VariableName</SAMESIZEAS>                     <!-- Optional; defines the cardinality of this variable based on the cardinality of the VariableName -->
   </TRACKINGVARIABLE>
+
+  <RUNHOOKS>                                                  <!-- Optionnal; defines the list of pre and post hooks for techniques with separated policy generation mode -->
+    <PRE bundle="pre_hook_bundle">                            <!-- Optionnal; name of the bundle/method to run before any directive based on this technique is run -->
+      <REPORT name="Component name"/>                         <!-- Component Name for the report of the hook
+      <PARAMETER name="name" value="value"/>                  <!-- Optionnal; parameter to pass to the hook
+    </PRE>
+    <POST bundle="post_hook_bundle">                          <!-- Optionnal; name of the bundle/method to run after all the directives based on this technique are run -->
+      <REPORT name="Component name"/>                         <!-- Component Name for the report of the hook
+      <PARAMETER name="name" value="value"/>                  <!-- Optionnal; parameter to pass to the hook
+    </POST>
+  </RUNHOOKS>
+
+
   <SECTIONS>                                                  <!-- Lists all the sections of the promises -->
     <SECTION name="sectionName">                              <!-- Container of a section (see below) -->
     </SECTION>
@@ -296,6 +311,61 @@ To configure a password, you must specify two things in the `<CONSTRAINT>` secti
 </SECTION>
 
 ----
+
+==== Separated policy generation
+
+In Rudder 4.3, a new mode of policy generation is introduced, that allows to mix Audit and Enforce mode for Directives based on the same Technique on a given node, and have Directives based on different version of the same Techniques. It is enabled with the entry <POLICYGENERATION>separated</POLICYGENERATION> in metadata.xml, and result on separated generated files for each Directives.
+One directory is generated by Directive, in the path TechniqueName/TechniqueVersion_DirectiveID, and requires the use of a placeholder, RudderUniqueID, used in bundle/method name, as well as result classes, to avoid name and classes collision at runtime.
+
+===== Usage of RudderUniqueID
+
+Here is an extract from Technique to exhibit the use of the placeholder
+
+----
+
+bundle agent sudo_parameter_edit_sudoers_RudderUniqueID(filename, entity, nopasswd, alldo, command)
+{
+  vars:
+
+      "index" slist => getindices("${entity}");
+
+    pass1::
+
+      "command_all[${index}]" string => "ALL=(ALL) NOPASSWD:ALL",
+                      ifvarclass => "(sudo_${index}_RudderUniqueID_alldo.sudo_${index}_nopasswd).(sudo_${index}_RudderUniqueID_command_notempty|sudo_${index}_RudderUniqueID_alldo)";
+
+----
+
+It is used here in the bundle name, to ensure its unicity, and it is also used in the class name.
+
+===== Pre and post hooks
+
+Some Techniques require actions to be performed only once, before and/or after all operation (for instance, ensuring that a package is installed before configuring this package).
+A pre and post hook mechanism has been introduced, for these uses.
+By convention, all pre and post hooks are located in the hooks.st file, in the System Technique common (so outside of the Technique we consider, to enforce that only one version of the hook may live in the Technique repository at a time).
+
+Hooks have only one parameter, which is a JSON entry, in the format
+
+----
+
+{
+  "parameters":
+    { 
+       "parameterName1":"parameterValue1",
+       "parameterName2":"parameterValue2",
+    },
+  "reports":
+    [
+      {"id":"DirectiveId1","mode":"enforce/audit", "technique":"techniqueName", "name":"componentName", "value":"componentValue1"},
+      {"id":"DirectiveId2","mode":"enforce/audit", "technique":"techniqueName", "name":"componentName", "value":"componentValue2"},
+      {"id":"DirectiveId3","mode":"enforce/audit", "technique":"techniqueName", "name":"componentName", "value":"componentValue3"},
+   ]
+}
+
+----
+
+The entries parameterName and parameterValue are defined by the PARAMETER tag of the section RUNHOOKS of metadata.xml, while the componentName is defined by its REPORT tag.
+
 
 ==== Known limitations
 
