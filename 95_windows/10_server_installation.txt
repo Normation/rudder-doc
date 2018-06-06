@@ -1,8 +1,14 @@
 [[dsc-server-installation]]
 === Install Windows DSC plugin on the server
 
+===== Prerequisite
+
+The Windows DSC plugin requires *zip* on the Rudder server, you need to install it prior to installing the plugin.
+
+===== Installing and Upgrading
+
 The installation and upgrade processes are exactly the same.
-Download the *rpkg* file, and run, on the server:
+Download the *rpkg* file, and run, on the Rudder server:
 
 ----
 /opt/rudder/bin/rudder-pkg install-file rudder-plugin-dsc-<Rudder version>-<plugin version>.rpkg	
