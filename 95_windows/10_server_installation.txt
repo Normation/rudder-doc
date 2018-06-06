@@ -2,6 +2,7 @@
 === Install Windows DSC plugin on the server
 
 The installation and upgrade processes are exactly the same.
+The plugin needs the *zip* command to be functionnal, make sure to install it on your Rudder server.
 Download the *rpkg* file, and run, on the server:
 
 ----
