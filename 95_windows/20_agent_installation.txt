@@ -2,6 +2,17 @@
 === Install Windows DSC agent
 
 The installation and upgrade processes are exactly the same.
+The Rudder agent needs *PowerShell 4* or later to be functionnal, which is built-in on:
+
+ * Windows Server 2012 R2 and later
+
+And Available on:
+
+ * Windows Server 2008 R2
+ * Windows Server 2012
+
+Rudder does not currently support officialy the desktop versions of Microsoft Windows.
+
 Download the *exe* file, and run, on your node:
 
 ----
@@ -10,11 +21,12 @@ rudder-agent-dsc-<Rudder version>-<plugin version>.exe
 
 ----
 
-The installer will ask you the policy server to use.
+The installer will ask you the IP address of the policy server to use.
 If a policy server is already configured (for example during upgrade), you can leave this field empty.
 
 The installer will install the agent files and create the scheduled
-tasks to run the agent and the the inventory.
+tasks to run the agent and the inventory. Rudder does not come as a Windows Service but as a scheduled
+PowerShell task, managed by *schtasks.exe*.
 
 If you want to do an automated unattended installation, you can re-configure the policy server in:
 
