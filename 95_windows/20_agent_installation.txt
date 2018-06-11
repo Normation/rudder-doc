@@ -2,6 +2,37 @@
 === Install Windows DSC agent
 
 The installation and upgrade processes are exactly the same.
+
+===== Supported version of Microsoft Windows
+
+The Rudder agent needs *PowerShell 4* or later, which is built-in on:
+
+ * Windows Server 2012 R2 and later
+
+PowerShell 4 may also be installed on the following platforms, following this procedure: https://social.technet.microsoft.com/wiki/contents/articles/20623.step-by-step-upgrading-the-powershell-version-4-on-2008-r2.aspx 
+
+ * Windows Server 2008 R2
+ * Windows Server 2012
+
+===== Desktop version of Microsoft Windows
+
+There is no official support of Rudder agent on desktop versions of Microsoft Windows. However, the agent can be installed on the following platform:
+
+ * Windows 7 (you will need to upgrade to PowerShell 4 first, and activate WinRM)
+ * Windows 8 (you will need to upgrade to PowerShell 4 first, and activate WinRM)
+ * Windows 8.1
+ * Windows 10
+
+Plase note that prior to the installation on Windows 7 and 8, you will need to install PowerShell 4 and make sure WinRM is activated with the following command:
+
+----
+
+Set-WSManQuickConfig DSC
+
+----
+
+===== Installation procedure
+
 Download the *exe* file, and run, on your node:
 
 ----
@@ -10,19 +41,21 @@ rudder-agent-dsc-<Rudder version>-<plugin version>.exe
 
 ----
 
-The installer will ask you the policy server to use.
-If a policy server is already configured (for example during upgrade), you can leave this field empty.
+The installer will ask the IP address or DNS name of the policy server to use.
+If a policy server is already configured (for example during upgrade or an unattended installation), you can leave this field empty.
 
-The installer will install the agent files and create the scheduled
-tasks to run the agent and the the inventory.
+The installer will install the agent files and create the scheduled tasks to run the agent and the inventory. Rudder does not come as a Windows Service but as a scheduled
+PowerShell task, managed by *schtasks.exe*.
 
-If you want to do an automated unattended installation, you can re-configure the policy server in:
+===== Unattended installation
+
+For an automated unattended installation, you can pre-configure the policy server in the file:
 
 ----
 C:\Program Files\Rudder\etc\policy-server.conf
 ----
 
-Before running the installer with:
+Then the installer need to be executed with the following command:
 
 ----
 
@@ -30,5 +63,5 @@ rudder-agent-dsc-<Rudder version>-<plugin version>.exe \S
 
 ----
 
-This will install the agent without asking questions.
+This will install the agent in silent mode.
 
