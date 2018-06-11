@@ -6,151 +6,7 @@
 You can navigate to *Node Management > Search Nodes* to display information
 about the Nodes which have been already validated, and are managed by Rudder.
 
-[[quick-search, Quick Search]]
-
-==== Quick search
-
-You might have noticed the small text area at the top of the Rudder interface:
-it is the Quick Search bar. Its purpose is to enable a user to easily search for
-Rudder elements (Nodes, Groups, Directives, Parameters, Rules)  based on their
-name, id, description, inventory...
-
-image::./images/rudder-quicksearch.png[Quicksearch]
-
-An autocompletion list will appear as soon as Rudder detects an element it can
-identify, you just have to click on it to be redirected to the element
-configuration page.
-
-More complex search queries can be input using the "in:" and "is:" keywords,
-"is" targets Rudder objects by type, and "in" targets elements like name,
-description...
-
-Those keywords are used to refine a research in case a search query returns
-too many results.
-
-The available search keywords are:
-
-.is: keywords
-[frame="topbot",options="header"]
-|======================
-|keyword |Description
-|node      |Nodes
-|group     |Groups
-|parameter |Parameters
-|directive |Directives
-|rule      |Rules
-|======================
-
-.in: keywords (common)
-[frame="topbot",options="header"]
-|======================
-|keyword |Search for
-|name |Names
-|id |IDs
-|description, long_description |Descriptions
-|enabled |Enabled elements (true or false)
-|======================
-
-.in: keywords (nodes)
-[frame="topbot",options="header"]
-|======================
-|keyword |Search for
-|hostname |Hostnames
-|os_type |OS types (windows, linux, aix...)
-|os_name |OS Names (Windows Server 2012, Debian... )
-|os_version |OS versions (8, 2008 R2, ...)
-|os |OS Full Names (Debian GNU/Linux 6.0.10 (squeeze)...)
-|os_kernel_version |OS Kernel versions (3.16, 5.1...)
-|os_service_pack |OS Service Packs (for Windows and SuSE Linux)
-|architecture |OS Architectures (amd64, x86_64, i386)
-|ram |Machine memory
-|ips |Network IP addresses
-|policy_server_id |ID of a node's policy server (root...)
-|properties |Node properties (arbitrary key=values associated to a node)
-|rudder_roles |Rudder roles (rudder-reports, rudder-ldap...)
-|======================
-
-.in: keywords (groups)
-[frame="topbot",options="header"]
-|======================
-|keyword |Search for
-|dynamic |Dynamic groups
-|======================
-
-.in: keywords (directives)
-[frame="topbot",options="header"]
-|======================
-|keyword |Search for
-|dir_param_name |Directive parameter names, as in the Techniques metadata.xml ("GENERIC_FILE_CONTENT_PATH"...)
-|dir_param_value |Directive parameter values
-|technique_id |Technique IDs
-|technique_name |Technique names ("Enforce a file content"...)
-|technique_version |Technique version
-|======================
-
-.in: keywords (parameters)
-[frame="topbot",options="header"]
-|======================
-|keyword |Search for
-|parameter_name |Parameter names
-|parameter_value |Parameter values
-|======================
-
-.in: keywords (rules)
-[frame="topbot",options="header"]
-|======================
-|keyword |Search for
-|directives |Rules containing those Directive IDs
-|groups |Rules containing those Group IDs
-|======================
-
-.Example: Search for a Node called +debian-node+
-
-====
-
-Assuming you have one managed Node called +debian-node.rudder-project.org+,
-whose ID in Rudder is +d06b1c6c-f59b-4e5e-8049-d55f769ac33f+.
-
-. Type in the Quick Search field the +de+ or +d0+.
-
-. The search result will return this Node: +debian-node.rudder-project.org --
-d06b1c6c-f59b-4e5e-8049-d55f769ac33f [d06b1c6c-f59b-4e5e-8049-d55f769ac33f]+.
-
-====
-
-.Example: Search for a directive called +Common users+
-
-====
-
-Assuming you have one Directive called +Common users+,
-whose ID in Rudder is +6e8ce05b-3f77-4fed-a424-edf0fdaa4231+.
-
-. Type in the Quick Search field +is:directive common+.
-
-. The search result will return this Directive: +Common users --
-4a6aaea7-6471-4ca9-8c27-9ee9f44ed882 [6e8ce05b-3f77-4fed-a424-edf0fdaa4231]+.
-
-====
-
-
-[TIP]
-
-====
-
-This feature is enabled by default on +new+ installations of Rudder from the
-following versions:
-
-* 3.1.14
-* 3.2.7
-* 4.0.0
-
-and may be enabled after an upgrade of a Rudder installation in the Settings tab.
-
-====
-
-[[advanced-search, Advanced Search]]
-
-==== Advanced Search 
+==== General behavior
 
 In the Advanced Search tool, you can create complex searches based on Node
 Inventory information. The benefit of the Advanced Search tool is to save the
@@ -169,51 +25,10 @@ among the list of fields concerning this theme.
 
 - 2. Select the matching rule
 
-// FIXME: due to a bug in asciidoc, we cannot write '≠' 
-
 The matching rule can be selected between following possibilities: 'Is defined',
-'Is not defined', '=', ≠ or 'Regex'  followed by the term you are searching for presence or
+'Is not defined', '=', '≠' or 'Regex'  followed by the term you are searching for presence or
 absence. Depending on the field, the list of searchable terms is either an free
 text field, either the list of available terms. 
-
-- a. Regex matching rule
-
-You can use regular expressions to find whatever you want in Node inventories.
-A search request using a regexp will look for every node that match the pattern you
-entered.
-
-Those regexps follow Java Pattern rules. See http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
-for more details.
-
-.Search node having an ip address matching +192.168.x.y+
-
-====
-
-Assuming you want to search every node using an ip address match 192.168.x.y, where x<10 
-and y could be everything. You will to add that line to your search request:
-
-* 'Node summary', 'Ip address', +Regex+, '192\ .168\ .\d\ . .*'
- 
-====
-
-- b. Composite search
-
-Some fields allow you to look for more than one piece of information at a time.
-That's the case for environment variable. For those fields you have to enter 
-the first element then the separator then following elements.
-The name of the fields tells you about what is expected. It would look like 
-+firstelement<sep>secondelement+ assuming that <sep> is the separator.
-
-.Search Environment Variable +LANG=C+.
-
-====
-
-Assuming you want to search every node having the environment variable LANG set to C.
-You will have to add that search line to your request:
-
-* 'Environment variable', 'key=value', +=+, 'LANG=C'.
- 
-====
 
 - 3. Add another rule
 
@@ -235,5 +50,234 @@ create this 2 lines request:
 
 . Second search line: 'Software', 'Name', +=+, +ssh+.
  
+====
+
+==== Search numbers with units
+
+Some parameters for the advanced search tool allow using units. For example, in
+the search criterion for RAM size, you can type +512MB+ instead of a value in
+bytes. This paragraph describes supported units by parameter type.
+
+===== Bytes and multiples
+
+All criteria using a memory size (RAM, hard disk capacity, etc) is by default
+expected in bytes. If no other unit is specified, all values will be assumed to
+be in bytes.
+
+===== Convenience notation
+
+All memory sizes can be written using spaces or underscores (+_+) to make the
+numbers easier to read. Numbers must begin with a digit. For example, the
+following numbers are all valid and all worth +1234+:
+
+----
+
+1234
+1 234
+1_234
+1234_
+
+----
+
+The following number is not valid:
+
+----
+
+_1234
+
+----
+
+===== Supported units
+
+Units used are non binary units, and a multiplication factor of 1024 is applied
+between each unit. Units are case-insensitive. Therefore, +Mb+ is identical to
++mB+ or +mb+ or +MB+.
+
+In detail, the following units are supported (provided in lower case, see
+above):
+
+.Units supported by Rudder search engine
+
+[options="header"]
+
+|====
+| Notation | Alternate | Value 
+| +b+ | +o+ | bytes (equivalent to not specifying a unit)
+| +kb+ | +ko+ | 1024 bytes
+| +mb+ | +mo+ | 1024^2 bytes
+| +gb+ | +go+ | 1024^3 bytes
+| +tb+ | +to+ | 1024^4 bytes
+| +pb+ | +po+ | 1024^5 bytes
+| +eb+ | +eo+ | 1024^6 bytes
+| +zb+ | +zo+ | 1024^7 bytes
+| +yb+ | +yo+ | 1024^8 bytes
+|====
+
+==== Regex matching rule
+
+You can use regular expressions to find whatever you want in Node inventories.
+A search request using a regexp will look for every node that match the pattern you
+entered.
+
+Those regexps follow Java Pattern rules. See http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
+for more details.
+
+.Search node having an ip address matching +192.168.x.y+
+
+====
+
+Assuming you want to search every node using an ip address match 192.168.x.y, where x<10 
+and y could be everything. You will to add that line to your search request:
+
+* 'Node summary', 'Ip address', +Regex+, '192\ .168\ .\d\ . .*'
+ 
+====
+
+==== Composite search (name=value)
+
+Some fields allow you to look for more than one piece of information at a time.
+That's the case for environment variable. For those fields you have to enter 
+the first element then the separator then following elements.
+The name of the fields tells you about what is expected. It would look like 
++firstelement<sep>secondelement+ assuming that <sep> is the separator.
+
+.Search Environment Variable +LANG=C+.
+
+====
+
+Assuming you want to search every node having the environment variable LANG set to C.
+You will have to add that search line to your request:
+
+* 'Environment variable', 'Name=Value', +=+, 'LANG=C'.
+ 
+====
+
+==== Node properties search
+
+Node properties are special because they support both `key=value` and `key=JSON` content. 
+As of Rudder 4.3.2, we have the possibility to choose among three operator givent the use case, 
+so let's see which is the best on each case. 
+
+===== Check for property existence: [Name equals]
+
+The +Name equals+ operator allows to find all nodes which have the property with the given name
+defined. That operator only look for the property name and don't care if the value is a string or
+a JSON one. 
+
+.Search for nodes with the property +datacenter+ defined
+
+====
+
+* 'Environment variable', 'Name=Value', +Name equals+, 'datacenter'.
+
+====
+
+
+===== Lookup node by property name=value pair
+
+If you want to lookup nodes by a property name and its value, you can use the "name=value" operator, 
+as explained in paragraph "composite search" above. 
+
+Please note that if the value is JSON, you will need to use the exact serialization of the JSON 
+value (in a compact formating: no spaces, etc). It is generally not what you want to do with 
+JSON value, and for them it is better to use JSON path query (see below).
+
+.Search for the node property "datacenter" with value "Paris"
+
+====
+
+* 'Properties', 'Name=Value', +=+, 'datacenter=Paris'.
+
+====
+
+===== Lookup node by property name=value pair with regex
+
+You can also use regex on node properties name and value. The regex can be done on each part, so
+the following examples allow to fill different purposes:
+
+.Search for nodes with a property whose value is "Paris" whatever its name
+
+====
+
+* 'Properties', 'Name=Value', +regex+, '.*=Paris'.
+
+====
+
+.Search for nodes with a property whose name is "datacenter" and value contains "Paris"
+
+====
+
+* 'Properties', 'Name=Value', +regex+, 'datacenter=.*Paris.*'.
+
+====
+
+
+.Search for nodes with a property whose name starts with "datacenter" and value contains "Paris"
+
+====
+
+* 'Properties', 'Name=Value', +regex+, 'datacenter.*=.*Paris.*'.
+
+====
+
+[[search-nodes-properties-json-path, JSON Path queries on Node Properties]]
+===== JSON Path queries on Node Properties
+
+Since Rudder 4.3.2, you can use a JSON path query to lookup nodes based of specific feature
+of the JSON value of a node property. 
+
+The operator is +Name:JSON Path+ and the general usage is: 
+
+.Search for nodes with a property by JSON path query
+
+====
+
+* 'Properties', 'Name=Value', +Name:JSON Path+, 'datacenter:json-path-query'.
+
+====
+
+Where +json-path-query+ is JSON path selector from https://github.com/json-path/JsonPath.
+Nodes are selected if the JSON path selector result is not empty, i.e if the JSON value
+contains selected elements. 
+
+For example, let's say you have a node with a property whose name is +datacenter+ and value is:
+
+====
+{
+  "id": "xxxxxx",
+  "accepted": true,
+  "location": {
+    "name": "Paris-03",
+    "address": {
+        "continent": "Europe",
+        "city": "Paris",
+    }
+  },
+  "environments": ["prod","dev"]
+}
+====
+
+The following query would all select the node:
+
+
+.Example of JSON path queries
+
+==== 
+
+//select based on the value of a JSON leaf - boolean type
+'Properties', 'Name=Value', +Name:JSON Path+, 'datacenter:$.[?(@.accepted==true)]'
+
+//select based on the value of a JSON leaf - string type
+'Properties', 'Name=Value', +Name:JSON Path+, 'datacenter:$.location.address[?(@.city=='Paris')]'
+
+//select because "city" exists (whatever its value)
+'Properties', 'Name=Value', +Name:JSON Path+, 'datacenter:$.location.address.city'
+
+//select based on a regex on a specific JSON leaf
+'Properties', 'Name=Value', +Name:JSON Path+, 'datacenter:$.location[?(@.name=~/Paris-[0-9]+/)]'
+
+//select based on belonging to a set
+'Properties', 'Name=Value', +Name:JSON Path+, 'datacenter:$.[?(@.environements subsetof ['prod', 'qa', 'dev'])]'
+
 ====
 
