@@ -12,7 +12,7 @@ echo '[Rudder_4.2]
 name=Rudder 4.1 EL repository
 baseurl=http://www.rudder-project.org/rpm-4.2/RHEL_$releasever/
 gpgcheck=1
-gpgkey=http://www.rudder-project.org/rpm-4.2/RHEL_$releasever/repodata/repomd.xml.key' > /etc/yum.repos.d/rudder.repo
+gpgkey=https://www.rudder-project.org/rpm-repos/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
 ----
 
