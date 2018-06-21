@@ -35,6 +35,8 @@ The metadata file is a JSON file and is named 'metadata':
   # the list of packages or other plugins that this package depends on (optional)
   # this is currently only informative
   "depends": {
+    # dependency on a specific binary that must be in the PATH
+    "binary": [ "zip" ]
     # dependencies on dpkg based systems
     "dpkg": [ "apache2" ],
     "rpm": [ ],
