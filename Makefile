@@ -99,8 +99,14 @@ hooks.asciidoc: rudder-repo
 ncf-repo:
 	git clone https://github.com/Normation/ncf.git ncf-repo
 
-generic-methods.asciidoc: ncf-repo
+rudder-agent-windows-repo:
+	# Allow failing if builder has no access to agent-windows-repo
+	git clone git@github.com:Normation/rudder-agent-windows.git rudder-agent-windows-repo || mkdir rudder-agent-windows-repo
+
+generic-methods.asciidoc: ncf-repo rudder-agent-windows-repo
+	cd rudder-agent-windows-repo && git fetch && git checkout branches/rudder/$(RUDDER_VERSION) && git pull || true
 	cd ncf-repo && git fetch && git checkout branches/rudder/$(RUDDER_VERSION) && git pull
+	cp rudder-agent-windows-repo/plugin/ncf/30_generic_methods/*.cf ncf-repo/tree/30_generic_methods/ || true
 	cp tools/ncf_doc_rudder.py ncf-repo/tools/
 	./ncf-repo/tools/ncf_doc_rudder.py
 	# Remove language setting on code field (#9621)
@@ -190,7 +196,7 @@ test: webhelp/index.html quicktest
 ## WARNING: at cleanup, delete png files that were produced by output only !
 
 clean:
-	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub webhelp webhelp-localsearch xincluded-profiled.xml $(BASENAME).xml rudder-agent-repo rudder-repo extensions ncf-repo generic_methods.{asciidoc,md} hooks.asciidoc xsl/links.xsl xsl/index.html
+	rm -rf rudder-doc.xml *.pdf *.html *.png *.svg temp html epub webhelp webhelp-localsearch xincluded-profiled.xml $(BASENAME).xml rudder-agent-repo rudder-repo extensions ncf-repo rudder-agent-windows-repo generic_methods.{asciidoc,md} hooks.asciidoc xsl/links.xsl xsl/index.html
 
 view: all
 	$(SEE) $(TARGETS)
