@@ -16,6 +16,8 @@ GNU/Linux:
 
 * RedHat Enterprise Linux (RHEL) / RHEL-like 3 and 5 to 7
 
+* SuSE Linux Enterprise Server (SLES) 10 SP3, 11 and 12
+
 * Ubuntu 10.04 LTS (Lucid), 12.04 LTS (Precise), 14.04 LTS (Trusty), 16.04 LTS (Xenial)
 
 Other Unix systems:
