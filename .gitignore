@@ -15,6 +15,7 @@ hooks.asciidoc
 xincluded-profiled.xml
 /rudder-agent-repo/
 /ncf-repo/
+/rudder-agent-windows-repo/
 /rudder-repo/
 
 # Generated images
