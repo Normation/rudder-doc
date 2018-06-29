@@ -2,7 +2,7 @@
 
 === Node properties data sources
 
-As explained in previous chapters, Nodes have properties that can be
+As explained in the chapter about node management, Nodes have properties that can be
 used to create groups or in techniques and directives parameters.
 These properties are key/value pairs, with values being a simple
 string or a well formed JSON document. 
