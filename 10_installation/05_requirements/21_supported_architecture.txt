@@ -18,7 +18,7 @@ GNU/Linux:
 
 * SuSE Linux Enterprise Server (SLES) 10 SP3, 11 and 12
 
-* Ubuntu 10.04 LTS (Lucid), 12.04 LTS (Precise), 14.04 LTS (Trusty), 16.04 LTS (Xenial)
+* Ubuntu 10.04 LTS (Lucid), 12.04 LTS (Precise), 14.04 LTS (Trusty), 16.04 LTS (Xenial), 18.04 LTS (Bionic)
 
 Other Unix systems:
 
