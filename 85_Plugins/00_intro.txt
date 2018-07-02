@@ -1,0 +1,11 @@
+
+[[plugins]]
+== Rudder Plugins
+
+This chapter presents available plugins provides for Rudder and maintained
+by along with Rudder. They are available for each version of Rudder and
+updated if needed (for example in case of API change). 
+
+Plugins can be open-source or only available in binary format. 
+
+
