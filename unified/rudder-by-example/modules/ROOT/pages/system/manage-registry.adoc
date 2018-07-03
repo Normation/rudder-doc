@@ -13,7 +13,7 @@ Rudder offers different ways to manage the Windows registry:
 
 The technique is only a fancy overlay of the `registry_entry_*` generic method.
 
-==== Quick recall
+=== Quick recall
 A `Registry Key` is the path containing `Registry entries`.
 On this image we can see:
 
