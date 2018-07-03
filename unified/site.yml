@@ -1,13 +1,13 @@
 site:
   title: Rudder Documentation
-  start_page: rudder-by-example::index
+  start_page: get-started::index
 content:
   sources:
   - url: ../
-    branches: HEAD
+    branches: master
     start_path: unified/rudder-by-example
   - url: ../
-    branches: HEAD
+    branches: master
     start_path: unified/get-started
 ui:
   bundle:
