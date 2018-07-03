@@ -1,5 +1,0 @@
-= Getting started with Rudder
-
-This document will guide you through the installation of a test Rudder platform
-and the configuration of a real configuration use-case.
-

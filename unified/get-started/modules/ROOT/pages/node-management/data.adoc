@@ -1,0 +1,75 @@
+== Providing configuration data
+
+data vs. code
+
+For now we have only manipulated statically defined information, may it be for group definition or
+inside the configuration themselves. This is the simplest use-case, but Rudder allows
+to easily define and use dynamic data.
+
+[NOTE]
+
+====
+
+In this section we will see:
+
+* how to attach data to each node
+* how to use it for group definition
+* how to use it inside configuration policies
+
+====
+
+Rudder has basically 3 types of variable data:
+
+* Global parameters that apply to the whole Rudder instance
+* Variable definition inside configuration policies
+* Variable associated to a node
+
+
+
+We will define a property for our node:
+
+Go to the node details, for example using the quick search bar,
+and go to the "Properties" tab. This is a small key-value database associated to each node.
+
+Define a "env" = "production" variable.
+
+image::./property.png["Definition of a node property", align="center"]
+
+Then click on the plus sign to add the property.
+
+We now have associated a new property tour our node.
+Let's use it to define a group of production boxes.
+
+
+Go to the groups page, and create the "Production nodes" group,
+defined by:
+
+image::./production.png["Definition of the production group", align="center"]
+
+It should contain our "node" machine.
+
+We will also start defining data for the next policy we will build,
+still for the "node" machine.
+
+Let's define a property called `website`, with the following content:
+
+----
+{
+  "host": "mysite.example.com",
+  "port": 8080
+}
+----
+
+This will be translated in the configuration of a website we will do on the
+"node" machine in the next part of this tutorial.
+
+
+
+To sum things up:
+
+* Rudder has rich variables features
+* Variables can be scalar or hierarchical objects
+* Variables can be defined on the server: globally, by policy or by node
+* Node variables can be used for business-oriented classification
+* Variables can be defined locally, during agent evaluation, to use local data
+

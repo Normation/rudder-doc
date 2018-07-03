@@ -1,0 +1,15 @@
+== Organize policies
+
+[NOTE]
+
+====
+In this section you will see:
+
+* How to group directives in a meaningful way
+* Link them to machines
+
+====
+
+
+
+

@@ -1,0 +1,41 @@
+== Run agent locally
+
+Let's connect to our Rudder server by SSH:
+
+----
+vagrant ssh server
+sudo -i # to get a root access
+----
+
+We will use the `rudder` command that gives access to all Rudder actions.
+
+But first, let's explain a bit how things work on the agent.
+We saw that the server generates an appliable configuration
+for the expected state of the machine.
+
+The agent that runs on all o the se machines will download the latest version
+of its policies, and apply the locally. To trigger this process manually, run:
+
+----
+rudder agent update # to update the policies rom the server
+rudder agent run    # to apply these policies locally
+----
+
+This will display the state of all applied components, including the ones you have defined before.
+
+image::./run.png["Agent output", align="center"]
+
+The rest of the components are called system techniques, you can ignore them for now. They are
+responsible for maintaining the Rudder services themselves, and hence not editable by users.
+
+Lets's get back to the web interface, on the dashboard:
+
+image::./dashboard.png["Dashboard graph", align="center"]
+
+You can see that compliance information got back to the server, and is used to
+display the current state in the dashboard.
+
+We have now finished our first policy application, from definition, using a new technique
+or a built-in one, and an application on our Rudder server.
+
+We will now dig a bit deeper on what the policy mode we modified is, and how to use use it.

@@ -1,0 +1,66 @@
+== Use a predefined policy
+
+You have just learnt to use the technique editor, which gives access to a broad
+range of building blocks for policies. To allow easy configuration of
+common system settings, Rudder also comes with a pre-defined set of techniques,
+directly usable.
+
+Go to the "Configuration Manegement -> Directive" page. What is a directive? It is a technique instance:
+une technique plus some paramreters, makeing it an appliable pîece of configuration.
+
+This is smallest building block for appliable policies.
+
+We will now configure the SSH service on our nodes using the dedicated pre-built technique.
+
+Let's use the filter in the directive tree to find it easily:
+
+image::./ssh.png["SSH technique", align="center"]
+
+Now click on it, the right part of the page will display the technique details, and
+the list of available versions of the technique. We will use the latest one, by clicking on
+"Create with latest version".
+
+This will make a new form appear, containing the configuration of the directive itslef.
+As we said before, a technique is a parametrizable policy. A directive is a technique instance,
+i.e. a techniques plus a set of parameters.
+
+Defining a directive consist of choosing a technique and providing parameters for it.
+
+Let's decide ho we want to configure our SSH server. Let's give it a description.
+When using Rudder, keep in mind that filling all these documentation filed, though it may seem
+tedious, is very important for future reference, or collaboration with other.
+Is is for example useful to include reference to external information (ticketing system, etc.),
+to allow keeping a track of all configuration changes.
+
+Let's disable password authentication:
+
+image::./ssh-password.png["SSH technique", align="center"]
+
+And go to the bottom of the page, click on "Global confguration for all nodes"
+(to apply it everywhere, we will see how it works later).
+
+image::./rule.png["SSH technique", align="center"]
+
+And click on save. It will open a window asking for confirmation and an audit message,
+that is used for tracability. Let's leave it empty for now, and confirm.
+
+Why a confirmation window here? Because the change we are saving will *change our machines state*.
+Once you click on save, the Rudder server will start creating configuration policies for nodes
+it is applied to (we will see later which ones exactly).
+
+Let's create a second directive, based on the technique we have just created (our demo user).
+Use the filter to find it in the directive tree, still on the Directives page.
+
+This time, we will change one of the general parameters by overriding the policy mode to Audit mode.
+
+image::./audit.png["Audit mode", align="center"]
+
+Then apply it to the "Global configuration for all nodes" and save.
+
+You have just applied your first configuration policy.
+If you wait just a bit (at most 5 minutes), our expected state will be applied on our machine
+(actually only our Rudder server itself for now).
+
+But we will ave a closer look at what happens on the machine in the next section.
+
+

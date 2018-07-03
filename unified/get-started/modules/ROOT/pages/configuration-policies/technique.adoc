@@ -1,0 +1,49 @@
+== Define a configuration policy
+
+Here you will learn to define a configuration policy through Rudder's technique editor.
+A technique is a configuration policy template, that will need to be instanciated afterwards.
+
+Go to "Utilisties -> Technique Editor". A configuration policy in Rudder is called a technique.
+
+
+image::./tech-editor.png["Rudder technique editor", align="center"]
+
+You may have expected to start writing configuration code at this point. We won't!
+(though it is also perfectly possible, but not the purpose of this guide).
+
+Let's define a very simple policy: create a demo user.
+
+We will first create a new technique by clicking on (who could have guessed) "Create Technique".
+
+We can now name our technique: "Demo user", and add a small description:
+
+image::./new.png["New technique form", align="center"]
+
+How does this interface work?
+
+* The left part is the list of techniques (empty for now, but our new technique will pop there once we save it)
+* The center is the technique itself
+* The right part is the "methods" column (and a category list to navigate in methods)
+
+The methods will be the building block to our technique. You can think of them as small bricks
+you will assemble into a technique. Lets start the configuration, click on the "User" category (in the lower right of the interface),
+and click on the "User present" method.
+It is now part of our technique's component list, with an orange warning asking for parameters. To provide them, click on the method instance in the technique.
+
+The right column will change from method list to method configuration:
+
+image::./demo.png["demo user", align="center"]
+
+We have defined a first policy! Let's add a second method, click on "Add methods"
+in the lower left of the technique details, to display the list of available methods,
+and navigate to the "User" category. Let's add a user description, with the "User fullname" method:
+
+image::./fullname.png["demo user's fullname", align="center"]
+
+We now have specified one characteristic of our user.
+
+Let's save this technique! (with the "Save" button).
+As you can see it is really simple to define our expected state.
+Later in this guide, we will get back to the technique editor to explore the rest
+of the features, but you already know enough to define a lot of configuration policies.
+

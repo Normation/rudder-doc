@@ -1,0 +1,61 @@
+== Setup a test environment
+
+This section will help you setup your own Rudder environment in a couple of minutes. The rest of the tutorial assumes you are
+using this environment (you can also setup your own,
+you will only have to substitute hostnames/IP addresses when necessary).
+
+This installation method is cross-platform, and you can use it on Linux, Microsoft Windows, Mac OS X
+and more. You will need:
+
+* https://www.virtualbox.org/wiki/Downloads[VirtualBox], to run the demo virtual machines
+* https://www.vagrantup.com/downloads.html[Vagrant], to handle the virtual machines configuration and provisioning
+
+On Debian/Ubuntu systems, just run `sudo apt-get install -y virtualbox vagrant`, and on RHEL/Fedora systems,
+run `sudo yum install -y VirtualBox vagrant`.
+
+Once they are installed, run:
+
+----
+git clone https://github.com/Normation/rudder-vagrant.git
+cd rudder-vagrant
+----
+
+And then, to create the environment:
+
+----
+vagrant up
+----
+
+This will download the virtual machine image if needed, and will setup a Rudder environment using two virtual machines.
+
+[TIP]
+
+.Vagrant commands
+
+====
+
+Here are the basic vagrant commands useful to manage your environment:
+
+* `vagrant up` to bring the environment up, wether the VM need to created or only started
+* `vagrant halt` to stop the virtual machines (but keep them for later use)
+* `vagrant destroy` to totally remove virtual machines
+* `vagrant ssh server|agent` to connect to one of your nodes using SSH
+
+====
+
+Once the command returns, you are ready to get started! You now have access to two virtual machines,
+`server` and `node`, with Rudder already installed.
+
+You can connect to the server's Web interface on:
+
+https://localhost:8081/rudder/
+
+You have to accept the self-signed certificate generated during installation, and you will
+see Rudder's login page.
+
+image::./login.png["Rudder login page", align="center"]
+
+You can login with:
+
+* User: *admin*
+* Password: *admin*

@@ -17,6 +17,8 @@ xincluded-profiled.xml
 /ncf-repo/
 /rudder-agent-windows-repo/
 /rudder-repo/
+.idea/
+doc.iml
 
 # Generated images
 main_*.png
@@ -35,4 +37,3 @@ html/
 extensions/
 xsl/links.xsl
 xsl/index.html
-

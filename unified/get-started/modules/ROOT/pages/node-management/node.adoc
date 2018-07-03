@@ -1,0 +1,43 @@
+== Add a new machine
+
+In the demo platform, you have two nodes:
+
+* The `server` we already used
+* A `node` machine
+
+This machine already has Rudder installed, and we will see how
+
+[NOTE]
+
+====
+
+An *inventory* contains hardware and software information about a node.
+It is sent to register the node to the server after agent installation, and then
+gets updated daily (during the night, at a random time).
+
+You can manually trigger an inventory with `rudder agent inventory`.
+
+====
+
+[NOTE]
+
+====
+
+To get information about the agent state on a node, run:
+
+----
+# rudder agent info
+Hostname: server.rudder.local
+UUID: root
+Key Hash: 9fe57bb0dd0795c571b54fcb537c290004ab6454
+Policy server: 127.0.0.1
+Roles: rudder-agent
+Report mode: full-compliance
+Run interval: 5 min
+Agent is enabled
+Policy updated: 2018-06-28 22:20:01
+Inventory sent: 2018-06-28 02:05:49
+Version: Rudder agent 4.3.2
+----
+
+====

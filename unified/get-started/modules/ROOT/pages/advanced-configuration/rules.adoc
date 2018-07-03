@@ -1,0 +1,19 @@
+== Organize configuration policies
+
+In the previous sections, we saw how to define directives, the
+appliable parts of configuration, and groups of nodes.
+This section will show you how to link directives to groups.
+
+[NOTE]
+
+====
+
+A *rule* is defined by a set of directives and a set of group.
+It will make Rudder apply the directives on the target groups.
+
+====
+
+We will define a new rule fow our web site configuration.
+
+Let's got to the rules page, "Configuration management -> Rules".
+
