@@ -1,0 +1,87 @@
+== Define a complete applicative policy
+
+[NOTE]
+
+====
+
+In this section, you will learn:
+
+* How to define more advanced configuration policies
+* How to link different components, using conditionnal
+  evaluation of methods.
+* How to define and use techniques with parameters
+
+====
+
+In the first part, we defined a very simple technique
+that managed a user.
+
+We will go back to the technique editor and create a technique
+to configure a small website, that will consist of nginx installation,
+deployment of a minimal configuration and an html file as our website.
+
+Let's call our new technique "Static website".
+
+image::./website.png["Website technique", align="center"]
+
+This time, we will add parameters to this technique.
+What are parameters? Just like we saw in the built'in techniques, you can pass parameters to techniques created in the technique editor.
+
+We will require two parameters:
+
+* A domain for our site, called `domain`
+* A port to listen on, called `port`
+
+image::./parameters.png["Technique parameters", align="center"]
+
+Then we can start assembling our building blocks. We want:
+
+* to install nginx
+* to manage the nginx service
+* to manage nginx configuration file
+* to add our website content
+
+We will now map it to generic methods:
+
+* "Package present" with the "nginx" parameter
+* "Service started" with the "nginx" parameter
+
+Four our website content, we will use a simple:
+
+* "File content" with the html content of our website
+
+And for the configuration file:
+
+* "File from a mustache string": this means nothing to you for now
+
+Which looks strange, but don't worry, nothing complicated here.
+
+Let's start with the easy part, with the nginx setup.
+
+Add a package present. You can skip all parameters except the package
+name, defaults are ok for us.
+
+image::./nginx-package.png["Install nginx package", align="center"]
+
+And for the service
+
+Now let's define our website content:
+
+TODO
+
+Now we are only missing a configuration file.
+
+Let's add a
+
+[NOTE]
+
+====
+
+Templating allows replacing content in a generic template with
+specific data. The include environement conditions or varaibles.
+
+It is generally a good practice to enforce the content of file totally, either by templating or hardcoded file than to
+use file editions, as they define an absolute state and are hence a lot easier to use and more reliable.
+
+====
+

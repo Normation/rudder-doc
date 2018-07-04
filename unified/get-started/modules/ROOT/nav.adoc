@@ -10,5 +10,5 @@
 ** xref:node-management/data.adoc[Provide configuration data]
 * xref:advanced-configuration/index.adoc[Configuration policy management]
 ** xref:advanced-configuration/rules.adoc[Manage configuration policies]
-** xref:advanced-configuration/technique.adoc[Define a complex applicative policy]
+** xref:advanced-configuration/technique.adoc[Define a complete applicative policy]
 ** xref:advanced-configuration/compliance.adoc[Apply it to a specific role]

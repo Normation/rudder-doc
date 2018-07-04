@@ -4,8 +4,8 @@ site:
 content:
   sources:
   - url: ../
-    branches: master
+    branches: HEAD
     start_path: unified/rudder-by-example
   - url: ../
-    branches: master
+    branches: HEAD
     start_path: unified/get-started
