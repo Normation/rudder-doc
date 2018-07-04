@@ -1,11 +1,22 @@
 == Add a new machine
 
+[NOTE]
+
+====
+
+In this section, you will see:
+
+* How to manage a new server with Rudder
+* What does the Rudder server knows about managed nodes
+
+====
+
 In the demo platform, you have two nodes:
 
 * The `server` we already used
 * A `node` machine
 
-This machine already has Rudder installed, and we will see how
+This machine already has Rudder installed, and we will see how to add the second one.
 
 [NOTE]
 
@@ -41,6 +52,16 @@ Version: Rudder agent 4.3.2
 ----
 
 ====
+
+How does adding a new node to Rudder work?
+
+* Install rudder-agent on the new node (using a standard software repo)
+* Configure the agent with the hostname or IP of the Rudder server that should manage it
+* It will automatically register itself to its server
+* Accept the new node on the server, and it is done
+
+In the demo platform, the agent has already be installed and configured, and it should have already sent
+an registered to the server.
 
 Let's have a look at what this inventory contains.
 Go to "Node management -> Accept new nodes".

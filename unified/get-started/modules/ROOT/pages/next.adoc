@@ -1,0 +1,6 @@
+= Next steps
+
+This tutorial is now over. You can have a look at:
+
+* http://wwww.rudder-project.org/rudder-by-example[Rudder by example] for explained usecases
+* http://faq.rudder-project.org[Rudder FAQ]

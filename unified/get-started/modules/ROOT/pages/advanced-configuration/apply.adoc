@@ -1,0 +1,21 @@
+= Apply a complete applicative policy
+
+Now we have defined out technique, we will apply it.
+To do so, got to the directives page ("Configuration management -> Directives")
+and find our new technique (for example by using the filter with "Website"),
+and create a directive (in the latest version).
+
+This times our technique takes parameters, so we have to provide them:
+
+image::./technique-parameters.png["Parameters for our website technique", align="center"]
+
+We are using node properties here (the one we have defined in TODO).
+
+The syntax to use to access them is `${node.properties[property_name]}`.
+Here we have hierarchical json, so we access a subkey with `${node.properties[property_name][subkey]}`.
+
+Then you can see the rules zone at the bottom of the page.
+It allows quickly linking a directive to a rule, as it is a common task in Rudder.
+
+We will use it and select our "Demo Website" rule, then save the directive.
+

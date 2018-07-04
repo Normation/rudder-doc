@@ -71,7 +71,7 @@ TODO
 
 Now we are only missing a configuration file.
 
-Let's add a
+Let's add a template
 
 [NOTE]
 
@@ -85,3 +85,96 @@ use file editions, as they define an absolute state and are hence a lot easier t
 
 ====
 
+Let's add this configuration file:
+
+----
+server {
+    root /var/www/html;
+    server_name {{{domain}}};
+    listen {{{port}}};
+}
+----
+
+
+TODO
+
+
+We have now defined all of our configuration states! But are we done yet? Not exactly,
+as we are missing an important piece: restarting the service when the configuration changes.
+
+You can spot it is a bit different compared to our other methods: in this case
+it is not a state but an action we need to express.
+
+The technique editor has a concept of conditions. What are conditions?
+
+[NOTE]
+
+====
+
+A *condition* is represented by a string, and can be either defined or not.
+The conditions express what the current execution environment is:
+
+* We are on a Debian 9 system
+* The state of the nginx package is correct
+* The content of the configuration file has just been modified
+* etc.
+
+We can use conditions to limit the evaluation of a method to a specific context,
+for example only on debian 9 or only when a given file has been modified by the agent.
+
+This allows:
+
+* using actions (like service restart) by limiting them to a specific context
+* writing generic policies compatible with different operating systems, by having specific parts for each
+
+====
+
+[NOTE]
+
+====
+
+Every method will define a *result condition* that is one of the conditions displayed
+in method details
+
+image::./result-conditions.png["Install nginx package conditions", align="center"]
+
+It can be:
+
+* *Success*: When the state was already compliant
+* *Repaired*: When the state has been modofied by the agent to become compliant
+* *Error*: When the expected state could not be reached
+
+====
+
+
+In our case the condition will be the modification of the configuration file:
+
+TODO
+
+[NOTE]
+
+====
+
+Conditions can be combinated using boolean operators:
+
+* `!` for *not*
+* `|` for *or*
+* `.` for *and*
+* `(` and `)` for grouping
+
+====
+
+
+[NOTE]
+
+====
+
+When you start using conditions, be careful to only use them when necessary.
+For example, we could imagine only deploying our website when installing the package.
+
+This is less reliable as we would stop checking for this symlink, and always
+consider it ok.
+
+In short: Checking configuration is cheap, only add conditions when strictly necessary.
+
+====
