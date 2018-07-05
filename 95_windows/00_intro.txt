@@ -1,4 +1,0 @@
-== Rudder agent DSC
-
-This chapter contains the reference Rudder agent DSC
-
