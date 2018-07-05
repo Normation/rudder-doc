@@ -25,7 +25,7 @@ This plugin is configured with a configuration file. Any modification in the fil
 reloaded immediately without the need to restart Rudder. 
 
 
-== Configuration file location
+=== Configuration file location
 
 The default location for the configuration file is 
 `/opt/rudder/share/plugins/node-external-reports/node-external-reports.properties`. 
@@ -33,11 +33,11 @@ The default location for the configuration file is
 In case you need to change the configuration file location, you need to start Rudder with the JVM 
 option parameter `-Drudder.plugin.externalNodeInformation.config=/full/path/to/config/file`.
 
-== Configuration file format
+=== Configuration file format
 
 Plugin file format is as follow: 
 
-```
+----
 plugin.node-external-reports.reports {
 
   01_first_report_type= {
@@ -50,7 +50,8 @@ plugin.node-external-reports.reports {
 
   02_second_report_type = {}
 
-```
+----
+
 Note that quotes are mandatory only when the value contains `@@` (so most likely only for
 the `filename` parameter). 
 
@@ -68,7 +69,7 @@ the `filename` parameter).
 For example, if you gather HTML "security" reports, text monitoring one, and PDF compliance
 KPI for your nodes, the configuration file will look like: 
 
-```
+----
 plugin.node-external-reports.reports {
 
   01_security= {
@@ -95,11 +96,11 @@ plugin.node-external-reports.reports {
     content-type=application/pdf
   }
 }
-```
+----
 
 And the content of  `/var/reports/` will looks like: 
 
-```
+----
 /tmp/reports
 ├── compliance
 │   ├── compliance-node34.china1.bigcorp.com.html
@@ -113,5 +114,5 @@ And the content of  `/var/reports/` will looks like:
     ├── report-node34.china1.bigcorp-sec.com.html 
     │   .....
     └── report-00000068-55a2-4b97-8529-5154cbb63a18-sec.html
-```
+----
 
