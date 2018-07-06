@@ -55,7 +55,7 @@ Let's define a property called `website`, with the following content:
 
 ----
 {
-  "host": "mysite.example.com",
+  "domain": "mysite.example.com",
   "port": 8080
 }
 ----

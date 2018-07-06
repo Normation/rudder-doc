@@ -1,6 +1,19 @@
 = Define configuration policies
 
-Rudder's goal is to manage the configuration of your machines:
+[NOTE]
+
+====
+
+In this part, you will learn:
+
+* How to defined new configuration policies, with the example of a user
+* How to use pre-defined configuration policies, with the example of the
+  ssh service configuration.
+* How a apply a configuration and check its outcome
+
+====
+
+Rudder's goal is to manage the configuration of machines, for example:
 
 * Package httpd installed in version 2.4.12
 * Service ntpd is currently running

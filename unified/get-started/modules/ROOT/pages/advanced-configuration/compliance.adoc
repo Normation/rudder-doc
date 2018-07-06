@@ -1,15 +1,39 @@
-== Organize policies
+== Visualize compliance
 
-[NOTE]
+=== Trigger agent run
 
-====
-In this section you will see:
+Now we have applied our directive, we can trigger its application by going
+on our node with ssh:
 
-* How to group directives in a meaningful way
-* Link them to machines
+----
+vagrant ssh node
+----
 
-====
+And running the agent with:
 
+----
+rudder agent run -u
+----
 
+=== Rule compliance
 
+In the first part we saw that Rudder provides a compliance view by node,
+which allows identifying individual problems, but this compliance view is not suited
+to get a general view of some policies compliance.
 
+Rules, in addition to linking node and policies, provide a compliance entry point.
+
+Go to your "Demo website" page (for example with the quick search field) and click on the rule.
+
+It will display a compliance page with two parts:
+
+* A global compliance view for the rule
+* A by-node compliance view for the rule
+
+They allow exploring compliance differently, based on what you are looking for.
+
+At the bottom, you will see the "Recent changes" graph, which lists the changes
+done by Rudder for this rule.
+Click on a time slot and the details will be displayed in the table below.
+
+TODO screen

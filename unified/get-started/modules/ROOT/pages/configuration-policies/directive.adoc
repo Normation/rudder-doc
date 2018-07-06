@@ -57,10 +57,16 @@ image::./audit.png["Audit mode", align="center"]
 
 Then apply it to the "Global configuration for all nodes" and save.
 
+[TIP]
+
+====
+
+How to chose between built-in techniques and creating one in the technique editor?
+
+====
+
 You have just applied your first configuration policy.
 If you wait just a bit (at most 5 minutes), our expected state will be applied on our machine
 (actually only our Rudder server itself for now).
 
 But we will ave a closer look at what happens on the machine in the next section.
-
-

@@ -1,6 +1,17 @@
 == Setup a test environment
 
-This section will help you setup your own Rudder environment in a couple of minutes. The rest of the tutorial assumes you are
+[NOTE]
+
+====
+
+In this section you will:
+
+* Setup your own Rudder test environment in virtual machines
+* Have access to this platform for the rest of the tutorial
+
+====
+
+The rest of the tutorial assumes you are
 using this environment (you can also setup your own,
 you will only have to substitute hostnames/IP addresses when necessary).
 
@@ -59,3 +70,12 @@ You can login with:
 
 * User: *admin*
 * Password: *admin*
+
+[NOTE]
+
+====
+
+You now have access to a full Rudder platform,
+ to follow this guide or for later tests.
+
+====

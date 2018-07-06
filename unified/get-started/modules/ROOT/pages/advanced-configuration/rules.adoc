@@ -17,3 +17,16 @@ We will define a new rule fow our web site configuration.
 
 Let's got to the rules page, "Configuration management -> Rules".
 
+And click on "Create Rule".
+
+image::./rule-2.png["New rule form", align="center"]
+
+This will open the configuration page of the new rule.
+Configuring a rules consists in selecting a list of directives and a list of groups you want ot link.
+
+To select a group or a directive, simply click on it, and it will appear in the right green zone.
+
+You can see in the upper right two tabs, Settings and Compliance.
+We are in the settings tabs, compliance will show you the
+
+That's all you have to know about rules!

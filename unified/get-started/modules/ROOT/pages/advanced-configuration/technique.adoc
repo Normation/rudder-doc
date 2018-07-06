@@ -1,0 +1,180 @@
+== Define a complete applicative policy
+
+[NOTE]
+
+====
+
+In this section, you will learn:
+
+* How to define more advanced configuration policies
+* How to link different components, using conditionnal
+  evaluation of methods.
+* How to define and use techniques with parameters
+
+====
+
+In the first part, we defined a very simple technique
+that managed a user.
+
+We will go back to the technique editor and create a technique
+to configure a small website, that will consist of nginx installation,
+deployment of a minimal configuration and an html file as our website.
+
+Let's call our new technique "Static website".
+
+image::./website.png["Website technique", align="center"]
+
+This time, we will add parameters to this technique.
+What are parameters? Just like we saw in the built'in techniques, you can pass parameters to techniques created in the technique editor.
+
+We will require two parameters:
+
+* A domain for our site, called `domain`
+* A port to listen on, called `port`
+
+image::./parameters.png["Technique parameters", align="center"]
+
+Then we can start assembling our building blocks. We want:
+
+* to install nginx
+* to manage the nginx service
+* to manage nginx configuration file
+* to add our website content
+
+We will now map it to generic methods:
+
+* "Package present" with the "nginx" parameter
+* "Service started" with the "nginx" parameter
+
+Four our website content, we will use a simple:
+
+* "File content" with the html content of our website
+
+And for the configuration file:
+
+* "File from a mustache string": this means nothing to you for now
+
+Which looks strange, but don't worry, nothing complicated here.
+
+Let's start with the easy part, with the nginx setup.
+
+Add a package present. You can skip all parameters except the package
+name, defaults are ok for us.
+
+image::./nginx-package.png["Install nginx package", align="center"]
+
+And for the service
+
+Now let's define our website content:
+
+TODO
+
+Now we are only missing a configuration file.
+
+Let's add a template
+
+[NOTE]
+
+====
+
+Templating allows replacing content in a generic template with
+specific data. The include environement conditions or varaibles.
+
+It is generally a good practice to enforce the content of file totally, either by templating or hardcoded file than to
+use file editions, as they define an absolute state and are hence a lot easier to use and more reliable.
+
+====
+
+Let's add this configuration file:
+
+----
+server {
+    root /var/www/html;
+    server_name {{{domain}}};
+    listen {{{port}}};
+}
+----
+
+
+TODO
+
+
+We have now defined all of our configuration states! But are we done yet? Not exactly,
+as we are missing an important piece: restarting the service when the configuration changes.
+
+You can spot it is a bit different compared to our other methods: in this case
+it is not a state but an action we need to express.
+
+The technique editor has a concept of conditions. What are conditions?
+
+[NOTE]
+
+====
+
+A *condition* is represented by a string, and can be either defined or not.
+The conditions express what the current execution environment is:
+
+* We are on a Debian 9 system
+* The state of the nginx package is correct
+* The content of the configuration file has just been modified
+* etc.
+
+We can use conditions to limit the evaluation of a method to a specific context,
+for example only on debian 9 or only when a given file has been modified by the agent.
+
+This allows:
+
+* using actions (like service restart) by limiting them to a specific context
+* writing generic policies compatible with different operating systems, by having specific parts for each
+
+====
+
+[NOTE]
+
+====
+
+Every method will define a *result condition* that is one of the conditions displayed
+in method details
+
+image::./result-conditions.png["Install nginx package conditions", align="center"]
+
+It can be:
+
+* *Success*: When the state was already compliant
+* *Repaired*: When the state has been modofied by the agent to become compliant
+* *Error*: When the expected state could not be reached
+
+====
+
+
+In our case the condition will be the modification of the configuration file:
+
+TODO
+
+[NOTE]
+
+====
+
+Conditions can be combinated using boolean operators:
+
+* `!` for *not*
+* `|` for *or*
+* `.` for *and*
+* `(` and `)` for grouping
+
+====
+
+
+[NOTE]
+
+====
+
+When you start using conditions, be careful to only use them when necessary.
+For example, we could imagine only deploying our website when installing the package.
+
+This is less reliable as we would stop checking for this symlink, and always
+consider it ok.
+
+In short: Checking configuration is cheap, only add conditions when strictly necessary.
+
+====
