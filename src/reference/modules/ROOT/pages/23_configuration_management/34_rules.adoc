@@ -1,0 +1,11 @@
+=== Rules
+
+include::../glossary/rule.txt[]
+
+image::Rule_management.png[]
+
+When a Rule is created or modified, the promises for the target nodes are generated. Rudder computes all the promises each nodes must have, and makes them available for the nodes. This process can take up to several minutes, depending on the number of managed nodes and the Policy Server configuration. During this time, The status icon on the top of the page turns to grey, with moving arrows.
+if you feel the generated promises should be modified (for instance, if you changed the configuration of Rudder), you can click on the status menu in the top bar and click on "Regenerate policies"
+
+image::Rule_config.png[]
+

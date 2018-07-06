@@ -1,0 +1,63 @@
+
+[[install-server]]
+=== Install Rudder Server
+
+This chapter covers the installation of a Rudder Root Server, from the
+specification of the underlying server, to the initial setup of the application.
+
+Before all, you need to setup a server according to
+<<server-supported-os, the server specifications>>. You should also
+<<configure-the-network, configure the network>>. These topics are covered in the
+Architecture chapter.
+
+Ideally, this machine should have Internet access, but this is not a strict requirement.
+
+As Rudder data can grow really fast depending on your number of managed nodes and number of rules, it is advised to separate partitions to prevent /var getting full and break your system.
+Special attention should be given to:
+
+=======
+
+/var/lib/pgsql::
+(OS dependent).
+Please see the <<_database_maintenance, database maintenance>> chapter for more details about the
+PostgreSQL database size estimation.
+
+/var/rudder::
+Contains most of your server information, the configuration-repository, LDAP database, etc...
+Rudder application-related files should stay under 1GB, but the size of the configuration-repository will
+depend of the amount of data you store in it, especially in the shared-files folder (files that will get
+distributed to the agents using the "Download a file for the shared folder" Technique).
+
+/var/log/rudder::
+Report logs (/var/log/rudder/reports) size will depend on the amount of nodes you manage.
+It is possible to reduce this drastically by unticking "Log all reports received to /var/log/rudder/reports/all.log"
+under the Administration - Settings tab in the Rudder web interface. This will prevent Rudder from recording this logs
+in a text file on disk, and will only store them in the SQL database. This saves on space, and doesn't remove any
+functionality, but does however make debugging harder.
+
+=======
+
+[NOTE]
+
+.Files installed by the application
+
+=====
+
++/etc+:: System-wide configuration files are stored here: init scripts,
+configuration for apache, logrotate and rsyslog.
+
++/opt/rudder+:: Non variable application files are stored here.
+
++/opt/rudder/etc+:: Configuration files for Rudder services are stored here.
+
++/var/log/rudder+:: Log files for Rudder services are stored here.
+
++/var/rudder+:: Variable data for Rudder services are stored here.
+
++/var/rudder/configuration-repository/techniques+:: Techniques are stored here.
+
++/var/rudder/cfengine-community+:: Data for CFEngine Community is stored here.
+
++/usr/share/doc/rudder*+:: Documentation about Rudder packages.
+
+=====

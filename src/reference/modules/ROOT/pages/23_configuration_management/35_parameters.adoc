@@ -1,0 +1,33 @@
+=== Variables
+
+==== User defined parameters
+
+Rudder provides a simple way to add common and reusable variables in either plain Directives, or techniques created using the Technique editor: the parameters.
+
+image::rudder-parameters.png[Parameters]
+
+The parameters enable the user to specify a content that can be put anywhere, using the following syntax:
+
+* In Directives: '${rudder.param.name}' will expand the content of the "name" parameter.
+* In the Technique Editor: '${rudder_parameters.name}' will do the same.
+
+Using this, you can specify common file headers (this is the default parameter, "rudder_file_edit_header"), common DNS or domain names, backup servers,
+site-specific elements...
+
+==== System variables
+
+Rudder also provides system variables that contain information about nodes
+and their policy server. You can use them like user defined parameters.
+
+The information about a Node:
+
+* '${rudder.node.id}' returns the Rudder generated id of the Node
+* '${rudder.node.hostname}' returns the hostname of the Node
+* '${rudder.node.admin}' returns the administrator login of the Node 
+
+The information about a Node's policy server.
+
+* '${rudder.node.policyserver.id}' returns the Rudder generated id of the Policy Server
+* '${rudder.node.policyserver.hostname}' returns the hostname of the Policy Server
+* '${rudder.node.policyserver.admin}' returns the administrator login of the Policy Server 
+

@@ -1,0 +1,6 @@
+// Man page
+
+=== Man pages
+
+include::{partialsdir}/dyn/rudder.adoc[leveloffset=+3]
+

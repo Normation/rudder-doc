@@ -1,0 +1,32 @@
+==== Install Rudder Agent on Debian or Ubuntu
+
+include::{partialsdir}/syslog.adoc[]
+
+include::{partialsdir}/apt_key.adoc[]
+
+Then add Rudder's package repository:
+
+----
+
+echo "deb http://www.rudder-project.org/apt-4.3/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
+
+----
+
+Update your local package database to retrieve the list of packages available on our repository:
+
+----
+
+sudo apt-get update
+
+----
+
+Install the +rudder-agent+ package:
+
+----
+
+sudo apt-get install rudder-agent
+
+----
+
+You can now <<_configure_and_validate, configure the agent>>.
+

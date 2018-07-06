@@ -1,0 +1,35 @@
+
+[[groups, Groups]]
+
+=== Group of Nodes
+
+You can create Group of Nodes based on search criteria to ease attribution of
+Rules in Configuration Management. The creation of groups can be done from the
+'Node Management > Search Nodes' page, or directly from the Groups list in
+'Node Management > Groups'. A group can be either Dynamic or Static.
+
+include::../glossary/dynamic-group.txt[]
+
+include::../glossary/static-group.txt[]
+
+image::groups.png[]
+
+.Create a dynamic group for Linux Nodes with +ssh+ having an ip address in 192.18.42.x.
+
+====
+
+To create that dynamic group like described above, You first have to create a new group
+with group type set to +Dynamic+. Then you have to set its search request to:
+
+. Operator: +AND+.
+
+. First search line: 'Node', 'Operating System', +=+, 'Linux'.
+
+. Second search line: 'Software', 'Name', +=+, +ssh+.
+
+. Third search line: 'Node summary', 'Ip address', +Regex+, '192\ .168\ .\d\ . .*' .
+
+Finally, you have to click on Search to populate the group and click on Save to actually save it.
+
+====
+

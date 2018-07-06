@@ -1,6 +1,0 @@
-=== Generic methods
-
-This section documents all the generic methods available in the <<_recommended_solution_technique_editor, Technique Editor>>.
-
-include::../generic_methods.asciidoc[]
-

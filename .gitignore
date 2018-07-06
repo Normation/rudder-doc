@@ -1,39 +1,12 @@
 # Generated files
-rudder-doc.xml
-html/
-*.html
-*.pdf
-*.tex
-webhelp*
-html/
-extensions/
-xsl/links.xsl
-xsl/index.html
-generic_methods.asciidoc
-generic_methods.md
-hooks.asciidoc
-xincluded-profiled.xml
-/rudder-agent-repo/
-/ncf-repo/
-/rudder-agent-windows-repo/
-/rudder-repo/
-.idea/
-doc.iml
-
-# Generated images
-main_*.png
-_*.png
-temp/*
-graphs/*
-/*.png
+/build
 
 # Backup files
 *.swp
 *~
 *.bak
 *.off
-webhelp*
-html/
-extensions/
-xsl/links.xsl
-xsl/index.html
+
+# Editor files
+.idea/
+doc.iml

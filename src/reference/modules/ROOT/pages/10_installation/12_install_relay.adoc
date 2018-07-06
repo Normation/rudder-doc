@@ -1,0 +1,97 @@
+[[relay-servers]]
+=== Install Rudder Relay (optional)
+
+Relay servers can be added to Rudder, for example to manage a DMZ or to isolate specific
+nodes from the main environment for security reasons. 
+
+Relay server's purpose is to solve a simple problem: sometimes, one would want to manage
+multiple networks from Rudder, without having to allow all the subnet access to the other
+for security reasons. A solution for this would be to have a kind of "Rudder" proxy that
+would be relaying information between the subnet and the main Rudder server. This is the
+reason relay servers were created.
+
+Using a relay, you are able to:
+
+- Separate your Rudder architecture into separate entities that still report to one server
+- Prevent laxist security exceptions to the Rudder server
+- Ease maintenance
+
+The first part is to be done on the machine that will become a relay server.
+The procedure will:
+
+- Add the machine as a regular node
+- Configure the relay components (Syslog, Apache HTTPd, CFEngine)
+- Switch this node to the relay server role (from the root server point of view)
+
+==== On the relay
+
+To begin, please install a regular Rudder agent on the OS, following the
+<<install-agent, installation instructions>>, and install the 'rudder-server-relay'
+package in addition to the 'rudder-agent' package.
+
+To complete this step, please make sure that your node is configured successfully
+and appears in your Rudder web interface.
+
+==== On the root server
+
+You have to tell the Rudder Root server that a node will be a relay. To do so,
+launch the rudder-node-to-relay script on the root server, supplying the UUID of the
+host to be considered as a relay. You can find the UUID of your node with the
+'rudder agent info' command.
+
+----
+
+/opt/rudder/bin/rudder-node-to-relay aaaaaaaa-bbbb-cccc-dddd-eeeeeeee
+
+----
+
+==== Validation
+
+When every step has completed successfully:
+
+- The Rudder root server will recognize the new node as a relay
+- It will generate specific promises for the relay
+- The relay will update and switch to his new role
+
+This is an example of node details pane showing a relay server. Note the "Role:
+Rudder relay server" part that shows that the machine has successfully changed
+from a node to a relay.
+
+.Rudder relay node
+
+image::RudderRelay.png[Relay]
+
+==== Adding nodes to a relay server
+
+When you have at least one relay, you will likely want to add nodes
+on it.
+
+You then have two possible cases:
+
+- You want to switch an already existing node to the relay
+- You want to add a new one
+
+The procedure on both cases is the same, you have to:
+
+- Create / update the file /var/rudder/cfengine-community/policy_server.dat
+with the IP address or the fully qualified domain name of the relay server
+(instead of the root server)
+
+----
+
+echo "rudder-relay.example.com" > /var/rudder/cfengine-community/policy_server.dat
+
+----
+
+
+- Trigger an inventory immediately to make sure the node is registered correctly
+
+----
+
+rudder agent inventory
+
+----
+
+After those steps, the node should be registered correctly on your Rudder
+infrastructure.
+

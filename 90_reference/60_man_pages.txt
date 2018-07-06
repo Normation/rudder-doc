@@ -1,6 +1,0 @@
-// Man page
-
-=== Man pages
-
-include::../rudder-agent-repo/man/rudder.asciidoc[]
-

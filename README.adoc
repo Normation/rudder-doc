@@ -1,0 +1,79 @@
+Rudder documentation
+====================
+
+== Dependencies
+
+Antora:: https://docs.antora.org/antora/1.0/install/install-antora/ to build the doc
+
+Graphviz:: http://www.graphviz.org/ to build SVG schemas.
+
+Pandoc:: http://www.pandoc.org to convert ncf markdown doc to asciidoc
+
+Python:: to build generic methods documentation
+
+For the tests only: 
+
+Linkchecker:: http://wummel.github.io/linkchecker/ to check for broken links
+
+=== Install the dependencies on Debian and Ubuntu:
+
+----
+apt install git linkchecker pandoc npm
+----
+
+=== Install the dependencies on Fedora
+
+----
+dnf install git linkchecker pandoc
+# Install node and npm from upstream: https://nodejs.org/en/ (use LTS version)
+----
+
+=== Install common dependencies
+
+On all systems:
+
+----
+npm i -g @antora/cli
+npm i -g @antora/site-generator-default
+npm i -g gulp-cli
+npm i -g yarn
+----
+
+== Build
+
+=== Sources organization
+
+* `rudder-theme`: ui theme for the doc HTML output
+* `src`: contains the docs sources
+** `get-started`
+** `rudder-by-example`
+** `reference`
+*** `modules`: contains the actual doc sources
+*** `dependencies`: contains the doc built from external sources
+*** `tools`: contaisn tools to help build the doc
+*** `antora.yml`: entry point for antora
+* `tests`: contains test for the doc
+* `build`: contains built files
+* `site.yml`: main entry point for antora
+
+=== Build site
+
+Create HTML output suitable for distribution:
+
+----
+make
+----
+
+Output files will be in `build/site`.
+
+=== Cleanup
+
+Delete all generated files.
+
+----
+make clean
+----
+
+== Theme development
+
+Follow https://gitlab.com/antora/antora-ui-default/ for docs about the theme.
