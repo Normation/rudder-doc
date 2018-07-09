@@ -9,7 +9,7 @@ node specific documents. A new tab is created on node details page that allows t
 documents for the corresponding node. 
 
 
-=== Documents naming convention
+==== Documents naming convention
 
 Documents must be stored in configured directories with a naming convention that allows
 Rudder to find back what document corresponds to a given node. 
@@ -19,13 +19,13 @@ The exact naming pattern if defined in the `fileformat` configuration parameter,
 value `@@node@@` is used to denotate the place where the node `UUID` or `hostname` will be.
 Both `UUID` and `hostname` are tested when looking for a matching file for a node. 
 
-=== Plugin configuration
+==== Plugin configuration
 
 This plugin is configured with a configuration file. Any modification in the file will be 
 reloaded immediately without the need to restart Rudder. 
 
 
-=== Configuration file location
+==== Configuration file location
 
 The default location for the configuration file is 
 `/opt/rudder/share/plugins/node-external-reports/node-external-reports.properties`. 
@@ -33,7 +33,7 @@ The default location for the configuration file is
 In case you need to change the configuration file location, you need to start Rudder with the JVM 
 option parameter `-Drudder.plugin.externalNodeInformation.config=/full/path/to/config/file`.
 
-=== Configuration file format
+==== Configuration file format
 
 Plugin file format is as follow: 
 
