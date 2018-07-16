@@ -65,5 +65,5 @@ or through any other means of your choice
 ====
 
 
-You can now <<_technique_upgrade,upgrade your local techniques>>.
+You can now xref:12_upgrade/60_technique_upgrade.adoc#_technique_upgrade[upgrade your local techniques].
 

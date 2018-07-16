@@ -22,12 +22,12 @@ reorganize in *Configuration > Techniques*. The library
 is organized in two parts: the available Techniques, and the selection
 made by the user.
 
-include::../glossary/technique-library.txt[]
+include::{partialsdir}/glossary/technique-library.adoc[]
 
-include::../glossary/active-techniques.txt[]
+include::{partialsdir}/glossary/active-techniques.adoc[]
 
 ==== Create new Techniques
 
 The standard library only provides the most common Techniques. You can create
-new Technique with the <<technique-editor, Technique Editor>>.
+new Technique with the xref:23_configuration_management/41_technique_editor.adoc#technique-editor[Technique Editor].
 

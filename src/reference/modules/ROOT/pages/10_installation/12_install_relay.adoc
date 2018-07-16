@@ -26,7 +26,7 @@ The procedure will:
 ==== On the relay
 
 To begin, please install a regular Rudder agent on the OS, following the
-<<install-agent, installation instructions>>, and install the 'rudder-server-relay'
+xref:10_installation/11_install_agent/00_install_agent.adoc#install-agent[installation instructions], and install the 'rudder-server-relay'
 package in addition to the 'rudder-agent' package.
 
 To complete this step, please make sure that your node is configured successfully

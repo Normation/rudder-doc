@@ -40,8 +40,8 @@ given in the output of `rudder-init`.
 
 You should see a loading screen, then a login prompt. The default login is "admin" with
 password "admin", authenticating you in the Rudder web interface with full administrative privileges.
-You are strongly advised to <<_passwords, change this password>> as soon as possible.
+You are strongly advised to xref:30_basic_administration/80_user_management.adoc#_passwords[change this password] as soon as possible.
 
 The setup of the Rudder server is now over. If you plan to manage hundreds or thousands of Nodes,
-please note that some <<_performance_tuning, performance tuning>> can be necessary on the system.
+please note that some xref:43_advanced_administration/20_application_tuning.adoc#_performance_tuning[performance tuning] can be necessary on the system.
 

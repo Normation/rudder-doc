@@ -41,7 +41,7 @@ For example, you can issue the following command to get the list of currently de
 curl -X GET -H "X-API-Token: yourToken" http://your.rudder.server/rudder/api/latest/rules
 ----
 
-You can then check the status code (which should be 200). See the <<rest-api, API documentation>> for more information.
+You can then check the status code (which should be 200). See the xref:30_basic_administration/70_server_rest_api.adoc#rest-api[API documentation] for more information.
 
 You can also check the webapp logs (in '/var/log/rudder/webapp/year_month_day.stderrout.log')
 for error messages.
@@ -65,7 +65,7 @@ Here is an very simple example of API call to check for errors (exits with 1 whe
 curl -s -H "X-API-Token: yourToken" -X GET 'https:/your.rudder.server/rudder/api/latest/compliance/rules' | grep -qv '"status": "error"'
 ----
 
-See the <<rest-api, API documentation>> for more information about general API usage, and the
+See the xref:30_basic_administration/70_server_rest_api.adoc#rest-api[API documentation] for more information about general API usage, and the
 http://www.rudder-project.org/rudder-api-doc/#api-compliance[compliance API documentation]
 for a list of available calls.
 

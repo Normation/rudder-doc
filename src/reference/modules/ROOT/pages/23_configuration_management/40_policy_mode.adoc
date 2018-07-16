@@ -1,3 +1,4 @@
+[[_policy_mode_audit_enforce]]
 === Policy Mode (Audit/Enforce)
 
 Rudder 4.0 includes a policy mode setting, that allows two distinct behaviors:
@@ -5,7 +6,7 @@ Rudder 4.0 includes a policy mode setting, that allows two distinct behaviors:
 * *Audit*: Test if the system is in the desired state, and report about it
 * *Enforce*: Test if the system is in the desired state, if not, try to act to get to this state, and report about actions taken and final state
 
-This allows for example <<_using_rudder_as_an_audit_tool, to use Rudder as an audit tool>> or <<, _using_audit_mode_to_validate_a_policy_before_applying_it, to test a policy before enforcing it>>.
+This allows for example xref:26_manage_your_it/5_usecases/0_usecases_intro.adoc#_using_rudder_as_an_audit_tooli[to use Rudder as an audit tool] or xref:26_manage_your_it/5_usecases/0_usecases_intro.adoc#_using_audit_mode_to_validate_a_policy_before_applying_it[to test a policy before enforcing it].
 
 image:./images/audit_mode_general_overview.png[]
 

@@ -14,7 +14,7 @@ image::continuous-configuration.png[Continuous Configuration]
 
 
 Rudder is natively integrated with the supported OS (Linux, Windows, AIX - see
-<<node-supported-os>>) so that it provides generic, abstract, OS independant
+xref:10_installation/05_requirements/21_supported_architecture.adoc#node-supported-os[the list of supported Operating Systems for Nodes]) so that it provides generic, abstract, OS independant
 primitives to the user who can:
 
 
@@ -35,7 +35,7 @@ primitives to the user who can:
 
 image::introduction/core_techniques.png["Standard Technique Library", align="center"]
 
-The simple primitives can be simply mixed and <<intro-rudder-extensibility,extended>> to provide
+The simple primitives can be simply mixed and xref:00_introduction/20_key_features.adoc#intro-rudder-extensibility[extended] to provide
 solutions for any and all of your unique use cases of software stacks,
 deployments, IT services or configuration that can't be natively supported.
 
@@ -75,13 +75,13 @@ used to defined coniguration rule targets. Typically, some configurations are
 linked to the kind of server (physical or virtual), the quantity of RAM
 available, the version of an OS library which contains a security bug, etc.
 
-All of these data are also available <<rudder-api-integration, through Rudder APIs>>.
+All of these data are also available xref:80_extension_and_integration/40_Rudder_Integration.adoc#rudder-api-integration[through Rudder APIs].
 
 ==== REST API
 
 All Rudder commands are available through an exhaustive REST API. That API is
 http://www.rudder-project.org/rudder-api-doc/[fully documented online] and can
-be used to <<rudder-api-integration, quickly and smoothly integrate Rudder with your existing infrastructure>>.
+be used to xref:80_extension_and_integration/40_Rudder_Integration.adoc#rudder-api-integration[quickly and smoothly integrate Rudder with your existing infrastructure].
 
 
 ==== Audit trace and Change Requests
@@ -99,8 +99,8 @@ image::introduction/change_request.png["Change Request", align="center"]
 
 The validation process can be externalized to third party ticketing system, like
 a CMDB, so that it can integrated into an existing company workflow. This
-integration is done thanks to <<rudder-integration, an existing
-plugin or a dedicated synchronisation tool>>.
+integration is done thanks to xref:80_extension_and_integration/40_Rudder_Integration.adoc#rudder-integration[an existing
+plugin or a dedicated synchronisation tool].
 
 ==== Centralized authentication (LDAP, Active Directory, plugins)
 
@@ -108,7 +108,7 @@ Rudder can use enterprise directories (LDAP, Active Directory)
 or be connected to an SSO to manage users authentication.
 
 Moreover, Rudder authentication layer is plugable and can be extended to other
-authentication protocol <<extending-rudder-with-plugins, like Radius or SPNEGO with plugins>>.
+authentication protocol xref:80_extension_and_integration/20_Rudder_plugins.adoc#extending-rudder-with-plugins[like Radius or SPNEGO with plugins].
 
 [[intro-rudder-extensibility]]
 ==== Extensibilty
@@ -143,7 +143,7 @@ programming language:
 
 image::introduction/ncf_language.png["High level definition language", align="center"]
 
-But the *natural*, *common* strategy to use them is with the <<technique-editor, "provided graphical editor">>
+But the *natural*, *common* strategy to use them is with the xref:23_configuration_management/41_technique_editor.adoc#technique-editor["provided graphical editor"]
 which allows to use all the same modules, but with a *web UI* and
 with *drag'n'drop*. Of course, you can configure each unitary module to use data from
 a node and behave specifically on each one.

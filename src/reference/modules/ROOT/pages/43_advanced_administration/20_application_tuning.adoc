@@ -1,8 +1,10 @@
+[[_performance_tuning]]
 === Performance tuning
 
 Rudder and some applications used by Rudder (like the Apache web server, or Jetty)
 can be tuned to your needs.
 
+[[_reports_retention]]
 ==== Reports retention
 
 To lower Rudder server's disk usage, you can configure the retention duration 
@@ -46,6 +48,7 @@ more memory.
 
 You can follow the configuration steps described in the following paragraph.
 
+[[_configure_ram_allocated_to_jetty]]
 ==== Configure RAM allocated to Jetty
 
 To change the RAM given to Jetty, you have to: 
@@ -72,7 +75,7 @@ service restart rudder-jetty
 The amount of memory should be the half of the RAM of the server, rounded up to the nearest GB.
 For example, if the server has 5GB of RAM, 3GB should be allocated to Jetty.
 
-
+[[_optimize_postgresql_server]]
 ==== Optimize PostgreSQL server
 
 The default out-of-the-box configuration of PostgreSQL server is really not
@@ -206,6 +209,7 @@ mount /var/rudder/cfengine-community/state
 
 ----
 
+[[_rsyslog]]
 ==== Rsyslog
 
 If you are using syslog over TCP as reporting protocol (it is set in *Administration* -> *Settings* -> *Protocol*), 

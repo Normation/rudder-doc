@@ -15,13 +15,13 @@ any packages for them. Moreover, some Techniques may not work properly. If you
 wish to get Rudder support on those systems, please get in touch with us!
 
 A reference about how to manually build a Rudder agent is available on Rudder's
-documentation here: <<_building_the_rudder_agent, Building the Rudder Agent>>
+documentation here: xref:90_reference/40_build_agent.adoc#_building_the_rudder_agent[Building the Rudder Agent]
 
 ====
 
 ===== For Rudder Nodes
 
-The following operating systems have had an agent built using <<_building_the_rudder_agent, Building the Rudder Agent>>:
+The following operating systems have had an agent built using xref:90_reference/40_build_agent.adoc#_building_the_rudder_agent[Building the Rudder Agent]:
 
 * FreeBSD
 

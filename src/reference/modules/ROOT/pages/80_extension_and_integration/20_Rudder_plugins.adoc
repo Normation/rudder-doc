@@ -9,7 +9,7 @@ available in Rudder web application.
 ==== Rudder Plugin
 
 A plugin is an archive in the `.rpkg` file format that can be manipulated with the
-`rudder-pkg` command (see <<plugins-management, Plugins Administration>>)
+`rudder-pkg` command (see xref:30_basic_administration/30_plugins.adoc#plugins-management[Plugins Administration])
 
 A Rudder plugin has full access to all Rudder internal APIs, datas, and process.
 Its power is very large, but some care must be taken to ensure that the plugin

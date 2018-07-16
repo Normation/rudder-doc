@@ -35,6 +35,7 @@ service rudder-jetty restart
 
 ----
 
+[[_passwords]]
 ===== Passwords
 
 The authentication tag should have a "hash" attribute, making "password" attributes

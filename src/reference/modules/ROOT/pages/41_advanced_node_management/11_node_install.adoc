@@ -45,9 +45,9 @@ into this file.
 After all of these files are in place, the CFEngine Community daemons are
 launched:
 
-include::../glossary/cf-execd.txt[]
+include::{partialsdir}/glossary/cf-execd.adoc[]
 
-include::../glossary/cf-serverd.txt[]
+include::{partialsdir}/glossary/cf-serverd.adoc[]
 
 ===== Configuration
 

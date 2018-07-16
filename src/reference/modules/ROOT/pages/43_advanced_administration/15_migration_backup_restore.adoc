@@ -1,3 +1,4 @@
+[[_migration_backups_and_restores]]
 === Migration, backups and restores
 
 It is advised to backup frequently your Rudder installation in case

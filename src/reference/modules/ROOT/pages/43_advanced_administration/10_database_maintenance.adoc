@@ -1,3 +1,4 @@
+[[_database_maintenance]]
 === Database maintenance
 
 Rudder uses two backends to store information as of now: LDAP and SQL

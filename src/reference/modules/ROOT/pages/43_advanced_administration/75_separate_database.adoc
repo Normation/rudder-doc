@@ -147,7 +147,7 @@ apt-get remove --purge rudder-reports
 ----
 
 * You can also remove the postgresql package and database from the server if installed, but keep in mind you will lose all existing data.
-You can follow the <<_migration_backups_and_restores, backup and restore>> procedure to migrate the data to the new database.
+You can follow the xref:43_advanced_administration/15_migration_backup_restore.adoc#_migration_backups_and_restores[backup and restore] procedure to migrate the data to the new database.
 
 * Change the hostname in `/opt/rudder/etc/rudder-web.properties`:
 

@@ -13,9 +13,9 @@ It also includes a ttl mechanism that allows sharing a file for a limited amount
 
 To use this feature, two generic methods are available in the technique editor:
 
-* <<sharedfile_from_node, sharedfile_from_node>>: To download a file shared from another node.
-* <<sharedfile_to_node, sharedfile_to_node>>: To make a file available to another node.
+* xref:90_reference/50_generic_methods.adoc#sharedfile_from_node[sharedfile_from_node]: To download a file shared from another node.
+* xref:90_reference/50_generic_methods.adoc#sharedfile_to_node[sharedfile_to_node]: To make a file available to another node.
 
 See the documentation of these methods for details about the required parameters, 
-and especially <<sharedfile_to_node, sharedfile_to_node>> for a complete usage example.
+and especially xref:90_reference/50_generic_methods.adoc#sharedfile_to_node[sharedfile_to_node] for a complete usage example.
 

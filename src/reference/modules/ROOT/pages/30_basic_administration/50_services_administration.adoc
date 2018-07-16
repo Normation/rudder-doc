@@ -36,7 +36,7 @@ service rudder-server restart
 Here is the list of the components of the root server with a brief description
 of their role, and the command to restart them:
 
-include::../glossary/cfengine-server.txt[]
+include::{partialsdir}/glossary/cfengine-server.adoc[]
 
 ----
 
@@ -44,7 +44,7 @@ service rudder-agent restart
 
 ----
 
-include::../glossary/web-server-application.txt[]
+include::{partialsdir}/glossary/web-server-application.adoc[]
 
 ----
 
@@ -52,7 +52,7 @@ service rudder-jetty restart
 
 ----
 
-include::../glossary/web-server-front-end.txt[]
+include::{partialsdir}/glossary/web-server-front-end.adoc[]
 
 ----
 
@@ -60,7 +60,7 @@ service apache2 restart
 
 ----
 
-include::../glossary/ldap-server.txt[]
+include::{partialsdir}/glossary/ldap-server.adoc[]
 
 ----
 
@@ -68,7 +68,7 @@ service rudder-slapd restart
 
 ----
 
-include::../glossary/sql-server.txt[]
+include::{partialsdir}/glossary/sql-server.adoc[]
 
 ----
 

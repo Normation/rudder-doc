@@ -51,6 +51,7 @@ also reset the agent internal state. The only configuration kept is the server
 hostname or ip configured in +policy_server.dat+. It will also send an inventory
 to the server, which will treat it as a new node inventory. 
 
+[[_change_the_agent_run_schedule]]
 ==== Change the agent run schedule
 
 By default, the agent runs on all nodes every 5 minutes. You can modify this value in

@@ -1,3 +1,4 @@
+[[_node_properties_expansion_in_directives]]
 === Node properties expansion in directives
 
 It is possible to use properties defined on nodes to build Directive values. The
@@ -90,5 +91,5 @@ ${node.properties[datacenter][id]}
 Which will be considered as a standard variable by the agent, which will replaced this expression by its value if it's defined, or kept as is if it's unknown.
 
 The variable content is read from `/var/rudder/cfengine-community/inputs/properties.d/properties.json`, and from the optionally defined `/var/rudder/local/properties.d/*.json` files.
-You can find more information on node properties in <<_node_properties>>.
+You can find more information on node properties in xref:42_advanced_configuration_management/40_node_properties.adoc#_node_properties[node properties documentation].
 

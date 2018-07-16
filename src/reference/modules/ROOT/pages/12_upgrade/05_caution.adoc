@@ -1,5 +1,6 @@
 === Upgrade notes
 
+[[_upgrade_from_rudder_4_0_or_older]]
 ==== Upgrade from Rudder 4.0 or older
 
 Direct upgrades from 4.0.x and older are no longer supported on 4.3.
@@ -31,7 +32,7 @@ therefore not strictly necessary to update your agents to 4.3.x.
 ===== Older agents
 
 These agents are not compatible with Rudder 4.3, and you have to upgrade them. 
-Be careful to follow the upgrade path explained <<_upgrade_from_rudder_4_0_or_older, above>>.
+Be careful to follow the upgrade path explained xref:12_upgrade/05_caution.adoc#_upgrade_from_rudder_4_0_or_older[above].
 
 ==== Protocol for reporting
 
@@ -45,6 +46,6 @@ case of networking or load issues, or if you want to manage a lot of nodes.
 The only drawback is that you can lose reports in these situations. It does not
 affects the reliability of policy enforcement, but may only temporarily affects
 reporting on the server.
-Read <<_rsyslog, perfomance notes>> about rsyslog for detailed information.
+Read xref:43_advanced_administration/20_application_tuning.adoc#_rsyslog[perfomance notes] about rsyslog for detailed information.
 
 

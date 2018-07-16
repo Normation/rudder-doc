@@ -11,7 +11,7 @@ order to "smooth" the load across your infrastructure (also known as "splay
 time"). This reduces simultaneous connections on relay and root servers (both
 for the CFEngine server and for sending reports).
 
-See <<_change_the_agent_run_schedule>> Section to see how to configure it 
+See xref:41_advanced_node_management/10_node_management.adoc#_change_the_agent_run_schedule[Change the agent run schedule] Section to see how to configure it 
 
 
 ===== Inventory (FusionInventory)

@@ -3,7 +3,7 @@
 Once you have selected and organized your Techniques, you can create your
 configurations in the *Configuration Management > Directives* section.
 
-include::../glossary/directive.txt[]
+include::{partialsdir}/glossary/directive.adoc[]
 
 The screen is divided in three parts:
 

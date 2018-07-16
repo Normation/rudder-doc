@@ -1,3 +1,4 @@
+[[_building_the_rudder_agent]]
 === Building the Rudder Agent
 
 ==== Get source

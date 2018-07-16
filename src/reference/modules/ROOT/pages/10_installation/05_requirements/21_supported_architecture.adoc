@@ -26,7 +26,7 @@ Other Unix systems:
 
 Windows:
 
-* <<install-on-windows, Microsoft Windows>> Server 2008 R2, 2012, 2012 R2, 2016
+* xref:10_installation/05_requirements/21_supported_architecture.adoc#install-on-windows[Microsoft Windows] Server 2008 R2, 2012, 2012 R2, 2016
 
 [TIP]
 

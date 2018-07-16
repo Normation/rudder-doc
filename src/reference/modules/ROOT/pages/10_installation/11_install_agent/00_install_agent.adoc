@@ -10,7 +10,7 @@ The machines managed by Rudder are called Nodes, and can either be physical or v
 For a machine to become a managed Node, you have to install the Rudder Agent on it.
 The Node will afterwards register itself on the server. And finally, the Node should
 be acknowledged in the Rudder Server interface to become a managed Node. For a more detailed
-description of the workflow, please refer to the <<_node_management_2, Node Management>>
+description of the workflow, please refer to the xref:21_node_management/20_node_management.adoc#_node_management_2[Node Management]
 documentation.
 
 [NOTE]
@@ -37,7 +37,7 @@ We grouped all these tools in one package, to ease the Rudder Agent
 installation.
 
 To get the list of supported Operating systems, please refer to
-<<node-supported-os, the list of supported Operating Systems for the Nodes>>.
+xref:10_installation/05_requirements/21_supported_architecture.adoc#node-supported-os[the list of supported Operating Systems for the Nodes].
 
 =====
 

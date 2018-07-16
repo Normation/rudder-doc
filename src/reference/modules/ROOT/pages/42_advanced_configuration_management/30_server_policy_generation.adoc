@@ -16,7 +16,7 @@ The process of policy generation:
 
 image::objects-used-in-generation.png[Objects and parameters used in policy generation]
 
-You can customize some of these actions and add new ones using the <<_server_event_hooks, Server Event Hooks>>.
+You can customize some of these actions and add new ones using the xref:42_advanced_configuration_management/60_server_event_hooks.adoc#_server_event_hooks[Server Event Hooks].
 
 image::policy_generation.png[Status of policy generation]
 

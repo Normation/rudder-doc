@@ -1,3 +1,4 @@
+[[_configure_and_validate]]
 ==== Configure and validate
 
 ===== Configure Rudder Agent

@@ -6,8 +6,8 @@ This chapter covers the installation of a Rudder Root Server, from the
 specification of the underlying server, to the initial setup of the application.
 
 Before all, you need to setup a server according to
-<<server-supported-os, the server specifications>>. You should also
-<<configure-the-network, configure the network>>. These topics are covered in the
+xref:10_installation/05_requirements/21_supported_architecture.adoc#server-supported-os[the server specifications]. You should also
+xref:10_installation/05_requirements/05_requirements.adoc#configure-the-network[configure the network]. These topics are covered in the
 Architecture chapter.
 
 Ideally, this machine should have Internet access, but this is not a strict requirement.
@@ -19,7 +19,7 @@ Special attention should be given to:
 
 /var/lib/pgsql::
 (OS dependent).
-Please see the <<_database_maintenance, database maintenance>> chapter for more details about the
+Please see the xref:10_installation/05_requirements/05_requirements.adoc#_database_maintenance[database maintenance] chapter for more details about the
 PostgreSQL database size estimation.
 
 /var/rudder::

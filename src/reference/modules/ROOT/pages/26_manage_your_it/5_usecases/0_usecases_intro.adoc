@@ -30,6 +30,7 @@ servers. SSH servers can then be stopped or reconfigured manually many times,
 Rudder will always restore your preferred settings and restart the SSH server in
 less than 5 minutes.
 
+[[_using_rudder_as_an_audit_tool]]
 ==== Using Rudder as an Audit tool
 
 Using Rudder as an Audit tool is useful if you do not want to make any changes on the system,

@@ -4,13 +4,13 @@ We adopted the following terms to describe the configurations in Rudder:
 
 ====
 
-include::../glossary/technique.txt[]
+include::{partialsdir}/glossary/technique.adoc[]
 
-include::../glossary/directive.txt[]
+include::{partialsdir}/glossary/directive.adoc[]
 
-include::../glossary/rule.txt[]
+include::{partialsdir}/glossary/rule.adoc[]
 
-include::../glossary/applied-policy.txt[]
+include::{partialsdir}/glossary/applied-policy.adoc[]
 
 ====
 

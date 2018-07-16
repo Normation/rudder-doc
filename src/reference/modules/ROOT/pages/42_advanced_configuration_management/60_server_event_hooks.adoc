@@ -1,3 +1,4 @@
+[[_server_event_hooks]]
 === Server Event Hooks
 
 Rudder 4.1 introduces the possibility to execute files (hooks), typically scripts,

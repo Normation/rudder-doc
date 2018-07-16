@@ -1,3 +1,4 @@
+[[_node_properties]]
 === Node properties
 
 Node properties can be found in the "properties" tab of each node in Rudder.
@@ -31,7 +32,7 @@ ${node.properties[datacenter]}
 
 ----
 
-WARNING: Before Rudder 3.1.14 and 3.2.7, node properties could not be used in JavaScript expressions (see following section), since they are evaluated during policy generation and node properties were only made available to agents at runtime. Since Rudder 3.1.14, 3.2.7 and 4.0.0 and later, you can enable a feature switch in "Administration/Settings" to enable node properties expansion in directive parameters. More details are available at <<_node_properties_expansion_in_directives>>.
+WARNING: Before Rudder 3.1.14 and 3.2.7, node properties could not be used in JavaScript expressions (see following section), since they are evaluated during policy generation and node properties were only made available to agents at runtime. Since Rudder 3.1.14, 3.2.7 and 4.0.0 and later, you can enable a feature switch in "Administration/Settings" to enable node properties expansion in directive parameters. More details are available at xref:42_advanced_configuration_management/45_node_properties_in_directives.adoc#_node_properties_expansion_in_directives[Node properties expansion in directives].
 
 In a mustache template, use:
 

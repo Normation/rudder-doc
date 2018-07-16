@@ -1,3 +1,4 @@
+[[_node_management_2]]
 == Node management
 
 [[inventory, Node Inventory]]

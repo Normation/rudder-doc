@@ -1,6 +1,6 @@
 === Rules
 
-include::../glossary/rule.txt[]
+include::{partialsdir}/glossary/rule.adoc[]
 
 image::Rule_management.png[]
 

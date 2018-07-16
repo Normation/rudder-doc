@@ -3,7 +3,7 @@
 When accessing the Rudder web interface, a login / password is required.  The
 default account is "admin" (Password: admin).
 
-You can change the user accounts by following the <<user-management, User management>>
+You can change the user accounts by following the xref:30_basic_administration/80_user_management.adoc#user-management[User management]
 procedure.
 
 === Presentation of Rudder Web Interface

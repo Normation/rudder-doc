@@ -8,9 +8,9 @@ Rules in Configuration Management. The creation of groups can be done from the
 'Node Management > Search Nodes' page, or directly from the Groups list in
 'Node Management > Groups'. A group can be either Dynamic or Static.
 
-include::../glossary/dynamic-group.txt[]
+include::{partialsdir}/glossary/dynamic-group.adoc[]
 
-include::../glossary/static-group.txt[]
+include::{partialsdir}/glossary/static-group.adoc[]
 
 image::groups.png[]
 

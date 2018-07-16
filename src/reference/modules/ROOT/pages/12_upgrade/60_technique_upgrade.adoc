@@ -1,3 +1,4 @@
+[[_technique_upgrade]]
 === Technique upgrade
 
 At the first installation, Rudder will automatically deploy a Technique library in the
