@@ -3,7 +3,7 @@
 Here you will learn to define a configuration policy through Rudder's technique editor.
 A technique is a configuration policy template, that will need to be instanciated afterwards.
 
-Go to "Utilisties -> Technique Editor". A configuration policy in Rudder is called a technique.
+Go to "Utilities -> Technique Editor". A configuration policy in Rudder is called a technique.
 
 
 image::./tech-editor.png["Rudder technique editor", align="center"]
