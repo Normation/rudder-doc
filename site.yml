@@ -4,12 +4,12 @@ site:
 content:
   sources:
   - url: .
-    branches: HEAD
+    branches: master
     start_path: src/get-started
   - url: .
-    branches: HEAD
+    branches: master
     start_path: src/rudder-by-example
   - url: .
-    branches: HEAD
+    branches: master
     start_path: src/reference
 

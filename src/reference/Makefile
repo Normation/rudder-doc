@@ -11,6 +11,7 @@ content: $(ADOC_DYN_FILES) modules/ROOT/nav.adoc
 
 %.adoc:
 	cd dependencies && make $@
+	mkdir -p modules/ROOT/pages/_partials/dyn/
 	cp dependencies/$@ modules/ROOT/pages/_partials/dyn/$@
 
 modules/ROOT/nav.adoc: $(ADOC_SRC_FILES)
