@@ -5,10 +5,10 @@ range of building blocks for policies. To allow easy configuration of
 common system settings, Rudder also comes with a pre-defined set of techniques,
 directly usable.
 
-Go to the "Configuration Manegement -> Directive" page. What is a directive? It is a technique instance:
-une technique plus some paramreters, makeing it an appliable pîece of configuration.
+Go to the "Configuration Management -> Directive" page. What is a directive? It is a technique instance:
+a technique plus some parameters, making it an applicable pîece of configuration.
 
-This is smallest building block for appliable policies.
+This is smallest building block for applicable policies.
 
 We will now configure the SSH service on our nodes using the dedicated pre-built technique.
 
@@ -20,9 +20,9 @@ Now click on it, the right part of the page will display the technique details, 
 the list of available versions of the technique. We will use the latest one, by clicking on
 "Create with latest version".
 
-This will make a new form appear, containing the configuration of the directive itslef.
+This will make a new form appear, containing the configuration of the directive itself.
 As we said before, a technique is a parametrizable policy. A directive is a technique instance,
-i.e. a techniques plus a set of parameters.
+i.e. a technique plus a set of parameters.
 
 Defining a directive consist of choosing a technique and providing parameters for it.
 
@@ -36,7 +36,7 @@ Let's disable password authentication:
 
 image::./ssh-password.png["SSH technique", align="center"]
 
-And go to the bottom of the page, click on "Global confguration for all nodes"
+And go to the bottom of the page, click on "Global configuration for all nodes"
 (to apply it everywhere, we will see how it works later).
 
 image::./rule.png["SSH technique", align="center"]
@@ -69,4 +69,4 @@ You have just applied your first configuration policy.
 If you wait just a bit (at most 5 minutes), our expected state will be applied on our machine
 (actually only our Rudder server itself for now).
 
-But we will ave a closer look at what happens on the machine in the next section.
+But we will have a closer look at what happens on the machine in the next section.
