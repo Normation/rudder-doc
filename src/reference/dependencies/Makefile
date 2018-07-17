@@ -21,13 +21,10 @@ rudder-agent-windows-repo:
 
 ## Dynamic content
 
-rudder.8: rudder.adoc
-	cp rudder-agent-repo/man/rudder.8 rudder.8
-
 rudder.adoc: rudder-agent-repo
 	cd rudder-agent-repo && git fetch && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
-	cd rudder-agent-repo/man && make rudder.8
-	cp rudder-agent-repo/man/rudder.asciidoc rudder.adoc
+	cd rudder-agent-repo/man && make rudder.adoc
+	cp rudder-agent-repo/man/rudder.adoc rudder.adoc
 
 hooks.adoc: rudder-repo
 	cd rudder-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
