@@ -5,7 +5,7 @@ range of building blocks for policies. To allow easy configuration of
 common system settings, Rudder also comes with a pre-defined set of techniques,
 directly usable.
 
-Go to the "Configuration Management -> Directive" page. What is a directive? It is a technique instance:
+Go to the "Configuration Management -> Directives" page. What is a directive? It is a technique instance:
 a technique plus some parameters, making it an applicable pîece of configuration.
 
 This is smallest building block for applicable policies.
@@ -16,7 +16,7 @@ Let's use the filter in the directive tree to find it easily:
 
 image::./ssh.png["SSH technique", align="center"]
 
-Now click on it, the right part of the page will display the technique details, and
+Now click on "SSH server (OpenSSH)", the right part of the page will display the technique details, and
 the list of available versions of the technique. We will use the latest one, by clicking on
 "Create with latest version".
 
