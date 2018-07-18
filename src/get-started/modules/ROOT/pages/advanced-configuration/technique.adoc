@@ -52,7 +52,7 @@ Four our website content, we will use a simple:
 
 And for the configuration file:
 
-* "File from a mustache string": this means nothing to you for now
+* "File from a mustache string": use a template for the configuration of the nginx service
 
 Which looks strange, but don't worry, nothing complicated here.
 
@@ -68,6 +68,8 @@ And for the service
 Now let's define our website content:
 
 TODO
+
+And correct it permission to 644 
 
 Now we are only missing a configuration file.
 
@@ -95,8 +97,9 @@ server {
 }
 ----
 
+In the destination /etc/nginx/conf.d/default.conf
 
-TODO
+
 
 
 We have now defined all of our configuration states! But are we done yet? Not exactly,
