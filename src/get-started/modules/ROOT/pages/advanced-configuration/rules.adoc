@@ -27,6 +27,6 @@ Configuring a rules consists in selecting a list of directives and a list of gro
 To select a group or a directive, simply click on it, and it will appear in the right green zone.
 
 You can see in the upper right two tabs, Settings and Compliance.
-We are in the settings tabs, compliance will show you the
+We are in the settings tabs, compliance will show you the compliance details of the Rule.
 
 That's all you have to know about rules!
