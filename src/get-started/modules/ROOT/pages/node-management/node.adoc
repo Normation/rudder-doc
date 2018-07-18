@@ -76,5 +76,5 @@ Then you have to choose to accept this node or not. Once accepted, a node will g
 
 Let's accept our node, select the checkbox on the right, and click on "Accept".
 
-And you can go back to the Nodes list, you will see we now have two. A configuration has already be generated, and will be applied to our node within 5 minutes? It includes the two directives we defined before as they apply to all the nodes managed by Rudder.
+And you can go back to the Nodes list, you will see we now have two nodes. A configuration has already be generated, and will be applied to our node within 5 minutes. It includes the two directives we defined before as they apply to all the nodes managed by Rudder.
 
