@@ -58,6 +58,16 @@ Set-WSManQuickConfig DSC
 
 ----
 
+Moreover, the Windows DSC agent comes without digital signature, you need to allow the unsigned source code execution on the Windows node.
+In some environment, this policy change can lead to security issues, please read the https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-6[Microsoft Windows doc] associated.
+This can be done in powershell by executing the following command:
+
+----
+
+Set-ExecutionPolicy RemoteSigned
+
+----
+
 ===== Installation procedure
 
 Download the *exe* file, and run, on your node:
