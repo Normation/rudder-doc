@@ -96,7 +96,7 @@ Then the installer need to be executed with the following command:
 
 ----
 
-rudder-agent-dsc-<Rudder version>-<plugin version>.exe \S
+rudder-agent-dsc-<Rudder version>-<plugin version>.exe /S
 
 ----
 
