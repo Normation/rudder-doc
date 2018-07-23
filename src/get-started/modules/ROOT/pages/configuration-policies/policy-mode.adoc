@@ -1,5 +1,16 @@
 == Audit vs. Enforce - Policy Mode
 
+[NOTE]
+
+====
+
+In this section you will:
+
+* Analyze results from an audit policy
+* Switch between audit and enforce modes to fix the configuration issues
+
+====
+
 As you saw just before, we configured one of our directives in "Audit mode".
 You may have guessed, according to its name, what this means.
 

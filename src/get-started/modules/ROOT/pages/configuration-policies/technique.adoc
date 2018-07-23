@@ -1,5 +1,16 @@
 == Define a configuration policy
 
+[NOTE]
+
+====
+
+In this section you will:
+
+* Use policy building blocks in the builder UI
+* Define a configuration policy within Rudder
+
+====
+
 Here you will learn to define a configuration policy through Rudder's technique editor.
 A technique is a configuration policy template, that will need to be instanciated afterwards.
 

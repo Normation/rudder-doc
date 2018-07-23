@@ -1,5 +1,16 @@
 == Use a predefined policy
 
+[NOTE]
+
+====
+
+In this section you will:
+
+* Define a configuration policy from a pre-defined template
+* Create appliable configuration items called *directives* from
+
+====
+
 You have just learnt to use the technique editor, which gives access to a broad
 range of building blocks for policies. To allow easy configuration of
 common system settings, Rudder also comes with a pre-defined set of techniques,

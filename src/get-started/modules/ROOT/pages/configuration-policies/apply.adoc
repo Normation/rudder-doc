@@ -1,5 +1,17 @@
 == Run agent locally
 
+[NOTE]
+
+====
+
+In this section you will:
+
+* Trigger a policy application locally on the node using Rudder CLI
+* Read the policy enforcement state in its output
+* Check reported compliance in the Web interface
+
+====
+
 Let's connect to our Rudder server by SSH:
 
 ----
