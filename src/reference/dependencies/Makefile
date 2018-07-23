@@ -1,6 +1,6 @@
 ## Builds dynamic dependencies from other repos
 
-RUDDER_VERSION = 4.3
+RUDDER_VERSION = 5.0
 .PHONY: clean generic_methods.adoc rudder.adoc hooks.adoc
 all: generic_methods.adoc hooks.adoc rudder.adoc
 
@@ -22,7 +22,8 @@ rudder-agent-windows-repo:
 ## Dynamic content
 
 rudder.adoc: rudder-agent-repo
-	cd rudder-agent-repo && git fetch && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
+	cd rudder-agent-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
+	cd rudder-agent-repo && git pull
 	cd rudder-agent-repo/man && make rudder.adoc
 	cp rudder-agent-repo/man/rudder.adoc rudder.adoc
 
@@ -36,8 +37,10 @@ hooks.adoc: rudder-repo
 	done
 
 generic_methods.adoc: ncf-repo rudder-agent-windows-repo
-	cd rudder-agent-windows-repo && git fetch && git checkout branches/rudder/$(RUDDER_VERSION) && git pull || true
-	cd ncf-repo && git fetch && git checkout branches/rudder/$(RUDDER_VERSION) && git pull
+	cd rudder-agent-windows-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
+	cd rudder-agent-windows-repo && git pull
+	cd ncf-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
+	cd ncf-repo && git pull
 	cp rudder-agent-windows-repo/plugin/ncf/30_generic_methods/*.cf ncf-repo/tree/30_generic_methods/ || true
 	cp tools/ncf_doc_rudder.py ncf-repo/tools/
 	./ncf-repo/tools/ncf_doc_rudder.py
