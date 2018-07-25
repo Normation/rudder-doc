@@ -1,4 +1,4 @@
-.PHONY: prepare build/site/ rudder-theme/build/ui-bundle.zip
+.PHONY: prepare build/site/ rudder-theme/build/ui-bundle.zip optipng
 
 html: build/site/
 
@@ -14,6 +14,9 @@ build/site/: prepare rudder-theme/build/ui-bundle.zip
 
 test: build/site/
 	./tests/check_broken_links.sh
+
+optipng:
+	find src -name "*.png" -exec optipng {} \;
 
 clean:
 	cd src/reference && make clean
