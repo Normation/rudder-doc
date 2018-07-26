@@ -149,10 +149,10 @@ PubkeyAuthentication yes
 AuthenticationMethods publickey
 DenyUsers *
 
-Match Host {{#vars.node.properties.ssh_access.fromip}}{{{.}}},{{/vars.node.properties.ssh_access.fromip}} User {{#vars.node.properties.ssh_access.user}}{{{.}}},{{/vars.node.properties.ssh_access.user}}
+Match Address {{#vars.node.properties.ssh_access.fromip}}{{{.}}},{{/vars.node.properties.ssh_access.fromip}} User {{#vars.node.properties.ssh_access.user}}{{{.}}},{{/vars.node.properties.ssh_access.user}}
   DenyUsers !*
 
-Match Host {{#vars.node.properties.ssh_access.fromip}}{{{.}}},{{/vars.node.properties.ssh_access.fromip}} Group {{#vars.node.properties.ssh_access.group}}{{{.}}},{{/vars.node.properties.ssh_access.group}}
+Match Address {{#vars.node.properties.ssh_access.fromip}}{{{.}}},{{/vars.node.properties.ssh_access.fromip}} Group {{#vars.node.properties.ssh_access.group}}{{{.}}},{{/vars.node.properties.ssh_access.group}}
   DenyUsers !*
 ----
 
