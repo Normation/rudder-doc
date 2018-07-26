@@ -77,15 +77,14 @@ http {
     
     {{#vars.node.properties.nginx.upstreams}}
     upstream {{{name}}} {
-        {{#servers}}
+        {{#servers}} // <1>
         server {{{host}}} weight={{{weight}}};
         {{/servers}}
     }
     {{/vars.node.properties.nginx.upstreams}}
 }
 ----
-
-Note that for the second level of iteration, we use a name relative to the first iterator's value.
+<1> Note that for the second level of iteration, we use a name relative to the first iterator's value.
 
 === Result
 
@@ -124,7 +123,7 @@ This example ensures the content of a bastillion host's `sshd_config`, configura
 
 We can either define the following node property in our Rudder server for any secured system, or use a `Variables (any)` directive to assing this to multiple systems in a group (like systems requiring extra security due being exposed to the internet).
 
-Value of either *Node property* named `ssh_access` or a *Variable (any)* Directive named `bastillion.ssh_access`:
+Value of either *Node property* named `ssh_access` or a *Variable (any)* directive named `bastillion.ssh_access`:
 
 [source,json]
 ----
@@ -137,7 +136,7 @@ Value of either *Node property* named `ssh_access` or a *Variable (any)* Directi
 
 === Configuration policy
 
-The configuration will consist of a shared template downloaded from `shared-files` of the rudder server and a method to provide the input data for the template. We will show two approaches on that.
+The configuration will consist of a shared template downloaded from `shared-files` of the Rudder server and a method to provide the input data for the template. We will show two approaches on that.
 
 ==== Example template with a *Node property* holding the data
 
@@ -158,9 +157,9 @@ Match Address {{#vars.node.properties.ssh_access.fromip}}{{{.}}},{{/vars.node.pr
 
 The iterator of the arrays uses the `{{{.}}}` to reference the value if the currently iterated item, which is the value of the array item.
 
-==== Example template with a *Variables (any)* Directive holding the data.
+==== Example template with a *Variables (any)* directive holding the data.
 
-You can use a dedicated Rule to assign the Directive to a group of nodes, with this approach you can have different Directives allowing different access but reuse the same template and NCF Directive with data provided by different Rules.
+You can use a dedicated rule to assign the directive to a group of nodes, with this approach you can have different directives allowing different access but reuse the same template and directive with data provided by different rules.
 
 [source,mustache]
 ----
@@ -177,16 +176,16 @@ Match Address {{#vars.bastillion.ssh_access.fromip}}{{{.}}},{{/vars.bastillion.s
   DenyUsers !*
 ----
 
-==== NCF Techniqe to deploy the template
+==== Technique to deploy the template
 
-This template  be handled by a dedicated NCF Technique that more or less consists of:
+This template be handled by a dedicated technique that more or less consists of:
 
 * *File from remote source*: Download the file from `/var/rudder/configuration-repository/shared-files/sshd_config.mustache` for example to `/etc/ssh/sshd_config.template`
 * *File from a mustache template*: Create a populated file from the template `/etc/ssh/sshd_config.template` to `/etc/ssh/sshd_config.final`
 * *File from local source with check*: Copy `/etc/ssh/sshd_config.final` to ``/etc/ssh/sshd_config` if command `/usr/sbin/sshd -t /etc/ssh/sshd_config.final` returns 0 (verify configuration before trashing your sshd config)
 * *Service restart*: Restart `sshd` if previous method has condition `_repaired`
 
-(NFC Methods names taken from Rudder 4.3.1)
+(Methods names taken from Rudder 4.3)
 
 ==== Resulting config file
 
