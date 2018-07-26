@@ -63,7 +63,6 @@ The template that will be shared from the Rudder server:
 nginx.conf.tpl
 [source,mustache]
 ----
-{% raw %}
 http {
     server {
         listen {{{vars.node.properties.nginx.port}}};
@@ -84,7 +83,6 @@ http {
     }
     {{/vars.node.properties.nginx.upstreams}}
 }
-{% endraw %}
 ----
 
 Note that for the second level of iteration, we use a name relative to the first iterator's value.
@@ -117,3 +115,102 @@ http {
     }
 }
 ----
+
+== Advanced example: sshd_config templating
+
+This example ensures the content of a bastillion host's `sshd_config`, configurable via either variables shared via group membership or private node properties.
+
+=== Source data
+
+We can either define the following node property in our Rudder server for any secured system, or use a `Variables (any)` directive to assing this to multiple systems in a group (like systems requiring extra security due being exposed to the internet).
+
+Value of either *Node property* named `ssh_access` or a *Variable (any)* Directive named `bastillion.ssh_access`:
+
+[source,json]
+----
+{ 
+  "fromip" : [ "10.111.20.1", "10.111.20.2" ],
+  "user"   : [ "joe", "jack" ],
+  "group"  : [ "admins" ]
+}
+----
+
+=== Configuration policy
+
+The configuration will consist of a shared template downloaded from `shared-files` of the rudder server and a method to provide the input data for the template. We will show two approaches on that.
+
+==== Example template with a *Node property* holding the data
+
+[source,mustache]
+----
+Protocol 2
+PasswordAuthentication no
+PubkeyAuthentication yes
+AuthenticationMethods publickey
+DenyUsers *
+
+Match Host {{#vars.node.properties.ssh_access.fromip}}{{{.}}},{{/vars.node.properties.ssh_access.fromip}} User {{#vars.node.properties.ssh_access.user}}{{{.}}},{{/vars.node.properties.ssh_access.user}}
+  DenyUsers !*
+
+Match Host {{#vars.node.properties.ssh_access.fromip}}{{{.}}},{{/vars.node.properties.ssh_access.fromip}} Group {{#vars.node.properties.ssh_access.group}}{{{.}}},{{/vars.node.properties.ssh_access.group}}
+  DenyUsers !*
+----
+
+The iterator of the arrays uses the `{{{.}}}` to reference the value if the currently iterated item, which is the value of the array item.
+
+==== Example template with a *Variables (any)* Directive holding the data.
+
+You can use a dedicated Rule to assign the Directive to a group of nodes, with this approach you can have different Directives allowing different access but reuse the same template and NCF Directive with data provided by different Rules.
+
+[source,mustache]
+----
+Protocol 2
+PasswordAuthentication no
+PubkeyAuthentication yes
+
+DenyUsers *
+
+Match Host {{#vars.bastillion.ssh_access.fromip}}{{{.}}},{{/vars.bastillion.ssh_access.fromip}} User {{#vars.bastillion.ssh_access.user}}{{{.}}},{{/vars.bastillion.ssh_access.user}}
+  DenyUsers !*
+
+Match Host {{#vars.bastillion.ssh_access.fromip}}{{{.}}},{{/vars.bastillion.ssh_access.fromip}} Group {{#vars.bastillion.ssh_access.group}}{{{.}}},{{/vars.bastillion.ssh_access.group}}
+  DenyUsers !*
+----
+
+==== NCF Techniqe to deploy the template
+
+This template  be handled by a dedicated NCF Technique that more or less consists of:
+
+* *File from remote source*: Download the file from `/var/rudder/configuration-repository/shared-files/sshd_config.mustache` for example to `/etc/ssh/sshd_config.template`
+* *File from a mustache template*: Create a populated file from the template `/etc/ssh/sshd_config.template` to `/etc/ssh/sshd_config.final`
+* *File from local source with check*: Copy `/etc/ssh/sshd_config.final` to ``/etc/ssh/sshd_config` if command `/usr/sbin/sshd -t /etc/ssh/sshd_config.final` returns 0 (verify configuration before trashing your sshd config)
+* *Service restart*: Restart `sshd` if previous method has condition `_repaired`
+
+(NFC Methods names taken from Rudder 4.3.1)
+
+==== Resulting config file
+
+The result is an output like this for the final config file
+
+[source,sshd_config]
+----
+Protocol 2
+PasswordAuthentication no
+PubkeyAuthentication yes
+
+DenyUsers *
+
+Match Host 10.111.20.1,10.111.20.2, User joe,jack,
+  DenyUsers !*
+
+Match Host 10.111.20.1,10.111.20.2, Group admins,
+  DenyUsers !*
+----
+
+=== Notes
+
+* Apparently the `sshd_config` is still valid if the Match-Group has commas on the end of a list, and if you don't want to have any Groups or Users, just keep the json array for them as an empty array (`[ ]`), and it will still be a valid sshd_config (but it will definetly look strange).
+
+* Please check the configuration options that are available for the version of your sshd, most importantly of what is supported in the Match-Block. Earlier versions of sshd do not support all config options, this is also why validation the generated file is always a good option so an update of sshd can not break your access easily, just make sure you check the compliance after updates. 
+
+* This approaches can be mixed with both node-property and generic-variable based input data, and is only an example on the 
