@@ -170,10 +170,10 @@ PubkeyAuthentication yes
 
 DenyUsers *
 
-Match Host {{#vars.bastillion.ssh_access.fromip}}{{{.}}},{{/vars.bastillion.ssh_access.fromip}} User {{#vars.bastillion.ssh_access.user}}{{{.}}},{{/vars.bastillion.ssh_access.user}}
+Match Address {{#vars.bastillion.ssh_access.fromip}}{{{.}}},{{/vars.bastillion.ssh_access.fromip}} User {{#vars.bastillion.ssh_access.user}}{{{.}}},{{/vars.bastillion.ssh_access.user}}
   DenyUsers !*
 
-Match Host {{#vars.bastillion.ssh_access.fromip}}{{{.}}},{{/vars.bastillion.ssh_access.fromip}} Group {{#vars.bastillion.ssh_access.group}}{{{.}}},{{/vars.bastillion.ssh_access.group}}
+Match Address {{#vars.bastillion.ssh_access.fromip}}{{{.}}},{{/vars.bastillion.ssh_access.fromip}} Group {{#vars.bastillion.ssh_access.group}}{{{.}}},{{/vars.bastillion.ssh_access.group}}
   DenyUsers !*
 ----
 
@@ -200,10 +200,10 @@ PubkeyAuthentication yes
 
 DenyUsers *
 
-Match Host 10.111.20.1,10.111.20.2, User joe,jack,
+Match Address 10.111.20.1,10.111.20.2, User joe,jack,
   DenyUsers !*
 
-Match Host 10.111.20.1,10.111.20.2, Group admins,
+Match Address 10.111.20.1,10.111.20.2, Group admins,
   DenyUsers !*
 ----
 
