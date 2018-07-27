@@ -1,6 +1,7 @@
 site:
   title: Rudder Documentation
   start_page: get-started::index
+  url: https://docs.rudder.io
 content:
   sources:
   - url: .
@@ -9,7 +10,7 @@ content:
   - url: .
     branches: master
     start_path: src/rudder-by-example
-  - url: .
-    branches: master
+  - url: ./doc-5.0
+    branches: "5.0"
     start_path: src/reference
 

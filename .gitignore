@@ -10,3 +10,6 @@
 # Editor files
 .idea/
 doc.iml
+
+# Temporary
+doc-5.0
