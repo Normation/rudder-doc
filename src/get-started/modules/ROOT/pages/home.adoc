@@ -1,0 +1,7 @@
+= Welcome to Rudder Documentation
+
+You can read:
+
+* The xref:index.adoc[get started guide]
+* The xref:reference:ROOT:index.adoc[reference manual]
+* xref:rudder-by-example:ROOT:index.adoc[Rudder by example] for use-case examples
