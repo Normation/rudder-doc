@@ -16,7 +16,7 @@ This backup procedure will operate on the three principal Rudder data sources:
 
 It will also backup the application logs.
 
-[code,python]
+[source,python]
 
 .How to backup a Rudder installation
 
@@ -50,7 +50,7 @@ but what should you do with it ?
 
 Here is the restoration procedure:
 
-[code,python]
+[source,python]
 
 .How to restore a Rudder backup
 
