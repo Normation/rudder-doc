@@ -53,7 +53,7 @@ However, to force this operation to free storage immediately, you can trigger a 
 by yourself, however keep in mind that this operation is very disk and memory intensive,
 and will lock both the Rudder interface and the reporting system for quite a long time with a big database.
 
-[code,python]
+[source,python]
 
 .Manual vacuuming using the psql binary
 
@@ -79,7 +79,7 @@ rudder=# VACUUM FULL;
 In some very rare case, you will encounter some LDAP database entries that are not indexed and used
 during searches. In that case, OpenLDAP will output warnings to notify you that they should be.
 
-[code,python]
+[source,python]
 
 .LDAP database reindexing
 

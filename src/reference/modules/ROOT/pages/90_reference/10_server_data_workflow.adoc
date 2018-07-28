@@ -17,7 +17,7 @@ The description of the category is included in +category.xml+.
 . At the last level, each technique is described with a +metadata.xml+ file and
 one or several CFEngine template files (name ending with +.st+).
 
-[code,python]
+[source,python]
 
 .An extract of Rudder Techniques filesystem tree 
 
