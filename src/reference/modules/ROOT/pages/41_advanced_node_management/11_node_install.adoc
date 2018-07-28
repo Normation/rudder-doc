@@ -184,13 +184,6 @@ generated for Nodes according in the following states:
 
 . Regeneration was forced by the user.
 
-["graphviz", "generate_policy_workflow.png"]
+image::graphviz/generate_policy_workflow.png[Generate policy workflow]
 
-.Generate policy workflow
-
--------
-
-include::../graphviz/generate_policy_workflow.dot[]
-
-------
 

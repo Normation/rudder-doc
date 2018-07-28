@@ -273,7 +273,7 @@ This variable can have only one value, over all the instances of this Technique,
 
 The password type allows to show an input text field whose content will be hashed when the form is submitted so that the password is never store in clear text.
 
-image:./images/password-field.png[Directive Password Field]
+image:password-field.png[Directive Password Field]
 
 *Available hash formats*
 

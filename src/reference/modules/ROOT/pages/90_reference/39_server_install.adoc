@@ -4,17 +4,7 @@
 
 Rudder components are distributed as a set of packages.
 
-//image::rudder-packages.png[Rudder packages]
-
-["graphviz", "packages.png"]
-
-.Rudder packages and their dependencies
-
-----
-
-include::../graphviz/packages.dot[]
-
-----
+image::graphviz/packages.png[Rudder packages and their dependencies]
 
 +rudder-webapp+::
 

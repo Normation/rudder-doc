@@ -78,11 +78,11 @@ Change request content::
 In this section, there is two tabs: 
 - History about that change request
 
-image:./images/workflows/History.png[]
+image:workflows/History.png[]
 
 - Display the change proposed
 
-image:./images/workflows/Rule_Update_Diff.png[]
+image:workflows/Rule_Update_Diff.png[]
 
 
 ==== How to create a Change request ? 

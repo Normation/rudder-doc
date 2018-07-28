@@ -57,13 +57,5 @@ At each change of the Node Configurations, Rudder Server creates CFEngine draft 
 (+Cf3PolicyDraft+) that are stored in memory, and then invokes +cf-clerk+. 
 +cf-clerk+ finally generates the CFEngine promises for the Nodes.
 
-["graphviz", "data_workflow.png"]
-
-.Rudder data workflow
-
-----
-
-include::../graphviz/data_workflow.dot[]
-
-----
+image::graphviz/data_workflow.png[Rudder data workflow]
 

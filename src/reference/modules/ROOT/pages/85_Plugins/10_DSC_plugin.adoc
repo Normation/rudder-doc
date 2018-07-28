@@ -109,7 +109,7 @@ DSC Generic Methods are shipped with the Rudder dsc plugin. Some are specific fo
 
 A filter is available in the Technique Editor to select either all generic methods, generic methods available for classic agent, and generic method available for DSC agent, so that you can choose relevant methods for the type of nodes you need to manage
 
-image:./images/technique_editor/rudder-technique-editor-filter.png[Technique editor filter]
+image:technique_editor/rudder-technique-editor-filter.png[Technique editor filter]
 
 
 ==== DSC Techniques
@@ -119,7 +119,7 @@ Techniques compatible with DSC agent appear, in the Directives and Techniques tr
 Unfortunately, not all Techniques are compatible with DSC agent, as some are deprecated, or some will be completely rewritten, but the coverage is increasing regularly.
 
 
-image:./images/rudder-technique-dsc.png[DSC compatible Techniques]
+image:rudder-technique-dsc.png[DSC compatible Techniques]
 
 ==== DSC Agent CLI
 
@@ -148,7 +148,7 @@ where action can be one of the following
 * version: Show the version of the DSC Rudder agent
 
 
-image:./images/rudder-agent-dsc-cli.png[Example of a Rudder DSC agent output on Windows]
+image:rudder-agent-dsc-cli.png[Example of a Rudder DSC agent output on Windows]
 
 ===== Agent logs
 
@@ -199,5 +199,5 @@ Import-LocalizedData : Cannot find the Windows PowerShell data file 'MSFT_Servic
 
 This does not prevent the correct execution of the agent, and next runs in the same terminal will not exhibit the error
 
-image:./images/rudder-agent-windows-known-issue.png[Error on first DSC agent execution in a terminal]
+image:rudder-agent-windows-known-issue.png[Error on first DSC agent execution in a terminal]
 

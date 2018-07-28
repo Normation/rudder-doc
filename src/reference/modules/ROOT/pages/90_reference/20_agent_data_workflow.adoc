@@ -7,15 +7,7 @@ recurrent tasks performed by the Rudder Agent? How does the Rudder Server handle
 the requests coming from the Rudder Agent? The Rudder Agent workflow diagram
 summarizes the process that will be described in the next pages.
 
-["graphviz", "agent_workflow.png"]
-
-.Rudder Agent workflow
-
--------
-
-include::../graphviz/agent_workflow.dot[]
-
-------
+image::graphviz/agent_workflow.png[Rudder agent workflow]
 
 Let's consider the Rudder Agent is installed and configured on the new Node.
 

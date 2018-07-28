@@ -25,21 +25,21 @@ It will add a default title bar and login bar, and a new page in Settings/Brandi
 
 Upon accessing Rudder, the login page will be changed, with a red line and text "Production", as shown here
 
-image:./images/branding/login-default.png[Default login message]
+image:branding/login-default.png[Default login message]
 
 Same for the Rudder top bar
 
-image:./images/branding/default-main-display.png[Default main display]
+image:branding/default-main-display.png[Default main display]
 
 ===== Customization
 
 A new page is available within Rudder, to customize the apparence. This page is in the Settings section, called Branding. It allows for setting the top Bar and the Login page, with a color and a text, and a real-time display of the expected result
 
-image:./images/branding/Configure.png[Configure apparence]
+image:branding/Configure.png[Configure apparence]
 
 The text bar accepts any UTF-8 character or emojis, as displayed in this example
 
-image:./images/branding/Customised_bar.png[Customized bar]
+image:branding/Customised_bar.png[Customized bar]
 
 
 

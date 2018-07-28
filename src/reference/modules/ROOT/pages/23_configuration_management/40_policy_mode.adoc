@@ -8,7 +8,7 @@ Rudder 4.0 includes a policy mode setting, that allows two distinct behaviors:
 
 This allows for example xref:26_manage_your_it/5_usecases/0_usecases_intro.adoc#_using_rudder_as_an_audit_tooli[to use Rudder as an audit tool] or xref:26_manage_your_it/5_usecases/0_usecases_intro.adoc#_using_audit_mode_to_validate_a_policy_before_applying_it[to test a policy before enforcing it].
 
-image:./images/audit_mode_general_overview.png[]
+image:audit_mode_general_overview.png[]
 
 This mode can be set:
 

@@ -11,7 +11,7 @@ The goal of that section is to detail the different steps and explain how to
 spot and solve a problem on the inventory workflow. Following diagram sum up
 the whole process.
 
-image:./images/rudder-inventory-workflow.png[Inventory workflow, from node to
+image:rudder-inventory-workflow.png[Inventory workflow, from node to
 Root server]
 
 
