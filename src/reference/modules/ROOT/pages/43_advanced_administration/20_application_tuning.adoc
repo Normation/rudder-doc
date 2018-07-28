@@ -194,7 +194,7 @@ error: UNTRUSTED: State directory /var/rudder/cfengine-community (mode 770) was 
 
 Here is the command line to use:
 
-[code,python]
+[source,python]
 
 .How to mount a RAMdisk on CFEngine state directory
 
