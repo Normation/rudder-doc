@@ -1,6 +1,6 @@
 name: reference
 title: Reference manual
-version: master
+version: 5.0
 nav:
 - modules/ROOT/nav.adoc
 

@@ -1,6 +1,6 @@
 name: get-started
 title: Get started
-version: master
+version: 5.0
 nav:
 - modules/ROOT/nav.adoc
 
