@@ -1,7 +1,9 @@
 site:
-  title: Rudder Documentation
+  title: Development Rudder Documentation
   start_page: get-started::home
-  url: https://docs.rudder.io
+  url: https://docs.rudder.io/dev
+output:
+  dir: ./build/site-dev
 content:
   sources:
   - url: .
@@ -11,6 +13,6 @@ content:
     branches: master
     start_path: src/rudder-by-example
   - url: ./doc-build
-    branches: "branches/rudder/5.0"
+    branches: ["branches/rudder/5.0", "master"]
     start_path: src/reference
 
