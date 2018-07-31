@@ -1,6 +1,6 @@
 name: rudder-by-example
 title: Rudder by example
-version: "5.1-dev"
+version: "current"
 nav:
 - modules/ROOT/nav.adoc
 

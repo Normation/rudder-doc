@@ -1,16 +1,17 @@
 site:
-  title: Rudder Documentation
+  title: Rudder Documentation Local Test
   start_page: get-started::home
-  url: https://docs.rudder.io
+output:
+  dir: ./build/site-local
 content:
   sources:
   - url: .
-    branches: master
+    branches: HEAD
     start_path: src/get-started
   - url: .
-    branches: master
+    branches: HEAD
     start_path: src/rudder-by-example
-  - url: ./doc-build
-    branches: "branches/rudder/5.0"
+  - url: .
+    branches: HEAD
     start_path: src/reference
 
