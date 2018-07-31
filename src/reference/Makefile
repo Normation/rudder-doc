@@ -17,7 +17,7 @@ content: $(GRAPHVIZ_IMAGES) $(ADOC_DYN_FILES) modules/ROOT/nav.adoc
 	cp dependencies/$@ modules/ROOT/pages/_partials/dyn/$@
 
 modules/ROOT/nav.adoc: $(ADOC_SRC_FILES)
-	./tools/generate-nav.sh
+	./tools/generate-nav.py > modules/ROOT/nav.adoc
 
 modules/ROOT/assets/images/graphviz/%.png: modules/ROOT/assets/graphviz/%.dot
 	mkdir -p modules/ROOT/assets/images/graphviz
