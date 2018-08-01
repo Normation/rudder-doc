@@ -2,7 +2,7 @@ site:
   title: Rudder Documentation Local Test
   start_page: get-started::home
 output:
-  dir: ./build/site-local
+  dir: ./build/sites/site-local
 content:
   sources:
   - url: .

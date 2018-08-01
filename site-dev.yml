@@ -3,7 +3,7 @@ site:
   start_page: get-started::home
   url: https://docs.rudder.io/dev
 output:
-  dir: ./build/site-dev
+  dir: ./build/sites/site-dev
 content:
   sources:
   - url: .
