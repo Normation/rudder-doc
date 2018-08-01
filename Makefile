@@ -6,11 +6,11 @@ GENERIC_DOCS = site site-dev site-local
 
 SITES = $(GENERIC_DOCS) $(VERSION_DOCS)
 
-.PHONY: prepare rudder-theme/build/ui-bundle.zip optipng doc-build $(SITES)
+.PHONY: prepare rudder-theme/build/ui-bundle.zip optipng doc-build build/sites/redirect-current.conf build/files $(SITES)
 .DEFAULT_GOAL := local
 
-all: $(GENERIC_DOCS) $(VERSION_ARCHIVES) test
-online: site site-dev $(VERSION_ARCHIVES) test
+all: $(GENERIC_DOCS) $(VERSION_ARCHIVES) build/sites/redirect-current.conf build/files test
+online: site site-dev $(VERSION_ARCHIVES) build/sites/redirect-current.conf build/files test
 local: site-local test
 
 rudder-theme/build/ui-bundle.zip:
@@ -36,8 +36,20 @@ $(SITES): prepare rudder-theme/build/ui-bundle.zip
 	antora --ui-bundle-url ./rudder-theme/build/ui-bundle.zip $@.yml
 
 %.tar.gz: %
+	mkdir -p build/archives
 	cd build && tar -cvzf $@ $<
+	mv build/$@ build/archives/
 	rm -rf build/$<
+
+# Generate apache conf for current redirection to latest release
+build/sites/redirect-current.conf:
+	# once 5.0 is relased, should be https://www.rudder-project.org/release-info/rudder/versions/latest
+	echo 'RedirectMatch ^/reference/current/(.*)$$ /reference/5.0/$$1' > $@
+
+# Download documentation files
+build/files:
+	mkdir -p build/files
+	curl -o build/files/rudder-cheatsheet-advanced.pdf "https://raw.githubusercontent.com/Normation/rudder-tools/master/documents/cheatsheet-advanced/rudder-cheatsheet-advanced.pdf"
 
 test:
 	./tests/check_broken_links.sh

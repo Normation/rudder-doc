@@ -2,6 +2,8 @@ site:
   title: Rudder Documentation
   start_page: get-started::home
   url: https://docs.rudder.io
+output:
+  dir: ./build/sites/site
 content:
   sources:
   - url: .
