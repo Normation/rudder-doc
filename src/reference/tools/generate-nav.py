@@ -25,6 +25,7 @@ def slugify(s):
     s = s.strip()
     s = re.sub('\W', '_', s)
     s = remove_duplicate_underscore(s)
+    s = s.rstrip('_')
     return s
 
 os.chdir(PAGESDIR)
