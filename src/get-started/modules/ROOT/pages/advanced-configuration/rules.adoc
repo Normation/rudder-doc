@@ -1,4 +1,4 @@
-== Organize configuration policies
+= Organize configuration policies
 
 In the previous sections, we saw how to define directives, the
 appliable parts of configuration, and groups of nodes.

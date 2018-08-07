@@ -1,4 +1,4 @@
-== Classify machines
+= Classify machines
 
 In Rudder, we never apply policies to individual nodes, but always to sets of nodes.
 

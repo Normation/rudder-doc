@@ -1,4 +1,4 @@
-== Use a predefined policy
+= Use a predefined policy
 
 [NOTE]
 

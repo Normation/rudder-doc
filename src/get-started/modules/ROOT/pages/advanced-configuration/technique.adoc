@@ -1,4 +1,4 @@
-== Define a complete applicative policy
+= Define a complete applicative policy
 
 [NOTE]
 

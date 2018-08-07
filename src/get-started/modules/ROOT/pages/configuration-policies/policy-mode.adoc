@@ -1,4 +1,4 @@
-== Audit vs. Enforce - Policy Mode
+= Audit vs. Enforce - Policy Mode
 
 [NOTE]
 
