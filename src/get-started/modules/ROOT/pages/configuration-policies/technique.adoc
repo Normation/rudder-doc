@@ -1,4 +1,4 @@
-== Define a configuration policy
+= Define a configuration policy
 
 [NOTE]
 

@@ -1,4 +1,4 @@
-== Add a new machine
+= Add a new machine
 
 [NOTE]
 
