@@ -1,6 +1,6 @@
-== Visualize compliance
+= Visualize compliance
 
-=== Trigger agent run
+== Trigger agent run
 
 Now we have applied our directive, we can trigger its application by going
 on our node with ssh:
@@ -15,7 +15,7 @@ And running the agent with:
 rudder agent run -u
 ----
 
-=== Rule compliance
+== Rule compliance
 
 In the first part we saw that Rudder provides a compliance view by node,
 which allows identifying individual problems, but this compliance view is not suited

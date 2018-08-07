@@ -1,4 +1,4 @@
-==== Enforce a line is present in a file only once 
+= Enforce a line is present in a file only once 
 
 Enforcing a line to be present in a single occurrence in a file is not an easy process to automate
 if you can't totally control the content of the file and need to let it

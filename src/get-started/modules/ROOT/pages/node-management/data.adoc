@@ -1,4 +1,4 @@
-== Providing configuration data
+= Providing configuration data
 
 data vs. code
 

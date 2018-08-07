@@ -1,4 +1,4 @@
-== Setup a test environment
+= Setup a test environment
 
 [NOTE]
 

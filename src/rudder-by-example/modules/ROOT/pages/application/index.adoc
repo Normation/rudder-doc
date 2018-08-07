@@ -1,3 +1,0 @@
-= Application management
-
-This section will show you various examples of application management with Rudder.

@@ -1,3 +1,0 @@
-= Files management
-
-This section will show you various examples of file management with Rudder.

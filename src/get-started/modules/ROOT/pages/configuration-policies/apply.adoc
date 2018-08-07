@@ -1,4 +1,4 @@
-== Run agent locally
+= Run agent locally
 
 [NOTE]
 
@@ -47,7 +47,7 @@ image::./dashboard.png["Dashboard graph", align="center"]
 You can see that compliance information got back to the server, and is used to
 display the current state in the dashboard.
 
-=== Node compliance
+== Node compliance
 
 Now you can go to our node details by using the quick search filter, and searching for "node".
 
@@ -57,7 +57,7 @@ component.
 
 image::./node-compliance.png["Node compliance", align="center"]
 
-=== Conclusion
+== Conclusion
 
 We have now finished our first policy application, from definition, using a new technique
 or a built-in one, and an application on our Rudder server.
