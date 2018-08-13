@@ -1,7 +1,21 @@
 = Welcome to Rudder Documentation
 
-You can read:
+* Discover Rudder
+** xref:reference:ROOT:00_introduction/01_presentation.adoc[What is Rudder]: Discover Rudder features and use cases
+** https://demo.rudder.io[Online demo]: Explore the Web interface with an online demo
+** xref:index.adoc[Get started guide]: Get started with Rudder on a test platform
 
-* The xref:index.adoc[get started guide]
-* The xref:reference:ROOT:index.adoc[reference manual]
-* xref:rudder-by-example:ROOT:index.adoc[Rudder by example] for use-case examples
+* Install Rudder
+** xref:reference:ROOT:10_installation/05_requirements/00_intro.adoc[Requirements]: Requirement for Rudder installation
+** xref:reference:ROOT:10_installation/10_install_server/00_install_intro.adoc[Install a Rudder server]: Install a Rudder root server to define your configuration policies
+** xref:reference:ROOT:10_installation/11_install_agent/00_install_agent.adoc[Install a Rudder agent]: Install a Rudder agent to apply configuration
+
+* Use Rudder
+** The xref:reference:ROOT:index.adoc[User manual]: Reference documentation
+** https://docs.rudder.io/api[API reference]: To automate actions and extract information
+** xref:rudder-by-example:ROOT:index.adoc[Rudder by example]: for real and detailed use-case examples
+
+* Join the community
+** https://www.rudder-project.org/site/support/chat-mailing-lists/[Chat with the community]: on our IRC channel
+** https://www.rudder-project.org/site/support/forums-lists/[Ask questions]:  on ServerFault or on our user mailing-list
+** https://www.rudder-project.org/redmine[Report an issue or propose a feature]: on our issue tracker
