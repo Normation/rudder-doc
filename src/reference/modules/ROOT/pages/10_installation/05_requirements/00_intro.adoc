@@ -1,4 +1,0 @@
-
-[[rudder-installation-requirements]]
-=== Requirements
-

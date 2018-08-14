@@ -1,0 +1,93 @@
+= Build packages from source
+
+[[_building_the_rudder_agent]]
+== Building the Rudder agent
+
+=== Get source
+
+Make sure you have network access and the git command.
+
+Go to your build directory and checkout rudder-packages
+
+----
+
+cd /usr/src
+git clone https://github.com/Normation/rudder-packages.git
+cd rudder-packages
+
+----
+
+Choose the branch to build
+
+----
+
+# For branch 5.0
+git checkout branches/rudder/5.0
+cd rudder-agent
+
+----
+
+Now choose one of the 3 next chapter, depending on your case: dpkg (debian-like package), rpm (redhat-like package) or other.
+
+=== Build a dpkg package
+
+Set the version to build:
+
+* Update the debian/changelog file to make the first entry match the version you want to build.
+* Edit the SOURCES/Makefile file and set the value of RUDDER_VERSION_TO_PACKAGE: see http://www.rudder-project.org/archives/ for a complete list of available versions.
+
+Run the dpkg package builder:
+
+----
+
+dpkg-buildpackage
+
+----
+
+The package will be stored in the parent directory.
+
+=== Build an rpm package
+
+Set the version to build:
+
+* Edit the SOURCES/Makefile file and set the value of RUDDER_VERSION_TO_PACKAGE: see http://www.rudder-project.org/archives/ for a complete list of available versions.
+
+Run the rpm package builder:
+
+----
+
+# make sure you are in in rudder-agent, then
+ln -s `pwd` /root/rpmbuild
+rpmbuild -ba --define 'real_version 5.0.0' SPECS/*.spec
+
+----
+
+The package will be stored in RPMS/
+
+=== Build an agent locally
+
+Before building the agent, you must decide on some environment variables:
+
+
+* RUDDER_VERSION_TO_PACKAGE: the version of the sources that will be used, see http://www.rudder-project.org/archives/ for a complete list. If a 'rudder-sources' directory exists in SOURCES it will be used instead of downloading sources. The Variable still needs to be defined though.
+
+* DESTDIR: where to put the installation, use / to install on the system and leave the default of ./target to prepare a package.
+
+* USE_SYSTEM_OPENSSL: (default true), use system openssl (depends on libssl-dev) or build it with the agent.
+
+* USE_SYSTEM_LMDB: (default false), use system lmdb (depends on liblmdb-dev) or build it with the agent.
+
+* USE_SYSTEM_PCRE: (default true), use system pcre (depends on libpcre3-dev) or build it with the agent.
+
+* USE_SYSTEM_PERL: (default false), use system perl (depends on perl) or build it with the agent.
+
+* USE_SYSTEM_FUSION: (default false), use system fusion (depends on fusioninventory-agent), or build it with the agent. We advise you to use the Rudder version since it contains some patches.
+
+----
+
+# example
+env="RUDDER_VERSION_TO_PACKAGE=5.0.0 DESTDIR=/ USE_SYSTEM_PERL=true"
+make $env
+make install $env
+
+----

@@ -1,0 +1,21 @@
+== Installation
+
+Each official package is signed
+with our GPG signature. To ensure the packages you will install
+are official builds and have not been altered, import our key
+into rpm using the following command:
+
+----
+
+rpm --import https://www.rudder-project.org/rpm-repos/rudder_rpm_key.pub
+
+----
+
+Our key fingerprint is:
+
+----
+
+pub  1024R/6F07D355 2012-11-09 Rudder Project (RPM release key) <security@rudder-project.org>
+      Key fingerprint = 1141 A947 CDA0 4E83 82C1  B9C4 ADAB 3BD3 6F07 D355
+
+----

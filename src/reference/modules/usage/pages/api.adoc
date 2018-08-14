@@ -1,0 +1,7 @@
+[[rest-api]]
+= REST API
+
+Rudder provides a complete REST API that gives access to the same features
+as the Web interface (and even more).
+
+Read the https://docs.rudder.io/api/[API documentation] for more information about usage and available features.

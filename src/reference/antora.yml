@@ -3,4 +3,9 @@ title: Reference manual
 version: "5.0"
 nav:
 - modules/ROOT/nav.adoc
+- modules/installation/nav.adoc
+- modules/usage/nav.adoc
+- modules/administration/nav.adoc
+- modules/plugins/nav.adoc
+- modules/reference/nav.adoc
 

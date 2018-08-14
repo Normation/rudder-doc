@@ -1,5 +1,0 @@
-== Advanced administration
-
-This chapter covers more advanced administration task of Rudder services.
-
-
