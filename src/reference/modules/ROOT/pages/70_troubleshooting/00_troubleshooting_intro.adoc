@@ -1,4 +1,4 @@
 == Troubleshooting and common issues
 
-All technical and general answers are on http://faq.rudder-project.org/.
+All technical and general answers are on https://faq.rudder-project.org/.
 
