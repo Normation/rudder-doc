@@ -90,8 +90,7 @@ waiting.inventory.queue.size=50
 
 ----
 
-Since Rudder 3.1.18 / 3.2.11 / 4.0.3, the number of currently waiting
-inventories can be obtained via a local REST API call to
+Number of currently waiting inventories can be obtained via a local REST API call to
 `http://localhost:8080/endpoint/api/info`:
 
 ----
