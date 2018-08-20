@@ -2,7 +2,7 @@ site:
   title: Rudder 5.0 Documentation
   start_page: get-started::home
 output:
-  dir: ./build/doc-5.0
+  dir: ./build/history/5.0
 content:
   sources:
   - url: .
