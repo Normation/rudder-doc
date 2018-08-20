@@ -1,16 +1,12 @@
 === JavaScript evaluation in Directives
 
-It is possible to use JavaScript expressions to build Directive values. The
+It is possible to use JavaScript expressions to build Directive values in all fields. The
 resulting values will be computed during policy generation, and can therefore
 provide unique values for each node.
 
 ==== Feature availability
 
-This feature was introduced in Rudder 3.1.12, Rudder 3.2.5  for password fields
-only, and generalized for all fields in Rudder 3.1.14, Rudder 3.2.7 and Rudder 4.0.
-
-If you upgraded to 3.1.12 (or a later 3.1.x version) or 3.2.5 (or a later 3.2.x
-version) from a previous Rudder version, this feature is disabled by default
+If you upgraded from a version prior to 3.1.12 or 3.2.5, this feature is disabled by default
 in order to mitigate any risk of undesired side effects on existing
 installations. You can enable it in the Administration/Settings page, using the
 *Enable script evaluation in Directives* parameter.
