@@ -1,9 +1,10 @@
-VERSION_DOCS = 5.0 5.1
-VERSION_ARCHIVES = $(addsuffix .tar.gz, $(VERSION_DOCS))
+VERSIONS = 5.0 5.1
+VERSION_DOCS = $(addprefix doc-, $(VERSIONS))
+VERSION_ARCHIVES = $(addsuffix .archive, $(VERSIONS))
 
 GENERIC_DOCS = site site-dev site-local
 
-SITES = $(GENERIC_DOCS) $(VERSION_DOCS)
+SITES = $(GENERIC_DOCS) $(VERSIONS)
 
 .PHONY: prepare rudder-theme/build/ui-bundle.zip optipng doc-build build/sites/site/.htaccess build/files $(SITES)
 .DEFAULT_GOAL := local
@@ -32,12 +33,12 @@ prepare: doc-build
 	cd src/reference && make
 
 $(SITES): prepare rudder-theme/build/ui-bundle.zip
-	antora --ui-bundle-url ./rudder-theme/build/ui-bundle.zip doc-$@.yml
+	antora --ui-bundle-url ./rudder-theme/build/ui-bundle.zip $@.yml
 
-doc-%.tar.gz: %
+%.archive: %
 	mkdir -p build/archives
-	cd build/history && tar -cvzf $@ $<
-	mv build/history/$@ build/archives/$@
+	cd build/history && cp -r $< doc-$< && tar -cvzf doc-$<.tar.gz doc-$< && rm -r doc-$<
+	mv build/history/doc-$<.tar.gz build/archives/
 
 # Generate apache conf for current redirection to latest release
 build/sites/site/.htaccess:
