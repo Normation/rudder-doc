@@ -22,7 +22,7 @@ sent by FusionInventory and insert the valuable data into the LDAP database.
 Application server for +rudder-webapp+ and +rudder-inventory-endpoint+. Both
 packages are written in 'Scala'. At compilation time, they are converted into
 +.war+ files. They need to be run in an application server. 'Jetty' is this
-application server. It depends on a compatible Java 7 Runtime Environment.
+application server. It depends on a compatible Java 8 Runtime Environment.
 
 +rudder-techniquess+::
 
@@ -127,7 +127,7 @@ The rsyslog server is receiving the logs from the nodes and insert them into a
 PostgreSQL database. On SLES, the +rsyslog-pgsql+ package is not part of the
 distribution, it can be downloaded alongside Rudder packages.
 
-Java 7+ JRE::
+Java 8+ JRE::
 
 The Java runtime is needed by the Jetty application server. Where possible, the
 package from the distribution is used, else a Java RE must be downloaded
