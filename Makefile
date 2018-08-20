@@ -39,7 +39,6 @@ $(SITES): prepare rudder-theme/build/ui-bundle.zip
 	mkdir -p build/archives
 	cd build && tar -cvzf $@ $<
 	mv build/$@ build/archives/
-	rm -rf build/$<
 
 # Generate apache conf for current redirection to latest release
 build/sites/site/.htaccess:
