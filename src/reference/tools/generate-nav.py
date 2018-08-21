@@ -41,17 +41,23 @@ for file in files:
         content = f.read().splitlines()
 
     prev = ""
+    first = True
     for line in content:
         search_title = TITLE.search(line)
         if search_title:
-            level = search_title.group(1).count("=")
+            level = search_title.group(1).count("=") + 1
             title = search_title.group(2)
             search_id = ID.search(prev)
             if search_id:
                 page_id = search_id.group(1)
             else:
                 page_id = slugify(title)
-            result.append("*" * level + " xref:" + file + "#" + page_id + "[" + title + "]")
+            if level < 6:
+                if first:
+                    result.append("*" * level + " xref:" + file + "[" + title + "]")
+                    first = False
+                else:
+                    result.append("*" * level + " xref:" + file + "#" + page_id + "[" + title + "]")
         prev = line
 
 print("\n".join(result))
