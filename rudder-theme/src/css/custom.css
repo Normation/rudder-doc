@@ -11,6 +11,15 @@ html {
   color: #333;
 }
 
+.crumb > a {
+  text-decoration: none !important;
+}
+
+.crumb:last-child > a {
+  color: #555;
+  font-weight: 500;
+}
+
 /* --- NAVBAR --- */
 
 .is-current-page > .nav-link,
@@ -76,6 +85,8 @@ html {
   color: #fff;
   min-height: 36px;
   opacity: 0.5;
+  position: absolute;
+  right: 0;
 }
 
 .navigation .nav-menu > ul > li ul li.nav-item.is-active > button {
@@ -95,9 +106,32 @@ html {
   margin-left: 0;
 }
 
+/*
+.navigation .nav-menu ul > li.nav-item.is-current-page.is-active > ul > li {
+  background-color: #303d43;
+}
+*/
+
+.navigation .nav-menu > ul > li > ul > li > ul > li {
+  background-color: #303d43;
+}
+
 .navigation .nav-menu > ul > li > ul li button + a {
   width: calc(100% - 35px) !important;
-  padding-left: 0 !important;
+  padding-left: 35px;
+}
+
+.navigation .nav-menu > ul > li > ul > li > button + a,
+.navigation .nav-menu > ul > li > ul > li > button + span {
+  padding-left: 6px !important;
+}
+
+.nav-menu > ul > li > button + a {
+  padding-left: 35px !important;
+}
+
+.navigation .nav-menu > h3 > a {
+  padding-left: 9px;
 }
 
 .navigation .nav-menu > h3 > a,
@@ -109,6 +143,7 @@ html {
 .navigation .nav-menu > ul > li > ul > li.is-current-path,
 .navigation .nav-menu > ul > li > ul > li.is-current-page {
   border-left-color: #f08004;
+  background-color: #20272a;
 }
 
 .navigation .nav-menu > ul > li > ul > li.is-current-page > a {
@@ -119,32 +154,46 @@ html {
 .navigation .nav-menu > ul > li > ul > li > a:hover,
 .navigation .nav-menu > ul > li > ul li button:hover {
   color: #fff;
-  background-color: #1e282c;
+  background-color: #1a2226;
 }
 
 .navigation .nav-menu > ul > li > ul li button:hover {
   opacity: 1;
 }
 
-.navigation .nav-menu > ul > li > ul > li > ul {
+.navigation .nav-menu > ul.nav-list {
+  color: #8aa4af;
+}
+
+.navigation .nav-menu ul.nav-list {
   margin-left: 0;
   padding-left: 0;
-  color: #8aa4af;
-  background-color: #2c3b41;
+  margin-bottom: 0 !important;
+}
+
+.navigation .nav-menu li.nav-item {
+  margin-top: 0;
 }
 
 .navigation .nav-menu > ul > li > ul > li > button + a,
 .navigation .nav-menu > ul > li > ul > li > ul > li > a,
-.navigation .nav-menu > ul > li > ul > li > ul > li > ul li a {
+.navigation .nav-menu > ul > li > ul > li > ul > li > ul li a,
+.navigation .nav-menu > ul li > span.nav-text {
   padding: 6px 6px 6px 35px;
   display: block;
   margin: 0;
   width: 100%;
   position: relative;
+  min-height: 36px;
+}
+
+.navigation .nav-menu > ul > li > ul > li > ul > li > ul > li a {
+  padding-left: 50px;
 }
 
 .navigation .nav-menu > ul > li > ul > li > ul > li.is-current-page > a,
-.navigation .nav-menu > ul > li > ul > li > ul > li ul li.is-current-page > a {
+.navigation .nav-menu > ul > li > ul > li > ul > li ul li.is-current-page > a,
+.navigation .nav-menu > ul li > span.nav-text:hover {
   color: #fff;
 }
 
@@ -163,24 +212,26 @@ html {
   background-repeat: no-repeat;
 }
 
-.navigation .nav-menu > ul > li > ul > li > ul > li.is-current-page > a::before,
-.navigation .nav-menu > ul > li > ul > li > ul > li ul li.is-current-page > a::before {
+.navigation .nav-menu > ul > li > ul > li > ul li.is-current-page > a::before {
   left: 0;
 }
 
-.navigation .nav-menu > ul > li > ul > li.is-current-page > button + a::before,
-.navigation .nav-menu > ul > li > ul > li ul li.is-current-page > button + a::before {
+.navigation .nav-menu > ul > li > ul > li > ul > li ul li.is-current-page > a::before {
+  left: 15px;
+}
+
+.navigation .nav-menu > ul > li > ul li.is-current-page > button + a::before,
+.navigation .nav-menu > ul > li > ul li.is-current-page > button + a::after {
   content: initial !important;
 }
 
-.navigation .nav-menu > ul > li > ul > li.is-current-page > button + a,
-.navigation .nav-menu > ul > li > ul > li ul li.is-current-page > button + a {
-  padding-right: 35px;
+.navigation .nav-menu > ul > li > ul > li.is-current-page.is-active {
+  background-color: #1e282c;
 }
 
 .navigation .nav-menu > ul > li > ul > li.is-current-page > button + a::after,
 .navigation .nav-menu > ul > li > ul > li ul li.is-current-page > button + a::after {
-  right: 0;
+  left: 0;
 }
 
 .navigation .nav-menu > ul > li > ul > li > ul li a:hover {
