@@ -9,7 +9,7 @@ GRAPHVIZ_IMAGES = $(addprefix modules/ROOT/assets/images/graphviz/, $(notdir $(G
 
 MODULES = ROOT installation usage administration plugins reference
 
-content: $(GRAPHVIZ_IMAGES) $(ADOC_DYN_FILES) nav
+content: $(GRAPHVIZ_IMAGES) $(ADOC_DYN_FILES) plugins nav
 
 ## Dynamic content
 
@@ -27,6 +27,10 @@ hooks.adoc:
 	cd dependencies && make $@
 	mkdir -p modules/usage/pages/_partials/dyn/
 	cp dependencies/$@ modules/usage/pages/_partials/dyn/$@
+
+plugins:
+	cd dependencies && make $@
+	cp -r dependencies/$@/* modules/plugins/
 
 nav: $(ADOC_SRC_FILES)
 	./tools/generate-nav.py ROOT "Introduction" > modules/ROOT/nav.adoc
@@ -53,3 +57,5 @@ clean:
 	rm -rf modules/*/nav.adoc
 	rm -f modules/*/pages/_partials/dyn/*
 	rm -rf modules/*/assets/images/graphviz
+	rm -rf modules/plugins/assets
+	find modules/plugins/pages ! -name 'index.adoc' -type f -exec rm -f {} +

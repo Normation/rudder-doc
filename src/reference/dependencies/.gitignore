@@ -8,4 +8,6 @@ rudder.8
 /ncf-repo/
 /rudder-agent-windows-repo/
 /rudder-repo/
-
+/plugins/
+/rudder-plugins-repo/
+/rudder-plugins-private-repo/

@@ -1,12 +1,36 @@
-[[extending-and-integrating-rudder]]
-= Rudder extension and integration with third party software
+[[plugins-management]]
+= Plugins
 
-Rudder was thought from the begining to be a good citizen in you infrastructure.
-Part of that good will intent is translated into the fact that everything is done
-so that Rudder is able to inter-operate well with the other parts of your
-infrastructure.
+Rudder is an extensible software. The *Administration > Plugin Management*
+section sum-up information about loaded plugins, their version and their
+configuration.
 
-For that, there is two mains way of integrating Rudder with your
-existing infrastructure components: you can either extend Rudder with plugins,
-or you can extend your existing tools or process to take advantage of Rudder.
+A plugin is an `.rpkg` file (for "Rudder package").
 
+== Install a plugin
+
+To install a plugin, copy the `.rpkg` file on your server, and run:
+
+----
+/opt/rudder/bin/rudder-pkg install-file <package.rpkg>
+----
+
+You can list currently installed plugins using:
+
+----
+/opt/rudder/bin/rudder-pkg list
+----
+
+You can also enable or disable, or remove a plugin with:
+
+----
+/opt/rudder/bin/rudder-pkg plugin enable <plugin>
+/opt/rudder/bin/rudder-pkg plugin disable <plugin>
+/opt/rudder/bin/rudder-pkg remove <package>
+----
+
+See all available commands with:
+
+----
+/opt/rudder/bin/rudder-pkg --help
+----
