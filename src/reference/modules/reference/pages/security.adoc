@@ -35,7 +35,7 @@ More precisely:
 === Common data
 
 This refers to content available from all nodes in the authorized networks, readable from all users
-on the nodes (and that can be transfered withtout encryption when using initial promises of a pre-4.0 node).
+on the nodes (and that can be transfered withtout encryption when using initial policies of a pre-4.0 node).
 
 These unprotected contents are:
 

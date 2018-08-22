@@ -1,4 +1,4 @@
-CFEngine server::
+Policy server::
 
-Distribute the CFEngine configuration to the nodes.
+Distribute the configuration to the nodes.
 

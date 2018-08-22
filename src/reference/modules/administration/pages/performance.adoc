@@ -171,7 +171,7 @@ I/O's, you might experience a sluggish CFEngine agent run everytime the machine
 tries to comply with your Rules.
 
 This is because the CFEngine agent tries to update its internal databases everytime the agent
-executes a promise (the .lmdb files in the /var/rudder/cfengine-community/state directory),
+executes a policy (the .lmdb files in the /var/rudder/cfengine-community/state directory),
 which even if the database is very light, takes some time if the machine has a very high iowait.
 
 In this case, here is a workaround you can use to restore CFEngine's full speed: you can use

@@ -88,7 +88,7 @@ The documentation provided on APIs is exhaustive, but here comes a summary of
 what can be done with them:
 
 - accept, delete a node and manage its parameters,
-- get information with a parametrable depth about node inventories,
+- get information with a parametrizable depth about node inventories,
 - search for nodes,
 - manage (create, update, delete) groups, directives, rules and parameters,
 - interact with the Techniques library,

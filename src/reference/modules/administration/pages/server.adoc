@@ -151,7 +151,7 @@ You can add as many networks as you want, the expected format is:
 === Clear caches
 
 Clear cached data, like node configuration. That will trigger a full
-redeployment, with regeneration of all promises files.
+redeployment, with regeneration of all policies files.
 
 === Reload dynamic groups
 
@@ -212,8 +212,8 @@ service rudder-agent restart
 
 ====
 
-This command can take more than one minute to restart the CFEngine daemon.
-This is not a bug, but an internal protection system of CFEngine.
+This command can take more than one minute to restart the agent daemons.
+This is not a bug, but an internal protection system of the agent.
 
 ====
 

@@ -75,13 +75,13 @@ used to defined configuration rule targets. Typically, some configurations are
 linked to the kind of server (physical or virtual), the quantity of RAM
 available, the version of an OS library which contains a security bug, etc.
 
-All of these data are also available xref:administration:integration.adoc#rudder-integration[through Rudder APIs].
+All of these data are also available xref:administration:integration.adoc#rudder-api-integration[through Rudder APIs].
 
 == REST API
 
 All Rudder commands are available through an exhaustive REST API. That API is
 https://docs.rudder.io/api/[fully documented online] and can
-be used to xref:administration:integration.adoc#rudder-integration[quickly and smoothly integrate Rudder with your existing infrastructure].
+be used to xref:administration:integration.adoc#rudder-api-integration[quickly and smoothly integrate Rudder with your existing infrastructure].
 
 == Audit trace and Change Requests
 
@@ -106,7 +106,7 @@ plugin or a dedicated synchronisation tool].
 Rudder can use enterprise directories (LDAP, Active Directory)
 or be connected to an SSO to manage users authentication.
 
-Moreover, Rudder authentication layer is plugable and can be extended to other
+Moreover, Rudder authentication layer is pluggable and can be extended to other
 authentication protocol xref:TODO[like Radius or SPNEGO with plugins].
 
 [[intro-rudder-extensibility]]
