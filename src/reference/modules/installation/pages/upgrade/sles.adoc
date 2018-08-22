@@ -1,0 +1,26 @@
+= Upgrade Rudder on SLES
+
+include::{partialsdir}/sles_repo.adoc[]
+
+== Rudder agent
+
+For Rudder agent, upgrade the agent package:
+
+----
+
+zypper update rudder-agent
+
+----
+
+
+== Rudder server
+
+For Rudder server, upgrade the server packages:
+
+----
+
+zypper update rudder-server-root
+
+----
+
+include::{partialsdir}/upgrade_techniques.adoc[]

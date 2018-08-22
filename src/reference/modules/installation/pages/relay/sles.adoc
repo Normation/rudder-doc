@@ -1,0 +1,20 @@
+= Install Rudder relay on SLES
+
+include::{partialsdir}/syslog.adoc[]
+
+include::{partialsdir}/zypper_segfault.adoc[]
+
+include::{partialsdir}/rpm_key.adoc[]
+
+include::{partialsdir}/sles_repo.adoc[]
+
+Install the package:
+
+----
+
+zypper install rudder-server-relay
+
+----
+
+include::{partialsdir}/relay_initial_config.adoc[]
+

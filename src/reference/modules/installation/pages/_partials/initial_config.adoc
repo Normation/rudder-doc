@@ -1,0 +1,50 @@
+== Initial configuration
+
+After the installation, you have to configure some system elements, by launching
+the following initialisation script:
+
+----
+
+/opt/rudder/bin/rudder-init
+
+----
+
+This script will ask you to fill in the following details:
+
+=====
+
+Allowed networks:: A list of IP networks authorized to connect to the server.
+It uses the network/CIDR mask notation, for instance +192.168.0.0/24+ or
++10.0.0.0/8+.
+To add several networks, first type the first network, then press
+the return key - the script will ask if you wish to add some more networks.
+Also, the allowed networks can be adjusted later in the web interface
+in the Administration - Settings tab without having to run the script
+again.
+
+=====
+
+[TIP]
+
+=====
+
+In case of typing error, or if you wish to reconfigure Rudder, you can
+execute this script again as many times as you want.
+
+=====
+
+=== Validate the installation
+
+Once all these steps have been completed, use your web browser to go to the URL
+given in the output of `rudder-init`.
+
+You should see a loading screen, then a login prompt. The default login is:
+
+* User: *admin*
+* Password: *admin*
+
+You are strongly advised to xref:administration:user_management.adoc#_passwords[change this password] as soon as possible.
+
+The setup of the Rudder server is now over. If you plan to manage hundreds or thousands of nodes,
+please note that some xref:administration:performance.adoc#_performance_tuning[performance tuning] can be necessary on the system.
+

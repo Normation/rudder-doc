@@ -1,0 +1,432 @@
+= Rudder architecture
+
+== Inventory workflow, from nodes to Root server
+
+One of the main information workflow in a Rudder managed system is the node's
+inventory one.
+
+Node inventories are generated on nodes, are sent to the node policy server (be
+it a Relay or the Root server) up to the Root server, and stored in the
+Rudder database (technically an LDAP server), waiting for later use.
+
+The goal of that section is to detail the different steps and explain how to
+spot and solve a problem on the inventory workflow. Following diagram sum up
+the whole process.
+
+image:rudder-inventory-workflow.png[Inventory workflow, from node to
+Root server]
+
+
+=== Processing inventories on node
+
+Inventories are generated daily during an agent run in the 00:00-06:00 time
+frame window local to the node. The exact time is randomly spread on the time
+frame for a set of nodes, but each node will always keep the same time (modulo
+the exact time of the run).
+
+User can request the generation and upload of inventory with the command:
+
+----
+
+$ rudder agent inventory
+
+----
+
+In details, generating inventory does:
+
+* ask the node policy server for its UUID with an HTTP GET on
+  `https://server/uuid`,
+* generate an inventory by scanning the node hardware and software components,
+* optionally make a digital signature of the generated inventory file,
+* send file(s) to the node's policy server on `https://POLICY-SERVER/inventory-updates/`
+
+The individual commands can be displayed with the `-i` option to `rudder agent
+inventory` command.
+
+
+=== Processing inventories on relays
+
+On the Relay server:
+
+* the inventory is received by a `webdav` endpoint,
+* the `webdav` service store the file in the folder
+  `/var/rudder/inventories/incoming`
+* on each agent runs, files in `/var/rudder/inventories/incoming` are
+  forwarded to the Relay own policy server.
+
+=== Processing inventories on root server
+
+On the Root server, the start of the workflow is the same than on a relay:
+
+* the inventory is received by a `webdav` endpoint,
+* the `webdav` service store the file in the folder
+  `/var/rudder/inventories/incoming`
+
+Then, on each run, the agent:
+
+* look for inventory / signature pairs:
+** inventories without a corresponding signature file are processed only if
+   they are older than 2 minutes,
+* POST the inventory or inventory+signature pair to the local API of
+  "inventory-endpoint" application on `http://localhost:8080/endpoint/upload/`
+* the API makes some quick checks on inventory (well formed, mandatory fields...)
+  and :
+** if checks are OK, *ACCEPTS* (HTTP code `200`) the inventory,
+** if signature is configured to be mandatory and is missing, or if the
+   signature is not valid, refuses with *UNAUTHORIZED* error (HTTP code `401`)
+** else fails with a *PRECONDITION FAILED* error (HTTP code `412`)
+* on error, inventory file is moved to `/var/rudder/inventories/failed`,
+* on success:
+** the inventory file is moved to `/var/rudder/inventories/received`,
+** in parallel, _inventory web_ parses and updates Rudder database.
+
+=== Queue of inventories waiting to be parsed
+
+The _inventory endpoint_ has a limited number of slot available for succesfully
+uploaded inventories to be queued waiting for parsing.
+That number can be configured in file `/opt/rudder/etc/inventory-web.properties`:
+
+----
+
+waiting.inventory.queue.size=50
+
+----
+
+Since Rudder 3.1.18 / 3.2.11 / 4.0.3, the number of currently waiting
+inventories can be obtained via a local REST API call to
+`http://localhost:8080/endpoint/api/info`:
+
+----
+
+$ curl http://localhost:8080/endpoint/api/info
+
+{
+  "queueMaxSize": 50,
+  "queueFillCount": 50,
+  "queueSaturated": true
+}
+
+----
+
+== Rudder Server data workflow
+
+To have a better understanding of the Archive feature of Rudder, a description
+of the data workflow can be useful.
+
+All the logic of Rudder Techniques is stored on the filesystem in
++/var/rudder/configuration-repository/techniques+.
+The files are under version control, using git.
+The tree is organized as following:
+
+. At the first level, techniques are classified in categories: applications,
+fileConfiguration, fileDistribution,  jobScheduling,  system,  systemSettings.
+The description of the category is included in +category.xml+.
+
+. At the second and third level, Technique identifier and version.
+
+. At the last level, each technique is described with a +metadata.xml+ file and
+one or several CFEngine template files (name ending with +.st+).
+
+[source,python]
+
+.An extract of Rudder Techniques filesystem tree
+
+----
+
++-- techniques
+|   +-- applications
+|   |   +-- apacheServer
+|   |   |   +-- 1.0
+|   |   |       +-- apacheServerConfiguration.st
+|   |   |       +-- apacheServerInstall.st
+|   |   |       +-- metadata.xml
+|   |   +-- aptPackageInstallation
+|   |   |   +-- 1.0
+|   |   |       +-- aptPackageInstallation.st
+|   |   |       +-- metadata.xml
+|   |   +-- aptPackageManagerSettings
+|   |   |   +-- 1.0
+|   |   |       +-- aptPackageManagerSettings.st
+|   |   |       +-- metadata.xml
+|   |   +-- category.xml
+|   |   +-- openvpnClient
+|   |   |   +-- 1.0
+|   |   |       +-- metadata.xml
+|   |   |       +-- openvpnClientConfiguration.st
+|   |   |       +-- openvpnInstall.st
+
+----
+
+At Rudder Server startup, or after the user has requested a reload of the
+Rudder Techniques, each +metadata.xml+ is mapped in memory, and used to create
+the LDAP subtree of Active Techniques.
+The LDAP tree contains also a set of subtrees for Node Groups, Rules and Node
+Configurations.
+
+At each change of the Node Configurations, Rudder Server creates CFEngine draft policies
+(+Cf3PolicyDraft+) that are stored in memory, and then invokes +cf-clerk+.
++cf-clerk+ finally generates the CFEngine promises for the Nodes.
+
+image::graphviz/data_workflow.png[Rudder data workflow]
+
+== Configuration files for Rudder Server
+
+* /opt/rudder/etc/htpasswd-webdav
+
+* /opt/rudder/etc/inventory-web.properties
+
+* /opt/rudder/etc/logback.xml
+
+* /opt/rudder/etc/openldap/slapd.conf
+
+* /opt/rudder/etc/reportsInfo.xml
+
+* /opt/rudder/etc/rudder-users.xml
+
+* /opt/rudder/etc/rudder-web.properties
+
+== Rudder agent workflow
+
+[NOTE]
+
+.Components
+
+=====
+
+This agent contains the following tools:
+
+. The community version of http://www.cfengine.com[CFEngine], a powerful open
+source configuration management tool.
+
+. http://fusioninventory.org/[FusionInventory], an inventory software.
+
+. An initial configuration set for the agent, to bootstrap the Rudder Root Server
+access.
+
+These components are recognized for their reliability and minimal impact on
+performances. Our tests showed their memory consumption is usually under 10 MB
+of RAM during their execution. So you can safely install them on your servers.
+
+We grouped all these tools in one package, to ease the Rudder Agent
+installation.
+
+=====
+
+In this chapter, we will have a more detailed view of the Rudder Agent
+workflow. What files and processes are created or modified at the installation
+of the Rudder Agent? What is happening when a new Node is created? What are the
+recurrent tasks performed by the Rudder Agent? How does the Rudder Server handle
+the requests coming from the Rudder Agent? The Rudder Agent workflow diagram
+summarizes the process that will be described in the next pages.
+
+image::graphviz/agent_workflow.png[Rudder agent workflow]
+
+Let's consider the Rudder Agent is installed and configured on the new Node.
+
+The Rudder Agent is regularly launched and performs following tasks
+sequentially, in this order:
+
+=== Request data from Rudder Server
+
+The first action of Rudder Agent is to fetch the +tools+ directory from Rudder
+Server. This directory is located at +/opt/rudder/share/tools+ on the Rudder
+Server and at +/var/rudder/tools+ on the Node. If this directory is already
+present, only changes will be updated.
+
+The agent then try to fetch new Applied Policies from Rudder Server. Only
+requests from valid Nodes will be accepted. At first run and until the Node has
+been validated in Rudder, this step fails.
+
+=== Launch processes
+
+Ensure that the CFEngine community daemons +cf-execd+ and +cf-serverd+ are
+running. Try to start these daemons if they are not already started.
+
+Daily between 5:00 and 5:05, relaunch the CFEngine Community daemons +cf-execd+
+and +cf-serverd+.
+
+Add a line in +/etc/crontab+ to launch +cf-execd+ if it's not running.
+
+Ensure again that the CFEngine community daemons +cf-execd+ and +cf-serverd+
+are running. Try to start these daemons if they are not already started.
+
+=== Identify Rudder Root Server
+
+Ensure the +curl+ package is installed. Install the package if it's not
+present.
+
+Get the identifier of the Rudder Root Server, necessary to generate reports.
+The URL of the identifier is http://Rudder_root_server/uuid
+
+
+=== Inventory
+
+If no inventory has been sent since 8 hours, or if a forced inventory has been
+requested (class +force_inventory+ is defined), do and send an inventory to the
+server.
+----
+
+rudder agent inventory
+
+----
+
+No reports are generated until the Node has been validated in Rudder Server.
+
+=== Syslog
+
+After validation of the Node, the system log service of the Node is configured
+to send reports regularly to the server. Supported system log providers are:
++syslogd+, +rsyslogd+ and +syslog-ng+.
+
+=== Apply Directives
+
+Apply other policies and write reports locally.
+
+== Configuration files for a Node
+
+* /etc/default/rudder-agent
+
+== Packages organization
+
+=== Packages
+
+Rudder components are distributed as a set of packages.
+
+image::graphviz/packages.png[Rudder packages and their dependencies]
+
++rudder-webapp+::
+
+Package for the Rudder Web Application. It is the graphical interface for
+Rudder.
+
++rudder-inventory-endpoint+::
+
+Package for the inventory reception service. It has no graphical interface. This
+service is using HTTP as transport protocol. It receives an parses the files
+sent by FusionInventory and insert the valuable data into the LDAP database.
+
++rudder-jetty+::
+
+Application server for +rudder-webapp+ and +rudder-inventory-endpoint+. Both
+packages are written in 'Scala'. At compilation time, they are converted into
++.war+ files. They need to be run in an application server. 'Jetty' is this
+application server. It depends on a compatible Java 7 Runtime Environment.
+
++rudder-techniques+::
+
+Package for the Techniques. They are installed in
++/opt/rudder/share/techniques+. At runtime, the Techniques are
+copied into a 'git' repository in +/var/rudder/configuration-repository+. Therefore, the package depends
+on the +git+ package.
+
++rudder-inventory-ldap+::
+
+Package for the database containing the inventory and configuration information
+for each pending and validated Node. This 'LDAP' database is build upon
+'OpenLDAP' server.  The 'OpenLDAP' engine is contained in the package.
+
++rudder-reports+::
+
+Package for the database containing the logs sent by each Node and the reports
+computed by Rudder. This is a 'PostgreSQL' database using the 'PostgreSQL'
+engine of the distribution. The package has a dependency on the +postgresl+
+package, creates the database named +rudder+ and installs the inialisation
+scripts for that database in +/opt/rudder/etc/postgresql/*.sql+.
+
++rudder-server-root+::
+
+Package to ease installation of all Rudder services. This package depends on
+all above packages. It also
+
+- installs the Rudder configuration script:
+
+----
+
+/opt/rudder/bin/rudder-init
+
+----
+
+- installs the initial promises for the Root Server in:
+
+----
+
+/opt/rudder/share/initial-promises/
+
+----
+
+- installs the init scripts (and associated +default+ file):
+
+----
+
+/etc/init.d/rudder
+
+----
+
+- installs the logrotate configuration:
+
+----
+
+/etc/logrotate.d/rudder-server-root
+
+----
+
++rudder-agent+::
+
+One single package integrates everything needed for the Rudder Agent. It
+contains CFEngine Commmunity, FusionInventory, and the initial promises for a
+Node. It also contains an init script:
+
+----
+
+/etc/init.d/rudder
+
+----
+
+The +rudder-agent+ package depends on a few libraries and utilities:
+
+* +OpenSSL+
+* +libpcre+
+* +liblmdb+ (On platforms where it is available as a package - on others the rudder-agent package bundles it)
+* +uuidgen+
+
+=== Software dependencies and third party components
+
+The Rudder Web application requires the installation of 'Apache 2 httpd',
+'JRE 7+', and 'cURL'; the LDAP Inventory service needs 'rsyslog' and
+the report service requires 'PostgreSQL'.
+
+When available, packages from your distribution are used. These packages are:
+
+Apache::
+
+The Apache Web server is used as a proxy to give HTTP access to the Web
+Application. It is also used to give writable WebDAV access for the inventory.
+The Nodes send their inventory to the WebDAV service, the inventory is stored in
++/var/rudder/inventories/incoming+.
+
+PostgreSQL::
+
+The PostgreSQL database is used to store logs sent by the Nodes and
+reports generated by Rudder. Rudder 4.0 is tested for PostgreSQL 9.2 and higher. It still works with version 8.4 to 9.1, but not warranties are made that it will hold in the future. It is really recommanded to migrate to PostgreSQL 9.2 at least.
+
+rsyslog and rsyslog-pgsql::
+
+The rsyslog server is receiving the logs from the nodes and insert them into a
+PostgreSQL database. On SLES, the +rsyslog-pgsql+ package is not part of the
+distribution, it can be downloaded alongside Rudder packages.
+
+Java 7+ JRE::
+
+The Java runtime is needed by the Jetty application server. Where possible, the
+package from the distribution is used, else a Java RE must be downloaded
+from Oracle's website (http://www.java.com).
+
+curl::
+
+This package is used to send inventory files from
++/var/rudder/inventories/incoming+ to the Rudder Endpoint.
+
+git::
+
+The running Techniques Library is maintained as a git repository in
++/var/rudder/configuration-repository/techniques+.

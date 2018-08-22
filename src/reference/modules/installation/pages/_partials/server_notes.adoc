@@ -1,0 +1,7 @@
+== Before installation
+
+Before all, you need to setup a server according to
+xref:installation:operating_systems.adoc#server-supported-os[the server specifications]. You should also
+xref:installation:requirements.adoc#configure-the-network[configure the network].
+
+As Rudder data can grow really fast depending on your number of managed nodes and number of rules, it is advised to separate partitions to prevent /var getting full and break your system.

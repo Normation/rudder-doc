@@ -1,0 +1,19 @@
+= Install Rudder agent on Debian or Ubuntu
+
+include::{partialsdir}/quick_agent.adoc[]
+
+include::{partialsdir}/syslog.adoc[]
+
+include::{partialsdir}/apt_key.adoc[]
+
+include::{partialsdir}/debian_repo.adoc[]
+
+Install the package:
+
+----
+
+apt-get install rudder-agent
+
+----
+
+include::{partialsdir}/agent_initial_config.adoc[]

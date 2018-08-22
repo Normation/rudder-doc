@@ -1,0 +1,180 @@
+[[rudder-installation-requirements]]
+= Requirements
+
+[[configure-the-network]]
+== Networking
+
+.Network Flows
+[options="header"]
+|=======================
+|To|From|Port|Usage
+|Root Server|User or API client| *tcp/443* (https) | Access Web interface/API
+.6+|Policy Server |Any Node|*udp/514* (or tcp/514) |Send reports
+.3+|Linux or AIX Node | *tcp/443* (https/WebDAV) | Send inventories
+|  *tcp/5309*    |Fetch policies
+|  _tcp/5310 (optional)_    |Debug policy copy
+|AIX Node | *tcp/80* (http/WebDAV) | Send inventories
+|Windows DSC Node | *tcp/443* (https/WebDAV) | Send inventories and fetch policies
+|Linux or AIX Node | Policy Server | _tcp/5309 (optional)_ | Trigger remote agent run
+|=======================
+
+Note: The policy server is the server configured to manage the node, and can be
+either a root server or a relay server.
+
+=== DNS - Name resolution
+
+If you want to be able to trigger agent runs from the Root Server (without
+having to wait for regular automated run),
+you will need your Root Server (or Relay Server) to be able to resolve your nodes
+using the provided hostname.
+
+
+
+
+[[jvm-requirements]]
+== JVM Security Policy
+
+Rudder needs `unlimited strength` security policy because it uses a variety of advanced
+hashing and cryptographic algorithms only available in that mode.
+
+Any recent JVM (JDK 8 > 8u161, all JDK 9 and more recent) is configured by default with this policy.
+
+You can check your case by running the following command on your server:
+
+----
+
+jrunscript -e 'exit (javax.crypto.Cipher.getMaxAllowedKeyLength("RC5") >= 256 ? 0 : 1);'; echo $?
+
+----
+
+If it returns 0, you have the correct policy. In other cases, you will need to change it.
+
+For that, you can download the
+http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html[`unlimited strength` policy for JDK 8 here].
+
+
+Then, simply copy the `java.policy` file into `$JAVA_HOME/jre/lib/security/java.policy`.
+
+[[rudder-cloud-compatibility]]
+== Cloud compatibility
+
+The agent provides an abstraction that permits a high level management of the infrastructure.
+This abstraction is independent of the underlying hardware. This also works for the cloud -
+we can define configuration rules in Rudder that will be applied as well inside a cloud instance as in a virtual server or in a physical machine of a datacenter.
+
+Any cloud instance based on one of the supported operating system is automatically supported.
+
+[[node-hardware-requirements]]
+== Hardware specifications for Rudder Agent
+
+Rudder agent has a very small footprint, and only consumes:
+
+* 10 to 20 MB of RAM during an agent run
+* a few kB on the network to check or update its policies
+* a few kB on the network to report
+* around 100 MB of disk space for the installed files and the workspace
+
+These figures will vary depending on your configuration (backup retention,
+number of configured components to check, etc...).
+
+[[server-hardware-requirements]]
+== Hardware specifications and sizing for Rudder Root Server
+
+A dedicated server is strongly recommended, either physical or virtual with at least one dedicated core.
+Rudder Server runs on both 32 (if available) and 64 bit versions of every supported Operating System.
+
+[NOTE]
+
+====
+
+Rudder does not fear big infrastructures. It is currently used in production in
+infrastructure with more than *7000* nodes.
+
+====
+
+=== Memory
+
+The required amount of RAM mainly depends on the number of managed nodes. A general rule for the minimal value on a stand-alone server is:
+
+* less than 50 nodes: 2 GB
+* between 50 and 1000 nodes: 4 GB
+* more than 1000 nodes: 4 GB + 1 GB of RAM by 500 nodes above 1000.
+
+When managing more than 1000 nodes, we also recommend you to use a multiserver
+installation for Rudder as described in chapter xref:administration:multi_server.adoc#multiserver-rudder[Multiserver Rudder].
+
+When your server has more than 2 GB of RAM, you have to configure the RAM allocated
+to the Java Virtual Machine as explained in the section
+xref:administration:performance.adoc#_configure_ram_allocated_to_jetty[about webapplication RAM configuration].
+
+When your server has more than 4 GB, you may need to also tune the PostgresSQL
+server, as explained in the xref:administration:performance.adoc#_optimize_postgresql_server[Optimize PostgreSQL Server]
+section.
+
+[TIP]
+
+====
+
+As an example, a Rudder server which manages 2600 nodes (with a lot of policies
+checked) will need:
+
+* A server with 8 GB of RAM,
+* 4 GB of RAM will be allocated to the JVM.
+
+In our load-tests, with such a configuration, the server is not stressed and
+the user experience is good.
+
+====
+
+=== Disk
+
+The PostgreSQL database will take up most disk space needed by Rudder. The storage
+necessary for the database can be estimated by counting around
+150 to 400 kB by Directive, by Node and by day of retention of node's
+execution reports (the default is 4 days):
+
+----
+max_space = number of Directives * number of Nodes * retention duration in days * 400 kB
+----
+
+For example, a default installation with 500 nodes and an average of
+50 Directives by node, should require between *14 GB and 38 GB* of disk space
+for PostgreSQL.
+
+Follow the xref:administration:performance.adoc#_reports_retention[Reports Retention] section to configure the
+retention duration.
+
+[WARNING]
+
+====
+
+Be careful to correctly size your */var* partition. Compliance data are growing
+fast, and PostgreSQL doesn't like at all to encounter a write error because
+the disk is full. It is also adviced to set-up your monitoring to check for
+available space on that partition.
+
+Special attention should be given to:
+
+=======
+
+`/var/lib/pgsql`::
+(OS dependent).
+Please see the xref:installation:requirements.adoc#_database_maintenance[database maintenance] chapter for more details about the
+PostgreSQL database size estimation.
+
+`/var/rudder`::
+Contains most of your server information, the configuration repository, LDAP database, etc...
+Rudder application-related files should stay under 1GB, but the size of the configuration-repository will
+depend of the amount of data you store in it, especially in the shared-files folder (files that will get
+distributed to the agents).
+
+`/var/log/rudder`::
+Report logs (`/var/log/rudder/reports`) size will depend on the amount of nodes you manage.
+It is possible to reduce this drastically by unticking "Log all reports received to /var/log/rudder/reports/all.log"
+under the *Administration -> Settings* tab in the Rudder web interface. This will prevent Rudder from recording this logs
+in a text file on disk, and will only store them in the SQL database. This saves on space, and doesn't remove any
+functionality, but does however make debugging harder.
+
+=======
+
+====

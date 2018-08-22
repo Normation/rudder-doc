@@ -1,3 +1,0 @@
-[[_manage_your_it]]
-== Configuration policies
-

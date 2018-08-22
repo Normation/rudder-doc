@@ -1,0 +1,15 @@
+[TIP]
+
+====
+
+If you are working on a test system, you can use the xref:quick_install.adoc[quick install script]:
+
+----
+
+curl https://www.rudder-project.org/tools/rudder-setup | bash -s setup-server 5.0
+
+----
+
+That will automatically execute the installation, and you can go directly to the *Initial configuration* section below.
+
+====

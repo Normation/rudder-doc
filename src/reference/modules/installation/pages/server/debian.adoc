@@ -1,0 +1,24 @@
+= Install Rudder root server on Debian or Ubuntu
+
+include::{partialsdir}/quick_server.adoc[]
+
+include::{partialsdir}/server_notes.adoc[]
+
+== Dependencies
+
+Rudder requires Java RE (version 8 at least) which is not packaged by default on Debian 8. The Java RE 8 for Debian can be found through Oracle's website: https://www.java.com
+
+include::{partialsdir}/apt_key.adoc[]
+
+include::{partialsdir}/debian_repo.adoc[]
+
+To begin the installation, you should simply install the rudder-server-root
+metapackage, which will install the required components:
+
+----
+
+apt-get install rudder-server-root
+
+----
+
+include::{partialsdir}/initial_config.adoc[]

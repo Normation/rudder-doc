@@ -1,0 +1,36 @@
+= Upgrade Rudder on Debian or Ubuntu
+
+[WARNING]
+
+====
+
+Rudder includes a script for upgrading all files, databases, etc... which need
+migrating. Therefore, you should not replace your old files by the new ones
+when apt asks about this, unless you want to reset all your parameters.
+
+====
+
+include::{partialsdir}/debian_repo.adoc[]
+
+== Rudder agent
+
+For Rudder agent, upgrade the agent package:
+
+----
+
+apt-get install rudder-agent
+
+----
+
+== Rudder server
+
+
+For Rudder server, upgrade the server packages:
+
+----
+
+apt-get install rudder-server-root
+
+----
+
+include::{partialsdir}/upgrade_techniques.adoc[]
