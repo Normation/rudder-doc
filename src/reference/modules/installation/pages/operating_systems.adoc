@@ -1,3 +1,4 @@
+= Supported Operating Systems
 
 [[node-supported-os, the list of supported Operating Systems for Nodes]]
 == Fully supported Operating Systems
@@ -12,15 +13,15 @@ available for these platforms:
 
 GNU/Linux:
 
-* Debian 5 to 9
+* Debian 8 and 9
 
-* RedHat Enterprise Linux (RHEL) / RHEL-like 3 and 5 to 7
+* RedHat Enterprise Linux (RHEL) / RHEL-like 6 and 7 (64-bit)
 
-* SUSE Linux Enterprise Server (SLES) 10 SP3, 11 and 12
+* SUSE Linux Enterprise Server (SLES) 11 and 12 (64bit)
 
-* Ubuntu 10.04 LTS (Lucid), 12.04 LTS (Precise), 14.04 LTS (Trusty), 16.04 LTS (Xenial), 18.04 LTS (Bionic)
+* Ubuntu 14.04 LTS (Trusty), 16.04 LTS (Xenial), 18.04 LTS (Bionic) (64-bit)
 
-* Slackware 14
+* Slackware 14 (64-bit)
 
 Other Unix systems:
 
@@ -28,7 +29,7 @@ Other Unix systems:
 
 Windows:
 
-* xref:installation:requirements.adoc#install-on-windows[Microsoft Windows] Server 2008 R2, 2012, 2012 R2, 2016
+* xref:TODO[Microsoft Windows] Server 2008 R2, 2012, 2012 R2, 2016
 
 [TIP]
 
@@ -79,13 +80,21 @@ any packages for them. Moreover, some Techniques may not work properly. If you
 wish to get Rudder support on those systems, please get in touch with us!
 
 A reference about how to manually build a Rudder agent is available on Rudder's
-documentation here: xref:reference:build.adoc#_building_the_rudder_agent[Building the Rudder Agent]
+xref:reference:build.adoc#_building_the_rudder_agent[build documentation].
 
 ====
 
 === For Rudder Nodes
 
 The following operating systems have had an agent built using xref:reference:build.adoc#_building_the_rudder_agent[Building the Rudder Agent]:
+
+* Debian 5 to 7
+
+* RedHat Enterprise Linux / CentOS 3 and 5
+
+* SUSE Linux Enterprise Server 10 SP3
+
+* Ubuntu 10.04 LTS (Lucid), 12.04 LTS (Precise)
 
 * FreeBSD
 

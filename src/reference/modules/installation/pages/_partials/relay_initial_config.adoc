@@ -19,7 +19,7 @@ host to be considered as a relay. You can find the UUID of your node with the
 When every step has completed successfully:
 
 - The Rudder root server will recognize the new node as a relay
-- It will generate specific promises for the relay
+- It will generate specific policies for the relay
 - The relay will update and switch to his new role
 
 This is an example of node details pane showing a relay server. Note the "Role:

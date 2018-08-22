@@ -188,7 +188,8 @@ psql -u rudder -d rudder -W < /root/rudder-backup-XXXXXXXX.sql
 rudder agent enable
 
 # And restart the machine or just Rudder:
-service rudder restart
+service rudder-server restart
+service rudder-agent restart
 
 ----
 

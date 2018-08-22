@@ -83,7 +83,7 @@ All the tag name in the .xml are in upper case, all the attributes are in camel 
     <FILE name="file2.txt"><OUTPATH>technique_name/newname.txt</OUTPATH></FILE>
     <FILE name="RUDDER_CONFIGURATION_REPOSITORY/directory/other/file.txt"><OUTPATH>technique_name/filename</OUTPATH></FILE>
   </FILES>
-  <TRACKINGVARIABLE>                                          <!-- Defines a special system variable TRACKINGKEY that contains all the necessary information to track which Directive generated the promises -->
+  <TRACKINGVARIABLE>                                          <!-- Defines a special system variable TRACKINGKEY that contains all the necessary information to track which Directive generated the policies -->
     <SAMESIZEAS>VariableName</SAMESIZEAS>                     <!-- Optional; defines the cardinality of this variable based on the cardinality of the VariableName -->
   </TRACKINGVARIABLE>
 
@@ -99,7 +99,7 @@ All the tag name in the .xml are in upper case, all the attributes are in camel 
   </RUNHOOKS>
 
 
-  <SECTIONS>                                                  <!-- Lists all the sections of the promises -->
+  <SECTIONS>                                                  <!-- Lists all the sections of the policies -->
     <SECTION name="sectionName">                              <!-- Container of a section (see below) -->
     </SECTION>
   </SECTIONS>
@@ -194,7 +194,7 @@ NOTE: INPUT fields are automatically escaped, meaning any quote will be written 
    *  *ipv4* [since Rudder 3.1.14, 3.2.7, 4.0.0]: only accept IPv4 formatedt IPs
    * *ipv6* [since Rudder 3.1.14, 3.2.7, 4.0.0]: only accept IPv6 formatted IPs
    * *size-<unit>* : (size-b, size-kb, size-mb, size-gb ou size-tb)
-   * *raw* : the content of this field will not be escaped when written in the promises (Rudder >= 2.6)
+   * *raw* : the content of this field will not be escaped when written in the policies (Rudder >= 2.6)
    * *password* : the content of this field will be handled as a password, and thus be hidden and transformed if necessary (see "Password handling" below) (Rudder >= 2.6)
 
 === The <FILES> tag
@@ -211,7 +211,7 @@ Example:
 ----
 
    *  *name* is mandatory. It's the path to file to copy, either relative to the technique directory (i.e, at the same level as metadata.xml) or absolute from the configuration repository directory if it starts with RUDDER_CONFIGURATION_REPOSITORY (usually /var/rudder/configuration-repository) (and yes, this forbids the use case where you want to have a sub-directory named RUDDER_CONFIGURATION_REPOSITORY under the technique directory - I'm sure one will find other way to do it if really needed :). The file will be taken from git, at the same git revision as other tehniques files.
-   *  *OUTPATH* is optional. If not specified, the file will be copied into the target node promises at the same place as other files for the technique, with the same name. If specified, you have to give a path+name, where path is relative to the directory for agent promises on the node (i.e, if you want to put the file in the technique directory, you need to use "techniqueName/new-file-name.txt")
+   *  *OUTPATH* is optional. If not specified, the file will be copied into the target node policies at the same place as other files for the technique, with the same name. If specified, you have to give a path+name, where path is relative to the directory for agent promises on the node (i.e, if you want to put the file in the technique directory, you need to use "techniqueName/new-file-name.txt")
 
 == Examples
 
@@ -389,95 +389,6 @@ It is a side effect of the previous limitation.
 
 The Techniques use the http://www.stringtemplate.org/[StringTemplate] engine. A Technique *must* have the .st extension to be extended by Rudder (have some variables replaced, some part removed or added given some parameters).
 
-=== Variable replacement
-
-Note : Rudder use a StringTemplate grammar slighlty different from the default one. Rather than using "$" as a variable identifier, the Techniques use "&" to avoid collision with the CFEngine variables
-
-==== Single-valued variable replacement
-
-----
-
-&UUID&
-
-----
-
-   * Will be remplaced by the value of the variable UUID
-
-==== Remplacement of variable with one or more values
-
-----
-
-&DNS_RESOLVERS: { "&it&" };separator=", "&
-
-----
-
-   * Will be remplaced by `"8.8.8.8", "8.8.4.4"`
-   * Here, `&it&` is an alias for the current item in the list (with no confusion, because there is only one variable)
-
-----
-
-&POLICYCHILDREN, CHILDRENID : {host, uuid |
-"/var/rudder/share/&uuid&/"
-maproot => { host2ip("&host&"), escape("&host&") },
-admit => { host2ip("&host&"), escape("&host&") };
-
-} &
-
-----
-
-   * `host` is an alias for the current value of POLICYCHILDREN
-   * `uuid` is an alias for the current value of CHILDRENID
-   * Both item are iterated at the same time, so both list must have the same length
-
-==== Remplacement of variable with one or more value, and writing an index all along
-
-----
-
-&FILE_AND_FOLDER_MANAGEMENT_PATH:{path |"file[&i&][path]" string => "&path&";
-}&
-
-----
-
-   * _i_ is an iterator, starting at 1
-
-The result would be:
-
-----
-
-"file[1][path]" string => "/var";
-"file[2][path]" string => "/bin";
-
-----
-
-==== Conditionnal writing of a section
-
-----
-
-&if(INITIAL)&
-
-something
-
-&endif&
-
-----
-
-The variable must either be:
-
-   * A boolean: If its value is true, then the section will be displayed
-   * A variable with the parameter `MAYBEEMPTY="true"`: If the value is not set, then the section won't be displayed, otherwise it will be displayed
-
-More information can be found here: https://theantlrguy.atlassian.net/wiki/display/ST/ST+condensed+--+Templates+and+expressions
-
-==== Unique identifier of Directive for Techniques with separated policy generation
-
-As of Rudder 4.3, Techniques with separated policy generation (see tag POLICYGENERATION in metadata.xml) need to have a way to identify uniquely their generated files, and bundles and methods. The special placeholder RudderUniqueID is replaced at generation by the identifier of the Directive. It can be used anywhere in the .st files, or even in the OUTPATH.
-
-== Syntax of the Techniques
-
-=== Generalities
-
-The Techniques use the http://www.stringtemplate.org/[StringTemplate] engine. A Technique *must* have the .st extension to be extended by Rudder (have some variables replaced, some part removed or added given some parameters).
-
 === Variable remplacement
 
 Note : Rudder use a StringTemplate grammar slighlty different from the default one. Rather than using "$" as a variable identifier, the Techniques use "&" to avoid collision with the CFEngine variables
@@ -619,10 +530,10 @@ bundle common control
 ----
 
    * Indentation should be made by spaces. A incrementation of indentation is equal to two spaces
-   * The promise type should be indented by two spaces (instead of being at the same indentation level than the bundle name)
-   * The class expression should be indented by four spaces (two spaces after the promise type)
-   * The promiser should be indented by six spaces (two spaces after the class expression or four spaces after the promise type if no class expression is defined)
-   * Attributes of promises should be indented by eight spaces (two spaces after the promiser) and it should be only one attribute by line.
+   * The policy type should be indented by two spaces (instead of being at the same indentation level than the bundle name)
+   * The class expression should be indented by four spaces (two spaces after the policy type)
+   * The promiser should be indented by six spaces (two spaces after the class expression or four spaces after the policy type if no class expression is defined)
+   * Attributes of policies should be indented by eight spaces (two spaces after the promiser) and it should be only one attribute by line.
    * Attribute's arrows '=>' should all be at the same level, one character after the largest attribute name
 
 ----
@@ -640,8 +551,8 @@ bundle agent example
 
 ----
 
-   * Attributes of promise type "vars" and "classes" should be on only one line except if there are more than one attribute.
-   * For promise type "vars" and "classes" on one line, attribute names and the arrows should be aligned
+   * Attributes of policy type "vars" and "classes" should be on only one line except if there are more than one attribute.
+   * For policy type "vars" and "classes" on one line, attribute names and the arrows should be aligned
    * A list should be written multilines if it needs more than 80 characters in one line
    * Multilines list should have comma after each element, except the last one.
    * Multilines list should begin with only a bracket "{"
@@ -663,9 +574,9 @@ bundle agent example
    * Alternance of brackets and parenthesis are tolerated when lots of variables are imbricated for more readability: `${var_lv1[$(var_lvl2[${var_lvl3}])]}`
    * A Technique should have its bundle wrote with parameters
    * All the bundles should have as first argument "prefix" which contains the prefix to use for all the classes made from an outcome. This prefix should never be hardcoded in the bundle.
-   * Always write comments with # when a promise needs more than 30 seconds of thought.
-   * If classes should be created in order to iterate for make a workaround of the normal ordering (i.e: "iteration_1", "iteration_2", "iteration_3"), they should always be defined at the end of the promise type "classes".
-   * The order to the promise type must always be in the order of the normal ordering : https://docs.cfengine.com/docs/3.10/reference-language-concepts-normal-ordering.html
+   * Always write comments with # when a policy needs more than 30 seconds of thought.
+   * If classes should be created in order to iterate for make a workaround of the normal ordering (i.e: "iteration_1", "iteration_2", "iteration_3"), they should always be defined at the end of the policy type "classes".
+   * The order to the policy type must always be in the order of the normal ordering : https://docs.cfengine.com/docs/3.10/reference-language-concepts-normal-ordering.html
    * StringTemplate variables should always be written in UPPERCASE
    * StringTemplate variables should be written with underscore
    * StringTemplate variables should always be prefixed by the Technique name in uppecase too. i.e: `CHECK_GENERIC_FILE_FILE_NAME`

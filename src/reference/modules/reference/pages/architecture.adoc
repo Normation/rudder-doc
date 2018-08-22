@@ -92,7 +92,7 @@ waiting.inventory.queue.size=50
 
 ----
 
-Since Rudder 3.1.18 / 3.2.11 / 4.0.3, the number of currently waiting
+The number of currently waiting
 inventories can be obtained via a local REST API call to
 `http://localhost:8080/endpoint/api/info`:
 
@@ -125,7 +125,7 @@ The description of the category is included in +category.xml+.
 . At the second and third level, Technique identifier and version.
 
 . At the last level, each technique is described with a +metadata.xml+ file and
-one or several CFEngine template files (name ending with +.st+).
+one or several agent template files (name ending with +.st+).
 
 [source,python]
 
@@ -163,9 +163,7 @@ the LDAP subtree of Active Techniques.
 The LDAP tree contains also a set of subtrees for Node Groups, Rules and Node
 Configurations.
 
-At each change of the Node Configurations, Rudder Server creates CFEngine draft policies
-(+Cf3PolicyDraft+) that are stored in memory, and then invokes +cf-clerk+.
-+cf-clerk+ finally generates the CFEngine promises for the Nodes.
+At each change of the Node Configurations, Rudder Server generates the agent policies for the Nodes.
 
 image::graphviz/data_workflow.png[Rudder data workflow]
 
@@ -239,15 +237,15 @@ been validated in Rudder, this step fails.
 
 === Launch processes
 
-Ensure that the CFEngine community daemons +cf-execd+ and +cf-serverd+ are
+Ensure that the agent daemons +cf-execd+ and +cf-serverd+ are
 running. Try to start these daemons if they are not already started.
 
-Daily between 5:00 and 5:05, relaunch the CFEngine Community daemons +cf-execd+
+Daily between 5:00 and 5:05, relaunch the agent daemons +cf-execd+
 and +cf-serverd+.
 
 Add a line in +/etc/crontab+ to launch +cf-execd+ if it's not running.
 
-Ensure again that the CFEngine community daemons +cf-execd+ and +cf-serverd+
+Ensure again that the agent daemons +cf-execd+ and +cf-serverd+
 are running. Try to start these daemons if they are not already started.
 
 === Identify Rudder Root Server
@@ -310,7 +308,7 @@ sent by FusionInventory and insert the valuable data into the LDAP database.
 Application server for +rudder-webapp+ and +rudder-inventory-endpoint+. Both
 packages are written in 'Scala'. At compilation time, they are converted into
 +.war+ files. They need to be run in an application server. 'Jetty' is this
-application server. It depends on a compatible Java 7 Runtime Environment.
+application server. It depends on a compatible Java 8 Runtime Environment.
 
 +rudder-techniques+::
 
@@ -346,7 +344,7 @@ all above packages. It also
 
 ----
 
-- installs the initial promises for the Root Server in:
+- installs the initial policies for the Root Server in:
 
 ----
 
@@ -373,7 +371,7 @@ all above packages. It also
 +rudder-agent+::
 
 One single package integrates everything needed for the Rudder Agent. It
-contains CFEngine Commmunity, FusionInventory, and the initial promises for a
+contains CFEngine Community, FusionInventory, and the initial policies for a
 Node. It also contains an init script:
 
 ----
@@ -415,7 +413,7 @@ The rsyslog server is receiving the logs from the nodes and insert them into a
 PostgreSQL database. On SLES, the +rsyslog-pgsql+ package is not part of the
 distribution, it can be downloaded alongside Rudder packages.
 
-Java 7+ JRE::
+Java 8+ JRE::
 
 The Java runtime is needed by the Jetty application server. Where possible, the
 package from the distribution is used, else a Java RE must be downloaded
