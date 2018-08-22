@@ -238,12 +238,61 @@ html {
   color: #fff;
 }
 
-.navigation-explore .context {
-  color: #556d77;
-  background: #1a2226;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+.navigation .panels {
+  position: relative;
+  padding-top: 47.5px;
 }
+
+.navigation-explore {
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+
+.navigation-explore .context {
+  color: #8aa4af;
+  background: #1a2226;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border-bottom: 2px solid #536169;
+  position: relative;
+  transition-property: border, color;
+  transition-duration: 0.2s;
+}
+
+.navigation-explore:hover .context {
+  border-color: #f08004 !important;
+}
+
+.navigation-explore .context::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 1px;
+  bottom: 0;
+  width: 30px;
+  background-image: url(../../_/img/menu-nav.svg);
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center;
+  opacity: 0.5;
+}
+
+.navigation-explore:hover .context::after {
+  opacity: 1;
+}
+
+.navigation-explore.is-active .context::after {
+  background-image: url(../../_/img/menu-nav-close.svg);
+  opacity: 1;
+}
+
+.navigation-explore .context .version {
+  background-image: none;
+  padding-right: none;
+}
+
+/* url(../img/chevron-nav.svg); */
 
 .navigation-explore .context:hover {
   color: #fff;
@@ -393,4 +442,16 @@ html {
 
 .footer {
   display: none;
+}
+
+@keyframes slide-fade {
+  0% {
+    opacity: 1;
+    background-position: center bottom;
+  }
+
+  100% {
+    opacity: 0;
+    background-position: center top;
+  }
 }
