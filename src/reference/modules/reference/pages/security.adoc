@@ -1,0 +1,82 @@
+= Security considerations
+
+== Data confidentiality
+
+Rudder is designed to strictly separate policies between nodes,
+and to only let a node access its own policies.
+
+This section will give details about how the policies are secured, and which
+content is node-specific or global.
+
+=== Private data
+
+All confidential information should be stored in private data, namely:
+
+* the directives, groups, rules, and their parameters
+* the techniques parameters in the Technique Editor
+* the shared-files directory
+
+There are:
+
+* always transferred encrypted between nodes (using agent copy protocol or https for the interface and the API)
+* only available to the nodes that need it
+* only accessible locally by the users that need it
+
+More precisely:
+
+* root server:
+** all the data is present on it
+** files are readable and writable only by the root user and (for some of them) the rudder group
+** some data is also accessible from our backends (PostgreSQL, OpenLDAP), but only locally (the services are listenning on loopback) and from Rudder-specific users, whith passwords only accessible to the root user
+** accessible remotely by the Web interface (needs an authorized user account) or the API (needs a token)
+* relay: only the data needed for the served nodes and the relay itself are available and stored locally, only accessible to the root user
+* node: only the data needed to configure the node is available and stored locally, only accessible to the root user
+
+=== Common data
+
+This refers to content available from all nodes in the authorized networks, readable from all users
+on the nodes (and that can be transfered withtout encryption when using initial promises of a pre-4.0 node).
+
+These unprotected contents are:
+
+* the tools (`/var/rudder/tools`)
+* the common ncf part (`/var/rudder/ncf/common`), which includes all the content distibuted in the `ncf` package
+* the Rudder techniques sources (without parameters), which includes all the content distibuted in the `rudder-techniques` package
+
+== Node-Server communication security
+
+This section gives more details about the different flows between nodes and servers.
+
+=== File copy
+
+File copy is used to get policies and files copied during policy execution (named *shared-files*).
+It uses a custom file copy protocol inside standard TLS.
+
+The access policy is:
+
+* Peer to peer key exchange, without central authority
+* TOFU (Trust On First Use): keys are sent and accepted at first connection (from the policy server on nodes
+  and from nodes with an IP in the Allowed Networks on policy servers).
+* Node-specific files have an ACL containg the public key of the node, as found in the inventory
+* Common files have an IP-based ACL based on the Allowed Networks
+
+The old hostame and IP ACL are still generated for node-specific files to ensure compatibility with older nodes,
+but will be removed in the future.
+
+=== Inventory
+
+Nodes send an inventory to the server after installation or upgrade, and once a day.
+
+This inventory contains various information, including:
+
+* The node's public key
+* The node's policy server
+
+The inventory security policy is:
+
+* Inventories are sent by the node to its configured policy_server over HTTPS, currently without certificate validation.
+* Inventories are signed by the node using its private key, which allows the server to check this signature using
+  the public key coming from previous inventory and to ensure it really comes from the right node.It avoids treating a
+  malicious (or bogus) inventory coming from another node, and you should check the public key when accepting a new node.
+* Once a node has sent a signed inventory, no unsigned inventory will be accepted for this node.
+

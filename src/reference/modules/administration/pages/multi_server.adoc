@@ -1,0 +1,309 @@
+= Advanced multi-server installation
+
+== Use a database on a separate server
+
+This section allows installing a separate database only without splitting the rest of the server components
+like when using the rudder-multiserver-setup script.
+The setup is done in two places: on the database server and on the Rudder root server.
+
+It also allows moving an existing database to another server.
+
+[TIP]
+
+.Use different user and database names
+
+====
+
+It can be useful, for example if you want to share you database server between several Rudder root servers (see note below),
+to use a different database for your Rudder root server. To do so:
+
+* Create the new database (replace `alternate_user_name`, `alternate_base_name` and specify a password):
+
+----
+
+su - postgres -c "psql -q -c \"CREATE USER alternate_user_name WITH PASSWORD 'GENERATE_A_PASSWORD'\""
+su - postgres -c "psql -q -c \"CREATE DATABASE alternate_base_name WITH OWNER = alternate_user_name\""
+
+----
+
+* Initialize it. First copy the initialization script:
+
+----
+
+ cp /opt/rudder/etc/postgresql/reportsSchema.sql /opt/rudder/etc/postgresql/reportsSchema-alternate.sql
+
+----
+
+* In the copied file, change the:
+
+----
+
+ALTER database rudder SET standard_conforming_strings=true;
+
+----
+
+To:
+
+----
+
+ALTER database alternate_base_name SET standard_conforming_strings=true;
+
+----
+
+* Then apply the script:
+
+----
+
+su - postgres -c "psql -q -U alternate_user_name -h localhost -d alternate_base_name \
+     -f /opt/rudder/etc/postgresql/reportsSchema-alternate.sql"
+
+----
+
+* Follow the standard instructions of this section, with two differences:
+
+** You need to adjust the line added to `pg_hba.conf` to match your user and database name.
+
+** You need to also change the database name and user in `rudder-web.properties`.
+
+====
+
+[CAUTION]
+
+.Use the same database server for several Rudder root servers
+
+====
+
+It is possible to share the same database server between several Rudder instances,
+by following the preceding tip to use a different database than the default one.
+However, there are some important points to know:
+
+* This database server can only be used with the rudder-db role in case of multiserver setup.
+
+* This database server can only be a node for one of the Rudder servers. This also means that this
+root server will have indirect access to the content of the other databases.
+
+====
+
+
+
+=== On the database server
+
+* Install and configure the agent on the node, and install the *rudder-reports* package.
+
+* Change the `postgresql.conf` file (usually in `/var/lib/pgsql` or `/etc/postgresql`), to listen on the right interface to communicate with the server:
+
+----
+
+# you can use '*' to listen on all interfaces
+listen_addresses = 'IP_TO_USE'
+
+----
+
+* Also ensure that network policies (i.e. the firewall settings) allow PostgreSQL flows from the root server to the database server.
+
+* Add an authorization line for the server (in `pg_hba.conf`, in the same directory):
+
+----
+
+host    rudder          rudder          ROOT_SERVER_IP/32       md5
+
+----
+
+* Restart postgresql to apply the new settings:
+
+----
+
+service postgresql restart
+
+----
+
+* Execute the following command to configure the password (that should be the same as RUDDER_PSQL_PASSWORD in `/opt/rudder/etc/rudder-passwords.conf` on the root server):
+
+----
+
+su - postgres -c "psql -c \"ALTER USER rudder WITH PASSWORD 'RUDDER_SERVER_DATABASE_PASSWORD'\""
+
+----
+
+* Run an inventory to the server:
+
+----
+
+rudder agent inventory
+
+----
+
+=== On the root server
+
+In the following section, DATABASE_HOST refers to the hostname of the new database server, and SERVER_HOST to the hostname of
+the root server.
+
+* Remove the rudder-server-root and rudder-reports packages if installed. For example, you can run on Debian:
+
+----
+
+service rudder restart
+apt-mark manual rudder-webapp rudder-inventory-endpoint
+apt-get remove --purge rudder-reports
+
+----
+
+* You can also remove the postgresql package and database from the server if installed, but keep in mind you will lose all existing data.
+You can follow the xref:administration:procedures.adoc#_migration_backups_and_restores[backup and restore] procedure to migrate the data to the new database.
+
+* Change the hostname in `/opt/rudder/etc/rudder-web.properties`:
+
+----
+
+rudder.jdbc.url=jdbc:postgresql://DATABASE_HOST:5432/rudder
+
+----
+
+* Edit `/var/rudder/cfengine-community/inputs/rudder-server-roles.conf` and set the following line:
+
+----
+
+rudder-db:DATABASE_HOST
+
+----
+
+* Edit the /etc/rsyslog.d/rudder.conf file and change the hostname in:
+
+----
+
+:ompgsql:DATABASE_HOST,rudder,rudder,...
+
+----
+
+* Run an inventory:
+
+----
+
+rudder agent inventory
+
+----
+
+* Restart rudder services:
+
+----
+
+service rsyslog restart
+service rudder restart
+
+----
+
+* Clear the cache (in Administration -> Settings)
+
+You should now have finished configuring the database server. You can check the technical logs to see if reports are correctly
+written into the database and read by the web application.
+
+
+[[multiserver-rudder]]
+== Multiserver Rudder
+
+From version 3.0 Rudder can be divided into 4 different components:
+
+- rudder-web: an instance with the webapp and the central policy server
+- rudder-ldap: the inventory endpoint and its ldap backend
+- rudder-db: the postgresql storage
+- rudder-relay-top: the contact point for nodes
+
+=== Preliminary steps
+
+
+You need the setup scripts provided at https://github.com/normation/rudder-tools/tree/master/scripts/rudder-multiserver-setup.
+You can download them with this command:
+
+----
+
+mkdir rudder-multiserver-setup
+cd rudder-multiserver-setup
+for i in add_repo detect_os.sh rudder-db.sh rudder-ldap.sh rudder-relay-top.sh rudder-web.sh
+do
+  wget --no-check-certificate https://raw.githubusercontent.com/Normation/rudder-tools/master/scripts/rudder-multiserver-setup/$i
+done
+chmod 755 *
+cd ..
+
+
+----
+
+
+You need 4 instances of supported OS, one for each component.
+Only the rudder-web instance need at least 2GB of RAM.
+
+Register the 4 names in the DNS or add them in /etc/hosts on each instance.
+
+Add firewall rules:
+
+- from rudder-web to rudder-db port pgsql TCP
+- from rudder-* to rudder-web port rsyslog 514 TCP
+- from rudder-relay-top to rudder-ldap port 8080 TCP
+- from rudder-web to rudder-ldap port 8080 TCP
+- from rudder-web to rudder-ldap port 389 TCP
+- from rudder-web to rudder-relay-top port 5309
+
+
+=== Install rudder-relay-top
+
+Copy the rudder-multiserver-setup directory to you instance.
+
+Run rudder-relay-top.sh as root, replace <rudder-web> with the hostname of the rudder-web instance:
+
+----
+
+cd rudder-multiserver-setup
+./rudder-relay-top.sh <rudder-web>
+
+----
+
+Take note of the UUID.
+If you need it later read, it is in the file /opt/rudder/etc/uuid.hive
+
+=== Install rudder-db
+
+Copy the rudder-multiserver-setup directory to you instance.
+
+Run rudder-db.sh as root, replace <rudder-web> with the hostname of the rudder-web instance, replace <allowed-network> with the network containing the rudder-web instances:
+
+----
+
+cd rudder-multiserver-setup
+./rudder-db.sh <rudder-web> <allowed-network>
+
+----
+
+=== Install rudder-ldap
+
+Copy the rudder-multiserver-setup directory to you instance.
+
+Run rudder-ldap.sh as root, replace <rudder-web> with the hostname of the rudder-web instance:
+
+----
+
+cd rudder-multiserver-setup
+./rudder-ldap.sh <rudder-web>
+
+----
+
+=== Install rudder-web
+
+Copy the rudder-multiserver-setup directory to you instance.
+
+Run rudder-relay-top.sh as root, replace <rudder-*> with the hostname of the corresponding instance:
+
+----
+
+cd rudder-multiserver-setup
+./rudder-web.sh <rudder-web> <rudder-ldap> <rudder-db> <rudder-relay-top>
+
+----
+
+Connect rudder web interface and accept all nodes.
+Then run the following command where <relay-uuid> is the uuid from rudder-relay-top setup.
+
+----
+
+/opt/rudder/bin/rudder-node-to-relay <relay-uuid>
+
+----

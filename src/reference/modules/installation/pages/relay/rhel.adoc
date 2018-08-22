@@ -1,0 +1,17 @@
+= Install Rudder relay on RHEL or CentOS
+
+include::{partialsdir}/syslog.adoc[]
+
+include::{partialsdir}/rpm_key.adoc[]
+
+include::{partialsdir}/rhel_repo.adoc[]
+
+Install the package:
+
+----
+
+yum install rudder-server-relay
+
+----
+
+include::{partialsdir}/relay_initial_config.adoc[]

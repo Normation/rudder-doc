@@ -1,0 +1,32 @@
+= Rudder components
+
+== Root server
+
+This is the server that will define the configuration for the nodes it manages.
+You generally need to install only one root server, except if you have completely
+separated environments where each environment can have its own server.
+
+== Agent
+
+The machines managed by Rudder are called nodes, and can either be physical or virtual.
+For a machine to become a managed Node, you have to install the Rudder agent on it.
+The node will afterwards register itself on the server. And finally, the node should
+be acknowledged in the Rudder root server interface to become a managed node.
+
+[[relay-servers]]
+== Relay (optional)
+
+Relay servers can be added to Rudder, for example to manage a DMZ or to isolate specific
+nodes from the main environment for security reasons.
+
+Relay server's purpose is to solve a simple problem: sometimes, one would want to manage
+multiple networks from Rudder, without having to allow all the subnet access to the other
+for security reasons. A solution for this would be to have a kind of "Rudder" proxy that
+would be relaying information between the subnet and the main Rudder server. This is the
+reason relay servers were created.
+
+Using a relay, you are able to:
+
+- Separate your Rudder architecture into separate entities that still report to one server
+- Prevent laxist security exceptions to the Rudder server
+- Ease maintenance

@@ -1,0 +1,19 @@
+= Install Rudder agent on RHEL or CentOS
+
+include::{partialsdir}/quick_agent.adoc[]
+
+include::{partialsdir}/syslog.adoc[]
+
+include::{partialsdir}/rpm_key.adoc[]
+
+include::{partialsdir}/rhel_repo.adoc[]
+
+Install the package:
+
+----
+
+yum install rudder-agent
+
+----
+
+include::{partialsdir}/agent_initial_config.adoc[]

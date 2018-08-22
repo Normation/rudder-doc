@@ -1,0 +1,38 @@
+= Install Rudder root server on RHEL or CentOS
+
+include::{partialsdir}/quick_server.adoc[]
+
+include::{partialsdir}/server_notes.adoc[]
+
+include::{partialsdir}/rpm_key.adoc[]
+
+include::{partialsdir}/rhel_repo.adoc[]
+
+To begin the installation, you should simply install the rudder-server-root
+metapackage, which will install the required components:
+
+----
+
+yum install rudder-server-root
+
+----
+
+On Red Hat-like systems, a firewall setup is enabled by default, and would need to be adjusted
+for Rudder to operate properly. You have to allow all the flows described in the
+xref:installation:requirements.adoc#configure-the-network[network] section.
+
+[TIP]
+
+====
+
+On EL7, the default firewall is firewalld, and you can enable HTTP/S access by running
+
+----
+
+firewall-cmd --permanent --zone=public --add-port=443/tcp
+
+----
+
+====
+
+include::{partialsdir}/initial_config.adoc[]

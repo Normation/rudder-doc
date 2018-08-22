@@ -1,0 +1,15 @@
+[TIP]
+
+====
+
+If you are working on a test system, you can use the xref:quick_install.adoc[quick install script]:
+
+----
+
+curl https://www.rudder-project.org/tools/rudder-setup | bash -s setup-agent 5.0 [policy server hostname or ip]
+
+----
+
+That will automatically execute the following steps.
+
+====

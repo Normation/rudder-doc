@@ -1,0 +1,94 @@
+= Package format
+
+Rudder has a specific package format for plugins.
+
+You can manage Rudder packages with the rudder-pkg command. This is the documentation of how they are created.
+
+== File description
+
+A Rudder package file ends with the `.rpkg` extension.
+
+A Rudder package file is an archive file and can be managed with the 'ar' command.
+
+The archive contains:
+
+* A metadata file in JSON format named medatata
+* A tarball file in txz format name scripts.txz that contains package setup utility scripts
+* One or more tarball files in txz format that contain the package files
+
+The metadata file is a JSON file and is named 'metadata':
+
+----
+
+{
+  # the only currently supported type in "plugin" (mandatory)
+  "type": "plugin",
+  # the package name must consist of ascii characters without whitespace (mandatory)
+  "name": "myplugin",
+  # the package version has the form "rudder_major-version_major.version_minor" for a plugin (mandatory)
+  "version": "4.1-1.0",
+  # these are is purely informative (optional)
+  "build-date": "2017-02-22T13:58:23Z",
+  "build-commit": "34aea1077f34e5abdaf88eb3455352aa4559ba8b",
+  # the list of jar files to enable if this is a webapp plugin (optional)
+  "jar-files": [ "test.jar" ],
+  # the list of packages or other plugins that this package depends on (optional)
+  # this is currently only informative
+  "depends": {
+    # dependency on a specific binary that must be in the PATH
+    "binary": [ "zip" ]
+    # dependencies on dpkg based systems
+    "dpkg": [ "apache2" ],
+    "rpm": [ ],
+    # dependency specific to debian-8
+    "debian-8": [ ],
+    "sles-11": [ ],
+    # rudder dependency, ie this is a Rudder format package
+    "rudder": [ "new-plugin" ]
+  },
+  # the plugin content (mandatory)
+  "content": {
+    # this will put the content of the extracted files.txz into /opt/rudder/share
+    "files.txz": "/opt/rudder/share",
+    "var_rudder.txz": "/var/rudder"
+  }
+}
+
+----
+
+To see a package metadata file use:
+
+----
+
+ar p package.rpkg medatada
+
+----
+
+The scripts.txz is a tarball that can contain zero or more executable files named:
+
+* preinst that will be run before installing the package files
+* postinst that will be run after installing the package files
+* prerm that will be run before removing the package files
+* postrm that will be run after removing the package files
+
+preinst and postinst take one parameter that can be 'install' or 'upgrade'. The value 'upgrade' is used when a previous version of the package is already installed.
+
+To create the scripts.txz file use:
+
+----
+
+tar cvfJ scripts.txz preinst postinst prerm postrm
+
+----
+
+To create a Rudder package file use the ar command:
+
+----
+
+ar r mypackage-4.1-3.0.rpkg medatada scripts.txz files.txz
+
+----
+
+Note that ar r inserts or replaces files so you can create your package with incremental inserts.
+
+To extract files, 'use ar x' instead.

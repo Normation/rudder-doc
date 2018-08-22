@@ -1,0 +1,11 @@
+Add a yum repository for Rudder:
+
+----
+
+echo '[Rudder_4.3]
+name=Rudder 4.3 repository
+baseurl=http://www.rudder-project.org/rpm-4.3/RHEL_$releasever/
+gpgcheck=1
+gpgkey=https://www.rudder-project.org/rpm-repos/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
+
+----
