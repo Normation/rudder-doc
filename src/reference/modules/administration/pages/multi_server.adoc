@@ -192,7 +192,7 @@ service rudder restart
 
 ----
 
-* Clear the cache (in Administration -> Settings)
+* Clear the cache (in *Administration -> Settings*)
 
 You should now have finished configuring the database server. You can check the technical logs to see if reports are correctly
 written into the database and read by the web application.
