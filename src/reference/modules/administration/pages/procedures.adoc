@@ -146,7 +146,7 @@ cp /tmp/rudder-log-backup* /root
 === Restore
 
 Of course, after a total machine crash, you will have your backups at hand,
-but what should you do with it ?
+but what should you do with it?
 
 Here is the restoration procedure:
 

@@ -8,9 +8,9 @@ the search fields and the reporting screens.
 == Authentication
 
 When accessing the Rudder web interface, a login / password is required.  The
-default account is "admin" (Password: admin).
+default account is *admin* (password: *admin*).
 
-You can change the user accounts by following the xref:administration:users.adoc#user-management[User management]
+You can change the user accounts by following the xref:administration:users.adoc#user-management[user management]
 procedure.
 
 == Presentation of Rudder Web Interface
@@ -111,17 +111,17 @@ An autocompletion list will appear as soon as Rudder detects an element it can
 identify, you just have to click on it to be redirected to the element's
 configuration page.
 
-More complex search queries can be input using the "in:" and "is:" keywords,
-"is" targets Rudder objects by type, and "in" targets elements like name,
+More complex search queries can be input using the *in:* and *is:* keywords,
+*is* targets Rudder objects by type, and *in* targets elements like name,
 description...
 
 Those keywords are used to refine a research in case a search query returns
 too many results.
 
-For example, the naive request for +root+ policy server will likely returns far too
-many results, because +root+ appears in most node +policy server ID+ field:
+For example, the naive request for *root* policy server will likely returns far too
+many results, because *root* appears in most node *policy server ID* field:
 
-.Example: A lookup for +root+ will return far too many results
+.Example: A lookup for *root* will return far too many results
 
 ====
 
@@ -130,9 +130,9 @@ root
 ====
 
 So you will need to be more precise and stipulate that you only want to search for
-nodes whose +nodeid+ is +root+:
+nodes whose *nodeid* is *root*:
 
-.Example: Only search for the node whose ID is +root+
+.Example: Only search for the node whose ID is *root*
 
 ====
 
@@ -147,7 +147,7 @@ The available search keywords are:
 .is: keywords
 [frame="topbot",options="header"]
 |======================
-|keyword |Description
+|Keyword |Description
 |node      |Nodes
 |group     |Groups
 |parameter |Parameters
@@ -158,7 +158,7 @@ The available search keywords are:
 .in: keywords (common)
 [frame="topbot",options="header"]
 |======================
-|keyword |Search for
+|Keyword |Search for
 |name |Names
 |id |IDs
 |description, long_description |Descriptions
@@ -168,7 +168,7 @@ The available search keywords are:
 .in: keywords (nodes)
 [frame="topbot",options="header"]
 |======================
-|keyword |Search for
+|Keyword |Search for
 |hostname |Hostnames
 |os_type |OS types (windows, linux, aix...)
 |os_name |OS Names (Windows Server 2012, Debian... )
@@ -187,14 +187,14 @@ The available search keywords are:
 .in: keywords (groups)
 [frame="topbot",options="header"]
 |======================
-|keyword |Search for
+|Keyword |Search for
 |dynamic |Dynamic groups
 |======================
 
 .in: keywords (directives)
 [frame="topbot",options="header"]
 |======================
-|keyword |Search for
+|Keyword |Search for
 |dir_param_name |Directive parameter names, as in the Techniques metadata.xml ("GENERIC_FILE_CONTENT_PATH"...)
 |dir_param_value |Directive parameter values
 |technique_id |Technique IDs
@@ -205,7 +205,7 @@ The available search keywords are:
 .in: keywords (parameters)
 [frame="topbot",options="header"]
 |======================
-|keyword |Search for
+|Keyword |Search for
 |parameter_name |Parameter names
 |parameter_value |Parameter values
 |======================
@@ -213,22 +213,22 @@ The available search keywords are:
 .in: keywords (rules)
 [frame="topbot",options="header"]
 |======================
-|keyword |Search for
+|Keyword |Search for
 |directives |Rules containing those Directive IDs
 |groups |Rules containing those Group IDs
 |======================
 
-.Example: Search for a Node called +debian-node+
+.Example: Search for a Node called *debian-node*
 
 ====
 
-Assuming you have one managed Node called +debian-node.rudder-project.org+,
+Assuming you have one managed Node called +debian-node.example.com+,
 whose ID in Rudder is +d06b1c6c-f59b-4e5e-8049-d55f769ac33f+.
 
-. Type in the Quick Search field the +de+ or +d0+.
+. Type in the Quick Search field the *de* or *d0*.
 
-. The search result will return this Node: +debian-node.rudder-project.org --
-d06b1c6c-f59b-4e5e-8049-d55f769ac33f [d06b1c6c-f59b-4e5e-8049-d55f769ac33f]+.
+. The search result will return this Node: *debian-node.example.com --
+d06b1c6c-f59b-4e5e-8049-d55f769ac33f [d06b1c6c-f59b-4e5e-8049-d55f769ac33f]*.
 
 ====
 
@@ -236,13 +236,13 @@ d06b1c6c-f59b-4e5e-8049-d55f769ac33f [d06b1c6c-f59b-4e5e-8049-d55f769ac33f]+.
 
 ====
 
-Assuming you have one Directive called +Common users+,
-whose ID in Rudder is +6e8ce05b-3f77-4fed-a424-edf0fdaa4231+.
+Assuming you have one Directive called *Common users*,
+whose ID in Rudder is *6e8ce05b-3f77-4fed-a424-edf0fdaa4231*.
 
-. Type in the Quick Search field +is:directive common+.
+. Type in the Quick Search field *is:directive common*.
 
-. The search result will return this Directive: +Common users --
-4a6aaea7-6471-4ca9-8c27-9ee9f44ed882 [6e8ce05b-3f77-4fed-a424-edf0fdaa4231]+.
+. The search result will return this Directive: *Common users --
+4a6aaea7-6471-4ca9-8c27-9ee9f44ed882 [6e8ce05b-3f77-4fed-a424-edf0fdaa4231]*.
 
 ====
 

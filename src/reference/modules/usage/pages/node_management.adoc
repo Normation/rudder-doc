@@ -9,7 +9,7 @@ image::node_workflow.svg[]
 
 image::nodes.png[]
 
-Rudder integrates a node inventory tool which harvest useful information
+Rudder integrates a node inventory tool which harvests useful information
 about the nodes. This information is used by Rudder to handle the nodes, and
 you can use the inventory information for Configuration Management purposes:
 search Nodes, create Groups of Nodes, determine some configuration management
@@ -48,28 +48,28 @@ image::node-compliance.png[]
 
 
 [[accept-new-nodes, Accept new Nodes]]
-== Accept new Nodes
+== Accept new nodes
 
 At the starting point, the Rudder Server doesn't know anything about the Nodes.
 After the installation of the Rudder Agent, each Node registers itself to the
 Rudder Server, and sends a first inventory. Every new Node must be manually
 validated in the Rudder Web Interface to become part of Rudder Managed Nodes.
-This task is performed in the *Node Management > Accept new Nodes* section of
+This task is performed in the *Node Management -> Accept new Nodes* section of
 the application. You can select Nodes waiting for an approval, and determine
 whether you consider them as valid or not. Click on each Node name to display
 the extended inventory. Click on the magnifying glass icon to display the
 policies which will be applied after the validation.
 
-.Accept the new Node +debian-node.rudder-project.org+
+.Accept the new Node *debian-node.example.com*
 
 ====
 
 . Install and configure the Rudder Agent on the new Node
-+debian-node.rudder-project.org+
+*debian-node.example.com*
 
 . Wait a few minutes for the first run of the Rudder Agent.
 
-. Navigate to *Node Management > Accept new Nodes*.
+. Navigate to *Node Management -> Accept new Nodes*.
 
 . Select the new Node in the list.
 
@@ -82,9 +82,9 @@ tools.
 
 
 [[search-nodes, Search Nodes]]
-== Search Nodes
+== Search nodes
 
-You can navigate to *Node Management > Search Nodes* to display information
+You can navigate to *Node Management -> Search Nodes* to display information
 about the Nodes which have been already validated, and are managed by Rudder.
 
 === General behavior
@@ -93,7 +93,7 @@ In the Advanced Search tool, you can create complex searches based on Node
 Inventory information. The benefit of the Advanced Search tool is to save the
 query and create a Group of Nodes based on the search criteria.
 
-- 1. Select a field
+. Select a field
 
 The selection of the field upon which the criteria will apply is a two step
 process. The list of fields is not displayed unordered and extensively. Fields
@@ -104,14 +104,14 @@ Interface', 'Filesystem', 'Machine', 'RAM', 'Storage', 'BIOS', 'Controller',
  Variable', 'Processes', 'Virtual Machines'; then you choose
 among the list of fields concerning this theme.
 
-- 2. Select the matching rule
+. Select the matching rule
 
 The matching rule can be selected between following possibilities: 'Is defined',
 'Is not defined', '=', '≠' or 'Regex'  followed by the term you are searching for presence or
 absence. Depending on the field, the list of searchable terms is either an free
 text field, either the list of available terms.
 
-- 3. Add another rule
+. Add another rule
 
 You can select only one term for each matching rule. If you want to create more
 complex search, then you can add another rule using the '+' icon. All rules are
@@ -369,8 +369,8 @@ The following query would all select the node:
 
 You can create Group of Nodes based on search criteria to ease attribution of
 Rules in Configuration Management. The creation of groups can be done from the
-'Node Management > Search Nodes' page, or directly from the Groups list in
-'Node Management > Groups'. A group can be either Dynamic or Static.
+*Node Management -> Search Nodes* page, or directly from the Groups list in
+*Node Management -> Groups*. A group can be either Dynamic or Static.
 
 include::{partialsdir}/glossary/dynamic-group.adoc[]
 
