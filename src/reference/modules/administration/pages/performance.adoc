@@ -1,0 +1,304 @@
+[[_performance_tuning]]
+= Performance tuning
+
+Rudder and some applications used by Rudder (like the Apache web server, or Jetty)
+can be tuned to your needs.
+
+[[_reports_retention]]
+== Reports retention
+
+To lower Rudder server's disk usage, you can configure the retention duration
+for node's execution reports in
++/opt/rudder/etc/rudder-web.properties+ file with the options:
+
++rudder.batch.reportscleaner.archive.TTL=30+
+
++rudder.batch.reportscleaner.delete.TTL=90+
+
+== Apache web server
+
+The Apache web server is used by Rudder as a proxy, to connect to the Jetty
+application server, and to receive inventories using the WebDAV protocol.
+
+There are tons of documentation about Apache performance tuning available on the
+Internet, but the defaults should be enough for most setups.
+
+== Jetty
+
+The Jetty application server is the service that runs Rudder web application and inventory
+endpoint. It uses the Java runtime environment (JRE).
+
+The default settings fit the basic recommendations for minimal Rudder hardware requirements,
+but there are some configuration switches that you might need to tune to obtain better
+performance with Rudder, or correct e.g. timezone issues.
+
+To look at the available optimization knobs, please take a look at +/etc/default/rudder-jetty+
+on your Rudder server.
+
+== Java "Out Of Memory Error"
+
+It may happen that you get java.lang.OutOfMemoryError.
+They can be of several types,
+but the most common is: "java.lang.OutOfMemoryError: Java heap space".
+
+This error means that the web application needs more RAM than what was given.
+It may be linked to a bug where some process consumed much more memory than
+needed, but most of the time, it simply means that your system has grown and needs
+more memory.
+
+You can follow the configuration steps described in the following paragraph.
+
+[[_configure_ram_allocated_to_jetty]]
+== Configure RAM allocated to Jetty
+
+To change the RAM given to Jetty, you have to:
+
+----
+
+# edit +/etc/default/rudder-jetty+ with your preferred text editor, for example vim:
+vim /etc/default/rudder-jetty
+
+Notice: that file is alike to +/opt/rudder/etc/rudder-jetty.conf+, which is the file with
+default values. +/opt/rudder/etc/rudder-jetty.conf+ should never be modified directly because
+modification would be erased by packaging in the following Rudder versuib update.
+
+# modify JAVA_XMX to set the value to your need.
+# The value is given in MB by default, but you can also use the "G" unit to specify a size in GB.
+
+JAVA_XMX=2G
+
+# save your changes, and restart Jetty:
+service restart rudder-jetty
+
+----
+
+The amount of memory should be the half of the RAM of the server, rounded up to the nearest GB.
+For example, if the server has 5GB of RAM, 3GB should be allocated to Jetty.
+
+[[_optimize_postgresql_server]]
+== Optimize PostgreSQL server
+
+The default out-of-the-box configuration of PostgreSQL server is really not
+compliant for high end (or normal) servers. It uses a really small amount of
+memory.
+
+The location of the PostgreSQL server configuration file is usually:
+
+----
+
+/etc/postgresql/9.x/main/postgresql.conf
+
+----
+
+On a SUSE system:
+
+----
+
+/var/lib/pgsql/data/postgresql.conf
+
+----
+
+
+
+=== Suggested values on an high end server
+
+----
+#
+# Amount of System V shared memory
+# --------------------------------
+#
+# A reasonable starting value for shared_buffers is 1/4 of the memory in your
+# system:
+
+shared_buffers = 1GB
+
+# You may need to set the proper amount of shared memory on the system.
+#
+#   $ sysctl -w kernel.shmmax=1073741824
+#
+# Reference:
+# http://www.postgresql.org/docs/8.4/interactive/kernel-resources.html#SYSVIPC
+#
+# Memory for complex operations
+# -----------------------------
+#
+# Complex query:
+
+work_mem = 24MB
+max_stack_depth = 4MB
+
+# Complex maintenance: index, vacuum:
+
+maintenance_work_mem = 240MB
+
+# Write ahead log
+# ---------------
+#
+# Size of the write ahead log:
+
+wal_buffers = 4MB
+
+# Query planner
+# -------------
+#
+# Gives hint to the query planner about the size of disk cache.
+#
+# Setting effective_cache_size to 1/2 of total memory would be a normal
+# conservative setting:
+
+effective_cache_size = 1024MB
+
+----
+
+=== Suggested values on a low end server
+
+----
+
+shared_buffers = 128MB
+work_mem = 8MB
+max_stack_depth = 3MB
+maintenance_work_mem = 64MB
+wal_buffers = 1MB
+effective_cache_size = 128MB
+
+----
+
+
+== CFEngine
+
+If you are using Rudder on a highly stressed machine, which has especially slow or busy
+I/O's, you might experience a sluggish CFEngine agent run everytime the machine
+tries to comply with your Rules.
+
+This is because the CFEngine agent tries to update its internal databases everytime the agent
+executes a policy (the .lmdb files in the /var/rudder/cfengine-community/state directory),
+which even if the database is very light, takes some time if the machine has a very high iowait.
+
+In this case, here is a workaround you can use to restore CFEngine's full speed: you can use
+a RAMdisk to store CFEngine states.
+
+You might use this solution either temporarily, to examine a slowness problem, or permanently, to mitigate a
+known I/O problem on a specific machine. We do not recommend as of now to use this on a whole IT infrastructure.
+
+Be warned, this solution has a drawback: you should backup and restore the content of this directory
+manually in case of a machine reboot because all the persistent states are stored here, so in case you are using,
+for example the jobScheduler Technique, you might encounter an unwanted job execution because CFEngine will have
+"forgotten" the job state.
+
+Also, note that the mode=0700 is important as CFEngine will refuse to run correctly if the state directory is
+world readable, with an error like:
+
+----
+error: UNTRUSTED: State directory /var/rudder/cfengine-community (mode 770) was not private!
+----
+
+Here is the command line to use:
+
+[source,python]
+
+.How to mount a RAMdisk on CFEngine state directory
+
+----
+
+# How to mount the RAMdisk manually, for a "one shot" test:
+mount -t tmpfs -o size=128M,nr_inodes=2k,mode=0700,noexec,nosuid,noatime,nodiratime tmpfs /var/rudder/cfengine-community/state
+
+# How to put this entry in the fstab, to make the modification permanent
+echo "tmpfs /var/rudder/cfengine-community/state tmpfs defaults,size=128M,nr_inodes=2k,mode=0700,noexec,nosuid,noatime,nodiratime 0 0" >> /etc/fstab
+mount /var/rudder/cfengine-community/state
+
+----
+
+[[_rsyslog]]
+== Rsyslog
+
+If you are using syslog over TCP as reporting protocol (it is set in *Administration* -> *Settings* -> *Protocol*),
+you can experience issues with rsyslog on Rudder
+policy servers (root or relay) when managing a large number of nodes.
+This happens because using TCP implies the system has to keep track of
+the connections. It can lead to reach some limits, especially:
+
+* max number of open files for the user running rsyslog
+* size of network backlogs
+* size of the conntrack table
+
+You have two options in this situation:
+
+* Switch to UDP (in *Administration* -> *Settings* -> *Protocol*). It is less reliable
+  than TCP and you can lose reports in case of networking or load issues, but it will
+  prevent breaking your server, and allow to manage more Nodes.
+* Stay on TCP. Do this only if you need to be sure you will get all your reports
+  to the server. You will should follow the instructions below to tune your system
+  to handle more connections.
+
+All settings needing to modify '/etc/sysctl.conf' require to run 'sysctl -p'
+to be applied.
+
+=== Maximum number of TCP sessions in rsyslog
+
+You may need to increase the maximum number of TCP sessions that rsyslog will accept.
+Add to your '/etc/rsyslog.conf':
+
+----
+$ModLoad imtcp
+# 500 for example, depends on the number of nodes and the agent run frequency
+$InputTCPMaxSessions 500
+----
+
+Note: You can use 'MaxSessions' instead of 'InputTCPMaxSessions' on rsyslog >= 7.
+
+=== Maximum number of file descriptors
+
+If you plan to manage hundreds of Nodes behind a relay or a root server, you should increase
+the open file limit (10k is a good starting point, you might have to get to 100k with
+thousands of Nodes).
+
+You can change the system-wide maximum number of file descriptors in '/etc/sysctl.conf' if necessary:
+
+----
+fs.file-max = 100000
+----
+
+Then you have to get the user running rsyslog enough file descriptors. To do so,
+you have to:
+
+* Have a high enough hard limit for rsyslog
+* Set the limit used by rsyslog
+
+The first one can be set in '/etc/security/limits.conf':
+
+----
+username hard nofile 8192
+----
+
+For the second one, you have two options:
+
+* Set the soft limit (which will be used by default) in '/etc/security/limits.conf' (with 'username soft nofile 8192')
+* If you want to avoid changing soft limit (particularly if rsyslog is running as root), you
+  can configure rsyslog to change its limit to a higher value (but not higher than the hard limit)
+  with the '$MaxOpenFiles' configuration directive in '/etc/rsyslog.conf'
+
+You have to restart rsyslog for these settings to take effect.
+
+You can check current soft and hard limits by running the following commands as the user you want to check:
+
+----
+ulimit -Sn
+ulimit -Hn
+----
+
+=== Network backlog
+
+You can also have issues with the network queues (which may for example lead to sending SYN cookies):
+
+* You can increase the maximum number of connection requests awaiting acknowledgment by changing
+  'net.ipv4.tcp_max_syn_backlog = 4096' (for example, the default is 1024) in '/etc/sysctl.conf'.
+* You may also have to increase the socket listen() backlog in case of bursts, by changing
+  'net.core.somaxconn = 1024' (for example, default is 128) in '/etc/sysctl.conf'.
+
+=== Conntrack table
+
+You may reach the size of the conntrack table, especially if you have other applications
+running on the same server. You can increase its size in '/etc/sysctl.conf',
+see http://www.netfilter.org/documentation/FAQ/netfilter-faq.html#toc3.7[the Netfilter FAQ]
+for details.

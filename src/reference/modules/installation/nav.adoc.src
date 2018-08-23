@@ -1,0 +1,29 @@
+* Installation
+** xref:index.adoc[Rudder components]
+** xref:operating_systems.adoc[Compatible OS]
+*** xref:operating_systems.adoc#node-supported-os[Fully supported Operating Systems]
+*** xref:operating_systems.adoc#_partially_supported_operating_systems[Partially supported Operating Systems]
+** xref:requirements.adoc[Requirements]
+*** xref:requirements.adoc#configure-the-network[Networking]
+*** xref:requirements.adoc#jvm-requirements[JVM Security Policy]
+*** xref:requirements.adoc#rudder-cloud-compatibility[Cloud compatibility]
+*** xref:requirements.adoc#node-hardware-requirements[Hardware specifications for Rudder Agent]
+*** xref:requirements.adoc#server-hardware-requirements[Hardware specifications and sizing for Rudder Root Server]
+** xref:quick_install.adoc[Quick installation]
+** Install root server
+*** xref:server/debian.adoc[on Debian/Ubuntu]
+*** xref:server/rhel.adoc[on RHEL/CentOS]
+*** xref:server/sles.adoc[on SLES]
+** Install agent
+*** xref:agent/debian.adoc[on Debian/Ubuntu]
+*** xref:agent/rhel.adoc[on RHEL/CentOS]
+*** xref:agent/sles.adoc[on SLES]
+** Install relay server
+*** xref:relay/debian.adoc[on Debian/Ubuntu]
+*** xref:relay/rhel.adoc[on RHEL/CentOS]
+*** xref:relay/sles.adoc[on SLES]
+** xref:upgrade.adoc[Upgrade notes]
+** Upgrade Rudder
+*** xref:upgrade/debian.adoc[on Debian/Ubuntu]
+*** xref:upgrade/rhel.adoc[on RHEL/CentOS]
+*** xref:upgrade/sles.adoc[on SLES]

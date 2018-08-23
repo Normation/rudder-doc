@@ -1,14 +1,14 @@
 = Welcome to Rudder Documentation
 
 * Discover Rudder
-** xref:reference:ROOT:00_introduction/01_presentation.adoc[What is Rudder]Discover Rudder features and use cases
+** xref:reference:ROOT:index.adoc[What is Rudder]Discover Rudder features and use cases
 ** https://demo.rudder.io[Online demo]Explore the Web interface with an online demo
 ** xref:index.adoc[Get started guide]Get started with Rudder on a test platform
 
 * Install Rudder
-** xref:reference:ROOT:10_installation/05_requirements/00_intro.adoc[Requirements]Requirement for Rudder installation
-** xref:reference:ROOT:10_installation/10_install_server/00_install_intro.adoc[Install a Rudder server]Install a Rudder root server to define your configuration policies
-** xref:reference:ROOT:10_installation/11_install_agent/00_install_agent.adoc[Install a Rudder agent]Install a Rudder agent to apply configuration
+** xref:reference:installation:requirements.adoc[Requirements]Requirement for Rudder installation
+** Install a Rudder root server to define your configuration policies on xref:reference:installation:server/debian.adoc[Debian/Ubuntu], xref:reference:installation:server/rhel.adoc[RHEL/CentOS] or xref:reference:installation:server/sles.adoc[SLES]
+** Install a Rudder agent to apply configuration on xref:reference:installation:agent/debian.adoc[Debian/Ubuntu], xref:reference:installation:agent/rhel.adoc[RHEL/CentOS] or xref:reference:installation:agent/sles.adoc[SLES]
 
 * Use Rudder
 ** xref:reference:ROOT:index.adoc[User manual]Reference documentation

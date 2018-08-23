@@ -1,4 +1,0 @@
-CFEngine server::
-
-Distribute the CFEngine configuration to the nodes.
-

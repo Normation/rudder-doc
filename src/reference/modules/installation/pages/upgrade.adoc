@@ -1,0 +1,35 @@
+= Upgrade notes
+
+== Upgrade from Rudder 4.1, 4.2 or 4.3
+
+Migration from 4.1, 4.2 or 4.3 are supported, so you can upgrade directly to 5.0.
+
+[[_upgrade_from_rudder_4_0_or_older]]
+== Upgrade from Rudder 4.0 or older
+
+Direct upgrades from 4.0.x and older are no longer supported on 5.0.
+If you are still running one of those, either on servers or nodes,
+please first upgrade to one of the supported versions, and then upgrade to 5.0.
+
+== Compatibility between Rudder agent 5.0 and older server versions
+
+=== 4.1, 4.2 and 4.3 servers
+
+Rudder agents 5.0 are compatible with 4.1, 4.2 and 4.3 Rudder servers.
+
+=== Older servers
+
+Rudder agents 5.0 are not compatible with Rudder servers older than 4.1.
+You need to upgrade your server to a compatible version before the agents.
+
+== Compatibility between Rudder server 5.0 and older agent versions
+
+=== 4.1, 4.2 and 4.3 agents
+
+Rudder agent 4.1, 4.2 and 4.3 are fully compatible with Rudder server 5.0. It is
+therefore not strictly necessary to update all your agents to 5.0.
+
+=== Older agents
+
+These agents are not compatible with Rudder 5.0, and you have to upgrade them.
+Be careful to follow the upgrade path explained xref:upgrade.adoc#_upgrade_from_rudder_4_0_or_older[above].

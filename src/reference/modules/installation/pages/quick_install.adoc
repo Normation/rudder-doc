@@ -1,0 +1,49 @@
+= Quick installation
+
+[WARNING]
+
+====
+
+This is a bit like the insecure `curl | sh`, this is because it is intended for quick testing.
+Please read the full installation section if you want the complete procedure.
+
+However the URL is HTTPS with a valid certificate.
+
+====
+
+We have a quick procedure for people who just want to test Rudder:
+
+----
+
+  wget https://www.rudder-project.org/tools/rudder-setup
+  chmod +x rudder-setup
+  ./rudder-setup setup-server latest
+
+----
+
+This will setup Rudder repository on your system and the use the package manager to install rudder server in latest version.
+
+rudder-setup can also install an agent or a relay in any version, here is the full usage:
+
+----
+
+Usage rudder-setup (add-repository|setup-agent|setup-server|upgrade-agent|upgrade-server) <rudder_version> [<policy_server>]
+  Adds a repository and setup rudder on your OS
+  Should work on as many OS as possible
+  Currently suported : Debian, Ubuntu, RHEL, Fedora, Centos, Amazon, Oracle, SLES
+
+  rudder_version : x.y or x.y.z or x.y-nightly or ci/x.y or lts or latest
+       x.y:         the latest x.y release (ex: 3.2)
+       x.y.z:       the exact x.y.z release (ex: 3.2.1)
+       x.y.z-t:     the exact x.y.z release with a retag number t (ex: 3.2.1-1)
+       x.y.z.a:     the latest x.y.z pre-release where a can be alpha1, beta1, rc1... (ex: 4.0.0.rc1)
+       x.y-nightly: the latest public x.y nightly build (ex: 3.2-nightly)
+       ci/x.y:      the latest private x.y nightly build (ex: ci/3.2)
+       ci/x.y.z:    the latest private x.y.z release build (ex: ci/3.2.16)
+       ci/x.y.z-t:  the latest private x.y.z release build with a retag number t (ex: ci/3.2.16-1)
+       ci/x.y.z.a:  the latest private x.y.z pre-release build (ex: ci/4.0.0.rc1)
+       lts:         the latest long term support version
+       latest:      the latest stable version
+
+
+----

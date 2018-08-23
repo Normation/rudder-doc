@@ -1,0 +1,116 @@
+= Supported Operating Systems
+
+[[node-supported-os, the list of supported Operating Systems for Nodes]]
+== Fully supported Operating Systems
+
+Fully supported Operating Systems are systems that are frequently built and tested on our servers.
+Partially supported Operating Systems are systems that have been built and tested at least once but that have not seen continuous flow of fixes.
+
+=== For Rudder Nodes
+
+The following operating systems are supported for Rudder Nodes and packages are
+available for these platforms:
+
+GNU/Linux:
+
+* Debian 8 and 9
+
+* RedHat Enterprise Linux (RHEL) / RHEL-like 6 and 7 (64-bit)
+
+* SUSE Linux Enterprise Server (SLES) 11 and 12 (64bit)
+
+* Ubuntu 14.04 LTS (Trusty), 16.04 LTS (Xenial), 18.04 LTS (Bionic) (64-bit)
+
+* Slackware 14 (64-bit)
+
+Other Unix systems:
+
+* IBM AIX 5.3, 6.1 and 7.1
+
+Windows:
+
+* xref:TODO[Microsoft Windows] Server 2008 R2, 2012, 2012 R2, 2016
+
+[TIP]
+
+[[install-on-windows, Install on Microsoft Windows]]
+
+.Windows, Slackware and AIX Nodes
+
+====
+
+* On Windows, installing Rudder requires the DSC (Desired State Configuration) plugin and Powershell 4.0 or more
+* For IBM AIX, pre-built RPM packages are distributed by Normation only
+* For IBM AIX, pre-built packages are distributed by Normation only
+
+Hence, as a starting point, we suggest that you only use Linux machines. Once
+you are accustomed to Rudder, contact Normation to obtain a demo version for
+these platforms.
+
+====
+
+
+[[server-supported-os, the list of supported Operating Systems for Root server]]
+=== For Rudder root server or relay server
+
+The following operating systems are supported as a root or relay server:
+
+* Debian 8 and 9
+
+* RedHat Enterprise Linux / CentOS 7
+
+* SUSE Linux Enterprise Server 12 SP1+
+
+* Ubuntu 16.04 LTS (Xenial), 18.04 LTS (Bionic)
+
+== Partially supported Operating Systems
+
+Fully supported Operating Systems are systems that are frequently built and tested on our servers.
+Partially supported Operating Systems are systems that have been built and tested at least once but that have not seen continuous flow of fixes.
+
+[WARNING]
+
+.Partially supported Operating Systems
+
+====
+
+It is possible to use Rudder on other platforms than the fully supported ones.
+However, we haven't tested the application on them, and can't currently supply
+any packages for them. Moreover, some Techniques may not work properly. If you
+wish to get Rudder support on those systems, please get in touch with us!
+
+A reference about how to manually build a Rudder agent is available on Rudder's
+xref:reference:build.adoc#_building_the_rudder_agent[build documentation].
+
+====
+
+=== For Rudder Nodes
+
+The following operating systems have had an agent built using xref:reference:build.adoc#_building_the_rudder_agent[Building the Rudder Agent]:
+
+* Debian 5 to 7
+
+* RedHat Enterprise Linux / CentOS 3 and 5
+
+* SUSE Linux Enterprise Server 10 SP3
+
+* Ubuntu 10.04 LTS (Lucid), 12.04 LTS (Precise)
+
+* FreeBSD
+
+* Solaris 10 and 11
+
+* Raspbian, based on jessie (via dpkg)
+
+* Debian 8 on ARM (armhf version) (via dpkg)
+
+* OpenSUSE (via rpm)
+
+You can also follow the documentation instructions to build and install Rudder Agent locally on your favorite linux distribution.
+Even if this distribution has not been tested by us, it has a reasonable chance of success.
+
+=== For Rudder Root Server
+
+We advise against using an unsupported OS for Rudder server because the server contains
+much more code than the agent. This code is tailored against specific OS versions
+to work around many system limitations and specificities.

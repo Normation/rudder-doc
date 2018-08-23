@@ -1,0 +1,25 @@
+= Upgrade Rudder on RHEL or CentOS
+
+include::{partialsdir}/rhel_repo.adoc[]
+
+== Rudder agent
+
+For Rudder agent, upgrade the agent package:
+
+----
+
+yum update rudder-agent
+
+----
+
+== Rudder server
+
+For Rudder server, upgrade the server packages:
+
+----
+
+yum update rudder-server-root
+
+----
+
+include::{partialsdir}/upgrade_techniques.adoc[]

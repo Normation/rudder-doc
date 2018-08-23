@@ -1,0 +1,350 @@
+= Maintenance procedures
+
+[[_database_maintenance]]
+== Database maintenance
+
+Rudder uses two backends to store information as of now: LDAP and SQL
+
+To achieve this, OpenLDAP and PostgreSQL are installed with Rudder.
+
+However, like every database, they require a small amount of maintenance
+to keep operating well. Thus, this chapter will introduce you to the basic
+maintenance procedure you might want to know about these particular database
+implementations.
+
+=== Automatic PostgreSQL table maintenance
+
+Rudder uses an automatic mechanism to automate the archival and pruning of the reports
+database.
+
+By default, this system will:
+
+* Archive reports older that 3 days
+* Remove reports older than 90 days
+
+It thus reduces the work overhead by only making Rudder handle relevant reports (fresh enough)
+and putting aside old ones.
+
+This is obviously configurable in /opt/rudder/etc/rudder-web.properties, by altering the following
+configuration elements:
+
+* rudder.batch.reportscleaner.archive.TTL: Set the maximum report age before archival
+* rudder.batch.reportscleaner.delete.TTL: Set the maximum report age before deletion
+
+The default values are OK for systems under moderate load, and should be adjusted in case of
+excessive database bloating.
+
+The estimated disk space consumption, with a 5 minute agent run frequency, is 150 to 400 kB per Directive,
+per day and per node, which is roughly 5 to 10 MB per Directive per month and per node.
+
+Thus, 25 directives on 100 nodes, with a 7 day log retention policy, would take 2.5 to 10 GB, and
+25 directives on 1000 nodes with a 1 hour agent execution period and a 30 day log retention policy
+would take 9 to 35 GB.
+
+=== PostgreSQL database vacuum
+
+In some cases, like a large report archiving or deletion, the Rudder interface
+will still display the old database size. This is because even if the database has been
+cleaned as requested, the physical storage backend did not reclaim space on the hard drive,
+resulting in a "fragmented" database. This is not an issue, as PostgreSQL handles this automatically,
+and new reports sent by the nodes to Rudder will fill the blanks in the database, resulting in a
+steady growth of the database. This task is handled by the autovacuum process, which periodically
+cleans the storage regularly to prevent database bloating.
+
+However, to force this operation to free storage immediately, you can trigger a "vacuum full" operation
+by yourself, however keep in mind that this operation is very disk and memory intensive,
+and will lock both the Rudder interface and the reporting system for quite a long time with a big database.
+
+[source,python]
+
+.Manual vacuuming using the psql binary
+
+----
+
+# You can either use sudo to change owner to the postgres user, or use the rudder connection credentials.
+
+# With sudo:
+sudo -u postgres psql -d rudder
+
+# With rudder credentials, it will ask the password in this case:
+psql -u rudder -d rudder -W
+
+# And then, when you are connected to the rudder database in the psql shell, trigger a vacuum:
+rudder=# VACUUM FULL;
+
+# And take a coffee.
+
+----
+
+=== LDAP database reindexing
+
+In some very rare case, you will encounter some LDAP database entries that are not indexed and used
+during searches. In that case, OpenLDAP will output warnings to notify you that they should be.
+
+[source,python]
+
+.LDAP database reindexing
+
+----
+
+# Stop OpenLDAP
+service rudder-slapd stop
+
+# Reindex the databases
+service rudder-slapd reindex
+
+# Restart OpenLDAP
+service rudder-slapd restart
+
+----
+
+[[_migration_backups_and_restores]]
+== Migration, backups and restores
+
+It is advised to backup frequently your Rudder installation in case
+of a major outage.
+
+These procedures will explain how to backup your Rudder installation.
+
+=== Backup
+
+This backup procedure will operate on the three principal Rudder data sources:
+
+* The LDAP database
+* The PostgreSQL database
+* The configuration-repository folder
+
+It will also backup the application logs.
+
+[source,python]
+
+.How to backup a Rudder installation
+
+----
+
+# First, backup the LDAP database:
+/opt/rudder/sbin/slapcat -l /tmp/rudder-backup-$(date +%Y%m%d).ldif
+
+# Second, the PostgreSQL database:
+sudo -u postgres pg_dump rudder > /tmp/rudder-backup-$(date +%Y%m%d).sql
+
+# Or without sudo, use the rudder application password:
+pg_dump -U rudder rudder > /tmp/rudder-backup-$(date +%Y%m%d).sql
+
+# Third, backup the configuration repository:
+tar -C /var/rudder -zvcf /tmp/rudder-backup-$(date +%Y%m%d).tar.gz configuration-repository/ cfengine-community/ppkeys/
+
+# Finally, backup the logs:
+tar -C /var/log -zvcf /tmp/rudder-log-backup-$(date +%Y%m%d).tar.gz rudder/
+
+# And put the backups wherever you want, here /root:
+cp /tmp/rudder-backup* /root
+cp /tmp/rudder-log-backup* /root
+
+----
+
+=== Restore
+
+Of course, after a total machine crash, you will have your backups at hand,
+but what should you do with it ?
+
+Here is the restoration procedure:
+
+[source,python]
+
+.How to restore a Rudder backup
+
+----
+
+# First, follow the standard installation procedure, this one assumes you have a working "blank"
+# Rudder on the machine
+
+# Disable Rudder agent
+rudder agent disable
+
+# Stop Rudder services
+service rudder stop
+
+# Drop the OpenLDAP database
+rm -rf /var/rudder/ldap/openldap-data/*.mdb
+
+# Import your backups
+
+# Configuration repository
+tar -C /var/rudder -zvxf /root/rudder-backup-XXXXXXXX.tar.gz
+
+# LDAP backup
+/opt/rudder/sbin/slapadd -l /root/rudder-backup-XXXXXXXX.ldif
+
+# Start PostgreSQL
+service postgresql start
+
+# PostgreSQL backup
+sudo -u postgres psql -d rudder < /root/rudder-backup-XXXXXXXX.sql
+# or
+psql -u rudder -d rudder -W < /root/rudder-backup-XXXXXXXX.sql
+
+# Enable Rudder agent
+rudder agent enable
+
+# And restart the machine or just Rudder:
+service rudder-server restart
+service rudder-agent restart
+
+----
+
+=== Migration
+
+To migrate a Rudder installation, just backup and restore your Rudder installation
+from one machine to another.
+
+If your server address changed, you will also have to do the following on
+every node that is directly connected to it (managed nodes or relays):
+
+* Remove the server public key +rm /var/rudder/cfengine-community/ppkeys/root-MD5=*.pub+
+* Modify +/var/rudder/cfengine-community/policy_server.dat+ with the new address, then you can force your nodes to send their inventory by running +rudder agent inventory+
+
+[[password-management]]
+=== Password management
+
+You might want to change the default passwords used in Rudder's managed daemons
+for evident security reasons.
+
+==== Configuration of the postgres database password
+
+You will have to adjust the postgres database and the rudder-web.properties file.
+
+Here is a semi-automated procedure:
+
+* Generate a decently fair password. You can use an arbitrary one too.
+
+----
+
+PASS=`dd if=/dev/urandom count=128 bs=1 2>&1 | md5sum | cut -b-12`
+
+----
+
+* Update the Postgres database user
+
+----
+
+su - postgres -c "psql -q -c \"ALTER USER blah WITH PASSWORD '$PASS'\""
+
+----
+
+* Insert the password in the rudder-web.properties file
+
+----
+
+sed -i "s%^rudder.jdbc.password.*$%rudder.jdbc.password=$PASS%" /opt/rudder/etc/rudder-web.properties
+
+----
+
+==== Configuration of the OpenLDAP manager password
+
+You will have to adjust the OpenLDAP and the rudder-web.properties file.
+
+Here is a semi-automated procedure:
+
+* Generate a decently fair password. You can use an arbitrary one too.
+
+----
+
+PASS=`dd if=/dev/urandom count=128 bs=1 2>&1 | md5sum | cut -b-12`
+
+----
+
+* Update the password in the slapd configuration
+
+----
+
+HASHPASS=`/opt/rudder/sbin/slappasswd -s $PASS`
+sed -i "s%^rootpw.*$%rootpw          $HASHPASS%" /opt/rudder/etc/openldap/slapd.conf
+
+----
+
+* Update the password in the rudder-web.properties file
+
+----
+
+sed -i "s%^ldap.authpw.*$%ldap.authpw=$PASS%" /opt/rudder/etc/rudder-web.properties
+
+----
+
+==== Configuration of the WebDAV access password
+
+This time, the procedure is a bit more tricky, as you will have to update
+the Technique library as well as a configuration file.
+
+Here is a semi-automated procedure:
+
+* Generate a decently fair password. You can use an arbitrary one too.
+
+----
+
+PASS=`dd if=/dev/urandom count=128 bs=1 2>&1 | md5sum | cut -b-12`
+
+----
+
+* Update the password in the apache htaccess file
+
+[TIP]
+
+====
+
+On some systems, especially SUSE ones, htpasswd is called as "htpasswd2"
+
+====
+
+----
+
+htpasswd -b /opt/rudder/etc/htpasswd-webdav rudder $PASS
+
+----
+
+* Update the password in Rudder's system Techniques
+
+----
+
+cd /var/rudder/configuration-repository/techniques/system/common/1.0/
+sed -i "s%^.*davpw.*$%   \"davpw\" string => \"$PASS\"\;%" site.st
+git commit -m "Updated the rudder WebDAV access password" site.st
+
+----
+
+* Update the Rudder Directives by either reloading them in the web interface (in the "Configuration Management/Techniques" tab) or restarting jetty (NOT recommended)
+
+=== Password upgrade
+
+This version of Rudder uses a central file to manage the passwords that will
+be used by the application: /opt/rudder/etc/rudder-passwords.conf
+
+When first installing Rudder, this file is initialized with default values,
+and when you run rudder-init, it will be updated with randomly generated
+passwords.
+
+On the majority of cases, this is fine, however you might want to adjust the
+passwords manually. This is possible, just be cautious when editing the file,
+as if you corrupt it Rudder will not be able to operate correctly anymore and
+will spit numerous errors in the program logs.
+
+As of now, this file follows a simple syntax: ELEMENT:password
+
+You are able to configure three passwords in it: The OpenLDAP one, the
+PostgreSQL one and the authenticated WebDAV one.
+
+If you edit this file, Rudder will take care of applying the new passwords
+everywhere it is needed, however it will restart the application automatically
+when finished, so take care of notifying users of potential downtime before
+editing passwords.
+
+Here is a sample command to regenerate the WebDAV password with a random
+password, that is portable on all supported systems. Just change the
+"RUDDER_WEBDAV_PASSWORD" to any password file statement corresponding to
+the password you want to change.
+
+----
+
+sed -i s/RUDDER_WEBDAV_PASSWORD.*/RUDDER_WEBDAV_PASSWORD:$(dd if=/dev/urandom count=128 bs=1 2>&1 | md5sum | cut -b-12)/ /opt/rudder/etc/rudder-passwords.conf
+
+----

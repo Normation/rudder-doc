@@ -1,0 +1,481 @@
+= Configuration concepts
+
+We adopted the following terms to describe the configurations in Rudder:
+
+====
+
+include::{partialsdir}/glossary/technique.adoc[]
+
+include::{partialsdir}/glossary/directive.adoc[]
+
+include::{partialsdir}/glossary/rule.adoc[]
+
+include::{partialsdir}/glossary/applied-policy.adoc[]
+
+====
+
+As illustrated in this summary diagram, the rules are linking the
+functions of inventory management and configuration management.
+
+.Concepts diagram
+
+image::configuration_concepts.svg[]
+
+== Techniques
+
+=== Concepts
+
+A Technique defines a set of operations and configurations to reach the
+desired behaviour. This includes the initial set-up, but also a regular check on
+the parameters, and automatic repairs (when possible).
+
+All the Techniques are built with the possibility to change only part of a
+service configuration: each parameter may be either active, either set on the
+"Don't change" value, that will let the default values or in place. This allows
+for a progressive deployment of the configuration management.
+
+Finally, the Techniques will generate a set of reports which are sent to
+the Rudder Root Server, which will let you analyse the percentage of compliance
+of your policies, and soon, detailed reports on their application.
+
+=== Manage the Techniques
+
+The Techniques shipped with Rudder are presented in a library that you can
+reorganize in *Configuration > Techniques*. The library
+is organized in two parts: the available Techniques, and the selection
+made by the user.
+
+include::{partialsdir}/glossary/technique-library.adoc[]
+
+include::{partialsdir}/glossary/active-techniques.adoc[]
+
+=== Create new Techniques
+
+The standard library only provides the most common Techniques. You can create
+new Technique with the xref:usage:technique_editor.adoc#technique-editor[Technique Editor].
+
+== Directives
+
+Once you have selected and organized your Techniques, you can create your
+configurations in the *Configuration Management > Directives* section.
+
+include::{partialsdir}/glossary/directive.adoc[]
+
+The screen is divided in three parts:
+
+- on the left, The list of Directives, grouped by Technique
+
+- on the right, The selected Directive form.
+
+Click on the name of a Technique to show its description, and how to Create a Directive base on it.
+
+Click on the name of a Directive to see the Directive Summary containing the
+description of the Technique its derived from, and the configuration items
+of the Directive.
+
+
+image::Directive_management.png[]
+
+.Create a Directive for Name resolution
+
+====
+
+Use the Technique 'Name resolution' to create a new Directive called
++Google DNS Servers+, and shortly described as 'Use Google DNS Server'. Check in
+the options 'Set nameservers' and 'Set DNS search suffix'.  Set the value of the
+variable 'DNS resolver' to +8.8.8.8+ and of 'Domain search suffix' according to
+your organization, like +rudder-project.org+.
+
+====
+
+== Rules
+
+include::{partialsdir}/glossary/rule.adoc[]
+
+image::Rule_management.png[]
+
+When a Rule is created or modified, the policies for the target nodes are generated. Rudder computes all the policies each nodes must have, and makes them available for the nodes. This process can take up to several minutes, depending on the number of managed nodes and the Policy Server configuration. During this time, The status icon on the top of the page turns to grey, with moving arrows.
+if you feel the generated policies should be modified (for instance, if you changed the configuration of Rudder), you can click on the status menu in the top bar and click on "Regenerate policies"
+
+image::Rule_config.png[]
+
+
+
+== Variables
+
+=== User defined parameters
+
+Rudder provides a simple way to add common and reusable variables in either plain Directives, or techniques created using the Technique editor: the parameters.
+
+image::rudder-parameters.png[Parameters]
+
+The parameters enable the user to specify a content that can be put anywhere, using the following syntax:
+
+* In Directives: '${rudder.param.name}' will expand the content of the "name" parameter.
+* In the Technique Editor: '${rudder_parameters.name}' will do the same.
+
+Using this, you can specify common file headers (this is the default parameter, "rudder_file_edit_header"), common DNS or domain names, backup servers,
+site-specific elements...
+
+=== System variables
+
+Rudder also provides system variables that contain information about nodes
+and their policy server. You can use them like user defined parameters.
+
+The information about a Node:
+
+* '${rudder.node.id}' returns the Rudder generated id of the Node
+* '${rudder.node.hostname}' returns the hostname of the Node
+* '${rudder.node.admin}' returns the administrator login of the Node
+
+The information about a Node's policy server.
+
+* '${rudder.node.policyserver.id}' returns the Rudder generated id of the Policy Server
+* '${rudder.node.policyserver.hostname}' returns the hostname of the Policy Server
+* '${rudder.node.policyserver.admin}' returns the administrator login of the Policy Server
+
+
+[[compliance-and-drift-assessment]]
+== Compliance and Drift Assessment
+
+
+=== Overview in Rudder
+
+
+Rudder is built to continuously assess drift compared to defined policies, with or without auto-healing.
+
+By auto-healing, we mean that optionally, Rudder can continuously enforce correct configuration over time, correcting the assessed drift so that
+your configuration converges towards desired states. This behavior is optional, and Rudder can only report drift without changing configuration.
+That policy enforce or audit mode can be configured by node, rule or directive (see xref:usage:configuration_management.adoc#_policy_mode_audit_enforce[policy mode documentation] for more details).
+
+Rudder is able to adapt to complex process and only do the minimal required work so that the server converges to the desired state,
+and so whatever was the starting state point. Rudder works as a GPS would, adapting the path to your destination depending of the path
+you actually took. This process is much more resilient to changes than a step by step, procedural description of the commands to execute.
+
+Compliance and drift from expected configurations are then reported with possibility to drill down in non-compliance issues to identify the root problem.
+
+Of course, one can always correct a drift error by hand by updating coniguration target and changing policy mode from "audit" to "enforce" mode.
+
+==== Compliance and drift reporting
+
+Compliance drifts (non compliances, enforcement errors, repaires) are reported in Rudder by several means:
+
+- Compliance are reported in aggregated format globally in the dashboard, and by rules or nodes (example for Rule below)
+- they are stored in Rudder compliance database, and each Rule displays an history of changes as depicted in "Changes history on a Rule" below.
+- each drifts fires an event which is logged in file /var/log/rudder/compliance/non-compliant-reports.log and can be used
+  to integrates with log aggregation engine like Logstash, or hooks (typically to send notification to IRC or Slack, send email, etc)
+  - see for example the Slack connector here: https://github.com/Normation/rudder-tools/blob/master/scripts/rudder-notification/forward-non-compliance-to-slack.sh
+- compliance and drift are also available from Rudder API to provide deeper integration with your IT Infrastructure.
+
+
+
+.Compliance on a Rule
+
+image::Rule_compliance.png[Rule compliance]
+
+The Rule detailed compliance screen will also graph compliance deviations on
+a recent period as well as display a deviation log history for this period.
+
+
+
+.Changes history on a Rule
+
+image::rudder-rule-compliance-history.png[Changes compliance history]
+
+
+
+
+=== How compliance is calculated ?
+
+As previously seen, in Rudder you define Rules which target groups of Nodes, and are composed of configuration Directives.
+
+A Directive contains one or multiple sub-configuration elements which generates reports.
+For example, for a Sudoers Directive, each user can be such an element.
+
+Reports have states explaining what is the drift between the expected configuration and the actual configuration.
+Some states depends if the user choose to auto-matically enforce drift correction
+or if he chose to only reports on drift).
+
+Finaly, a node can get a global state if reports don't come at expected frequency or for expected policy configuration version.
+
+Below you will find all details about the possible states and their meaning with the actual compliance calculus method.
+
+*Checking that the node is correctly reporting, at correct frequency*
+
+At the node level, we are checking that the node is sending reports according to the
+expected frequency, and for the currently defined version of the configuration for it.
+
+Based on this information, we get a
+
+Applying::
+
+When a new set of policies are defined for a node (or any update to existing one), Rudder waits during a grace period
+for reports so that the node has time to apply the new policies.
+During this period, the configuration is said 'Applying'.
+
+No report::
+
+The system didn't send any reports since a time incompatible with the agent frequency run interval. Most
+likelly, the node is not online or there is an ongoing network issue between the node and Rudder server.
+
+
+
+*At directive level: checking for drift and auto-healing*
+
+
+Success or Compliant::
+
+The system is already in the desired state. No change is needed. Conformity is reached.
+
+Repaired::
+
+When a configuration policy is "enforced", that state means that the system was not in the desired state.
+Rudder applied some change and repaired what was not correct. Now the system is in the desired state.
+
+Error::
+
+When configuration is enforced, it means that the system is not in the desired state and Rudder wasn't able to repair the system.
+
+Non compliant::
+
+When configuration is not enforced, it means that the systemn is not in the desired state. A drift is reported.
+
+Not applicable::
+
+A specific configuration may not be applicable on a given node because some precondition
+are not met. For example, the specified configuration is only relevant for Linux nodes, and
+thus is Not applicable on a Windows server.
+
+Unexpected::
+
+We have a special kind of report for unexpected states (both for enforce and audit mode). These
+reports generally mean that the node is sending reports for unexpected configuration components. It
+may be due to bad parameters for the configuration, or an error in the Technique.
+
+
+*Compliance calculus*
+
+Based on these facts, the compliance of a Rule is calculated like this:
+
+Number of Nodes for which conformity is reached for every Directive of the
+Rule / Total number of Nodes on which the Rule has been applied
+
+
+== Validation workflow in Rudder
+
+The validation workflow is a feature whose purpose is to hold any change (Rule, Directive, Group) made by users in the web interface,
+to be reviewed first by other users with the adequate privileges before actual deployment.
+
+The goal is to improve safety and knowledge sharing in the team that is using Rudder.
+
+To enable it, you only have to tick "Enable Change Requests" in the Administration - Settings tab of the web interface. (This feature
+is optional and can be disabled at any time without any problem, besides risking the invalidation of yet-unapproved changes)
+
+image::workflows/Enabling.png[]
+
+=== What is a Change request ?
+
+A Change request represents a modification of a Rule/Directive/Group from an old state to a new one.
+The Change is not saved and applied by the configuration, before that, it needs to be reviewed and approved by other members of the team.
+
+A Change request has:
+
+- An Id (an integer > 0)
+- A title.
+- A description.
+- A creator.
+- A status.
+- Its own history.
+
+This information can be updated on the change request detail page.
+For now, a Change request is linked to one change at a time.
+
+==== Change request status
+
+There is 4 Change request status:
+
+Pending validation::
+- The change has to be reviewed and validated.
+- Can be send to: Pending deployment, Deployed, Cancelled.
+
+Pending deployment::
+- The change was validated, but now require to be deployed.
+- Can be send to: Deployed, Cancelled.
+
+Deployed::
+- The change is deployed.
+- This is a final state, it can't be moved anymore.
+
+Cancelled::
+- The change was not approved.
+- This is a final state, it can't be moved anymore.
+
+Here is a diagram about all those states and transitions:
+
+image::workflows/States.png[]
+
+=== Change request management page
+
+All Change requests can be seen on the /secure/utilities/changeRequests page.
+There is a table containing all requests, you can access to each of them by clicking on their id.
+You can filter change requests by status and only display what you need.
+
+image::workflows/Management.png[]
+
+==== Change request detail page
+
+Each Change request is reachable on the /secure/utilities/changeRequest/id.
+
+image::workflows/Details.png[]
+
+The page is divided into two sections:
+
+Change request information::
+
+display common information (title, description, status, id) and a form to edit them.
+
+image::workflows/Informations.png[]
+
+Change request content::
+
+In this section, there is two tabs:
+- History about that change request
+
+image:workflows/History.png[]
+
+- Display the change proposed
+
+image:workflows/Rule_Update_Diff.png[]
+
+
+=== How to create a Change request ?
+
+If they are enabled in Rudder, every change in Rudder will make you create a Change request.
+You will have a popup to enter the name of your change request and a change message.
+
+The change message will be used as description for you Change Request, so we advise to fill it anyway to keep an explanation ab out your change.
+
+image::workflows/Popup.png[]
+
+Change request are not available for Rule/Directive/Groups creation, they are only active if the Rule/Directive/Groups existed before:
+
+Here is a small table about all possibilities:
+
+image::workflows/Table.png[]
+
+=== How to validate a Change request ?
+
+==== Roles
+
+Not every user can validate or deploy change in Rudder.
+Only those with one of the following roles can act on Change request:
+
+Validator::
+Can validate Change request
+
+Deployer::
+To deploy Change Request
+
+Both of those roles:
+
+- Give you access to pending Change requests
+- Allow you to perform actions on them (validate or cancel)
+
+You have to change users in */opt/rudder/etc/rudder-users.xml* and include those rights.
+Without one of those roles, you can only access Change Request in 'Deployed' or 'Cancelled' and those you opened before.
+
+You can deploy directly if you have both the validator and deployer roles.
+The *administrator* Role gives you both the deployer and valdiator role.
+
+There is also the possibility to access Change requests in Read only mode by using the role 'validator_read' or 'deployer_read'.
+
+image::workflows/Validation.png[]
+
+==== Self Validations
+
+Using Change requests means that you want your team to share knowledge, and validate each other change.
+So by default:
+
+- *Self validation* is disabled.
+- *Self deployment* is enabled.
+
+Those two behaviours can be changed in the property file */opt/rudder/etc/rudder-web.properties*.
+'rudder.workflow.self.validation' and 'rudder.workflow.self.deployment' are the properties that define this behaviour.
+
+=== Change request and conflicts
+
+When the initial state of a Change request has changed (i.e.: you want to modify a Directive, but someone else changes about that Directive has been accepted before yours), your change can't be validated anymore.
+
+image::workflows/Conflict.png[]
+
+For now, we decided to reduce to the possibility of an error or inconsistency when there are concurrent changes.
+In a future version of Rudder, there will be a system to handle those conflicts, and make sure actual changes are not overwritten.
+
+=== Notifications
+
+In several parts of Rudder webapp there are some Notifications about Change requests.
+
+==== Pending change requests
+
+This notification is displayed only if the validator/deployer role is active on your user account.
+It shows you how many Change requests are waiting to be reviewed/deployed.
+Clicking on it will lead you to the Change request management page, with a filter already applied.
+
+image::workflows/Notification.png[]
+
+==== Change already proposed on Rule/Directive/Group
+
+When there is a change about the Rule/Directive/Group already proposed but not deployed/cancelled, you will be notified that there are some pending Change requests about that element.
+You will be provided a Link to those change request, So you can check if the change is already proposed.
+
+image::workflows/Warning.png[]
+
+
+[[_policy_mode_audit_enforce]]
+== Policy Mode (Audit/Enforce)
+
+Rudder 4.0 includes a policy mode setting, that allows two distinct behaviors:
+
+* *Audit*: Test if the system is in the desired state, and report about it
+* *Enforce*: Test if the system is in the desired state, if not, try to act to get to this state, and report about actions taken and final state
+
+This allows for example xref:ROOT:usecases.adoc#_using_rudder_as_an_audit_tooli[to use Rudder as an audit tool] or xref:usage:configuration_management.adoc#_using_audit_mode_to_validate_a_policy_before_applying_it[to test a policy before enforcing it].
+
+image:audit_mode_general_overview.png[]
+
+This mode can be set:
+
+* Globally on the Rudder root server. In this can case there are two options: allow to override this mode on specific items, or use the global configuration everywhere.
+* On a directive.
+* On a node.
+
+A lot of attention and several safeguards have been put in place to ensure that if you choose to use "Audit"
+for a target, nothing will be changed on the node for that target (except Rudder's own configuration under `/var/rudder`), and only some harmless
+commands will be run (like listing installed packages or refreshing package lists).
+
+Nodes are fully aware of exactly what directives need to be executed in Audit or in Enforce mode, and the "rudder agent" command line has been enhanced to let you see the result with a glimpse: the first column in `rudder agent run` output is now the mode (*A* for *Audit* and *E* for *Enforce*), and the compliance summary is split by audit mode.
+In addition to pre-existing technical reports, new ones have been added to report on "audit-compliant" (the check was OK), "audit-non-compliant" (the check was done, but the result is not the one expected), "audit-not-applicable" (the check is not applicable for that node, for example because of a limitation on the OS type), "audit-error" (the check wasn't able to finish correctly) status.
+
+=== How is the effective mode computed?
+
+We will here explain what is the computation made during generation to
+decide which mode to apply to a directive on a node, based on the current settings.
+
+The short rule is: *Override wins, then Audit wins*
+
+For a given directive on a given node at a given time, we have three different policy mode
+settings:
+
+* The global mode, called *G*, which can be *Audit* or *Enforce*
+* The node mode called *N*, which can be *Global* (if not overridden), *Audit, or *Enforce*
+* The directive mode, called *D*, which can be *Global* (if not overridden), *Audit, or *Enforce*
+
+The result is:
+
+* If override is not allowed, the policy mode is *always* the global mode *G*.
+* If override is allowed:
+
+** If *N* and *D* are set to use the *Global* default value (i.e. no override), the policy mode is the global mode *G*.
+** If *N* uses the *global* value and *D* is overriden to *Audit* or *Enforce*, the *D* value is used.
+** If *D* uses the *global* value and *N* is overriden to *Audit* or *Enforce*, the *N* value is used.
+** If *N* and *D* are overriden to *Audit* or *Enforce*, the value is *Audit* if at least one of *N* or *D* is *Audit*, *Enforce* if both are in *Enforce* mode

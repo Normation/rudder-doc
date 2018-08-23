@@ -1,0 +1,108 @@
+[[technique-editor]]
+= Technique editor
+
+== Introduction
+
+=== First, what is a Technique ?
+
+A technique is a description in code form of what the agent has to do on the node.
+This code is actually composed of a series of Generic method calls.
+These different Generic method calls are conditional.
+
+=== What is a Generic method?
+
+A generic method is a description of an elementary state independent of the operating system (ex: a package is installed, a file contains such line, etc...).
+Generic methods are independent of the operating system (It has to work on any operating system).
+Generic methods calls are conditioned by condition expressions, which are boolean expression combining basic conditions with classic boolean operators (ex : operating system is Debian, such generic method produced a modification, did not produce any modification, produced an error, etc…)
+
+
+== Technique Editor
+
+=== Utility
+
+Rudder provides a set of pre-defined Techniques that cover some basic configuration and system administration needs. Of course,this set of techniques cannot responds to all of the specific needs of each client. That’s why Rudder integrate the *Technique _editor_*, a tool to create advanced Techniques.
+Directly accessible from Ruder menu (_Utilities > Technique editor_), this tool has an easy-to-use interface, which doesn’t require any programming skills but nevertheless allows to create complex Techniques.
+
+=== Interface
+
+Here is an overview of its interface :
+
+image::technique_editor/1-rudder-technique-editor.png[]
+
+The interface is divided into 3 columns:
+
+
+- A column listing custom Techniques
+
+image::technique_editor/2-list-techniques.png[]
+
+Here, we can see our previously created Techniques. We can click on them to see their details/edit them, or create a new one by clicking on the “New” button. Theses Techniques are visible in the *ncf techniques* category in the *Directives _tree_*, so can be used to create new Directives.
+
+- A column with the Technique content
+
+When we create a new Technique, or when we edit an existing one, the configuration form appears at the center of the interface, instead of the title and the description of the tool.
+
+image::technique_editor/3-ntp-configuration.png[]
+
+Then we can see the name, the description, the Bundle name, the version and the Generic methods list of the current Technique. Only the name and the description are editable, the Bundle name and the version are automatically defined during the Technique creation.
+
+- A column listing Generic methods / displaying generic method details
+
+To the right of the interface is the list of Generic methods available for Technique configuration.
+This list is made up of about a hundred Generic methods, grouped according to their category to make them easier to use (an exhaustive list can be found in the xref:reference:generic_methods.adoc[reference documentation])
+
+image::technique_editor/4-list-generics-method.png[]
+
+You just need to click on a Generic method or drag'n drop it in the area provided for such purpose to add it to the current Technique. Once it's done, you can configure it by clicking on it. Then a new display containing the method details appears instead of the Generic methods list:
+
+image::technique_editor/5-configure-generic-method.png[]
+
+The Generic method details are divided into 3 blocks :
+
+. Conditions
+  - Conditions allow user to restrict the execution of the method.
+. Parameters
+  - Parameters are in mono or multi line text format. They can contains variables which will be extended at the time of the execution.
+. Result conditions
+  - One result condition of three will be defined following the execution of a generic method:
+    * Success, when the configuration is correct and no action are needed
+    * Repaired, when the configuration is wrong and actions to fix it were executed with success
+    * Error, when the configuration is wrong but actions to fix it failed
+
+Theses conditions can be used in another Generic methods conditions. ie, you can execute a command if a previous one failed or was repaired.
+
+
+== Create your first Technique
+
+Now we are going to see how to create a simple technique to configure a ntp server, step by step.
+
+=== General information
+
+Let's start from the beginning. Click on the "_New_ Technique" button and start filling in the General information fields (only name is required).
+
+In our case:
+
+- *Name*: _Configure NTP_
+- *Description*: _Install, configure and ensure the ntpd is running. Uses a template file to configuration._
+
+=== Add and configure generic methods
+
+Now, we have to find and add the generic methods which correspond to the actions we want to execute. In our case, we want to add the following methods:
+
+* Package install (You can find it in the *Package category*)
+  - This method only take one parameter, the name of the package to install. So here, fill in the *package_name* field with the value _ntp_.
+
+* File from template (You can find it in the *File category*)
+  - This method take two parameters. The first one corresponds to the absolute path of the source file containing a template to be expanded. We are going to use a Rudder variable here to get the correct path. Fill in the *source_template* field with the value _$\{path_technique\}/templates/ntp.conf_.
+  - The second corresponds to the absolute path of the destination file. Fill in with the value _/etc/ntp.conf_.
+
+* Service restart (You can find it in the *Service category*)
+  - This method only take one parameter, the name of the service we want to restart. So here, fill in the *service_name* field with the value _ntp_.
+  - Also, we want to restart the service only if it has just been installed, so only if the result conditions defined following the execution of *Package install* method is *Repaired* (package_install_ntp_repaired). So here, fill in the *Other conditions* field in the Conditions panel with the value _package_install_ntp_repaired_.
+
+* Service ensure running (You can find it in the *Service category*)
+  - This method only take one parameter, the name of the service we want to check. Again, here, fill in the *service_name* field with the value _ntp_.
+
+=== Save and apply your technique
+
+And… It’s already done. Rather fast, right? Don't forget to save. Now you can see it in the *Directives _tree_*, and  use it to create a Directive that will be applied on your _Nodes_ thanks to a _Rule_.
