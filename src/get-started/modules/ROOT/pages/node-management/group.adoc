@@ -7,16 +7,15 @@ In Rudder, we never apply policies to individual nodes, but always to sets of no
 ====
 
 A *group* is query over inventory data that defines a set of nodes,
-on which policies can be applied.
+on which specific policies can then be applied.
 
 ====
 
 In this section, you will learn how to specify such queries, and build
 consistent groups.
 
-Go to the "Node Management -> Groups" page, you will see a tree on the left.
-
-This is the tree of groups, with a hierarchy made of group categories
+Go to the *Node Management -> Groups* page, you will see a tree on the left.
+This is the tree of groups, with a hierarchy made of group categories.
 
 [NOTE]
 
@@ -46,7 +45,7 @@ image::./ubuntu-2.png["Group of Ubuntu 16.04 nodes", align="center"]
 Click on "Search" to make the actual search over node information, you should see
 the "node" machine in the list. The server does not appear as Rudder servers are excluded from groups by default. Click on "Save".
 
-We now have defined a first custom group. You can use any acombination of criteria based
+We now have defined a first custom group. You can use any combination of criteria based
 on the inventory data.
 
 [TIP]

@@ -4,4 +4,3 @@ We have applied a configuration policy to our Rudder server, but
 it is not what Rudder is about.
 In this part, we will see how to add a new machine to Rudder, and how to classify it,
 allowing to apply the right configuration to the right node.
-

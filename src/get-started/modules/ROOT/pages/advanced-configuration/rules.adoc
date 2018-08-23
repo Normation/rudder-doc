@@ -1,7 +1,7 @@
 = Organize configuration policies
 
 In the previous sections, we saw how to define directives, the
-appliable parts of configuration, and groups of nodes.
+applicable parts of configuration, and groups of nodes.
 This section will show you how to link directives to groups.
 
 [NOTE]
@@ -9,15 +9,16 @@ This section will show you how to link directives to groups.
 ====
 
 A *rule* is defined by a set of directives and a set of group.
-It will make Rudder apply the directives on the target groups.
+It will make Rudder apply the selected directives on the target groups.
 
 ====
 
 We will define a new rule fow our web site configuration.
 
-Let's got to the rules page, "Configuration management -> Rules".
+Let's go to the rules page, *Configuration management -> Rules*. On the left you can see a tree similar to what you saw in the groups page. It works in the same way, and rules categories
+are also here only for policy organization, and do not modify the rules behavior.
 
-And click on "Create Rule".
+Click on *Create Rule*.
 
 image::./rule-2.png["New rule form", align="center"]
 
@@ -25,8 +26,9 @@ This will open the configuration page of the new rule.
 Configuring a rules consists in selecting a list of directives and a list of groups you want ot link.
 
 To select a group or a directive, simply click on it, and it will appear in the right green zone.
+You can then save your rule.
 
-You can see in the upper right two tabs, Settings and Compliance.
-We are in the settings tabs, compliance will show you the compliance details of the Rule.
+In the upper right, you can see two tabs, *Settings* and *Compliance*.
+We are in the *Settings* tabs, which allows configuring the rule. The *Compliance* tab will show you the compliance details of the rule.
 
 That's all you have to know about rules!

@@ -25,9 +25,10 @@ Let's call our new technique "Static website".
 image::./website.png["Website technique", align="center"]
 
 This time, we will add parameters to this technique.
-What are parameters? Just like we saw in the built'in techniques, you can pass parameters to techniques created in the technique editor.
+What are parameters? Just like we saw in the built-in techniques, you can pass parameters to techniques created in the technique editor. They are part of the technique
+definition, and their value is usable with the `${variable_name}` syntax.
 
-We will require two parameters:
+We will need two parameters:
 
 * A domain for our site, called `domain`
 * A port to listen on, called `port`
@@ -99,8 +100,7 @@ server {
 
 In the destination /etc/nginx/conf.d/default.conf
 
-
-
+TODO
 
 We have now defined all of our configuration states! But are we done yet? Not exactly,
 as we are missing an important piece: restarting the service when the configuration changes.
