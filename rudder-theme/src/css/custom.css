@@ -256,8 +256,6 @@ html {
   box-shadow: none !important;
   border-bottom: 2px solid #536169;
   position: relative;
-  transition-property: border, color;
-  transition-duration: 0.2s;
 }
 
 .navigation-explore:hover .context {
@@ -444,14 +442,293 @@ html {
   display: none;
 }
 
-@keyframes slide-fade {
-  0% {
-    opacity: 1;
-    background-position: center bottom;
-  }
+/* =================== HOME PAGE=================== */
 
-  100% {
-    opacity: 0;
-    background-position: center top;
-  }
+#homepage {
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: 100%;
+}
+
+#homepage > h1 {
+  text-align: center;
+  margin-top: 0;
+  padding-top: 2rem;
+}
+
+#homepage > .ulist {
+  background-color: #f5f5f0;
+}
+
+#homepage .ulist > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#homepage > .ulist > ul > li {
+  text-align: center;
+  position: relative;
+  padding: 50px 10%;
+  margin-bottom: 0;
+  background-color: #fff;
+}
+
+#homepage > .ulist > ul > li:first-child {
+  padding-bottom: 10px;
+}
+
+#homepage > .ulist > ul > li:first-child::after,
+#homepage > .ulist > ul > li:first-child::before {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  bottom: -20px;
+  left: 48%;
+  transform: rotate(45deg);
+  z-index: 9;
+}
+
+#homepage > .ulist > ul > li > .ulist {
+  text-align: left;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+#homepage > .ulist > ul > li > p {
+  font-size: 1.6em;
+  color: #333;
+  font-weight: 500;
+  padding-bottom: 2px;
+  display: inline-block;
+  border-bottom: 2px solid #f08004;
+  margin-bottom: 30px;
+  min-height: 0;
+  height: auto;
+  line-height: 40px;
+}
+
+#homepage > .ulist > ul > li > p::after {
+  content: "";
+  height: 0;
+  width: 100%;
+  border-bottom: 2px solid #f1f1f1;
+  position: absolute;
+  left: 0;
+  top: 20px;
+  z-index: -1;
+}
+
+/* -- DISCOVER RUDDER */
+
+#homepage > .ulist > ul > li > .ulist > ul {
+  display: flex;
+}
+
+#homepage > .ulist > ul > li > .ulist > ul > li {
+  display: inline-block;
+  width: 33.3%;
+  padding: 0 15px;
+}
+
+#homepage > .ulist > ul > li > .ulist > ul > li > p {
+  text-align: center;
+  color: #555;
+}
+
+#homepage > .ulist > ul > li > .ulist > ul > li > p a {
+  display: block;
+  text-align: center;
+  text-decoration: none !important;
+  position: relative;
+  font-size: 1.1rem;
+}
+
+#homepage > .ulist > ul > li:first-child > .ulist > ul > li > p a::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transition-duration: 0.4s;
+  transition-property: filter, opacity;
+  margin-bottom: 15px;
+}
+
+#homepage > .ulist > ul > li:first-child > .ulist > ul > li > p a:hover::before {
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+#homepage > .ulist > ul > li:first-child > .ulist > ul > li:nth-child(1) > p a::before {
+  background-image: url(../img/home-logo-rudder.svg);
+}
+
+#homepage > .ulist > ul > li:first-child > .ulist > ul > li:nth-child(2) > p a::before {
+  background-image: url(../img/home-logo-demo.svg);
+}
+
+#homepage > .ulist > ul > li:first-child > .ulist > ul > li:nth-child(3) > p a::before {
+  background-image: url(../img/home-logo-getstarted.svg);
+}
+
+#homepage > .ulist > ul > li:first-child > .ulist > ul > li > p a::after {
+  content: initial;
+}
+
+/* -- INSTALL RUDDER */
+
+#homepage > .ulist > ul > li:nth-child(2) > .ulist {
+  padding-top: 60px;
+  margin-top: -10px;
+  position: relative;
+}
+
+#homepage > .ulist > ul > li:nth-child(2) > .ulist::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: calc(33.3% / 2);
+  top: 30px;
+  background-color: gainsboro;
+  height: 4px;
+  width: calc(66.6%);
+}
+
+#homepage > .ulist > ul > li:nth-child(2) > .ulist > ul > li > p a {
+  margin-bottom: 10px;
+}
+
+#homepage > .ulist > ul > li:nth-child(2) > .ulist > ul > li > p a::before {
+  content: "";
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  left: calc(50% - 12.5px);
+  top: -40px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 4px solid #dcdcdc;
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+#homepage > .ulist > ul > li:nth-child(2) > .ulist > ul > li > p a::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#homepage > .ulist > ul > li:nth-child(2) > .ulist > ul > li > p a:hover::before {
+  background-color: #b7b7b7;
+}
+
+/* -- USE RUDDER && JOIN THE COMMUNITY */
+
+#homepage > .ulist > ul > li:nth-child(3),
+#homepage > .ulist > ul > li:nth-child(4) {
+  background-color: transparent;
+  text-align: left;
+  display: inline-block;
+  width: 49%;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) {
+  padding: 50px 5% 50px 10%;
+}
+
+#homepage > .ulist > ul > li:nth-child(4) {
+  padding: 50px 10% 50px 5%;
+  margin-left: -5px;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist {
+  margin-top: 0;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul {
+  display: block;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li {
+  display: block;
+  width: 100%;
+  padding-left: 0;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li > p,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li > p {
+  padding-left: 70px;
+  text-align: left;
+  position: relative;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li > p::before,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li > p::before {
+  content: "";
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition-duration: 0.2s;
+  opacity: 0.6;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li > p::before {
+  background-image: url(../img/list-icon-use-rudder.svg);
+}
+
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li:nth-child(1) > p::before {
+  background-image: url(../img/list-icon-community-1.svg);
+}
+
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li:nth-child(2) > p::before {
+  background-image: url(../img/list-icon-community-2.svg);
+}
+
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li:nth-child(3) > p::before {
+  background-image: url(../img/list-icon-community-3.svg);
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li > p:hover::before,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li > p:hover::before {
+  opacity: 1;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li p a::before,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li p a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li p a,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li p a {
+  text-align: left;
+  position: static;
 }

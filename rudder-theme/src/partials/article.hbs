@@ -1,4 +1,4 @@
-<article class="doc">
+<article class="doc" {{~#if (eq page.url '/get-started/current/home.html')}}id="homepage"{{/if}}>
 {{#if (eq page.layout '404')}}
 <h1>{{{or page.title 'Page Not Found'}}}</h1>
 <div class="paragraph">

@@ -1,21 +1,21 @@
 = Welcome to Rudder Documentation
 
 * Discover Rudder
-** xref:reference:ROOT:index.adoc[What is Rudder]: Discover Rudder features and use cases
-** https://demo.rudder.io[Online demo]: Explore the Web interface with an online demo
-** xref:index.adoc[Get started guide]: Get started with Rudder on a test platform
+** xref:reference:ROOT:index.adoc[What is Rudder]Discover Rudder features and use cases
+** https://demo.rudder.io[Online demo]Explore the Web interface with an online demo
+** xref:index.adoc[Get started guide]Get started with Rudder on a test platform
 
 * Install Rudder
-** xref:reference:installation:requirements.adoc[Requirements] for Rudder installation
+** xref:reference:installation:requirements.adoc[Requirements]Requirement for Rudder installation
 ** Install a Rudder root server to define your configuration policies on xref:reference:installation:server/debian.adoc[Debian/Ubuntu], xref:reference:installation:server/rhel.adoc[RHEL/CentOS] or xref:reference:installation:server/sles.adoc[SLES]
 ** Install a Rudder agent to apply configuration on xref:reference:installation:agent/debian.adoc[Debian/Ubuntu], xref:reference:installation:agent/rhel.adoc[RHEL/CentOS] or xref:reference:installation:agent/sles.adoc[SLES]
 
 * Use Rudder
-** The xref:reference:ROOT:index.adoc[User manual]: Reference documentation
-** https://docs.rudder.io/api[API reference]: To automate actions and extract information
-** xref:rudder-by-example:ROOT:index.adoc[Rudder by example]: for real and detailed use-case examples
+** xref:reference:ROOT:index.adoc[User manual]Reference documentation
+** https://docs.rudder.io/api[API reference]To automate actions and extract information
+** xref:rudder-by-example:ROOT:index.adoc[Rudder by example]for real and detailed use-case examples
 
 * Join the community
-** https://www.rudder-project.org/site/support/chat-mailing-lists/[Chat with the community]: on our IRC channel
-** https://www.rudder-project.org/site/support/forums-lists/[Ask questions]:  on ServerFault or on our user mailing-list
-** https://www.rudder-project.org/redmine[Report an issue or propose a feature]: on our issue tracker
+** https://www.rudder-project.org/site/support/chat-mailing-lists/[Chat with the community]on our IRC channel
+** https://www.rudder-project.org/site/support/forums-lists/[Ask questions] on ServerFault or on our user mailing-list
+** https://www.rudder-project.org/redmine[Report an issue or propose a feature]on our issue tracker
