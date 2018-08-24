@@ -2,7 +2,7 @@
 = Requirements
 
 [[configure-the-network]]
-== Networking
+== Network flows - Firewall configuration
 
 .Network Flows
 [options="header"]
