@@ -1,6 +1,6 @@
 name: reference
 title: Reference manual
-version: "5.1-dev"
+version: "5.0"
 nav:
 - modules/ROOT/nav.adoc
 - modules/installation/nav.adoc
