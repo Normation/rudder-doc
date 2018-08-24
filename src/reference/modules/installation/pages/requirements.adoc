@@ -4,6 +4,10 @@
 [[configure-the-network]]
 == Networking
 
+The following network flows are used by Rudder for regular operations. Make sure your firewalls allow these connections.
+
+Please bear in mind that a central Rudder server, called root server, requires network flows from both the 'Root server' and 'Policy server' sections below.
+
 .Network Flows
 [options="header"]
 |=======================
@@ -23,9 +27,9 @@ either a root server or a relay server.
 
 === DNS - Name resolution
 
-If you want to be able to trigger agent runs from the Root Server (without
+If you want to be able to remotely trigger agent runs on nodes from the Root Server (without
 having to wait for regular automated run),
-you will need your Root Server (or Relay Server) to be able to resolve your nodes
+you will need your Root Server (and Relay Servers, if applicable) to be able to resolve your nodes
 using the provided hostname.
 
 
