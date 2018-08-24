@@ -1,6 +1,6 @@
 ## Builds dynamic dependencies from other repos
 
-RUDDER_VERSION = 5.1
+RUDDER_VERSION = 5.0
 
 .PHONY: clean generic_methods.adoc rudder.adoc hooks.adoc
 all: generic_methods.adoc hooks.adoc rudder.adoc
