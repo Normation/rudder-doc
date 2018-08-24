@@ -11,6 +11,13 @@ html {
   color: #333;
 }
 
+.doc .exampleblock > .content {
+  background-color: #f5f5f5;
+  border: 1px solid #e6e6e6;
+  box-shadow: none;
+  border-radius: 4px;
+}
+
 .crumb > a {
   text-decoration: none !important;
 }
