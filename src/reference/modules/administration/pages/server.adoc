@@ -159,43 +159,6 @@ Reload dynamic groups, so that new nodes and their inventories are taken into
 account. Normally, dynamic group are automatically reloaded unless that feature
 is explicitly disable in Rudder configuration file.
 
-[[plugins-management]]
-== Plugins
-
-Rudder is an extensible software. The *Administration -> Plugin Management*
-section sum-up information about loaded plugins, their version and their
-configuration.
-
-A plugin is an `.rpkg` file (for "Rudder package").
-
-=== Install a plugin
-
-To install a plugin, copy the `.rpkg` file on your server, and run:
-
-----
-/opt/rudder/bin/rudder-pkg install-file <package.rpkg>
-----
-
-You can list currently installed plugins using:
-
-----
-/opt/rudder/bin/rudder-pkg list
-----
-
-You can also enable or disable, or remove a plugin with:
-
-----
-/opt/rudder/bin/rudder-pkg plugin enable <plugin>
-/opt/rudder/bin/rudder-pkg plugin disable <plugin>
-/opt/rudder/bin/rudder-pkg remove <package>
-----
-
-See all available commands with:
-
-----
-/opt/rudder/bin/rudder-pkg --help
-----
-
 == Basic administration of Rudder services
 
 === Restart the agent of the node

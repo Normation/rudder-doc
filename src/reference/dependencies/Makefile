@@ -2,8 +2,8 @@
 
 RUDDER_VERSION = 5.1
 
-.PHONY: clean generic_methods.adoc rudder.adoc hooks.adoc
-all: generic_methods.adoc hooks.adoc rudder.adoc
+.PHONY: clean generic_methods.adoc rudder.adoc hooks.adoc plugins
+all: generic_methods.adoc hooks.adoc rudder.adoc plugins
 
 ## Repos
 
@@ -19,6 +19,13 @@ ncf-repo:
 rudder-agent-windows-repo:
 	# Allow failing if builder has no access to agent-windows-repo
 	git clone git@github.com:Normation/rudder-agent-windows.git rudder-agent-windows-repo || mkdir rudder-agent-windows-repo
+
+rudder-plugins-repo:
+	git clone https://github.com/Normation/rudder-plugins.git rudder-plugins-repo
+
+rudder-plugins-private-repo:
+	# Allow failing if builder has no access to agent-plugins-private
+	git clone git@github.com:Normation/rudder-plugins-private.git rudder-plugins-private-repo || mkdir rudder-plugins-private-repo
 
 ## Dynamic content
 
@@ -49,10 +56,18 @@ generic_methods.adoc: ncf-repo rudder-agent-windows-repo
 	sed -i 's/```.*/```/' generic_methods.md
 	pandoc -t asciidoc -f markdown generic_methods.md > generic_methods.adoc
 
+plugins: rudder-plugins-repo rudder-plugins-private-repo
+	cd rudder-plugins-private-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
+	cd rudder-plugins-private-repo && git pull && make clean && make doc
+	cd rudder-plugins-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
+	cd rudder-plugins-repo && git pull && make clean && make doc
+	cp -r rudder-plugins-repo/doc/* plugins/
+	cp -r rudder-plugins-private-repo/doc/* plugins/
+
 ## Clean
 
 clean:
-	rm -f generic_methods.{adoc,md} hooks.adoc rudder.adoc
+	rm -f generic_methods.{adoc,md} hooks.adoc rudder.adoc plugins
 
 veryclean: clean
-	rm -rf rudder-agent-repo rudder-repo ncf-repo rudder-agent-windows-repo
+	rm -rf rudder-agent-repo rudder-repo ncf-repo rudder-agent-windows-repo rudder-plugins-repo rudder-plugins-private-repo
