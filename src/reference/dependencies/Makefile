@@ -26,6 +26,7 @@ rudder-plugins-repo:
 rudder-plugins-private-repo:
 	# Allow failing if builder has no access to agent-plugins-private
 	git clone git@github.com:Normation/rudder-plugins-private.git rudder-plugins-private-repo || mkdir rudder-plugins-private-repo
+	cd rudder-plugins-private-repo && ./init-repo.sh
 
 ## Dynamic content
 
