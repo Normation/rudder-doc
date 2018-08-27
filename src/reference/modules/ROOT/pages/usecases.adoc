@@ -1,13 +1,13 @@
-= Usecases
+= Use cases
 
 This chapter gives a few examples for using Rudder. We have no doubt that you'll
-have your own ideas, that we're impatient to hear about...
+have your own ideas too, that we're impatient to hear about...
 
 == Dynamic groups by operating system
 
 Create dynamic groups for each operating system you administer, so that you can
 apply specific policies to each type of OS. When new nodes are added to Rudder,
-these policies will automatically be enforced upon them.
+these policies will automatically be applied to them.
 
 == Library of preventive policies
 

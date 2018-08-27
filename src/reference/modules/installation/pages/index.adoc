@@ -2,16 +2,17 @@
 
 == Root server
 
-This is the server that will define the configuration for the nodes it manages.
+This is the central server that will define configuration for the nodes it manages.
 You generally need to install only one root server, except if you have completely
-separated environments where each environment can have its own server.
+separated environments where each environment requires its own server.
 
-== Agent
+== Node
 
-The machines managed by Rudder are called nodes, and can either be physical or virtual.
-For a machine to become a managed Node, you have to install the Rudder agent on it.
-The node will afterwards register itself on the server. And finally, the node should
-be acknowledged in the Rudder root server interface to become a managed node.
+The machines managed by Rudder are called nodes, and can be any type of machine
+(physical, virtual, cloud instance, container, etc).
+For a machine to become a managed Node, you need to install the Rudder agent on it.
+The agent will run a local inventory and register itself to the root server. Then, 
+you can accept the node in the Rudder root server interface for it to become a managed node.
 
 [[relay-servers]]
 == Relay (optional)

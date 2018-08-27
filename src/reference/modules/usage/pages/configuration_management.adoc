@@ -41,7 +41,7 @@ of your policies, and soon, detailed reports on their application.
 === Manage the Techniques
 
 The Techniques shipped with Rudder are presented in a library that you can
-reorganize in *Configuration > Techniques*. The library
+reorganize in *Configuration -> Techniques*. The library
 is organized in two parts: the available Techniques, and the selection
 made by the user.
 
@@ -57,7 +57,7 @@ new Technique with the xref:usage:technique_editor.adoc#technique-editor[Techniq
 == Directives
 
 Once you have selected and organized your Techniques, you can create your
-configurations in the *Configuration Management > Directives* section.
+configurations in the *Configuration Management -> Directives* section.
 
 include::{partialsdir}/glossary/directive.adoc[]
 
@@ -84,7 +84,7 @@ Use the Technique 'Name resolution' to create a new Directive called
 +Google DNS Servers+, and shortly described as 'Use Google DNS Server'. Check in
 the options 'Set nameservers' and 'Set DNS search suffix'.  Set the value of the
 variable 'DNS resolver' to +8.8.8.8+ and of 'Domain search suffix' according to
-your organization, like +rudder-project.org+.
+your organization, like +example.com+.
 
 ====
 
@@ -111,8 +111,8 @@ image::rudder-parameters.png[Parameters]
 
 The parameters enable the user to specify a content that can be put anywhere, using the following syntax:
 
-* In Directives: '${rudder.param.name}' will expand the content of the "name" parameter.
-* In the Technique Editor: '${rudder_parameters.name}' will do the same.
+* In Directives: `${rudder.param.name}` will expand the content of the "name" parameter.
+* In the Technique Editor: `${rudder_parameters.name}` will do the same.
 
 Using this, you can specify common file headers (this is the default parameter, "rudder_file_edit_header"), common DNS or domain names, backup servers,
 site-specific elements...
@@ -124,15 +124,15 @@ and their policy server. You can use them like user defined parameters.
 
 The information about a Node:
 
-* '${rudder.node.id}' returns the Rudder generated id of the Node
-* '${rudder.node.hostname}' returns the hostname of the Node
-* '${rudder.node.admin}' returns the administrator login of the Node
+* `${rudder.node.id}` returns the Rudder generated id of the Node
+* `${rudder.node.hostname}` returns the hostname of the Node
+* `${rudder.node.admin}` returns the administrator login of the Node
 
 The information about a Node's policy server.
 
-* '${rudder.node.policyserver.id}' returns the Rudder generated id of the Policy Server
-* '${rudder.node.policyserver.hostname}' returns the hostname of the Policy Server
-* '${rudder.node.policyserver.admin}' returns the administrator login of the Policy Server
+* `${rudder.node.policyserver.id}` returns the Rudder generated id of the Policy Server
+* `${rudder.node.policyserver.hostname}` returns the hostname of the Policy Server
+* `${rudder.node.policyserver.admin}` returns the administrator login of the Policy Server
 
 
 [[compliance-and-drift-assessment]]
@@ -154,20 +154,18 @@ you actually took. This process is much more resilient to changes than a step by
 
 Compliance and drift from expected configurations are then reported with possibility to drill down in non-compliance issues to identify the root problem.
 
-Of course, one can always correct a drift error by hand by updating coniguration target and changing policy mode from "audit" to "enforce" mode.
+Of course, one can always correct a drift error by hand by updating configuration target and changing policy mode from "audit" to "enforce" mode.
 
 ==== Compliance and drift reporting
 
-Compliance drifts (non compliances, enforcement errors, repaires) are reported in Rudder by several means:
+Compliance drifts (non-compliance, enforcement errors, repairs) are reported in Rudder by several means:
 
 - Compliance are reported in aggregated format globally in the dashboard, and by rules or nodes (example for Rule below)
 - they are stored in Rudder compliance database, and each Rule displays an history of changes as depicted in "Changes history on a Rule" below.
-- each drifts fires an event which is logged in file /var/log/rudder/compliance/non-compliant-reports.log and can be used
+- each drifts fires an event which is logged in file `/var/log/rudder/compliance/non-compliant-reports.log` and can be used
   to integrates with log aggregation engine like Logstash, or hooks (typically to send notification to IRC or Slack, send email, etc)
   - see for example the Slack connector here: https://github.com/Normation/rudder-tools/blob/master/scripts/rudder-notification/forward-non-compliance-to-slack.sh
 - compliance and drift are also available from Rudder API to provide deeper integration with your IT Infrastructure.
-
-
 
 .Compliance on a Rule
 
@@ -176,16 +174,11 @@ image::Rule_compliance.png[Rule compliance]
 The Rule detailed compliance screen will also graph compliance deviations on
 a recent period as well as display a deviation log history for this period.
 
-
-
 .Changes history on a Rule
 
 image::rudder-rule-compliance-history.png[Changes compliance history]
 
-
-
-
-=== How compliance is calculated ?
+=== How compliance is calculated?
 
 As previously seen, in Rudder you define Rules which target groups of Nodes, and are composed of configuration Directives.
 
@@ -193,10 +186,10 @@ A Directive contains one or multiple sub-configuration elements which generates 
 For example, for a Sudoers Directive, each user can be such an element.
 
 Reports have states explaining what is the drift between the expected configuration and the actual configuration.
-Some states depends if the user choose to auto-matically enforce drift correction
+Some states depends if the user choose to automatically enforce drift correction
 or if he chose to only reports on drift).
 
-Finaly, a node can get a global state if reports don't come at expected frequency or for expected policy configuration version.
+Finally, a node can get a global state if reports don't come at expected frequency or for expected policy configuration version.
 
 Below you will find all details about the possible states and their meaning with the actual compliance calculus method.
 
@@ -263,12 +256,12 @@ Rule / Total number of Nodes on which the Rule has been applied
 [[_policy_mode_audit_enforce]]
 == Policy Mode (Audit/Enforce)
 
-Rudder 4.0 includes a policy mode setting, that allows two distinct behaviors:
+Rudder includes a policy mode setting, that allows two distinct behaviors:
 
 * *Audit*: Test if the system is in the desired state, and report about it
 * *Enforce*: Test if the system is in the desired state, if not, try to act to get to this state, and report about actions taken and final state
 
-This allows for example xref:ROOT:usecases.adoc#_using_rudder_as_an_audit_tooli[to use Rudder as an audit tool] or xref:usage:configuration_management.adoc#_using_audit_mode_to_validate_a_policy_before_applying_it[to test a policy before enforcing it].
+This allows for example xref:ROOT:usecases.adoc#_using_rudder_as_an_audit_tool[to use Rudder as an audit tool] or xref:ROOT:usecases.adoc#_using_audit_mode_to_validate_a_policy_before_applying_it[to test a policy before enforcing it].
 
 image:audit_mode_general_overview.png[]
 
@@ -296,8 +289,8 @@ For a given directive on a given node at a given time, we have three different p
 settings:
 
 * The global mode, called *G*, which can be *Audit* or *Enforce*
-* The node mode called *N*, which can be *Global* (if not overridden), *Audit, or *Enforce*
-* The directive mode, called *D*, which can be *Global* (if not overridden), *Audit, or *Enforce*
+* The node mode called *N*, which can be *Global* (if not overridden), *Audit*, or *Enforce*
+* The directive mode, called *D*, which can be *Global* (if not overridden), *Audit*, or *Enforce*
 
 The result is:
 
@@ -305,6 +298,6 @@ The result is:
 * If override is allowed:
 
 ** If *N* and *D* are set to use the *Global* default value (i.e. no override), the policy mode is the global mode *G*.
-** If *N* uses the *global* value and *D* is overriden to *Audit* or *Enforce*, the *D* value is used.
-** If *D* uses the *global* value and *N* is overriden to *Audit* or *Enforce*, the *N* value is used.
-** If *N* and *D* are overriden to *Audit* or *Enforce*, the value is *Audit* if at least one of *N* or *D* is *Audit*, *Enforce* if both are in *Enforce* mode
+** If *N* uses the *global* value and *D* is overridden to *Audit* or *Enforce*, the *D* value is used.
+** If *D* uses the *global* value and *N* is overridden to *Audit* or *Enforce*, the *N* value is used.
+** If *N* and *D* are overridden to *Audit* or *Enforce*, the value is *Audit* if at least one of *N* or *D* is *Audit*, *Enforce* if both are in *Enforce* mode

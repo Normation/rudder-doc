@@ -31,7 +31,7 @@ after some changes impacting the inventory information.
 
 === +Regenerate all policies+ button
 
-The button +Regenerate all policies+ on the top right of the screen, in the +Status+ menu, allows you to force
+The button *Regenerate all policies* on the top right of the screen, in the *Status* menu, allows you to force
 the regeneration of all policies. It will clear all internal caches, and force a complete
 computation of the policies. This is generally useful to make sure everything is correct after a problem
 on the central server.
@@ -67,7 +67,7 @@ To share those folders to all nodes, Rudder makes a copy of these folders in two
 places:
 
 * `/var/rudder/ncf`, for part common to all nodes - so NOT techniques,
-  ** `/var/rudder/ncf/local` is a copy of node-independant directories from
+  ** `/var/rudder/ncf/local` is a copy of node-independent directories from
      `/var/rudder/configuration-repository/ncf`, so almost everything *BUT*
      `/var/rudder/configuration-repository/ncf/50_techniques`.
   ** `/var/rudder/ncf/common` is a copy `/usr/share/ncf/tree`
@@ -75,8 +75,6 @@ places:
   for techniques, with one directory for each technique applied to the node.
 * `/var/rudder/share/xxxx-yyyy-node-id-zzzz/rules/cfengine-community/rudder_expected_reports.csv`
   contains information about report expected for all ncf techniques applied to that node.
-
-
 
 Files in `/var/rudder/ncf` are synchronized automatically by the "rudder agent update"
 command when the agent runs on the server. So any modification done in files
@@ -90,8 +88,8 @@ during its policy update phase.
 === From ncf Technique Editor to Rudder Techniques and back
 
 Here we will explain how the Technique Editor integration to Rudder is done to
-transform ncf techniques into full fledge Rudder one. We will also get the
-big picture of the web flow and the resulting events triggered on Rudder servier
+transform ncf techniques into full fledged Rudder one. We will also get the
+big picture of the web flow and the resulting events triggered on Rudder server
 side.
 
 Each action in the Technique Editor interface produces requests to an API defined over ncf.
@@ -157,7 +155,7 @@ If you want to run post hooks by hand, you can use the following command:
 [[_node_properties]]
 == Node properties
 
-Node properties can be found in the "properties" tab of each node in Rudder.
+Node properties can be found in the *properties* tab of each node in Rudder.
 
 Node properties can be modified using Rudder's API, see https://docs.rudder.io/api/#api-Nodes-updateNodeProperties
 
@@ -282,7 +280,7 @@ Those values are read from
 `/var/rudder/cfengine-community/inputs/properties/*.json`. All files are taken
 in order and override the previous ones - the last one wins.
 
-The agent searches for optionnal properties files `/var/rudder/local/properties.d/*.json`, and will define variables
+The agent searches for optional properties files `/var/rudder/local/properties.d/*.json`, and will define variables
 or override existing properties.
 
 Each file must contain at least 2 levels of JSON content, the first level is the namespace level
@@ -309,8 +307,8 @@ For example:
 The merge is a first level merge done at the namespace level. This means that:
 
 * a key in a namespace is fully overridden by the same key in the same namespace in a later file.
-* a key in a namespace is never overriden by the same key in a different namespace
-* a key that is overriden never retains original data even if it is a data container itself
+* a key in a namespace is never overridden by the same key in a different namespace
+* a key that is overridden never retains original data even if it is a data container itself
 
 The result key is available in the `node.<namespace>` data variable. A usage
 example:
@@ -339,13 +337,10 @@ More details in our https://docs.rudder.io/api[API documentation].
 Properties can also be defined directly on the nodes, by creating properties files
 `/var/rudder/local/properties.d/*.json/`
 
-
 === Feature availability
 
-This feature was introduced in Rudder 3.1.14, Rudder 3.2.7 and Rudder 4.0.0.
-
 If you upgraded to 3.1.14 (or a later 3.1.x version) or 3.2.7 (or a later 3.2.x
-version) from a previous Rudder version, this feature is disabled by default
+version) from a previous Rudder version, this feature was disabled by default
 in order to mitigate any risk of undesired side effects on existing
 installations. You can enable it in the Administration/Settings page, using the
 *Enable node properties expansion in Directives* switch.
@@ -555,10 +550,10 @@ logged. You can also check your JVM editor manual to add support for these algor
 === Status and future support
 
 In a future version of Rudder, JavaScript evaluation will be supported in all
-fields in Directives.
+fields in Directives, including non plain-text fields.
 
 In the meantime, you can already test this functionality out by entering a JavaScript
-expression in any Directive field, prefixed by "evaljs:". Please be aware that
+expression in any Directive field, prefixed by `evaljs:`. Please be aware that
 this is unsupported and untested, so do this at your own risk.
 
 If you do encounter any issues, please get in touch or open a ticket - we'd
@@ -589,7 +584,7 @@ at Technique and Version granularity.
 This is done by adding or updating the file:
 `/var/rudder/configuration-repository/techniques/default-directive-names.conf`.
 
-That file need to be commited in git, and the Technique library reloaded
+That file need to be committed in git, and the Technique library reloaded
 to take effect:
 
 ----
@@ -659,7 +654,7 @@ into one Policy after having been sorted.
 For Directive based on the same Technique, the sort order is based on the *Priority* value of the Directive. Between two Directive, the one with the highest *Priority*
 is the first:
 
-- for a *non* multi-instance Technique, it means that it is there is only one that is chosen in the resulting Policies (the others are discared),
+- for a *non* multi-instance Technique, it means that it is there is only one that is chosen in the resulting Policies (the others are discarded),
 - for a multi-instance Technique, it means that the variables in the Policy will be declared and check in sorting order of Directives (so the first Directive's
   variables will be declared in first position and check first during an agent run).
 
@@ -679,22 +674,20 @@ use "0" whenever the documentation says "highest priority".
 You can use the merging of Directive to define variable override with the "Generic Variable Definition" Technique.
 
 For example, let say you want to define a *DNS* variable with default value *[default dns]* and on some node case,
-a value *[overrided dns]*:
+a value *[overridden dns]*:
 
 - Create a Directive [1] with *high* priority: it will be your *default* case, so set *DNS* to *[default dns]*.
-- Create an other Directive [2] with *lower* priority: it will be you specialized case, so set *DNS* to *[overrided dns]*.
+- Create an other Directive [2] with *lower* priority: it will be you specialized case, so set *DNS* to *[overridden dns]*.
 
 Then, a node with only Directive [1] will have the default value defined, and a node with both Directives will have the overriding one.
 
-It works because on the agent, you can redeclare a variable name and reassign to it a new value: the last one wins (so in our case, the *less* prioritary).
-
+It works because on the agent, you can redeclare a variable name and reassign to it a new value: the last one wins (so in our case, the *lowest* priority).
 
 === Sorting Policies
 
 Rudder uses a best-effort method for ordering Policies, based on alphanumeric ordering of the corresponding Rule, then Directive name.
 
 When several Directive were merged, Rudder choose the first (Rule name, Directive name) as the ordering value to use for the resulting Policy.
-
 
 .Best practice
 [TIP]

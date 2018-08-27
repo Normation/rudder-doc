@@ -3,7 +3,7 @@
 
 == Introduction
 
-=== First, what is a Technique ?
+=== First, what is a Technique?
 
 A technique is a description in code form of what the agent has to do on the node.
 This code is actually composed of a series of Generic method calls.
@@ -21,7 +21,7 @@ Generic methods calls are conditioned by condition expressions, which are boolea
 === Utility
 
 Rudder provides a set of pre-defined Techniques that cover some basic configuration and system administration needs. Of course,this set of techniques cannot responds to all of the specific needs of each client. That’s why Rudder integrate the *Technique _editor_*, a tool to create advanced Techniques.
-Directly accessible from Ruder menu (_Utilities > Technique editor_), this tool has an easy-to-use interface, which doesn’t require any programming skills but nevertheless allows to create complex Techniques.
+Directly accessible from Ruder menu (*Utilities -> Technique editor*), this tool has an easy-to-use interface, which doesn't require any programming skills but nevertheless allows to create complex Techniques.
 
 === Interface
 

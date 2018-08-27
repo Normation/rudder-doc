@@ -1,9 +1,9 @@
-= Node management
+= Advanced node management
 
 == Reinitialize policies for a Node
 
-To reinitialize the policies for a Node, delete the local copy of the Applied
-Policies fetched from the Rudder Server, and create a new local copy of the
+To reinitialize the policies for a Node, delete the local copy of the applied
+policies fetched from the Rudder Server, and create a new local copy of the
 initial policies.
 
 ----
@@ -18,7 +18,7 @@ At next run of the Rudder Agent (it runs every five minutes), the initial polici
 
 ====
 
-Use this procedure with caution: the Applied Policies of a Node should never get
+Use this procedure with caution: the applied policies of a Node should never get
 broken, unless some major change has occurred on the Rudder infrastructure, like
 a full reinstallation of the Rudder Server.
 
@@ -42,26 +42,26 @@ The command to reinitialize a Node is:
 
 ----
 
-rudder agent reinit
+rudder agent factory-reset
 
 ----
 
 This command will delete all local agent data, including its uuid and keys, and
 also reset the agent internal state. The only configuration kept is the server
-hostname or ip configured in +policy_server.dat+. It will also send an inventory
+hostname or ip configured in `policy_server.dat`. It will also send an inventory
 to the server, which will treat it as a new node inventory.
 
 [[_change_the_agent_run_schedule]]
 == Change the agent run schedule
 
 By default, the agent runs on all nodes every 5 minutes. You can modify this value in
- *Settings* -> *General* page in *Agent Run Schedule* section, as well as the "splay time"
+ *Settings -> General* page in *Agent Run Schedule* section, as well as the "splay time"
 across nodes (a random delay that alters scheduled run time, intended to spread
 load across nodes).
 
 image::Global_run_settings.png[]
 
-This settings can also be modified Node by Node, allowing you to customize the agent behavior (Node with little ressource like a Raspberry Pi or with limited bandwith). To do that, go into the Node details in the *Settings* tab
+This settings can also be modified Node by Node, allowing you to customize the agent behavior (Node with little resource like a Raspberry Pi or with limited bandwidth). To do that, go into the Node details in the *Settings* tab
 
 image::Node_settings.png[]
 
@@ -244,9 +244,9 @@ User interaction is required to validate new Nodes.
 
 Policies are not shared between the Nodes for obvious security and
 confidentiality reasons. Each Node has its own set of policies. Policies are
-generated for Nodes according in the following states:
+generated for Nodes according in the following cases;
 
-. Node is new;
+. A new node was accepted;
 
 . Inventory has changed;
 
@@ -259,9 +259,6 @@ generated for Nodes according in the following states:
 . Rule has changed;
 
 . Regeneration was forced by the user.
-
-image::graphviz/generate_policy_workflow.png[Generate policy workflow]
-
 
 == Agent execution frequency on nodes
 
@@ -276,7 +273,7 @@ order to "smooth" the load across your infrastructure (also known as "splay
 time"). This reduces simultaneous connections on relay and root servers (both
 for the policy server and for sending reports).
 
-See xref:usage:advanced_node_management.adoc#_change_the_agent_run_schedule[Change the agent run schedule] Section to see how to configure it
+See the xref:usage:advanced_node_management.adoc#_change_the_agent_run_schedule[agent run schedule] section to see how to configure it
 
 === Inventory
 
@@ -392,7 +389,7 @@ You should always use the first level keys as a namespace for your hooks to avoi
 
 === Inventory XML format
 
-Properties comming from inventory hooks are stored in a tag named `<CUSTOM_PROPERTIES>`. The tag contains a
+Properties coming from inventory hooks are stored in a tag named `<CUSTOM_PROPERTIES>`. The tag contains a
 JSON array with all the inventory hook properties merged:
 
 ----

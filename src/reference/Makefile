@@ -4,8 +4,8 @@
 
 ADOC_SRC_FILES = $(shell find modules/ROOT/pages -type f -name '*.adoc')
 ADOC_DYN_FILES = generic_methods.adoc hooks.adoc rudder.adoc
-GRAPHVIZ_FILES = $(shell find modules/ROOT/assets/graphviz -type f -name '*.dot')
-GRAPHVIZ_IMAGES = $(addprefix modules/ROOT/assets/images/graphviz/, $(notdir $(GRAPHVIZ_FILES:dot=png)))
+GRAPHVIZ_FILES = $(shell find modules/reference/assets/graphviz -type f -name '*.dot')
+GRAPHVIZ_IMAGES = $(addprefix modules/reference/assets/images/graphviz/, $(notdir $(GRAPHVIZ_FILES:dot=png)))
 
 MODULES = ROOT installation usage administration plugins reference
 
@@ -41,14 +41,9 @@ nav: $(ADOC_SRC_FILES)
 	./tools/generate-nav.py plugins "Plugins" > modules/plugins/nav.adoc
 	./tools/generate-nav.py reference "Reference" > modules/reference/nav.adoc
 
-modules/ROOT/reference/images/graphviz/%.png: modules/reference/assets/graphviz/%.dot
+modules/reference/assets/images/graphviz/%.png: modules/reference/assets/graphviz/%.dot
 	mkdir -p modules/reference/assets/images/graphviz
 	dot $< -Tpng -o $@
-
-modules/ROOT/usage/images/graphviz/%.png: modules/usage/assets/graphviz/%.dot
-	mkdir -p modules/usage/assets/images/graphviz
-	dot $< -Tpng -o $@
-
 
 ## Clean
 
