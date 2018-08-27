@@ -1,5 +1,5 @@
 [[plugins-management]]
-= Plugins
+= Manage plugins
 
 Rudder is an extensible software. The *Administration > Plugin Management*
 section sum-up information about loaded plugins, their version and their
