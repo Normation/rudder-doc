@@ -62,6 +62,7 @@ plugins: rudder-plugins-repo rudder-plugins-private-repo
 	cd rudder-plugins-private-repo && git pull && make clean && make doc
 	cd rudder-plugins-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
 	cd rudder-plugins-repo && git pull && make clean && make doc
+	rm -rf plugins && mkdir -p plugins/
 	cp -r rudder-plugins-repo/doc/* plugins/
 	cp -r rudder-plugins-private-repo/doc/* plugins/
 
