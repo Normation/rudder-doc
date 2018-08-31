@@ -7,7 +7,7 @@ into apt using the following command:
 
 ----
 
-wget --quiet -O- "https://www.rudder-project.org/apt-repos/rudder_apt_key.pub" | sudo apt-key add -
+wget --quiet -O- "https://repository.rudder.io/apt-repos/rudder_apt_key.pub" | sudo apt-key add -
 
 ----
 
