@@ -8,6 +8,8 @@ include::{partialsdir}/server_notes.adoc[]
 
 Rudder requires Java RE (version 8 at least) which is not packaged by default on Debian 8. The Java RE 8 for Debian can be found through Oracle's website: https://www.java.com
 
+Also, one of gnupg, gnupg2 and gnupg1 must be installed before starting setup.
+
 include::{partialsdir}/apt_key.adoc[]
 
 include::{partialsdir}/debian_repo.adoc[]
