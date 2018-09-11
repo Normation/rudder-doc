@@ -9,6 +9,55 @@ html {
 .doc h5,
 .doc h6 {
   color: #333;
+  font-weight: 500;
+}
+
+.doc h1 {
+  border-left: 4px solid #f08004;
+  padding-left: 22px;
+  font-size: 1.6em;
+}
+
+.doc h1 .anchor {
+  left: 4px;
+  margin-left: 0;
+}
+
+.doc h2 {
+  border-bottom-width: 2px !important;
+  border-bottom-color: #f08004 !important;
+  font-size: 1.5em;
+}
+
+.doc h3 {
+  border-bottom: 2px solid #e1e1e1 !important;
+  font-size: 1.4em;
+  padding-bottom: 4px;
+}
+
+.doc h4 {
+  border-left: 4px solid #f08004;
+  font-size: 1.2em;
+  padding-left: 12px;
+}
+
+.doc h4 .anchor {
+  left: 2px;
+  margin-left: 0;
+}
+
+.doc h5 {
+  font-size: 1.1em;
+  font-style: italic;
+}
+
+.doc h5 .anchor {
+  font-style: normal;
+}
+
+.doc h6 {
+  font-size: 1.1em;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .doc .exampleblock > .content {
