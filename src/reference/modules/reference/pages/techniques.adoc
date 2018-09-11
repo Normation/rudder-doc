@@ -2,10 +2,10 @@
 
 A technique is described by a XML file that lists:
 
-   * the template files
-   * the sections of the technique
-   * the variables that must be defined
-   * the compatibility list
+* the template files
+* the sections of the technique
+* the variables that must be defined
+* the compatibility list
 
 == Files organisation
 
@@ -38,9 +38,9 @@ techniques
 
 These files must reside in a folder with a version number. For each Technique, there can be several versions, Rudder will let you choose the version when creating a Directive.
 
-=== Version number formating
+=== Version number formatting
 
-The version number follows a formating "a la Debian" as described here: https://www.debian.org/doc/debian-policy/index.html#s-f-version, (without the debian_revision version)
+The version number follows a formatting "a la Debian" as described here: https://www.debian.org/doc/debian-policy/index.html#s-f-version, (without the debian_revision version)
 
 == General Rules
 
@@ -110,7 +110,7 @@ All the tag name in the .xml are in upper case, all the attributes are in camel 
 
 === The <SECTION> tag
 
-In a metadata.xml, there can be only one SECTIONS tag, that encloses one or several SECTION tags. A SECTION tag contains variables declaration and subsections. A SECTION can contains Variables definitions and SECTION.
+In a `metadata.xml`, there can be only one `SECTIONS` tag, that encloses one or several `SECTION` tags. A `SECTION` tag contains variables declaration and subsections. A `SECTION` can contain Variables definitions and `SECTION`.
 
 ----
 
@@ -118,17 +118,17 @@ In a metadata.xml, there can be only one SECTIONS tag, that encloses one or seve
 
 ----
 
-A SECTION has the following attributes:
+A `SECTION` has the following attributes:
 
-   * name : mandatory, the name of the section
-   * multivalued : optional, default false, defines if the section is repetable or not. If so, the Web Interface will display a "Add another" and "Delete" button for this section
-   * component : optional, default false; defines if the section is a component, and if true, the section will appear in the reporting, with its section name
-   * componentKey: optional, default None; defines the variable that is the key of the component. Note that the componentKey can only be defined if 'component' is 'true'
-   * displayPriority: optional, default high; defines if the section is displayed by default (high) or hidden by default (low)
+   * `name`: mandatory, the name of the section
+   * `multivalued`: optional, default false, defines if the section is repeatable or not. If so, the Web Interface will display a "Add another" and "Delete" button for this section
+   * `component`: optional, default false; defines if the section is a component, and if true, the section will appear in the reporting, with its section name
+   * `componentKey`: optional, default None; defines the variable that is the key of the component. Note that the componentKey can only be defined if `component` is `true`
+   * `displayPriority`: optional, default high; defines if the section is displayed by default (high) or hidden by default (low)
 
 NOTE: A multivalued section can only contain variable, and cannot contain section
 
-NOTE: If there are no SECTION defined with 'component="true"', a default SECTION for reporting will be generated, named after the id of the Technique (the folder name of the Technique)
+NOTE: If there are no `SECTION` defined with `component="true"`, a default `SECTION` for reporting will be generated, named after the id of the Technique (the folder name of the Technique)
 
 === Variables definitions in the <SECTION> tags
 
@@ -160,7 +160,7 @@ There are three tags to create a variable:
 
 ----
 
-Note: It is possible to inline LABEL and VALUE in the ITEM tag
+Note: It is possible to inline `LABEL` and `VALUE` in the `ITEM` tag
 
 ----
 
@@ -179,7 +179,7 @@ is equivalent to
 
 ----
 
-NOTE: INPUT fields are automatically escaped, meaning any quote will be written in the policies as \" ; and any backslash will be written as \\
+NOTE: `INPUT` fields are automatically escaped, meaning any quote will be written in the policies as \" ; and any backslash will be written as \\
 
 === Available types for an INPUT variable
 
@@ -191,11 +191,11 @@ NOTE: INPUT fields are automatically escaped, meaning any quote will be written 
    * *boolean* : display a checkbox
    * *mail* : only accept emails
    * *ip* : only accept ips. Before Rudder 3.1.14, 3.2.7 and 4.0.0, "ip" was accepting only IPv4 ip. Since these releases, it accepts both IPv4 and IPv6 format. <br />
-   *  *ipv4* [since Rudder 3.1.14, 3.2.7, 4.0.0]: only accept IPv4 formatedt IPs
+   *  *ipv4* [since Rudder 3.1.14, 3.2.7, 4.0.0]: only accept IPv4 formatted IPs
    * *ipv6* [since Rudder 3.1.14, 3.2.7, 4.0.0]: only accept IPv6 formatted IPs
    * *size-<unit>* : (size-b, size-kb, size-mb, size-gb ou size-tb)
    * *raw* : the content of this field will not be escaped when written in the policies (Rudder >= 2.6)
-   * *password* : the content of this field will be handled as a password, and thus be hidden and transformed if necessary (see "Password handling" below) (Rudder >= 2.6)
+   * *password* : the content of this field will be handled as a password, and thus be hidden and transformed if necessary (see "Password handling" below)
 
 === The <FILES> tag
 
@@ -210,8 +210,8 @@ Example:
 
 ----
 
-   *  *name* is mandatory. It's the path to file to copy, either relative to the technique directory (i.e, at the same level as metadata.xml) or absolute from the configuration repository directory if it starts with RUDDER_CONFIGURATION_REPOSITORY (usually /var/rudder/configuration-repository) (and yes, this forbids the use case where you want to have a sub-directory named RUDDER_CONFIGURATION_REPOSITORY under the technique directory - I'm sure one will find other way to do it if really needed :). The file will be taken from git, at the same git revision as other tehniques files.
-   *  *OUTPATH* is optional. If not specified, the file will be copied into the target node policies at the same place as other files for the technique, with the same name. If specified, you have to give a path+name, where path is relative to the directory for agent promises on the node (i.e, if you want to put the file in the technique directory, you need to use "techniqueName/new-file-name.txt")
+   *  *name* is mandatory. It's the path to file to copy, either relative to the technique directory (i.e, at the same level as metadata.xml) or absolute from the configuration repository directory if it starts with RUDDER_CONFIGURATION_REPOSITORY (usually /var/rudder/configuration-repository) (and yes, this forbids the use case where you want to have a sub-directory named RUDDER_CONFIGURATION_REPOSITORY under the technique directory - I'm sure one will find other way to do it if really needed :). The file will be taken from git, at the same git revision as other techniques files.
+   *  *OUTPATH* is optional. If not specified, the file will be copied into the target node policies at the same place as other files for the technique, with the same name. If specified, you have to give a path+name, where path is relative to the directory for agent promises on the node (i.e, if you want to put the file in the technique directory, you need to use `techniqueName/new-file-name.txt`)
 
 == Examples
 
@@ -219,7 +219,7 @@ Example:
 
 In the "NFS Client settings" Technique, there is a multivalued section with several entries. Here is a partial extract from it, with
 
-   * A multivalued section, named NFS mountpoint, that is multivalued and is a component. The variable reference for this component (the key) is NFS_CLIENT_LOCAL_PATH
+   * A multivalued section, named NFS mount point, that is multivalued and is a component. The variable reference for this component (the key) is NFS_CLIENT_LOCAL_PATH
    * One SELECT1 field, that will show two radio buttons, Mount and Unmount, with the default value to Mount
    * One INPUT field, named NFS_CLIENT_LOCAL_PATH, that is a text
 
@@ -279,7 +279,7 @@ image:password-field.png[Directive Password Field]
 
 For now, the password field support these hash algorithms :
 
-   * *PLAIN*  : that is not an hash algorithm, it just save the password in plain text, as inputed by the user.
+   * *PLAIN*  : that is not an hash algorithm, it just save the password in plain text, as inputted by the user.
    * *MD5, SHA1, SHA256, SHA512*  : uses the matching hash algorithm
    * *LINUX-SHADOW-MD5, LINUX-SHADOW-SHA256, LINUX-SHADOW-SHA512*  : build a string compatible with the Linux /etc/shadow format, as "specified" in http://man7.org/linux/man-pages/man3/crypt.3.html
 
@@ -292,7 +292,7 @@ To configure a password, you must specify two things in the `<CONSTRAINT>` secti
    * Available algorithm names are the ones from the section above (case insensitive).
    * Choices are presented in order given by the list, the first being the default one.
    * If the list contains only one algo, the drop down select if change to a phrase saying to the user that the given algo will be used.
-   * The list can not be empty. Moreover, if the `<MAYBEEMPTY>` contraint is set to false, the "None" option is not displayed to the user.
+   * The list can not be empty. Moreover, if the `<MAYBEEMPTY>` constraint is set to false, the "None" option is not displayed to the user.
 
 *Password field definition example*
 
@@ -314,8 +314,8 @@ To configure a password, you must specify two things in the `<CONSTRAINT>` secti
 
 == Separated policy generation
 
-In Rudder 4.3, a new mode of policy generation is introduced, that allows to mix Audit and Enforce mode for Directives based on the same Technique on a given node, and have Directives based on different version of the same Techniques. It is enabled with the entry <POLICYGENERATION>separated</POLICYGENERATION> in metadata.xml, and result on separated generated files for each Directives.
-One directory is generated by Directive, in the path TechniqueName/TechniqueVersion_DirectiveID, and requires the use of a placeholder, RudderUniqueID, used in bundle/method name, as well as result classes, to avoid name and classes collision at runtime.
+In Rudder 4.3, a new mode of policy generation is introduced, that allows to mix Audit and Enforce mode for Directives based on the same Technique on a given node, and have Directives based on different version of the same Techniques. It is enabled with the entry `<POLICYGENERATION>separated</POLICYGENERATION>` in metadata.xml, and result on separated generated files for each Directives.
+One directory is generated by Directive, in the path `TechniqueName/TechniqueVersion_DirectiveID`, and requires the use of a placeholder, RudderUniqueID, used in bundle/method name, as well as result classes, to avoid name and classes collision at runtime.
 
 === Usage of RudderUniqueID
 
@@ -342,7 +342,7 @@ It is used here in the bundle name, to ensure its unicity, and it is also used i
 
 Some Techniques require actions to be performed only once, before and/or after all operation (for instance, ensuring that a package is installed before configuring this package).
 A pre and post hook mechanism has been introduced, for these uses.
-By convention, all pre and post hooks are located in the hooks.st file, in the System Technique common (so outside of the Technique we consider, to enforce that only one version of the hook may live in the Technique repository at a time).
+By convention, all pre and post hooks are located in the `hooks.st` file, in the System Technique common (so outside of the Technique we consider, to enforce that only one version of the hook may live in the Technique repository at a time).
 
 Hooks have only one parameter, which is a JSON entry, in the format
 
@@ -369,7 +369,7 @@ The entries parameterName and parameterValue are defined by the PARAMETER tag of
 
 == Known limitations
 
-There are several known limitations at the moment, that are acknowleged, and will be solved in a "not too distant" future:
+There are several known limitations at the moment, that are acknowledged, and will be solved in a "not too distant" future:
 
 === Can't put a multivalued section in a multivalued section
 
@@ -389,11 +389,11 @@ It is a side effect of the previous limitation.
 
 The Techniques use the http://www.stringtemplate.org/[StringTemplate] engine. A Technique *must* have the .st extension to be extended by Rudder (have some variables replaced, some part removed or added given some parameters).
 
-=== Variable remplacement
+=== Variable replacement
 
-Note : Rudder use a StringTemplate grammar slighlty different from the default one. Rather than using "$" as a variable identifier, the Techniques use "&" to avoid collision with the CFEngine variables
+Note : Rudder use a StringTemplate grammar slightly different from the default one. Rather than using "$" as a variable identifier, the Techniques use "&" to avoid collision with the CFEngine variables
 
-==== Single-valued variable remplacement
+==== Single-valued variable replacement
 
 ----
 
@@ -401,9 +401,9 @@ Note : Rudder use a StringTemplate grammar slighlty different from the default o
 
 ----
 
-   * Will be remplaced by the value of the variable UUID
+   * Will be replaced by the value of the variable UUID
 
-==== Remplacement of variable with one or more values
+==== Replacement of variable with one or more values
 
 ----
 
@@ -411,7 +411,7 @@ Note : Rudder use a StringTemplate grammar slighlty different from the default o
 
 ----
 
-   * Will be remplaced by `"8.8.8.8", "8.8.4.4"`
+   * Will be replaced by `"8.8.8.8", "8.8.4.4"`
    * Here, `&it&` is an alias for the current item in the list (with no confusion, because there is only one variable)
 
 ----
@@ -429,7 +429,7 @@ admit => { host2ip("&host&"), escape("&host&") };
    * `uuid` is an alias for the current value of CHILDRENID
    * Both item are iterated at the same time, so both list must have the same length
 
-==== Remplacement of variable with one or more value, and writing an index all along
+==== Replacement of variable with one or more value, and writing an index all along
 
 ----
 
@@ -449,7 +449,7 @@ The result would be:
 
 ----
 
-==== Conditionnal writing of a section
+==== Conditional writing of a section
 
 ----
 
@@ -518,7 +518,7 @@ The following rules should be followed when naming a new Technique:
 ==== In the Technique
 
    * We try to follow CFEngine conventions but with some exceptions like using brackets "{}" instead of parenthesis "()"
-   * When defining bundles or bodies, the opening bracket should be on a dedicated line. Exemple:
+   * When defining bundles or bodies, the opening bracket should be on a dedicated line. Example:
 
 ----
 
@@ -553,9 +553,9 @@ bundle agent example
 
    * Attributes of policy type "vars" and "classes" should be on only one line except if there are more than one attribute.
    * For policy type "vars" and "classes" on one line, attribute names and the arrows should be aligned
-   * A list should be written multilines if it needs more than 80 characters in one line
-   * Multilines list should have comma after each element, except the last one.
-   * Multilines list should begin with only a bracket "{"
+   * A list should be written on multiple lines if it needs more than 80 characters in one line
+   * Multi-line lists should have comma after each element, except the last one.
+   * Multi-line lists should begin with only a bracket "{"
 
 ----
 
@@ -571,7 +571,7 @@ bundle agent example
 
    * The name of the variable in argument of the bundle should be named "params"
    * The call of the variables should be made with by using brackets `${var_correctly_called}` instead of parenthesis `$(var_wrongly_called)`
-   * Alternance of brackets and parenthesis are tolerated when lots of variables are imbricated for more readability: `${var_lv1[$(var_lvl2[${var_lvl3}])]}`
+   * Alternation of brackets and parenthesis are tolerated when lots of variables are nested for more readability: `${var_lv1[$(var_lvl2[${var_lvl3}])]}`
    * A Technique should have its bundle wrote with parameters
    * All the bundles should have as first argument "prefix" which contains the prefix to use for all the classes made from an outcome. This prefix should never be hardcoded in the bundle.
    * Always write comments with # when a policy needs more than 30 seconds of thought.
@@ -579,7 +579,7 @@ bundle agent example
    * The order to the policy type must always be in the order of the normal ordering : https://docs.cfengine.com/docs/3.10/reference-language-concepts-normal-ordering.html
    * StringTemplate variables should always be written in UPPERCASE
    * StringTemplate variables should be written with underscore
-   * StringTemplate variables should always be prefixed by the Technique name in uppecase too. i.e: `CHECK_GENERIC_FILE_FILE_NAME`
+   * StringTemplate variables should always be prefixed by the Technique name in uppercase too. i.e: `CHECK_GENERIC_FILE_FILE_NAME`
 
 ==== In the metadata.xml
 
@@ -605,5 +605,3 @@ bundle agent example
 
    * There is a test suite in scripts/check-techniques.sh that check metadata.xml and normal ordering in code
    * The list of all maintained techniques (techniques and versions) is in maintained-techniques file, and should be updated when new techniques or versions are created.
-
-

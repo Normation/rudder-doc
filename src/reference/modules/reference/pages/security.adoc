@@ -27,7 +27,7 @@ More precisely:
 * root server:
 ** all the data is present on it
 ** files are readable and writable only by the root user and (for some of them) the rudder group
-** some data is also accessible from our backends (PostgreSQL, OpenLDAP), but only locally (the services are listenning on loopback) and from Rudder-specific users, whith passwords only accessible to the root user
+** some data is also accessible from our backends (PostgreSQL, OpenLDAP), but only locally (the services are listening on loopback) and from Rudder-specific users, with passwords only accessible to the root user
 ** accessible remotely by the Web interface (needs an authorized user account) or the API (needs a token)
 * relay: only the data needed for the served nodes and the relay itself are available and stored locally, only accessible to the root user
 * node: only the data needed to configure the node is available and stored locally, only accessible to the root user
@@ -35,13 +35,13 @@ More precisely:
 === Common data
 
 This refers to content available from all nodes in the authorized networks, readable from all users
-on the nodes (and that can be transfered withtout encryption when using initial policies of a pre-4.0 node).
+on the nodes (and that can be transferred without encryption when using initial policies of a pre-4.0 node).
 
 These unprotected contents are:
 
 * the tools (`/var/rudder/tools`)
-* the common ncf part (`/var/rudder/ncf/common`), which includes all the content distibuted in the `ncf` package
-* the Rudder techniques sources (without parameters), which includes all the content distibuted in the `rudder-techniques` package
+* the common ncf part (`/var/rudder/ncf/common`), which includes all the content distributed in the `ncf` package
+* the Rudder techniques sources (without parameters), which includes all the content distributed in the `rudder-techniques` package
 
 == Node-Server communication security
 
@@ -57,7 +57,7 @@ The access policy is:
 * Peer to peer key exchange, without central authority
 * TOFU (Trust On First Use): keys are sent and accepted at first connection (from the policy server on nodes
   and from nodes with an IP in the Allowed Networks on policy servers).
-* Node-specific files have an ACL containg the public key of the node, as found in the inventory
+* Node-specific files have an ACL containing the public key of the node, as found in the inventory
 * Common files have an IP-based ACL based on the Allowed Networks
 
 The old hostame and IP ACL are still generated for node-specific files to ensure compatibility with older nodes,
