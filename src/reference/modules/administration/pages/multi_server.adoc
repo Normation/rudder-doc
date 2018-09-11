@@ -201,7 +201,7 @@ written into the database and read by the web application.
 [[multiserver-rudder]]
 == Multiserver Rudder
 
-From version 3.0 Rudder can be divided into 4 different components:
+Rudder can be divided into 4 different components:
 
 - rudder-web: an instance with the webapp and the central policy server
 - rudder-ldap: the inventory endpoint and its ldap backend

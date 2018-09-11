@@ -3,7 +3,7 @@
 [[archives, Archives]]
 == Archives
 
-=== Archive usecases
+=== Archive use cases
 
 The archive feature of Rudder allows to:
 
@@ -44,7 +44,7 @@ can export and import the configuration of Rudder Groups, Directives and Rules.
 You can either archive the complete configuration, or only the subset dedicated
 to Groups, Directives or Rules.
 
-When archiving configuration, a 'git tag' is created into +/var/rudder/configuration-repository+.
+When archiving configuration, a 'git tag' is created into `/var/rudder/configuration-repository`.
 This tag is then referenced in the Rudder web interface, and available for download
 as a zip file. Please note that each change in the Rudder web interface is also
 committed in the repository.
@@ -58,11 +58,11 @@ the *Administration -> Archives* section of the Rudder Server web interface.
 
 To perform a global archive, the steps are:
 
-. Click on 'Archive everything' - it will update the drop down list 'Choose an archive' with
+. Click on *Archive everything* - it will update the drop down list *Choose an archive* with
 the latest data
-. In the drop down list 'Choose an archive', select the newly created archive (archives are sorted
+. In the drop down list *Choose an archive*, select the newly created archive (archives are sorted
 by date), for example 2015-01-08 16:39
-. Click on 'Download as zip' to download an archive that will contains all elements.
+. Click on *Download as zip* to download an archive that will contains all elements.
 
 === Importing configuration
 
@@ -72,12 +72,12 @@ and all others will remain untouched.
 
 To import the archive on the target Rudder server, you can follow the following steps:
 
-. Uncompress the zip archive in /var/rudder/configuration-repository
-. If necessary, correct all files permissions: +chown -R root:rudder directives groups parameters ruleCategories rules techniques+ and +chown -R ncf-api-venv:rudder ncf/50_techniques techniques/ncf_techniques+
-. Add all files in the git repository: +git add . && git commit -am "Importing configuration"+
+. Uncompress the zip archive in `/var/rudder/configuration-repository`
+. If necessary, correct all files permissions: `chown -R root:rudder directives groups parameters ruleCategories rules techniques` and `chown -R ncf-api-venv:rudder ncf/50_techniques techniques/ncf_techniques`
+. Add all files in the git repository: `git add . && git commit -am "Importing configuration"`
 . Finally, in the Web interface, go to the *Administration -> Archives* section, and select
-'Latest Git commit' in the drop down list in the Global archive section, and click on 'Restore
-everything' to restore the configuration.
+*Latest Git commit* in the drop down list in the Global archive section, and click on *Restore
+everything* to restore the configuration.
 
 [TIP]
 
@@ -146,7 +146,7 @@ Here you can configure the networks from which nodes are allowed to connect to
 Rudder policy server to get their updated rules.
 
 You can add as many networks as you want, the expected format is:
-+networkip/mask+, for example +42.42.0.0/16+.
+`networkip/mask`, for example `42.42.0.0/16`.
 
 === Clear caches
 
@@ -167,7 +167,7 @@ To restart the Rudder Agent, use following command on a node:
 
 ----
 
-service rudder-agent restart
+rudder agent restart
 
 ----
 
@@ -192,7 +192,7 @@ service rudder-server restart
 
 ----
 
-==== Restart only one component
+==== Restart only one server component
 
 Here is the list of the components of the root server with a brief description
 of their role, and the command to restart them:

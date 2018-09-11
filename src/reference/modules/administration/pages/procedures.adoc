@@ -25,11 +25,11 @@ By default, this system will:
 It thus reduces the work overhead by only making Rudder handle relevant reports (fresh enough)
 and putting aside old ones.
 
-This is obviously configurable in /opt/rudder/etc/rudder-web.properties, by altering the following
+This is obviously configurable in `/opt/rudder/etc/rudder-web.properties`, by altering the following
 configuration elements:
 
-* rudder.batch.reportscleaner.archive.TTL: Set the maximum report age before archival
-* rudder.batch.reportscleaner.delete.TTL: Set the maximum report age before deletion
+* `rudder.batch.reportscleaner.archive.TTL`: Set the maximum report age before archival
+* `rudder.batch.reportscleaner.delete.TTL`: Set the maximum report age before deletion
 
 The default values are OK for systems under moderate load, and should be adjusted in case of
 excessive database bloating.
@@ -201,8 +201,8 @@ from one machine to another.
 If your server address changed, you will also have to do the following on
 every node that is directly connected to it (managed nodes or relays):
 
-* Remove the server public key +rm /var/rudder/cfengine-community/ppkeys/root-MD5=*.pub+
-* Modify +/var/rudder/cfengine-community/policy_server.dat+ with the new address, then you can force your nodes to send their inventory by running +rudder agent inventory+
+* Remove the server public key `rm /var/rudder/cfengine-community/ppkeys/root-MD5=*.pub`
+* Modify `/var/rudder/cfengine-community/policy_server.dat` with the new address, then you can force your nodes to send their inventory by running `rudder agent inventory`
 
 [[password-management]]
 === Password management
@@ -317,7 +317,7 @@ git commit -m "Updated the rudder WebDAV access password" site.st
 === Password upgrade
 
 This version of Rudder uses a central file to manage the passwords that will
-be used by the application: /opt/rudder/etc/rudder-passwords.conf
+be used by the application: `/opt/rudder/etc/rudder-passwords.conf`.
 
 When first installing Rudder, this file is initialized with default values,
 and when you run rudder-init, it will be updated with randomly generated
@@ -340,7 +340,7 @@ editing passwords.
 
 Here is a sample command to regenerate the WebDAV password with a random
 password, that is portable on all supported systems. Just change the
-"RUDDER_WEBDAV_PASSWORD" to any password file statement corresponding to
+`RUDDER_WEBDAV_PASSWORD` to any password file statement corresponding to
 the password you want to change.
 
 ----

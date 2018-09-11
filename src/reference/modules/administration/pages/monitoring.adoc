@@ -30,7 +30,7 @@ command[check_rudder]=/opt/rudder/bin/rudder agent health -n
 ----
 
 To get the last run time, you can lookup the modification date of
-'/var/rudder/cfengine-community/last_successful_inputs_update'.
+`/var/rudder/cfengine-community/last_successful_inputs_update`.
 
 === Monitoring a Server
 
@@ -72,7 +72,7 @@ for a list of available calls.
 === Monitor events
 
 The Web interface gives access to this, but we will here see how to process events
-automatically. They are available on the root server, in '/var/log/rudder/compliance/non-compliant-reports.log'.
+automatically. They are available on the root server, in `/var/log/rudder/compliance/non-compliant-reports.log`.
 This file contains two types of reports about all the nodes managed by this server:
 
 * All the modifications made by the agent
