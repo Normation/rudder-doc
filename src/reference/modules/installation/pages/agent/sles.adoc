@@ -1,0 +1,22 @@
+= Install Rudder agent on SLES
+
+include::{partialsdir}/quick_agent.adoc[]
+
+include::{partialsdir}/syslog.adoc[]
+
+include::{partialsdir}/zypper_segfault.adoc[]
+
+include::{partialsdir}/rpm_key.adoc[]
+
+include::{partialsdir}/sles_repo.adoc[]
+
+Install the package:
+
+----
+
+zypper install rudder-agent
+
+----
+
+include::{partialsdir}/agent_initial_config.adoc[]
+

@@ -1,0 +1,17 @@
+= Install Rudder relay on Debian or Ubuntu
+
+include::{partialsdir}/syslog.adoc[]
+
+include::{partialsdir}/apt_key.adoc[]
+
+include::{partialsdir}/debian_repo.adoc[]
+
+Install the package:
+
+----
+
+apt-get install rudder-server-relay
+
+----
+
+include::{partialsdir}/relay_initial_config.adoc[]

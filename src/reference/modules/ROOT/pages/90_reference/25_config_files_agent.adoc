@@ -1,4 +1,0 @@
-=== Configuration files for a Node
-
-* /etc/default/rudder-agent
-

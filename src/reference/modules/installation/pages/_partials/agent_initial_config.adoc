@@ -1,0 +1,52 @@
+[[_configure_and_validate]]
+== Configuration
+
+=== Configure the agent
+
+Configure the IP address or hostname of the Rudder Root Server in the following file
+
+----
+
+echo '<rudder server ip or hostname>' > /var/rudder/cfengine-community/policy_server.dat
+
+----
+
+[TIP]
+
+=====
+
+We advise you to use the +IP address+ of the Rudder root server. The DNS name of
+this server can also be used if you have a trusted DNS infrastructure
+with proper reverse resolutions.
+
+=====
+
+You can now start the Rudder service with:
+
+----
+
+rudder agent start
+
+----
+
+=== Add the node to the server
+
+Several minutes after the start of the agent, the new node should be pending in
+the Rudder web interface. You will be able to browse its inventory, and accept it to manage its
+configuration with Rudder.
+
+You may force the agent to run and send an inventory by issuing the following command:
+
+----
+
+rudder agent inventory
+
+----
+
+You may force the agent run by issuing the following command:
+
+----
+
+rudder agent run
+
+----

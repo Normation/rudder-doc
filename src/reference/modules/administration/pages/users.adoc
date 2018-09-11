@@ -1,0 +1,215 @@
+[[user-management]]
+= User management
+
+Change the users authorized to connect to the application.
+You can define authorization level for each user
+
+== Configuration of the users using a XML file
+
+=== Generality
+
+The credentials of a user are defined in the XML file
+`/opt/rudder/etc/rudder-users.xml`. This file expects the following format:
+
+----
+
+<authentication hash="sha512">
+  <user name="alice"  password="xxxxxxx" role="administrator"/>
+  <user name="bob"    password="xxxxxxx" role="administration_only, node_read"/>
+  <user name="custom" password="xxxxxxx" role="node_read,node_write,configuration_read,rule_read,rule_edit,directive_read,technique_read"/>
+</authentication>
+
+----
+
+The name and password attributes are mandatory (non empty) for the user tags.
+The role attribute can be omitted but the user will have no permission, and
+only valid attributes are recognized.
+
+Every modification of this file should be followed by a restart of the Rudder
+web application to be taken into account:
+
+----
+
+service rudder-jetty restart
+
+----
+
+[[_passwords]]
+=== Passwords
+
+The authentication tag should have a "hash" attribute, making "password" attributes
+on every user expect hashed passwords. Not specifying a hash attribute will fallback
+to plain text passwords, but it is strongly advised not to do so for security reasons.
+
+The algorithm to be used to create the hash (and verify it during authentication)
+depend on the value of the hash attribute. The possible values, the
+corresponding algorithm and the Linux shell command need to obtain the hash of
+the "secret" password for this algorithm are listed here:
+
+.Hashed passwords algorithms list
+
+[options="header"]
+
+|====
+|Value                 | Algorithm | Linux command to hash the password
+|"md5"                 | MD5       | read mypass; echo -n $mypass \| md5sum
+|"sha" or "sha1"       | SHA1      | read mypass; echo -n $mypass \| shasum
+|"sha256" or "sha-256" | SHA256    | read mypass; echo -n $mypass \| sha256sum
+|"sha512" or "sha-512" | SHA512    | read mypass; echo -n $mypass \| sha512sum
+|====
+
+When using the suggested commands to hash a password, you must enter the
+command, then type your password, and hit return. The hash will then be
+displayed in your terminal. This avoids storing the password in your shell
+history.
+
+Here is an example of authentication file with hashed password:
+
+----
+
+<authentication hash="sha256">
+
+  <!-- In this example, the hashed password is: "secret", hashed as a sha256 value -->
+  <user name="carol" password="2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b" role="administrator"/>
+
+</authentication>
+
+----
+
+[[ldap-auth-provider, LDAP authentication provider for Rudder]]
+== Configuring an LDAP authentication provider for Rudder
+
+If you are operating on a corporate network or want to have your users in a
+centralized database, you can enable LDAP authentication for Rudder users.
+
+=== LDAP is only for authentication
+
+Take care of the following limitation of the current process: only *authentication*
+is delegated to LDAP, NOT *authorizations*. So you still have to
+declare user's authorizations in the Rudder user file (`rudder-users.xml`).
+
+A user whose authentication is accepted by LDAP but not declared in the
+`rudder-users.xml` file is considered to have no rights at all (and so will
+only see a reduced version of Rudder homepage, with no action nor tabs available).
+
+
+The credentials of a user are defined in the XML file
+`/opt/rudder/etc/rudder-users.xml`. It expects the same format as regular file-based
+user login, but in this case "name" will be the login used to connect to LDAP and the
+'password' field will be ignored and should be set to "LDAP" to make it clear that
+this Rudder installation uses LDAP to log users in.
+
+
+Every modification of this file should be followed by a restart of the Rudder
+web application to be taken into account:
+
+----
+
+service rudder-jetty restart
+
+----
+
+=== Enable LDAP authentication
+
+LDAP authentication is enabled by setting the property `rudder.auth.ldap.enable` to `true`
+in file `/opt/rudder/etc/rudder-web.properties`.
+
+The LDAP authentication process is a bind/search/rebind in which an application
+connection (bind) is used to search (search) for a user entry given some base and
+filter parameters, and then, a bind (rebind) is tried on that entry with the
+credential provided by the user.
+
+So next, you have to set-up the connection parameters to the LDAP directory to use.
+There are five properties to change:
+
+- `rudder.auth.ldap.connection.url`
+- `rudder.auth.ldap.connection.bind.dn`
+- `rudder.auth.ldap.connection.bind.password`
+- `rudder.auth.ldap.searchbase`
+- `rudder.auth.ldap.filter`
+
+The search base and filter are used to find the user. The search base may be left empty, and
+in the filter, `{0}` will be replaced by the value provided as user login.
+
+Here are some usage examples,
+
+on standard LDAP:
+
+----
+
+rudder.auth.ldap.searchbase=ou=People
+rudder.auth.ldap.filter=(&(uid={0})(objectclass=person))
+
+----
+
+on Active Directory:
+
+----
+
+rudder.auth.ldap.searchbase=
+rudder.auth.ldap.filter=(&(sAMAccountName={0})(objectclass=user))
+
+----
+
+
+== Authorization management
+
+For every user you can define an access level, allowing it to access different
+pages or to perform different actions depending on its level.
+
+You can also build custom roles with whatever permission you want, using a type
+and a level as specified below.
+
+image::workflow_roles.png[Roles can match different types of users]
+
+In the xml file, the role attribute is a list of permissions/roles, separated by
+a comma. Each one adds permissions to the user. If one is wrong, or not correctly
+spelled, the user is set to the lowest rights (NoRights), having access only to the
+dashboard and nothing else.
+
+=== Pre-defined roles
+
+|====
+|Name                | Access level
+|administrator | All authorizations granted, can access and modify everything
+|administration_only | Only access to administration part of rudder, can do everything within it.
+|user | Can access and modify everything but the administration part
+|configuration | Can only access and act on configuration section
+|read_only | Can access to every read only part, can perform no action
+|inventory | Access to information about nodes, can see their inventory, but can't act on them
+|rule_only | Access to information about rules, but can't modify them
+|====
+
+For each user you can define more than one role, each role adding its authorization to the user.
+
+Example: "rule_only,administration_only" will only give access to the "Administration" tab as well as the
+Rules.
+
+=== Custom roles
+
+You can set a custom set of permissions instead of a pre-defined role.
+
+A permission is composed of a type and a level:
+
+* Type:  Indicates what kind of data will be displayed and/or can be set/updated by the user
+** *configuration*, *rule*, *directive*, *technique*, *node*, *group*, *administration*, *deployment*.
+* Level: Access level to be granted on the related type
+** *read*, *write*, *edit*, *all* (Can read, write, and edit)
+
+Depending on that value(s) you give, the user will have access to different pages and action in Rudder.
+
+Usage example:
+
+* *configuration_read* -> Will give read access to the configuration (Rule management, Directives and Parameters)
+* *rule_write, node_read* -> Will give read and write access to the Rules and read access to the Nodes
+
+== Going further
+
+Rudder aims at integrating with your IT system transparently, so it can't force
+its own authentication system.
+
+To meet this need, Rudder relies on the modular authentication system Spring
+Security that allows to easily integrate with databases or an
+enterprise SSO like CAS, OpenID or SPNEGO. The documentation for this
+integration is not yet available, but don't hesitate to reach us on this topic.
+

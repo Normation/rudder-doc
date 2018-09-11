@@ -1,3 +1,4 @@
-modules/ROOT/nav.adoc
-modules/ROOT/pages/_partials/dyn/
-modules/ROOT/assets/images/graphviz/
+modules/*/nav.adoc
+modules/*/pages/_partials/dyn/
+modules/*/assets/images/graphviz/
+modules/plugins/assets/

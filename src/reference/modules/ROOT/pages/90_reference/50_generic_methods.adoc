@@ -1,6 +1,0 @@
-=== Generic methods
-
-This section documents all the generic methods available in the xref:23_configuration_management/41_technique_editor.adoc#technique-editor[Technique Editor].
-
-include::{partialsdir}/dyn/generic_methods.adoc[]
-

@@ -1,0 +1,25 @@
+Add the Rudder packages repository:
+
+* on SLES 12:
+
+----
+
+zypper ar -n 'Rudder 4.3 repository' http://repository.rudder.io/rpm-4.3/SLES_12/ Rudder
+
+----
+
+* on SLES 11:
+
+----
+
+zypper ar -n 'Rudder 4.3 repository' http://repository.rudder.io/rpm-4.3/SLES_11/ Rudder
+
+----
+
+Update your local package database to retrieve the list of packages available on our repository:
+
+----
+
+zypper refresh
+
+----

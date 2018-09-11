@@ -1,0 +1,15 @@
+Add Rudder's package repository:
+
+----
+
+echo "deb http://repository.rudder.io/apt-4.3/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
+
+----
+
+Update your local package database to retrieve the list of packages available on our repository:
+
+----
+
+apt-get update
+
+----

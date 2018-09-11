@@ -59,6 +59,23 @@ html {
   font-size: 1.1em;
   border-bottom: 1px solid #e0e0e0;
 }
+
+.doc .exampleblock > .content {
+  background-color: #f5f5f5;
+  border: 1px solid #e6e6e6;
+  box-shadow: none;
+  border-radius: 4px;
+}
+
+.crumb > a {
+  text-decoration: none !important;
+}
+
+.crumb:last-child > a {
+  color: #555;
+  font-weight: 500;
+}
+
 /* --- NAVBAR --- */
 
 .is-current-page > .nav-link,
@@ -124,6 +141,8 @@ html {
   color: #fff;
   min-height: 36px;
   opacity: 0.5;
+  position: absolute;
+  right: 0;
 }
 
 .navigation .nav-menu > ul > li ul li.nav-item.is-active > button {
@@ -143,9 +162,32 @@ html {
   margin-left: 0;
 }
 
+/*
+.navigation .nav-menu ul > li.nav-item.is-current-page.is-active > ul > li {
+  background-color: #303d43;
+}
+*/
+
+.navigation .nav-menu > ul > li > ul > li > ul > li {
+  background-color: #303d43;
+}
+
 .navigation .nav-menu > ul > li > ul li button + a {
   width: calc(100% - 35px) !important;
-  padding-left: 0 !important;
+  padding-left: 35px;
+}
+
+.navigation .nav-menu > ul > li > ul > li > button + a,
+.navigation .nav-menu > ul > li > ul > li > button + span {
+  padding-left: 6px !important;
+}
+
+.nav-menu > ul > li > button + a {
+  padding-left: 35px !important;
+}
+
+.navigation .nav-menu > h3 > a {
+  padding-left: 9px;
 }
 
 .navigation .nav-menu > h3 > a,
@@ -157,6 +199,7 @@ html {
 .navigation .nav-menu > ul > li > ul > li.is-current-path,
 .navigation .nav-menu > ul > li > ul > li.is-current-page {
   border-left-color: #f08004;
+  background-color: #20272a;
 }
 
 .navigation .nav-menu > ul > li > ul > li.is-current-page > a {
@@ -167,32 +210,46 @@ html {
 .navigation .nav-menu > ul > li > ul > li > a:hover,
 .navigation .nav-menu > ul > li > ul li button:hover {
   color: #fff;
-  background-color: #1e282c;
+  background-color: #1a2226;
 }
 
 .navigation .nav-menu > ul > li > ul li button:hover {
   opacity: 1;
 }
 
-.navigation .nav-menu > ul > li > ul > li > ul {
+.navigation .nav-menu > ul.nav-list {
+  color: #8aa4af;
+}
+
+.navigation .nav-menu ul.nav-list {
   margin-left: 0;
   padding-left: 0;
-  color: #8aa4af;
-  background-color: #2c3b41;
+  margin-bottom: 0 !important;
+}
+
+.navigation .nav-menu li.nav-item {
+  margin-top: 0;
 }
 
 .navigation .nav-menu > ul > li > ul > li > button + a,
 .navigation .nav-menu > ul > li > ul > li > ul > li > a,
-.navigation .nav-menu > ul > li > ul > li > ul > li > ul li a {
+.navigation .nav-menu > ul > li > ul > li > ul > li > ul li a,
+.navigation .nav-menu > ul li > span.nav-text {
   padding: 6px 6px 6px 35px;
   display: block;
   margin: 0;
   width: 100%;
   position: relative;
+  min-height: 36px;
+}
+
+.navigation .nav-menu > ul > li > ul > li > ul > li > ul > li a {
+  padding-left: 50px;
 }
 
 .navigation .nav-menu > ul > li > ul > li > ul > li.is-current-page > a,
-.navigation .nav-menu > ul > li > ul > li > ul > li ul li.is-current-page > a {
+.navigation .nav-menu > ul > li > ul > li > ul > li ul li.is-current-page > a,
+.navigation .nav-menu > ul li > span.nav-text:hover {
   color: #fff;
 }
 
@@ -211,36 +268,85 @@ html {
   background-repeat: no-repeat;
 }
 
-.navigation .nav-menu > ul > li > ul > li > ul > li.is-current-page > a::before,
-.navigation .nav-menu > ul > li > ul > li > ul > li ul li.is-current-page > a::before {
+.navigation .nav-menu > ul > li > ul > li > ul li.is-current-page > a::before {
   left: 0;
 }
 
-.navigation .nav-menu > ul > li > ul > li.is-current-page > button + a::before,
-.navigation .nav-menu > ul > li > ul > li ul li.is-current-page > button + a::before {
+.navigation .nav-menu > ul > li > ul > li > ul > li ul li.is-current-page > a::before {
+  left: 15px;
+}
+
+.navigation .nav-menu > ul > li > ul li.is-current-page > button + a::before,
+.navigation .nav-menu > ul > li > ul li.is-current-page > button + a::after {
   content: initial !important;
 }
 
-.navigation .nav-menu > ul > li > ul > li.is-current-page > button + a,
-.navigation .nav-menu > ul > li > ul > li ul li.is-current-page > button + a {
-  padding-right: 35px;
+.navigation .nav-menu > ul > li > ul > li.is-current-page.is-active {
+  background-color: #1e282c;
 }
 
 .navigation .nav-menu > ul > li > ul > li.is-current-page > button + a::after,
 .navigation .nav-menu > ul > li > ul > li ul li.is-current-page > button + a::after {
-  right: 0;
+  left: 0;
 }
 
 .navigation .nav-menu > ul > li > ul > li > ul li a:hover {
   color: #fff;
 }
 
-.navigation-explore .context {
-  color: #556d77;
-  background: #1a2226;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+.navigation .panels {
+  position: relative;
+  padding-top: 47.5px;
 }
+
+.navigation-explore {
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+
+.navigation-explore .context {
+  color: #8aa4af;
+  background: #1a2226;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border-bottom: 2px solid #536169;
+  position: relative;
+}
+
+.navigation-explore:hover .context {
+  border-color: #f08004 !important;
+}
+
+.navigation-explore .context::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 1px;
+  bottom: 0;
+  width: 30px;
+  background-image: url(../../_/img/menu-nav.svg);
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center;
+  opacity: 0.5;
+}
+
+.navigation-explore:hover .context::after {
+  opacity: 1;
+}
+
+.navigation-explore.is-active .context::after {
+  background-image: url(../../_/img/menu-nav-close.svg);
+  opacity: 1;
+}
+
+.navigation-explore .context .version {
+  background-image: none;
+  padding-right: none;
+}
+
+/* url(../img/chevron-nav.svg); */
 
 .navigation-explore .context:hover {
   color: #fff;
@@ -390,4 +496,295 @@ html {
 
 .footer {
   display: none;
+}
+
+/* =================== HOME PAGE=================== */
+
+#homepage {
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: 100%;
+}
+
+#homepage > h1 {
+  text-align: center;
+  margin-top: 0;
+  padding-top: 2rem;
+}
+
+#homepage > .ulist {
+  background-color: #f5f5f0;
+}
+
+#homepage .ulist > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#homepage > .ulist > ul > li {
+  text-align: center;
+  position: relative;
+  padding: 50px 10%;
+  margin-bottom: 0;
+  background-color: #fff;
+}
+
+#homepage > .ulist > ul > li:first-child {
+  padding-bottom: 10px;
+}
+
+#homepage > .ulist > ul > li:first-child::after,
+#homepage > .ulist > ul > li:first-child::before {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  bottom: -20px;
+  left: 48%;
+  transform: rotate(45deg);
+  z-index: 9;
+}
+
+#homepage > .ulist > ul > li > .ulist {
+  text-align: left;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+#homepage > .ulist > ul > li > p {
+  font-size: 1.6em;
+  color: #333;
+  font-weight: 500;
+  padding-bottom: 2px;
+  display: inline-block;
+  border-bottom: 2px solid #f08004;
+  margin-bottom: 30px;
+  min-height: 0;
+  height: auto;
+  line-height: 40px;
+}
+
+#homepage > .ulist > ul > li > p::after {
+  content: "";
+  height: 0;
+  width: 100%;
+  border-bottom: 2px solid #f1f1f1;
+  position: absolute;
+  left: 0;
+  top: 20px;
+  z-index: -1;
+}
+
+/* -- DISCOVER RUDDER */
+
+#homepage > .ulist > ul > li > .ulist > ul {
+  display: flex;
+}
+
+#homepage > .ulist > ul > li > .ulist > ul > li {
+  display: inline-block;
+  width: 33.3%;
+  padding: 0 15px;
+}
+
+#homepage > .ulist > ul > li > .ulist > ul > li > p {
+  text-align: center;
+  color: #555;
+}
+
+#homepage > .ulist > ul > li > .ulist > ul > li > p a {
+  display: block;
+  text-align: center;
+  text-decoration: none !important;
+  position: relative;
+  font-size: 1.1rem;
+}
+
+#homepage > .ulist > ul > li:first-child > .ulist > ul > li > p a::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transition-duration: 0.4s;
+  transition-property: filter, opacity;
+  margin-bottom: 15px;
+}
+
+#homepage > .ulist > ul > li:first-child > .ulist > ul > li > p a:hover::before {
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+#homepage > .ulist > ul > li:first-child > .ulist > ul > li:nth-child(1) > p a::before {
+  background-image: url(../img/home-logo-rudder.svg);
+}
+
+#homepage > .ulist > ul > li:first-child > .ulist > ul > li:nth-child(2) > p a::before {
+  background-image: url(../img/home-logo-demo.svg);
+}
+
+#homepage > .ulist > ul > li:first-child > .ulist > ul > li:nth-child(3) > p a::before {
+  background-image: url(../img/home-logo-getstarted.svg);
+}
+
+#homepage > .ulist > ul > li:first-child > .ulist > ul > li > p a::after {
+  content: initial;
+}
+
+/* -- INSTALL RUDDER */
+
+#homepage > .ulist > ul > li:nth-child(2) > .ulist {
+  padding-top: 60px;
+  margin-top: -10px;
+  position: relative;
+}
+
+#homepage > .ulist > ul > li:nth-child(2) > .ulist::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: calc(33.3% / 2);
+  top: 30px;
+  background-color: gainsboro;
+  height: 4px;
+  width: calc(66.6%);
+}
+
+#homepage > .ulist > ul > li:nth-child(2) > .ulist > ul > li > p a {
+  margin-bottom: 10px;
+}
+
+#homepage > .ulist > ul > li:nth-child(2) > .ulist > ul > li > p a::before {
+  content: "";
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  left: calc(50% - 12.5px);
+  top: -40px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 4px solid #dcdcdc;
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+#homepage > .ulist > ul > li:nth-child(2) > .ulist > ul > li > p a::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#homepage > .ulist > ul > li:nth-child(2) > .ulist > ul > li > p a:hover::before {
+  background-color: #b7b7b7;
+}
+
+/* -- USE RUDDER && JOIN THE COMMUNITY */
+
+#homepage > .ulist > ul > li:nth-child(3),
+#homepage > .ulist > ul > li:nth-child(4) {
+  background-color: transparent;
+  text-align: left;
+  display: inline-block;
+  width: 49%;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) {
+  padding: 50px 5% 50px 10%;
+}
+
+#homepage > .ulist > ul > li:nth-child(4) {
+  padding: 50px 10% 50px 5%;
+  margin-left: -5px;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist {
+  margin-top: 0;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul {
+  display: block;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li {
+  display: block;
+  width: 100%;
+  padding-left: 0;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li > p,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li > p {
+  padding-left: 70px;
+  text-align: left;
+  position: relative;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li > p::before,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li > p::before {
+  content: "";
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition-duration: 0.2s;
+  opacity: 0.6;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li > p::before {
+  background-image: url(../img/list-icon-use-rudder.svg);
+}
+
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li:nth-child(1) > p::before {
+  background-image: url(../img/list-icon-community-1.svg);
+}
+
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li:nth-child(2) > p::before {
+  background-image: url(../img/list-icon-community-2.svg);
+}
+
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li:nth-child(3) > p::before {
+  background-image: url(../img/list-icon-community-3.svg);
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li > p:hover::before,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li > p:hover::before {
+  opacity: 1;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li p a::before,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li p a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li p a,
+#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li p a {
+  text-align: left;
+  position: static;
 }
