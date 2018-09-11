@@ -28,7 +28,7 @@ User can request the generation and upload of inventory with the command:
 
 ----
 
-$ rudder agent inventory
+rudder agent inventory
 
 ----
 
@@ -82,7 +82,7 @@ Then, on each run, the agent:
 
 === Queue of inventories waiting to be parsed
 
-The _inventory endpoint_ has a limited number of slot available for succesfully
+The _inventory endpoint_ has a limited number of slot available for successfully
 uploaded inventories to be queued waiting for parsing.
 That number can be configured in file `/opt/rudder/etc/inventory-web.properties`:
 
@@ -169,19 +169,19 @@ image::graphviz/data_workflow.png[Rudder data workflow]
 
 == Configuration files for Rudder Server
 
-* /opt/rudder/etc/htpasswd-webdav
+* `/opt/rudder/etc/htpasswd-webdav`
 
-* /opt/rudder/etc/inventory-web.properties
+* `/opt/rudder/etc/inventory-web.properties`
 
-* /opt/rudder/etc/logback.xml
+* `/opt/rudder/etc/logback.xml`
 
-* /opt/rudder/etc/openldap/slapd.conf
+* `/opt/rudder/etc/openldap/slapd.conf`
 
-* /opt/rudder/etc/reportsInfo.xml
+* `/opt/rudder/etc/reportsInfo.xml`
 
-* /opt/rudder/etc/rudder-users.xml
+* `/opt/rudder/etc/rudder-users.xml`
 
-* /opt/rudder/etc/rudder-web.properties
+* `/opt/rudder/etc/rudder-web.properties`
 
 == Rudder agent workflow
 
@@ -226,9 +226,9 @@ sequentially, in this order:
 
 === Request data from Rudder Server
 
-The first action of Rudder Agent is to fetch the +tools+ directory from Rudder
-Server. This directory is located at +/opt/rudder/share/tools+ on the Rudder
-Server and at +/var/rudder/tools+ on the Node. If this directory is already
+The first action of Rudder Agent is to fetch the `tools` directory from Rudder
+Server. This directory is located at `/opt/rudder/share/tools` on the Rudder
+Server and at `/var/rudder/tools` on the Node. If this directory is already
 present, only changes will be updated.
 
 The agent then try to fetch new Applied Policies from Rudder Server. Only
@@ -239,9 +239,6 @@ been validated in Rudder, this step fails.
 
 Ensure that the agent daemons +cf-execd+ and +cf-serverd+ are
 running. Try to start these daemons if they are not already started.
-
-Daily between 5:00 and 5:05, relaunch the agent daemons +cf-execd+
-and +cf-serverd+.
 
 Add a line in +/etc/crontab+ to launch +cf-execd+ if it's not running.
 
@@ -255,7 +252,6 @@ present.
 
 Get the identifier of the Rudder Root Server, necessary to generate reports.
 The URL of the identifier is http://Rudder_root_server/uuid
-
 
 === Inventory
 
@@ -282,7 +278,7 @@ Apply other policies and write reports locally.
 
 == Configuration files for a Node
 
-* /etc/default/rudder-agent
+* `/etc/default/rudder-agent`
 
 == Packages organization
 
