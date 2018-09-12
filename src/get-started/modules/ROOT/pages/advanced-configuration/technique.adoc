@@ -13,77 +13,106 @@ In this section, you will learn:
 
 ====
 
+== Technique creation
+
 In the first part, we defined a very simple technique
 that managed a user.
 
-We will go back to the technique editor and create a technique
-to configure a small website, that will consist of nginx installation,
-deployment of a minimal configuration and an html file as our website.
+We will go back to the technique editor (*Configuration policy -> Techniques*)
+and create a technique
+to configure a small website, that will consist of an nginx webserver installation,
+a deployment of a minimal configuration and an html file as our website.
 
 Let's call our new technique "Static website".
 
-image::./website.png["Website technique", align="center"]
+image::./website.png["Website technique", width=500, align="center"]
 
-This time, we will add parameters to this technique.
+But this time, we will add parameters to this technique.
 What are parameters? Just like we saw in the built-in techniques, you can pass parameters to techniques created in the technique editor. They are part of the technique
 definition, and their value is usable with the `${variable_name}` syntax.
 
 We will need two parameters:
 
-* A domain for our site, called `domain`
+* A path for our site, called `webroot`
 * A port to listen on, called `port`
 
-image::./parameters.png["Technique parameters", align="center"]
+image::./parameters.png["Technique parameters", width=500, align="center"]
 
 Then we can start assembling our building blocks. We want:
 
-* to install nginx
-* to manage the nginx service
-* to manage nginx configuration file
+* to install nginx and manage the nginx service
 * to add our website content
+* to manage nginx configuration file
 
-We will now map it to generic methods:
+== Methods
 
-* "Package present" with the "nginx" parameter
-* "Service started" with the "nginx" parameter
+We will now map our use case to generic methods in the technique editor.
 
-Four our website content, we will use a simple:
+=== Nginx installation
 
-* "File content" with the html content of our website
+Let's start with the easy part, the nginx setup. We need to install the nginx package.
 
-And for the configuration file:
+To do so, we will use a *package present* method, that will continuously ensure the package is installed. You can skip all parameters except the package
+name, which is *nginx*, defaults are ok for us.
 
-* "File from a mustache string": use a template for the configuration of the nginx service
+image::./nginx-package.png["Install nginx package", width=500, align="center"]
 
-Which looks strange, but don't worry, nothing complicated here.
+And for the service, use a *service started* method, with the *nginx*
+service name. It will ensure the service is started.
 
-Let's start with the easy part, with the nginx setup.
+image::./service.png["Start nginx service", width=500, align="center"]
 
-Add a package present. You can skip all parameters except the package
-name, defaults are ok for us.
+=== Website content
 
-image::./nginx-package.png["Install nginx package", align="center"]
+==== File content
 
-And for the service
+Four our website content, we will use a simple *File content* with the html content of our website. This method can add content to a file, this is the most simple file editing method.
 
-Now let's define our website content:
+----
+<html><h1>Welcome to Rudder demo!</h1></html>
+----
 
-TODO
+And put it in our webroot using `${webroot}/index.html`.
 
-And correct it permission to 644 
+NOTE: The enforce parameter specifies if we want to add content (with the `false` value) or to totally replace the content of the file (with the `true` value).
 
-Now we are only missing a configuration file.
+image::./indexhtml.png["HTML index files", width=500, align="center"]
 
-Let's add a template
+NOTE: This one is only a demo example, a real use case would probably include a
+separate website deployment process.
+
+==== Permissions
+
+We need a second method for our website content, as the default permission for files created by Rudder is 640, owned
+by root. Our file would hence not be readable by the web server user.
+To configure specific permissions, use the *permissions (non-recursive)* method with
+the following parameters:
+
+* *mode*: `644`
+* *owner*: `root`
+* *group*: `root`
+
+image::./permission.png["File permissions", width=500, align="center"]
+
+=== Nginx configuration file
+
+The last missing part is the web server configuration file. We want to
+tell nginx to serve our page on the domain given as parameter, and on the given port.
+
+This time we won't use a simple file content, but a dedicated feature for such cases: templating.
+It allows providing a base file content, with special markers for parts that will be dynamically
+computed by the agent at execution. It allows to have node-specific content in a generic file
+(like the static file server in our example). Rudder's native templating language is named
+*mustache* (you'll see why very soon).
 
 [NOTE]
 
 ====
 
 Templating allows replacing content in a generic template with
-specific data. The include environement conditions or varaibles.
+specific data. The include environement conditions or variables.
 
-It is generally a good practice to enforce the content of file totally, either by templating or hardcoded file than to
+It is generally a good practice to enforce the content of file totally, either by templating or file copy than to
 use file editions, as they define an absolute state and are hence a lot easier to use and more reliable.
 
 ====
@@ -92,21 +121,25 @@ Let's add this configuration file:
 
 ----
 server {
-    root /var/www/html;
-    server_name {{{domain}}};
-    listen {{{port}}};
+    root {{{vars.Static_website.webroot}}};
+    listen {{{vars.Static_website.port}}};
 }
 ----
 
-In the destination /etc/nginx/conf.d/default.conf
+In the destination `/etc/nginx/conf.d/demo.conf` using a *file from a mustache string* method that allows us providing the template content directly in the web interface.
 
-TODO
+image::./template.png["Templating method", width=500, align="center"]
 
 We have now defined all of our configuration states! But are we done yet? Not exactly,
-as we are missing an important piece: restarting the service when the configuration changes.
+as we are missing an important piece: restarting the service when the configuration changes,
+in order to actually apply the configuration.
+
+=== Restart the service (when needed!)
 
 You can spot it is a bit different compared to our other methods: in this case
 it is not a state but an action we need to express.
+If we use an action method in our policies, the action will be executed
+at every agent run, which is not what we want here.
 
 The technique editor has a concept of conditions. What are conditions?
 
@@ -132,14 +165,17 @@ This allows:
 
 ====
 
+In our case, we need to only execute our service restart when the configuration file method
+actually modifies the file. We need to use a condition that will be defined in this precise case.
+
 [NOTE]
 
 ====
 
 Every method will define a *result condition* that is one of the conditions displayed
-in method details
+in method details:
 
-image::./result-conditions.png["Install nginx package conditions", align="center"]
+image::./result-conditions.png["Install nginx package conditions", width=500, align="center"]
 
 It can be:
 
@@ -149,10 +185,7 @@ It can be:
 
 ====
 
-
-In our case the condition will be the modification of the configuration file:
-
-TODO
+In our case the condition will be the modification of the configuration file, so the condition will be the `repaired` condition of out templating method, i.e. `file_from_string_mustache__etc_nginx_conf_d_demo_conf_repaired` (you should use copy/paste in most result condition definitions).
 
 [NOTE]
 
@@ -167,6 +200,7 @@ Conditions can be combinated using boolean operators:
 
 ====
 
+Now your service restart will only be executed when necessary.
 
 [NOTE]
 
@@ -181,3 +215,8 @@ consider it ok.
 In short: Checking configuration is cheap, only add conditions when strictly necessary.
 
 ====
+
+== Conclusion
+
+We now have defined a complete applicative example, which probably looks like what you would do
+with a real system. In the following sections, we will apply it to a machine and check the results.

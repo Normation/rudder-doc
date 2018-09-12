@@ -1,9 +1,9 @@
 = Apply a complete applicative policy
 
-Now we have defined out technique, we will apply it.
-To do so, got to the directives page ("Configuration management -> Directives")
+Now we have defined our technique, we will apply it.
+To do so, got to the directives page (*Configuration management -> Directives*)
 and find our new technique (for example by using the filter with "Website"),
-and create a directive (in the latest version).
+and create a directive.
 
 This times our technique takes parameters, so we have to provide them:
 

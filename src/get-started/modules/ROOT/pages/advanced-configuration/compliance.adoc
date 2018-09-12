@@ -2,8 +2,8 @@
 
 == Trigger agent run
 
-Now we have applied our directive, we can trigger its application by going
-on our node with ssh:
+Now we have applied our directive, we can trigger its application by connecting to
+our node using ssh:
 
 ----
 vagrant ssh node
@@ -13,6 +13,13 @@ And running the agent with:
 
 ----
 rudder agent run -u
+----
+
+You should now be able to access your site:
+
+----
+$ curl http://localhost:8080
+<html><h1>Welcome to Rudder demo!</h1></html>
 ----
 
 == Rule compliance
