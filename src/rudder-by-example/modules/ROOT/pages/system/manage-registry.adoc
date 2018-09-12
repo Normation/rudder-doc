@@ -1,6 +1,6 @@
 = Manage Windows Registry keys
 
-== Usecase
+== Use case
 
 Windows software often stores its configuration in the Windows registry.
 The software and system configuration of your Windows nodes hence relies on a clear and correct registry management.
@@ -49,6 +49,7 @@ NOTE: Non Char based type values must be entered via hexadecimal syntax: like 0x
 
 
 == Usage
+
 There are two types of generic methods to handle registry keys:
 
 * Registry_Key_{present/absent} which handle registry keys

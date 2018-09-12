@@ -1,6 +1,6 @@
 = Install software from a .exe or .msi installer
 
-== Usecase
+== Use case
 
 When you need to make sure a given software is installed and its version is
 recent enough, you should be using the "Windows Software" technique.
@@ -19,8 +19,6 @@ Where:
 * `Path` is the relative path of the installer (.exe or .msi file), on the server side.
 * `Options` are parameters that will be given to the installer wizard.
 * `Minimal version` is the minimal version of the software that we expect on the node.
-
-
 
 The technique behaviour is quite simple:
 

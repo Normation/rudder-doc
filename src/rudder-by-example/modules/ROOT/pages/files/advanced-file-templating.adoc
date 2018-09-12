@@ -1,6 +1,6 @@
 = Configuration file from template
 
-== Usecase
+== Use case
 
 When you need to maintain configuration files including dynamic content, 
 depending on external data (node properties, group, external API, etc...),
@@ -12,13 +12,13 @@ the usage of templates is recommended!
 Now we decided to use templating to achieve our goal, we need to choose a method.
 We have two available languages for templating:
 
-* https://www.rudder-project.org/doc/_generic_methods.html#file_from_template_mustache[Mustache]: it is Rudder's native
+* xref:reference:generic_methods.html#file_from_template_mustache[Mustache]: it is Rudder's native
 templating engine, with a very simple syntax, and the best performance. It should be the default choice for most cases.
-* https://www.rudder-project.org/doc/_generic_methods.html#file_from_template_jinja2[Jinja2]: it provides more
+* xref:reference:generic_methods.html#file_from_template_jinja2[Jinja2]: it provides more
 features to manipulate displayed data, and is compatible with a lot of other automation. It is a bit slower
 than mustache though (as it uses an external python library).
 
-For a quick templating syntax reference, use the https://github.com/Normation/rudder-tools/raw/master/documents/cheatsheet-advanced/rudder-cheatsheet-advanced.pdf[Rudder cheatsheet].
+For a quick templating syntax reference, use the https://docs.rudder.io/files/rudder-cheatsheet-advanced.pdf[Rudder cheatsheet].
 Here we have no specific reason to use Jinja2, so we will stick with Mustache!
 
 == Advanced example: Nginx load balancer configuration
@@ -121,7 +121,7 @@ This example ensures the content of a bastillion host's `sshd_config`, configura
 
 === Source data
 
-We can either define the following node property in our Rudder server for any secured system, or use a `Variables (any)` directive to assing this to multiple systems in a group (like systems requiring extra security due being exposed to the internet).
+We can either define the following node property in our Rudder server for any secured system, or use a `Variables (any)` directive to passing this to multiple systems in a group (like systems requiring extra security due being exposed to the internet).
 
 Value of either *Node property* named `ssh_access` or a *Variable (any)* directive named `bastillion.ssh_access`:
 
@@ -208,7 +208,7 @@ Match Address 10.111.20.1,10.111.20.2, Group admins,
 
 === Notes
 
-* Apparently the `sshd_config` is still valid if the Match-Group has commas on the end of a list, and if you don't want to have any Groups or Users, just keep the json array for them as an empty array (`[ ]`), and it will still be a valid sshd_config (but it will definetly look strange).
+* Apparently the `sshd_config` is still valid if the Match-Group has commas on the end of a list, and if you don't want to have any Groups or Users, just keep the json array for them as an empty array (`[ ]`), and it will still be a valid sshd_config (but it will definitely look strange).
 
 * Please check the configuration options that are available for the version of your sshd, most importantly of what is supported in the Match-Block. Earlier versions of sshd do not support all config options, this is also why validation the generated file is always a good option so an update of sshd can not break your access easily, just make sure you check the compliance after updates. 
 
