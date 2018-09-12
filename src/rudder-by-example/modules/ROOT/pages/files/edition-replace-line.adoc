@@ -1,28 +1,40 @@
 = Enforce part of line in a file
 
-Enforcing part of a line, to ensure that some parameter is set, or setting some left hand side allows
-to roll out changes in file you can't control completly.
+Enforcing part of a line, to ensure that some parameter is set, or setting some left hand side, allows
+to roll out changes in files you can't control completely.
 
-Managing the values of key->value is the easiest use case, by using the generic methods http://www.ncf.io/pages/reference.html#file_key_value_present[file_key_value_present], 
-http://www.ncf.io/pages/reference.html#file_key_value_present_option[file_key_value_present_option] or even more complex use cases http://www.ncf.io/pages/reference.html#file_key_value_parameter_present_in_list[file_key_value_parameter_present_in_list]
+Managing the values of key->value lines is the easiest use case, by using the generic methods xref:reference:generic_methods.html#file_key_value_present[file_key_value_present],
+xref:reference:generic_methods.html#file_key_value_present_option[file_key_value_present_option] or even more complex use cases xref:reference:generic_methods.html#file_key_value_parameter_present_in_list[file_key_value_parameter_present_in_list].
 
-For more complex changes, using the most powerful *File content* technique is necessary.
+For more complex changes, using the more powerful *File content* technique is necessary.
 
-For instance, to change statements in rsyslog.conf file to ensure that logs from local3.none go to /var/log/messages,
-it is necessary to edit file with "Line replacement regular expressions", to match lines ending by /var/log/messages and replacing 
-it by the desired content.
-Please note that the regular expression are PCRE expression, and the replacement need to be convergent: the regular expression must not match the replaced string.
+For instance, to change statements in `rsyslog.conf` file to ensure that logs from `local3.none` go to `/var/log/messages`,
+it is necessary to edit file with "Line replacement regular expressions", to match lines ending by `/var/log/messages` and replacing
+them by the desired content.
 
-So the regular expression must not match lines having local3.none as a source, and /var/log/messages as a destination, which translates as
-^(([A-Za-z0-9;.,*](?!local3\.none))*)\s+/var/log/messages
+[NOTE]
 
-where ^ is the start of the line (regex are not anchored), [A-Za-z0-9;.,*] are all the valid characters for source, and (?!local3\.none) to prevent matching line containing local3.none
+--
 
-Captured sequence can be reused with the $(match.X) notation, where X represent the matched elements: $(match.0) is the whole string, $(match.1) is the first matched element, etc
+Please note that the regular expressions are PCRE expressions, and the replacement needs to be convergent: the regular expression must not match the replaced string.
 
-The replacement should be
+--
+
+So the regular expression must not match lines having `local3.none` as a source, and `/var/log/messages` as a destination, which translates as
+`^(([A-Za-z0-9;.,*](?!local3\.none))*)\s+/var/log/messages` where:
+
+* `^` is the start of the line (regex are not anchored)
+* `[A-Za-z0-9;.,*]` are all the valid characters for source
+* `(?!local3\.none)` to prevent matching line containing `local3.none`.
+
+Captured sequence can be reused with the `$(match.X)` notation, where `X` represents the matched elements: `$(match.0)` is the whole string, `$(match.1)` is the first matched element, etc
+
+The replacement should be:
+
+----
 $(match.1);local3.none        /var/log/messages
+----
 
-to add ;local3.none at the end of the line.
+to add `;local3.none` at the end of the line.
 
 image::replaceLine.png[replaceLine]
