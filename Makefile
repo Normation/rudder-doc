@@ -6,11 +6,11 @@ GENERIC_DOCS = site site-dev site-local
 
 SITES = $(GENERIC_DOCS) $(VERSIONS)
 
-.PHONY: prepare rudder-theme/build/ui-bundle.zip optipng doc-build build/sites/site/.htaccess build/files $(SITES)
+.PHONY: prepare rudder-theme/build/ui-bundle.zip optipng doc-build build/sites/site/.htaccess build/history/5.0/.htaccess build/files $(SITES)
 .DEFAULT_GOAL := local
 
-all: $(GENERIC_DOCS) $(VERSION_ARCHIVES) build/sites/site/.htaccess build/files test
-online: site site-dev $(VERSION_ARCHIVES) build/sites/site/.htaccess build/files test
+all: $(GENERIC_DOCS) $(VERSION_ARCHIVES) build/sites/site/.htaccess build/history/5.0/.htaccess build/files test
+online: site site-dev $(VERSION_ARCHIVES) build/sites/site/.htaccess build/history/5.0/.htaccess build/files test
 local: site-local test
 
 rudder-theme/build/ui-bundle.zip:
@@ -42,6 +42,10 @@ $(SITES): prepare rudder-theme/build/ui-bundle.zip
 
 # Generate apache conf for current redirection to latest release
 build/sites/site/.htaccess:
+	# once 5.0 is relased, should be https://www.rudder-project.org/release-info/rudder/versions/latest
+	echo 'Redirect /reference/current/ /reference/5.0/' > $@
+
+build/history/5.0/.htaccess:
 	# once 5.0 is relased, should be https://www.rudder-project.org/release-info/rudder/versions/latest
 	echo 'Redirect /reference/current/ /reference/5.0/' > $@
 
