@@ -4,5 +4,6 @@
 * Files management
 ** xref:files/advanced-file-templating.adoc[Advanced file templating]
 ** xref:files/edition-one-line.adoc[Enforce a line is present in a file only once]
+** xref:files/edition-replace-line.adoc[Enforce part of a line in a file]
 * System management
 ** xref:system/manage-registry.adoc[Manage Windows registry content]
