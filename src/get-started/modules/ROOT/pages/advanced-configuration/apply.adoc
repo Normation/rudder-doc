@@ -18,4 +18,3 @@ Then you can see the rules zone at the bottom of the page.
 It allows quickly linking a directive to a rule, as it is a common task in Rudder.
 
 We will use it and select our "Demo Website" rule, then save the directive.
-

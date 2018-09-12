@@ -21,8 +21,11 @@ and more. You will need:
 * https://www.virtualbox.org/wiki/Downloads[VirtualBox], to run the demo virtual machines
 * https://www.vagrantup.com/downloads.html[Vagrant], to handle the virtual machines configuration and provisioning
 
-On Debian/Ubuntu systems, just run `sudo apt-get install -y virtualbox vagrant`, and on RHEL/Fedora systems,
-run `sudo yum install -y VirtualBox vagrant`.
+To instal them, run:
+
+* `sudo apt install -y virtualbox vagrant` on Debian/Ubuntu systems
+* `sudo yum install -y VirtualBox vagrant` on RHEL systems
+* `sudo dnf install -y VirtualBox vagrant` on Fedora systems
 
 Once they are installed, run:
 

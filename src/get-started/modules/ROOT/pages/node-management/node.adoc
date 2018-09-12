@@ -48,7 +48,7 @@ Run interval: 5 min
 Agent is enabled
 Policy updated: 2018-06-28 22:20:01
 Inventory sent: 2018-06-28 02:05:49
-Version: Rudder agent 4.3.2
+Version: Rudder agent 5.0.0
 ----
 
 ====
@@ -61,10 +61,10 @@ How does adding a new node to Rudder work?
 * Accept the new node on the server, and it is done
 
 In the demo platform, the agent has already be installed and configured, and it should have already sent
-an registered to the server.
+an inventory to the server.
 
 Let's have a look at what this inventory contains.
-Go to "Node management -> Accept new nodes".
+Go to *Node management -> Accept new nodes*.
 
 You will see the "node" machine in the list. Click line, this will unfold the content of this node's inventory.
 

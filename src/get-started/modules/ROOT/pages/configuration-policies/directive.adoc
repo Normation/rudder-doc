@@ -14,12 +14,10 @@ In this section you will:
 You have just learnt to use the technique editor, which gives access to a broad
 range of building blocks for policies. To allow easy configuration of
 common system settings, Rudder also comes with a pre-defined set of techniques,
-directly usable.
+directly usable after installation.
 
-Go to the "Configuration Management -> Directives" page. What is a directive? It is a technique instance:
-a technique plus some parameters, making it an applicable pîece of configuration.
-
-This is smallest building block for applicable policies.
+Go to the *Configuration Management -> Directives* page. What is a directive? It is a simply a technique instance:
+a technique plus some parameters, making it an applicable piece of configuration.
 
 We will now configure the SSH service on our nodes using the dedicated pre-built technique.
 
@@ -35,15 +33,15 @@ This will make a new form appear, containing the configuration of the directive 
 As we said before, a technique is a parametrizable policy. A directive is a technique instance,
 i.e. a technique plus a set of parameters.
 
-Defining a directive consist of choosing a technique and providing parameters for it.
+Defining a directive consist of choosing a technique and providing its parameters.
 
-Let's decide ho we want to configure our SSH server. Let's give it a description.
-When using Rudder, keep in mind that filling all these documentation filed, though it may seem
+First, let's give it a description. When using Rudder, keep in mind that filling all these documentation filed, though it may seem
 tedious, is very important for future reference, or collaboration with other.
 Is is for example useful to include reference to external information (ticketing system, etc.),
 to allow keeping a track of all configuration changes.
 
-Let's disable password authentication:
+We now need to decide ho we want to configure our SSH server.
+Let's disable password authentication (it's always a good idea anyway):
 
 image::./ssh-password.png["SSH technique", align="center"]
 
@@ -53,10 +51,10 @@ And go to the bottom of the page, click on "Global configuration for all nodes"
 image::./rule.png["SSH technique", align="center"]
 
 And click on save. It will open a window asking for confirmation and an audit message,
-that is used for tracability. Let's leave it empty for now, and confirm.
+that is used for traceability. You can leave it empty for now, and confirm.
 
 Why a confirmation window here? Because the change we are saving will *change our machines state*.
-Once you click on save, the Rudder server will start creating configuration policies for nodes
+Once you click on save, the Rudder server will start updating configuration policies for nodes
 it is applied to (we will see later which ones exactly).
 
 Let's create a second directive, based on the technique we have just created (our demo user).
@@ -72,7 +70,10 @@ Then apply it to the "Global configuration for all nodes" and save.
 
 ====
 
-How to chose between built-in techniques and creating one in the technique editor?
+.How to chose between built-in techniques and creating one in the technique editor?
+
+A good rule of thumb it to use the built-in techniques when they cover your needs,
+and switch to the technique editor if you need to go further!
 
 ====
 

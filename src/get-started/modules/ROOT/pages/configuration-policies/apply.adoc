@@ -23,7 +23,7 @@ We will use the `rudder` command that gives access to all Rudder actions.
 
 But first, let's explain a bit how things work on the agent.
 We saw that the server generates an applicable configuration
-for the expected state of the machine.
+that contains the expected state of the machine.
 
 The agent that runs on all of these machines will download the latest version
 of its policies, and apply them locally. To trigger this process manually, run:
@@ -38,9 +38,10 @@ This will display the state of all applied components, including the ones you ha
 image::./run.png["Agent output", align="center"]
 
 The rest of the components are called system techniques, you can ignore them for now. They are
-responsible for maintaining the Rudder services themselves, and hence not editable by users.
+responsible for maintaining the Rudder services themselves, and hence are not editable by users.
 
-Let's get back to the web interface, on the dashboard:
+Let's get back to the web interface, on the dashboard (click on the *Dashboard* link in the
+left menu, or directly on the Rudder logo):
 
 image::./dashboard.png["Dashboard graph", align="center"]
 
@@ -52,7 +53,7 @@ display the current state in the dashboard.
 Now you can go to our node details by using the quick search filter, and searching for "node".
 
 Go to the "Compliance reports" tab. You will see the applied policy and the current compliance
-regarding them. If you click on a line it will unfold until you get to the actual applied
+regarding it. If you click on a line it will unfold until you get to the actual applied
 component.
 
 image::./node-compliance.png["Node compliance", align="center"]
@@ -60,6 +61,6 @@ image::./node-compliance.png["Node compliance", align="center"]
 == Conclusion
 
 We have now finished our first policy application, from definition, using a new technique
-or a built-in one, and an application on our Rudder server.
+or a built-in one, to the actual application on our Rudder server.
 
-We will now dig a bit deeper on what the policy mode we modified is, and how to use use it.
+We will now dig a bit deeper on what the policy mode (we modified) is, and how to use it.

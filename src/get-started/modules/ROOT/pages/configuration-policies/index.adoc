@@ -6,7 +6,8 @@
 
 In this part, you will learn:
 
-* How to defined new configuration policies, with the example of a user
+* How to defined new configuration policies, with the example of managing
+  a user on your machines
 * How to use pre-defined configuration policies, with the example of the
   ssh service configuration.
 * How a apply a configuration and check its outcome
@@ -21,7 +22,7 @@ Rudder's goal is to manage the configuration of machines, for example:
 * A specific prompt is deployed on production nodes
 * etc.
 
-Configuration is managed through the definition of an desired state for each machine.
+Configuration is managed through the definition of a desired state for each machine.
 This means you will not define a list of steps towards the expected state, like in a script,
 but a set of states for each item you want to manage (which
 is key to create reliable configuration policies).
@@ -34,5 +35,5 @@ A managed machine is called a *node* in Rudder.
 
 ====
 
-The desired state is applied by Rudder agents on each node, and the information about its application
-is continuously updated on the server. In this section, we will see two ways to define configuration policies, let's get started!
+The desired state is applied by a Rudder agent on each node, and the information about its application
+is continuously updated on the server. In this section, we will see two ways to define the desired state through configuration policies, let's get started!

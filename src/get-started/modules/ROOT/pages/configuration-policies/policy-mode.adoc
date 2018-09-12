@@ -16,21 +16,22 @@ You may have guessed, according to its name, what this means.
 
 Rudder has two available policy modes:
 
-* Enforce
-* Audit
+* *Enforce*: it will modify the target system, if necessary, to achieve the expected state
+* *Audit*: it will only report about non-compliant components
 
-The enforce mode will modify the target system, if necessary, to achieve the expected state.
-The audit mode will only report about non-compliances.
+This is why you can see the red surface is our compliance bars, and the non-compliance
+of our user technique which is in audit mode. It means our target system is not compliant according to our desired state
+(here the existence of the demo user, which does not exist on a newly installed system).
 
-What we can do now is to change the policy mode of the directive to use the default value, and re run the agent.
+What we can do now is change the policy mode of the directive to use the default value (which is enforce), and re-run the agent to make our system compliant.
 
-Go back to the directive. You can use the Directive page, or use the quick search field, in the
-header bar. Here you can search for any Rudder item (there is even a small query language).
+Go back to the demo user directive. You can use the Directive page, or use the quick search field, in the
+header bar. Here you can search for any Rudder item (there is even a small query language!).
 
 image::./quicksearch.png["Quicksearch field", align="center"]
 
-And click on your directive to go to its configuration page.Now change policy mode to
-default.
+And click on your directive to go to its configuration page. Now change policy mode to
+default, and save.
 
 You can get back to your SSH session, and re-run
 
@@ -39,7 +40,8 @@ rudder agent update
 rudder agent run
 ----
 
-You will see the actual modification happening, with a "repaired" state. If you go back to the dashboard, everything is green and compliance has reached 100%.
+You will see the actual modification happening, with a "repaired" state, and the demo user now exists
+on the system. If you go back to the dashboard, everything is green and compliance has reached 100%.
 
 This policy mode can be used in different cases:
 
