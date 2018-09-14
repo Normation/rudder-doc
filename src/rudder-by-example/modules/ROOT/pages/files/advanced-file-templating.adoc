@@ -12,9 +12,9 @@ the usage of templates is recommended!
 Now we decided to use templating to achieve our goal, we need to choose a method.
 We have two available languages for templating:
 
-* xref:reference:generic_methods.html#file_from_template_mustache[Mustache]: it is Rudder's native
+* xref:reference:reference:generic_methods.adoc#file_from_template_mustache[Mustache]: it is Rudder's native
 templating engine, with a very simple syntax, and the best performance. It should be the default choice for most cases.
-* xref:reference:generic_methods.html#file_from_template_jinja2[Jinja2]: it provides more
+* xref:reference:reference:generic_methods.adoc#file_from_template_jinja2[Jinja2]: it provides more
 features to manipulate displayed data, and is compatible with a lot of other automation. It is a bit slower
 than mustache though (as it uses an external python library).
 
