@@ -3,8 +3,8 @@
 Enforcing part of a line, to ensure that some parameter is set, or setting some left hand side, allows
 to roll out changes in files you can't control completely.
 
-Managing the values of key->value lines is the easiest use case, by using the generic methods xref:reference:generic_methods.html#file_key_value_present[file_key_value_present],
-xref:reference:generic_methods.html#file_key_value_present_option[file_key_value_present_option] or even more complex use cases xref:reference:generic_methods.html#file_key_value_parameter_present_in_list[file_key_value_parameter_present_in_list].
+Managing the values of key->value lines is the easiest use case, by using the generic methods xref:reference:reference:generic_methods.adoc#file_key_value_present[file_key_value_present],
+xref:reference:reference:generic_methods.adoc#file_key_value_present_option[file_key_value_present_option] or even more complex use cases xref:reference:reference:generic_methods.adoc#file_key_value_parameter_present_in_list[file_key_value_parameter_present_in_list].
 
 For more complex changes, using the more powerful *File content* technique is necessary.
 
