@@ -4,36 +4,88 @@ At the first installation, Rudder will automatically deploy a Technique library 
 `/var/rudder/configuration-repository/techniques` directory.
 
 When upgrading Rudder to another version, a new (updated) Technique library will be deployed
-in `/opt/rudder/share/techniques`, and Rudder will automatically take care of updating the system
+in `/opt/rudder/share/techniques`, and Rudder will only update the *system*
 Techniques in the configuration-repository directory.
 
-However, the other Techniques will not be updated automatically (yet), so you will have to do
-it yourself.
+However, Techniques from Rudder standard library are not updated automatically in Rudder 4.x, so it needs a user action.
+
+
+
+[TIP]
+
+====
+
+If you want to do any modification in a Technique from the standard library, it is recommanded to create a whole new Technique (copy the source one with a new name and version), and do your changes in this new Technique. Thus, your standard library won't diverge from Rudder upstream one, and you will be able to benefit from its updates.
+
+====
+
 
 [CAUTION]
 
 ====
 
-Please keep in mind that if you did manual modifications on the Techniques in existing directories,
-or created new versions of them, you will have some merging work to do.
+If you did any manual modifications in existing Techniques from standard library, you will need to merge the changes during upgrade of Techniques.
 
 ====
 
-To upgrade you local techniques, run the following commands on the Rudder Root Server:
+
+
+To upgrade your standard library's techniques, there are two possibilities
+
+
+===== Default case: your standard technique library is pristine
+
+If you did not modify any of the Technique from standard library (default case), or don't wish to keep any changes you made, you can override the Technique Library
 
 ----
 
-cd /var/rudder/configuration-repository
-cp -a /opt/rudder/share/techniques/* techniques/
-git status
-# Now, inspect the differences. If no conflict is noticeable, then go ahead.
-git add techniques/
-git commit -m "Technique upgrade" # Here, put a meaningful message about why you are updating.
-rudder server reload-techniques
+rudder server upgrade-techniques  -o
 
 ----
 
-This last command will reload the Technique library and trigger a full redeployment on nodes.
+Techniques created with the Technique Editor are not impacted by this command.
 
-Please check that the deployment is successful in the Rudder web interface.
+===== Special case: Techniques from standard library were modified
+
+
+If you modified a Technique from the standard library and wish to keep the changes, changes will be performed in an update branch in the git repository
+You will need to create the update branch if it is not already created, with the following command
+
+----
+
+$ rudder server upgrade-techniques  -i
+Creating initial branch from an early commit
+You have not provided an initial commit, we will use the first commit with techniques.
+This can make the upgrade merge complex.
+Use -c option to specify a more recent commit with no patch.
+
+Type ctrl-c to abort now and return to continue.
+
+----
+
+If the branch already exists, you will get the following output
+
+----
+
+Creating initial branch from an early commit
+The upgrade branch 'rudder_update' already exists, aborting
+
+----
+
+And then you can merge your changes in the upgraded Techniques with
+
+----
+
+# Upgrade the techniques
+$ rudder server upgrade-techniques  -u
+Switched to branch 'rudder_update'
+Switched to branch 'master'
+Merge made by the 'recursive' strategy.
+ok: reload techniques from files.
+
+----
+
+Please note that you may have to manually fix the merge.
+
+Finally, please check that the deployment is successful in the Rudder web interface.
 
