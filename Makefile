@@ -43,10 +43,12 @@ $(SITES): prepare rudder-theme/build/ui-bundle.zip
 # Generate apache conf for current redirection to latest release
 build/sites/site/.htaccess:
 	# once 5.0 is relased, should be https://www.rudder-project.org/release-info/rudder/versions/latest
+	mkdir -p build/sites/site
 	echo 'Redirect /reference/current/ /reference/5.0/' > $@
 
 build/history/5.0/.htaccess:
 	# once 5.0 is relased, should be https://www.rudder-project.org/release-info/rudder/versions/latest
+	mkdir -p build/history/5.0/
 	echo 'Redirect /reference/current/ /reference/5.0/' > $@
 
 # Download documentation files
