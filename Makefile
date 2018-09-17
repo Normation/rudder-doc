@@ -49,7 +49,7 @@ build/sites/site/.htaccess:
 build/history/5.0/.htaccess:
 	# once 5.0 is relased, should be https://www.rudder-project.org/release-info/rudder/versions/latest
 	mkdir -p build/history/5.0/
-	echo 'Redirect /reference/current/ /reference/5.0/' > $@
+	echo 'Redirect /rudder-doc/reference/current/ /rudder-doc/reference/5.0/' > $@
 
 # Download documentation files
 build/files:
