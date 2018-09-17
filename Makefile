@@ -9,8 +9,8 @@ SITES = $(GENERIC_DOCS) $(VERSIONS)
 .PHONY: prepare rudder-theme/build/ui-bundle.zip optipng doc-build build/sites/site/.htaccess build/history/5.0/.htaccess build/files $(SITES)
 .DEFAULT_GOAL := local
 
-all: $(GENERIC_DOCS) $(VERSION_ARCHIVES) build/sites/site/.htaccess build/history/5.0/.htaccess build/files test
-online: site site-dev $(VERSION_ARCHIVES) build/sites/site/.htaccess build/history/5.0/.htaccess build/files test
+all: $(GENERIC_DOCS) build/sites/site/.htaccess build/history/5.0/.htaccess $(VERSION_ARCHIVES) build/files test
+online: site site-dev build/sites/site/.htaccess build/history/5.0/.htaccess $(VERSION_ARCHIVES) build/files test
 local: site-local test
 
 rudder-theme/build/ui-bundle.zip:
