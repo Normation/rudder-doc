@@ -137,13 +137,13 @@
     if (!el) return (parent.scrollTop = scrollPosition)
 
     var margin = 10
-    var overTheTop = el.offsetTop - scrollPosition < 0
-    var belowTheBottom = el.offsetTop - scrollPosition + el.offsetHeight > parent.offsetHeight
+    //var y = el.getBoundingClientRect().top - parent.getBoundingClientRect().top
+    var y = el.offsetTop
 
-    if (overTheTop) {
-      parent.scrollTop = el.offsetTop - margin
-    } else if (belowTheBottom) {
-      parent.scrollTop = el.offsetTop - (parent.offsetHeight - el.offsetHeight) + margin
+    if (y < scrollPosition) {
+      parent.scrollTop = y - margin
+    } else if (y - parent.offsetHeight + el.offsetHeight > scrollPosition) {
+      parent.scrollTop = y - parent.offsetHeight + el.offsetHeight + margin
     } else {
       parent.scrollTop = scrollPosition
     }
