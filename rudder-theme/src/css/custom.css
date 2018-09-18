@@ -12,9 +12,13 @@ html {
   font-weight: 500;
 }
 
+.doc h3 {
+  font-size: 1.3em;
+}
+
 .doc h4 {
   border-left: 4px solid #f08004;
-  font-size: 1.2em;
+  font-size: 1em;
   padding-left: 12px;
 }
 
@@ -24,7 +28,7 @@ html {
 }
 
 .doc h5 {
-  font-size: 1.1em;
+  font-size: 1em;
   font-style: italic;
 }
 
@@ -33,7 +37,7 @@ html {
 }
 
 .doc h6 {
-  font-size: 1.1em;
+  font-size: 1em;
   border-bottom: 1px solid #e0e0e0;
 }
 
