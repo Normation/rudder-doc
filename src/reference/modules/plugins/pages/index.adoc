@@ -1,11 +1,21 @@
 [[plugins-management]]
 = Manage plugins
 
-Rudder is an extensible software. The *Administration -> Plugin Management*
-section sum-up information about loaded plugins, their version and their
+Rudder is an extensible software. The *Plugins*
+menu sums-up information about loaded plugins, their version and their
 configuration.
 
 A plugin is an `.rpkg` file (for "Rudder package").
+
+== Get plugins
+
+There are two types of Rudder pre-packaged plugins:
+
+* Integration plugins, that allow linking Rudder to other tools (monitoring, inventory, notification, etc.). They are freely available.
+* Advanced features plugins (reporting, validation workflow, etc.) which are part of the Rudder subscription.
+
+To download free plugins or get information about plugins included in the subscription,
+read the https://rudder.io/plugins/[dedicated page on rudder.io].
 
 == Install a plugin
 
