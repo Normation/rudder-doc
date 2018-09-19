@@ -2,5 +2,8 @@
 
 This tutorial is now over. You can have a look at:
 
-* xref:rudder-by-example:ROOT:index.adoc[Rudder by example] for explained usecases
-* http://faq.rudder-project.org[Rudder FAQ]
+* The xref:reference:installation:requirements.adoc[installation guide] to setup your own Rudder server
+* xref:rudder-by-example:ROOT:index.adoc[Rudder by example] for explained use cases
+* The http://faq.rudder-project.org[Rudder FAQ] may answer some of your questions
+
+If you need help, or more information, just ask on https://gitter.im/normation/rudder[our chat room]!

@@ -53,7 +53,7 @@ Let's define a property called `website`, with the following content:
 
 ----
 {
-  "domain": "mysite.example.com",
+  "webroot": "/var/www/html",
   "port": 8080
 }
 ----

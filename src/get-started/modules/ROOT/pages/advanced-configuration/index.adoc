@@ -1,11 +1,12 @@
 = Configuration policies management
 
-In the beginning of this guide, we defined static configuration policies and attached them to all of our nodes.
+In the beginning of this guide, we defined static configuration policies and
+attached them to all of our nodes.
 Even if this may happen in real life, this is not common, and you will often
-need more flexible policies.
+need more flexible targets.
 
-In this section, we will deploy a complete example of a website deployment,
-that will look like a real use case.
+In this section, we will configure a complete example of a website deployment,
+that will look much like a real use case.
 
 [NOTE]
 
