@@ -7,59 +7,65 @@ Fully supported Operating Systems are systems that we frequently build packages 
 
 === For Rudder Nodes
 
+==== Community support
+
 The following operating systems are supported for Rudder Nodes and packages are
-available for these platforms:
+available freely for these platforms:
 
-GNU/Linux:
+[options="header"]
+|===
 
-* Debian 8 and 9
+| OS | Version | Architecture
 
-* Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) 6 and 7 (64-bit)
+| Debian | 8 and 9 | 32bit, 64bit
+.2+| Ubuntu | 14.04 and 16.04 LTS | 32bit, 64bit
+| 18.04 LTS | 64bit
+.2+| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 6 | 32bit, 64bit
+| 7 | 64bit
+| SUSE Linux Enterprise Server (SLES) | 12 | 64bit
 
-* SUSE Linux Enterprise Server (SLES) 11 and 12 (64bit)
+|===
 
-* Ubuntu 14.04 LTS (Trusty), 16.04 LTS (Xenial), 18.04 LTS (Bionic) (64-bit)
+==== Subscription support
 
-* Slackware 14 (64-bit)
+The following operating systems are supported for Rudder Nodes and packages are
+available for these platforms as part of the https://www.normation.com/en/rudder/subscription/[Rudder subscription]:
 
-Other Unix systems:
+[options="header"]
+|===
 
-* IBM AIX 5.3, 6.1 and 7.1
+| OS | Version | Architecture
 
-Windows:
+.3+| Debian | 5 to 7 |32bit, 64bit
+| 8 | 32bit, 64bit, armhf (Raspbian)
+| 9 | 32bit, 64bit, arm64, armhf (Raspbian)
+.2+| Ubuntu | 10.04 to 16.04 LTS | 32bit, 64bit
+| 18.04 LTS | 64bit
+| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 3, 5 to 7 | 32bit, 64bit
+.2+| SUSE Linux Enterprise Server (SLES) | 10SP3 and 11 | 32bit, 64bit
+| 12 | 64bit
+| Slackware | 14 | 64bit
+| IBM AIX | 5.3, 6.1 and 7.1 | ppc
+| Microsoft Windows Server | 2008 R2, 2012, 2012 R2, 2016 | 32bit, 64bit
 
-* xref:TODO[Microsoft Windows] Server 2008 R2, 2012, 2012 R2, 2016
-
-[TIP]
-
-[[install-on-windows, Install on Microsoft Windows]]
-
-.Windows, Slackware and AIX Nodes
-
-====
-
-* For Microsoft Windows, Rudder agent relies on DSC (Desired State Configuration) included in Powershell 4.0 or later. Packages are available from Normation under subscription only.
-* For IBM AIX, packages are available from Normation under subscription only.
-
-Hence, as a starting point, we suggest that you evaluate Rudder on Linux machines. Once
-you are accustomed to Rudder, contact Normation to obtain a demo version for
-these platforms.
-
-====
-
+|===
 
 [[server-supported-os, the list of supported Operating Systems for Root server]]
 === For Rudder root server or relay server
 
 The following operating systems are supported as a root or relay server:
 
-* Debian 8 and 9
+[options="header"]
+|===
 
-* Red Hat Enterprise Linux (RHEL) / CentOS 7
+| OS | Version | Architecture
 
-* SUSE Linux Enterprise Server (SLES) 12 SP1+
+| Debian | 8 and 9 | 64bit
+| Ubuntu | 16.04 and 18.04 LTS | 64bit
+| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 7 | 64bit
+| SUSE Linux Enterprise Server (SLES) | 12 | 64bit
 
-* Ubuntu 16.04 LTS (Xenial), 18.04 LTS (Bionic)
+|===
 
 == Partially supported Operating Systems
 
@@ -81,23 +87,11 @@ wish to get Rudder support on those systems, please get in touch with us!
 
 The following operating systems have had an agent built using xref:reference:build.adoc#_building_the_rudder_agent[Building the Rudder Agent]:
 
-* Debian 5 to 7
-
-* Red Hat Enterprise Linux (RHEL) / RHEL-like 3 to 5
-
-* SUSE Linux Enterprise Server (SLES) 10 SP3
-
-* Ubuntu 10.04 LTS (Lucid), 12.04 LTS (Precise)
-
 * FreeBSD
 
 * Solaris 10 and 11
 
-* Raspbian, based on jessie (via dpkg)
-
-* Debian 8 on ARM (armhf version) (via dpkg)
-
-* OpenSUSE (via rpm)
+* OpenSUSE
 
 [TIP]
 
