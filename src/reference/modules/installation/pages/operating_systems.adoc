@@ -22,7 +22,7 @@ available freely for these platforms:
 | 18.04 LTS | 64bit
 .2+| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 6 | 32bit, 64bit
 | 7 | 64bit
-| SUSE Linux Enterprise Server (SLES) | 12 | 64bit
+| SUSE Linux Enterprise Server (SLES) | 12 and 15 | 64bit
 
 |===
 
@@ -43,7 +43,7 @@ available for these platforms as part of the https://www.normation.com/en/rudder
 | 18.04 LTS | 64bit
 | Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 3, 5 to 7 | 32bit, 64bit
 .2+| SUSE Linux Enterprise Server (SLES) | 10SP3 and 11 | 32bit, 64bit
-| 12 | 64bit
+| 12 and 15 | 64bit
 | Slackware | 14 | 64bit
 | IBM AIX | 5.3, 6.1 and 7.1 | ppc
 | Microsoft Windows Server | 2008 R2, 2012, 2012 R2, 2016 | 32bit, 64bit
@@ -63,7 +63,7 @@ The following operating systems are supported as a root or relay server:
 | Debian | 8 and 9 | 64bit
 | Ubuntu | 16.04 and 18.04 LTS | 64bit
 | Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 7 | 64bit
-| SUSE Linux Enterprise Server (SLES) | 12 | 64bit
+| SUSE Linux Enterprise Server (SLES) | 12 and 15 | 64bit
 
 |===
 
