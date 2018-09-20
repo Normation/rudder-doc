@@ -18,6 +18,8 @@ templating engine, with a very simple syntax, and the best performance. It shoul
 features to manipulate displayed data, and is compatible with a lot of other automation. It is a bit slower
 than mustache though (as it uses an external python library).
 
+NOTE: As jinja2 is not a native templating engine, you have to make sure the jinja2 python module is installed on the target nodes before using it (installing the `python-jinja2` package using Rudder is usually enough).
+
 For a quick templating syntax reference, use the https://docs.rudder.io/files/rudder-cheatsheet-advanced.pdf[Rudder cheatsheet].
 Here we have no specific reason to use Jinja2, so we will stick with Mustache!
 
