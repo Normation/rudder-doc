@@ -7,7 +7,7 @@ into rpm using the following command:
 
 ----
 
-rpm --import https://repository.rudder.io/rpm-repos/rudder_rpm_key.pub
+rpm --import https://repository.rudder.io/rpm/rudder_rpm_key.pub
 
 ----
 
