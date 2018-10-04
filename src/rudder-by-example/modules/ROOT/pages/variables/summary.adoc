@@ -1,0 +1,43 @@
+== Variables
+
+Most of the time, you want to define a policy (i.e a rule) applying a set of generic directives to a group of node. But directive actual behavior must be adapted for each node, based on the context of that node. 
+
+There is several ways to do that - and building a rule for each node is not the correct one :)
+
+Depending of the more general context, follows a list of possibilities:
+
+**Node properties**
+
+The most common way to do that is to use node properties, i.e properties that are specific to each node and can be user in directives. 
+The documentation is here: https://docs.rudder.io/reference/5.0/usage/advanced_configuration_management.html#_node_properties And you are an use case example in the getting started manual: definition https://docs.rudder.io/get-started/current/node-management/data.html and usage: https://docs.rudder.io/get-started/current/advanced-configuration/apply.html
+
+A node can have "local override" for node properties, ie the property value that can be defined on the node file system, not in Rudder Node detail (also explained in https://docs.rudder.io/reference/5.0/usage/advanced_configuration_management.html#_node_properties)
+
+You can sync node properties from external rest API with the "data sources" rudder plugin https://docs.rudder.io/reference/5.0/plugins/datasources.html
+
+**Variables from node environement**
+
+You can define variables from things on the node, like file content, command output, etc. 
+
+You can define such variable with Variable techniques (in "Miscellaneous" category) in standard library. 
+For example, the `Variable from JSON file (dict)` allows to load a json file as variables that can be used in directive parameters with the syntaxe `${variable_prefix.variable_name[json-key][json-subkey]}`. There is also `variable from command`, or `variable (string)`. 
+
+You have the corresponding generic methods if you build a technique from the technique editor: look for methods in the "Variable" category, for example "variable from command" that allows (suspens) to create a variable from the result of a command ; or in the case of a json file content, as you told, "variable dict from prefix".  These methods can be used in directive, too. 
+
+> Be careful that when you use these directives, you need to define the
+> variable before they are used, so check your policy order:
+> https://docs.rudder.io/reference/5.0/usage/advanced_configuration_management.html#_directives_ordering
+
+**Templating**
+
+If you need more involved templating work, you can use jinja or mustache as explained here: https://docs.rudder.io/rudder-by-example/current/files/advanced-file-templating.html
+
+**Vault**
+
+In Rudder 5.0, we added a Vault plugin that allows to get secret from (suspens, again) a Vault installation: https://github.com/Normation/rudder-plugins/tree/master/vault
+
+**Older resources**
+
+You can find some information about how it used to be done in forgoten times without the : https://www.mauras.ch/rudder-fun-with-variables.html
+
+
