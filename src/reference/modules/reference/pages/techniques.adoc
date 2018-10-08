@@ -575,7 +575,7 @@ bundle agent example
    * A Technique should have its bundle wrote with parameters
    * All the bundles should have as first argument "prefix" which contains the prefix to use for all the classes made from an outcome. This prefix should never be hardcoded in the bundle.
    * Always write comments with # when a policy needs more than 30 seconds of thought.
-   * If classes should be created in order to iterate for make a workaround of the normal ordering (i.e: "iteration_1", "iteration_2", "iteration_3"), they should always be defined at the end of the policy type "classes".
+   * If classes should be created in order to iterate for make a workaround of the normal ordering (i.e: "pass1", "pass2", "pass3"), they should always be defined at the end of the policy type "classes".
    * The order to the policy type must always be in the order of the normal ordering : https://docs.cfengine.com/docs/3.10/reference-language-concepts-normal-ordering.html
    * StringTemplate variables should always be written in UPPERCASE
    * StringTemplate variables should be written with underscore
@@ -597,7 +597,6 @@ bundle agent example
 
 === Maintenance
 
-   * These rules were introduced after the 2.5 release of Rudder and before the 2.6 release. Therefore, they were enforced as of rudder-techniques-2.6.*.
    * Always follow the conventions above when Techniques are updated but only for the lines edited. This rule concerns the Techniques on all the branches of git.
    * On any branches that have released versions on them, we only allow minimal modifications. No lines should be modified if not to fix a bug (respecting these best practices is not currently considered a bug).
 
