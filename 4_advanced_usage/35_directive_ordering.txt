@@ -49,7 +49,7 @@ For example, let say you want to define a *DNS* variable with default value *[de
 a value *[overrided dns]*:
 
 - Create a Directive [1] with *high* priority: it will be your *default* case, so set *DNS* to *[default dns]*.
-- Create an other Directive [2] with *lower* priority: it will be you specialized case, so set *DNS* to *[overrided dns]*.
+- Create an other Directive [2] with *lower* priority: it will be your specialized case, so set *DNS* to *[overrided dns]*.
 
 Then, a node with only Directive [1] will have the default value defined, and a node with both Directives will have the overriding one. 
 
