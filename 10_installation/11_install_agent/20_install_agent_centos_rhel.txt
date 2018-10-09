@@ -4,13 +4,39 @@ include::snippets/syslog.snippet[]
 
 include::../10_install_server/snippets/rpm_key.txt.snippet[]
 
-Then define a yum repository for Rudder:
+Then define a yum repository for Rudder.
+
+===== For RHEL/CentOS
 
 ----
 
 echo '[Rudder_4.1]
 name=Rudder 4.1 EL repository
 baseurl=http://www.rudder-project.org/rpm-4.1/RHEL_$releasever/
+gpgcheck=1
+gpgkey=https://www.rudder-project.org/rpm-repos/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
+
+----
+
+===== For Amazon Linux
+
+----
+
+echo '[Rudder_4.1]
+name=Rudder 4.1 AL repository
+baseurl=http://www.rudder-project.org/rpm-4.1/RHEL_6/
+gpgcheck=1
+gpgkey=https://www.rudder-project.org/rpm-repos/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
+
+----
+
+===== For Amazon Linux 2
+
+----
+
+echo '[Rudder_4.1]
+name=Rudder 4.1 AL repository
+baseurl=http://www.rudder-project.org/rpm-4.1/RHEL_7/
 gpgcheck=1
 gpgkey=https://www.rudder-project.org/rpm-repos/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
