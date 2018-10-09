@@ -62,7 +62,7 @@ The following operating systems are supported as a root or relay server:
 
 | Debian | 8 and 9 | 64bit
 | Ubuntu | 16.04 and 18.04 LTS | 64bit
-| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 7 | 64bit
+| Red Hat Enterprise Linux (RHEL) / CentOS | 7 | 64bit
 | SUSE Linux Enterprise Server (SLES) | 12 and 15 | 64bit
 
 |===
