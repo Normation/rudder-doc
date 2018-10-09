@@ -1,4 +1,4 @@
-= Install Rudder agent on RHEL or CentOS
+= Install Rudder agent on RHEL or CentOS or derivatives
 
 include::{partialsdir}/quick_agent.adoc[]
 
@@ -6,7 +6,43 @@ include::{partialsdir}/syslog.adoc[]
 
 include::{partialsdir}/rpm_key.adoc[]
 
-include::{partialsdir}/rhel_repo.adoc[]
+Add the Rudder packages repository:
+
+* on RHEL/CentOS:
+
+----
+
+echo '[Rudder_5.0]
+name=Rudder 5.0 repository
+baseurl=http://repository.rudder.io/rpm/5.0/RHEL_$releasever/
+gpgcheck=1
+gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
+
+----
+
+* on Amazon Linux:
+
+----
+
+echo '[Rudder_5.0]
+name=Rudder 5.0 repository
+baseurl=http://repository.rudder.io/rpm/5.0/RHEL_6/
+gpgcheck=1
+gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
+
+----
+
+* on Amazon Linux 2:
+
+----
+
+echo '[Rudder_5.0]
+name=Rudder 5.0 repository
+baseurl=http://repository.rudder.io/rpm/5.0/RHEL_7/
+gpgcheck=1
+gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
+
+----
 
 Install the package:
 
