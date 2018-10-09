@@ -56,7 +56,7 @@ GNU/Linux:
 
 * Debian 8 and 9
 
-* RedHat Enterprise Linux (RHEL) / RHEL-like 6 and 7
+* RedHat Enterprise Linux (RHEL) / CentOS 6 and 7
 
 * SuSE Linux Enterprise Server (SLES) 11 SP1 and SP3, 12 SP1, 12 SP2
 
