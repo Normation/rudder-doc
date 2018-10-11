@@ -4,6 +4,20 @@
 
 Migration from 4.1, 4.2 or 4.3 are supported, so you can upgrade directly to 5.0.
 
+[WARNING]
+====
+The following features are now provided as plugins and no more available as part of default Rudder
+installation starting from 5.0:
+
+* LDAP-based authentication
+* Relay servers
+* Changes validation workflow (change requests)
+
+If you were using them, upgrade will disable them and you will have to install
+the plugin.
+Read (the plugins page on our website)[http://rudder.io/plugins] for more information.
+====
+
 [[_upgrade_from_rudder_4_0_or_older]]
 == Upgrade from Rudder 4.0 or older
 
