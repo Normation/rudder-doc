@@ -53,10 +53,10 @@ The plugin defines:
 * An host variable named `rudder_node_id` that contains the uuid of the node
 * Host variables containing the Rudder node properties
 
-You can then use them in the configuration, for example:
+You can then use them in the configuration, for example (if you have defined `node_property` and `node_property2`):
 
 ----
-ansible -i rudder.py All_nodes_managed_by_root_policy_server -a "echo {{rudder_node_id}} {{rudder_group_id}} {{node_property}} {{node_property.key}}"
+ansible -i rudder.py All_nodes -a "echo {{rudder_node_id}} {{rudder_group_id}} {{node_property}} {{node_property2.key}}"
 ----
 
 Will try to connect over SSH to all nodes managed by your Rudder server and display the given information.
