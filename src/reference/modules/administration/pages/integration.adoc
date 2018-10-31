@@ -46,6 +46,11 @@ edit `rudder.ini` to fill (at least):
 * Your Rudder server URL
 * A valid API token. It only needs to be able to read groups and nodes inventory data.
 
+To specify the path of the configuration to the plugin, you can either:
+
+* Put the `rudder.ini` next to the `rudder.py` file
+* Define the `RUDDER_INI_PATH` environment variable with `export RUDDER_INI_PATH=/path/to/my_rudder.ini` before executing the ansible commands
+
 Then you can start using it with the `-i rudder.py` option (to the Ansible command-line).
 The plugin defines:
 
