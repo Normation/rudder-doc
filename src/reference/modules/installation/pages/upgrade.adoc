@@ -18,6 +18,16 @@ the plugin.
 Read (the plugins page on our website)[http://rudder.io/plugins] for more information.
 ====
 
+[NOTE]
+====
+If your Rudder server was upgraded from a 4.1 or older installation on Ubuntu 12.04 LTS or 14.04 LTS,
+you may still be using port 5514 for syslog communication with nodes.
+
+It not necessary anymore, you can switch back to the default
+by changing the port in the `rudder.syslog.port` line in `/opt/rudder/etc/rudder-web.properties`
+to 514.
+====
+
 [[_upgrade_from_rudder_4_0_or_older]]
 == Upgrade from Rudder 4.0 or older
 
