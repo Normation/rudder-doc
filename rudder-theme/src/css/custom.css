@@ -769,3 +769,68 @@ html {
   text-align: left;
   position: static;
 }
+
+/* =============================== SEARCH BAR =============================== */
+
+.navbar-item > .algolia-autocomplete {
+  position: relative;
+}
+
+#docsearch {
+  background-color: transparent;
+  border: none;
+  padding: 8px 12px 6px 52px;
+  height: 35px;
+  outline: none !important;
+  color: #555;
+}
+
+#docsearch-addon {
+  display: inline-block;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition-duration: 0.2s;
+  transition-property: background-color;
+  background-color: #fff;
+}
+
+#docsearch-addon::before,
+#docsearch-addon::after {
+  content: "";
+  display: inline-block;
+  width: 40px;
+  height: 35px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#docsearch-addon::before {
+  background-color: #f9d3ab;
+}
+
+#docsearch-addon::after {
+  background-image: url(../img/search.svg);
+  background-position: 50%;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  transition-duration: 0.2s;
+}
+
+.navbar-item > .algolia-autocomplete:hover #docsearch-addon::after {
+  opacity: 0.8;
+}
+
+.navbar-item > .algolia-autocomplete .algolia-docsearch-suggestion--wrapper {
+  padding: 0;
+}
+
+.navbar-item > .algolia-autocomplete .algolia-docsearch-suggestion--title {
+  color: #555;
+  font-weight: 600;
+}
