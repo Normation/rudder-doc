@@ -69,7 +69,7 @@ plugins: rudder-plugins-repo rudder-plugins-private-repo
 ## Clean
 
 clean:
-	rm -f generic_methods.{adoc,md} hooks.adoc rudder.adoc plugins
+	rm -rf generic_methods.{adoc,md} hooks.adoc rudder.adoc plugins
 
 veryclean: clean
 	rm -rf rudder-agent-repo rudder-repo ncf-repo rudder-agent-windows-repo rudder-plugins-repo rudder-plugins-private-repo
