@@ -1,0 +1,203 @@
+[[dsc-plugin]]
+= Windows
+
+This plugins allows to manage Windows systems, using Microsoft Powershell DSC
+
+== Install Windows DSC plugin on the server
+
+=== Prerequisite
+
+The Windows DSC plugin requires *zip* on the Rudder server, you need to install it prior to installing the plugin.
+
+=== Installing and Upgrading
+
+The installation and upgrade processes are exactly the same.
+Download the *rpkg* file, and run, on the Rudder server:
+
+----
+/opt/rudder/bin/rudder-pkg install-file rudder-plugin-dsc-<Rudder version>-<plugin version>.rpkg	
+----
+
+It will add:
+
+* The ability to generate policies for Windows Nodes
+* New generic methods in the technique editor
+* New techniques
+
+
+== Install Windows DSC agent
+
+The installation and upgrade processes are exactly the same.
+
+=== Supported version of Microsoft Windows
+
+The Rudder agent needs *PowerShell 4* or later, which is built-in on:
+
+ * Windows Server 2012 R2 and later
+
+PowerShell 4 may also be installed on the following platforms, following this procedure: https://social.technet.microsoft.com/wiki/contents/articles/20623.step-by-step-upgrading-the-powershell-version-4-on-2008-r2.aspx 
+
+ * Windows Server 2008 R2
+ * Windows Server 2012
+
+=== Desktop version of Microsoft Windows
+
+There is no official support of Rudder agent on desktop versions of Microsoft Windows. However, the agent can be installed on the following platform:
+
+ * Windows 7 (you will need to upgrade to PowerShell 4 first, and activate WinRM)
+ * Windows 8 (you will need to upgrade to PowerShell 4 first, and activate WinRM)
+ * Windows 8.1
+ * Windows 10
+
+Plase note that prior to the installation on Windows 7 and 8, you will need to install PowerShell 4 and make sure WinRM is activated with the following command:
+
+----
+
+Set-WSManQuickConfig DSC
+
+----
+
+Moreover, the Windows DSC agent comes without digital signature, you need to allow the unsigned source code execution on the Windows node.
+In some environment, this policy change can lead to security issues, please read the https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-6[Microsoft Windows doc] associated.
+This can be done in powershell by executing the following command:
+
+----
+
+Set-ExecutionPolicy RemoteSigned
+
+----
+
+=== Installation procedure
+
+Download the *exe* file, and run, on your node:
+
+----
+
+rudder-agent-dsc-<Rudder version>-<plugin version>.exe	
+
+----
+
+The installer will ask the IP address or DNS name of the policy server to use.
+If a policy server is already configured (for example during upgrade or an unattended installation), you can leave this field empty.
+
+The installer will install the agent files and create the scheduled tasks to run the agent and the inventory. Rudder does not come as a Windows Service but as a scheduled
+PowerShell task, managed by *schtasks.exe*.
+
+=== Unattended installation
+
+For an automated unattended installation, you can pre-configure the policy server in the file:
+
+----
+C:\Program Files\Rudder\etc\policy-server.conf
+----
+
+Then the installer need to be executed with the following command:
+
+----
+
+rudder-agent-dsc-<Rudder version>-<plugin version>.exe /S
+
+----
+
+This will install the agent in silent mode.
+
+
+== Technique editor with DSC
+
+DSC Generic Methods are shipped with the Rudder dsc plugin. Some are specific for Windows managed systems (like the Registry management), and the others are the DSC version of existing generic methods.
+
+A filter is available in the Technique Editor to select either all generic methods, generic methods available for classic agent, and generic method available for DSC agent, so that you can choose relevant methods for the type of nodes you need to manage
+
+image:technique_editor/rudder-technique-editor-filter.png[Technique editor filter]
+
+
+== DSC Techniques
+
+Techniques compatible with DSC agent appear, in the Directives and Techniques trees, with a DSC symbol, as shown in the screenshot below.
+
+Unfortunately, not all Techniques are compatible with DSC agent, as some are deprecated, or some will be completely rewritten, but the coverage is increasing regularly.
+
+
+image:rudder-technique-dsc.png[DSC compatible Techniques]
+
+== DSC Agent CLI
+
+The Rudder agent CLI is available as a Powershell module, by running, in a Powershell terminal
+
+----
+
+rudder agent <action>
+
+----
+
+where action can be one of the following
+
+* disable: Disable the agent, and prevent its execution
+
+* enable: Enable the agent
+
+* info: Show information about the agent and the node (hostname, Rudder ID, policy server, etc)
+
+* inventory: Generate an inventory, and send it to the server
+
+* run: Run the agent (see example output below)
+
+* update: Update agent policy from the Rudder Server
+
+* version: Show the version of the DSC Rudder agent
+
+
+image:rudder-agent-dsc-cli.png[Example of a Rudder DSC agent output on Windows]
+
+=== Agent logs
+
+Rudder logs are visible in the output of the agent. You can get more details about what is done with the 
+`-Verbose` option:
+
+----
+rudder agent run -v
+----
+
+You can also explore all agent logs (including those from unattended runs) in the Windows Event Viewer.
+Before Windows plugin version 4.2-1.6 Rudder used the windows system eventlog and was logging in 
+the *Windows Logs -> Application* view, with the *Rudder* source and the *101* Event ID.
+
+Since the Windows plugin version 4.2-1.6 Rudder will report in a dedicated windows journal named Rudder and its logs are saved on different verbosity:
+
+* *classic Rudder reports* will have the *Event ID 101*, they are the reports sent to the server.
+
+* *Information logs* will have the *Event ID 102* and will only be local logs.
+
+If you had an old plugin version installed Rudder will not try to install the new journal reference because
+it needs a complete reboot of the host system. 
+See the last note on the Microsoft doc: https://msdn.microsoft.com/en-us/library/2awhba7a%28v=vs.110%29.aspx.
+
+If you want to change manually the Rudder eventlog use the following process, keep in mind that it will need a machine restart to avoid any reporting issues.
+First identify the current eventlog for Rudder by running in the powershell console
+----
+[System.Diagnostics.EventLog]::LogNameFromSourceName("Rudder", ".")
+----
+If it does not suit you, remove the Rudder source from it and create a new logger for Rudder
+----
+Remove-Eventlog -Source "Rudder"
+New-Eventlog -Source "Rudder" -LogName "Rudder"
+----
+
+Then reboot the system.
+
+
+== Known issues
+
+On the first run of the Rudder DSC agent CLI in a Powershell terminal, you may have the following error message:
+
+----
+
+Import-LocalizedData : Cannot find the Windows PowerShell data file 'MSFT_ServiceResource.strings.psd1' in directory 'C:\Windows\system32\WindowsPowershell\v1.0\Modules\PSDesiredStateConfiguration\PSProviders\MSFT_ServiceResource\\', or in any parent culture directories.
+
+----
+
+This does not prevent the correct execution of the agent, and next runs in the same terminal will not exhibit the error
+
+image:rudder-agent-windows-known-issue.png[Error on first DSC agent execution in a terminal]
+
+
