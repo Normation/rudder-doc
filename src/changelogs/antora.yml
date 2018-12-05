@@ -1,0 +1,6 @@
+name: changelogs
+title: Changelogs
+version: "5.0"
+nav:
+- modules/ROOT/nav.adoc
+
