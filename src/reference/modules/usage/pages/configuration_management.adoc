@@ -122,6 +122,9 @@ site-specific elements...
 Rudder also provides system variables that contain information about nodes
 and their policy server. You can use them like user defined parameters.
 
+NOTE: These variables are only usable in the directive parameters and not in the technique editor,
+see node-level properties below if needed.
+
 The information about a Node:
 
 * `${rudder.node.id}` returns the Rudder generated id of the Node
@@ -134,6 +137,19 @@ The information about a Node's policy server.
 * `${rudder.node.policyserver.hostname}` returns the hostname of the Policy Server
 * `${rudder.node.policyserver.admin}` returns the administrator login of the Policy Server
 
+==== Node-level system properties
+
+NOTE: These variables are not available on Windows nodes, but only on with the classic Linux/AIX agent.
+
+These properties are evaluated on the node at run time, and are hence available both in
+directives parameters and in the technique editor:
+
+* `${sys.fqhost}` is the fully-qualified hostname, it matches the hostname seen in Rudder
+* `${sys.uqhost}` is the unqualified hostname
+* `${sys.host}` is the node's hostname (according to the kernel)
+* `${sys.domain}` is the domain discovered by the agent
+
+There are also more variables available, all documented in https://docs.cfengine.com/docs/3.10/reference-special-variables-sys.html[this page].
 
 [[compliance-and-drift-assessment]]
 == Compliance and Drift Assessment
