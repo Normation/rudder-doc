@@ -15,4 +15,6 @@ content:
   - url: ./doc-build
     branches: ["branches/rudder/5.0", "master"]
     start_path: src/reference
-
+  - url: .
+    branches: master
+    start_path: src/changelogs
