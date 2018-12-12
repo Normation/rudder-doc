@@ -7,6 +7,7 @@
   {{/if}}
   <ul class="components">
     {{#each site.components}}
+    {{#if (not (eq this.name "changelogs"))}}
     <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
       <span class="title">{{{./title}}}</span>
       <ul class="versions">
@@ -27,6 +28,7 @@
         {{/if}}
       </ul>
     </li>
+    {{/if}}
     {{/each}}
     <li class="component">
       <span class="title">API reference</span>
@@ -44,17 +46,17 @@
           {{#if (eq this.name "reference")}}
           {{#each ./versions}}
           <li class="version {{~#if (eq this ../latestVersion)}} is-latest{{/if}}">
-            <a href="https://www.rudder-project.org/changelog-{{./version}}">{{./version}}</a>
+            <a href="{{@root.site.url}}/changelogs/{{./version}}/index.html">{{./version}}</a>
           </li>
           {{/each}}
           {{/if}}
           {{/each}}
           {{#if site.url}}
           <li class="version">
-            <a href="https://www.rudder-project.org/changelog-4.3">4.3</a>
+            <a href="{{@root.site.url}}/changelogs/4.3/index.html">4.3</a>
           </li>
           <li class="version">
-            <a href="https://www.rudder-project.org/changelog-4.1">4.1</a>
+            <a href="{{@root.site.url}}/changelogs/4.1/index.html">4.1</a>
           </li>
           {{/if}}
         </ul>

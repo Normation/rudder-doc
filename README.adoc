@@ -77,3 +77,13 @@ make clean
 == Theme development
 
 Follow https://gitlab.com/antora/antora-ui-default/ for docs about the theme.
+
+== Files containing version numbers
+
+* {{version}}.yml
+* site{,-dev}.yml
+* src/changelogs/antora.yml
+* src/changelogs/dependencies/Makefile
+* src/reference/antora.yml
+* src/reference/dependencies/Makefile
+
