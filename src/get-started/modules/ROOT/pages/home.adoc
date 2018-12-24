@@ -20,4 +20,4 @@
 * Join the community
 ** https://gitter.im/normation/rudder[Chat with the community]on our Gitter channel
 ** https://www.rudder-project.org/site/support/forums-lists/[Ask questions] on ServerFault or on our user mailing-list
-** https://www.rudder-project.org/redmine[Report an issue or propose a feature]on our issue tracker
+** https://issues.rudder.io/[Report an issue or propose a feature]on our issue tracker
