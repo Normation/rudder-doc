@@ -2,7 +2,7 @@
 
 RUDDER_VERSION = 5.0
 
-.PHONY: clean generic_methods.adoc rudder.adoc hooks.adoc plugins
+.PHONY: clean generic_methods.adoc rudder.adoc hooks.adoc plugins versions.adoc
 all: generic_methods.adoc hooks.adoc rudder.adoc plugins
 
 ## Repos
@@ -29,6 +29,9 @@ rudder-plugins-private-repo:
 	cd rudder-plugins-private-repo && ./init-repo.sh
 
 ## Dynamic content
+
+versions.adoc:
+	./tools/versions.sh > $@
 
 rudder.adoc: rudder-agent-repo
 	cd rudder-agent-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master

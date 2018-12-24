@@ -20,7 +20,7 @@ def get_min_versions():
   min_version = {}
   
   try:
-    versions = requests.get(release_info_url + "versions").content.decode('ascii').splitlines()
+    versions = requests.get(release_info_url + "versions/supported").content.decode('ascii').splitlines()
   except requests.exceptions.RequestException as e:
     print(e)
     sys.exit(1)

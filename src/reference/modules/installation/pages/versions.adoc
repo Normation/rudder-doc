@@ -1,0 +1,35 @@
+= Rudder versions
+
+== Rudder versioning
+
+Rudder versions look like `X.Y.Z` (for example, 5.0.2):
+
+* *`Z` version increments* (`X.Y.Z1` -> `X.Y.Z2`, for example 5.0.2 to 5.0.3) are *minor bug fix only* releases. They can be considered as stable as the previous release, as we make a lot of effort to reduce the amount of changes that go into these versions. A full changelog is always available. Upgrading your Rudder version to the latest minor release is always recommended, and is designed to be easy. They are released every few weeks.
+* *`Y` or `X` version increments* are *major* releases. These versions include new features, and the amount of changed code can be considerable. An upgrade path from one major version to next will always be provided, but may not be between two non-consecutive versions (ie, upgrading from 4.1 to 4.2 is supported, and from 4.2 to 4.3 is too, but upgrading directly from 4.1 to 4.3 may not be – check the xref:reference:installation:upgrade.adoc[upgrade section] of the user manual for specifics). They are released every few months.
+
+== Rudder life cycle
+
+A maintained version is a major version for which we release minor bug fix releases and communicate about security vulnerabilities.
+
+* Our general policy is to *maintain major releases until 3 months after the next major version* is released to give some time for upgrading.
+* For a slower major upgrade pace, Rudder subscription provides (among other benefits) *long-term maintenance up to 24 months after release* (depending on the subscription level) for Rudder versions. You can read more about it on the https://www.rudder.io/en/rudder/subscription/[subscription page].
+
+Note: The ESR tag was previously given to major releases that were maintained 6 months after the next ESR version was announced. Rudder 4.1 is the last ESR release, extended maintenance is now provided as part of https://www.rudder.io/en/rudder/subscription/[Rudder subscription].
+
+You can subscribe to the https://www.rudder-project.org/site/community/mailing-lists/<Paste>[rudder-announce mailing-list] to receive release and end of life announcements. Here is a table of all versions of Rudder, their status, release dates and planned maintenance termination date:
+
+== Versions
+
+include::{partialsdir}/dyn/versions.adoc[]
+
+== Repositories
+
+Special repositories:
+
+* Latest release:
+** http://repository.rudder.io/apt/latest/
+** http://repository.rudder.io/rpm/latest/
+* Latest nightly builds:
+** http://repository.rudder.io/apt/nightly/
+** http://repository.rudder.io/rpm/nightly/
+
