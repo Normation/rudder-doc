@@ -15,7 +15,7 @@ We have a quick procedure for people who just want to test Rudder:
 
 ----
 
-  wget https://www.rudder-project.org/tools/rudder-setup
+  wget https://repository.rudder.io/tools/rudder-setup
   chmod +x rudder-setup
   ./rudder-setup setup-server latest
 
