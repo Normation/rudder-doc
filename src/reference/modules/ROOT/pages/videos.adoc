@@ -1,0 +1,25 @@
+= Rudder Videos
+
+== Configuration Management Camp 2018 - Rudder Room
+
+++++
+<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL6rU2OMWTrhEDPh0pyAGnBRIlqUeeQxSh" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+++++
+
+== Configuration Management Camp 2017 - Rudder Room
+
+++++
+<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL6rU2OMWTrhG7L0enRZ0b8v4_8idAds_m" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+++++
+
+== Configuration Management Camp 2015 - Rudder Room
+
+++++
+<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL6rU2OMWTrhHGtHH3Bz7Ppb8YMvPOIhm4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+++++
+
+== Community talks
+
+++++
+<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL6rU2OMWTrhEht2fD05AqZkpLia8TkFC3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+++++
