@@ -11,7 +11,7 @@ SITES = $(GENERIC_DOCS) $(VERSIONS)
 .DEFAULT_GOAL := local
 
 all: $(GENERIC_DOCS) build/sites/site/.htaccess build/history/5.0/.htaccess $(VERSION_ARCHIVES) build/files test
-online: site site-dev build/sites/site/.htaccess build/history/5.0/.htaccess $(VERSION_ARCHIVES) build/files test
+online: site site-dev build/sites/site/.htaccess build/history/5.0/.htaccess $(VERSION_ARCHIVES) build/files
 local: site-local test
 
 rudder-theme/build/ui-bundle.zip:
@@ -57,7 +57,7 @@ build/sites/site/.htaccess:
 	# once 5.0 is relased, should be https://www.rudder-project.org/release-info/rudder/versions/latest
 	mkdir -p build/sites/site
 	echo 'Redirect /reference/current/ /reference/5.0/' > $@
-	echo 'Redirect /changelogs/current/ /changelogs/5.0/' > $@
+	echo 'Redirect /changelogs/current/ /changelogs/5.0/' >> $@
 
 build/history/5.0/.htaccess:
 	# once 5.0 is relased, should be https://www.rudder-project.org/release-info/rudder/versions/latest
