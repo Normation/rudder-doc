@@ -1,5 +1,6 @@
 * Installation
 ** xref:index.adoc[Rudder components]
+** xref:versions.adoc[Rudder versions]
 ** xref:operating_systems.adoc[Compatible OS]
 *** xref:operating_systems.adoc#node-supported-os[Fully supported Operating Systems]
 *** xref:operating_systems.adoc#_partially_supported_operating_systems[Partially supported Operating Systems]

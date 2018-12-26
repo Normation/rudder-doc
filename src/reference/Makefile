@@ -3,7 +3,7 @@
 .PHONY: clean $(ADOC_DYN_FILES) nav
 
 ADOC_SRC_FILES = $(shell find modules/ROOT/pages -type f -name '*.adoc')
-ADOC_DYN_FILES = generic_methods.adoc hooks.adoc rudder.adoc
+ADOC_DYN_FILES = generic_methods.adoc hooks.adoc rudder.adoc versions.adoc
 GRAPHVIZ_FILES = $(shell find modules/reference/assets/graphviz -type f -name '*.dot')
 GRAPHVIZ_IMAGES = $(addprefix modules/reference/assets/images/graphviz/, $(notdir $(GRAPHVIZ_FILES:dot=png)))
 
@@ -12,6 +12,11 @@ MODULES = ROOT installation usage administration plugins reference
 content: $(GRAPHVIZ_IMAGES) $(ADOC_DYN_FILES) plugins nav
 
 ## Dynamic content
+
+versions.adoc:
+	cd dependencies && make $@
+	mkdir -p modules/installation/pages/_partials/dyn/
+	cp dependencies/$@ modules/installation/pages/_partials/dyn/$@
 
 generic_methods.adoc:
 	cd dependencies && make $@
