@@ -44,3 +44,5 @@ See all available commands with:
 ----
 /opt/rudder/bin/rudder-pkg --help
 ----
+
+include::{partialsdir}/dyn/version-compat.adoc[leveloffset=+1]
