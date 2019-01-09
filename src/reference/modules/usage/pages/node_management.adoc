@@ -171,27 +171,34 @@ _1234
 ==== Supported units
 
 Units used are non binary units, and a multiplication factor of 1024 is applied
-between each unit. Units are case-insensitive. Therefore, +Mb+ is identical to
-+mB+ or +mb+ or +MB+.
+between each unit.
 
-In detail, the following units are supported (provided in lower case, see
-above):
+[WARNING]
+
+====
+
+*Units are case-insensitive*. Therefore, +Mb+ is identical to
++mB+ or +mb+ or +MB+, and *b* is actually a *byte*.
+
+====
+
+In detail, the following units are supported:
 
 .Units supported by Rudder search engine
 
 [options="header"]
 
 |====
-| Notation | Alternate | Value
-| +b+ | +o+ | bytes (equivalent to not specifying a unit)
-| +kb+ | +ko+ | 1024 bytes
-| +mb+ | +mo+ | 1024^2 bytes
-| +gb+ | +go+ | 1024^3 bytes
-| +tb+ | +to+ | 1024^4 bytes
-| +pb+ | +po+ | 1024^5 bytes
-| +eb+ | +eo+ | 1024^6 bytes
-| +zb+ | +zo+ | 1024^7 bytes
-| +yb+ | +yo+ | 1024^8 bytes
+| Notation | Value
+| +B+ | bytes (equivalent to not specifying a unit)
+| +kB+ | 1024 bytes
+| +mB+ | 1024^2 bytes
+| +gB+ | 1024^3 bytes
+| +tB+ | 1024^4 bytes
+| +pB+ | 1024^5 bytes
+| +eB+ | 1024^6 bytes
+| +zB+ | 1024^7 bytes
+| +yB+ | 1024^8 bytes
 |====
 
 === Regex matching rule
