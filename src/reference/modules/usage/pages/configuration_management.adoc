@@ -25,62 +25,62 @@ image::configuration_concepts.svg[]
 
 === Concepts
 
-A Technique defines a set of operations and configurations to reach the
+A technique defines a set of operations and configurations to reach the
 desired behaviour. This includes the initial set-up, but also a regular check on
 the parameters, and automatic repairs (when possible).
 
-All the Techniques are built with the possibility to change only part of a
+All the techniques are built with the possibility to change only part of a
 service configuration: each parameter may be either active, either set on the
 "Don't change" value, that will let the default values or in place. This allows
 for a progressive deployment of the configuration management.
 
-Finally, the Techniques will generate a set of reports which are sent to
+Finally, the techniques will generate a set of reports which are sent to
 the Rudder Root Server, which will let you analyse the percentage of compliance
 of your policies, and soon, detailed reports on their application.
 
-=== Manage the Techniques
+=== Manage techniques
 
-The Techniques shipped with Rudder are presented in a library that you can
+Techniques shipped with Rudder are presented in a library that you can
 reorganize in *Configuration -> Techniques*. The library
-is organized in two parts: the available Techniques, and the selection
+is organized in two parts: the available techniques, and the selection
 made by the user.
 
 include::{partialsdir}/glossary/technique-library.adoc[]
 
 include::{partialsdir}/glossary/active-techniques.adoc[]
 
-=== Create new Techniques
+=== Create new techniques
 
-The standard library only provides the most common Techniques. You can create
-new Technique with the xref:usage:technique_editor.adoc#technique-editor[Technique Editor].
+The standard library only provides the most common techniques. You can create
+new technique with the xref:usage:technique_editor.adoc#technique-editor[Technique Editor].
 
 == Directives
 
-Once you have selected and organized your Techniques, you can create your
+Once you have selected and organized your techniques, you can create your
 configurations in the *Configuration Management -> Directives* section.
 
 include::{partialsdir}/glossary/directive.adoc[]
 
 The screen is divided in three parts:
 
-- on the left, The list of Directives, grouped by Technique
+- on the left, The list of directives, grouped by technique
 
-- on the right, The selected Directive form.
+- on the right, The selected directive form.
 
-Click on the name of a Technique to show its description, and how to Create a Directive base on it.
+Click on the name of a technique to show its description, and how to create a directive base on it.
 
-Click on the name of a Directive to see the Directive Summary containing the
-description of the Technique its derived from, and the configuration items
-of the Directive.
+Click on the name of a directive to see the directive summary containing the
+description of the technique its derived from, and the configuration items
+of the directive.
 
 
 image::Directive_management.png[]
 
-.Create a Directive for Name resolution
+.Create a directive for Name resolution
 
 ====
 
-Use the Technique 'Name resolution' to create a new Directive called
+Use the technique 'Name resolution' to create a new directive called
 +Google DNS Servers+, and shortly described as 'Use Google DNS Server'. Check in
 the options 'Set nameservers' and 'Set DNS search suffix'.  Set the value of the
 variable 'DNS resolver' to +8.8.8.8+ and of 'Domain search suffix' according to
@@ -94,7 +94,7 @@ include::{partialsdir}/glossary/rule.adoc[]
 
 image::Rule_management.png[]
 
-When a Rule is created or modified, the policies for the target nodes are generated. Rudder computes all the policies each nodes must have, and makes them available for the nodes. This process can take up to several minutes, depending on the number of managed nodes and the Policy Server configuration. During this time, The status icon on the top of the page turns to grey, with moving arrows.
+When a rule is created or modified, the policies for the target nodes are generated. Rudder computes all the policies each nodes must have, and makes them available for the nodes. This process can take up to several minutes, depending on the number of managed nodes and the Policy Server configuration. During this time, The status icon on the top of the page turns to grey, with moving arrows.
 if you feel the generated policies should be modified (for instance, if you changed the configuration of Rudder), you can click on the status menu in the top bar and click on "Regenerate policies"
 
 image::Rule_config.png[]
@@ -105,14 +105,14 @@ image::Rule_config.png[]
 
 === User defined parameters
 
-Rudder provides a simple way to add common and reusable variables in either plain Directives, or techniques created using the Technique editor: the parameters.
+Rudder provides a simple way to add common and reusable variables in either plain directives, or techniques created using the technique editor: the parameters.
 
 image::rudder-parameters.png[Parameters]
 
 The parameters enable the user to specify a content that can be put anywhere, using the following syntax:
 
-* In Directives: `${rudder.param.name}` will expand the content of the "name" parameter.
-* In the Technique Editor: `${rudder_parameters.name}` will do the same.
+* In directives: `${rudder.param.name}` will expand the content of the "name" parameter.
+* In the technique editor: `${rudder_parameters.name}` will do the same.
 
 Using this, you can specify common file headers (this is the default parameter, "rudder_file_edit_header"), common DNS or domain names, backup servers,
 site-specific elements...
@@ -125,13 +125,15 @@ and their policy server. You can use them like user defined parameters.
 NOTE: These variables are only usable in the directive parameters and not in the technique editor,
 see node-level properties below if needed.
 
-The information about a Node:
+The information about a node:
 
-* `${rudder.node.id}` returns the Rudder generated id of the Node
-* `${rudder.node.hostname}` returns the hostname of the Node
-* `${rudder.node.admin}` returns the administrator login of the Node
+* `${rudder.node.id}` returns the Rudder generated id of the node
+* `${rudder.node.hostname}` returns the hostname of the node
+* `${rudder.node.admin}` returns the administrator login of the node
+* `${rudder.node.state}` returns the xref:usage:advanced_node_management.adoc#node-lifecycle[node lifecycle] of the node
+* `${rudder.node.policyMode}` returns the xref:usage:configuration_management.adoc#_policy_mode_audit_enforce[effective policy mode] of the node
 
-The information about a Node's policy server.
+The information about a node's policy server.
 
 * `${rudder.node.policyserver.id}` returns the Rudder generated id of the Policy Server
 * `${rudder.node.policyserver.hostname}` returns the hostname of the Policy Server
@@ -176,30 +178,30 @@ Of course, one can always correct a drift error by hand by updating configuratio
 
 Compliance drifts (non-compliance, enforcement errors, repairs) are reported in Rudder by several means:
 
-- Compliance are reported in aggregated format globally in the dashboard, and by rules or nodes (example for Rule below)
-- they are stored in Rudder compliance database, and each Rule displays an history of changes as depicted in "Changes history on a Rule" below.
+- Compliance are reported in aggregated format globally in the dashboard, and by rules or nodes (example for rule below)
+- they are stored in Rudder compliance database, and each rule displays an history of changes as depicted in "Changes history on a rule" below.
 - each drifts fires an event which is logged in file `/var/log/rudder/compliance/non-compliant-reports.log` and can be used
   to integrates with log aggregation engine like Logstash, or hooks (typically to send notification to IRC or Slack, send email, etc)
   - see for example the Slack connector here: https://github.com/Normation/rudder-tools/blob/master/scripts/rudder-notification/forward-non-compliance-to-slack.sh
 - compliance and drift are also available from Rudder API to provide deeper integration with your IT Infrastructure.
 
-.Compliance on a Rule
+.Compliance on a rule
 
 image::Rule_compliance.png[Rule compliance]
 
-The Rule detailed compliance screen will also graph compliance deviations on
+The rule detailed compliance screen will also graph compliance deviations on
 a recent period as well as display a deviation log history for this period.
 
-.Changes history on a Rule
+.Changes history on a rule
 
 image::rudder-rule-compliance-history.png[Changes compliance history]
 
 === How compliance is calculated?
 
-As previously seen, in Rudder you define Rules which target groups of Nodes, and are composed of configuration Directives.
+As previously seen, in Rudder you define rules which target groups of nodes, and are composed of configuration directives.
 
-A Directive contains one or multiple sub-configuration elements which generates reports.
-For example, for a Sudoers Directive, each user can be such an element.
+A directive contains one or multiple sub-configuration elements which generates reports.
+For example, for a Sudoers directive, each user can be such an element.
 
 Reports have states explaining what is the drift between the expected configuration and the actual configuration.
 Some states depends if the user choose to automatically enforce drift correction
@@ -259,15 +261,15 @@ Unexpected::
 
 We have a special kind of report for unexpected states (both for enforce and audit mode). These
 reports generally mean that the node is sending reports for unexpected configuration components. It
-may be due to bad parameters for the configuration, or an error in the Technique.
+may be due to bad parameters for the configuration, or an error in the technique.
 
 
 *Compliance calculus*
 
-Based on these facts, the compliance of a Rule is calculated like this:
+Based on these facts, the compliance of a rule is calculated like this:
 
-Number of Nodes for which conformity is reached for every Directive of the
-Rule / Total number of Nodes on which the Rule has been applied
+Number of nodes for which conformity is reached for every directive of the
+rule / Total number of nodes on which the rule has been applied
 
 [[_policy_mode_audit_enforce]]
 == Policy Mode (Audit/Enforce)
