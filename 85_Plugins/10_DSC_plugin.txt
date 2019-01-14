@@ -191,9 +191,9 @@ Then reboot the system.
 
 * On Windows, Rudder can only manage user password in clear text.
 
-* Mustache templating on Windows is very limited and does not support array iteration, there is an open ticket in the private associated Redmine: https://issues.rudder.io/issues/11380.
+* Mustache templating on Windows is very limited and does not support array iteration.
 
-* Folders can not be shared via the "Rudder shared folder" with a Windows agent, only files can be shared.
+* The Technique File download (Rudder server) technique can not share folders with a Windows agent, only files can be shared.
 
 * On the first run of the Rudder DSC agent CLI in a Powershell terminal, you may have the following error message:
 +
