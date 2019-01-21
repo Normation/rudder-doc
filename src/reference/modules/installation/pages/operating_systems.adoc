@@ -29,7 +29,7 @@ available freely for these platforms:
 ==== Subscription support
 
 The following operating systems are supported for Rudder Nodes and packages are
-available for these platforms as part of the https://www.normation.com/en/rudder/subscription/[Rudder subscription]:
+available for these platforms as part of the https://www.rudder.io/en/pricing/subscription/[Rudder subscription]:
 
 [options="header"]
 |===

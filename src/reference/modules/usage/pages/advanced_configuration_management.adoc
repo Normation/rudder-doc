@@ -645,7 +645,7 @@ into one Policy after having been sorted.
  In Rudder 4.3, that limitation is lifted and Technique can be made to generate ONE Policy for each Directive. That capacity is controled by the
  `POLICYGENERATION` tag, where the value `merged` is the pre-4.3 default behavior, and values `separated` or `separated-with-param` lead to one Policy per Directive.
 
- See https://www.rudder-project.org/redmine/issues/10625[Don't merge directive from same technique on generation] for more information.
+ See https://issues.rudder.io/issues/10625[Don't merge directive from same technique on generation] for more information.
 =====
 
 
@@ -664,7 +664,7 @@ If several *Directives* have the same *Priority*, the *Rule name*, and then the 
 [WARNING]
 ======
 The *Priority* field of a Directive used to be a number, from 0 to 10, where 0 means "highest priority".
-This changed with https://www.rudder-project.org/redmine/issues/11725 but if you knew Rudder before that change, please
+This changed with https://issues.rudder.io/issues/11725 but if you knew Rudder before that change, please
 use "0" whenever the documentation says "highest priority".
 ======
 
