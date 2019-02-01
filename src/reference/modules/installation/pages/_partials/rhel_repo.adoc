@@ -3,7 +3,7 @@ Add a yum repository for Rudder:
 ----
 
 echo '[Rudder_5.0]
-name=Rudder 5.0 repository
+name=Rudder 5.0
 baseurl=http://repository.rudder.io/rpm/5.0/RHEL_$releasever/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
