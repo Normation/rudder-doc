@@ -88,8 +88,8 @@ rudder-repo:
 hooks.asciidoc: rudder-repo
 	cd rudder-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
 	cd rudder-repo && git pull
-	cp rudder-repo/rudder-core/src/main/resources/hooks.d/readme.adoc hooks.asciidoc
-	for hook in `ls rudder-repo/rudder-core/src/main/resources/hooks.d/*/readme.adoc`; do \
+	cp rudder-repo/webapp/sources/rudder/rudder-core/src/main/resources/hooks.d/readme.adoc hooks.asciidoc
+	for hook in `ls rudder-repo/webapp/sources/rudder/rudder-core/src/main/resources/hooks.d/*/readme.adoc`; do \
 	  echo "" >> hooks.asciidoc ; \
 	  cat $$hook >> hooks.asciidoc ; \
 	done
