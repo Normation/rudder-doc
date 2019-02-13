@@ -15,7 +15,7 @@ installation starting from 5.0:
 
 If you were using them, upgrade will disable them and you will have to install
 the plugin.
-Read (the plugins page on our website)[http://rudder.io/plugins] for more information.
+Read https://rudder.io/plugins[the plugins page on our website] for more information.
 ====
 
 [NOTE]
