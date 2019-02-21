@@ -4,11 +4,11 @@
 
 The Techniques use the http://www.stringtemplate.org/[StringTemplate] engine. A Technique *must* have the .st extension to be extended by Rudder (have some variables replaced, some part removed or added given some parameters).
 
-==== Variable remplacement
+==== Variable replacement
 
 Note : Rudder use a StringTemplate grammar slighlty different from the default one. Rather than using "$" as a variable identifier, the Techniques use "&" to avoid collision with the CFEngine variables
 
-===== Single-valued variable remplacement
+===== Single-valued variable replacement
 
 ----
 
@@ -18,7 +18,7 @@ Note : Rudder use a StringTemplate grammar slighlty different from the default o
 
    * Will be remplaced by the value of the variable UUID
 
-===== Remplacement of variable with one or more values
+===== Replacement of variable with one or more values
 
 ----
 
@@ -44,7 +44,7 @@ admit => { host2ip("&host&"), escape("&host&") };
    * `uuid` is an alias for the current value of CHILDRENID
    * Both item are iterated at the same time, so both list must have the same length
 
-===== Remplacement of variable with one or more value, and writing an index all along
+===== Replacement of variable with one or more value, and writing an index all along
 
 ----
 
