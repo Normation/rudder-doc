@@ -1,7 +1,4 @@
 = Set up a UI Project
-ifndef::env-site,env-github[]
-include::_attributes.adoc[]
-endif::[]
 // Settings:
 :idprefix:
 :idseparator: -
@@ -53,15 +50,15 @@ You should see:
 
 [.output]
 ....
-lint:css
-lint:js
+default
+clean
 lint
 format
 build
-build:preview
+bundle
+bundle:pack
 preview
-pack
-default
+preview:build
 ....
 
 We'll explain what each of these tasks are for and when to use them.
