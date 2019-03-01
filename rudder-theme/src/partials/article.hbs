@@ -15,12 +15,13 @@ If you typed the URL of this page manually, please double check that you entered
 {{{page.contents}}}
 
 {{#if (not (eq page.url '/get-started/current/home.html'))}}
+
 <br/>
-{{#if page.next}}
-<a href="{{{page.next.url}}}">&larr; {{page.next.content}}</a>
-{{/if}}
 {{#if page.previous}}
-<a style="float: right;" href="{{{page.previous.url}}}">{{page.previous.content}} &rarr;</a>
+<a href="{{{page.previous.url}}}">&larr; {{page.previous.content}}</a>
+{{/if}}
+{{#if page.next}}
+<a style="float: right;" href="{{{page.next.url}}}">{{page.next.content}} &rarr;</a>
 {{/if}}
 
 {{/if}}
