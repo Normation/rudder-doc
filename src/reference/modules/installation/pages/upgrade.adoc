@@ -20,10 +20,14 @@ Read https://rudder.io/plugins[the plugins page on our website] for more informa
 
 [WARNING]
 ====
-When upgrading from a 4.1 older than 4.1.13, a 4.2 older than 4.2.7 or a 4.3 older than 4.3.3,
+On RHEL/centOS and SLES systems, when upgrading from a 4.1 older than 4.1.13, a 4.2 older
+than 4.2.7 or a 4.3 older than 4.3.3,
 it is necessary to explicitely upgrade `rudder-agent` (in the same command as 
 the other packages) when upgrading a relay or a root server,
 because of a dependency misconfiguration in the agent package.
+
+This has been fixed in the packages, but the problem is caused by the
+package in the version your are upgrading from.
 ====
 
 [NOTE]
