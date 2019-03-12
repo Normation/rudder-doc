@@ -25,35 +25,178 @@ By default, this system will:
 It thus reduces the work overhead by only making Rudder handle relevant reports (fresh enough)
 and putting aside old ones.
 
-This is obviously configurable in `/opt/rudder/etc/rudder-web.properties`, by altering the following
+This is configurable in `/opt/rudder/etc/rudder-web.properties`, by changing the following
 configuration elements:
 
 * `rudder.batch.reportscleaner.archive.TTL`: Set the maximum report age before archival
 * `rudder.batch.reportscleaner.delete.TTL`: Set the maximum report age before deletion
 
 The default values are OK for systems under moderate load, and should be adjusted in case of
-excessive database bloating.
+excessive database bloating (see next section).
 
-The estimated disk space consumption, with a 5 minute agent run frequency, is 150 to 400 kB per Directive,
+The estimated disk space consumption, with a 5 minutes agent run frequency, is 150 to 400 kB per Directive,
 per day and per node, which is roughly 5 to 10 MB per Directive per month and per node.
 
 Thus, 25 directives on 100 nodes, with a 7 day log retention policy, would take 2.5 to 10 GB, and
 25 directives on 1000 nodes with a 1 hour agent execution period and a 30 day log retention policy
 would take 9 to 35 GB.
 
-=== PostgreSQL database vacuum
+=== PostgreSQL database bloating
 
-In some cases, like a large report archiving or deletion, the Rudder interface
-will still display the old database size. This is because even if the database has been
-cleaned as requested, the physical storage backend did not reclaim space on the hard drive,
-resulting in a "fragmented" database. This is not an issue, as PostgreSQL handles this automatically,
-and new reports sent by the nodes to Rudder will fill the blanks in the database, resulting in a
-steady growth of the database. This task is handled by the autovacuum process, which periodically
-cleans the storage regularly to prevent database bloating.
+PostgreSQL database can grow over time, even if the number of nodes and directives remain the same.
+This is because even if the database is regularly cleaned by Rudder as requested,
+the physical storage backend does not reclaim space on the hard drive, resulting in a "fragmented" database.
 
-However, to force this operation to free storage immediately, you can trigger a "vacuum full" operation
-by yourself, however keep in mind that this operation is very disk and memory intensive,
-and will lock both the Rudder interface and the reporting system for quite a long time with a big database.
+This is often not an issue, as PostgreSQL handles this automatically,
+and new reports sent by the nodes to Rudder should fill the blanks in the database.
+This task is handled by the autovacuum process, which periodically cleans the storage regularly
+to prevent database bloating.
+
+However, database can grow significantly, resulting in large disk usage, and slower performance, due to massive
+bloating (with database 3 or 4 times larger than necessary).
+
+To cure (or prevent) this behaviour, you can use either http://reorg.github.io/pg_repack/[pg_repack] that repacks
+the tables online, or trigger vacuum full operations, which put an exclusive lock on tables, 
+and will lock both the Rudder interface and the reporting system for quite a long time.
+
+
+==== Reclaming space online, using pg_repack
+
+It is necessary to install pg_repack, available on Postgresql.org repository. The procedure ballow shows how to install
+and configure it, using PostgreSQL repository.
+
+First, you need to identify the Postgresql version on your Rudder Server Root
+
+----
+
+$ psql -U rudder -h localhost -c "select version();"
+rudder=> select version();
+               version
+-----------------------------------------
+ PostgreSQL 9.6.10 on x86_64-pc-linux-gnu
+(1 row)
+
+----
+
+For the rest of the procedure, PG_VERSION refers to the PostgreSQL version, in format Major.Minor, and PG_SHORT_VERSION
+refers to the version in format MajorMinor. (note that version 10 and later don't have minor versions).
+So, with PostgreSQL version 9.6.10, you will have to define
+
+----
+
+PG_VERSION="9.6"
+PG_SHORT_VERSION="96"
+
+----
+
+[source,python]
+
+.Downloading and installing pg_repack on Debian
+
+----
+
+apt-get install wget ca-certificates
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+apt-get update
+apt-get install postgresql-PG_VERSION-repack
+
+----
+
+[source,python]
+
+.Downloading and installing pg_repack on RHEL/CentOS
+
+----
+
+echo '[pg_repack]
+name=pg_repack
+baseurl=https://download.postgresql.org/pub/repos/yum/PGVERSION/redhat/rhel-$releasever-$arch/
+gpgcheck=1
+gpgkey=https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-PG_SHORT_VERSION' > /etc/yum.repos.d/pg_repack.repo
+
+
+yum install pg_repackPG_SHORT_VERSION
+
+----
+
+Then pg_repack needs to be configured within postgresql, by editing postgresql.conf (typically in
+/etc/postgresql/PG_VERSION/main/postgresql.conf)
+
+and setting the shared_preload_libraries
+
+----
+
+shared_preload_libraries = 'pg_repack'
+
+----
+
+Then restart postgresql, and set up the extension
+
+----
+
+$ service postgresql restart
+
+$ su postgres
+$ psql -d rudder
+
+CREATE EXTENSION pg_repack;
+
+ALTER FUNCTION repack.version() OWNER TO postgres;
+ALTER FUNCTION repack.version_sql() OWNER TO postgres;
+ALTER FUNCTION repack.array_accum(anyelement) OWNER TO postgres;
+ALTER FUNCTION repack.oid2text(oid) OWNER TO postgres;
+ALTER FUNCTION repack.get_index_columns(oid,text) OWNER TO postgres;
+ALTER FUNCTION repack.get_order_by(oid,oid) OWNER TO postgres;
+ALTER FUNCTION repack.get_create_index_type(oid,name) OWNER TO postgres;
+ALTER FUNCTION repack.get_create_trigger(oid,oid) OWNER TO postgres;
+ALTER FUNCTION repack.get_enable_trigger(oid) OWNER TO postgres;
+ALTER FUNCTION repack.get_assign(oid,text) OWNER TO postgres;
+ALTER FUNCTION repack.get_compare_pkey(oid,text) OWNER TO postgres;
+ALTER FUNCTION repack.get_columns_for_create_as(oid) OWNER TO postgres;
+ALTER FUNCTION repack.get_drop_columns(oid,text) OWNER TO postgres;
+ALTER FUNCTION repack.get_storage_param(oid) OWNER TO postgres;
+ALTER FUNCTION repack.get_alter_col_storage(oid) OWNER TO postgres;
+ALTER FUNCTION repack.repack_indexdef(oid,oid,name,boolean) OWNER TO postgres;
+ALTER FUNCTION repack.repack_trigger() OWNER TO postgres;
+ALTER FUNCTION repack.conflicted_triggers(oid) OWNER TO postgres;
+ALTER FUNCTION repack.disable_autovacuum(regclass) OWNER TO postgres;
+ALTER FUNCTION repack.repack_apply(cstring,cstring,cstring,cstring,cstring,integer) OWNER TO postgres;
+ALTER FUNCTION repack.repack_swap(oid) OWNER TO postgres;
+ALTER FUNCTION repack.repack_drop(oid,integer) OWNER TO postgres;
+ALTER FUNCTION repack.repack_index_swap(oid) OWNER TO postgres;
+ALTER FUNCTION repack.get_table_and_inheritors(regclass) OWNER TO postgres;
+ALTER DEFAULT PRIVILEGES IN SCHEMA repack GRANT INSERT ON TABLES TO PUBLIC;
+ALTER DEFAULT PRIVILEGES IN SCHEMA repack GRANT USAGE, SELECT ON SEQUENCES TO PUBLIC;
+
+----
+
+pg_repack is now installed and configured, and you can start reclaming space, either manually, either via a cronjob
+(recommended solution)
+
+The easiest solution is to create a cron file /etc/cron.d/repack_db
+
+[source,python]
+
+----
+
+# Compress inline the database
+PATH=/usr/bin
+
+# 2:20: compress ruddersysevents
+20 2 * * * postgres pg_repack -d rudder -t ruddersysevents -T 3600
+
+# 3:40: compress ruddersysevents
+40 3 * * * postgres pg_repack -d rudder -t archivedruddersysevents -T 3600
+
+# 4:30: compress  nodecompliancelevels
+30 2 * * * postgres pg_repack -d rudder -t nodecompliancelevels -T 3600
+
+----
+
+==== Reclaming space with locking, using VACUUM FULL
+
+
 
 [source,python]
 
@@ -67,14 +210,14 @@ and will lock both the Rudder interface and the reporting system for quite a lon
 sudo -u postgres psql -d rudder
 
 # With rudder credentials, it will ask the password in this case:
-psql -u rudder -d rudder -W
+psql -u rudder -d rudder
 
 # And then, when you are connected to the rudder database in the psql shell, trigger a vacuum:
-rudder=# VACUUM FULL;
-
-# And take a coffee.
-
+rudder# VACUUM FULL rudder;
+rudder# VACUUM FULL archivedruddersysevents;
+rudder# VACUUM FULL nodecompliancelevels;
 ----
+
 
 === LDAP database reindexing
 
