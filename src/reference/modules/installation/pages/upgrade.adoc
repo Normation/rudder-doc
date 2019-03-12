@@ -29,7 +29,7 @@ Environment=VERBOSITY_OPTION=
 ** Edit the `/etc/default/rudder-agent` file:
 
 ----
-# You need to uncomment en let empty
+# You need to uncomment and let empty
 CFENGINE_COMMUNITY_PARAMS_1=""
 ----
 
