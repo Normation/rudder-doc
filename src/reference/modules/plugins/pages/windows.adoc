@@ -42,7 +42,7 @@ PowerShell 4 may also be installed on the following platforms, following this pr
 
 === Desktop version of Microsoft Windows
 
-There is no official support of Rudder agent on desktop versions of Microsoft Windows. However, the agent can be installed on the following platform:
+There is no official support of Rudder agent on desktop versions of Microsoft Windows. However, the agent can be installed on the following platforms:
 
  * Windows 7 (you will need to upgrade to PowerShell 4 first, and activate WinRM)
  * Windows 8 (you will need to upgrade to PowerShell 4 first, and activate WinRM)
@@ -190,20 +190,17 @@ Then reboot the system.
 
 * On Windows, Rudder can only manage user password in clear text.
 
-* Mustache templating on Windows is very limited and does not support array iteration.
+* Mustache templating on Windows does not support the exact same syntax than Linux, see the documentation see [the documentation](#file_from_template_mustache).
 
 * The Technique File download (Rudder server) technique can not share folders with a Windows agent, only files can be shared.
 
-* On the first run of the Rudder DSC agent CLI in a Powershell terminal, you may have the following error message:
+* If you have a file explorer opened on a Rudder folder while executing the command `rudder agent update` there is a chance that the agent fails and raise an error
+like :
 +
 ----
-
-Import-LocalizedData : Cannot find the Windows PowerShell data file 'MSFT_ServiceResource.strings.psd1' in directory 'C:\Windows\system32\WindowsPowershell\v1.0\Modules\PSDesiredStateConfiguration\PSProviders\MSFT_ServiceResource\\', or in any parent culture directories.
-
+Get-ChildItem : Access to the path 'C:\Program Files\Rudder\tmp\dsc\ncf' is denied.
 ----
 +
-This does not prevent the correct execution of the agent, and next runs in the same terminal will not exhibit the error
 
-image:rudder-agent-windows-known-issue.png[Error on first DSC agent execution in a terminal]
-
-
+This may broke your agent. If it happens, please rename the folder `C:\Program Files\Rudder\Policy.swap` in `C:\Program Files\Rudder\Policy`, close all
+Windows File Explorer and try again to update.
