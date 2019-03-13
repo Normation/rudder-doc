@@ -1,6 +1,11 @@
 [[rudder-installation-requirements]]
 = Requirements
 
+== Browser support for UI
+
+Rudder can be used with recent version (less than 2 years old) of Firefox, Chrome (and derivatives), and Edge. 
+Internet Explorer is not supported. 
+
 [[configure-the-network]]
 == Network flows - Firewall configuration
 
