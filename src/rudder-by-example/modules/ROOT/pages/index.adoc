@@ -2,4 +2,4 @@
 
 This document gives examples of Rudder usecase examples with a step by step explanation.
 
-Please explore the menu on your left to find useful example relevent to your needs. If you miss any example, do not hesitate to ask the community on https://char.rudder.io/
+Please explore the menu on your left to find useful example relevant to your needs. If you miss any example, do not hesitate to ask the community on our https://chat.rudder.io/[chat room].
