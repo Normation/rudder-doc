@@ -1,5 +1,49 @@
 = Upgrade notes
 
+== Upgrade from a previous Rudder 5.0
+
+Migration from any 5.0 minor version is supported (see below for migration from older versions).
+
+[NOTE]
+====
+
+Rudder 5.0.9 changes the default log level for the configuration server in Rudder.
+
+This allows easier debugging and tracability of policy updates, so we enabled
+it by default, but will produce more logs.
+If you want to revert to the previous behavior (which only logs errors):
+
+* On systemd systems
+
+** Create a `/etc/systemd/system/rudder-cf-serverd.service.d/override.conf` file containing:
+
+----
+[Service]
+Environment=VERBOSITY_OPTION=
+----
+
+** Run `systemctl daemon-reload` then `systemctl restart rudder-cf-serverd`
+
+* On systems using the init script
+
+** Edit the `/etc/default/rudder-agent` file:
+
+----
+# You need to uncomment and let empty
+CFENGINE_COMMUNITY_PARAMS_1=""
+----
+
+** Restart the service with `service rudder-agent restart`
+
+Verbosity options can be:
+
+* empty for only errors
+* `--inform` for basic messages
+* `--verbose` for very detailed logs
+* `--debug` for unreasonnably detailed logs
+
+====
+
 == Upgrade from Rudder 4.1, 4.2 or 4.3
 
 Migration from 4.1, 4.2 or 4.3 are supported, so you can upgrade directly to 5.0.
