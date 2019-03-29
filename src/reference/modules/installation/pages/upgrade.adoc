@@ -2,7 +2,7 @@
 
 == Upgrade from a previous Rudder 5.0
 
-Migration from any 5.0 minor version is supported.
+Migration from any 5.0 minor version is supported (see below for migration from older versions).
 
 [NOTE]
 ====
