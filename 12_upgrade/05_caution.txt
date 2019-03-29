@@ -49,6 +49,25 @@ Then, you now need to use:
 
 ====
 
+[NOTE]
+
+====
+
+Upgrading from 4.1.18 or earlier can cause transient missing `/opt/rudder/etc/uuid.hive` - as this
+file is no longer part of the packaging. The issue will resolve itself, and happen only once - any
+subsequent upgrade will not exhibit this problem anymore.
+
+If you don't want to wait up to 5 minutes for this issue to correct itself, you can run:
+
+---
+rudder agent check
+---
+
+that will restore the file from backup.
+
+====
+
+
 ==== Compatibility between Rudder agent 4.1 and older server versions
 
 ===== 4.0.x servers
