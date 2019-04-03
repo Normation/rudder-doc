@@ -448,3 +448,25 @@ image::node-lifecycle-settings.png[]
 
 In the future, these states will be configurable on a per node basis at acceptation, and the
 lifecycle states list will be configurable by users.
+
+== Disable the service listening for remote run on nodes
+
+By default, every Rudder node runs a service that listens on port 5309 for remote execution triggers,
+callable from https://docs.rudder.io/api/#api-Nodes-applyPolicy[Rudder API].
+
+WARNING: On Rudder root server and relays, this service is necessary and cannot be disabled. It is used to serve configuration policies to managed nodes.
+
+It is totally optional, and you can easily disable it:
+
+* On systemd systems, stop and disable the `rudder-cf-serverd` service on the nodes you don't want it to run (you can do it through Rudder policies):
+
+----
+systemctl stop rudder-cf-serverd.service
+systemctl disable rudder-cf-serverd.service
+----
+
+* On systems still using the init script, edit `/etc/default/rudder-agent` and uncomment and set to 0 the `CFENGINE_COMMUNITY_RUN_1` line: 
+
+----
+CFENGINE_COMMUNITY_RUN_1="0"
+----
