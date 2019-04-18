@@ -2,8 +2,8 @@
 
 RUDDER_VERSION = 5.1
 
-.PHONY: clean generic_methods.adoc rudder.adoc hooks.adoc plugins versions.adoc version-compat.adoc
-all: generic_methods.adoc hooks.adoc rudder.adoc plugins version-compat.adoc
+.PHONY: clean generic_methods.adoc rudder.adoc rudder-relayd.1.adoc hooks.adoc plugins versions.adoc version-compat.adoc
+all: generic_methods.adoc hooks.adoc rudder.adoc rudder-relayd.1.adoc plugins version-compat.adoc
 
 ## Repos
 
@@ -37,7 +37,14 @@ rudder.adoc: rudder-agent-repo
 	cd rudder-agent-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
 	cd rudder-agent-repo && git pull
 	cd rudder-agent-repo/man && make rudder.adoc
-	cp rudder-agent-repo/man/rudder.adoc rudder.adoc
+	# Remove first line for easier inclusion
+	tail -n +2 rudder-agent-repo/man/rudder.adoc > rudder.adoc
+
+rudder-relayd.1.adoc: rudder-repo
+	cd rudder-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
+	cd rudder-repo && git pull
+	# Remove first line for easier inclusion
+	tail -n +2 rudder-repo/relay/sources/man/rudder-relayd.1.adoc > rudder-relayd.1.adoc
 
 hooks.adoc: rudder-repo
 	cd rudder-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
@@ -77,7 +84,7 @@ plugins: rudder-plugins-repo rudder-plugins-private-repo
 ## Clean
 
 clean:
-	rm -rf generic_methods.{adoc,md} hooks.adoc rudder.adoc version-compat.adoc plugins
+	rm -rf generic_methods.{adoc,md} hooks.adoc rudder.adoc rudder-relayd.1.adoc version-compat.adoc plugins
 
 veryclean: clean
 	rm -rf rudder-agent-repo rudder-repo ncf-repo rudder-agent-windows-repo rudder-plugins-repo rudder-plugins-private-repo

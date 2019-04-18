@@ -3,7 +3,7 @@
 .PHONY: clean $(ADOC_DYN_FILES) nav
 
 ADOC_SRC_FILES = $(shell find modules/ROOT/pages -type f -name '*.adoc')
-ADOC_DYN_FILES = generic_methods.adoc hooks.adoc rudder.adoc versions.adoc version-compat.adoc
+ADOC_DYN_FILES = generic_methods.adoc hooks.adoc rudder.adoc rudder-relayd.1.adoc versions.adoc version-compat.adoc
 GRAPHVIZ_FILES = $(shell find modules/reference/assets/graphviz -type f -name '*.dot')
 GRAPHVIZ_IMAGES = $(addprefix modules/reference/assets/images/graphviz/, $(notdir $(GRAPHVIZ_FILES:dot=png)))
 
@@ -24,6 +24,11 @@ generic_methods.adoc:
 	cp dependencies/$@ modules/reference/pages/_partials/dyn/$@
 
 rudder.adoc:
+	cd dependencies && make $@
+	mkdir -p modules/reference/pages/_partials/dyn/
+	cp dependencies/$@ modules/reference/pages/_partials/dyn/$@
+
+rudder-relayd.1.adoc:
 	cd dependencies && make $@
 	mkdir -p modules/reference/pages/_partials/dyn/
 	cp dependencies/$@ modules/reference/pages/_partials/dyn/$@

@@ -1,4 +1,9 @@
 = Man pages
 
+== rudder(8)
+
 include::{partialsdir}/dyn/rudder.adoc[leveloffset=+1]
 
+== rudder-relayd(1)
+
+include::{partialsdir}/dyn/rudder-relayd.1.adoc[leveloffset=+1]
