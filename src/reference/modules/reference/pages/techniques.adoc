@@ -210,6 +210,8 @@ Example:
 
 ----
 
+NOTE: Files referenced in FILE tag can only be encoded in UTF-8 or plain ASCII text - other encoding will cause reencoding in UTF-8 and possible data corruption.
+
    *  *name* is mandatory. It's the path to file to copy, either relative to the technique directory (i.e, at the same level as metadata.xml) or absolute from the configuration repository directory if it starts with RUDDER_CONFIGURATION_REPOSITORY (usually /var/rudder/configuration-repository) (and yes, this forbids the use case where you want to have a sub-directory named RUDDER_CONFIGURATION_REPOSITORY under the technique directory - I'm sure one will find other way to do it if really needed :). The file will be taken from git, at the same git revision as other techniques files.
    *  *OUTPATH* is optional. If not specified, the file will be copied into the target node policies at the same place as other files for the technique, with the same name. If specified, you have to give a path+name, where path is relative to the directory for agent promises on the node (i.e, if you want to put the file in the technique directory, you need to use `techniqueName/new-file-name.txt`)
 
