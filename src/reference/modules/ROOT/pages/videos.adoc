@@ -1,5 +1,11 @@
 = Rudder Videos
 
+== Configuration Management Camp 2019 - Rudder Room
+
+++++
+<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL6rU2OMWTrhEkQ9_watFjyE1dDxaNFeOW" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+++++
+
 == Configuration Management Camp 2018 - Rudder Room
 
 ++++
