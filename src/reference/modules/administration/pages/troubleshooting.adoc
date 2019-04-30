@@ -1,0 +1,5 @@
+= Troubleshooting agent-server communication issues
+
+== Inventory problem
+
+== Reporting problem
