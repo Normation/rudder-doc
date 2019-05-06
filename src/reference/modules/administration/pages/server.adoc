@@ -49,6 +49,18 @@ This tag is then referenced in the Rudder web interface, and available for downl
 as a zip file. Please note that each change in the Rudder web interface is also
 committed in the repository.
 
+
+[WARNING]
+===========
+
+Currently, Archiving also add all unstaged files in the commit in +/var/rudder/configuration-repository+.
+So it can change the Techniques used by Rudder (Rudder uses the latest commit in git as a reference). You
+should away ensure that there are no unstaged files before doing any Archive to avoid any side effect.
+In the future, Rudder will prevent any Archive in Techniques or Generic Methods are not commited.
+
+===========
+
+
 The content of this repository can be imported into any Rudder server (with the same version).
 
 === Archiving
