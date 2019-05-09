@@ -137,17 +137,18 @@ the user experience is good.
 
 === Disk
 
-The PostgreSQL database will take up most disk space needed by Rudder. The storage
+The PostgreSQL database will take up most of the disk space needed by Rudder. The storage
 necessary for the database can be estimated by counting around
-150 to 400 kB by Directive, by Node and by day of retention of node's
-execution reports (the default is 4 days):
+500 to 900 kB per Directive per Node per Day of retention of node execution reports (default is 4 days),
+plus 150 kB per Directive per Node per Day of archiving (default is 15 days),
+plus 150 kB per Directive per Node per Day of compliance retention (default is 15 days) :
 
 ----
-max_space = number of Directives * number of Nodes * retention duration in days * 400 kB
+max_space = number of Directives * number of Nodes * ( retention duration in days * 900 kB + archive retention in days * 150 + compliance retention in days * 150 )
 ----
 
 For example, a default installation with 500 nodes and an average of
-50 Directives by node, should require between *14 GB and 38 GB* of disk space
+50 Directives by node, should require between *69 GB and 104 GB* of disk space
 for PostgreSQL.
 
 Follow the xref:administration:performance.adoc#_reports_retention[reports Retention] section to configure the
