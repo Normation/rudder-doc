@@ -1,7 +1,7 @@
 [[dsc-plugin]]
 = Windows
 
-This plugins allows to manage Windows systems, using Microsoft Powershell DSC. Rudder Windows agent is available with a annual subscription, read more about the subscription here: https://www.rudder.io/en/pricing/subscription/
+This plugins allows to manage Windows systems, using Microsoft Powershell DSC. Rudder Windows agent is available with a annual subscription, read more about it https://www.rudder.io/en/pricing/subscription/[on our website].
 
 == Install Windows DSC plugin on the server
 
