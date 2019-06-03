@@ -1,0 +1,121 @@
+= Extend inventories with custom data
+
+== Use case
+
+Rudder provides inventories containing generic information about
+nodes hardware, configuration and installed software, allowing to classify nodes into
+relevant groups and apply different policies.
+But sometimes, the content of these inventories is not enough, and you
+may want to *add custom data* that could be a node property, but *comes
+directly from the node*.
+
+In this case, you can use the xref:reference:usage:advanced_node_management.adoc#extend-nodes-inventory[inventory extension hook mechanism].
+Additional data will appear as *read-only node properties in the Rudder server*, ready
+to be used like the rest of the properties (to classify nodes or be part
+of actual policies content).
+
+We will here describe a complete example, allowing to collect information
+about known *CPU vulnerabilities* on the nodes.
+
+image::cpu_vuln.png[CPU vulnerabilities]
+
+== Policy design
+
+To be able to use our custom data we need to:
+
+* write a script collecting the information
+* deploy the script to the relevant nodes
+* use the defined property to create groups
+
+== Inventory extension script
+
+An inventory extension script can be written in any language, it just needs to be an
+executable file placed in `/var/rudder/hooks.d` that outputs a json object. It will be called at each 
+inventory, and its output will be added into it.
+
+NOTE: Read the xref:reference:usage:advanced_node_management.adoc#extend-nodes-inventory[dedicated section]
+for more details.
+
+We'll just have to extract vulnerabilities information provided by the kernel in 
+`/sys/devices/system/cpu/vulnerabilities`. We'll not return the raw data, but
+rework it to make it easily usable on the server. We'll:
+
+* Determine the status of the node for each known vulnerability
+* Add details in a separate variable for mode advanced handling
+
+In our case, we have written a small python script (the https://github.com/Normation/rudder-tools/blob/master/contrib/inventory-hooks/cpu_vulnerabilities.py[script] and its https://github.com/Normation/rudder-tools/blob/master/contrib/inventory-hooks/cpu_vulnerabilities.adoc[documentation]) that outputs our CPU vulnerabilities in the
+following format:
+
+[source,json]
+----
+{
+  "cpu_vulnerabilities": {
+    "spectre_v2": {
+      "status": "vulnerable",
+      "details": "Retpoline without IBPB"
+    },
+    "spectre_v1": {
+      "status": "mitigated",
+      "details": "Load fences"
+    },
+    "meltdown": {
+      "status": "mitigated",
+      "details": "PTI"
+    }
+  }
+}
+----
+
+[NOTE]
+====
+
+We have a https://github.com/Normation/rudder-tools/tree/master/contrib/inventory-hooks[central place] to allow sharing your inventory extension scripts, if your 
+are writing one, please consider contributing it! (Just open a _pull request_ directly on the repository,
+your script doesn't have to be perfect!).
+
+====
+
+== Deploy the script
+
+Here we can simply use any mean allowing to copy files from the root server to the nodes.
+We will create a dedicated directory in `/var/rudder/configuration-repository/shared-files`
+on the server and copy the hooks to the right nodes.
+
+An good option (allowing different inventory on different machines)
+is to create a dedicated technique like:
+
+image::cpu_technique.png[Technique to deploy inventory hooks]
+
+(applied permissions here are `root:root` and `755`).
+
+Then you can add a directive for each hooks:
+
+image::cpu_directive.png[Directive to deploy CPU vulnerabilities hook]
+
+For example, in our example, we will very likely apply this directive to all our physical nodes.
+
+== Use the defined properties
+
+In our case, we want to define groups identifying vulnerable nodes.
+
+image::cpu_prop.png[Defined property]
+
+To use the data properly, we need to extract information from the object,
+and cannot rely on a simple regex. We will use the
+xref:reference:usage:node_management.adoc#search-nodes-properties-json-path[JSON path syntax].
+
+For example to select nodes known to be vulnerable to `spectre_v2`, we need to use the `cpu_vulnerabilities:$.spectre_v2[?(@.status=='vulnerable')]` JSON path query in group form that
+will only select nodes that have a `spectre_v2` object with the `vulnerable status`.
+
+image::cpu_group.png[Defined group]
+
+You can then apply rules to these groups (upgrade CPU microcode, plan reboots, etc.)
+
+[NOTE]
+====
+
+Inventory data is updated daily, if you want to gather updated information, 
+run `rudder agent inventory` on the target nodes to se changes reflected in Rudder
+server.
+
+====
