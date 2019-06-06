@@ -256,7 +256,7 @@ This backup procedure will operate on principal Rudder data sources:
 * The LDAP database
 * The PostgreSQL database
 * The configuration-repository folder
-* Rudder cofiguration
+* Rudder configuration
 
 It will also backup the application logs.
 
