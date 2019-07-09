@@ -39,7 +39,7 @@ the import will break the configuration on the target Rudder server.
 
 ==== Concepts
 
-In the 'Administration > Archives' section of the Rudder Server web interface, you
+In the 'Utilities > Archives' page of the Rudder Server web interface, you
 can export and import the configuration of Rudder Groups, Directives and Rules.
 You can either archive the complete configuration, or only the subset dedicated
 to Groups, Directives or Rules.
@@ -64,7 +64,7 @@ The content of this repository can be imported into any Rudder server (with the 
 ==== Archiving
 
 To archive Rudder Rules, Groups, Directives, or make a global archive, you need to go to 
-the 'Administration > Archives' section of the Rudder Server web interface.
+the 'Utilities > Archives' page of the Rudder Server web interface.
 
 To perform a global archive, the steps are:
 
@@ -85,9 +85,8 @@ To import the archive on the target Rudder server, you can follow the following 
 . Uncompress the zip archive in /var/rudder/configuration-repository
 . If necessary, correct all files permissions: +chown -R root:rudder directives groups parameters ruleCategories rules techniques+ and +chown -R ncf-api-venv:rudder ncf/50_techniques techniques/ncf_techniques+
 . Add all files in the git repository: +git add . && git commit -am "Importing configuration"+
-. Finally, in the Web interface, go to the 'Administration > Archives' section, and select
-'Latest Git commit' in the drop down list in the Global archive section, and click on 'Restore
-everything' to restore the configuration.
+. In the Web interface, go to the 'Settings > General' page, at the bottom of the page in 'Manage Technique library' section, click 'Reload Techniques' button
+. Finally, in the Web interface, go to the 'Utilities > Archives' page, in the 'Global Archive' section (first section), select 'Latest Git commit' in the drop down list, and click on 'Restore everything' to restore the configuration.
 
 [TIP]
 
@@ -110,7 +109,7 @@ For instance, using one unique git repository you can follow this workflow:
 
 .. +git pull+ from the central repository;
 
-.. Use  Rudder web interface to import the qualified archive.
+.. Use  Rudder web interface to reload techniques and import the qualified archive.
 
 ====
 
