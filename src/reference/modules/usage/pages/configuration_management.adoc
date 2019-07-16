@@ -99,59 +99,10 @@ if you feel the generated policies should be modified (for instance, if you chan
 
 image::Rule_config.png[]
 
-
-
 == Variables
 
-=== User defined parameters
-
-Rudder provides a simple way to add common and reusable variables in either plain directives, or techniques created using the technique editor: the parameters.
-
-image::rudder-parameters.png[Parameters]
-
-The parameters enable the user to specify a content that can be put anywhere, using the following syntax:
-
-* In directives: `${rudder.param.name}` will expand the content of the "name" parameter.
-* In the technique editor: `${rudder_parameters.name}` will do the same.
-
-Using this, you can specify common file headers (this is the default parameter, "rudder_file_edit_header"), common DNS or domain names, backup servers,
-site-specific elements...
-
-=== System variables
-
-Rudder also provides system variables that contain information about nodes
-and their policy server. You can use them like user defined parameters.
-
-NOTE: These variables are only usable in the directive parameters and not in the technique editor,
-see node-level properties below if needed.
-
-The information about a node:
-
-* `${rudder.node.id}` returns the Rudder generated id of the node
-* `${rudder.node.hostname}` returns the hostname of the node
-* `${rudder.node.admin}` returns the administrator login of the node
-* `${rudder.node.state}` returns the xref:usage:advanced_node_management.adoc#node-lifecycle[node lifecycle] of the node
-* `${rudder.node.policyMode}` returns the xref:usage:configuration_management.adoc#_policy_mode_audit_enforce[effective policy mode] of the node
-
-The information about a node's policy server.
-
-* `${rudder.node.policyserver.id}` returns the Rudder generated id of the Policy Server
-* `${rudder.node.policyserver.hostname}` returns the hostname of the Policy Server
-* `${rudder.node.policyserver.admin}` returns the administrator login of the Policy Server
-
-==== Node-level system properties
-
-NOTE: These variables are not available on Windows nodes, but only on with the classic Linux/AIX agent.
-
-These properties are evaluated on the node at run time, and are hence available both in
-directives parameters and in the technique editor:
-
-* `${sys.fqhost}` is the fully-qualified hostname, it matches the hostname seen in Rudder
-* `${sys.uqhost}` is the unqualified hostname
-* `${sys.host}` is the node's hostname (according to the kernel)
-* `${sys.domain}` is the domain discovered by the agent
-
-There are also more variables available, all documented in https://docs.cfengine.com/docs/3.10/reference-special-variables-sys.html[this page].
+Rudder provides multiple ways to add common and reusable variables in either plain directives, or techniques created using the technique editor.
+See xref:reference:variables.adoc[Variables] for more details.
 
 [[compliance-and-drift-assessment]]
 == Compliance and Drift Assessment

@@ -1,0 +1,152 @@
+= Variables
+
+== General
+
+In Rudder, you can define and use variables via the technique editor or the differents pre-built techniques.
+
+All variables are defined under a `prefix` (scope), so to reference a variable you will always need its `prefix` and its `name`, separated via a `.` char.
+To call a variable in Rudder we use `${...}` brackets syntax as described below:
+
+NOTE: For backward compatibility, the syntax `$(...)` is also supported, but deprecated and not recommanded.
+
+----
+// Call to a String or Iterator variable
+${<prefix>.<variable name>}
+
+// Call to a key in a Dict variable
+${<prefix>.<variable dict name>[key][sub-key]}
+
+----
+
+The prefix will allow you to easily organize your variables and re-use the already taken name defining a new prefix.
+
+Variables are also typed and can be:
+* A classic `String`
+* A `Dict`, which support key-values and arrays
+* Or an `Iterator` which is used to loop over things in Rudder.
+
+More over, all variables in Rudder are overridable at execution time, keep in mind that ordering the definition of your variables is important.
+
+== User defined parameters
+
+Rudder provides a simple way to add common and reusable variables in either plain directives, or techniques created using the technique editor: the parameters.
+
+image::rudder-parameters.png[Parameters]
+
+The parameters enable the user to specify a content that can be put anywhere, using the following syntax:
+
+* In directives: `${rudder.param.name}` will expand the content of the "name" parameter.
+* In the technique editor: `${rudder_parameters.name}` will do the same.
+
+Using this, you can specify common file headers (this is the default parameter, "rudder_file_edit_header"), common DNS or domain names, backup servers,
+site-specific elements...
+
+== System Variables
+
+Rudder also provides system variables that contain information about nodes
+and their policy server. You can use them like user defined parameters.
+
+=== In the Directive parameters
+
+NOTE: These variables are only usable in the directive parameters and not in the technique editor,
+
+Informations about current node:
+
+[cols="2", options="header"]
+|===
+|Variable
+|Descritpion
+
+|${rudder.node.id}
+|Rudder id of the node
+
+|${rudder.node.hostname}
+|Node hostname
+
+|${rudder.node.admin}
+|Node administrator login
+
+|${rudder.node.state}
+|The xref:usage:advanced_node_management.adoc#node-lifecycle[node lifecycle] of the node
+
+|${rudder.node.policyMode}
+|the xref:usage:configuration_management.adoc#_policy_mode_audit_enforce[effective policy mode] of the node
+|===
+
+Informations about a node's policy server:
+
+[cols="2", options="header"]
+|===
+|Variable
+|Descritpion
+
+|${rudder.node.policyserver.id}
+|The Rudder generated id of the Policy Server
+
+|${rudder.node.policyserver.hostname}
+|The hostname of the Policy Server
+
+|${rudder.node.policyserver.admin}
+|The administrator login of the Policy Server
+
+|===
+
+=== In the Technique Editor
+
+NOTE: These variables are not available on Windows nodes, but only on with the classic Linux/AIX agent and within the `Technique Editor`.
+
+==== Node-level system properties
+
+These properties are evaluated on the node at run time, and are hence available both in
+directives parameters and in the technique editor:
+
+[cols="3", options="header"]
+|===
+|Variable
+|Descritpion
+
+|${sys.arch}
+|Kernel short architecture
+
+|${sys.fqhost}
+|Fully qualified hostname, as seen in Rudder
+
+|${sys.uqhost}
+|Unqualified hostname
+
+|${sys.host}
+|Node's hsotname (according to the kernel)
+
+|${sys.domain}
+|Node's domain as discovered by the agent
+|===
+
+There are also more variables available, all documented in https://docs.cfengine.com/docs/3.10/reference-special-variables-sys.html[this page].
+
+==== Constants
+
+[cols="2", options="header"]
+|===
+|Variable
+|Descritpion
+
+|${const.dollar}
+|$
+
+|${const.dirsep}
+|/
+
+|${const.endl} or ${const.n}
+|\n
+
+|${const.r}
+|carriage return
+
+
+|${const.t}
+|tabulation
+
+|${ncf_const.s}
+|space char
+|===
+

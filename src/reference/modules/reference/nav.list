@@ -1,6 +1,7 @@
 architecture.adoc
 build.adoc
 man.adoc
+variables.adoc
 package_format.adoc
 security.adoc
 relay_api.adoc
