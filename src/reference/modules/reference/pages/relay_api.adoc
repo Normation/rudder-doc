@@ -1,102 +1,191 @@
-= Rudder relay API
+== Rudder relay API
 
-The `rudder-server-relay` package provides an HTTP API.
-It is available on simple relays and root servers.
-It is an internal API, not exposed to users, and used
-to provide various Rudder features.
+The `+rudder-server-relay+` package provides an HTTP API. It is
+available on simple relays and root servers. It is an internal API, not
+exposed to users, and used to provide various Rudder features.
 
-== Remote Run
+=== Remote Run
 
-The remote run API is available at `https://relay/rudder/relay-api/remote-run`.
-It allows triggering a run on nodes (like with the `rudder remote run` command).
+The remote run API is available at
+`+https://relay/rudder/relay-api/remote-run+`. It allows triggering a
+run on nodes (like with the `+rudder remote run+` command).
 
-=== Description
+==== Description
 
-The remote run API applies to all nodes that are below the target relay server, which means:
+The remote run API applies to all nodes that are below the target relay
+server, which means:
 
 * All nodes directly connected to the server
-* All the relays that have the target node as policy server, and all nodes that are below them
+* All the relays that have the target node as policy server, and all
+nodes that are below them
 
-In particular, it does not act on the target relay itself (except for the root server which is its own policy server).
+In particular, it does not act on the target relay itself (except for
+the root server which is its own policy server).
 
-There are different methods, whether you want to trigger all nodes, or only a part of them.
+There are different methods, whether you want to trigger all nodes, or
+only a part of them.
 
-=== Security
+==== Security
 
 The remote run calls are not authenticated, but restricted to:
 
 * Local calls on the relay
-* The relay's policy server
+* The relay’s policy server
 
-They requires allowing the policy server to connect to its nodes on port 5309.
+They require allowing the policy server to connect to its nodes on port
+5309.
 
-=== Usage
+==== Usage
 
 This API provides the following methods:
 
-* *POST* `/rudder/relay-api/remote-run/all`: Trigger a run on all nodes below the target relay.
-* *POST* `/rudder/relay-api/remote-run/nodes/`_<node-id>_: Trigger a run on the _node-id_ node (which must be under the target relay).
-* *POST* `/rudder/relay-api/remote-run/nodes` Trigger a run on the given nodes (which must be under the target relay), see the `nodes` parameter below.
+* _POST_ `+/rudder/relay-api/remote-run/all+`: Trigger a run on all
+nodes below the target relay.
+* _POST_ `+/rudder/relay-api/remote-run/nodes/+`____: Trigger a run on
+the _node-id_ node (which must be under the target relay).
+* _POST_ `+/rudder/relay-api/remote-run/nodes+` Trigger a run on the
+given nodes (which must be under the target relay), see the `+nodes+`
+parameter below.
 
 The general parameters are:
 
-* `keep_output` = *true* or *false*: Should the agent output be returned (default: *false*)
-* `asynchronous` = *true* or *false*: Should the server return immediately after trigerring the agent or wait for remote runs to end (default: *false*)
-* `classes` = *class* or *class1,class2,etc.* for multiple classes: Classes to pass to the agent (default: none)
+* `+keep_output+` = _true_ or _false_: Should the agent output be
+returned (default: _false_)
+* `+asynchronous+` = _true_ or _false_: Should the server return
+immediately after triggering the agent or wait for remote runs to end
+(default: _false_)
+* `+classes+` = _class_ or _class1,class2,etc._ for multiple classes:
+Classes to pass to the agent (default: none)
 
-And, only for the `/rudder/relay-api/remote-run/nodes` call:
+And, only for the `+/rudder/relay-api/remote-run/nodes+` call:
 
-* `nodes` = *node_uuid* or *node_uuid1,node_uuid2,etc.* for multiple nodes: Nodes to trigger (default: none)
+* `+nodes+` = _node_uuid_ or _node_uuid1,node_uuid2,etc._ for multiple
+nodes: Nodes to trigger (default: none)
 
-== Shared Files
+=== Shared Files
+
+==== Description
+
+The goal of this API is to share a file from node to node. The source
+node uses an API call to send the file, and the destination node will
+get the file using the same protocol as files shared from the policy
+server.
+
+There are generic method that allow easy access to those methods from
+the nodes.
+
+==== Security
+
+This call is open to all nodes in the allowed networks of the target
+relay. The sent files are signed with the node’s key, and the signature
+is checked before being processed.
+
+==== Usage
+
+This API provides the following methods:
+
+* _PUT_ `+/shared-files/<target-uuid>/<source-uuid>/<file-id>+`
+* _HEAD_
+`+/shared-files/<target-uuid>/<source-uuid>/<file-id>?hash=<file-hash>+`
+
+The common URL parameters are:
+
+* `+target-uuid+` = _destination_node_uuid_: where to send the file to
+* `+source-uuid+` = _source_node_uuid_: who sent the file
+* `+file-id+` = _my_file_id_: under which name to store the file, this needs to be unique
+
+NB : `+file-id+` must match this charset [A-z0-9_-.]
+
+== PUT
+
+The following parameters have to be sent in a form:
+
+* `+hash_value+` = _value of the hash_: hash of the shared file
+* `+algorithm+` = _sha1_, _sha256_ or _sha512_: algorithm used to hash
+the file
+* `+digest+` = **: signature of the file
+* `+pubkey+` = **: public key
+* `+ttl+` = **: can be a number of second or a string of the long form
+``1day 2hours 3minutes 4seconds'' or abbreviated in the form ``1d 2h 3m
+4s''
+* `+header+` = _rudder-signature-v1_: signing format (for now, only one
+possible value)
+
+The relay that receives an API call to share a file (_PUT_) will:
+
+* share the file directly if the target node is one of its managed
+nodes.
+* send the file to a sub-relay if the target is somewhere under it.
+* forward the file to its policy server if the target is nowhere under
+it.
+
+There are 3 types of HTTP responses:
+
+* HTTP 404 : the target-uuid is unknown
+* HTTP 500 : a problem occurred (unable to get the nodes list, no ttl
+provided, unable to get file content)
+* HTTP 200 : everything went well
+
+Once the file has been forwarded to the right node, a metadata file is
+saved next to the shared file. It contains the _PUT_ parameters sent
+with the file. Here’s an example of a such file:
+
+`+header=rudder-signature-v1+` `+algorithm=sha512+`
+`+digest=8ca9efc5752e133e2[..]CAwEAAQ==+` `+hostname=ubuntu-18-04-64+`
+`+keydate=2018-10-31 18:21:43.653257143 +0000+` `+keyid=B29D02BB+`
+`+expires=1562230419+`
+
+NB : the `+expires+` field contains the ttl parameter sent, in a unix
+timestamp format.
+
+== HEAD
+
+The URL parameters specific to the _HEAD_ call are:
+
+* `+file-hash+` = _value of the hash_: hash of the shared file
+
+The purpose of the HEAD request is to check if the file named
+`+<file-id>+` stored in `+/shared-files/<target-uuid>/<source-uuid>/+`
+has its hash value equal to the value sent with the `+?hash=+`
+parameter.
+
+The relay that receives a _HEAD_ call will respond with:
+
+* HTTP 200 if the hash values are equal
+* HTTP 404 if the hash values are not equal, or the target-uuid is
+unknown
+* HTTP 500 : a problem occurred (unable to get the nodes list, no ttl
+provided, unable to get file content)
+
+== Shared Folder
+
+The goal of this API is to share a folder between Windows nodes.
 
 === Description
 
-The goal of this API is to share a file from node to node. The source nodes uses an API call to send the file,
-and the destination node will get the file using the same protocol as files shared from the policy server.
-
-The relay that receives an API call to share a file (*PUT*) will:
-
-* share the file directly if the target nodes is one of its managed nodes.
-* send the file to a sub-relay if the target is somewhere under it
-* forward the file to its policy server if the target is nowhere under it
-
-The relay that receive a *HEAD* call will:
-
-* If the file exists, compare the provided hash with the hash of the stored file, and return the result (*true* or *false*).
-* If the file does not exist, return *false*.
-
-The ttl is stored along with the file, and a clean task will regularly run and check for outdated files to remove.
-
-There are ncf generic method that allow easy access to those methods from the nodes.
-
 === Security
 
-This call is open to all nodes in the allowed networks of the target relay.
-The sent files are signed with the node's key, and the signature is checked before being traited.
+This call is open to all nodes in the allowed networks of the target
+relay. The sent files are signed with the node’s key, and the signature
+is checked before being processed.
 
 === Usage
 
 This API provides the following methods:
 
-* *PUT* `/shared-files/` _<target-uuid>_ `/` _<source-uuid>_ `/` _<file-id>_
-* *HEAD* `/shared-files/` _<target-uuid>_ `/` _<source-uuid>_ `/` _<file-id>_ `?hash=` _file-hash_
+* HEAD or GET
+`+/shared-folder/<path:file_name>?hash_type=<sha1 || sha256 || sha512>?hash=<hash_value>+`
 
-The common URL parameters are:
+=== HEAD & GET
 
-* `target-uuid` = *destination_node_uuid*:  where to send the file to
-* `source-uuid` = *source_node_uuid*: who sent the file
-* `file-id` = *my_file_id*: under which name to store the file, this needs to be unique
+* `+hash_type+` = _sha1_, _sha256_ or _sha512_: algorithm used to hash
+the file
+* `+hash_value+` = _value of the hash_: hash of the shared file
 
-The URL parameters specific to the *HEAD* call are:
+The relay that receives a _HEAD_ or a _GET_ call will respond with:
 
-* `file-hash` = *value of the hash*: hash of the shared file
-
-The following are only needed for the *PUT* call:
-
-* `hash_value` = *value of the hash*: hash of the shared file
-* `algorithm` = *sha1*, *sha256* or *sha512*: algorithm used to hash the file
-* `digest` = **: signature of the file
-* `pubkey` = **: public key
-* `ttl` = **: can be a number of second or a string of the long form "1day 2hours 3minute 4seconds" or abbreviated in the form "5h 3s"
-* `header` = *rudder-signature-v1*: signing format (for now, only one possible value)
+* HTTP 200 if the hash parameter is missing, or if the hashes are not
+equal
+* HTTP 304 if the hash values are equal
+* HTTP 404 if the file cannot be found
+* HTTP 500 : if the hash_type is incorrect (only sha1, sha256 and sha512 are available)
