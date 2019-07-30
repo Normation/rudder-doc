@@ -4,13 +4,13 @@ The `+rudder-server-relay+` package provides an HTTP API. It is
 available on simple relays and root servers. It is an internal API, not
 exposed to users, and used to provide various Rudder features.
 
-=== Remote Run
+== Remote Run
 
 The remote run API is available at
 `+https://relay/rudder/relay-api/remote-run+`. It allows triggering a
 run on nodes (like with the `+rudder remote run+` command).
 
-==== Description
+== Description
 
 The remote run API applies to all nodes that are below the target relay
 server, which means:
@@ -25,7 +25,7 @@ the root server which is its own policy server).
 There are different methods, whether you want to trigger all nodes, or
 only a part of them.
 
-==== Security
+== Security
 
 The remote run calls are not authenticated, but restricted to:
 
@@ -35,7 +35,7 @@ The remote run calls are not authenticated, but restricted to:
 They require allowing the policy server to connect to its nodes on port
 5309.
 
-==== Usage
+== Usage
 
 This API provides the following methods:
 
@@ -62,9 +62,9 @@ And, only for the `+/rudder/relay-api/remote-run/nodes+` call:
 * `+nodes+` = _node_uuid_ or _node_uuid1,node_uuid2,etc._ for multiple
 nodes: Nodes to trigger (default: none)
 
-=== Shared Files
+== Shared Files
 
-==== Description
+== Description
 
 The goal of this API is to share a file from node to node. The source
 node uses an API call to send the file, and the destination node will
@@ -74,13 +74,13 @@ server.
 There are generic method that allow easy access to those methods from
 the nodes.
 
-==== Security
+== Security
 
 This call is open to all nodes in the allowed networks of the target
 relay. The sent files are signed with the node’s key, and the signature
 is checked before being processed.
 
-==== Usage
+== Usage
 
 This API provides the following methods:
 
@@ -177,22 +177,22 @@ provided, unable to get file content)
 
 The goal of this API is to share a folder between Windows nodes.
 
-=== Description
+== Description
 
-=== Security
+== Security
 
 This call is open to all nodes in the allowed networks of the target
 relay. The sent files are signed with the node’s key, and the signature
 is checked before being processed.
 
-=== Usage
+== Usage
 
 This API provides the following methods:
 
 * HEAD or GET
 `+/shared-folder/<path:file_name>?hash_type=<sha1 || sha256 || sha512>?hash=<hash_value>+`
 
-=== HEAD & GET
+== HEAD & GET
 
 * `+hash_type+` = _sha1_, _sha256_ or _sha512_: algorithm used to hash
 the file
