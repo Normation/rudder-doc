@@ -472,9 +472,8 @@ git commit -m "Updated the rudder WebDAV access password" site.st
 This version of Rudder uses a central file to manage the passwords that will
 be used by the application: `/opt/rudder/etc/rudder-passwords.conf`.
 
-When first installing Rudder, this file is initialized with default values,
-and when you run rudder-init, it will be updated with randomly generated
-passwords.
+In the package, this file is initialized with default values, and during
+postinstall it will be updated with randomly generated passwords.
 
 On the majority of cases, this is fine, however you might want to adjust the
 passwords manually. This is possible, just be cautious when editing the file,

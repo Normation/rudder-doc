@@ -332,14 +332,6 @@ scripts for that database in +/opt/rudder/etc/postgresql/*.sql+.
 Package to ease installation of all Rudder services. This package depends on
 all above packages. It also
 
-- installs the Rudder configuration script:
-
-----
-
-/opt/rudder/bin/rudder-init
-
-----
-
 - installs the initial policies for the Root Server in:
 
 ----
@@ -348,13 +340,7 @@ all above packages. It also
 
 ----
 
-- installs the init scripts (and associated +default+ file):
-
-----
-
-/etc/init.d/rudder
-
-----
+- installs the services configuration (and associated +default+ file)
 
 - installs the logrotate configuration:
 
@@ -368,13 +354,7 @@ all above packages. It also
 
 One single package integrates everything needed for the Rudder Agent. It
 contains CFEngine Community, FusionInventory, and the initial policies for a
-Node. It also contains an init script:
-
-----
-
-/etc/init.d/rudder
-
-----
+Node.
 
 The +rudder-agent+ package depends on a few libraries and utilities:
 
@@ -386,7 +366,7 @@ The +rudder-agent+ package depends on a few libraries and utilities:
 === Software dependencies and third party components
 
 The Rudder Web application requires the installation of 'Apache 2 httpd',
-'JRE 7+', and 'cURL'; the LDAP Inventory service needs 'rsyslog' and
+'JRE 8+', and 'cURL'; the LDAP Inventory service needs 'rsyslog' and
 the report service requires 'PostgreSQL'.
 
 When available, packages from your distribution are used. These packages are:
