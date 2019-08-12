@@ -1,8 +1,25 @@
 = Upgrade notes
 
-== Upgrade from a previous Rudder 5.0
+== Upgrade from Rudder 5.0
 
 Migration from any 5.0 minor version is supported (see below for migration from older versions).
+
+[NOTE]
+====
+
+Rudder generic method `condition from command` will change its behaviour in `audit` policy mode starting 5.1.
+
+Before the 5.1 Rudder version, when in audit policy mode, the method was not executing the command passed in
+parameters and would always report an error.
+
+In order to limit the compliance drift when switching policy mode we chose to make the method behave in the
+exact same way in audit mode than in enforce mode because:
+
+* Audit and enforce policy mode should do the same check on the node, and differ on the remediation part
+* The method is mainly used to bypass missing components in the current generic methods library
+and so, not applying it in audit restrain Rudder from complex use cases
+* The command passed as parameter should always be system impact free, and so, it can be executed without
+impacting the overall configuration state of the node
 
 [NOTE]
 ====
@@ -44,9 +61,9 @@ Verbosity options can be:
 
 ====
 
-== Upgrade from Rudder 4.1, 4.2 or 4.3
+== Upgrade from Rudder 4.3
 
-Migration from 4.1, 4.2 or 4.3 are supported, so you can upgrade directly to 5.0.
+Migration from Rudder 4.3 are supported, so you can upgrade directly to 5.1.
 
 [WARNING]
 ====
@@ -64,8 +81,7 @@ Read https://rudder.io/plugins[the plugins page on our website] for more informa
 
 [WARNING]
 ====
-On RHEL/centOS and SLES systems, when upgrading from a 4.1 older than 4.1.13, a 4.2 older
-than 4.2.7 or a 4.3 older than 4.3.3,
+On RHEL/centOS and SLES systems, when upgrading from a 4.3 older than 4.3.3,
 it is necessary to explicitely upgrade `rudder-agent` (in the same command as 
 the other packages) when upgrading a relay or a root server,
 because of a dependency misconfiguration in the agent package.
@@ -84,32 +100,32 @@ by changing the port in the `rudder.syslog.port` line in `/opt/rudder/etc/rudder
 to 514.
 ====
 
-[[_upgrade_from_rudder_4_0_or_older]]
-== Upgrade from Rudder 4.0 or older
+[[_upgrade_from_rudder_4_2_or_older]]
+== Upgrade from Rudder 4.2 or older
 
-Direct upgrades from 4.0.x and older are no longer supported on 5.0.
+Direct upgrades from 4.2.x and older are no longer supported on 5.1.
 If you are still running one of those, either on servers or nodes,
-please first upgrade to one of the supported versions, and then upgrade to 5.0.
+please first upgrade to one of the supported versions, and then upgrade to 5.1.
 
-== Compatibility between Rudder agent 5.0 and older server versions
+== Compatibility between Rudder agent 5.1 and older server versions
 
-=== 4.1, 4.2 and 4.3 servers
+=== 4.3 servers
 
-Rudder agents 5.0 are compatible with 4.1, 4.2 and 4.3 Rudder servers.
+Rudder agents 5.1 are compatible with 4.3 and 5.0 Rudder servers.
 
 === Older servers
 
-Rudder agents 5.0 are not compatible with Rudder servers older than 4.1.
+Rudder agents 5.1 are not compatible with Rudder servers older than 4.3.
 You need to upgrade your server to a compatible version before the agents.
 
-== Compatibility between Rudder server 5.0 and older agent versions
+== Compatibility between Rudder server 5.1 and older agent versions
 
-=== 4.1, 4.2 and 4.3 agents
+=== 4.3 and 5.0 agents
 
-Rudder agent 4.1, 4.2 and 4.3 are fully compatible with Rudder server 5.0. It is
-therefore not strictly necessary to update all your agents to 5.0.
+Rudder agent 4.3 and 5.0 are fully compatible with Rudder server 5.1. It is
+therefore not strictly necessary to update all your agents to 5.1.
 
 === Older agents
 
-These agents are not compatible with Rudder 5.0, and you have to upgrade them.
+These agents are not compatible with Rudder 5.1, and you have to upgrade them.
 Be careful to follow the upgrade path explained xref:upgrade.adoc#_upgrade_from_rudder_4_0_or_older[above].
