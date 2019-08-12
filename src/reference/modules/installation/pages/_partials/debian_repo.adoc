@@ -2,7 +2,7 @@ Add Rudder's package repository:
 
 ----
 
-echo "deb http://repository.rudder.io/apt/5.0/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
+echo "deb http://repository.rudder.io/apt/5.1/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 
 ----
 
