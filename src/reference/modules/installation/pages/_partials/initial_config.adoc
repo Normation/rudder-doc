@@ -11,7 +11,7 @@ You should see a loading screen, then a login prompt. The default login is:
 
 You are strongly advised to xref:administration:users.adoc#_passwords[change this password] as soon as possible.
 
-Now you should go to Settings -> General -> Allowed Networks and check that the networks listed there properly indlude all your nodes network addresses.
+Now you should go to Settings -> General -> Allowed Networks and check that the networks listed there properly include all your nodes network addresses.
 By default this will contain your server's attached networks.
 
 The setup of the Rudder server is now over. If you plan to manage hundreds or thousands of nodes,

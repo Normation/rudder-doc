@@ -14,15 +14,14 @@ The following network flows are used by Rudder for regular operations. Make sure
 Please bear in mind that a central Rudder server, called root server, requires network flows from both the 'Root server' and 'Policy server' sections below.
 
 .Network Flows
-[options="header"]
+[cols="<.^,<.^,<.^,<.^", options="header"]
 |=======================
 |To|From|Port|Usage
 |Root Server|User or API client| *tcp/443* (https) | Access Web interface/API
-.6+|Policy Server |Any Node|*udp/514* (or tcp/514) |Send reports
-.3+|Linux or AIX Node | *tcp/443* (https/WebDAV) | Send inventories
+.4+|Policy Server |Node < 5.1|_udp/514 (optional)_ (or _tcp/514_) |Send reports
+|Node >= 5.1 .2+| *tcp/443* (https/WebDAV) | Send reports
+.2+|Any Node | Send inventories
 |  *tcp/5309*    |Fetch policies
-|  _tcp/5310 (optional)_    |Debug policy copy
-|AIX Node | *tcp/80* (http/WebDAV) | Send inventories
 |Windows DSC Node | *tcp/443* (https/WebDAV) | Send inventories and fetch policies
 |Linux or AIX Node | Policy Server | _tcp/5309 (optional)_ | Trigger remote agent run
 |=======================
@@ -36,9 +35,6 @@ If you want to be able to remotely trigger agent runs on nodes from the Root Ser
 having to wait for regular automated run),
 you will need your Root Server (and Relay Servers, if applicable) to be able to resolve your nodes
 using the provided hostname.
-
-
-
 
 [[jvm-requirements]]
 == JVM Security Policy
