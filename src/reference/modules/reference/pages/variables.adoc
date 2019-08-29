@@ -55,7 +55,7 @@ Informations about current node:
 [cols="2", options="header"]
 |===
 |Variable
-|Descritpion
+|Description
 
 |${rudder.node.id}
 |Rudder id of the node
@@ -78,7 +78,7 @@ Informations about a node's policy server:
 [cols="2", options="header"]
 |===
 |Variable
-|Descritpion
+|Description
 
 |${rudder.node.policyserver.id}
 |The Rudder generated id of the Policy Server
@@ -103,7 +103,7 @@ directives parameters and in the technique editor:
 [cols="3", options="header"]
 |===
 |Variable
-|Descritpion
+|Description
 
 |${sys.arch}
 |Kernel short architecture
@@ -128,7 +128,7 @@ There are also more variables available, all documented in https://docs.cfengine
 [cols="2", options="header"]
 |===
 |Variable
-|Descritpion
+|Description
 
 |${const.dollar}
 |$
