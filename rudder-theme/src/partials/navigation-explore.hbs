@@ -18,14 +18,6 @@
           <a href="{{{relativize @root.page.url ./url}}}">{{./version}}</a>
         </li>
         {{/each}}
-        {{~#if (and @root.site.url (eq this.name "reference"))}}
-        <li class="version">
-          <a href="https://docs.rudder.io/reference/4.3/">4.3</a>
-	</li>
-	<li class="version">
-          <a href="https://docs.rudder.io/reference/4.1/">4.1</a>
-        </li>
-        {{/if}}
       </ul>
     </li>
     {{/if}}
@@ -51,14 +43,6 @@
           {{/each}}
           {{/if}}
           {{/each}}
-          {{#if site.url}}
-          <li class="version">
-            <a href="{{@root.site.url}}/changelogs/4.3/index.html">4.3</a>
-          </li>
-          <li class="version">
-            <a href="{{@root.site.url}}/changelogs/4.1/index.html">4.1</a>
-          </li>
-          {{/if}}
         </ul>
       </span>
     </li>

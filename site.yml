@@ -14,6 +14,7 @@ content:
     start_path: src/rudder-by-example
   - url: ./doc-build
     branches: "branches/rudder/5.0"
+    branches: "branches/rudder/5.1"
     start_path: src/reference
   - url: ./changelogs-build
     branches:
@@ -34,4 +35,5 @@ content:
     - "branches/rudder/4.2"
     - "branches/rudder/4.3"
     - "branches/rudder/5.0"
+    - "branches/rudder/5.1"
     start_path: src/changelogs
