@@ -37,7 +37,7 @@ changelogs-build:
 	for version in $(ALL_VERSIONS); do \
 	  cd $@ && git checkout master && git branch -df "branches/rudder/$$version" ; git checkout -b "branches/rudder/$$version" ; \
 	  sed -i "s@version: \"5.2-alpha\"@version: \"$$version\"@" src/changelogs/antora.yml ; \
-	  sed -i "s@RUDDER_VERSION = 5.0@RUDDER_VERSION = $$version@" src/changelogs/dependencies/Makefile ; \
+	  sed -i "s@RUDDER_VERSION = 5.2@RUDDER_VERSION = $$version@" src/changelogs/dependencies/Makefile ; \
 	  cd src/changelogs && make ; \
 	  cd ../.. && git add -f src/changelogs && git commit --allow-empty -m "Build" ; cd .. ; \
 	done
