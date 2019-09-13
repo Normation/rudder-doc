@@ -72,8 +72,28 @@ service restart rudder-jetty
 
 ----
 
-The amount of memory should be the half of the RAM of the server, rounded up to the nearest GB.
+On small installations (less than 1000 nodes), the amount of memory should be the half of the RAM of the server, rounded up to the nearest GB.
 For example, if the server has 5GB of RAM, 3GB should be allocated to Jetty.
+
+On installations with more than 1000 nodes, two-third (rounded up to the nearest GB) should be allocated to Jetty.
+For example, if the server has 16GB of RAM, 11GB should be allocated to Jetty
+
+
+=== Memory usage of the JVM
+
+If you are constraint by the amount of memory available, you can enable the String deduplication option of the JVM, to
+save between one fifth to one fourth of memory used by rudder-jetty.
+To do so, you need to edit the `/etc/default/rudder-jetty`, uncomment the option *JAVA_GC* and set
+
+----
+JAVA_GC="-XX:+UseG1GC
+-XX:+UnlockExperimentalVMOptions
+-XX:MaxGCPauseMillis=500
+-XX:+UseStringDeduplication
+----
+
+and restart service rudder-jetty
+
 
 [[_optimize_postgresql_server]]
 == Optimize PostgreSQL server
@@ -84,13 +104,14 @@ memory.
 
 The location of the PostgreSQL server configuration file is usually:
 
+On a Debian system:
 ----
 
 /etc/postgresql/9.x/main/postgresql.conf
 
 ----
 
-On a SUSE system:
+On a SUSE or RHEL/CentOS system:
 
 ----
 
@@ -98,21 +119,19 @@ On a SUSE system:
 
 ----
 
-=== Suggested values on an high end server
+=== Suggested values for a setup with more than 3000 nodes
 
 ----
 #
 # Amount of System V shared memory
 # --------------------------------
 #
-# A reasonable starting value for shared_buffers is 1/4 of the memory in your
-# system:
 
-shared_buffers = 1GB
+shared_buffers = 256MB
 
-# You may need to set the proper amount of shared memory on the system.
+# On old versions of PostgreSQL, you may need to set the proper amount of shared memory on the system.
 #
-#   $ sysctl -w kernel.shmmax=1073741824
+#   $ sysctl -w kernel.shmmax=268435456
 #
 # Reference:
 # http://www.postgresql.org/docs/8.4/interactive/kernel-resources.html#SYSVIPC
@@ -122,12 +141,13 @@ shared_buffers = 1GB
 #
 # Complex query:
 
-work_mem = 24MB
+temp_buffers = 32MB
+work_mem = 6MB
 max_stack_depth = 4MB
 
 # Complex maintenance: index, vacuum:
 
-maintenance_work_mem = 240MB
+maintenance_work_mem = 2GB
 
 # Write ahead log
 # ---------------
@@ -136,81 +156,142 @@ maintenance_work_mem = 240MB
 
 wal_buffers = 4MB
 
+# Number of checkpoints
+checkpoint_segments = 16
+
+
 # Query planner
 # -------------
 #
 # Gives hint to the query planner about the size of disk cache.
 #
-# Setting effective_cache_size to 1/2 of total memory would be a normal
+# Setting effective_cache_size to 1/2 of remaining memory would be a normal
 # conservative setting:
 
 effective_cache_size = 1024MB
 
 ----
 
-=== Suggested values on a low end server
+=== Suggested values on a small server
 
 ----
 
-shared_buffers = 128MB
-work_mem = 8MB
-max_stack_depth = 3MB
-maintenance_work_mem = 64MB
+shared_buffers = 64MB
+work_mem = 4MB
+maintenance_work_mem = 256MB
 wal_buffers = 1MB
+checkpoint_segments = 8
 effective_cache_size = 128MB
 
-----
-
-
-== Agent
-
-If you are using Rudder on a highly stressed machine, which has especially slow or busy
-I/O's, you might experience a sluggish CFEngine agent run every time the machine
-tries to comply with your Rules.
-
-This is because the CFEngine agent tries to update its internal databases every time the agent
-executes a policy (the `.lmdb` files in the `/var/rudder/cfengine-community/state directory`),
-which even if the database is very light, takes some time if the machine has a very high iowait.
-
-In this case, here is a workaround you can use to restore CFEngine's full speed: you can use
-a RAMdisk to store CFEngine states.
-
-You might use this solution either temporarily, to examine a slowness problem, or permanently, to mitigate a
-known I/O problem on a specific machine. We do not recommend as of now to use this on a whole IT infrastructure.
-
-Be warned, this solution has a drawback: you should backup and restore the content of this directory
-manually in case of a machine reboot because all the persistent states are stored here, so in case you are using,
-for example the jobScheduler Technique, you might encounter an unwanted job execution because CFEngine will have
-"forgotten" the job state.
-
-Also, note that the mode=0700 is important as CFEngine will refuse to run correctly if the state directory is
-world readable, with an error like:
-
-----
-error: UNTRUSTED: State directory /var/rudder/cfengine-community (mode 770) was not private!
-----
-
-Here is the command line to use:
-
-[source,python]
-
-.How to mount a RAMdisk on CFEngine state directory
 
 ----
 
-# How to mount the RAMdisk manually, for a "one shot" test:
-mount -t tmpfs -o size=128M,nr_inodes=2k,mode=0700,noexec,nosuid,noatime,nodiratime tmpfs /var/rudder/cfengine-community/state
+==== Maximum number of file descriptors
 
-# How to put this entry in the fstab, to make the modification permanent
-echo "tmpfs /var/rudder/cfengine-community/state tmpfs defaults,size=128M,nr_inodes=2k,mode=0700,noexec,nosuid,noatime,nodiratime 0 0" >> /etc/fstab
-mount /var/rudder/cfengine-community/state
+If you manage thousands of nodes with Rudder, you should increase the open file limits as policy generation opens and write a lot of file.
+If you experience the error
 
 ----
+ERROR com.normation.rudder.services.policies.ParallelSequence - Failure in boxToEither: Error when trying to open template template name
+----
+
+it means that you should increase the limit of open files
+You can change the system-wide maximum number of file descriptors in `/etc/sysctl.conf` if necessary:
+
+----
+fs.file-max = 3247518
+----
+
+Then you have to get the rudder application enough file descriptors. To do so,
+you have to:
+
+* Have a high enough hard limit for rudder
+* Set the limit used by rudder and root
+
+These can be set in `/etc/security/limits.conf`:
+
+----
+rudder soft nofile 8192
+root soft nofile 8192
+root hard nofile 8192
+----
+
+
+You have to restart rudder-jetty for these settings to take effect.
+
+You can check current soft and hard limits by running the following commands as the user you want to check:
+
+----
+ulimit -Sn
+ulimit -Hn
+----
+
+
 
 [[_rsyslog]]
 == Rsyslog
 
-If you are using syslog over TCP as reporting protocol (it is set in *Administration -> Settings -> Protocol*),
+On very large installation, with many reports sent to the rudder servers, some messages
+may be lost because the default UDP buffer is too small or because rsyslog doesn't consume the
+reports fast enough. If you experience random missing reports, there are several changes that
+will improve the situation.
+
+=== Increase the UDP buffer
+
+----
+sysctl -w net.core.rmem_max=26214400
+sysctl -w net.core.rmem_default=26214400
+----
+
+
+=== Upgrade rsyslog to a more recent version
+
+The version of rsyslog included in some distributions can be have trouble handling more than 
+1000 reports/seconds; our tests show that versions 8.1901.0 and later are necessay to consumme
+more than 1400 reports/seconds.
+List of rsyslog supported repositories can be found here: https://www.rsyslog.com/downloads/download-other/[rsyslog repositories]
+
+=== Increase the number of threads for rsyslog
+
+Edit the file `/var/rudder/configuration-repository/techniques/system/distributePolicy/1.0/rudder-rsyslog-root.st` on the rudder server, and replace the lines
+
+----
+$ModLoad imudp
+$UDPServerRun &SYSLOGPORT&
+----
+
+by 
+
+----
+module(load="imudp" threads="2")
+input(type="imudp" port="&SYSLOGPORT&")
+----
+
+and increase the number of action queue workers
+----
+$ActionQueueWorkerThreads 2
+----
+
+by
+
+----
+$ActionQueueWorkerThreads 4
+----
+
+and then commit the change
+
+----
+cd /var/rudder/configuration-repository/techniques
+git add system/distributePolicy/1.0/rudder-rsyslog-root.st
+git commit -m "Increase number of threads allocated to rsyslog"
+rudder server reload-techniques
+----
+
+
+=== Using syslog over TCP (not recommended)
+
+If you are using syslog over TCP as reporting protocol - which is not recommended
+(it is set in *Administration -> Settings -> Protocol*),
 you can experience issues with rsyslog on Rudder
 policy servers (root or relay) when managing a large number of nodes.
 This happens because using TCP implies the system has to keep track of
@@ -224,7 +305,8 @@ You have two options in this situation:
 
 * Switch to UDP (in *Administration -> Settings -> Protocol*). It is less reliable
   than TCP and you can lose reports in case of networking or load issues, but it will
-  prevent breaking your server, and allow to manage more Nodes.
+  prevent breaking your server, and allow to manage more Nodes. Note that this is the default
+  setting.
 * Stay on TCP. Do this only if you need to be sure you will get all your reports
   to the server. You will should follow the instructions below to tune your system
   to handle more connections.
@@ -232,7 +314,7 @@ You have two options in this situation:
 All settings needing to modify `/etc/sysctl.conf` require to run `sysctl -p`
 to be applied.
 
-=== Maximum number of TCP sessions in rsyslog
+==== Maximum number of TCP sessions in rsyslog
 
 You may need to increase the maximum number of TCP sessions that rsyslog will accept.
 Add to your `/etc/rsyslog.conf`:
@@ -245,47 +327,7 @@ $InputTCPMaxSessions 500
 
 Note: You can use `MaxSessions` instead of `InputTCPMaxSessions` on rsyslog >= 7.
 
-=== Maximum number of file descriptors
-
-If you plan to manage hundreds of Nodes behind a relay or a root server, you should increase
-the open file limit (10k is a good starting point, you might have to get to 100k with
-thousands of Nodes).
-
-You can change the system-wide maximum number of file descriptors in `/etc/sysctl.conf` if necessary:
-
-----
-fs.file-max = 100000
-----
-
-Then you have to get the user running rsyslog enough file descriptors. To do so,
-you have to:
-
-* Have a high enough hard limit for rsyslog
-* Set the limit used by rsyslog
-
-The first one can be set in `/etc/security/limits.conf`:
-
-----
-username hard nofile 8192
-----
-
-For the second one, you have two options:
-
-* Set the soft limit (which will be used by default) in `/etc/security/limits.conf` (with `username soft nofile 8192`)
-* If you want to avoid changing soft limit (particularly if rsyslog is running as root), you
-  can configure rsyslog to change its limit to a higher value (but not higher than the hard limit)
-  with the '$MaxOpenFiles' configuration directive in `/etc/rsyslog.conf`
-
-You have to restart rsyslog for these settings to take effect.
-
-You can check current soft and hard limits by running the following commands as the user you want to check:
-
-----
-ulimit -Sn
-ulimit -Hn
-----
-
-=== Network backlog
+==== Network backlog
 
 You can also have issues with the network queues (which may for example lead to sending SYN cookies):
 
@@ -294,9 +336,56 @@ You can also have issues with the network queues (which may for example lead to 
 * You may also have to increase the socket listen() backlog in case of bursts, by changing
   `net.core.somaxconn = 1024` (for example, default is 128) in `/etc/sysctl.conf`.
 
-=== Conntrack table
+==== Conntrack table
 
 You may reach the size of the conntrack table, especially if you have other applications
 running on the same server. You can increase its size in `/etc/sysctl.conf`,
 see http://www.netfilter.org/documentation/FAQ/netfilter-faq.html#toc3.7[the Netfilter FAQ]
 for details.
+
+
+== Agent
+
+If you are using Rudder on a highly stressed machine, which has especially slow or busy
+I/O's, you might experience a sluggish CFEngine agent run every time the machine
+tries to comply with your Rules.
+
+This is because the agent tries to update its internal databases every time the agent
+executes a policy (the `.lmdb` files in the `/var/rudder/cfengine-community/state directory`),
+which even if the database is very light, takes some time if the machine has a very high iowait.
+
+In this case, here is a workaround you can use to restore the agent's full speed: you can use
+a RAMdisk to store its states.
+
+You might use this solution either temporarily, to examine a slowness problem, or permanently, to mitigate a
+known I/O problem on a specific machine. We do not recommend as of now to use this on a whole IT infrastructure.
+
+Be warned, this solution has a drawback: you should backup and restore the content of this directory
+manually in case of a machine reboot because all the persistent states are stored here, so in case you are using,
+for example the jobScheduler Technique, you might encounter an unwanted job execution because the agent will have
+"forgotten" the job state.
+
+Also, note that the mode=0700 is important as agent will refuse to run correctly if the state directory is
+world readable, with an error like:
+
+----
+error: UNTRUSTED: State directory /var/rudder/cfengine-community (mode 770) was not private!
+----
+
+Here is the command line to use:
+
+[source,python]
+
+.How to mount a RAMdisk on agent state directory
+
+----
+
+# How to mount the RAMdisk manually, for a "one shot" test:
+mount -t tmpfs -o size=128M,nr_inodes=2k,mode=0700,noexec,nosuid,noatime,nodiratime tmpfs /var/rudder/cfengine-community/state
+
+# How to put this entry in the fstab, to make the modification permanent
+echo "tmpfs /var/rudder/cfengine-community/state tmpfs defaults,size=128M,nr_inodes=2k,mode=0700,noexec,nosuid,noatime,nodiratime 0 0" >> /etc/fstab
+mount /var/rudder/cfengine-community/state
+
+----
+
