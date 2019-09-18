@@ -1,5 +1,7 @@
 = Install Rudder relay on SLES
 
+include::{partialsdir}/relay_plugin.adoc[]
+
 include::{partialsdir}/syslog.adoc[]
 
 include::{partialsdir}/zypper_segfault.adoc[]
