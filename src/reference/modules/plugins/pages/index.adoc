@@ -45,4 +45,13 @@ See all available commands with:
 /opt/rudder/bin/rudder-pkg --help
 ----
 
+== Install your licenses
+
+Some plugins needs a license to work properly. All your licenses are signed with a key (license.key file)
+and there is one file per licensed plugin (<plugin-name>.license). You may have downloaded them from https://download.rudder.io/plugins/licenses
+
+You need to put all files in `/opt/rudder/etc/plugins/licenses` folder, if that directory does not exist please create it.
+
+If the plugin is installed, no need to restart Rudder, it will read the new license and check its compatibility immediatly
+
 include::{partialsdir}/dyn/version-compat.adoc[leveloffset=+1]
