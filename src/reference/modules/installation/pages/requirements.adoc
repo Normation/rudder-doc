@@ -18,8 +18,8 @@ Please bear in mind that a central Rudder server, called root server, requires n
 |=======================
 |To|From|Port|Usage
 |Root Server|User or API client| *tcp/443* (https) | Access Web interface/API
-.4+|Policy Server |Node < 5.1|_udp/514 (optional)_ (or _tcp/514_) |Send reports
-|Node >= 5.1 .2+| *tcp/443* (https/WebDAV) | Send reports
+.4+|Policy Server |Node < 6.0|_udp/514 (optional)_ (or _tcp/514_) |Send reports
+|Node >= 6.0 .2+| *tcp/443* (https/WebDAV) | Send reports
 .2+|Any Node | Send inventories
 |  *tcp/5309*    |Fetch policies
 |Windows DSC Node | *tcp/443* (https/WebDAV) | Send inventories and fetch policies

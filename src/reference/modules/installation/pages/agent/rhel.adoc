@@ -12,9 +12,9 @@ Add the Rudder packages repository:
 
 ----
 
-echo '[Rudder_5.1]
-name=Rudder 5.1
-baseurl=http://repository.rudder.io/rpm/5.1/RHEL_$releasever/
+echo '[Rudder_6.0]
+name=Rudder 6.0
+baseurl=http://repository.rudder.io/rpm/6.0/RHEL_$releasever/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
@@ -24,9 +24,9 @@ gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/r
 
 ----
 
-echo '[Rudder_5.1]
-name=Rudder 5.1
-baseurl=http://repository.rudder.io/rpm/5.1/RHEL_6/
+echo '[Rudder_6.0]
+name=Rudder 6.0
+baseurl=http://repository.rudder.io/rpm/6.0/RHEL_6/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
@@ -36,9 +36,9 @@ gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/r
 
 ----
 
-echo '[Rudder_5.1]
-name=Rudder 5.1
-baseurl=http://repository.rudder.io/rpm/5.1/RHEL_7/
+echo '[Rudder_6.0]
+name=Rudder 6.0
+baseurl=http://repository.rudder.io/rpm/6.0/RHEL_7/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 

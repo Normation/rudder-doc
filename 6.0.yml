@@ -1,8 +1,8 @@
 site:
-  title: Rudder 5.1 Documentation
+  title: Rudder 6.0 Documentation
   start_page: get-started::home
 output:
-  dir: ./build/history/5.1
+  dir: ./build/history/6.0
 content:
   sources:
   - url: .
@@ -12,6 +12,6 @@ content:
     branches: master
     start_path: src/rudder-by-example
   - url: ./doc-build
-    branches: "branches/rudder/5.1"
+    branches: "branches/rudder/6.0"
     start_path: src/reference
 

@@ -6,7 +6,7 @@ If you are working on a test system, you can use the xref:quick_install.adoc[qui
 
 ----
 
-curl https://repository.rudder.io/tools/rudder-setup | bash -s setup-agent 5.1 [policy server hostname or ip]
+curl https://repository.rudder.io/tools/rudder-setup | bash -s setup-agent 6.0 [policy server hostname or ip]
 
 ----
 
