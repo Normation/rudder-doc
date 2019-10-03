@@ -39,6 +39,7 @@
         </ul>
       </span>
     </li>
+    {{#if site.url}}
     <li class="component">
       <span class="title">Changelogs</span>
         <ul class="versions">
@@ -51,16 +52,15 @@
           {{/each}}
           {{/if}}
           {{/each}}
-          {{#if site.url}}
           <li class="version">
             <a href="{{@root.site.url}}/changelogs/4.3/index.html">4.3</a>
           </li>
           <li class="version">
             <a href="{{@root.site.url}}/changelogs/4.1/index.html">4.1</a>
           </li>
-          {{/if}}
         </ul>
       </span>
     </li>
+    {{/if}}
   </ul>
 </div>
