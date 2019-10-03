@@ -1,6 +1,6 @@
 name: changelogs
 title: Changelogs
-version: "5.2-alpha"
+version: "5.0"
 nav:
 - modules/ROOT/nav.adoc
 
