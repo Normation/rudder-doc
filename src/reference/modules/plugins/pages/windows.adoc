@@ -108,7 +108,7 @@ DSC Generic Methods are shipped with the Rudder dsc plugin. Some are specific fo
 
 A filter is available in the Technique Editor to select either all generic methods, generic methods available for classic agent, and generic method available for DSC agent, so that you can choose relevant methods for the type of nodes you need to manage
 
-image:technique_editor/rudder-technique-editor-filter.png[Technique editor filter]
+image:rudder-technique-editor-filter.png[Technique editor filter]
 
 
 == DSC Techniques
