@@ -470,3 +470,26 @@ systemctl disable rudder-cf-serverd.service
 ----
 CFENGINE_COMMUNITY_RUN_1="0"
 ----
+
+== Single directive execution
+
+Normal rudder agent runs apply all the node configuration to the underlying system.
+
+You may sometimes want to test a single directive, either because it is long to run or because you want to test it in isolation from directives.
+
+To do this, you need to know the list of available directives on your agent with the command:
+
+----
+rudder directive list
+----
+
+image::directive-list.png[]
+
+Then you can run one with the command:
+
+----
+rudder directive run -u <uuid>
+----
+
+image::directive-run.png[]
+
