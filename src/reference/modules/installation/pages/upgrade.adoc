@@ -7,6 +7,15 @@ Migration from any 5.0 minor version is supported (see below for migration from 
 [NOTE]
 ====
 
+The Rudder packages ncf, ncf-api-virtualenv, rudder-inventory-endpoint, rudder-inventory-ldap, rudder-jetty 
+and rudder-techniques have been merged into rudder-webapp. This means that on a server upgrade from Rudder 5.0
+those packages will all be removed.
+
+This is normal!
+
+[NOTE]
+====
+
 Rudder generic method `condition from command` will change its behaviour in `audit` policy mode starting 6.0.
 
 Before the 6.0 Rudder version, when in audit policy mode, the method was not executing the command passed in

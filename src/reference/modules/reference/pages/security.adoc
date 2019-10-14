@@ -39,9 +39,8 @@ on the nodes (and that can be transferred without encryption when using initial 
 
 These unprotected contents are:
 
-* the tools (`/var/rudder/tools`)
 * the common ncf part (`/var/rudder/ncf/common`), which includes all the content distributed in the `ncf` package
-* the Rudder techniques sources (without parameters), which includes all the content distributed in the `rudder-techniques` package
+* the Rudder techniques sources without parameters `/var/rudder/configuration-repository/techniques`
 
 == Node-Server communication security
 

@@ -85,9 +85,9 @@ following places:
 
 +/etc+:: Scripts to integrate Rudder Agent in the system (init, cron).
 
-+/opt/rudder/share/initial-promises+:: Initialization policies for the Rudder
-Agent. These policies are used until the Node has been validated in Rudder. They
-are kept available at this place afterwards.
++/opt/rudder/share/bootstrap-promises+:: Bootstraping policies for the Rudder
+Agent. These policies are used to download a common set of initial policies
+from the server.
 
 +/opt/rudder/lib/perl5+:: The FusionInventory Inventory tool and its Perl
 dependencies.
