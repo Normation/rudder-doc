@@ -4,7 +4,6 @@ man.adoc
 variables.adoc
 package_format.adoc
 security.adoc
-relay_api.adoc
 generic_methods.adoc
 reports.adoc
 techniques.adoc
