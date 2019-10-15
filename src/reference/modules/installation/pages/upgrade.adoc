@@ -13,6 +13,21 @@ those packages will all be removed.
 
 This is normal!
 
+====
+
+[NOTE]
+====
+
+The technique tools folder (in `/var/rudder/tools`), that was previously used to synchronize tools used by the system
+techniques is not used anymore. All tools have been migrated into the technique that used them.
+
+The folder is left in place, but not automatically shared anymore.
+
+If you relied on the tools copy mechanism to share files, you can replace it by a standard recursive copy
+from the shared files.
+
+====
+
 [NOTE]
 ====
 
@@ -29,6 +44,8 @@ exact same way in audit mode than in enforce mode because:
 and so, not applying it in audit restrain Rudder from complex use cases
 * The command passed as parameter should always be system impact free, and so, it can be executed without
 impacting the overall configuration state of the node
+
+====
 
 [NOTE]
 ====
