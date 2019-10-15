@@ -70,61 +70,22 @@ Verbosity options can be:
 
 ====
 
-== Upgrade from Rudder 4.3
+[[_upgrade_from_rudder_4_3_or_older]]
+== Upgrade from Rudder 4.3 or older
 
-Migration from Rudder 4.3 are supported, so you can upgrade directly to 6.0.
-
-[WARNING]
-====
-The following features are now provided as plugins and no more available as part of default Rudder
-installation starting from 5.0:
-
-* LDAP-based authentication
-* Relay servers
-* Changes validation workflow (change requests)
-
-If you were using them, upgrade will disable them and you will have to install
-the plugin.
-Read https://rudder.io/plugins[the plugins page on our website] for more information.
-====
-
-[WARNING]
-====
-On RHEL/centOS and SLES systems, when upgrading from a 4.3 older than 4.3.3,
-it is necessary to explicitely upgrade `rudder-agent` (in the same command as 
-the other packages) when upgrading a relay or a root server,
-because of a dependency misconfiguration in the agent package.
-
-This has been fixed in the packages, but the problem is caused by the
-package in the version your are upgrading from.
-====
-
-[NOTE]
-====
-If your Rudder server was upgraded from a 4.1 or older installation on Ubuntu 12.04 LTS or 14.04 LTS,
-you may still be using port 5514 for syslog communication with nodes.
-
-It not necessary anymore, you can switch back to the default
-by changing the port in the `rudder.syslog.port` line in `/opt/rudder/etc/rudder-web.properties`
-to 514.
-====
-
-[[_upgrade_from_rudder_4_2_or_older]]
-== Upgrade from Rudder 4.2 or older
-
-Direct upgrades from 4.2.x and older are no longer supported on 6.0.
+Direct upgrades from 4.3.x and older are no longer supported on 6.0.
 If you are still running one of those, either on servers or nodes,
 please first upgrade to one of the supported versions, and then upgrade to 6.0.
 
 == Compatibility between Rudder agent 6.0 and older server versions
 
-=== 4.3 servers
+=== 5.0 servers
 
-Rudder agents 6.0 are compatible with 4.3 and 5.0 Rudder servers.
+Rudder agents 6.0 are compatible with 5.0 Rudder servers.
 
 === Older servers
 
-Rudder agents 6.0 are not compatible with Rudder servers older than 4.3.
+Rudder agents 6.0 are not compatible with Rudder servers older than 5.0.
 You need to upgrade your server to a compatible version before the agents.
 
 == Compatibility between Rudder server 6.0 and older agent versions
@@ -137,4 +98,4 @@ therefore not strictly necessary to update all your agents to 6.0.
 === Older agents
 
 These agents are not compatible with Rudder 6.0, and you have to upgrade them.
-Be careful to follow the upgrade path explained xref:upgrade.adoc#_upgrade_from_rudder_4_0_or_older[above].
+Be careful to follow the upgrade path explained xref:upgrade.adoc#_upgrade_from_rudder_4_3_or_older[above].
