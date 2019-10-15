@@ -15,7 +15,7 @@ The installation and upgrade processes are exactly the same.
 Download the *rpkg* file, and run, on the Rudder server:
 
 ----
-/opt/rudder/bin/rudder-pkg install-file rudder-plugin-dsc-<Rudder version>-<plugin version>.rpkg	
+rudder package install-file rudder-plugin-dsc-<Rudder version>-<plugin version>.rpkg
 ----
 
 It will add:
@@ -35,7 +35,7 @@ The Rudder agent needs *PowerShell 4* or later, which is built-in on:
 
  * Windows Server 2012 R2 and later
 
-PowerShell 4 may also be installed on the following platforms, following this procedure: https://social.technet.microsoft.com/wiki/contents/articles/20623.step-by-step-upgrading-the-powershell-version-4-on-2008-r2.aspx 
+PowerShell 4 may also be installed on the following platforms, following this procedure: https://social.technet.microsoft.com/wiki/contents/articles/20623.step-by-step-upgrading-the-powershell-version-4-on-2008-r2.aspx
 
  * Windows Server 2008 R2
  * Windows Server 2012
@@ -73,7 +73,7 @@ Download the *exe* file, and run, on your node:
 
 ----
 
-rudder-agent-dsc-<Rudder version>-<plugin version>.exe	
+rudder-agent-dsc-<Rudder version>-<plugin version>.exe
 
 ----
 
@@ -169,7 +169,7 @@ Since the Windows plugin version 4.2-1.6 Rudder will report in a dedicated windo
 * *Information logs* will have the *Event ID 102* and will only be local logs.
 
 If you had an old plugin version installed Rudder will not try to install the new journal reference because
-it needs a complete reboot of the host system. 
+it needs a complete reboot of the host system.
 See the last note on the Microsoft doc: https://msdn.microsoft.com/en-us/library/2awhba7a%28v=vs.110%29.aspx.
 
 If you want to change manually the Rudder eventlog use the following process, keep in mind that it will need a machine restart to avoid any reporting issues.
