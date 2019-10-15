@@ -199,7 +199,7 @@ You can restart all components of the Rudder Root Server at once:
 
 ----
 
-service rudder-server restart
+systemctl restart rudder-server
 
 ----
 
@@ -212,6 +212,8 @@ include::{partialsdir}/glossary/cfengine-server.adoc[]
 
 ----
 
+systemctl restart rudder-agent
+# or, depending on the platform
 service rudder-agent restart
 
 ----
@@ -220,7 +222,7 @@ include::{partialsdir}/glossary/web-server-application.adoc[]
 
 ----
 
-service rudder-jetty restart
+systemctl restart rudder-jetty
 
 ----
 
@@ -228,7 +230,9 @@ include::{partialsdir}/glossary/web-server-front-end.adoc[]
 
 ----
 
-service apache2 restart
+systemctl restart apache2
+# or, depending on the platform
+systemctl restart httpd
 
 ----
 
@@ -236,7 +240,7 @@ include::{partialsdir}/glossary/ldap-server.adoc[]
 
 ----
 
-service rudder-slapd restart
+systemctl restart rudder-slapd
 
 ----
 
@@ -244,6 +248,9 @@ include::{partialsdir}/glossary/sql-server.adoc[]
 
 ----
 
-service postgresql* restart
+# The name of the service may vary if you installed
+# non-standard postgresql packages
+# You can list them with systelctl --list-units --all | grep postgresql
+systemctl restart postgresql
 
 ----

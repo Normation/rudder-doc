@@ -30,7 +30,7 @@ web application to be taken into account:
 
 ----
 
-service rudder-jetty restart
+systemctl restart rudder-jetty
 
 ----
 
@@ -105,7 +105,7 @@ web application to be taken into account:
 
 ----
 
-service rudder-jetty restart
+systemctl restart rudder-jetty
 
 ----
 

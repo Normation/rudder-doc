@@ -68,7 +68,7 @@ modification would be erased by packaging in the following Rudder versuib update
 JAVA_XMX=2G
 
 # save your changes, and restart Jetty:
-service restart rudder-jetty
+systemctl restart rudder-jetty
 
 ----
 
