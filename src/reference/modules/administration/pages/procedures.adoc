@@ -20,26 +20,33 @@ database.
 By default, this system will:
 
 * Archive reports older that 3 days
-* Remove reports older than 90 days
+* Remove reports older than 15 days
+* Delete all historized compliance levels after 15 days
+* Delete logs older than twice the maximum agent run interval
 
+Logs are extra information on agent runs, that are used for debugging purpose, and are not
+used in compliance status.
 It thus reduces the work overhead by only making Rudder handle relevant reports (fresh enough)
 and putting aside old ones.
 
 This is configurable in `/opt/rudder/etc/rudder-web.properties`, by changing the following
 configuration elements:
 
-* `rudder.batch.reportscleaner.archive.TTL`: Set the maximum report age before archival
-* `rudder.batch.reportscleaner.delete.TTL`: Set the maximum report age before deletion
+* `rudder.batch.reportscleaner.archive.TTL`: Set the maximum report age before archival (in days)
+* `rudder.batch.reportscleaner.delete.TTL`: Set the maximum report age before deletion  (in days)
+* `rudder.batch.reportscleaner.compliancelevels.delete.TTL` : Set the maximum compliance age before removal  (in days)
+* `rudder.batch.reportsCleaner.deleteLogReport.TTL` : Set the maximum retention of logs reports, (in runs number, using Nx notation, e.g. 2x for two runs, or in minutes)
 
 The default values are OK for systems under moderate load, and should be adjusted in case of
 excessive database bloating (see next section).
 
-The estimated disk space consumption, with a 5 minutes agent run frequency, is 150 to 400 kB per Directive,
-per day and per node, which is roughly 5 to 10 MB per Directive per month and per node.
+The estimated disk space consumption, with a 5 minutes agent run frequency, is 500 to 900 kB per Directive,
+per day and per node, plus 150 kB per Directive per node per day for archived reports, plus 150 kB per Directive per node per day for compliance level,
+which equate to is roughly 5 to 7 MB per Directive per two weeks and per node.
 
-Thus, 25 directives on 100 nodes, with a 7 day log retention policy, would take 2.5 to 10 GB, and
-25 directives on 1000 nodes with a 1 hour agent execution period and a 30 day log retention policy
-would take 9 to 35 GB.
+Thus, 25 directives on 100 nodes, with the default reports retention policy, would take 13 to 18 GB, and
+25 directives on 1000 nodes with a 1 hour agent execution period with the defaut reports retention policy
+would take 11 to 15 GB.
 
 === PostgreSQL database bloating
 
