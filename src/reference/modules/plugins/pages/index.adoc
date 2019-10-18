@@ -19,30 +19,53 @@ read the https://rudder.io/plugins/[dedicated page on rudder.io].
 
 == Install a plugin
 
-To install a plugin, copy the `.rpkg` file on your server, and run:
+To install a plugin, you can use the `rudder package` command.
+You can configure it in `/opt/rudder/etc/rudder-pkg/rudder-pkg.conf`
+
+It can retrieve plugins and their licenses from the Rudder repository.
 
 ----
-/opt/rudder/bin/rudder-pkg install-file <package.rpkg>
+# Update the repository index
+rudder package update
+
+# Download and install the latest release of a plugin
+rudder package install-file <package_name>
+
+# Download and install the latest nightly of a plugin
+rudder package install-file <package_name> --nightly
+
+# Install a local .rpkg file
+rudder package install-file <package.rpkg>
+
+# Download all your license from the plugin repository
+rudder package licenses
 ----
 
-You can list currently installed plugins using:
+You can get information about available plugins with:
 
 ----
-/opt/rudder/bin/rudder-pkg list
+# List currently installed plugins
+rudder package list
+# List currently available plugins
+rudder package list --all
+# List all available versions of a plugin
+rudder package search <package_name>
+# Display details of a plugin
+rudder package show <package_name>
 ----
 
 You can also enable or disable, or remove a plugin with:
 
 ----
-/opt/rudder/bin/rudder-pkg plugin enable <plugin>
-/opt/rudder/bin/rudder-pkg plugin disable <plugin>
-/opt/rudder/bin/rudder-pkg remove <package>
+rudder package plugin enable <plugin>
+rudder package plugin disable <plugin>
+rudder package remove <package>
 ----
 
 See all available commands with:
 
 ----
-/opt/rudder/bin/rudder-pkg --help
+rudder package --help
 ----
 
 == Install your licenses

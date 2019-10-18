@@ -30,6 +30,8 @@ and so, not applying it in audit restrain Rudder from complex use cases
 * The command passed as parameter should always be system impact free, and so, it can be executed without
 impacting the overall configuration state of the node
 
+====
+
 [NOTE]
 ====
 
@@ -70,8 +72,13 @@ Verbosity options can be:
 
 ====
 
-[[_upgrade_from_rudder_4_3_or_older]]
-== Upgrade from Rudder 4.3 or older
+[NOTE]
+====
+
+The executable `/opt/rudder/bin/rudder-pkg` can now be used with the command `rudder package`, and can now
+list, search and install plugins and their licenses directly from a repository.
+
+====
 
 Direct upgrades from 4.3.x and older are no longer supported on 6.0.
 If you are still running one of those, either on servers or nodes,
