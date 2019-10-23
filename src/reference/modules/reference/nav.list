@@ -6,5 +6,6 @@ package_format.adoc
 security.adoc
 relay_api.adoc
 generic_methods.adoc
+generic_methods_guidelines.adoc
 reports.adoc
 techniques.adoc

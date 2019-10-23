@@ -2,7 +2,7 @@
 
 RUDDER_VERSION = 5.0
 
-.PHONY: clean generic_methods.adoc rudder.adoc hooks.adoc plugins versions.adoc version-compat.adoc
+.PHONY: clean generic_methods.adoc generic_methods_categories.txt rudder.adoc hooks.adoc plugins versions.adoc version-compat.adoc
 all: generic_methods.adoc hooks.adoc rudder.adoc plugins version-compat.adoc
 
 ## Repos
@@ -60,6 +60,8 @@ generic_methods.adoc: ncf-repo rudder-agent-windows-repo
 	sed -i 's/```.*/```/' generic_methods.md
 	pandoc -t asciidoc -f markdown generic_methods.md > generic_methods.adoc
 
+generic_methods_categories.txt: generic_methods.adoc
+
 version-compat.adoc: rudder-plugins-repo 
 	cd rudder-plugins-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
 	cd rudder-plugins-repo && git pull
@@ -77,7 +79,7 @@ plugins: rudder-plugins-repo rudder-plugins-private-repo
 ## Clean
 
 clean:
-	rm -rf generic_methods.{adoc,md} hooks.adoc rudder.adoc version-compat.adoc plugins
+	rm -rf generic_methods.{adoc,md} generic_methods_categories.txt hooks.adoc rudder.adoc version-compat.adoc plugins
 
 veryclean: clean
 	rm -rf rudder-agent-repo rudder-repo ncf-repo rudder-agent-windows-repo rudder-plugins-repo rudder-plugins-private-repo
