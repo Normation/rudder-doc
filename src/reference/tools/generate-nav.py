@@ -46,6 +46,13 @@ result = ["// Automatically generated list of content - do not edit", "* "+NAME]
 os.chdir(PAGESDIR)
 
 for file in files:
+    if file == "generic_methods.adoc":
+        # Special case
+        with open("../../../generic_methods_categories.txt") as f:
+            categories = f.read().splitlines()
+        result.extend(categories)
+        continue
+
     with open(file) as f:
         content = f.read().splitlines()
 
