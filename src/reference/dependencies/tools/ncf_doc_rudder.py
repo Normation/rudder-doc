@@ -15,6 +15,13 @@ from pprint import pprint
 # URL of the rudder_info api
 release_info_url = "http://www.rudder-project.org/release-info/rudder/"
 
+def slugify(s):
+    s = "_" + s
+    s = s.lower()
+    s = s.strip()
+    s = re.sub('\W', '_', s)
+    return s
+
 def get_min_versions():
   "Build the dictionnary of minimal Rudder version including compatibility with a given CFEngine version"
   min_version = {}
@@ -69,10 +76,11 @@ if __name__ == '__main__':
       categories[category_name] = [generic_method]
 
   content = []
+  titles = ["** xref:generic_methods.adoc[Generic methods]"]
 
   for category in sorted(categories.keys()):
-    content.append("\n*****\n")
-    content.append('\n### '+category.title())
+    titles.append("*** xref:generic_methods.adoc#"+slugify(category.title())+"["+category.title()+"]")
+    content.append('\n## '+category.title())
  
     # Generate markdown for each generic method
     for generic_method in categories[category]:
@@ -80,9 +88,8 @@ if __name__ == '__main__':
       rudder_version_needed = rudder_version(versions, generic_method["agent_version"])
       if not rudder_version_needed:
         continue
-      content.append("\n*****\n")
       bundle_name = generic_method["bundle_name"]
-      content.append('\n#### '+ bundle_name)
+      content.append('\n### '+ bundle_name)
       content.append(generic_method["description"])
       if "deprecated" in generic_method:
         content.append('\n**WARNING**: This generic method is deprecated.')
@@ -91,15 +98,21 @@ if __name__ == '__main__':
       content.append('\nCompatible with nodes running Rudder '+rudder_version_needed+' or higher.')
       
       if "documentation" in generic_method:
-        content.append('\n##### Usage')
+        content.append('\n#### Usage')
         content.append(generic_method["documentation"])
-      content.append('\n##### Parameters')
+      content.append('\n#### Parameters')
       for parameter in generic_method["parameter"]:
         content.append("* **" + parameter['name'] + "**: " + parameter['description'])
-      content.append('\n##### Classes defined')
+      content.append('\n#### Classes defined')
       content.append('\n```\n')
       content.append(generic_method["class_prefix"]+"_${"+generic_method["class_parameter"] + "}_{kept, repaired, not_ok, reached}")
       content.append('\n```\n')
+
+  # Write category list
+  result = '\n'.join(titles)+"\n"
+  outfile = open("generic_methods_categories.txt","w")
+  outfile.write(result)
+  outfile.close()
 
   # Write generic_methods.md
   result = '\n'.join(content)+"\n"

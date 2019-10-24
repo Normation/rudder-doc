@@ -3,7 +3,7 @@
 .PHONY: clean $(ADOC_DYN_FILES) nav
 
 ADOC_SRC_FILES = $(shell find modules/ROOT/pages -type f -name '*.adoc')
-ADOC_DYN_FILES = generic_methods.adoc hooks.adoc rudder.adoc rudder-relayd.1.adoc versions.adoc version-compat.adoc
+ADOC_DYN_FILES = generic_methods.adoc generic_methods_categories.txt hooks.adoc rudder.adoc rudder-relayd.1.adoc versions.adoc version-compat.adoc
 GRAPHVIZ_FILES = $(shell find modules/reference/assets/graphviz -type f -name '*.dot')
 GRAPHVIZ_IMAGES = $(addprefix modules/reference/assets/images/graphviz/, $(notdir $(GRAPHVIZ_FILES:dot=png)))
 
@@ -22,6 +22,10 @@ generic_methods.adoc:
 	cd dependencies && make $@
 	mkdir -p modules/reference/pages/_partials/dyn/
 	cp dependencies/$@ modules/reference/pages/_partials/dyn/$@
+
+generic_methods_categories.txt:
+	cd dependencies && make $@
+	cp dependencies/$@ .
 
 rudder.adoc:
 	cd dependencies && make $@
@@ -49,7 +53,7 @@ plugins:
 	echo "index.adoc" > modules/plugins/nav.list
 	find modules/plugins/pages ! -name 'index.adoc' ! -name 'version-compat.adoc' -type f | sed 's/.*\///' >> modules/plugins/nav.list
 
-nav: $(ADOC_SRC_FILES) plugins
+nav: $(ADOC_SRC_FILES) plugins generic_methods_categories.txt
 	./tools/generate-nav.py ROOT "Introduction" > modules/ROOT/nav.adoc
 	# installation has a custom nav
 	cp modules/installation/nav.adoc.src modules/installation/nav.adoc
@@ -70,4 +74,5 @@ clean:
 	rm -f modules/*/pages/_partials/dyn/*
 	rm -rf modules/*/assets/images/graphviz
 	rm -rf modules/plugins/assets
+	rm -f generic_methods_categories.txt
 	find modules/plugins/pages ! -name 'index.adoc' -type f -exec rm -f {} +
