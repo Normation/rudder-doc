@@ -1,5 +1,14 @@
 = Upgrade notes
 
+[WARNING]
+
+====
+
+Before upgrading a Rudder server, you should make a backup by following the
+xref:administration:procedures.adoc#_migration_backups_and_restores[backup procedure].
+
+====
+
 == Upgrade from Rudder 5.0
 
 Migration from any 5.0 minor version is supported (see below for migration from older versions).
