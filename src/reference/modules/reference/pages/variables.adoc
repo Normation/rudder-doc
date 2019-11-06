@@ -41,6 +41,57 @@ The parameters enable the user to specify a content that can be put anywhere, us
 Using this, you can specify common file headers (this is the default parameter, "rudder_file_edit_header"), common DNS or domain names, backup servers,
 site-specific elements...
 
+== Inventory variables
+
+NOTE: Theses variables have been introduced in Rudder 5.0.13, if you are using a previous version of Rudder, please use System Variables, described in next section
+
+Informations about current node:
+
+[cols="2", options="header"]
+|===
+|Variable
+|Description
+
+|${node.inventory[hostname]}
+|Node hostname
+
+|${node.inventory[localAdministratorAccountName]}
+|Node administrator login
+
+|${node.inventory[archDescription]}
+|The architecture of the node (like "x86_64")
+
+|${node.inventory[ram]}
+|The amount of RAM on the node (in bytes)
+
+|${node.inventory[timezone]}
+|The name of the timezone of the node (like "Europe/Paris")
+
+|${node.inventory[os][name]}
+|The operating system name (like "Debian")
+
+|${node.inventory[os][fullName]}
+|The operating system full name (like "Debian GNU/Linux 9.1 (stretch)")
+
+|${node.inventory[os][version]}
+|The operating system version (like "9.1")
+
+|${node.inventory[os][kernelVersion]}
+|The kernel version on the node (like "4.9.0-3-amd64")
+
+|${node.inventory[os][servicePack]}
+|The operating system service pack (like "4")
+
+|${node.inventory[machine][machineType]}
+|The machine type (like "qemu", "physical")
+
+|${node.inventory[machine][manufacturer]}
+|The manufacturer of the machine (like "innotek GmbH")
+
+|${rudder.inventory[policyServerId]}
+|The Rudder generated id of the node Policy Server
+|===
+
 == System Variables
 
 Rudder also provides system variables that contain information about nodes
