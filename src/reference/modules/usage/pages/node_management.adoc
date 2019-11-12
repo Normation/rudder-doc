@@ -177,8 +177,8 @@ between each unit.
 
 ====
 
-*Units are case-insensitive*. Therefore, +Mb+ is identical to
-+mB+ or +mb+ or +MB+, and *b* is actually a *byte*.
+*Units prefix are case-insensitive*. Therefore, +MB+ is identical to
++mB+. *B* is actually a *byte* - we cannot search on bit size, and *b* is thus not an authorized value to avoid confusion.
 
 ====
 
@@ -192,13 +192,13 @@ In detail, the following units are supported:
 | Notation | Value
 | +B+ | bytes (equivalent to not specifying a unit)
 | +kB+ | 1024 bytes
-| +mB+ | 1024^2 bytes
-| +gB+ | 1024^3 bytes
-| +tB+ | 1024^4 bytes
-| +pB+ | 1024^5 bytes
-| +eB+ | 1024^6 bytes
-| +zB+ | 1024^7 bytes
-| +yB+ | 1024^8 bytes
+| +MB+ | 1024^2 bytes
+| +GB+ | 1024^3 bytes
+| +TB+ | 1024^4 bytes
+| +PB+ | 1024^5 bytes
+| +EB+ | 1024^6 bytes
+| +ZB+ | 1024^7 bytes
+| +YB+ | 1024^8 bytes
 |====
 
 === Regex matching rule
