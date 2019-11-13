@@ -353,6 +353,8 @@ service rudder-agent restart
 
 ----
 
+Then you need to trigger a full policy regeration in the status menu with the *Regenerate all policies* button.
+
 === Migration
 
 To migrate a Rudder installation, just backup and restore your Rudder installation
