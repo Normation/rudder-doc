@@ -190,7 +190,7 @@ Then reboot the system.
 
 * On Windows, Rudder can only manage user password in clear text.
 
-* Mustache templating on Windows does not support the exact same syntax than Linux, see the documentation see [the documentation](#file_from_template_mustache).
+* Mustache templating on Windows does not support the exact same syntax than Linux, see the documentation see link:../reference/generic_methods.html#_file_from_template_mustache[the documentation].
 
 * The Technique File download (Rudder server) technique can not share folders with a Windows agent, only files can be shared.
 
