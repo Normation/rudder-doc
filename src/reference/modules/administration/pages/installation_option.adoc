@@ -1,0 +1,44 @@
+= Server installation options
+
+== Installation modifiers with environment variables
+
+There are two environment variables that can be set to change specific part of the installation
+
+=== Do not edit /etc/sudoers file at installation
+
+On RPM-based system (SLES, CentOS and RedHat), Rudder server installation validates that the `/etc/sudoers` file contains the line
+
+----
+
+#includedir /etc/sudoers.d
+
+----
+
+If this file shouldn't be changed during installation, you should set the environment variable RUDDER_NO_SUDOERS_EDIT to 1
+
+----
+
+export RUDDER_NO_SUDOERS_EDIT=1
+
+----
+
+=== Do not modify system Techniques at upgrade
+
+During its upgrade, Rudder automatically upgrade and commit the system Techniques. These Techniques are necessary to maintain Rudder, and need to be synchronized with Rudder.
+If you don't want to commit automatically the system Techniques, you should set the environment variable RUDDER_NO_TECHNIQUE_AUTOCOMMIT to 1.
+
+----
+
+export RUDDER_NO_TECHNIQUE_AUTOCOMMIT=1
+
+----
+
+You will have to commit the Techniques after the installation to ensure that Rudde works as expected
+
+----
+
+cd /var/rudder/configuration-repository/techniques/system
+git add .
+git commit -m "Upgrade system Techniques"
+
+----
