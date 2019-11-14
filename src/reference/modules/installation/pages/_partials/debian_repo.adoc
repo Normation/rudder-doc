@@ -1,6 +1,12 @@
 Add Rudder's package repository:
 
+[source, Bash]
 ----
+
+# If lsb_release is not installed on your machine, change $(lb_release -cs) by your distribution codename.
+# Ex:
+#   stretch for Debian 9
+#   bionic  for Ubuntu 18.04 LTS
 
 echo "deb http://repository.rudder.io/apt/6.1/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 
