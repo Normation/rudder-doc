@@ -15,7 +15,11 @@
         <li class="version
           {{~#if (and (eq ../this @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
           {{~#if (eq this ../latestVersion)}} is-latest{{/if}}">
-          <a href="{{{relativize @root.page.url ./url}}}">{{./version}}</a>
+	  {{~#if (eq ./version "6.0") }}
+          <a href="{{{relativize @root.page.url ./url}}}">{{./version}}-beta</a>
+	  {{else}}
+	  <a href="{{{relativize @root.page.url ./url}}}">{{./version}}</a>
+	  {{/if}}
         </li>
         {{/each}}
         {{~#if (and @root.site.url (eq this.name "reference"))}}
@@ -47,7 +51,11 @@
           {{#if (eq this.name "reference")}}
           {{#each ./versions}}
           <li class="version {{~#if (eq this ../latestVersion)}} is-latest{{/if}}">
-            <a href="{{@root.site.url}}/changelogs/{{./version}}/index.html">{{./version}}</a>
+	    {{~#if (eq ./version "6.0") }}
+            <a href="{{@root.site.url}}/changelogs/{{./version}}/index.html">{{./version}}-beta</a>
+	    {{else}}
+	    <a href="{{@root.site.url}}/changelogs/{{./version}}/index.html">{{./version}}</a>
+	    {{/if}}
           </li>
           {{/each}}
           {{/if}}
