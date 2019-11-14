@@ -50,6 +50,19 @@ available for these platforms as part of the https://www.rudder.io/en/pricing/su
 
 |===
 
+[WARNING]
+
+.Supporting Debian-based systems without systemd
+
+====
+
+It is possible to use Rudder on platforms without systemd, but systemd is required
+by the package when the distribution supports it.
+Please contact Rudder team if you want a package without systemd on a distribution
+where systemd has been removed.
+
+====
+
 [[server-supported-os, the list of supported Operating Systems for Root server]]
 === For Rudder root server or relay server
 
