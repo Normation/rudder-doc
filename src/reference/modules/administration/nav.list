@@ -4,5 +4,6 @@ users.adoc
 procedures.adoc
 performance.adoc
 monitoring.adoc
+installation_option.adoc
 multi_server.adoc
 integration.adoc
