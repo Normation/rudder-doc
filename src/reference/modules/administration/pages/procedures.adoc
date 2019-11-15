@@ -67,9 +67,9 @@ the tables online, or trigger vacuum full operations, which put an exclusive loc
 and will lock both the Rudder interface and the reporting system for quite a long time.
 
 
-==== Reclaming space online, using pg_repack
+==== Reclaiming space online, using pg_repack
 
-It is necessary to install pg_repack, available on Postgresql.org repository. The procedure ballow shows how to install
+It is necessary to install pg_repack, available on Postgresql.org repository. The procedure below shows how to install
 and configure it, using PostgreSQL repository.
 
 First, you need to identify the Postgresql version on your Rudder Server Root
@@ -96,7 +96,7 @@ PG_SHORT_VERSION="96"
 
 ----
 
-[source,python]
+[source,shell]
 
 .Downloading and installing pg_repack on Debian
 
@@ -110,7 +110,7 @@ apt-get install postgresql-PG_VERSION-repack
 
 ----
 
-[source,python]
+[source,shell]
 
 .Downloading and installing pg_repack on RHEL/CentOS
 
@@ -183,7 +183,7 @@ pg_repack is now installed and configured, and you can start reclaming space, ei
 
 The easiest solution is to create a cron file /etc/cron.d/repack_db
 
-[source,python]
+[source,shell]
 
 ----
 
@@ -205,7 +205,7 @@ PATH=/usr/bin
 
 
 
-[source,python]
+[source,shell]
 
 .Manual vacuuming using the psql binary
 
@@ -231,7 +231,7 @@ rudder# VACUUM FULL nodecompliancelevels;
 In some very rare case, you will encounter some LDAP database entries that are not indexed and used
 during searches. In that case, OpenLDAP will output warnings to notify you that they should be.
 
-[source,python]
+[source,shell]
 
 .LDAP database reindexing
 
@@ -249,7 +249,7 @@ service rudder-slapd restart
 ----
 
 [[_migration_backups_and_restores]]
-== Migration, backups and restores
+== Server backup and migration
 
 It is advised to backup frequently your Rudder installation in case
 of a major outage.
@@ -267,32 +267,36 @@ This backup procedure will operate on principal Rudder data sources:
 
 It will also backup the application logs.
 
-[source,python]
+[source,shell]
 
 .How to backup a Rudder installation
 
 ----
 
+# Where you want to put the backups
+cd /tmp/backup
+
 # First, backup the LDAP database:
-/opt/rudder/sbin/slapcat -l /tmp/rudder-backup-$(date +%Y%m%d).ldif
+/opt/rudder/sbin/slapcat -l rudder-backup-$(date +%Y%m%d).ldif
 
 # Second, the PostgreSQL database:
-sudo -u postgres pg_dump rudder > /tmp/rudder-backup-$(date +%Y%m%d).sql
+sudo -u postgres pg_dump -Fc rudder > rudder-backup-$(date +%Y%m%d).pgsql
 
 # Or without sudo, use the rudder application password:
-pg_dump -Fc -U rudder rudder > /tmp/rudder-backup-$(date +%Y%m%d).sql
+pg_dump -Fc -U rudder rudder > rudder-backup-$(date +%Y%m%d).pgsql
 
 # Third, backup the configuration repository:
-tar -C /var/rudder -zcf /tmp/rudder-backup-$(date +%Y%m%d).tar.gz configuration-repository/ cfengine-community/ppkeys/ packages/ plugin-resources/
+tar -C /var/rudder -zcf rudder-backup-$(date +%Y%m%d).tar.gz configuration-repository/ cfengine-community/ppkeys/
+
+# These may not exist
+[ -d /var/rudder/packages ] && tar -C /var/rudder -zcf rudder-backup-packages-$(date +%Y%m%d).tar.gz packages/
+[ -d /var/rudder/plugin-resources ] && tar -C /var/rudder -zcf rudder-backup-plugin-resources-$(date +%Y%m%d).tar.gz plugin-resources/
 
 # Then backup Rudder configuration
-tar -C /opt/rudder /tmp/rudder-etc-backup-$(date +%Y%m%d).tar.gz etc/
+tar -C /opt/rudder -zcf rudder-etc-backup-$(date +%Y%m%d).tar.gz etc/
 
-# Finally, backup the logs:
-tar -C /var/log -zcf /tmp/rudder-log-backup-$(date +%Y%m%d).tar.gz rudder/
-
-# And put the backups wherever you want, here /root:
-cp /tmp/rudder*-backup* /root
+# Finally, backup the logs (if you need them)
+tar -C /var/log -zcf rudder-log-backup-$(date +%Y%m%d).tar.gz rudder/
 
 ----
 
@@ -303,7 +307,7 @@ but what should you do with it?
 
 Here is the restoration procedure:
 
-[source,python]
+[source,shell]
 
 .How to restore a Rudder backup
 
@@ -318,31 +322,40 @@ rudder agent disable
 # Stop Rudder services
 service rudder-server stop
 service rudder-agent stop
+# to stop using the database
+service rsyslog stop
 
 # Drop the OpenLDAP database
 rm -rf /var/rudder/ldap/openldap-data/*.mdb
 
 # Import your backups
 
+# Go into the backup folder
+cd /tmp/backup
+
 # Configuration repository
-tar -C /var/rudder -zvxf /root/rudder-backup-XXXXXXXX.tar.gz
+tar -C /var/rudder -zxf rudder-backup-XXXXXXXX.tar.gz
+
+# If they exist
+tar -C /var/rudder -zxf rudder-backup-packages-XXXXXXXX.tar.gz
+tar -C /var/rudder -zxf rudder-backup-plugin-resources-XXXXXXXX.tar.gz
 
 # LDAP backup
-/opt/rudder/sbin/slapadd -l /root/rudder-backup-XXXXXXXX.ldif
+/opt/rudder/sbin/slapadd -l rudder-backup-XXXXXXXX.ldif
 
 # Start PostgreSQL
 service postgresql start
 
 # PostgreSQL backup
-sudo -u postgres pg_restore -d rudder -c -C < /root/rudder-backup-XXXXXXXX.sql
+sudo -u postgres pg_restore -d rudder --clean --create < rudder-backup-XXXXXXXX.sql
 # or
-pg_restore -u rudder -d rudder -c -C -W < /root/rudder-backup-XXXXXXXX.sql
+pg_restore -u rudder -d rudder --clean --create -W < rudder-backup-XXXXXXXX.sql
 
 # Configuration backup
-tar -C /opt/rudder -zxf /root/rudder-etc-backup-XXXXXXXX.tar.gz
+tar -C /opt/rudder -zxf rudder-etc-backup-XXXXXXXX.tar.gz
 
 # Logs backups
-tar -C /var/log -zxf /root/rudder-log-backup-XXXXXXXX.tar.gz
+tar -C /var/log -zxf rudder-log-backup-XXXXXXXX.tar.gz
 
 # Enable Rudder agent
 rudder agent enable
@@ -366,13 +379,165 @@ every node that is directly connected to it (managed nodes or relays):
 * Remove the server public key `rm /var/rudder/cfengine-community/ppkeys/root-MD5=*.pub`
 * Modify `/var/rudder/cfengine-community/policy_server.dat` with the new address, then you can force your nodes to send their inventory by running `rudder agent inventory`
 
+== Relay backup and migration
+
+=== Backup
+
+This backup procedure will operate on principal Rudder relay data.
+
+It will also backup the application logs.
+
+[source,shell]
+
+.How to backup a Rudder installation
+
+----
+
+# Where you want to put the backups
+cd /tmp/backup
+
+# Data directory
+tar -C /var/rudder -zcf rudder-backup-$(date +%Y%m%d).tar.gz cfengine-community/ppkeys/
+
+# Then backup Rudder configuration
+tar -C /opt/rudder -zcf rudder-etc-backup-$(date +%Y%m%d).tar.gz etc/
+
+# Finally, backup the logs (if you need them)
+tar -C /var/log -zcf rudder-log-backup-$(date +%Y%m%d).tar.gz rudder/
+
+----
+
+=== Restore
+
+Of course, after a total machine crash, you will have your backups at hand,
+but what should you do with it?
+
+Here is the restoration procedure:
+
+[source,shell]
+
+.How to restore a Rudder backup
+
+----
+
+# First, follow the standard installation procedure, this one assumes you have a working "blank"
+# Rudder on the machine
+
+# Disable Rudder agent
+rudder agent disable
+
+# Stop Rudder services
+service rudder-agent stop
+
+# Import your backups
+
+# Go into the backup folder
+cd /tmp/backup
+
+# Data repository
+tar -C /var/rudder -zxf rudder-backup-XXXXXXXX.tar.gz
+
+# Configuration backup
+tar -C /opt/rudder -zxf rudder-etc-backup-XXXXXXXX.tar.gz
+
+# Logs backups
+tar -C /var/log -zxf rudder-log-backup-XXXXXXXX.tar.gz
+
+# Enable Rudder agent
+rudder agent enable
+
+# And restart Rudder:
+service rudder-agent restart
+
+----
+
+=== Migration
+
+To migrate a Rudder relay installation, just backup and restore your Rudder relay
+from one machine to another.
+
+If your relay address changed, you will also have to do the following on
+every node that is directly connected to it (managed nodes or relays):
+
+* Remove the relay public key `rm /var/rudder/cfengine-community/ppkeys/{RELAY_UUID}-MD5=*.pub`
+* Modify `/var/rudder/cfengine-community/policy_server.dat` with the new address, then you can force your nodes to send their inventory by running `rudder agent inventory`
+
+== Agent backup and migration
+
+=== Backup
+
+This backup procedure will operate on principal Rudder agent data.
+
+[source,shell]
+
+.How to backup a Rudder installation
+
+----
+
+# Where you want to put the backups
+cd /tmp/backup
+
+# Data directory
+tar -C /var/rudder -zcf rudder-backup-$(date +%Y%m%d).tar.gz cfengine-community/ppkeys/
+
+# Then backup Rudder configuration
+tar -C /opt/rudder -zcf rudder-etc-backup-$(date +%Y%m%d).tar.gz etc/
+
+----
+
+=== Restore
+
+Of course, after a total machine crash, you will have your backups at hand,
+but what should you do with it?
+
+Here is the restoration procedure:
+
+[source,shell]
+
+.How to restore a Rudder backup
+
+----
+
+# First, follow the standard installation procedure, this one assumes you have a working "blank"
+# Rudder on the machine
+
+# Disable Rudder agent
+rudder agent disable
+
+# Stop Rudder services
+service rudder-agent stop
+
+# Import your backups
+
+# Go into the backup folder
+cd /tmp/backup
+
+# Data repository
+tar -C /var/rudder -zxf rudder-backup-XXXXXXXX.tar.gz
+
+# Configuration backup
+tar -C /opt/rudder -zxf rudder-etc-backup-XXXXXXXX.tar.gz
+
+# Enable Rudder agent
+rudder agent enable
+
+# And restart Rudder:
+service rudder-agent restart
+
+----
+
+=== Migration
+
+To migrate a Rudder agent installation, just backup and restore your agent
+from one machine to another.
+
 [[password-management]]
-=== Password management
+== Password management
 
 You might want to change the default passwords used in Rudder's managed daemons
 for evident security reasons.
 
-==== Configuration of the postgres database password
+=== Configuration of the postgres database password
 
 You will have to adjust the postgres database and the rudder-web.properties file.
 
@@ -402,7 +567,7 @@ sed -i "s%^rudder.jdbc.password.*$%rudder.jdbc.password=$PASS%" /opt/rudder/etc/
 
 ----
 
-==== Configuration of the OpenLDAP manager password
+=== Configuration of the OpenLDAP manager password
 
 You will have to adjust the OpenLDAP and the rudder-web.properties file.
 
@@ -433,7 +598,7 @@ sed -i "s%^ldap.authpw.*$%ldap.authpw=$PASS%" /opt/rudder/etc/rudder-web.propert
 
 ----
 
-==== Configuration of the WebDAV access password
+=== Configuration of the WebDAV access password
 
 This time, the procedure is a bit more tricky, as you will have to update
 the Technique library as well as a configuration file.
