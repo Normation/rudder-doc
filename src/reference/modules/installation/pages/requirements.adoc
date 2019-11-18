@@ -108,9 +108,6 @@ The required amount of RAM mainly depends on the number of managed nodes. A gene
 * between 50 and 1000 nodes: 4 GB
 * more than 1000 nodes: 4 GB + 1 GB of RAM by 500 nodes beyond 1000.
 
-When managing more than 1000 nodes, we also recommend you to use a multiserver
-installation for Rudder as described in the xref:administration:multi_server.adoc#multiserver-rudder[multiserver installation] chapter.
-
 When your server has more than 2 GB of RAM, you have to configure the RAM allocated
 to the Java Virtual Machine as explained in the section
 xref:administration:performance.adoc#_configure_ram_allocated_to_jetty[about webapplication RAM configuration].
