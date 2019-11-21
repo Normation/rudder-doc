@@ -74,6 +74,58 @@ This has been fixed in the packages, but the problem is caused by the
 package in the version your are upgrading from.
 ====
 
+[WARNING]
+====
+During migration from Rudder 4.x to 5.0, you may encounter an OpenSSL bug resulting in a connection error between nodes and policy server. Problematic Linux distibutions are (but may not be limited to): RHEL 6 (any version), RHEL 7.3 and older, SLES 12SP3 or older, Debian 8 or older, Ubuntu 14 or older.  
+
+
+
+Diagnosis: 
+
+Rudder agent can't communicate with Rudder server, and 
+`rudder agent update -i` display an SSL error looking like:
+
+    Peeked nothing important in TCP stream, considering the protocol as TLS error: Failed to accept TLS connection: (-1 SSL_ERROR_SSL) illegal zero content
+
+Cause: 
+
+The problem, traced https://issues.rudder.io/issues/13690#note-20[in that ticket for Rudder], is due to a bug in OpenSSL for version `1.1.1 and up`
+which are only compatible with https://github.com/openssl/openssl/issues/7134[OpenSSL 1.0.2 and up]. 
+Yet Rudder 4.1, 4.2 or 4.3 use OpenSSL provided by the system and some Linux
+distributions supported by these versions of Rudder only provide flavors of 
+OpenSSL 1.0.1. 
+
+Solution:
+
+As far as we know, there is three solutions available to migrate Rudder
+servers and agent from 4.x to 5.0 and avoid the communication problem:
+
+- the simplest solution is to contact Rudder support which can provide a specially
+compiled version of Rudder policy server with OpenSSL 1.0.2 for use during the
+migration. Once the migration is done, the common Rudder policy server component
+can be reinstalled to ensure using the last version of OpenSSL. Rudder support can
+also provide compatible scale out relays to segment your migration. 
+
+- the second solution, if available on your system, is to update OpenSSL to
+version 1.0.2 or newer on Rudder server version 4.x and then migrate agents to
+Rudder 5.0. Once all agents are migrated to 5.0, you can safelly migrate Rudder
+server to that version. Alternatively, you can update OpenSSL version to 1.0.2 
+or higher on nodes with Rudder 4.3 and migrate Rudder server to 5.0. 
+
+- the last solution is to migrate the whole system (Rudder server and nodes)
+to Rudder 5.0 in one go. In that case, know that once you migrate the server, 
+nodes won't be able to update their policies anymore. If you want to migrate
+Rudder on nodes with a Rudder policy, be sure to do it before upgrading Rudder
+server.
+
+We are sorry for any inconvenience resulting from this problem. If you
+need more information or help, please don’t hesitate to contact us by
+email or other means of communication like
+https://chat.rudder.io[chat] or irc (#rudder on freenode).
+
+====
+
+
 [NOTE]
 ====
 If your Rudder server was upgraded from a 4.1 or older installation on Ubuntu 12.04 LTS or 14.04 LTS,
