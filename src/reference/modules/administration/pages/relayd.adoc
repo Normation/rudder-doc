@@ -1,0 +1,62 @@
+= Relayd administration
+
+The `rudder-relayd` service (added in 6.0) is part of the `rudder-server-relay` package
+and runs on all relays and root servers. It provides the https://docs.rudder.io/api/relay/[relay API]
+and handles inventories and reports forwarding to the root server from nodes.
+
+== Configuration
+
+Relay configuration is stored in `/opt/rudder/etc/relay`:
+
+* `main.conf` contains general configuration. Its content is managed by the Rudder agent of the relay.
+* `logging.conf` contains logging information.
+
+Relay also reads the following data files:
+
+* `/var/rudder/lib/relay/nodeslist.json`: contains information about the nodes behind a relay
+* `/var/rudder/lib/ssl/allnodescerts.pem` (only on root server): contains the certificates of all nodes managed by the root server
+
+Configuration reload uses the reload API endpoint, which allows `systemctl reload rudder-relayd`
+to be synchronous (and ensure configuration is already applied when command returns).
+
+Reloading relayd configuration reloads all data files and update properties from
+`logging.conf` but not the ones from `main.conf`. Changing properties in `main.conf`
+requires a restart to be taken into account.
+
+== Data files
+
+Relayd operates on different data directories:
+
+* `/var/rudder/inventories` (on on simple relays): to forward inventories to upstream relay or root server. On root server, the webapp monitors this folder directly.
+* `/var/rudder/reports`: to forward reports to upstream relay, or, on root server, to parse and insert reports into the database.
+* `/var/rudder/shared-files/`: files shared between nodes
+* `/var/rudder/configuration-repository/shared-files` (read-only): global shared files for Windows agents (Unix agent uses policy download protocol).
+
+== API
+
+Relayd exposes its API on http://localhost:3030/rudder/relay-api/:
+
+* A system control API on `http://localhost:3030/rudder/relay-api/1/system/`
+* The relay API on `http://localhost:3030/rudder/relay-api/1/{remote-run, shared-files, shared-folder}/`. These endpoints are also publicly exposed on https://relay.example.com/rudder/relay-api/.
+
+See the https://docs.rudder.io/api/relay/[API documentation] for more information.
+
+== Logging
+
+Relayd outputs its logs on stdout. You can access its logs through `journalctl -u rudder-relay`.
+
+The log level and filters are configurable in `/opt/rudder/etc/logging.conf`:
+
+* `level` is the global minimal log level. It can be `error`, `warning`, `info`, `debug` or `trace`
+* `filter` allows increasing the log level of a particular component, with `[component]=level`, like
+`database=trace`. You can also filter logs by node id with `[database{node=root}]`. Apply multiple
+filters by separating them with a comma.
+
+Reload the service to update log level and filters.
+
+== Security
+
+Relayd runs with the `rudder-relayd` user and the `rudder` group.
+It also runs in a dedicated SELinux context on RHEL, and on recent
+systemd versions it runs with limited access to filesystem (can only
+write into predefined data directories).
