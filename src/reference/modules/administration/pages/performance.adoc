@@ -81,18 +81,34 @@ For example, if the server has 16GB of RAM, 11GB should be allocated to Jetty
 
 === Memory usage of the JVM
 
-If you are constraint by the amount of memory available, you can enable the String deduplication option of the JVM, to
-save between one fifth to one fourth of memory used by rudder-jetty.
-To do so, you need to edit the `/etc/default/rudder-jetty`, uncomment the option *JAVA_GC* and set
+When RAM allocated to jetty reaches 4 to 6GB (or higher), you may experience long freeze of Rudder, up 
+to several tens of seconds. If this is the case, and if you use `Rudder 5.0.12` or newer, you can change
+the JVM garbage collector used by the `JVM` to one better fitted for larger memory footprint:
 
 ----
+
+# edit +/etc/default/rudder-jetty+ with your preferred text editor, for example vim:
+vim /etc/default/rudder-jetty
+
+Notice: that file is alike to +/opt/rudder/etc/rudder-jetty.conf+, which is the file with
+default values. +/opt/rudder/etc/rudder-jetty.conf+ should never be modified directly because
+modification would be erased by packaging in the following Rudder versuib update.
+
+# Uncomment the lines related to "Java Garbage collector option"
+
 JAVA_GC="-XX:+UseG1GC
 -XX:+UnlockExperimentalVMOptions
 -XX:MaxGCPauseMillis=500
--XX:+UseStringDeduplication
+-XX:+UseStringDeduplication"
+
+# save your changes, and restart Jetty:
+service restart rudder-jetty
+
 ----
 
-and restart service rudder-jetty
+This option is also a good solution if you are constrained by the amount of memory available.
+The String deduplication option of `G1GC` saves between one fifth to one fourth of memory 
+used by rudder-jetty.
 
 
 [[_optimize_postgresql_server]]
