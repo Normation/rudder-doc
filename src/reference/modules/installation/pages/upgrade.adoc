@@ -22,12 +22,14 @@ new installations, but upgraded instances will stay on the syslog protocol for c
 You can switch between reporting protocols at any time. You have three reporting options:
 
 * *syslog*: default on upgrades, same as before 6.0.
-* *HTTPS with syslog compatibility*: default for new installs, keeps compatibility with pre-6.0 agents by using HTTPS reporting for 6.0 agents but still allowing syslog reporting
-* *HTTPS*: switches to HTTPS only, and disables syslog report forwarding, removing all Rudder-specific
+* *HTTPS with syslog compatibility*: keeps compatibility with pre-6.0 agents by using HTTPS reporting for 6.0 agents but still allowing syslog reporting
+* *HTTPS*: default for new installs, switches to HTTPS only, and disables syslog report forwarding, removing all Rudder-specific
 log configuration from nodes and servers. This should only be done once all agents are upgraded to 6.0.
 This allows enforcing report signature and transport through HTTPS.
 
 For now, if you are using the *Change only* report mode, you cannot use HTTPS reporting yet, and have to stick to syslog for now. This will be made compatible in a future 6.0 release.
+
+You can read more about reporting in the xref:administration:server.adoc#reporting_protocol[dedicated section].
 
 ====
 
