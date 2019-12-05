@@ -1,5 +1,5 @@
 site:
-  title: Development Rudder Documentation
+  title: Development RUDDER Documentation
   start_page: get-started::home
   url: https://docs.rudder.io/dev
 output:

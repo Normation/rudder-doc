@@ -1,5 +1,5 @@
 site:
-  title: Rudder 6.1 Documentation
+  title: RUDDER 6.1 Documentation
   start_page: get-started::home
 output:
   dir: ./build/history/6.1

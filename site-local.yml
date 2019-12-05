@@ -1,5 +1,5 @@
 site:
-  title: Rudder Documentation Local Test
+  title: RUDDER Documentation Local Test
   start_page: get-started::home
 output:
   dir: ./build/sites/site-local

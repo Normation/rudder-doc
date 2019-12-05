@@ -1,23 +1,23 @@
-= Welcome to Rudder Documentation
+= Welcome to RUDDER Documentation
 
-* Discover Rudder
-** xref:5.0@reference:ROOT:index.adoc[What is Rudder]Discover Rudder features and use cases
+* Discover RUDDER
+** xref:5.0@reference:ROOT:index.adoc[What is RUDDER]Discover RUDDER features and use cases
 ** https://demo.rudder.io[Online demo]Explore the Web interface with an online demo
-** xref:index.adoc[Get started guide]Get started with Rudder on a test platform
+** xref:index.adoc[Get started guide]Get started with RUDDER on a test platform
 
-* Install Rudder
-** xref:5.0@reference:installation:requirements.adoc[Requirements]Requirement for Rudder installation
+* Install RUDDER
+** xref:5.0@reference:installation:requirements.adoc[Requirements]Requirement for RUDDER installation
 //** Install a Rudder root server to define your configuration policies on xref:reference:installation:server/debian.adoc[Debian/Ubuntu], xref:reference:installation:server/rhel.adoc[RHEL/CentOS] or xref:reference:installation:server/sles.adoc[SLES]
-** xref:5.0@reference:installation:server/debian.adoc[Install Rudder server]Install a Rudder root server to define your configuration policies
+** xref:5.0@reference:installation:server/debian.adoc[Install RUDDER server]Install a root server to define your configuration policies
 //** Install a Rudder agent to apply configuration on xref:reference:installation:agent/debian.adoc[Debian/Ubuntu], xref:reference:installation:agent/rhel.adoc[RHEL/CentOS] or xref:reference:installation:agent/sles.adoc[SLES]
-** xref:5.0@reference:installation:agent/debian.adoc[Install Rudder agent]Install a Rudder agent to apply configuration
+** xref:5.0@reference:installation:agent/debian.adoc[Install RUDDER agent]Install an agent to apply configuration
 
-* Use Rudder
+* Use RUDDER
 ** xref:5.0@reference:ROOT:index.adoc[User manual]Reference documentation
 ** https://docs.rudder.io/api[API reference]To automate actions and extract information
 ** xref:rudder-by-example:ROOT:index.adoc[Rudder by example]for real and detailed use-case examples
 
 * Join the community
-** https://gitter.im/normation/rudder[Chat with the community]on our Gitter channel
+** https://gitter.im/normation/rudder[Chat with the community] on our Gitter channel
 ** https://www.rudder.io/en/use/community/[Ask questions] on ServerFault or on our user mailing-list
-** https://issues.rudder.io/[Report an issue or propose a feature]on our issue tracker
+** https://issues.rudder.io/[Report an issue or propose a feature] on our issue tracker
