@@ -12,7 +12,7 @@ Rudder versions look like `X.Y.Z` (for example, 5.0.2):
 A maintained version is a major version for which we release minor bug fix releases and communicate about security vulnerabilities.
 
 * Our general policy is to *maintain major releases until 3 months after the next major version* is released to give some time for upgrading.
-* For a slower major upgrade pace, Rudder subscription provides (among other benefits) *long-term maintenance up to 24 months after release* (depending on the subscription level) for Rudder versions. You can read more about it on the https://www.rudder.io/en/pricing/subscription/[subscription page].
+* For a slower major upgrade pace, Rudder subscription provides (among other benefits) *long-term maintenance of 18 to 24 months after release* (depending on the subscription level) for Rudder versions, with a minimal upgrade window of 6 to 9 months. You can read more about it on the https://www.rudder.io/en/pricing/subscription/[subscription page].
 
 Note: The ESR tag was previously given to major releases that were maintained 6 months after the next ESR version was announced. Rudder 4.1 is the last ESR release, extended maintenance is now provided as part of https://www.rudder.io/en/pricing/subscription/[Rudder subscription].
 
