@@ -33,17 +33,19 @@ Usage rudder-setup (add-repository|setup-agent|setup-server|upgrade-agent|upgrad
   Currently suported : Debian, Ubuntu, RHEL, Fedora, Centos, Amazon, Oracle, SLES
 
   rudder_version : x.y or x.y.z or x.y-nightly or ci/x.y or lts or latest
-       x.y:         the latest x.y release (ex: 3.2)
-       x.y.z:       the exact x.y.z release (ex: 3.2.1)
-       x.y.z-t:     the exact x.y.z release with a retag number t (ex: 3.2.1-1)
-       x.y.z.a:     the latest x.y.z pre-release where a can be alpha1, beta1, rc1... (ex: 4.0.0.rc1)
-       x.y-nightly: the latest public x.y nightly build (ex: 3.2-nightly)
-       ci/x.y:      the latest private x.y nightly build (ex: ci/3.2)
-       ci/x.y.z:    the latest private x.y.z release build (ex: ci/3.2.16)
-       ci/x.y.z-t:  the latest private x.y.z release build with a retag number t (ex: ci/3.2.16-1)
-       ci/x.y.z.a:  the latest private x.y.z pre-release build (ex: ci/4.0.0.rc1)
-       lts:         the latest long term support version
-       latest:      the latest stable version
+       x.y:            the latest x.y release (ex: 3.2)
+       x.y.z:          the exact x.y.z release (ex: 3.2.1)
+       x.y.z~a:        the latest x.y.z pre-release where a can be alpha1, beta1, rc1... (ex: 4.0.0~rc1) 
+       x.y-nightly:    the latest public x.y nightly build (ex: 3.2-nightly)
+       ci/x.y.z:       the latest development x.y.z release build (ex: ci/3.2.16)
+       ci/x.y.z~a:     the latest development x.y.z pre-release build (ex: ci/4.0.0~rc1)
+       ci/x.y-nightly: the latest development x.y nightly build (ex: ci/5.1-nightly)
+       latest:         the latest stable version
 
+  Environment variables
+    USE_HTTPS=true        use https in repository source (default true)
+    DOWNLOAD_USER=...     download from private repository with this user
+    DOWNLOAD_PASSWORD=... use this password for private repository
+    DEV_MODE=true         permit external access to server and databases (default false)
 
 ----
