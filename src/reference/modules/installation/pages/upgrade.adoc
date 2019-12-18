@@ -11,6 +11,17 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 
 == Upgrade from Rudder 5.0
 
+[WARNING]
+
+====
+
+We discovered several issues for the upgrade of Rudder 5.0.15 or below to 6.0.0 or 6.0.1 for most
+distributions. We advice *strongly* to wait for Rudder 6.0.2 before upgrading your installation.
+
+====
+
+
+
 Migration from any 5.0 minor version is supported (see below for migration from older versions).
 
 [NOTE]
