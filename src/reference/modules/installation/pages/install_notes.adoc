@@ -1,0 +1,40 @@
+= Important installation notes
+
+[WARNING]
+
+====
+
+Several issues were found with Rudder server 6.0.0 and 6.0.1 installation. 
+You may need to do some manual configuration to complete installation successfully.
+
+====
+
+== All distribution
+
+The installation process does not correctly trigger an agent run at the end of installation.
+The most common issue is that connection to PostgreSQL will not be possible because authentication
+is not correct. 
+
+After Rudder root server installation, please run by: 
+
+----
+
+rudder agent run -u
+
+----
+
+You may need to run that command a second time to check that everything is then in success. 
+
+== RHEL/Centos 8
+
+On these distribution, some SELinux policies forbid connection to Rudder web interface. 
+You may see a "proxy connection error" when trying to access the UI. 
+
+For now, you will need to disable SELinux on that distribution. Use the following command
+as root:
+
+----
+
+setenforce 0
+
+----
