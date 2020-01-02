@@ -16,14 +16,6 @@ zypper ar -n 'Rudder 6.0' http://repository.rudder.io/rpm/6.0/SLES_12/ Rudder
 
 ----
 
-* on SLES 11:
-
-----
-
-zypper ar -n 'Rudder 6.0' http://repository.rudder.io/rpm/6.0/SLES_11/ Rudder
-
-----
-
 Update your local package database to retrieve the list of packages available on our repository:
 
 ----
