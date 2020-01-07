@@ -101,10 +101,12 @@ wish to get Rudder support on those systems, please get in touch with us!
 The following operating systems have had an agent built using xref:reference:build.adoc#_building_the_rudder_agent[Building the Rudder Agent]:
 
 * FreeBSD
-
 * Solaris 10 and 11
 
-* OpenSUSE
+The following operating systems work with packages built for another operating system:
+
+* OpenSUSE LEAP (with SLES packages)
+* Amazon Linux and Amazon Linux 2 (with RHEL6 and 7 packages)
 
 [TIP]
 
