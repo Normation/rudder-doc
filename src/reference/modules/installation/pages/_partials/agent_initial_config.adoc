@@ -21,14 +21,6 @@ with proper reverse resolutions.
 
 =====
 
-You can now start the Rudder service with:
-
-----
-
-rudder agent start
-
-----
-
 === Add the node to the server
 
 Several minutes after the start of the agent, the new node should be pending in
