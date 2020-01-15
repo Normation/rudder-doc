@@ -29,10 +29,10 @@ It can retrieve plugins and their licenses from the Rudder repository.
 rudder package update
 
 # Download and install the latest release of a plugin
-rudder package install-file <package_name>
+rudder package install <package_name>
 
 # Download and install the latest nightly of a plugin
-rudder package install-file <package_name> --nightly
+rudder package install <package_name> --nightly
 
 # Install a local .rpkg file
 rudder package install-file <package.rpkg>
