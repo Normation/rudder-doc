@@ -35,7 +35,7 @@ More precisely:
 === Common data
 
 This refers to content available from all nodes in the authorized networks, readable from all users
-on the nodes (and that can be transferred without encryption when using initial policies of a pre-4.0 node).
+on the nodes.
 
 These unprotected contents are:
 
@@ -46,36 +46,34 @@ These unprotected contents are:
 
 This section gives more details about the different flows between nodes and servers.
 
+* All flows use TLS 1.2+ (except for syslog reporting which is not encrypted by default).
+* All Rudder nodes have their own certificate and key pair, used for authentication.
+* The certificate that will be used is extracted from the inventory at node acceptation
+and can later by managed through the nodes API.
+
 === File copy
 
 File copy is used to get policies and files copied during policy execution (named *shared-files*).
-It uses a custom file copy protocol inside standard TLS.
+It uses a custom file copy protocol inside standard TLS (on port 5309).
 
 The access policy is:
 
-* Peer to peer key exchange, without central authority
-* TOFU (Trust On First Use): keys are sent and accepted at first connection (from the policy server on nodes
-  and from nodes with an IP in the Allowed Networks on policy servers).
-* Node-specific files have an ACL containing the public key of the node, as found in the inventory
-* Common files have an IP-based ACL based on the Allowed Networks
+* Peer to peer key exchange, without central authority. 
+* TOFU (Trust On First Use) for policy server key on the node. If the server changes key, the node will refuse to connect.
+* Node-specific files have an ACL restricting access to the node only (based on its public key)
+* Common files have an IP restriction ACL based on the Allowed Networks
 
-The old hostame and IP ACL are still generated for node-specific files to ensure compatibility with older nodes,
-but will be removed in the future.
-
-=== Inventory
+=== Inventory and HTTP-based reporting
 
 Nodes send an inventory to the server after installation or upgrade, and once a day.
+Reports are sent at the end of every agent run.
 
-This inventory contains various information, including:
+They are sent by the node to its configured policy_server over HTTPS, with optional certificate validation.
+Once a node is accepted, all HTTPS reports and inventories will be checked before being accepted.
+To force reports signature, you need to use the "HTTPS only" reporting mode, which disables syslog reporting totally.
 
-* The node's public key
-* The node's policy server
+=== Syslog reporting
 
-The inventory security policy is:
-
-* Inventories are sent by the node to its configured policy_server over HTTPS, currently without certificate validation.
-* Inventories are signed by the node using its private key, which allows the server to check this signature using
-  the public key coming from previous inventory and to ensure it really comes from the right node.It avoids treating a
-  malicious (or bogus) inventory coming from another node, and you should check the public key when accepting a new node.
-* Once a node has sent a signed inventory, no unsigned inventory will be accepted for this node.
-
+Syslog reports are sent in plain text and are not authentified. 
+Starting from 6.0, syslog reporting is disabled by default and
+present for compatibility with older agents.
