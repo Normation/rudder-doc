@@ -1,0 +1,75 @@
+= Logs reference
+
+== Server side
+
+The Rudder log files are all located in the: `/var/log/rudder` directory.
+
+----
+root@server:/var/log/rudder# ls -1
+agent-check
+apache2
+compliance
+core
+install
+ldap
+nodeConfigurations
+rudder-pkg
+webapp
+
+----
+
+=== Webapp
+
+All web application logs are located under the `webapp` folder. A new log file is generated everytime the service `rudder-jetty` is restarted.
+If you want to access the current webapp logs, look for the file named `<today's date>.stderrout.log`.
+The `java.log` is used to log the JVM errors.
+
+=== Apache2
+
+The `apache2` folder is mostly used to log inventories and API calls.
+
+=== Reports
+
+Only active when using the `SYSLOG` reporting mode and enabled in the webapp settings, it aggregates all raw
+reports received from the nodes under the file `/var/log/rudder/reports/all.log`.
+
+=== Compliance
+
+The `compliance` folder will agregate by default all non `Success` or `N/A` reports under `/var/log/rudder/compliance/non-compliant-reports.log`
+One line per reports that is neither `Success` nor `N/A`, as described below:
+
+----
+[2017-03-11 12:16:43+0100] N: root [rudder-snapshot.rudder.io]
+S: [result_error] R: root-DP [distributePolicy] D: root-distributePolicy [Distribute Policy] T: distributePolicy/1.0 C: [reports] V: [None]
+Some inventories failed to add successfully to Rudder
+
+[2017-03-11 12:21:42+0100] N: root [rudder-snapshot.rudder.io]
+S: [result_repaired] R: hasPolicyServer-root [Rudder system policy: basic setup (common)] D: common-root [Common] T: common/1.0 C: [Security parameters] V: [None]
+Some internal security parameters were adjusted
+----
+
+[cols=2*]
+|===
+
+|`*N*` for Node
+|`*S*` for Status
+|`*R*` for Rule
+|`*V*` for Value
+
+|`*D*` for Directive
+|`*T*` for Technique
+|`*C*` for Component
+|The last field is human readable text report message
+|===
+
+=== Install
+
+It contains one file per Rudder related package installation, with all the logs from their installation.
+
+=== Agent-check
+
+Logs every run of the command `rudder agent check -q` triggered by a cron every 5 minutes.
+
+== Agent side
+
+The agent only comes with the `install` and `agent-check` logs.
