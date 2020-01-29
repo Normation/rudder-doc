@@ -2,7 +2,7 @@ architecture.adoc
 build.adoc
 man.adoc
 variables.adoc
-package_format.adoc
+plugin_format.adoc
 security.adoc
 generic_methods.adoc
 generic_methods_guidelines.adoc

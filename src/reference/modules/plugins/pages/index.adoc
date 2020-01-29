@@ -5,7 +5,8 @@ Rudder is an extensible software. The *Plugins*
 menu sums-up information about loaded plugins, their version and their
 configuration.
 
-A plugin is an `.rpkg` file (for "Rudder package").
+A plugin is an `.rpkg` file (for "Rudder package"), see the xref:reference:plugin_format.adoc[dedicated documentation] for more
+information about the format.
 
 == Get plugins
 
