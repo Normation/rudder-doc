@@ -37,7 +37,7 @@ In details, generating inventory does:
 * ask the node policy server for its UUID with an HTTP GET on
   `https://server/uuid`,
 * generate an inventory by scanning the node hardware and software components,
-* optionally make a digital signature of the generated inventory file,
+* make a digital signature of the generated inventory file,
 * send file(s) to the node's policy server on `https://POLICY-SERVER/inventory-updates/`
 
 The individual commands can be displayed with the `-i` option to `rudder agent
@@ -48,8 +48,8 @@ inventory` command.
 
 On the Relay server:
 
-* the inventory is received by a `webdav` endpoint,
-* the `webdav` service store the file in the folder
+* the inventory and its signature are received by a `webdav` endpoint,
+* the `webdav` service store the files in the folder
   `/var/rudder/inventories/incoming`
 * on each agent runs, files in `/var/rudder/inventories/incoming` are
   forwarded to the Relay own policy server.
@@ -60,9 +60,28 @@ On the Root server, the start of the workflow is the same than on a relay:
 
 * the inventory is received by a `webdav` endpoint,
 * the `webdav` service store the file in the folder
-  `/var/rudder/inventories/incoming`
+  `/var/rudder/inventories/incoming` (for nodes not already accepted in Rudder) 
+  or in `/var/rudder/inventories/accepted-nodes-updates` (for node already
+  accepted). 
 
-Then, on each run, the agent:
+As soon as a file is created or modified in these two directories, an `inotify`
+event is sent to in inventory watcher process which:
+
+- check if the file is of any interest for it based on extension (`.ocs`, 
+  `.xml`, `.gz`, `.sign` extension are processed)
+- if the file is an archive, it's extracted, 
+- if the file is a signature (respectively an inventory), it waits for the
+  corresponding inventory (respectively signature) for up to 10s, 
+- if only the signature is present, nothing is done (only a log),
+- if only the inventory file is present, the processing is done in 
+  "compatibility" mode to support rudder agent below version 5.0, 
+- if the pair is present, both are processed together. 
+- processing starts by parsing inventory file and check for mandatory
+  elements (especially `<RUDDER>` tag and content)
+- then, inventory is queued to be saved in LDAP.   
+
+For compatibily reason,  on each run, the agent check if there is
+remaining inventories which were not processed and for each of them:
 
 * look for inventory / signature pairs:
 ** inventories without a corresponding signature file are processed only if
@@ -107,6 +126,35 @@ $ curl http://localhost:8080/endpoint/api/info
 }
 
 ----
+
+
+=== Start, stop, restart inventory watchers
+
+Inventory `inotify` watcher can be controlled via local REST API call:
+
+.start watchers
+----
+
+$ curl -X POST http://localhost:8080/endpoint/api/watcher/start
+
+----
+
+
+.restart watchers
+----
+
+$ curl -X POST http://localhost:8080/endpoint/api/watcher/restart
+
+----
+
+
+.stop watchers
+----
+
+$ curl -X POST http://localhost:8080/endpoint/api/watcher/stop
+
+----
+
 
 == Rudder Server data workflow
 
