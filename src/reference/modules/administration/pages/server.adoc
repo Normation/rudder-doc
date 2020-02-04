@@ -139,6 +139,29 @@ For instance, using one unique git repository you can follow this workflow:
 
 ====
 
+[WARNING]
+===========
+
+If you are importing from a Rudder 5.0.15 or before, the archive misses a folder. After importing configuration, 
+you may have the following error message
+
+----
+
+Error when trying to open template 'TechniqueResourceIdByPath(List(dsc, ncf, 50_techniques, TechniqueName, 1.0),TechniqueFile.ps1)'. Check that the file exists with a .st extension and is correctly commited in Git, or that the metadata for the technique are corrects.
+
+----
+
+To recover from this state, you need to regenerate the data with
+
+----
+
+touch /opt/rudder/etc/force_ncf_technique_update
+service rudder-jetty restart
+
+----
+
+===========
+
 === Deploy a preconfigured instance
 
 You can use the procedures of Archiving and Restoring configuration to deploy
