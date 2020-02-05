@@ -1,4 +1,4 @@
-= Package format
+= Plugin format
 
 Rudder has a specific package format for plugins.
 
