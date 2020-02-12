@@ -80,25 +80,6 @@ event is sent to in inventory watcher process which:
   elements (especially `<RUDDER>` tag and content)
 - then, inventory is queued to be saved in LDAP.   
 
-For compatibily reason,  on each run, the agent check if there is
-remaining inventories which were not processed and for each of them:
-
-* look for inventory / signature pairs:
-** inventories without a corresponding signature file are processed only if
-   they are older than 2 minutes,
-* POST the inventory or inventory+signature pair to the local API of
-  "inventory-endpoint" application on `http://localhost:8080/endpoint/upload/`
-* the API makes some quick checks on inventory (well formed, mandatory fields...)
-  and :
-** if checks are OK, *ACCEPTS* (HTTP code `200`) the inventory,
-** if signature is configured to be mandatory and is missing, or if the
-   signature is not valid, refuses with *UNAUTHORIZED* error (HTTP code `401`)
-** else fails with a *PRECONDITION FAILED* error (HTTP code `412`)
-* on error, inventory file is moved to `/var/rudder/inventories/failed`,
-* on success:
-** the inventory file is moved to `/var/rudder/inventories/received`,
-** in parallel, _inventory web_ parses and updates Rudder database.
-
 === Queue of inventories waiting to be parsed
 
 The _inventory endpoint_ has a limited number of slot available for successfully
