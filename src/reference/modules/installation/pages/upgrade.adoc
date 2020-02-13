@@ -135,6 +135,20 @@ list, search and install plugins and their licenses directly from a repository.
 
 ====
 
+[NOTE]
+====
+
+Rudder 6.1 comes with a new hash function: https://en.wikipedia.org/wiki/Bcrypt[Bcrypt] which allows safer password storage. To switch from a previous hash function (SHA1, SHA256, SH512, MD5) to BCrypt you should change the `hash` parameter in `/opt/rudder/etc/rudder-users.xml` to `bcrypt` and update all password.
+To update all passwords you have two ways to proceed: 
+
+* You can do it manually in the same file by using this command in a terminal to generate a new hash:
+----
+htpasswd -nBC 12 "" | tr -d ':\n' | sed 's/$2y/$2b/'
+----
+* Directly from the User Management plugin (you should at least update the administrator's password manually to log in the first time) and use the interface to update all password.
+
+====
+
 Direct upgrades from 4.3.x and older are no longer supported on 6.0.
 If you are still running one of those, either on servers or nodes,
 please first upgrade to one of the supported versions, and then upgrade to 6.0.
