@@ -13,7 +13,7 @@ The credentials of a user are defined in the XML file
 
 ----
 
-<authentication hash="sha512">
+<authentication hash="bcrypt">
   <user name="alice"  password="xxxxxxx" role="administrator"/>
   <user name="bob"    password="xxxxxxx" role="administration_only, node_read"/>
   <user name="custom" password="xxxxxxx" role="node_read,node_write,configuration_read,rule_read,rule_edit,directive_read,technique_read"/>
@@ -52,6 +52,7 @@ the "secret" password for this algorithm are listed here:
 
 |====
 |Value                 | Algorithm | Linux command to hash the password
+|"bcrypt"              | BCRYPT    | htpasswd -nBC 12 ""  \| tr -d ':\n' \| sed 's/$2y/$2b/'
 |"md5"                 | MD5       | read mypass; echo -n $mypass \| md5sum
 |"sha" or "sha1"       | SHA1      | read mypass; echo -n $mypass \| shasum
 |"sha256" or "sha-256" | SHA256    | read mypass; echo -n $mypass \| sha256sum
