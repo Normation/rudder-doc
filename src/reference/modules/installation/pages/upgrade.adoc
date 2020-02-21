@@ -135,13 +135,13 @@ please first upgrade to one of the supported versions, and then upgrade to 6.0.
 [WARNING]
 ====
 
-There was a bug in 6.0 agents before 6.0.4
+There was a bug in 6.0 agents before 6.0.3
 that made their inventories not fully parseable by 5.0
 servers, which leads to connection errors once the
 node is accepted.
 
 In this case you can either upgrade the server first or use
-6.0.4+ agents.
+6.0.3+ agents.
 
 ====
 
