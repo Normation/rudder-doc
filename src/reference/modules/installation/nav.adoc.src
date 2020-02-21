@@ -10,7 +10,6 @@
 *** xref:requirements.adoc#rudder-cloud-compatibility[Cloud compatibility]
 *** xref:requirements.adoc#node-hardware-requirements[Hardware specifications for Rudder Agent]
 *** xref:requirements.adoc#server-hardware-requirements[Hardware specifications and sizing for Rudder Root Server]
-** xref:install_notes.adoc[Important installation notes]
 ** xref:quick_install.adoc[Quick installation]
 ** Install root server
 *** xref:server/debian.adoc[on Debian/Ubuntu]
