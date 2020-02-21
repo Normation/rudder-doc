@@ -11,17 +11,6 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 
 == Upgrade from Rudder 5.0
 
-[WARNING]
-
-====
-
-We discovered several issues for the upgrade of Rudder 5.0.15 or below to 6.0.0 or 6.0.1 for most
-distributions. We advice *strongly* to wait for Rudder 6.0.2 before upgrading your installation.
-
-====
-
-
-
 Migration from any 5.0 minor version is supported (see below for migration from older versions).
 
 [NOTE]
@@ -143,6 +132,19 @@ please first upgrade to one of the supported versions, and then upgrade to 6.0.
 
 === 5.0 servers
 
+[WARNING]
+====
+
+There was a bug in 6.0 agents before 6.0.4
+that made their inventories not fully parseable by 5.0
+servers, which leads to connection errors once the
+node is accepted.
+
+In this case you can either upgrade the server first or use
+6.0.4+ agents.
+
+====
+
 Rudder agents 6.0 are compatible with 5.0 Rudder servers.
 
 === Older servers
@@ -153,6 +155,17 @@ You need to upgrade your server to a compatible version before the agents.
 == Compatibility between Rudder server 6.0 and older agent versions
 
 === 4.3 and 5.0 agents
+
+[WARNING]
+====
+
+There was a bug in 5.0 agents before 5.0.16 that prevented them from
+connecting to a 6.0.1+ server.
+
+In this case, you can either upgrade the agent to 5.0.16+ or
+the server to 6.0.3+.
+
+====
 
 Rudder agent 4.3 and 5.0 are fully compatible with Rudder server 6.0. It is
 therefore not strictly necessary to update all your agents to 6.0.
