@@ -11,7 +11,7 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 
 == Upgrade from Rudder 5.0
 
-Migration from any 5.0 minor version is supported (see below for migration from older versions).
+Migration from any 5.0 are supported from 5.0.16+ bugfix version and should be upgraded to at least 6.0.3 release (see below for migration from older versions).
 
 [NOTE]
 ====
@@ -43,6 +43,7 @@ those packages will all be removed.
 This is normal!
 
 ====
+
 
 [NOTE]
 ====
@@ -135,6 +136,29 @@ To update all passwords you have two ways to proceed:
 htpasswd -nBC 12 "" | tr -d ':\n' | sed 's/$2y/$2b/'
 ----
 * Directly from the User Management plugin (you should at least update the administrator's password manually to log in the first time) and use the interface to update all password.
+
+====
+
+[WARNING]
+====
+
+Upgrading from versions older 5.0.16 leads to problems when removing rudder-jetty package causing the upgrade command to fail and leave rudder-jetty package in a non functionnal state.
+
+However your Rudder 6.0 should be working, but we recommend to upgrade at least to 5.0.16 before upgrading to 6.0.
+
+====
+
+[WARNING]
+====
+
+Upgrading to versions before 6.0.3 leads to several errors (service not started, ldap conf not updated to new format ...), all these bugs are fixed in 6.0.3 and you consider upgrading at least to 6.0.3.
+
+====
+
+[WARNING]
+====
+
+Upgrading to 6.0.3 disables all plugins you may have installed because compatibility of previous 6.0 plugins are not compatible with 6.0.3, please reinstall your plugins to their latest versions.
 
 ====
 
