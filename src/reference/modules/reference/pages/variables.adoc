@@ -166,7 +166,7 @@ directives parameters and in the technique editor:
 |Unqualified hostname
 
 |${sys.host}
-|Node's hsotname (according to the kernel)
+|Node's hostname (according to the kernel)
 
 |${sys.domain}
 |Node's domain as discovered by the agent
