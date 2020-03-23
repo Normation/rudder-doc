@@ -27,20 +27,6 @@ Variables are also typed and can be:
 
 More over, all variables in Rudder are overridable at execution time, keep in mind that ordering the definition of your variables is important.
 
-== User defined parameters
-
-Rudder provides a simple way to add common and reusable variables in either plain directives, or techniques created using the technique editor: the parameters.
-
-image::rudder-parameters.png[Parameters]
-
-The parameters enable the user to specify a content that can be put anywhere, using the following syntax:
-
-* In directives: `${rudder.param.name}` will expand the content of the "name" parameter.
-* In the technique editor: `${rudder_parameters.name}` will do the same.
-
-Using this, you can specify common file headers (this is the default parameter, "rudder_file_edit_header"), common DNS or domain names, backup servers,
-site-specific elements...
-
 == Inventory variables
 
 NOTE: Theses variables have been introduced in Rudder 5.0.13, if you are using a previous version of Rudder, please use System Variables, described in next section
@@ -141,6 +127,415 @@ Informations about a node's policy server:
 |The administrator login of the Policy Server
 
 |===
+
+[[_node_properties]]
+== Node properties
+
+Node properties can be found in the *properties* tab of each node in Rudder.
+
+Node properties can be managed using the UI, or Rudder's API, see https://docs.rudder.io/api/#api-Nodes-updateNodeProperties
+
+Properties can also be defined on the node itself, to override locally properties.
+
+Each property is a key=value pair. The value can be a string or a well-formatted JSON data structure.
+
+Some examples:
+`datacenter=Paris`
+`datacenter= { "id": "FRA1", "name": "Colo 1, Paris", "location": "Paris, France", "dns_suffix": "paris.example.com" }`
+
+
+=== Using properties
+
+Node properties can be used almost everywhere in Rudder:
+
+* in directive parameters
+* in the technique editor
+* in your own techniques and generic methods
+
+To use a property, simply use the variable node.properties with the variable call syntax.
+
+Example with a property named 'datacenter':
+
+----
+
+${node.properties[datacenter]}
+
+----
+
+In a mustache template, use:
+
+----
+
+{{{vars.node.properties.datacenter}}}
+
+----
+
+=== Local override
+
+The agent searches for optionnal properties files `/var/rudder/local/properties.d/*.json`, and will override existing properties.
+
+As a result, if you have node properties defined server side as
+`"sysctls_postgresql":{"kernel.shmall":"903330","kernel.shmmax":"3700041320"}` and
+`"vm":{"vm.dirty_ratio":"10"}`
+
+and a local property file `/var/rudder/local/properties.d/postgresql_config.json` as
+
+----
+
+{
+  "properties":
+  {
+    "sysctls_postgresql": {
+      "kernel.shmmax":"5368709120"
+    }
+  }
+
+}
+
+----
+
+The resulting properties will be:
+
+`"sysctls_postgresql":{"kernel.shmmax":"5368709120"}` and
+`"vm":{"vm.dirty_ratio":"10"}`
+
+`sysctls_postgresql` has been overriden by local property, and `vm` has been left untouched.
+Note that it is an override, as the semantic of merging is not deterministic with literal values, and it does not allow to unset values. If you need to merge, please refer to the next paragraph.
+
+
+=== Merging properties
+
+If you want to merge server defined properties with local defined properties, rather than override them, you will need to use the generic method variable_dict_merge_tolerant to define which variables you need to merge, and define the local variables in a different namespace than properties.
+
+For instance, if you have defined in the node properties the following properties
+
+`"sysctls_postgresql":{"kernel.shmall":"903330","kernel.shmmax":"3700041320"}`
+
+and you wish to merge these values on a node with locally defined variable, to change the value of kernel.shmmax and set the value of kernel.shmmni, you can define the file /var/rudder/local/properties.d/postgresql_config.json with the following content
+
+----
+
+{
+    "local_properties":
+    {
+        "sysctls_postgresql": {
+            "kernel.shmmax":"5368709120",
+            "kernel.shmmni":"4096"
+        }
+    }
+
+}
+
+----
+
+and use the generic method `variable_dict_merge_tolerant` to merge `node.properties[sysctls_postgresql]` and `node.local_properties[sysctls_postgresql]`, and set the result in merged_properties.sysctls_postgresql (for instance): `variable_dict_merge_tolerant("merged_properties", "sysctls_postgresql", "node.properties[sysctls_postgresql]", "node.local_properties[sysctls_postgresql]")`
+
+As a result, merged_properties.sysctls_postgresql will contain
+
+---
+
+"sysctls_postgresql": {
+    "kernel.shmall":"903330",
+    "kernel.shmmax":"5368709120",
+    "kernel.shmmni":"4096"
+}
+
+
+---
+
+
+
+=== Under the hood
+
+On the server, one or more properties files are written for each node in the
+`/var/rudder/share/<uuid>/rules/cfengine-community/properties.d/` directory.
+This directory is then copied to each node by the agent with all other policy files.
+
+In the agent, properties are made available in the `node.<namespace>` container that contains the values.
+Those values are read from
+`/var/rudder/cfengine-community/inputs/properties/*.json`. All files are taken
+in order and override the previous ones - the last one wins.
+
+The agent searches for optional properties files `/var/rudder/local/properties.d/*.json`, and will define variables
+or override existing properties.
+
+Each file must contain at least 2 levels of JSON content, the first level is the namespace level
+and the second level is the key level.
+
+The namespace name must be an ASCII name that doesn't start with `_` and must
+match the following regex: `[a-zA-Z0-9][a-zA-Z0-9_]*`
+
+For example:
+
+----
+
+{
+  "properties":
+  {
+    "datacenter": "Paris",
+    "environment": "production",
+    "customer": "Normation"
+  }
+}
+
+----
+
+The merge is a first level merge done at the namespace level. This means that:
+
+* a key in a namespace is fully overridden by the same key in the same namespace in a later file.
+* a key in a namespace is never overridden by the same key in a different namespace
+* a key that is overridden never retains original data even if it is a data container itself
+
+The result key is available in the `node.<namespace>` data variable. A usage
+example:
+
+----
+${node.properties[datacenter]}
+----
+
+To get the original data (for debug only) there is the
+`properties.property_<fileid>` variable. A usage example:
+
+----
+${properties.property__var_rudder_cfengine_community_inputs_properties_d_properties_json[properties][datacenter]}
+----
+
+[[_node_properties_expansion_in_directives]]
+== Node properties expansion in directives
+
+It is possible to use properties defined on nodes to build Directive values in all fields. The
+resulting values will be computed during policy generation, and can therefore
+provide unique values for each node or be used in JavaScript expressions.
+
+Properties on nodes are defined using Rudder's REST API, with the 'Update Node properties' API call.
+More details in our https://docs.rudder.io/api[API documentation].
+
+Properties can also be defined directly on the nodes, by creating properties files
+`/var/rudder/local/properties.d/*.json/`
+
+=== Usage
+
+In any directive text field, you can access properties defined on nodes using the following syntax:
+
+----
+
+${node.properties[property_name][key_one][key_two]}
+
+----
+
+
+where:
+
+- `property_name` is the name of the property defined via the API
+- `key_one` and `key_two` are keys in the JSON structure
+- the value obtained is the string representation, in compact mode, of the entire node property or sub-structure of the JSON value
+- if the key is not found, an error will be raised that will stop policy generation
+- spaces are authorized around separators ([,],|,}..)
+
+==== Providing a default value in Directives
+
+You may want to provide a default value to node properties expansion to avoid a policy generation error due to missing node properties.
+This is also a good case to allow a simple override mechanism for a parameter where only some nodes have a specific value.
+
+You can also use other node properties, or other Rudder parameters as defaults, using the same syntax as above.
+
+Please note that this syntax is not available in Technique Editor. The prefered method in Technique Editor si to use `Variable String with Default`
+generic method, or use a Technique Parameter.
+
+Some examples:
+
+----
+
+${node.properties[datacenter][id] | default = "LON2" }
+${node.properties[datacenter][name] | default = """Co-location with "Hosting Company" in Paris (allows quotes)""" }
+${node.properties[datacenter][id] | default = ${rudder.param.default_datacenter} }
+${node.properties[netbios_name] | default = ${rudder.node.hostname} }
+${node.properties[dns_suffix] | default = ${node.properties[datacenter][dns_suffix] | default = "${rudder.node.hostname}.example.com" }
+
+#or even use cfengine variables in the default
+${node.properties[my_override] | default = "${cfengine.key}"}
+
+----
+
+==== Forcing expansion on the node
+
+In some cases, you will want to use a `${node.properties[key]}` in a directive parameter, but you don't want to expand it during
+policy generation on the Rudder server, but instead let the value be expanded during the agent run on the node. Typically if the value is to be used by a templating
+tool, or if the value is known only on the node.
+
+For these cases, you can add the "node" option to the property expression:
+
+----
+
+${node.properties[datacenter][id] | node }
+
+----
+
+This will be rewritten during policy generation into:
+
+----
+
+${node.properties[datacenter][id]}
+
+----
+
+Which will be considered as a standard variable by the agent, which will replaced this expression by its value if it's defined, or kept as is if it's unknown.
+
+The variable content is read from `/var/rudder/cfengine-community/inputs/properties.d/properties.json`, and from the optionally defined `/var/rudder/local/properties.d/*.json` files.
+You can find more information on node properties in xref:usage:advanced_configuration_management.adoc#_node_properties[node properties documentation].
+
+
+== JavaScript evaluation in Directives
+
+It is possible to use JavaScript expressions to build Directive values. The
+resulting values will be computed during policy generation, and can therefore
+provide unique values for each node.
+
+=== Feature availability
+
+You can disable this feature in the Administration/Settings page, using the
+*Enable script evaluation in Directives* parameter.
+
+
+=== Usage
+
+All standard JavaScript methods are available, and a Rudder-specific
+library, prefixed with `rudder.` also provides some extra utilities. This
+library is documented below.
+
+For example, to get the first 3 letters of each node's hostname, you can write:
+----
+"${rudder.node.hostname}".substring(0,3)
+----
+
+[TIP]
+
+[[limits-of-scripts, Limitation of the scripting language]]
+
+.Limitation of the scripting language
+
+====
+
+JavaScript expressions are evaluated in a sandboxed JavaScript environment. It has some
+limitations, such as:
+
+* It cannot write on the filesystem
+* Scripts are killed after 5 seconds of execution, to prevent overloading the system
+
+====
+
+=== Rudder utility library
+
+==== Standard hash methods
+
+The following methods allow to simply hash a value using standard algorithms:
+
+* `rudder.hash.md5(string)`
+* `rudder.hash.sha256(string)`
+* `rudder.hash.sha512(string)`
+
+These methods do not use a salt for hashing, and as such are not suitable for
+distributing passwords for user accounts on UNIX systems. See below for a
+preferable approach for this.
+
+==== UNIX password-compatible hash methods
+
+The following methods are specially designed to provided hashes that can be
+used as user passwords on UNIX systems (in `/etc/shadow`, for example). Use
+these if you want to distribute hashes of unique passwords for each of your
+nodes, for example.
+
+Two different cases exist: support for generic Unix-like systems (Linux, BSD,
+...) and support for AIX systems (which use a different hash algorithm).
+
+Available methods are:
+
+* `rudder.password.auto(algorithm, password [, salt])`
+* `rudder.password.unix(algorithm, password [, salt])`
+* `rudder.password.aix(algorithm, password [, salt])`
+
+The parameters are:
+
+* `algorithm` can be "MD5", "SHA-512", "SHA512", "SHA-256", "SHA256" (case insensitive)
+* `password` is the plain text password to hash
+* `salt` is the optional salt to use in the password (we *strongly* recommend providing this value - see warning below)
+
+The `unix` method generates Unix crypt password compatible hashes (for use on
+Linux, BSD, etc), while the `aix` method generates AIX password compatible
+hashes. The `auto` method automatically uses the appropriate algorithm for
+each node type (AIX nodes will have a AIX compatible hash, others will
+have a Unix compatible hash). We recommend always using `auto` for simplicity.
+
+For example, to use the first 8 letters of each node's hostname as a password,
+you could write:
+----
+rudder.password.auto("SHA-256", "${rudder.node.hostname}".substring(0,8), "abcdefg")
+----
+
+[WARNING]
+
+.Providing a salt
+
+====
+
+It is strongly recommended to provide a *salt* to the methods above. If no
+salt is provided, a random salt is created, and will be recreated at each
+policy generation, causing the resulting hashes to change each time. This, in
+turn, will generate an unnecessary "repaired" status for the password component on all nodes
+at each policy generation.
+
+====
+
+[TIP]
+
+.JVM requirements
+
+====
+
+This features is tested only on HotSpot 1.8, OpenJDK 1.8, and IBM JVM 1.8.
+
+====
+
+[TIP]
+
+.JVM requirements for AIX password hashes
+
+====
+
+AIX password generation depends on the availability of *PBKDF2WithHmacSHA256* and
+*PBKDF2WithHmacSHA512* in the JVM. These algorithms are included by default on
+HotSpot 1.8 and OpenJDK 1.8 and upward. In the case where your JVM does not support these
+algorithms, typically on an IBM JDK or a JVM 1.7 version of HotSpot and OpenJDK, the hashing
+algorithm falls back to *SHA1* with *PBKDF2WithHmacSHA1*, and an error message will be
+logged. You can also check your JVM editor manual to add support for these algorithms.
+
+====
+
+=== Status and future support
+
+In a future version of Rudder, JavaScript evaluation will be supported in all
+fields in Directives, including non plain-text fields.
+
+In the meantime, you can already test this functionality out by entering a JavaScript
+expression in any Directive field, prefixed by `evaljs:`. Please be aware that
+this is unsupported and untested, so do this at your own risk.
+
+There is currently no plan to extend this support to the fields in the
+Technique editor.
+
+== Global parameters
+
+Rudder provides a simple way to add common and reusable variables in either plain directives, or techniques created using the technique editor: the parameters.
+
+image::rudder-parameters.png[Parameters]
+
+The parameters enable the user to specify a content that can be put anywhere, using the following syntax:
+
+* In directives: `${rudder.param.name}` will expand the content of the "name" parameter.
+* In the technique editor: `${rudder_parameters.name}` will do the same.
+
+Using this, you can specify common file headers (this is the default parameter, "rudder_file_edit_header"), common DNS or domain names, backup servers,
+site-specific elements...
 
 === In the Technique Editor
 
