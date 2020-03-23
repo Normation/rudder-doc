@@ -23,8 +23,8 @@
 *** xref:relay/debian.adoc[on Debian/Ubuntu]
 *** xref:relay/rhel.adoc[on RHEL/CentOS]
 *** xref:relay/sles.adoc[on SLES]
-** xref:upgrade.adoc[Upgrade notes]
 ** Upgrade Rudder
+*** xref:upgrade/notes.adoc[Upgrade notes]
 *** xref:upgrade/debian.adoc[on Debian/Ubuntu]
 *** xref:upgrade/rhel.adoc[on RHEL/CentOS]
 *** xref:upgrade/sles.adoc[on SLES]
