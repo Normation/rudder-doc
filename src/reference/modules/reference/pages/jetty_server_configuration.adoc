@@ -1,0 +1,333 @@
+= Jetty server configuration
+
+Rudder web application is a `Java` web application (`war`) deployed on http://www.eclipse.org/jetty/[Jetty 9.4 server]. 
+
+`Jetty` is highly configurable and let you customize most of its behavior throught
+modules defined text or `xml` files. 
+
+This section will present `Jetty` installation directories used in `RUDDER` and how to proceed to modify default behavior if it happened to be needed.  
+
+== Jetty start and JVM parameters
+
+`Jetty` being a `Java` application, it runs on `JVM`. 
+`JVM` parameters and `Jetty` starting options are defined in `/opt/rudder/etc/rudder-jetty.conf` file. 
+You should never change anything in that file, since it would be lost during
+next `RUDDER` package upgrade. 
+Instead, you can change these parameters in `/etc/default/rudder-jetty`. It's 
+typically the place where you set-up `JVM` memory parameters, like `-Xmx`. 
+
+== Jetty modules configurations architecture
+
+`Jetty` use a system of default installation + overrides to provide customization. 
+
+Module configuration files are located in `/opt/rudder/jetty/etc`, and there is an overriding system that allows to store specific
+configuration in `/opt/rudder/etc/rudder-jetty-base/etc`. 
+Files in the latter directory have a higher precedence, and so you can copy files from `/opt/rudder/etc` to 
+`/opt/rudder/etc/rudder-jetty-base/etc` to customize them. 
+
+A main configuration file allows to decide what modules are enable and to change parameters value: `/opt/rudder/etc/rudder-jetty-base/start.ini`
+
+== Jetty directories
+
+=== Default installation: `/opt/rudder/jetty/`
+
+In `RUDDER`, `Jetty` default installation is `/opt/rudder/jetty/`. This directory contains a direct unzip of `Jetty` upstream archive. 
+`/opt/rudder/jetty/etc` contains all `Jetty` module configuration, each in one or several `xml` configuration files, sometimes along
+with parameter files (`.ini` or `.properties`). 
+
+A lot of modules are available, related to supported protocol (HTTP, HTTP2, etc) security (SPNEGO, SSL, etc), proxying, logs, etc. Please refer to `Jetty` 
+https://www.eclipse.org/jetty/documentation/[official documentation] if you need to
+learn about them. 
+
+You should not change anything here. Each time you want to customize a module, copy its relevant configuration files in `/opt/rudder/etc/rudder-jetty-base/`.
+
+=== Overrides: /opt/rudder/etc/rudder-jetty-base/
+
+This directory contains `RUDDER` specific configuration files, mainly `etc` subdirectory and `start.ini` configuration file.
+
+==== /opt/rudder/etc/rudder-jetty-base/etc
+
+This directory contains overrides for default modules. You can copy module configuration from `/opt/rudder/jetty/etc` here and customize them as you wish. 
+
+==== `start.ini` configuration file
+
+This file is the main configuration file for `Jetty` modules. It tells `Jetty`
+which modules are enable, and what are their parameters. 
+
+For example, if you want to customize authorized header request size, you can
+change value of parameter `requestHeaderSize` defined for module `server`
+
+This file contains important parameters, like `setuid`, thread pool configuration , ;
+various configuration on `HTTP` and request and answer sizes, log and request log
+configuration (files name, ...), etc. 
+
+For reference, a copy of Rudder `start.ini` is provided below.
+
+== Other Jetty places
+
+`Jetty` use other files and directories at run time, which are not linked to configuration but may be important to know:
+
+- `/var/rudder/tmp/jetty` is the directory where `Jetty` unzip web application `war` to run them. 
+- `/var/rudder/run/rudder-jetty.pid`: file containing `Jetty` PID
+- `/opt/rudder/share/webapps` contains `RUDDER` `war` files. 
+
+== Rudder defaults `start.ini`
+
+.start.ini
+[source,ini]
+----
+
+#===========================================================
+# Jetty Startup
+#
+# See documentation about {jetty.base} at
+# http://www.eclipse.org/jetty/documentation/current/startup.html
+#
+# This directory must be configured as $JETTY_BASE for Rudder.
+# You must also configure $JETTY_HOME where the default jetty
+# distribution is installed (/opt/rudder/jetty)
+#
+# To start rudder:
+# java -jar $JETT_HOME/start.jar jetty.base=$JETTY_BASE
+#
+#===========================================================
+
+# ---------------------------------------
+# Module: ext
+# Adds all jar files discovered in $JETTY_HOME/lib/ext
+# and $JETTY_BASE/lib/ext to the servers classpath.
+# ---------------------------------------
+#--module=ext
+
+# ---------------------------------------
+# Module: resources
+# Adds the $JETTY_HOME/resources and/or $JETTY_BASE/resources
+# directory to the server classpath. Useful for configuration
+# property files (eg jetty-logging.properties)
+# ---------------------------------------
+--module=resources
+
+# ---------------------------------------
+# Module: setuid
+# Enables the unix setUID configuration so that the server
+# may be started as root to open privileged ports/files before
+# changing to a restricted user (eg jetty).
+# ---------------------------------------
+--module=setuid
+
+## SetUID Configuration
+ jetty.setuid.startServerAsPrivileged=true
+ jetty.setuid.userName=root
+ jetty.setuid.groupName=root
+ jetty.setuid.umask=0007
+
+# ---------------------------------------
+# Module: server
+# Enables the core Jetty server on the classpath.
+# ---------------------------------------
+--module=server
+
+### ThreadPool configuration
+## Minimum number of threads
+# jetty.threadPool.minThreads=10
+
+## Maximum number of threads
+# jetty.threadPool.maxThreads=200
+
+## Thread idle timeout (in milliseconds)
+# jetty.threadPool.idleTimeout=60000
+
+### Common HTTP configuration
+## Scheme to use to build URIs for secure redirects
+# jetty.httpConfig.secureScheme=https
+
+## Port to use to build URIs for secure redirects
+# jetty.httpConfig.securePort=8443
+
+## Response content buffer size (in bytes)
+# jetty.httpConfig.outputBufferSize=32768
+
+## Max response content write length that is buffered (in bytes)
+# jetty.httpConfig.outputAggregationSize=8192
+
+## Max request headers size (in bytes)
+ jetty.httpConfig.requestHeaderSize=8192
+
+## Max response headers size (in bytes)
+# jetty.httpConfig.responseHeaderSize=8192
+
+## Whether to send the Server: header
+ jetty.httpConfig.sendServerVersion=true
+
+## Whether to send the Date: header
+ jetty.httpConfig.sendDateHeader=false
+
+## Max per-connection header cache size (in nodes)
+# jetty.httpConfig.headerCacheSize=512
+
+## Whether, for requests with content, delay dispatch until some content has arrived
+# jetty.httpConfig.delayDispatchUntilContent=true
+
+## Maximum number of error dispatches to prevent looping
+# jetty.httpConfig.maxErrorDispatches=10
+
+## Maximum time to block in total for a blocking IO operation (default -1 is to use idleTimeout on progress)
+# jetty.httpConfig.blockingTimeout=-1
+
+## Cookie compliance mode of: RFC2965, RFC6265
+# jetty.httpConfig.cookieCompliance=RFC6265
+
+### Server configuration
+## Whether ctrl+c on the console gracefully stops the Jetty server
+# jetty.server.stopAtShutdown=true
+
+## Timeout in ms to apply when stopping the server gracefully
+# jetty.server.stopTimeout=5000
+
+## Dump the state of the Jetty server, components, and webapps after startup
+# jetty.server.dumpAfterStart=false
+
+## Dump the state of the Jetty server, components, and webapps before shutdown
+# jetty.server.dumpBeforeStop=false
+
+# ---------------------------------------
+# Module: deploy
+# Enables webapplication deployment from the webapps directory.
+# ---------------------------------------
+--module=deploy
+
+# Monitored directory name (relative to $jetty.base)
+# jetty.deploy.monitoredDir=webapps
+# - OR -
+# Monitored directory path (fully qualified)
+ jetty.deploy.monitoredPath=/opt/rudder/share/webapps
+
+# Defaults Descriptor for all deployed webapps
+# jetty.deploy.defaultsDescriptorPath=${jetty.base}/etc/webdefault.xml
+
+# Monitored directory scan period (seconds)
+# jetty.deploy.scanInterval=1
+
+# Whether to extract *.war files
+# jetty.deploy.extractWars=true
+
+# ---------------------------------------
+# Module: webapp
+# Adds support for servlet specification webapplication to the server
+# classpath.  Without this, only Jetty specific handlers may be deployed.
+# ---------------------------------------
+--module=webapp
+
+## Add to the server wide default jars and packages protected or hidden from webapps.
+## System classes are protected and cannot be overridden by a webapp.
+## Server classes are hidden and cannot be seen by a webapp
+## Lists of patterns are comma separated and may be either:
+##  + a qualified classname e.g. 'com.acme.Foo'
+##  + a package name e.g. 'net.example.'
+##  + a jar file e.g. '${jetty.base.uri}/lib/dependency.jar'
+##  + a directory of jars,resource or classes e.g. '${jetty.base.uri}/resources'
+##  + A pattern preceeded with a '-' is an exclusion, all other patterns are inclusions
+##
+## The +=, operator appends to a CSV list with a comma as needed.
+##
+#jetty.webapp.addSystemClasses+=,org.example.
+#jetty.webapp.addServerClasses+=,org.example.
+
+# ---------------------------------------
+# Module: http
+# Enables a HTTP connector on the server.
+# By default HTTP/1 is support, but HTTP2C can
+# be added to the connector with the http2c module.
+# ---------------------------------------
+--module=http
+
+### HTTP Connector Configuration
+
+## Connector host/address to bind to
+ jetty.http.host=127.0.0.1
+
+## Connector port to listen on
+ jetty.http.port=8080
+
+## Connector idle timeout in milliseconds
+# jetty.http.idleTimeout=30000
+
+## Connector socket linger time in seconds (-1 to disable)
+# jetty.http.soLingerTime=-1
+
+## Number of acceptors (-1 picks default based on number of cores)
+# jetty.http.acceptors=-1
+
+## Number of selectors (-1 picks default based on number of cores)
+# jetty.http.selectors=-1
+
+## ServerSocketChannel backlog (0 picks platform default)
+# jetty.http.acceptorQueueSize=0
+
+## Thread priority delta to give to acceptor threads
+# jetty.http.acceptorPriorityDelta=0
+
+## Reserve threads for high priority tasks (-1 use a heuristic, 0 no reserved threads)
+# jetty.http.reservedThreads=-1
+
+## Connect Timeout in milliseconds
+# jetty.http.connectTimeout=15000
+
+## HTTP Compliance: RFC7230, RFC2616, LEGACY
+# jetty.http.compliance=RFC7230
+
+# ---------------------------------------
+# Module: console-capture
+# Redirects JVMs console stderr and stdout to a log file,
+# including output from Jetty's default StdErrLog logging.
+# ---------------------------------------
+
+--module=console-capture
+
+## Logging directory (relative to $jetty.base)
+# jetty.console-capture.dir=logs
+
+## Whether to append to existing file
+# jetty.console-capture.append=true
+
+## How many days to retain old log files
+# jetty.console-capture.retainDays=90
+
+## Timezone of the log timestamps
+# jetty.console-capture.timezone=GMT
+
+# ---------------------------------------
+# Module: requestlog
+# Enables a NCSA style request log.
+# ---------------------------------------
+#--module=requestlog
+
+## Logging directory (relative to $jetty.base)
+# jetty.requestlog.dir=logs
+
+## File path
+# jetty.requestlog.filePath=${jetty.requestlog.dir}/yyyy_mm_dd.request.log
+# jetty.requestlog.filePath=/var/log/rudder/webapp/yyyy_mm_dd.request.log
+
+## Date format for rollovered files (uses SimpleDateFormat syntax)
+# jetty.requestlog.filenameDateFormat=yyyy_MM_dd
+
+## How many days to retain old log files
+# jetty.requestlog.retainDays=90
+
+## Whether to append to existing file
+# jetty.requestlog.append=false
+
+## Whether to use the extended log output
+# jetty.requestlog.extended=true
+
+## Whether to log http cookie information
+# jetty.requestlog.cookies=true
+
+## Timezone of the log entries
+# jetty.requestlog.timezone=GMT
+
+## Whether to log LogLatency
+# jetty.requestlog.loglatency=false
+
+----
