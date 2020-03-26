@@ -47,7 +47,7 @@ This policy mode can be used in different cases:
 
 * Adding an existing machine, to check if its state matches the expected state, and only
 enable modification mode if it is correct, to avoid breaking anything
-* Adding a configuration item on nodes chere it was not previously managed. It allows easily checking if
+* Adding a configuration item on nodes where it was not previously managed. It allows easily checking if
 assumptions about the current state are correct before changing anything.
 
 We will now see how to manage other nodes, and more advanced configuration features.

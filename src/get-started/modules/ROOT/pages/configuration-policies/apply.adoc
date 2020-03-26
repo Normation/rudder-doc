@@ -29,7 +29,7 @@ The agent that runs on all of these machines will download the latest version
 of its policies, and apply them locally. To trigger this process manually, run:
 
 ----
-rudder agent update # to update the policies rom the server
+rudder agent update # to update the policies from the server
 rudder agent run    # to apply these policies locally
 ----
 
@@ -50,9 +50,10 @@ display the current state in the dashboard.
 
 == Node compliance
 
-Now you can go to our node details by using the quick search filter, and searching for "node".
+Now you can go to our node details by using the quick search filter, and searching for *node*
+(it's our node's hostname).
 
-Go to the "Compliance reports" tab. You will see the applied policy and the current compliance
+Go to the *Compliance reports* tab. You will see the applied policy and the current compliance
 regarding it. If you click on a line it will unfold until you get to the actual applied
 component.
 

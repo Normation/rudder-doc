@@ -6,4 +6,4 @@ This tutorial is now over. You can have a look at:
 * xref:rudder-by-example:ROOT:index.adoc[Rudder by example] for explained use cases
 * The http://faq.rudder.io[Rudder FAQ] may answer some of your questions
 
-If you need help, or more information, just ask on https://gitter.im/normation/rudder[our chat room]!
+If you need help, or more information, just ask on https://chat.rudder.io[our chat room]!

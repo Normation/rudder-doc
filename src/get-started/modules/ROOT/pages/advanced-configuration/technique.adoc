@@ -7,7 +7,7 @@
 In this section, you will learn:
 
 * How to define more advanced configuration policies
-* How to link different components, using conditionnal
+* How to link different components, using conditional
   evaluation of methods.
 * How to define and use techniques with parameters
 
@@ -31,9 +31,10 @@ But this time, we will add parameters to this technique.
 What are parameters? Just like we saw in the built-in techniques, you can pass parameters to techniques created in the technique editor. They are part of the technique
 definition, and their value is usable with the `${variable_name}` syntax.
 
-We will need two parameters:
+We will need three parameters:
 
 * A path for our site, called `webroot`
+* A domain for our site, called `domain`
 * A port to listen on, called `port`
 
 image::./parameters.png["Technique parameters", width=500, align="center"]
@@ -68,6 +69,7 @@ image::./service.png["Start nginx service", width=500, align="center"]
 
 Four our website content, we will use a simple *File content* with the html content of our website. This method can add content to a file, this is the most simple file editing method.
 
+[source,html]
 ----
 <html><h1>Welcome to Rudder demo!</h1></html>
 ----
@@ -110,7 +112,7 @@ computed by the agent at execution. It allows to have node-specific content in a
 ====
 
 Templating allows replacing content in a generic template with
-specific data. The include environement conditions or variables.
+specific data. The include environment conditions or variables.
 
 It is generally a good practice to enforce the content of file totally, either by templating or file copy than to
 use file editions, as they define an absolute state and are hence a lot easier to use and more reliable.
@@ -119,9 +121,11 @@ use file editions, as they define an absolute state and are hence a lot easier t
 
 Let's add this configuration file:
 
+[source,mustache]
 ----
 server {
     root {{{vars.Static_website.webroot}}};
+    server_name {{{vars.Static_website.domain}}};
     listen {{{vars.Static_website.port}}};
 }
 ----
@@ -180,7 +184,7 @@ image::./result-conditions.png["Install nginx package conditions", width=500, al
 It can be:
 
 * *Success*: When the state was already compliant
-* *Repaired*: When the state has been modofied by the agent to become compliant
+* *Repaired*: When the state has been modified by the agent to become compliant
 * *Error*: When the expected state could not be reached
 
 ====
@@ -191,7 +195,7 @@ In our case the condition will be the modification of the configuration file, so
 
 ====
 
-Conditions can be combinated using boolean operators:
+Conditions can be combined using boolean operators:
 
 * `!` for *not*
 * `|` for *or*
@@ -199,6 +203,12 @@ Conditions can be combinated using boolean operators:
 * `(` and `)` for grouping
 
 ====
+
+Let's add a *Service restart* method, with the `nginx` service name as parameter.
+
+Then use the *Conditions* tab of the method to add the repaired condition of the nginx configuration:
+
+image::./restart-nginx.png["Restart nginx", width=500, align="center"]
 
 Now your service restart will only be executed when necessary.
 
@@ -209,7 +219,7 @@ Now your service restart will only be executed when necessary.
 When you start using conditions, be careful to only use them when necessary.
 For example, we could imagine only deploying our website when installing the package.
 
-This is less reliable as we would stop checking for this symlink, and always
+This is less reliable as we would stop checking it, and always
 consider it ok.
 
 In short: Checking configuration is cheap, only add conditions when strictly necessary.
@@ -217,6 +227,10 @@ In short: Checking configuration is cheap, only add conditions when strictly nec
 ====
 
 == Conclusion
+
+Here is the final content of our technique:
+
+image::./methods.png["Final list of methods", width=500, align="center"]
 
 We now have defined a complete applicative example, which probably looks like what you would do
 with a real system. In the following sections, we will apply it to a machine and check the results.

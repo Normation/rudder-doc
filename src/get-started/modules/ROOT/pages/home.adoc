@@ -18,6 +18,6 @@
 ** xref:rudder-by-example:ROOT:index.adoc[Rudder by example]for real and detailed use-case examples
 
 * Join the community
-** https://gitter.im/normation/rudder[Chat with the community]on our Gitter channel
+** https://chat.rudder.io[Chat with the community]on our Gitter channel
 ** https://www.rudder.io/en/use/community/[Ask questions] on ServerFault or on our user mailing-list
 ** https://issues.rudder.io/[Report an issue or propose a feature]on our issue tracker

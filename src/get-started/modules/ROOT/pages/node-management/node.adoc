@@ -46,9 +46,9 @@ Roles: rudder-agent
 Report mode: full-compliance
 Run interval: 5 min
 Agent is enabled
-Policy updated: 2018-06-28 22:20:01
-Inventory sent: 2018-06-28 02:05:49
-Version: Rudder agent 5.0.0
+Policy updated: 2020-06-28 22:20:01
+Inventory sent: 2020-06-28 02:05:49
+Version: Rudder agent 6.0.4
 ----
 
 ====
@@ -66,7 +66,7 @@ an inventory to the server.
 Let's have a look at what this inventory contains.
 Go to *Node management -> Accept new nodes*.
 
-You will see the "node" machine in the list. Click line, this will unfold the content of this node's inventory.
+You will see the *node* machine in the list. Click line, this will unfold the content of this node's inventory.
 
 You can navigate through the tabs, to see software and hardware information.
 
@@ -74,7 +74,7 @@ image::./inventory.png["Inventory content", align="center"]
 
 Then you have to choose to accept this node or not. Once accepted, a node will get access to a configuration, so this can be a security-sensitive step.
 
-Let's accept our node, select the checkbox on the right, and click on "Accept".
+Let's accept our node, select the checkbox on the right, and click on *Accept*.
 
 And you can go back to the Nodes list, you will see we now have two nodes. A configuration has already be generated, and will be applied to our node within 5 minutes. It includes the two directives we defined before as they apply to all the nodes managed by Rudder.
 

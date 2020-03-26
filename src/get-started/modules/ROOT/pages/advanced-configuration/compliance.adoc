@@ -39,8 +39,9 @@ It will display a compliance page with two parts:
 
 They allow exploring compliance differently, based on what you are looking for.
 
-At the bottom, you will see the "Recent changes" graph, which lists the changes
+At the bottom, you will see the *Recent changes* graph, which lists the changes
 done by Rudder for this rule.
 Click on a time slot and the details will be displayed in the table below.
 
-TODO screen
+Compliance is also available through Rudder API, allowing to monitor
+and alert over compliance levels.

@@ -25,9 +25,9 @@ Let's use the filter in the directive tree to find it easily:
 
 image::./ssh.png["SSH technique", align="center"]
 
-Now click on "SSH server (OpenSSH)", the right part of the page will display the technique details, and
+Now click on *SSH server (OpenSSH)*, the right part of the page will display the technique details, and
 the list of available versions of the technique. We will use the latest one, by clicking on
-"Create with latest version".
+*Create with latest version*.
 
 This will make a new form appear, containing the configuration of the directive itself.
 As we said before, a technique is a parametrizable policy. A directive is a technique instance,
@@ -37,15 +37,16 @@ Defining a directive consist of choosing a technique and providing its parameter
 
 First, let's give it a description. When using Rudder, keep in mind that filling all these documentation filed, though it may seem
 tedious, is very important for future reference, or collaboration with other.
-Is is for example useful to include reference to external information (ticketing system, etc.),
+It is for example useful to include reference to external information (ticketing system, etc.),
 to allow keeping a track of all configuration changes.
+Also, note these documentation fields are rendered as markdown, so you can include links, bullet points, etc.
 
 We now need to decide ho we want to configure our SSH server.
 Let's disable password authentication (it's always a good idea anyway):
 
 image::./ssh-password.png["SSH technique", align="center"]
 
-And go to the bottom of the page, click on "Global configuration for all nodes"
+And go to the bottom of the page, click on *Global configuration for all nodes*
 (to apply it everywhere, we will see how it works later).
 
 image::./rule.png["SSH technique", align="center"]
@@ -64,7 +65,7 @@ This time, we will change one of the general parameters by overriding the policy
 
 image::./audit.png["Audit mode", align="center"]
 
-Then apply it to the "Global configuration for all nodes" and save.
+Then apply it to the *Global configuration for all nodes* and save.
 
 [TIP]
 

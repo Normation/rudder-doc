@@ -39,27 +39,31 @@ Let's use it to define a group of production boxes.
 
 == Classify nodes using node properties
 
-Go to the groups page, and create the "Production nodes" group,
+Go to the groups page, and create the *Production nodes* group,
 defined by:
 
 image::./production.png["Definition of the production group", align="center"]
 
-It should contain our "node" machine.
+It should contain our `node` machine.
 
 We will also start defining data for the next policy we will build,
-still for the "node" machine.
+still for the `node` machine.
 
-Let's define a property called `website`, with the following content:
+Let's define a JSON property called `website` (you need to set its type to `JSON`),
+with the following content:
 
+[source,json]
 ----
 {
   "webroot": "/var/www/html",
+  "domain": "example.com",
   "port": 8080
 }
 ----
 
+
 This will be translated in the configuration of a website we will do on the
-"node" machine in the next part of this tutorial.
+`node` machine in the next part of this tutorial.
 
 As you can already see, this property is a JSON object, which allows us to define more advanced
 variables with a hierarchical content.

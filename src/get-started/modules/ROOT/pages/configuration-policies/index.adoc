@@ -6,18 +6,18 @@
 
 In this part, you will learn:
 
-* How to defined new configuration policies, with the example of managing
+* How to define new configuration policies, with the example of managing
   a user on your machines
 * How to use pre-defined configuration policies, with the example of the
-  ssh service configuration.
+  ssh service configuration
 * How a apply a configuration and check its outcome
 
 ====
 
 Rudder's goal is to manage the configuration of machines, for example:
 
-* Package httpd installed in version 2.4.12
-* Service ntpd is currently running
+* Package `httpd` installed in version 2.4.12
+* Service `ntpd` is currently running
 * SSH connection using passwords are disabled
 * A specific prompt is deployed on production nodes
 * etc.

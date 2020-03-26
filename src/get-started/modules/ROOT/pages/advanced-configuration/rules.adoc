@@ -28,7 +28,11 @@ Configuring a rules consists in selecting a list of directives and a list of gro
 To select a group or a directive, simply click on it, and it will appear in the right green zone.
 You can then save your rule.
 
+Add the *All managed nodes* group, and do not link it to any directive for now, and save it.
+
+image::./new-rule.png["New rule settings", align="center"]
+
 In the upper right, you can see two tabs, *Settings* and *Compliance*.
 We are in the *Settings* tabs, which allows configuring the rule. The *Compliance* tab will show you the compliance details of the rule.
 
-That's all you have to know about rules!
+That's all you need to know about rules!

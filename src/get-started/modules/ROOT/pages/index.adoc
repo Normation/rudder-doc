@@ -18,4 +18,4 @@ only basic Unix command-line skills.
 
 image::./dashboard-overview.png["Rudder dashboard", align="center"]
 
-Let's start by xref:environment/index.adoc[installing the test environement].
+Let's start by xref:environment/index.adoc[installing the test environment].

@@ -16,16 +16,14 @@ A technique is a configuration policy template, that will need to be instantiate
 
 Go to *Configuration policy -> Techniques*. A configuration policy in Rudder is called a technique.
 
-image::./tech-editor.png["Rudder technique editor", align="center"]
-
 You may have expected to start writing configuration code at this point. We won't!
 (though it is also perfectly possible, but not the purpose of this guide).
 
-Let's define a very simple policy: create a demo user.
+Let's define a very simple policy: create a demo user. We will first create a new technique by clicking on *Create Technique*.
 
-We will first create a new technique by clicking on "Create Technique".
+image::./tech-editor.png["Rudder technique editor", align="center"]
 
-We can now name our technique: "Demo user", and add a small description for documentation:
+We can now name our technique: *Demo user*, and add a small description for documentation:
 
 image::./new.png["New technique form", align="center"]
 
@@ -36,23 +34,23 @@ How does this interface work?
 * The right part is the "methods" column (and a category list to navigate within methods)
 
 The methods will be the building blocks to our technique. You can think of them as small bricks
-you will assemble into a technique. Lets start the configuration, click on the "User" category (in the lower right of the interface),
-and click on the "User present" method.
+you will assemble into a technique. Lets start the configuration, click on the *User* category (in the lower right of the interface),
+and click on the *User present* method.
 It is now part of our technique's component list, with an orange warning asking for parameters. To provide them, click on the method instance in the technique.
 
 The right column will change from method list to method configuration:
 
 image::./demo.png["demo user", align="center"]
 
-We have defined a first policy! Let's add a second method: click on "Add methods"
+We have defined a first policy! Let's add a second method: click on *Add methods*
 in the lower left of the technique details, to display the list of available methods,
-and navigate to the "User" category. Let's add a user description, with the "User fullname" method:
+and navigate to the *User* category. Let's add a user description, with the *User fullname* method:
 
 image::./fullname.png["demo user's fullname", align="center"]
 
 We now have specified one characteristic of our user.
 
-Let's save this technique! (with the "Save" button). We now have a configuration policy
+Let's save this technique! (with the *Save* button). We now have a configuration policy
 we can apply yo our machines.
 
 As you can see it is really simple to define the expected state for our machines
