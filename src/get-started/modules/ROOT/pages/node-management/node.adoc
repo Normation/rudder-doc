@@ -55,8 +55,8 @@ Version: Rudder agent 6.0.4
 
 How does adding a new node to Rudder work?
 
-* Install rudder-agent on the new node (using a standard software repo)
-* Configure the agent with the hostname or IP of the Rudder server that should manage it
+* Install rudder-agent on the new node (using a standard software repository)
+* Configure the agent with the hostname or IP of the Rudder server that should manage it by editing `/opt/rudder/etc/policy-server.conf`.
 * It will automatically register itself to its server
 * Accept the new node on the server, and it is done
 
