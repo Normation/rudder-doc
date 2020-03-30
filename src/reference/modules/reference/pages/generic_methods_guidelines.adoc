@@ -1,6 +1,66 @@
 = Generic methods guidelines
 
-== Naming convention
+== Rudder generic methods project
+
+Rudder generic methods are building blocks used in technique editor. For general information, see documentation: https://docs.rudder.io/reference/5.0/usage/technique_editor.html
+
+Generic methods are defined in a stand-alone project with code name https://github.com/Normation/ncf[ncf] available in Normation Github.
+Generic methods are implemented for each Rudder agent, with CFEngine language and engine on Unix-based OS, and with Powershell and DSC for Windows based one.
+
+The project is organized in different parts:
+
+----
+ncf
+├── api      # code for Rudder technique editor APIs
+├── builder  # code for the technique editor
+├── tools    # python lib for technique editor
+├── examples # not relevant - for ncf use without Rudder
+├── LICENSE
+├── README.md
+├── Makefile # used to run tests
+├── qa-test  # quick tests automatically run before merging
+├── tests    # test directory - details in test chapter
+└── tree     # contains all the actual configuration management code
+    ├── 10_ncf_internals
+    ├── 20_cfe_basics
+    ├── 30_generic_methods
+    ├── 40_it_ops_knowledge
+    ├── 50_techniques
+    ├── ncf.conf
+    └── ncf-hooks.d
+----
+
+There are several layers in the actual framework, from 10 to 60, where each layer is a foundation for higher levels. The higher the lever, the higher the abstraction level.
+
+* *10_ncf_internals*: This directory contains the mechanics and glue to make the framework work. This should be very rarely modified, and is generic.
+* *20_cfe_basics*: This directory contains libraries that can be reused; most notably the CFEngine Standard Library and Rudder specific libraries.
+* *30_generic_methods*: This directory contains reusable bundles, that perform unit tasks, and are completely generic (for example "file_absent").
+
+Each level uses items from lower levels (lower numbers) or, in some cases, from its own level.
+
+==== 20_cf_basics
+
+If a part of code is common to several methods or more generic than the method, you should put it in 20_cfe_basics. Use the ncf_lib.cf file for general code, or a specific file for specific topics.
+
+You should NOT modify the CFEngine stdlib in 20_cfe_basics/cfengine as it would prevent updating from upstream. If you need to fix a bug is stdlib, you need to send the fix upstream as well.
+
+
+=== Generic method presentation
+
+A generic method is:
+* A function that allows managing the state of a system item, and reports about this item’s state
+* Not OS or application specific
+* A test that verifies the function works properly
+
+
+The generic method is made of:
+* One file in `tree/30_generic_methods`, named with the name of the method, that contains the implementation and metadata
+** Often splitted in a *Metadata* header part and the effective CFEngine implementation of the method.
+* One or more files in `tests/acceptance/30_generic_methods/`, starting with the name of the method
+
+The main file is made of CFEngine code plus some metadata in commentaries. The available fields are:
+
+==== Naming convention
 
    * A generic method should be named as this:
        * The first part is the name of the item being defined or configured (a package, a file, a condition, etc.), the second
@@ -12,5 +72,151 @@
        * `item_action` if it is an action (like `service_restart`)
     * Avoid useless words, and keep things short
     * When adding a more specific method, add a qualifier at the end
+
+
+=== Metadata
+
+==== Mandatory tags
+
+The *Metadata* of a method contains some mandatory fields, used by the technique editor.
+
+----
+# @name File present
+# @description Create a file if it doesn't exist
+#
+# @parameter target     File to create (absolute path on the target node)
+#
+# @class_prefix file_present
+# @class_parameter target
+----
+
+All generic methods need to be documented:
+
+* `@name` for the displayed name of the method in Rudder
+* `@description` describes what the method does (without repeating the name of the method)
+* `@parameter` one per parameter, always following the syntax
++
+----
+# @parameter <parameter name> <parameter short description>
+----
+* `@class_prefix` Base condition that will be used for reporting. At run time, the outcome
+conditions will always be
++
+----
+<@class_prefix>_<canonify(@class_parameter)>_{success|repaired|error}
+# Applied to file_present on /tmp/test, the outcome conditions can be:
+file_present_tmp_test_success
+file_present_tmp_test_repaired
+file_present_tmp_test_error
+----
+* `@class_parameter` indicates the parameter that will be used to define
+the outcome conditions.
+
+
+==== Other tags
+
+Still, there are many other tags available, and some, even if not mandatory are
+more than recommended, such as the `@documentation` one.
+
+
+.Complete list of Tags
+[options="header"]
+|==================================================================================================================================================================
+|Tag name             | Arguments                     | Mandatory   |Multiple  |Comment
+|name                 | <String>                      | Mandatory   |          | Human-readable name of the method
+|description          | <String>                      | Mandatory   |          | One-line description of the method
+|parameter            | <parameter name> <String>     | Mandatory   |          | One-line description of the parameter
+|parameter_constraint | <parameter name> <Constraint> |             | Multiple | Constraint over the given parameter
+|documentation        | <Markdown>                    | Recommended |          | user documentation
+|class_prefix         | <Canonified method name>      | Mandatory   |          | Base for the resulting conditions
+|class_parameter      | <main parameter name>         | Mandatory   |          | Name of the argument which value will be used for outcome classes.
+| deprecated          | <String>                      |             |          | Deprecation message
+|agent_version        | [>=/<]<CFEngine version>      |             |          | Agent version constraint
+|agent_requirements   | deprecated                    |             |          | Deprecated, do not use
+|action               | <String>                      |             |          | Tags a method as an "action" method ( not a state one) and add an action comment
+|rename               | <New method name>             |             |          | Tag the renamed method
+|==================================================================================================================================================================
+
+===== Constraints
+
+Constraints are assigned to a parameter and will help the editor doing sanity check
+in the arguments passed to the method.
+
+The syntax is always
+
+----
+#@parameter_constraint <parameter name> <constraint specific syntax>
+
+##Examples:
+#@parameter_constraint provider "select" : [ "", "default", "yum", "apt", "zypper", "zypper_pattern", "slackpkg", "pkg" ]
+#@parameter_constraint state "allow_empty_string" : true
+----
+
+* *min_length(int)*: set a minimum length for the parameter
+* *max_length(int)*: set a maximum length for the parameter
+* *not_regex(regex)*: a regex of forbidden pattern (regex need to be unicode)
+* *regex(regex)*: a regex of a required pattern (regex need to be unicode)
+* *allow_empty_string(bool)*: allow the parameter to be empty (useful for default values)
+* *allow_whitespace_string(bool)*: allow the parameter to contain only spaces (useful for separators)
+* *select(string1, string2, …)*: only accept a value from a list of options
+
+
+==== Outcome conditions
+
+Generic methods define two set of global classes; `old_class_prefix` and `class_prefix`
+* These two classes need to be canonified using the canonify function
+* `old_class_prefix` is defined as the tag `class_prefix` value, which means it is always something like:
++
+----
+#"old_class_prefix"  string => canonify("<@class_prefix> <@class_parameter>");
+# Example for the file_present method
+"old_class_prefix"  string => canonify("file_present_${target}");
+----
+** It is the “public” class used to build the outcome conditions
+* `class_prefix` is defined as the generic method name plus all the parameters of the generic method, truncated to 1000 chars
+** It is the unique identifier used for reporting
+
+.An example of old_class_prefix and class_prefix
+----
+# @class_prefix file_replace_lines
+# @class_parameter file
+
+bundle agent file_replace_lines(file, line, replacement)
+{
+  vars:
+      "old_class_prefix"  string => canonify("file_replace_lines_${file}");
+      "args"               slist => { "${file}", "${line}", "${replacement}" };
+      "report_param"      string => join("_", args);
+      "full_class_prefix" string => canonify("file_replace_lines_${report_param}");
+      "class_prefix"      string => string_head("${full_class_prefix}", "1000");
+
+----
+
+Still, the method need to verify and apply if needed the desirated state and then,
+based on its actions, generate the complete outcome classes and a report to the server.
+
+In most cases, the resulting can be define automatically by CFEngine when using
+a built in promise.
+
+----
+  files:
+    "${target}"
+      create        => "true",
+      classes       => classes_generic_two("${old_class_prefix}", "${class_prefix}");
+----
+
+If you need custom outcomes (i.e. not based directly on a promise outcome), use the bundles `_classes_{success|repaired|failure}`
+to define them.
+
+
+==== Reporting
+
+Logging should always use the `_log_v3` method.
+It takes the base of the report message, the `class_parameter`, the `old_class_prefix`, the `class_prefix`, and the list of generic method arguments as parameter
+Example:
+
+----
+"report"   usebundle => _log_v3("Replace line ${lines} with ${replacement} into ${file}", "${file}", "${old_class_prefix}", "${class_prefix}", @{args});
+----
 
 
