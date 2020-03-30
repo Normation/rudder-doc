@@ -36,7 +36,7 @@ available for these platforms as part of the https://www.rudder.io/en/pricing/su
 
 | OS | Version | Architecture
 
-.3+| Debian | 5 to 7 |32bit, 64bit
+.3+| Debian | 6 and 7 |32bit, 64bit
 | 8 | 32bit, 64bit, armhf (Raspbian)
 | 9 | 32bit, 64bit, arm64, armhf (Raspbian)
 .2+| Ubuntu | 10.04 to 16.04 LTS | 32bit, 64bit
