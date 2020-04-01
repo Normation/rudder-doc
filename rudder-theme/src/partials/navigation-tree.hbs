@@ -1,3 +1,9 @@
+{{#if page.component}}
+<div class="doc-title">
+  <span class="title">{{page.component.title}}</span>
+  <span class="version">{{page.version}}</span>
+</div>
+{{/if}}
 {{#if navigation.length}}
 <ul class="nav-list">
   {{#each navigation}}

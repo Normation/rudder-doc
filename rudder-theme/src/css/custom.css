@@ -112,7 +112,8 @@ html {
   text-decoration: none !important;
 }
 
-.navigation .nav-menu > ul li ul li button {
+.navigation .nav-menu > ul li ul li button,
+.doc-title .nav-toggle {
   background-image: url(../img/caret-white.svg);
   display: inline-block;
   background-size: 18px;
@@ -126,7 +127,42 @@ html {
   right: 0;
 }
 
-.navigation .nav-menu > ul > li ul li.nav-item.is-active > button {
+.doc-title.docs {
+  cursor: pointer;
+}
+
+.doc-title .nav-toggle {
+  top: 0;
+  height: 100%;
+}
+
+.doc-title:hover .nav-toggle,
+.navigation-explore:not(.is-active):hover .nav-toggle {
+  opacity: 1;
+}
+
+.navigation-explore:not(.is-active) .components {
+  display: block;
+  max-height: 140px;
+  overflow: hidden;
+  position: relative;
+}
+
+.navigation-explore:not(.is-active) .components::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 1) 100%);
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.navigation .nav-menu > ul > li ul li.nav-item.is-active > button,
+.is-active .doc-title .nav-toggle {
   background-image: url(../img/caret-white-d.svg);
   transform: none;
   -webkit-transform: none;
@@ -143,11 +179,63 @@ html {
   margin-left: 0;
 }
 
-/*
-.navigation .nav-menu ul > li.nav-item.is-current-page.is-active > ul > li {
-  background-color: #303d43;
+#topbar-nav > div > .navbar-item > a {
+  text-transform: uppercase;
 }
-*/
+
+#topbar-nav > div > .navbar-item > .control > a {
+  padding-right: 40px;
+  position: relative;
+  border-radius: 4px;
+  transition-duration: 0.2s;
+}
+
+#topbar-nav > div > .navbar-item > .control > a.chat {
+  color: #144b7b;
+}
+
+#topbar-nav > div > .navbar-item > .control > a.site {
+  color: #555;
+}
+
+#topbar-nav > div > .navbar-item > .control > a.chat:hover {
+  color: #144b7b;
+}
+
+#topbar-nav > div > .navbar-item > .control > a.site:hover {
+  color: #333;
+}
+
+#topbar-nav > div > .navbar-item > .control > a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 35px;
+  background-size: 70%;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition-property: filter, opacity;
+  transition-duration: 0.2s;
+}
+
+#topbar-nav > div > .navbar-item > .control > a.chat::after {
+  background-image: url(../img/chatbubbles.svg);
+}
+
+#topbar-nav > div > .navbar-item > .control > a.chat:hover::after {
+  filter: brightness(0.8);
+}
+
+#topbar-nav > div > .navbar-item > .control > a.site::after {
+  background-image: url(../img/globe.svg);
+  opacity: 0.6;
+}
+
+#topbar-nav > div > .navbar-item > .control > a:hover.site::after {
+  opacity: 0.8;
+}
 
 .navigation .nav-menu > ul > li > ul > li > ul > li {
   background-color: #303d43;
@@ -277,13 +365,13 @@ html {
 
 .navigation .panels {
   position: relative;
-  padding-top: 47.5px;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .navigation-explore {
-  position: absolute;
   width: 100%;
-  top: 0;
+  height: auto !important;
 }
 
 .navigation-explore .context {
@@ -327,8 +415,6 @@ html {
   padding-right: none;
 }
 
-/* url(../img/chevron-nav.svg); */
-
 .navigation-explore .context:hover {
   color: #fff;
 }
@@ -336,6 +422,7 @@ html {
 .navigation-explore .components {
   color: #8aa4af;
   background-color: #2c3b41;
+  padding-bottom: 30px;
   box-shadow: none;
 }
 
@@ -361,6 +448,43 @@ html {
   padding: 1px 10px;
   display: inline-block;
   text-decoration: none !important;
+}
+
+.doc-title {
+  position: relative;
+  padding: 10px 8px 10px 45px;
+  background-color: #20272a;
+  color: #fff;
+  font-size: 1.1em;
+  border-bottom: 2px solid #8aa4af;
+  transition-property: border-bottom-color;
+  transition-duration: 0.2s;
+}
+
+.navigation-explore:hover .doc-title,
+.navigation-menu:hover .doc-title {
+  border-bottom-color: #f08004;
+}
+
+.doc-title::before {
+  content: "";
+  background-image: url(../img/book.svg);
+  background-size: 70%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 8px;
+  bottom: 0;
+  width: 35px;
+  opacity: 0.6;
+}
+
+.doc-title .version {
+  float: right;
+  color: #8aa4af;
+  opacity: 0.8;
+  font-size: 0.9em;
 }
 
 /* --- ADMONITION BLOCKS --- */
@@ -833,4 +957,11 @@ html {
 .navbar-item > .algolia-autocomplete .algolia-docsearch-suggestion--title {
   color: #555;
   font-weight: 600;
+}
+
+.navigation-menu {
+  display: flex !important;
+  overflow-y: initial;
+  flex: 1;
+  height: auto;
 }
