@@ -3,6 +3,8 @@
 
 This plugins allows to manage Windows systems, using Microsoft Powershell DSC. Rudder Windows agent is available with a annual subscription, read more about it https://www.rudder.io/en/pricing/subscription/[on our website].
 
+IMPORTANT: Currently the DSC agent does not support yet the *HTTPS only* report mode which is the default mode on Rudder 6.0+. You can change it in the *Settings* page of your Rudder server.
+
 == Install Windows DSC plugin on the server
 
 === Prerequisite
