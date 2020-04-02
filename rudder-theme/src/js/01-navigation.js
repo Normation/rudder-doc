@@ -14,18 +14,36 @@
   var navState = getNavState()
   var menuState = getMenuState(navState, navContainer.dataset.component, navContainer.dataset.version)
 
+  /*
   navContainer.querySelector('.context').addEventListener('click', function () {
     var currentPanel = navContainer.querySelector('.is-active[data-panel]')
     var activatePanel = currentPanel.dataset.panel === 'menu' ? 'explore' : 'menu'
     currentPanel.classList.toggle('is-active')
     navContainer.querySelector('[data-panel=' + activatePanel + ']').classList.toggle('is-active')
   })
+  */
+
+  // Fold / Unfold navigation menu
+  navContainer.querySelector('.doc-title.docs').addEventListener('click', function () {
+    var currentPanel = navContainer.querySelector('.navigation-explore')
+    currentPanel.classList.toggle('is-active')
+  })
+  navContainer.querySelector('.navigation-explore .components').addEventListener('click', function () {
+    var currentPanel = navContainer.querySelector('.navigation-explore')
+    currentPanel.classList.add('is-active')
+  })
 
   find('.nav-toggle', menuPanel).forEach(function (btn) {
     var li = btn.parentElement
+    // Unfold all menu items on homepage
+    if (document.getElementById('homepage') != null) {
+      li.classList.add('is-active')
+      menuState.expandedItems = getExpandedItems()
+    }
     btn.addEventListener('click', function () {
       li.classList.toggle('is-active')
       menuState.expandedItems = getExpandedItems()
+
       saveNavState()
     })
     var navItemSpan = findNextElement(btn, '.nav-text')
