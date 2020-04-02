@@ -128,6 +128,24 @@ Informations about a node's policy server:
 
 |===
 
+
+[[_technique_parameters]]
+== Technique parameters
+
+Technique parameters, if any, are also following the same syntax schema, their prefix is the *technique_id*.
+This is understandable since they are local to the technique, and so binded to this scope/prefix, that's why we can accessing their content
+within a technique either with:
+
+----
+# Without the prefix
+${parameter_name}
+# The complete parameter name
+${technique_id.parameter_name}
+----
+
+The complete parameter name is mostly used to access the parameter value from a template or when using method which takes a variable name
+as argument such as link:../reference/generic_methods.html#_condition_from_variable_match[condition_from_variable_match].
+
 [[_node_properties]]
 == Node properties
 
@@ -540,6 +558,7 @@ site-specific elements...
 === In the Technique Editor
 
 NOTE: These variables are not available on Windows nodes, but only on with the classic Linux/AIX agent and within the `Technique Editor`.
+
 
 ==== Node-level system properties
 
