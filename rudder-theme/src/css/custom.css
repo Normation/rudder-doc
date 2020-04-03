@@ -142,10 +142,13 @@ html {
 }
 
 .navigation-explore:not(.is-active) .components {
+  display: none;
+  /*
   display: block;
   max-height: 140px;
   overflow: hidden;
   position: relative;
+  */
 }
 
 .navigation-explore:not(.is-active) .components::after {
@@ -478,6 +481,10 @@ html {
   bottom: 0;
   width: 35px;
   opacity: 0.6;
+}
+
+.doc-title.docs::before {
+  background-image: url(../img/books.svg);
 }
 
 .doc-title .version {
