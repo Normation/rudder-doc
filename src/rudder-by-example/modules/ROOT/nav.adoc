@@ -8,3 +8,5 @@
 * System management
 ** xref:system/manage-registry.adoc[Manage Windows registry content]
 ** xref:system/extend-inventories.adoc[Extend inventories with custom data]
+* Extending Rudder
+** xref:extending-rudder/add-new-methods.adoc[Add new methods to the technique editor]
