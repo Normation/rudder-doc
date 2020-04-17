@@ -1,0 +1,21 @@
+[NOTE]
+====
+
+There is not default user anymore, you need to create a user after installation
+with `rudder server create-user -u USERNAME`, and provide a secure password.
+
+This prevents having a time frame after installation where the server is accessible from anyone,
+and avoids Rudder servers left with open access.
+
+====
+
+[NOTE]
+====
+
+Rudder now provides bcrypt as hash type for local user passwords. It is the default
+for new server, but upgraded servers will continue to use existing hashes.
+
+It is advised to use bcrypt. To do so, you need to reset existing passwords and compute new hashes,
+see xref:administration:users.adoc#user-management[user management documentation] for more details.
+
+====
