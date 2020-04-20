@@ -12,6 +12,21 @@ echo "deb http://repository.rudder.io/apt/6.0/ $(lsb_release -cs) main" > /etc/a
 
 ----
 
+[NOTE]
+====
+
+If you have an active subscription, use the following to get access to long term support (you need to replace
+the user name and the password by your Rudder account):
+
+[source, Bash]
+----
+
+echo "deb https://LOGIN:PASSWORD@download.rudder.io/apt/6.0/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
+
+----
+
+====
+
 Update your local package database to retrieve the list of packages available on our repository:
 
 ----

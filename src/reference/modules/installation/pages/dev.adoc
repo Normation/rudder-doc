@@ -26,3 +26,6 @@ provide feedback:
 
 To get the full list of repository URLs, go
 to https://docs.rudder.io/versions[the page presenting Rudder versions].
+
+You can then follow standard install documentation, you only need to replace
+the repostory URLs by the nightly/beta/rc ones.

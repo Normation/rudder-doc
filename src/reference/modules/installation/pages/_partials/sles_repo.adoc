@@ -8,6 +8,20 @@ zypper ar -n 'Rudder 6.0' http://repository.rudder.io/rpm/6.0/SLES_15/ Rudder
 
 ----
 
+[NOTE]
+====
+
+If you have an active subscription, use the following to get access to long term support (you need to replace
+the user name and the password by your Rudder account):
+
+----
+
+zypper ar -n 'Rudder 6.0' http://LOGIN:PASSWORD@download.rudder.io/rpm/6.0/SLES_15/ Rudder
+
+----
+
+====
+
 * on SLES 12:
 
 ----
@@ -15,6 +29,20 @@ zypper ar -n 'Rudder 6.0' http://repository.rudder.io/rpm/6.0/SLES_15/ Rudder
 zypper ar -n 'Rudder 6.0' http://repository.rudder.io/rpm/6.0/SLES_12/ Rudder
 
 ----
+
+[NOTE]
+====
+
+If you have an active subscription, use the following to get access to long term support (you need to replace
+the user name and the password by your Rudder account):
+
+----
+
+zypper ar -n 'Rudder 6.0' http://LOGIN:PASSWORD@download.rudder.io/rpm/6.0/SLES_12/ Rudder
+
+----
+
+====
 
 Update your local package database to retrieve the list of packages available on our repository:
 

@@ -3,14 +3,7 @@
 
 Rudder is an extensible software. The *Plugins*
 menu sums-up information about loaded plugins, their version and their
-configuration.
-
-A plugin is an `.rpkg` file (for "Rudder package"), see the xref:reference:plugin_format.adoc[dedicated documentation] for more
-information about the format.
-
-== Get plugins
-
-There are two types of Rudder pre-packaged plugins:
+configuration. There are two types of Rudder pre-packaged plugins:
 
 * Integration plugins, that allow linking Rudder to other tools (monitoring, inventory, notification, etc.). They are freely available.
 * Advanced features plugins (reporting, validation workflow, etc.) which are part of the Rudder subscription.
@@ -18,29 +11,69 @@ There are two types of Rudder pre-packaged plugins:
 To download free plugins or get information about plugins included in the subscription,
 read the https://rudder.io/plugins/[dedicated page on rudder.io].
 
-== Install a plugin
+== Install plugins with a subscription
 
-To install a plugin, you can use the `rudder package` command.
-You can configure it in `/opt/rudder/etc/rudder-pkg/rudder-pkg.conf`
+First, you need to configure your Rudder technical account (username and password) in
+`/opt/rudder/etc/rudder-pkg/rudder-pkg.conf`.
 
-It can retrieve plugins and their licenses from the Rudder repository.
+[source,ini]
+----
+[Rudder]
+url = https://download.rudder.io/plugins
+username = USERNAME
+password = PASSWORD
+----
+
+Plugin management uses the `rudder package` command.
+Start by updating the repository index:
 
 ----
-# Update the repository index
 rudder package update
+----
 
-# Download and install the latest release of a plugin
-rudder package install <package_name>
+Then download your licenses:
 
-# Download and install the latest nightly of a plugin
-rudder package install <package_name> --nightly
-
-# Install a local .rpkg file
-rudder package install-file <package.rpkg>
-
-# Download all your license from the plugin repository
+----
 rudder package licenses
 ----
+
+List available packages:
+
+----
+rudder package list --all
+----
+
+You can then install a plugin with:
+
+----
+rudder package install <package_name>
+----
+
+The application will restart if necessary. Please read install output carefully as some
+plugins require additional dependencies.
+
+To update a plugin, refresh repository index with `rudder package update` and run the install
+command again.
+
+You will need to update your licenses with `rudder packages licenses` before their expiration.
+An alert will appear in Rudder's menu bar when a license is close to expiration.
+
+== Install plugins without a subscription
+
+Plugin management uses the `rudder package` command.
+You need to download the `.rpkg` package file of the plugin on your Rudder server,
+then install it with:
+
+----
+rudder package install-file <package.rpkg>
+----
+
+To update a plugin, you need to reinstall it with the same command, but in the newer version.
+
+== More about plugins
+
+A plugin is an `.rpkg` file (for "Rudder package"), see the xref:reference:plugin_format.adoc[dedicated documentation] for more
+information about the format.
 
 You can get information about available plugins with:
 
@@ -55,7 +88,7 @@ rudder package search <package_name>
 rudder package show <package_name>
 ----
 
-You can also enable or disable, or remove a plugin with:
+You can manage installed plugins with:
 
 ----
 rudder package plugin enable <plugin>
@@ -68,14 +101,5 @@ See all available commands with:
 ----
 rudder package --help
 ----
-
-== Install your licenses
-
-Some plugins needs a license to work properly. All your licenses are signed with a key (license.key file)
-and there is one file per licensed plugin (<plugin-name>.license). You may have downloaded them from https://download.rudder.io/plugins/licenses
-
-You need to put all files in `/opt/rudder/etc/plugins/licenses` folder, if that directory does not exist please create it.
-
-If the plugin is installed, no need to restart Rudder, it will read the new license and check its compatibility immediatly
 
 include::{partialsdir}/dyn/version-compat.adoc[leveloffset=+1]

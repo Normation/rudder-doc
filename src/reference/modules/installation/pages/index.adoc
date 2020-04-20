@@ -6,6 +6,12 @@ This is the central server that will define configuration for the nodes it manag
 You generally need to install only one root server, except if you have completely
 separated environments where each environment requires its own server.
 
+Installation instructions:
+
+* Install a root server on: xref:installation:server/debian.adoc[Debian/Ubuntu] | xref:installation:server/rhel.adoc[RHEL/CentOS] | xref:installation:server/sles.adoc[SLES]
+
+* Upgrade a root server on: xref:upgrade:server/debian.adoc[Debian/Ubuntu] | xref:upgrade:server/rhel.adoc[RHEL/CentOS] | xref:upgrade:server/sles.adoc[SLES]
+
 == Node
 
 The machines managed by Rudder are called nodes, and can be any type of machine
@@ -13,6 +19,12 @@ The machines managed by Rudder are called nodes, and can be any type of machine
 For a machine to become a managed Node, you need to install the Rudder agent on it.
 The agent will run a local inventory and register itself to the root server. Then, 
 you can accept the node in the Rudder root server interface for it to become a managed node.
+
+Installation instructions:
+
+* Install an agent on: xref:installation:agent/debian.adoc[Debian/Ubuntu] | xref:installation:agent/rhel.adoc[RHEL/CentOS/Amazon Linux] | xref:installation:agent/sles.adoc[SLES]
+
+* Upgrade an agent on: xref:upgrade:agent/debian.adoc[Debian/Ubuntu] | xref:upgrade:agent/rhel.adoc[RHEL/CentOS/Amazon Linux] | xref:upgrade:agent/sles.adoc[SLES]
 
 [[relay-servers]]
 == Relay (optional)
@@ -28,6 +40,11 @@ reason relay servers were created.
 
 Using a relay, you are able to:
 
-- Separate your Rudder architecture into separate entities that still report to one server
-- Prevent laxist security exceptions to the Rudder server
-- Ease maintenance
+* Separate your Rudder architecture into separate entities that still report to one server
+* Prevent laxist security exceptions to the Rudder server
+* Ease maintenance
+
+Installation instructions:
+
+* Install a relay server on: xref:installation:relay/debian.adoc[Debian/Ubuntu] | xref:installation:relay/rhel.adoc[RHEL/CentOS] | xref:installation:relay/sles.adoc[SLES]
+* Upgrade a relay server on: xref:upgrade:relay/debian.adoc[Debian/Ubuntu] | xref:upgrade:relay/rhel.adoc[RHEL/CentOS] | xref:upgrade:relay/sles.adoc[SLES]

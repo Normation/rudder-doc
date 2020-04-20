@@ -6,19 +6,7 @@ include::{partialsdir}/syslog.adoc[]
 
 include::{partialsdir}/rpm_key.adoc[]
 
-Add the Rudder packages repository:
-
-* on RHEL/CentOS:
-
-----
-
-echo '[Rudder_6.0]
-name=Rudder 6.0
-baseurl=http://repository.rudder.io/rpm/6.0/RHEL_$releasever/
-gpgcheck=1
-gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
-
-----
+include::{partialsdir}/rhel_repo.adoc[]
 
 * on Amazon Linux:
 
