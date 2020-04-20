@@ -42,7 +42,7 @@ You then have two possible cases:
 
 The procedure on both cases is the same, you have to:
 
-- Create / update the file /var/rudder/cfengine-community/policy_server.dat
+- Create or update the `/var/rudder/cfengine-community/policy_server.dat` file
 with the IP address or the fully qualified domain name of the relay server
 (instead of the root server)
 
