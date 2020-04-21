@@ -1,15 +1,23 @@
 == Initial configuration
 
-=== Validate the installation
+=== User account
+
+Now the installation is complete you need to create a first user account. The easiest way is to
+use the dedicated command to create a local admin user:
+
+----
+# Replace USERNAME by the user you want to create
+rudder server create-user -u USERNAME
+----
+
+It will ask you a password twice and will create the user.
+
+Read more about user account options in the xref:administration:users.adoc[dedicated section].
+
+=== First connection
 
 Once all these steps have been completed, use your web browser to go to the server URL.
-
-You should see a loading screen, then a login prompt. The default login is:
-
-* User: *admin*
-* Password: *admin*
-
-You are strongly advised to xref:administration:users.adoc#_passwords[change this password] as soon as possible.
+Use your first user credentials to connect.
 
 Now you should go to Settings -> General -> Allowed Networks and check that the networks listed there properly include all your nodes network addresses.
 By default this will contain your server's attached networks.
