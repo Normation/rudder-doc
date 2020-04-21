@@ -51,7 +51,7 @@ plugins:
 	cd dependencies && make $@
 	cp -r dependencies/$@/* modules/plugins/
 	echo "index.adoc" > modules/plugins/nav.list
-	find modules/plugins/pages ! -name 'index.adoc' ! -name 'version-compat.adoc' -type f | sed 's/.*\///' >> modules/plugins/nav.list
+	find modules/plugins/pages ! -name 'index.adoc' ! -name 'version-compat.adoc' -type f | sed 's/.*\///' | sort >> modules/plugins/nav.list
 
 nav: $(ADOC_SRC_FILES) plugins generic_methods_categories.txt
 	./tools/generate-nav.py ROOT "Introduction" > modules/ROOT/nav.adoc
