@@ -9,3 +9,35 @@ gpgcheck=1
 gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
 ----
+
+[NOTE]
+====
+
+If you have an active subscription, use the following to get access to long term support (you need to replace
+the user name and the password by your Rudder account):
+
+----
+
+echo '[Rudder_6.1]
+name=Rudder 6.1
+username=LOGIN
+password=PASSWORD
+baseurl=http://download.rudder.io/rpm/6.1/RHEL_$releasever/
+gpgcheck=1
+gpgkey=https://download.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
+
+----
+
+Or for RHEL/CentOS < 7:
+
+----
+
+echo '[Rudder_6.1]
+name=Rudder 6.1
+baseurl=http://LOGIN:PASSWORD@download.rudder.io/rpm/6.1/RHEL_$releasever/
+gpgcheck=1
+gpgkey=https://LOGIN:PASSWORD@download.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
+
+----
+
+====
