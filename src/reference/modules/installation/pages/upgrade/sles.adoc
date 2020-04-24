@@ -1,5 +1,7 @@
 = Upgrade Rudder on SLES
 
+include::{partialsdir}/upgrade_notes.adoc[]
+
 include::{partialsdir}/sles_repo.adoc[]
 
 == Rudder agent

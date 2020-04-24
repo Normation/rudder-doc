@@ -1,5 +1,7 @@
 = Upgrade Rudder on Debian or Ubuntu
 
+include::{partialsdir}/upgrade_notes.adoc[]
+
 [WARNING]
 
 ====
