@@ -1,5 +1,7 @@
 = Upgrade Rudder on RHEL or CentOS
 
+include::{partialsdir}/upgrade_notes.adoc[]
+
 include::{partialsdir}/rhel_repo.adoc[]
 
 == Rudder agent

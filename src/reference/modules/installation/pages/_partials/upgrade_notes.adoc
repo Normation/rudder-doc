@@ -1,0 +1,8 @@
+[NOTE]
+
+====
+
+Before upgrading, especially for minor and major version upgrades,
+please read the xref:installation:upgrade/notes.adoc[upgrade notes].
+
+====
