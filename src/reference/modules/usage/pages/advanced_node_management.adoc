@@ -127,13 +127,13 @@ include::{partialsdir}/glossary/cf-serverd.adoc[]
 
 === Configuration
 
-At this point, you should configure the Rudder Agent to actually enable the
+At this point, you should configure the Rudder agent to actually enable the
 contact with the server. Type in the IP address of the Rudder Root Server in the
 following file:
 
 ----
 
-echo *root_server_IP_address* > /var/rudder/cfengine-community/policy_server.dat
+rudder agent policy-server <rudder relay ip or hostname>
 
 ----
 

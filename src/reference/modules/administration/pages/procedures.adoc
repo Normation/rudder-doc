@@ -377,7 +377,7 @@ If your server address changed, you will also have to do the following on
 every node that is directly connected to it (managed nodes or relays):
 
 * Remove the server public key `rm /var/rudder/cfengine-community/ppkeys/root-MD5=*.pub`
-* Modify `/var/rudder/cfengine-community/policy_server.dat` with the new address, then you can force your nodes to send their inventory by running `rudder agent inventory`
+* Modify the policy server (`rudder agent policy-server <new-policy-server>`) with the new address, then you can force your nodes to send their inventory by running `rudder agent inventory`
 
 == Relay backup and migration
 
@@ -460,7 +460,7 @@ If your relay address changed, you will also have to do the following on
 every node that is directly connected to it (managed nodes or relays):
 
 * Remove the relay public key `rm /var/rudder/cfengine-community/ppkeys/{RELAY_UUID}-MD5=*.pub`
-* Modify `/var/rudder/cfengine-community/policy_server.dat` with the new address, then you can force your nodes to send their inventory by running `rudder agent inventory`
+* Modify the policy server (`rudder agent policy-server <new-policy-server>`) with the new address, then you can force your nodes to send their inventory by running `rudder agent inventory`
 
 == Agent backup and migration
 
