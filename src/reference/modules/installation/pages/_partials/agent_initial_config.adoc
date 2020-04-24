@@ -7,7 +7,7 @@ Configure the IP address or hostname of the Rudder Root Server in the following 
 
 ----
 
-echo '<rudder server ip or hostname>' > /var/rudder/cfengine-community/policy_server.dat
+rudder agent policy-server <rudder server ip or hostname>
 
 ----
 
