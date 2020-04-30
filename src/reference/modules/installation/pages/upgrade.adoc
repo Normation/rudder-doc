@@ -48,6 +48,24 @@ Verbosity options can be:
 
 Migration from 4.1, 4.2 or 4.3 are supported, so you can upgrade directly to 5.0.
 
+[NOTE]
+
+====
+
+Upgrading from 4.1.18 or earlier can cause transient missing `/opt/rudder/etc/uuid.hive` - as this
+file is no longer part of the packaging. The issue will resolve itself, and happen only once - any
+subsequent upgrade will not exhibit this problem anymore.
+
+If you don't want to wait up to 5 minutes for this issue to correct itself, you can run:
+
+---
+rudder agent check
+---
+
+that will restore the file from backup.
+
+====
+
 [WARNING]
 ====
 The following features are now provided as plugins and no more available as part of default Rudder
