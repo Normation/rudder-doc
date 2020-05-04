@@ -29,6 +29,16 @@ Please bear in mind that a central Rudder server, called root server, requires n
 Note: The policy server is the server configured to manage the node, and can be
 either a root server or a relay server.
 
+=== Security
+
+Your Rudder server and relays should generally not be exposed on the Internet. If you manage
+nodes on remote networks, the usage of a VPN for Rudder communications is recommended.
+
+By default, nodes listen on port 5309 to allow remote agent trigger. On nodes having public interfaces
+it is recommended to only allow connection to this port from the server through firewall configuration.
+You can also totally disable the service on simple nodes (but not server or relayd) if you don't want to use remote run with
+`systemctl disable rudder-cf-serverd && systemctl restart rudder-agent` (or an equivalent Rudder policy).
+
 === DNS - Name resolution
 
 If you want to be able to remotely trigger agent runs on nodes from the Root Server (without
