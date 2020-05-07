@@ -216,24 +216,22 @@ image::view-property-inheritance.jpg[Viewing property overrides]
 |name=datacenter, value={"dns": "1.1.1.1"}
 
 |Technique CFEngine
-| `${node.properties[datacenter]}`
-|${node.properties[datacenter][dns]}
+|`${node.properties[datacenter]}`
+|`${node.properties[datacenter][dns]}`
 
 |DSC Technique
-|${node.properties.datacenter}
-|${node.properties.datacenter.dns}
+|`$(${node.properties}.datacenter)`
+|`$(${node.properties}.datacenter.dns)`
 
 |Directive
-|${node.properties[datacenter]}
-|${node.properties[datacenter][dns]}
+|`${node.properties[datacenter]}`
+|`${node.properties[datacenter][dns]}`
 
 |Mustache
-|{{{vars.node.properties.datacenter}}}
-|{{{vars.node.properties.datacenter.dns}}}
 
 |Jinja2
-|{{vars.node.properties.datacenter}}
-|{{vars.node.properties.datacenter.dns}}
+|`{{vars.node.properties.datacenter}}`
+|`{{vars.node.properties.datacenter.dns}}`
 
 |===
 
@@ -255,24 +253,24 @@ node property which may have been overridden.
 |name=datacenter, value={"dns": "1.1.1.1"}
 
 |Classic technique
-|${rudder.parameters[datacenter]}
-|${rudder.parameters[datacenter][dns]}
+|`${rudder.parameters[datacenter]}`
+|`${rudder.parameters[datacenter][dns]}`
 
 |DSC technique
-|${rudder.parameters.datacenter}
-|${rudder.parameters.datacenter.dns}
+|`$(${rudder.parameters}.datacenter)`
+|`$(${rudder.parameters}.datacenter.dns)`
 
 |Directive
-|${rudder.parameters[datacenter]}
-|${rudder.parameters[datacenter][dns]}
+|`${rudder.parameters[datacenter]}`
+|`${rudder.parameters[datacenter][dns]}`
 
 |Mustache
-|{{{vars.rudder.parameters.datacenter}}}
-|{{{vars.rudder.parameters.datacenter.dns}}}
+|`{{{vars.rudder.parameters.datacenter}}}`
+|`{{{vars.rudder.parameters.datacenter.dns}}}`
 
 |Jinja2
-|{{vars.rudder.parameters.datacenter}}
-|{{vars.rudder.parameters.datacenter.dns}}
+|`{{vars.rudder.parameters.datacenter}}`
+|`{{vars.rudder.parameters.datacenter.dns}}`
 
 |===
 
@@ -311,24 +309,24 @@ These variable are expanded at policy generation and their values are based on n
 |name=os, value={"name": "Debian"}
 
 |Technique CFEngine
-|${node.inventory[hostname]}
-|${node.inventory[os][name]}
+|`${node.inventory[hostname]}`
+|`${node.inventory[os][name]}`
 
 |Technique DSC
-|????
-|????
+|`$(${node.inventory}.hostname)`
+|`$(${node.inventory}.os.name)`
 
 |Directive
-|${node.inventory[hostname]}
-|${node.inventory[os][name]}
+|`${node.inventory[hostname]}`
+|`${node.inventory[os][name]}`
 
 |Mustache
-|{{{vars.node.inventory.hostname}}}
-|{{{vars.node.inventory.os.name}}}
+|`{{{vars.node.inventory.hostname}}}`
+|`{{{vars.node.inventory.os.name}}}`
 
 |Jinja2
-|{{vars.node.inventory.hostname}}
-|{{vars.node.inventory.os.name}}
+|`{{vars.node.inventory.hostname}}`
+|`{{vars.node.inventory.os.name}}`
 
 |===
 
@@ -402,19 +400,19 @@ Information about a node:
 |Variable
 |Description
 
-|${rudder.node.id}
+|`${rudder.node.id}`
 |Rudder id of the node
 
-|${rudder.node.hostname}
+|`${rudder.node.hostname}`
 |Node hostname
 
-|${rudder.node.admin}
+|`${rudder.node.admin}`
 |Node administrator login
 
-|${rudder.node.state}
+|`${rudder.node.state}`
 |The xref:usage:advanced_node_management.adoc#node-lifecycle[node life cycle] of the node
 
-|${rudder.node.policyMode}
+|`${rudder.node.policyMode}`
 |the xref:usage:configuration_management.adoc#_policy_mode_audit_enforce[effective policy mode] of the node
 |===
 
@@ -425,13 +423,13 @@ Information about a node's policy server:
 |Variable
 |Description
 
-|${rudder.node.policyserver.id}
+|`${rudder.node.policyserver.id}`
 |The Rudder generated id of the Policy Server
 
-|${rudder.node.policyserver.hostname}
+|`${rudder.node.policyserver.hostname}`
 |The hostname of the Policy Server
 
-|${rudder.node.policyserver.admin}
+|`${rudder.node.policyserver.admin}`
 |The administrator login of the Policy Server
 
 |===
@@ -462,7 +460,7 @@ NOTE: These properties are evaluated on the node at run time.
 |No JSON like values
 
 |Technique CFEngine
-|${sys.host}
+|`${sys.host}`
 |N/A
 
 |Technique DSC
@@ -470,15 +468,15 @@ NOTE: These properties are evaluated on the node at run time.
 |N/A
 
 |Directive
-|${sys.host}
+|`${sys.host}`
 |N/A
 
 |Mustache
-|{{{vars.sys.host}}}
+|`{{{vars.sys.host}}}`
 |N/A
 
 |Jinja2
-|{{vars.sys.host}}
+|`{{vars.sys.host}}`
 |N/A
 
 |===
@@ -490,19 +488,19 @@ NOTE: These properties are evaluated on the node at run time.
 |Name
 |Description
 
-|sys.arch
+|`sys.arch`
 |Kernel short architecture
 
-|sys.fqhost
+|`sys.fqhost`
 |Fully qualified hostname, as seen in Rudder
 
-|sys.uqhost
+|`sys.uqhost`
 |Unqualified hostname
 
-|sys.host
+|`sys.host`
 |Node's hostname (according to the kernel)
 
-|sys.domain
+|`sys.domain`
 |Node's domain as discovered by the agent
 |===
 
@@ -515,23 +513,23 @@ There are also more variables available, all documented in https://docs.cfengine
 |Name
 |Description
 
-|const.dollar
-|$
+|`const.dollar`
+|`$`
 
-|const.dirsep
-|/
+|`const.dirsep`
+|`/`
 
-|const.endl or const.n
-|\n
+|`const.endl or const.n`
+|`\n`
 
-|const.r
-|carriage return
+|`const.r`
+|`carriage return`
 
 
-|const.t
+|`const.t`
 |tabulation
 
-|ncf_const.s
+|`ncf_const.s`
 |space char
 |===
 
@@ -693,7 +691,7 @@ and use the generic method `variable_dict_merge_tolerant` to merge `node.propert
 
 As a result, merged_properties.sysctls_postgresql will contain
 
----
+----
 
 "sysctls_postgresql": {
     "kernel.shmall":"903330",
@@ -701,8 +699,7 @@ As a result, merged_properties.sysctls_postgresql will contain
     "kernel.shmmni":"4096"
 }
 
-
----
+----
 
 
 
@@ -858,42 +855,42 @@ Time classes (available on all agents)
 |Names
 
 | Day of the Week 
-| Monday, Tuesday, Wednesday,...GMT_Monday, GMT_Tuesday, GMT_Wednesday,...
+| `Monday`, `Tuesday`, `Wednesday`,...`GMT_Monday`, `GMT_Tuesday`, GMT_Wed`nesday,...
 
 | Hour of the Day in Current Time Zone 
-| Hr00, Hr01,... Hr23 and Hr0, Hr1,... Hr23
+| `Hr00`, `Hr01`,... `Hr23` and `Hr0`, `Hr1`,... `Hr23`
 
 | Hour of the Day in GMT 
-| GMT_Hr00, GMT_Hr01, ...GMT_Hr23 and GMT_Hr0, GMT_Hr1, ...GMT_Hr23.
+| `GMT_Hr00`, `GMT_Hr01`, ...`GMT_Hr23` and `GMT_Hr0`, `GMT_Hr1`, ...`GMT_Hr23`.
     
 | Minutes of the Hour 
-| Min00, Min17,... Min45,... and GMT_Min00, GMT_Min17,... GMT_Min45,...
+| `Min00`, `Min17`,... `Min45`,... and `GMT_Min00`, `GMT_Min17`,... `GMT_Min45`,...
     
 | Five Minute Interval of the Hour 
-| Min00_05, Min05_10,... Min55_00 and GMT_Min00_05, GMT_Min05_10,... GMT_Min55_00. 
+| `Min00_05`, `Min05_10`,... `Min55_00` and `GMT_Min00_05`, `GMT_Min05_10`,... `GMT_Min55_00`. 
 
 Note the second number indicates up to what minute the interval extends and does not include that minute.
 
 | Quarter of the Hour 
-| Q1, Q2, Q3, Q4 and GMT_Q1, GMT_Q2, GMT_Q3, GMT_Q4
+| `Q1`, `Q2`, `Q3`, `Q4` and `GMT_Q1`, `GMT_Q2`, `GMT_Q3`, `GMT_Q4`
   
 | An expression of the current quarter hour 
-| Hr12_Q3 and GMT_Hr12_Q3
+| `Hr12_Q3` and `GMT_Hr12_Q3`
   
 | Day of the Month 
-| Day1, Day2,... Day31 and GMT_Day1, GMT_Day2,... GMT_Day31
+| `Day1`, `Day2`,... `Day31` and `GMT_Day1`, `GMT_Day2`,... `GMT_Day31`
 
 | Month 
-| January, February,... December and GMT_January, GMT_February,... GMT_December
+| `January`, `February`,... `December` and `GMT_January`, `GMT_February`,... `GMT_December`
  
 | Year 
-| Yr2020, Yr2004 and GMT_Yr1997, GMT_Yr2020
+| `Yr2020`, `Yr2004` and `GMT_Yr1997`, `GMT_Yr2020`
 
 | Period of the Day 
-| Night, Morning, Afternoon, Evening and GMT_Night, GMT_Morning, GMT_Afternoon, GMT_Evening (six hour blocks starting at 00:00 hours).
+| `Night`, `Morning`, `Afternoon`, `Evening` and `GMT_Night`, `GMT_Morning`, `GMT_Afternoon`, `GMT_Evening` (six hour blocks starting at 00:00 hours).
 
 | Lifecycle Index
-| Lcycle_0, Lcycle_1, Lcycle_2 and GMT_Lcycle_0, GMT_Lcycle_1, GMT_Lcycle_2 (the year number modulo 3, used in long term resource memory).
+| `Lcycle_0`, `Lcycle_1`, `Lcycle_2` and `GMT_Lcycle_0`, `GMT_Lcycle_1`, `GMT_Lcycle_2` (the year number modulo 3, used in long term resource memory).
 |===
 
 
@@ -909,13 +906,13 @@ Linux agent (non exhaustive list)
 | any
 
 | Operating System Architecture
-| arista, big_ip, debian, eos, fedora, Mandrake, Mandriva, oracle, redhat, slackware, smartmachine, smartos, solarisx86, sun4, SuSE, ubuntu, ultrix, unknown_ostype, etc.
+| `arista`, `big_ip`, `debian`, `eos`, `fedora`, `Mandrake`, `Mandriva`, `oracle`, `redhat`, `slackware`, `smartmachine`, `smartos`, `solarisx86`, `sun4`, `SuSE`, `ubuntu`, `ultrix`, `unknown_ostype`, etc.
 
 | VM or hypervisor specific
-| VMware, virt_guest_vz, virt_host_vz, virt_host_vz_vzps, xen, xen_dom0, xen_domu_hv, xen_domu_pv, oraclevmserver, etc.
+| `VMware`, `virt_guest_vz`, `virt_host_vz`, `virt_host_vz_vzps`, `xen`, `xen_dom0`, `xen_domu_hv`, `xen_domu_pv`, `oraclevmserver`, etc.
 
 | On Solaris-10 systems, the zone name 
-| in the form zone_global, zone_foo, zone_baz...
+| in the form `zone_global`, zo`ne_foo, `zone_baz`...
 
 |===
 
@@ -930,10 +927,10 @@ DSC agent
 |Names
 
 | Always set class
-| any
+| `any`
 
 | Operating System Architecture
-| windows, rudder, powershell, 64_bit, x86_64, i386
+| `windows`, `rudder`, `powershell`, `64_bit`, `x86_64`, `i386`
 
 |===
 
@@ -1116,8 +1113,10 @@ This is also a good case to allow a simple override mechanism for a parameter wh
 
 You can also use other node properties, or other Rudder parameters as defaults, using the same syntax as above.
 
-Please note that this syntax is not available in Technique Editor. The preferred method in Technique Editor si to use `Variable String with Default`
+NOTE: This syntax is not available in Technique Editor. The preferred method in Technique Editor si to use `Variable String with Default`
 generic method, or use a Technique Parameter.
+
+Default values must quoted with double quotes (`"..."`) or triple double quotes (`"""..."""`). You can omit quotes in the case where the `default` is only composed of exactly one variable.
 
 Some examples:
 
@@ -1125,8 +1124,8 @@ Some examples:
 
 ${node.properties[datacenter][id] | default = "LON2" }
 ${node.properties[datacenter][name] | default = """Co-location with "Hosting Company" in Paris (allows quotes)""" }
-${node.properties[datacenter][id] | default = ${rudder.parameters[default_datacenter]} }
-${node.properties[netbios_name] | default = ${rudder.node.hostname} }
+${node.properties[datacenter][id] | default = "${rudder.parameters[default_datacenter]} }"
+${node.properties[netbios_name] | default = "${rudder.node.hostname}" }
 ${node.properties[dns_suffix] | default = ${node.properties[datacenter][dns_suffix] | default = "${rudder.node.hostname}.example.com" }
 
 #or even use cfengine variables in the default
