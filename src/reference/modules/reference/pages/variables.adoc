@@ -202,7 +202,7 @@ It is important to be able to understand where a property is defined and how it 
 
 Rudder allows to see a property lineage in group and node property tab: inherited (even if latter overridden) properties get a dedicated tag and going on that tag show its full definition and overrides. 
 
-image::view-property-inheritance.jpg[Viewing property overrides]
+image::view-property-inheritance.png[Viewing property overrides]
 
 
 ==== Syntax
