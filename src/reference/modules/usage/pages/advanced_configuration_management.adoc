@@ -293,12 +293,12 @@ agent from Directives based on the same Technique.
 
 === Policy generation and Directive merge
 
-In Rudder, Policies are generated from Directives. In the general case, each directive will lead to one policy on the node. 
+In Rudder, policies are generated from directives. In the general case, each directive will lead to one policy on the node. 
 
-There is two exception to that rule:
+There are two exceptions to that rule:
 
-- for unique (non multi-instance) technique, the directive with the highest priority is selected.
-- for multi-instance technique, if the technique metadata `POLICYGENERATION` tag has value `merged`, then all directives will be merged into *one* policy on the agent. That behavior used to be the default one until Rudder 4.3. See https://issues.rudder.io/issues/10625[Don't merge directive from same technique on generation] for more information.
+- for unique (non multi-instance) technique, the directive with the highest priority is selected and others are discarded (and they will be tagged as such in node detail compliance),
+- for multi-instance technique, if the technique `POLICYGENERATION` metadata tag has value `merged`, then all directives will be merged into *one* policy on the node. That behavior used to be the default one until Rudder 4.3. See https://issues.rudder.io/issues/10625[Don't merge directive from same technique on generation] for more information about it.
 
 
 === Sorting Directives based on the *same* Technique

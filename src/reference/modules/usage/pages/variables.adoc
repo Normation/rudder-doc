@@ -228,6 +228,8 @@ image::view-property-inheritance.png[Viewing property overrides]
 |`${node.properties[datacenter][dns]}`
 
 |Mustache
+|`{{{vars.node.properties.datacenter}}}`
+|`{{{vars.node.properties.datacenter.dns}}}`
 
 |Jinja2
 |`{{vars.node.properties.datacenter}}`
