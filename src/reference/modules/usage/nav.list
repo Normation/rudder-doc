@@ -3,5 +3,6 @@ node_management.adoc
 advanced_node_management.adoc
 configuration_management.adoc
 technique_editor.adoc
+variables.adoc
 advanced_configuration_management.adoc
 api.adoc

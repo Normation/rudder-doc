@@ -102,7 +102,7 @@ image::Rule_config.png[]
 == Variables
 
 Rudder provides multiple ways to add common and reusable variables in either plain directives, or techniques created using the technique editor.
-See xref:reference:variables.adoc[Variables] for more details.
+See xref:usage:variables.adoc[Variables] for more details.
 
 [[compliance-and-drift-assessment]]
 == Compliance and Drift Assessment

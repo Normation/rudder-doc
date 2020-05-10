@@ -1,0 +1,1300 @@
+= Variables
+
+== Generalities
+
+Rudder has a notion of `variables`. A `variable` is something with a `name` that references a `value`, and that `value` can be accessed with appropriate syntax around its `name`. We call accessing the value `variable expansion` in honor to shell, guarding totem of devops glue. 
+
+In Rudder, `variable name` are namespaced with a dotted convention. `Values` can be mainly of two types: `string` and `json`, ie dictionary-like recursive structures. Rudder only supports `UTF-8` for `variables` `names` and `values`.
+
+Under that broad notion of `variable`, we need to take apart the two main action around them:
+
+- how one defines them? 
+- and how one uses them?
+
+In each case, we have sub-cases directed by use. 
+
+Variables definition covers two big aspects of knowledge:
+
+- configuration data, known by humans when policies are defined. That knowledge needs to be centralized, categorized, hierarchized and retrieved based on which node
+ policies will be used, 
+- dynamic or contextualized information about infrastructure provided by environment tooling, be it Rudder itself, facts about environment, or resources available only when the policy is checked. 
+
+In Rudder, how one reference a variable and when it will be expanded to retrieve its
+value depends upon where it is used. There is three cases: 
+
+- use in a techniques (in the editor or if you directly write generic methods), 
+- use in directives parameters, 
+- and use in templates (jinja2 or mustache). 
+
+The following sections will cover these notions and how to apply them in Rudder to fulfill your use cases. 
+
+An overview of `variables` is available in https://docs.rudder.io/files/rudder-cheatsheet-advanced.pdf[Rudder cheatsheet].
+
+== Variables definition purpose: configuration data or source of environment knowledge?
+
+
+In Rudder, we distinguish between two main cases for variable' values definition: 
+
+- 1/ configuration data that depicts ops knowledge about their infrastructure. That data is organized around node and groups of nodes, in hierarchies that allow to refine and special cases values from general cases and default values to node. That data is versioned along configuration logic and is available when policies are generated for each node. 
+
+A typical example for configuration data is the DNS server to use. The value is part of IT ops knowledge and will be different if the node is in a datacenter or another. 
+
+- 2/ source of environmental information, that are generally provided by Rudder or directly on the node and often represent facts about your infrastructure. That data is not known when policies are generated but only when policies are checked and can change from a check to the next depending of environmental changes, so that that data can't be versioned along configuration logic. 
+
+A typical example of facts is the result of a command (node environment) or the node's policy server IP (Rudder provided information). 
+
+
+The exact syntax to access a variable's value, especially in the case of JSON values, depends of where it's used. By convention, when table of variables are presented below, they will clearly explain what is the variable name. It will also present dictionary keys (which are also names) in a dotted path syntax. Exact syntax for the three use cases will be reminded each time. 
+
+[[_node_properties]]
+=== Hierarchical configuration data with node properties
+
+Assigning the correct value to a configuration process is as much important as
+knowing how the process must be done. Configuration data are an extremely important part of our work, and we must ensure that they remain consistent across all configuration.
+To answer to that problem, Rudder provides the notion of node properties that allows to define values of variables for each node and takes advantage of Rudder existing node categorization in groups to inherit commons values. 
+
+More precisely, a `node property` a `name=value` pair. The value can be a `string` or a well-formatted `JSON` data structure.
+
+Some examples:
+`datacenter=Paris`
+`datacenter= { "id": "FRA1", "name": "Colo 1, Paris", "location": "Paris, France", "dns_suffix": "paris.example.com" }`
+
+A `node property` can be define at three levels with inheritance between each of them. These level are, starting from the more general to the most specific:
+
+- `global parameters`, which are properties defined on all nodes and are useful to define common knowledge and default values, 
+- `group properties` that are defined in groups. Only nodes of that group get corresponding properties. Group properties are inherited from global parameters and properties define in parent groups, 
+- `node properties`, which are properties defined directly on the node. 
+
+At each level, properties can be defined via UI or via API. For nodes, external properties, typically from a `CMDB`, can be synchronized thanks to `data source` plugin. 
+
+Variable expansion is done during policy generation so that variable knows their final value at that moment, and it doesn't change until the next generation. 
+
+A last level of overriding is available directly locally on node. Since that part is not about configuration data known when policy are generated, it will be cover in next section.
+
+==== Inheritance and overriding
+
+Properties are inherited from global parameters to groups, then from group to subgroups, and then from group to nodes. 
+
+At each step, all properties from parent that are not defined in children are added to the latter. 
+For properties with a common name, an override is done with the following algorithm: 
+
+- if child value is a string, it is kept, 
+- if parent value is a string and child one is a JSON, JSON is kept
+- if parent value is a JSON array and child is a JSON object, child value is kept, 
+- if parent value is a JSON object and child is a JSON array, child value is kept, 
+- if both values are JSON array, array are concatenated, parent at lower indexes,
+- if both values are JSON object, object are merged using current algorithm recursively: missing keys are added, etc. 
+
+----
+
+// global parameter with name "example":
+"example":{
+  "parent-kept"    : "parent-kept"
+, "replaced-string": "original"
+, "replaced-array" : ["original"]
+, "replaced-object": {"orig":"inal"}
+, "append-array"   : [1,2]
+, "merge-object"   : {
+      "parent-kept"    : "parent-kept"
+    , "parent-replaced": "original"
+  }
+}
+
+// group property with name "example":
+"example":{ 
+  "group-added"    : "group-added"
+, "replaced-string": "group"
+, "replaced-array" : {"replaced":"group"}
+, "replaced-object": ["group"]
+, "append-array"   : [3,4]
+  "merge-object"   : {
+      "group-added"    : "group-added"
+    , "parent-replaced": "group"
+  }
+}
+
+// on nodes belonging to previous group, which doesn't have "example"
+// property defined (so no more overriding at that level):
+"example":{ 
+  "parent-kept"    : "parent-kept"
+, "group-added"    : "group-added"
+, "replaced-string": "group"
+, "replaced-array" : {"replaced":"group"}
+, "replaced-object": ["group"]
+, "append-array"   : [1,2,3,4]
+, "merge-object"   : {
+      "parent-kept"    : "parent-kept"
+    , "group-added"    : "group-added"
+    , "parent-replaced": "group"
+  }
+}
+----
+
+==== Global parameter
+
+Using this, you can specify common file headers (this is the default parameter, "rudder_file_edit_header"), common DNS or domain names, backup servers,
+site-specific elements...
+
+Rudder provides a simple way to add common and reusable variables in either plain directives, or techniques created using the technique editor: the parameters.
+
+image::rudder-parameters.png[Parameters]
+
+
+==== Group properties
+
+
+Group properties can be managed by using https://docs.rudder.io/api/#operation/updateGroup[goup's API] or they can be found in the *properties* tab of each group in Rudder UI.
+
+image::group-properties.png[Group properties in UI]
+
+Group properties will be defined on each node that belong in that group but only when policy are generated: group properties are never actually set on nodes, which allows to override them on node and to build group from node real properties, as explained below.
+
+===== Group hierarchy and property inheritance and override
+
+Group properties are inherited and override following group hierarchy. Group hierarchy are defined by the notion of "a group `S` is a sub group of an other parent group `P`" defined by: 
+
+- the subgroup `S` must have an `AND` criterion operator, 
+- the subgroup `S` must have a criteria `[Groups] [Group ID] [=] [parent group P]`
+
+image::define-subgroup-criteria.png[Example of subgroup definition with search criteria]
+
+In that case, `S` will have all properties of `P` and previously explained rules for override apply.
+
+A group can be the subgroup of several group, in which case overridden is done in criteria order (see next paragraph).
+
+
+===== Group property conflict and priorization
+
+When a node inherit a property with the same name from two groups that are not in a hierarchical relation, Rudder raises error and explains where the problem lies.
+
+image::group-property-conflict.png[Policy generation failed due to a group property conflict]
+
+It's important to understand that in that case, no automatic merging of properties is done because Rudder is unable to know on which way override should be done.
+
+When such a conflict happens, you can solve it by changing the name of one of the two properties. This is the best thing to do if the properties are not really common, and the name just happened to be reuse by error. Be careful that in such a case, you will have to also rename property reference to the new name in all use places, which can be a bit tedious. 
+
+The other possibility is to make both group part of the same hierarchy to manually defined what must be the override order. To do so, create a new group with a group criteria pointing towards each of the conflicting groups. 
+
+image::solving-group-conflict-with-subgroup.png[Solving a group property conflict by defining a common subgroup]
+
+The overriding is done from first criteria line to last, so that values of group in the last line are the ones going to the node (see full example below for illustration). 
+
+===== Node properties used in group criteria
+
+Rudder allows to define group based on node properties (their existence or predicate on their value). Inherited and overridden properties are not taken into account for that definition, and only properties *actually* defined on nodes are used to decide if a node belong to such a group. Doing otherwise could lead to cycles, and cycles with delay leads to oscillations, and oscillations leads to instability and chaos. We chose to remain away from the dark side, even if it brings more power.
+
+==== Node properties
+
+Node properties can be managed by using https://docs.rudder.io/api/#operation/updateNode[node's API] or they can be found in the *properties* tab of each node in Rudder UI.
+
+image::node-properties.png[Node properties in UI]
+
+==== Configuration data example
+
+This section provides a full example of node property definition for the following use case: 
+
+
+image::node-properties-hierarchy.png[Hierarchical property definition and overriding]
+
+==== Visualizing property inheritance
+
+It is important to be able to understand where a property is defined and how it is overridden to be able to manage it efficiently (and more importantly, to be able to understand why it's not what it is supposed to be). 
+
+Rudder allows to see a property lineage in group and node property tab: inherited (even if latter overridden) properties get a dedicated tag and going on that tag show its full definition and overrides. 
+
+image::view-property-inheritance.png[Viewing property overrides]
+
+
+==== Syntax
+
+===== Property syntax
+
+[cols="3", options="header"]
+|===
+|Use case
+|name=datacenter, value="Paris"
+|name=datacenter, value={"dns": "1.1.1.1"}
+
+|Technique CFEngine
+|`${node.properties[datacenter]}`
+|`${node.properties[datacenter][dns]}`
+
+|DSC Technique
+|`$(${node.properties}.datacenter)`
+|`$(${node.properties}.datacenter.dns)`
+
+|Directive
+|`${node.properties[datacenter]}`
+|`${node.properties[datacenter][dns]}`
+
+|Mustache
+
+|Jinja2
+|`{{vars.node.properties.datacenter}}`
+|`{{vars.node.properties.datacenter.dns}}`
+
+|===
+
+===== Global parameter syntax
+
+[WARNING]
+
+==== 
+
+You should never access global parameters directly and always use the corresponding 
+node property which may have been overridden.
+
+====
+
+[cols="3", options="header"]
+|===
+|Use case
+|name=datacenter, value="Paris"
+|name=datacenter, value={"dns": "1.1.1.1"}
+
+|Classic technique
+|`${rudder.parameters[datacenter]}`
+|`${rudder.parameters[datacenter][dns]}`
+
+|DSC technique
+|`$(${rudder.parameters}.datacenter)`
+|`$(${rudder.parameters}.datacenter.dns)`
+
+|Directive
+|`${rudder.parameters[datacenter]}`
+|`${rudder.parameters[datacenter][dns]}`
+
+|Mustache
+|`{{{vars.rudder.parameters.datacenter}}}`
+|`{{{vars.rudder.parameters.datacenter.dns}}}`
+
+|Jinja2
+|`{{vars.rudder.parameters.datacenter}}`
+|`{{vars.rudder.parameters.datacenter.dns}}`
+
+|===
+
+
+
+=== Source of environment facts
+
+
+Two main cases: 
+
+. predefined variables
+.. exhaustive list: Inventory variables, system variable, in the technique editor
+. variables acquired by code
+.. read file, node local override, augeas, osquery...
+
+==== Predefined variables and constants
+
+===== Inventory variables
+
+NOTE: These variables have been introduced in Rudder 5.0.13, if you are using a previous version of Rudder, please use System Variables, described in next section
+
+[WARNING]
+
+====
+
+These variable are expanded at policy generation and their values are based on node inventory values: they may not represent current reality of the node. If you want to get facts about the node when the check is done, look at next section, especially paragraph about OSQuery and Augeas generic methods. 
+
+====
+
+====== Syntax
+
+[cols="3", options="header"]
+|===
+|Use case
+|name=hostname, value="Paris"
+|name=os, value={"name": "Debian"}
+
+|Technique CFEngine
+|`${node.inventory[hostname]}`
+|`${node.inventory[os][name]}`
+
+|Technique DSC
+|`$(${node.inventory}.hostname)`
+|`$(${node.inventory}.os.name)`
+
+|Directive
+|`${node.inventory[hostname]}`
+|`${node.inventory[os][name]}`
+
+|Mustache
+|`{{{vars.node.inventory.hostname}}}`
+|`{{{vars.node.inventory.os.name}}}`
+
+|Jinja2
+|`{{vars.node.inventory.hostname}}`
+|`{{vars.node.inventory.os.name}}`
+
+|===
+
+====== Inventory variables list
+
+[cols="2", options="header"]
+|===
+|Variable
+|Description
+
+|hostname
+|Node hostname
+
+|localAdministratorAccountName
+|Node administrator login
+
+|archDescription
+|The architecture of the node (like "x86_64")
+
+|ram
+|The amount of RAM on the node (in bytes)
+
+|timezone
+|The name of the timezone of the node (like "Europe/Paris")
+
+|os.name
+|The operating system name (like "Debian")
+
+|os.fullName
+|The operating system full name (like "Debian GNU/Linux 9.1 (stretch)")
+
+|os.version
+|The operating system version (like "9.1")
+
+|os.kernelVersion
+|The kernel version on the node (like "4.9.0-3-amd64")
+
+|os.servicePack
+|The operating system service pack (like "4")
+
+|machine.machineType
+|The machine type (like "qemu", "physical")
+
+|machine.manufacturer
+|The manufacturer of the machine (like "innotek GmbH")
+
+|policyServerId
+|The Rudder generated id of the node Policy Server
+|===
+
+
+===== System variables in directive parameters
+
+Rudder provides system variables that contain information about nodes
+and their policy server.
+
+[WARNING]
+
+==== 
+You can use them only in directives and they will be 
+expanded during policy generation. 
+==== 
+
+Since these variables are only available on directive, they are presented with
+the full directive-only syntax.
+
+Information about a node:
+
+[cols="2", options="header"]
+|===
+|Variable
+|Description
+
+|`${rudder.node.id}`
+|Rudder id of the node
+
+|`${rudder.node.hostname}`
+|Node hostname
+
+|`${rudder.node.admin}`
+|Node administrator login
+
+|`${rudder.node.state}`
+|The xref:usage:advanced_node_management.adoc#node-lifecycle[node life cycle] of the node
+
+|`${rudder.node.policyMode}`
+|the xref:usage:configuration_management.adoc#_policy_mode_audit_enforce[effective policy mode] of the node
+|===
+
+Information about a node's policy server:
+
+[cols="2", options="header"]
+|===
+|Variable
+|Description
+
+|`${rudder.node.policyserver.id}`
+|The Rudder generated id of the Policy Server
+
+|`${rudder.node.policyserver.hostname}`
+|The hostname of the Policy Server
+
+|`${rudder.node.policyserver.admin}`
+|The administrator login of the Policy Server
+
+|===
+
+
+
+
+====== Node-level system properties and constant
+
+[WARNING]
+
+====
+
+These variables are not available on Windows nodes, but 
+only on with the classic Linux/AIX agent.
+
+====
+
+NOTE: These properties are evaluated on the node at run time.
+
+
+====== Syntax
+
+[cols="3", options="header"]
+|===
+|Use case
+|name=sys.host, value="host.local.name"
+|No JSON like values
+
+|Technique CFEngine
+|`${sys.host}`
+|N/A
+
+|Technique DSC
+|N/A
+|N/A
+
+|Directive
+|`${sys.host}`
+|N/A
+
+|Mustache
+|`{{{vars.sys.host}}}`
+|N/A
+
+|Jinja2
+|`{{vars.sys.host}}`
+|N/A
+
+|===
+
+====== System property
+
+[cols="2", options="header"]
+|===
+|Name
+|Description
+
+|`sys.arch`
+|Kernel short architecture
+
+|`sys.fqhost`
+|Fully qualified hostname, as seen in Rudder
+
+|`sys.uqhost`
+|Unqualified hostname
+
+|`sys.host`
+|Node's hostname (according to the kernel)
+
+|`sys.domain`
+|Node's domain as discovered by the agent
+|===
+
+There are also more variables available, all documented in https://docs.cfengine.com/docs/3.15/reference-special-variables-sys.html[this page].
+
+====== Constants
+
+[cols="2", options="header"]
+|===
+|Name
+|Description
+
+|`const.dollar`
+|`$`
+
+|`const.dirsep`
+|`/`
+
+|`const.endl or const.n`
+|`\n`
+
+|`const.r`
+|`carriage return`
+
+
+|`const.t`
+|tabulation
+
+|`ncf_const.s`
+|space char
+|===
+
+
+==== Node environment information at run time
+
+Often, you will need to capture values from the node context when the agent runs. It may be because you need to access information only relevant or defined on the node, like current open ports, because the information is only reachable from it like a REST API open only for node subnet, or for security reasons like providing secrets only to the node. Rudder provides a range of possibilities to cover this use cases.
+
+===== Automatic loading of JSON variable
+
+All files with `.json` extension placed in  `/var/rudder/local/properties.d/` are loaded as variable with JSON values for each agent run. For these files, the root level JSON keys are used as variable name prefix, the second level keys are used as variable names and following levels are used as value. 
+
+For example, the following file:
+
+----
+{
+  "prefix1": {
+    "stringVar": "value1",
+  , "jsonVar": {
+      "moreLevel":"levels"
+    }
+  }
+, "prefix2": {
+    "stringVar": "value2"
+  }
+}
+----
+
+will define three variables:
+
+- `${prefix1.stringVar}` with value `value1`,
+- `${prefix1.jsonVar}` with value `{"moreLevel":"levels"}``,
+- `${prefix2.stringVar}` with value `value2`,
+
+===== Node property local override
+
+Node properties can also be defined directly on the nodes, by creating properties files in `/var/rudder/local/properties.d/*.json`. File will be read in read in alphabetical order and any variable under the root key `properties` will be considered to be a node property
+
+[WARNING]
+
+====
+
+Existing node properties will be replaced and not merged by properties with the same names in node local override. If you want to *merge* properties, you will need to define them with different name and merge them by hand (see below).
+
+====
+
+As a result, if you have node properties defined server side as
+`"sysctls_postgresql":{"kernel.shmall":"903330","kernel.shmmax":"3700041320"}` and
+`"vm":{"vm.dirty_ratio":"10"}`
+
+and a local property file `/var/rudder/local/properties.d/postgresql_config.json` as
+
+----
+
+{
+  "properties":
+  {
+    "sysctls_postgresql": {
+      "kernel.shmmax":"5368709120"
+    }
+  }
+
+}
+
+----
+
+The resulting properties will be:
+
+`"sysctls_postgresql":{"kernel.shmmax":"5368709120"}` and
+`"vm":{"vm.dirty_ratio":"10"}`
+
+`sysctls_postgresql` has been replaced by local property, and `vm` has been left untouched.
+
+===== Variable defined by agent
+
+Agent can define variable. You can run `rudder agent run -i` to see some of them. 
+
+For the linux agent, https://docs.cfengine.com/docs/3.15/reference-special-variables-sys.html[CFEngine system variable] are available.
+
+For DSC agent, no specific variable are provided.
+
+==== Variable defined from technique and generic methods
+
+
+Rudder provide a set of generic method (and techniques) that allows to define `variable` from a wide range of inputs. For each case, the generic method read a source of information and translate it into a Rudder variable for which you provide a prefix and a name. 
+
+Rudder also provides `variable` techniques similar to generic methods that allow to define variables from string, json, or command output.
+
+In most case, it's easier to use corresponding generic methods and that allows to put together several variable definition in the same place.
+
+We present afterward a subset of interesting cases, but there is others that you can check out in https://docs.rudder.io/reference/latest/reference/generic_methods.html#_variable[generic method documentation].
+
+====== Variable override by order of rules and directives
+
+Variables defined with following generic methods or corresponding techniques can be overridden by other variables with same name defined in other rules or directives. 
+
+The exact ordering and rules are explain in the https://docs.rudder.io/reference/latest/usage/advanced_configuration_management.html#_sorting_directives_based_on_the_same_technique[ordering directive] chapter.
+
+====== Variable from files
+
+Rudder can natively parse JSON, YAML and CSV files to transform them into JSON values.
+
+====== Variable from `Augeas`
+
+http://augeas.net[Augeas] is standard tool for reading and editing configuration files by providing a tree-representation of their native format. It's really useful to clean the mess in that domain. With it, you can easily and safely transform almost any configuration file into a Rudder JSON variable. 
+
+====== Variable from `OSQuery`
+
+https://www.osquery.io/[osquery] is a tool that allows to query information about your system through SQL-like queries. It's becoming a de-facto standard, and with it you can get an accurate, real-time glimpse of your node and put that data into a Rudder JSON variable.
+
+====== Variable from Vault
+
+https://www.vaultproject.io/[Vault] is becoming a defacto tool to securely share secrets in a complex infrastructure, when your attack vector and mitigation includes having different people configuring systems and setting secrets. 
+Rudder provides a generic method through https://docs.rudder.io/reference/latest/plugins/vault.html[a plugin] to access a Vault secret and use it in a configuration only locally from the node.
+
+====== Variable from Consul
+
+https://www.consul.io/[Consul] is a common tools used to synchronize a key=value store among your infrastructure. Rudder can access Consul values through 
+Rudder provides a generic method through https://docs.rudder.io/reference/latest/plugins/consul.html[a plugin].
+
+====== Variable from command
+
+In last resort, you can always write a script to get what information you want, format the corresponding data in JSON and define a variable from that. This is especially useful when you need to retrieve data from a REST endpoint at run time - but beware of the implied latency on each run!
+
+
+===== Merging variable' values
+
+With all these variables coming from different sources, you will likely need to consolidate values on the node by creating overridden values. 
+
+Rudder provide two generic methods to merge values: 
+
+- `variable_dict_merge` will replace properties with the same name, 
+- `variable_dict_merge_tolerant` will merge properties with the same name.
+
+This second method can be used if you want to merge server defined properties with local defined properties rather than replace them. For that, define the node local variables in a different namespace than `properties`.
+
+For instance, if the following node properties was defined: 
+
+`"sysctls_postgresql":{"kernel.shmall":"903330","kernel.shmmax":"3700041320"}`
+
+You can define a file `/var/rudder/local/properties.d/postgresql_config.json` with the following content:
+
+----
+
+{
+    "local_properties":
+    {
+        "sysctls_postgresql": {
+            "kernel.shmmax":"5368709120",
+            "kernel.shmmni":"4096"
+        }
+    }
+
+}
+
+----
+
+and use the generic method `variable_dict_merge_tolerant` to merge `node.properties[sysctls_postgresql]` and `node.local_properties[sysctls_postgresql]`, and set the result in merged_properties.sysctls_postgresql (for instance): `variable_dict_merge_tolerant("merged_properties", "sysctls_postgresql", "node.properties[sysctls_postgresql]", "node.local_properties[sysctls_postgresql]")`
+
+As a result, merged_properties.sysctls_postgresql will contain
+
+----
+
+"sysctls_postgresql": {
+    "kernel.shmall":"903330",
+    "kernel.shmmax":"5368709120",
+    "kernel.shmmni":"4096"
+}
+
+----
+
+
+
+== Using variables 
+
+
+=== Technique vs Directive vs template
+
+There's little use defining variables if you don't use them. In this section, we will explain the three main use case of variables with their particularities:
+
+- variable used in techniques, ie in code designed to run on agent (and sometimes even only for a specific agent); here we deal with data used to lead logic (condition or iteration on set of data, etc). 
+- variable in templates are a special cases of previous case: they are expanded on node, during agent run. But their syntax and usage are directed by the template engine, `mustache` or `jinja2` in Rudder; 
+- on the other hand, variables in directives parameters are likely only configuration data defined elsewhere and used to parameterized a technique used as a configuration template. Variable in directive are generally expanded during policy generation in the policy server, and most errors can be caught at that time, 
+
+The next paragraph will detail specificities of each cases. 
+
+=== Technique
+
+In Rudder, you can define and use variables via the technique editor or the different pre-built techniques. If you happen to write your own generic methods, variables in them follows the same rules. 
+
+All variables are defined under a `prefix` (scope), so to reference a variable you will always need its `prefix` and its `name`, separated via a `.` char.
+To call a variable in Rudder we use `${...}` brackets syntax as described below:
+
+NOTE: For backward compatibility, the syntax `$(...)` is also supported, but deprecated and not recommended.
+
+----
+// Call to a String or Iterator variable
+${<prefix>.<variable name>}
+
+// Call to a key in a Dict variable
+${<prefix>.<variable dict name>[key][sub-key]}
+
+----
+
+
+In techniques, variables can be of one of three types:
+
+* A `String`
+* A `Dict`, which support key-values and arrays, ie JSON like structure, 
+* Or an `Iterator` which is used to loop over things in Rudder.
+
+More over, all variables in Rudder are overridable at execution time, keep in mind that ordering the definition of your variables is important.
+
+
+[[_technique_parameters]]
+==== Technique parameters
+
+Technique parameters can be referenced with the following syntax:
+
+----
+
+# Variable corresponding to a technique parameter, full version:
+${technique_id.parameter_name}
+
+----
+
+The complete parameter name is mostly used to access the parameter value from a template or when using method which takes a variable name
+as argument such as link:../reference/generic_methods.html#_condition_from_variable_match[condition_from_variable_match].
+
+But since they are local to each technique, you often can reference them by eliding the `technique_id` part :
+
+----
+
+# Variable corresponding to a technique parameter, short version:
+${parameter_name}
+
+----
+
+
+==== Conditionals
+
+
+===== Conditions concept in Rudder
+
+Condition in techniques are a bit different than your regular boolean in a programming language. Their first use case is to control execution of a generic method and so they are better understood as guards: if a set of predicates on that guard is verified, then the generic method is executed, else a report `not applicable` (`N/A`) is generated. 
+
+A condition is represented by a string, and can be either defined or not. The conditions express what the current execution environment is:
+
+- We are on a Debian 9 system
+- The state of the nginx package is correct
+- The content of the configuration file has just been modified
+- etc.
+
+NOTE: the `string` that define a condition is often called a `class` - not in the `object oriented programming` meaning, but in the categorization one.
+
+We can use conditions to limit the evaluation of a method to a specific context, for example only on debian 9 or only when a given file has been modified by the agent.
+
+This allows:
+- using actions (like service restart) by limiting them to a specific context
+- writing generic policies compatible with different operating systems, by having specific parts for each
+
+NOTE: if you need to code some complex logic with lots of branching (ie lots of interlocked if/then/else, or even recursive conditions), then it will be hard to do so at technique level. It is likely that complex logic should be encapsulated in an idempotent script, or even factored-out in a new generic method. 
+
+Conditions can be combined using boolean operators:
+
+- `!` for not
+- `|` for or
+- `.` for and
+- `(` and `)` for grouping
+
+
+
+===== Automatically defined condition classes
+
+
+====== Generic method result
+
+Every method will define a result condition that is one of the conditions displayed in method details:
+
+It can be:
+
+- *Success*: When the state was already compliant
+- *Repaired*: When the state has been modified by the agent to become compliant
+- *Error*: When the expected state could not be reached
+
+image::generic-method-result-class.png[You can find generic method result class in "Result condition tab"]
+
+
+====== Group
+
+Group conditions are defined only if the node is in the given group (available in the group details):
+
+- group_[group_uuid]
+- group_[group_name]
+
+====== System conditions
+
+In the same spirit that a number of variable are defined by default when the agent runs, a set of condition is defined based on the environment execution context. 
+These condition cover mainly information about the system (os, etc) and information about date. 
+
+These condition are different on each agent, and of course on each run depending of the context. You can see which one are defined by executing the following command on your node: 
+
+----
+
+rudder agent info -v
+
+----
+
+On linux agent, you can also start a run with some defined condition with the command:
+
+----
+
+rudder agent run -D my_condition
+
+----
+
+
+Time classes (available on all agents)
+
+[cols="2", options="header"]
+|===
+|Description
+|Names
+
+| Day of the Week 
+| `Monday`, `Tuesday`, `Wednesday`,...`GMT_Monday`, `GMT_Tuesday`, GMT_Wed`nesday,...
+
+| Hour of the Day in Current Time Zone 
+| `Hr00`, `Hr01`,... `Hr23` and `Hr0`, `Hr1`,... `Hr23`
+
+| Hour of the Day in GMT 
+| `GMT_Hr00`, `GMT_Hr01`, ...`GMT_Hr23` and `GMT_Hr0`, `GMT_Hr1`, ...`GMT_Hr23`.
+    
+| Minutes of the Hour 
+| `Min00`, `Min17`,... `Min45`,... and `GMT_Min00`, `GMT_Min17`,... `GMT_Min45`,...
+    
+| Five Minute Interval of the Hour 
+| `Min00_05`, `Min05_10`,... `Min55_00` and `GMT_Min00_05`, `GMT_Min05_10`,... `GMT_Min55_00`. 
+
+Note the second number indicates up to what minute the interval extends and does not include that minute.
+
+| Quarter of the Hour 
+| `Q1`, `Q2`, `Q3`, `Q4` and `GMT_Q1`, `GMT_Q2`, `GMT_Q3`, `GMT_Q4`
+  
+| An expression of the current quarter hour 
+| `Hr12_Q3` and `GMT_Hr12_Q3`
+  
+| Day of the Month 
+| `Day1`, `Day2`,... `Day31` and `GMT_Day1`, `GMT_Day2`,... `GMT_Day31`
+
+| Month 
+| `January`, `February`,... `December` and `GMT_January`, `GMT_February`,... `GMT_December`
+ 
+| Year 
+| `Yr2020`, `Yr2004` and `GMT_Yr1997`, `GMT_Yr2020`
+
+| Period of the Day 
+| `Night`, `Morning`, `Afternoon`, `Evening` and `GMT_Night`, `GMT_Morning`, `GMT_Afternoon`, `GMT_Evening` (six hour blocks starting at 00:00 hours).
+
+| Lifecycle Index
+| `Lcycle_0`, `Lcycle_1`, `Lcycle_2` and `GMT_Lcycle_0`, `GMT_Lcycle_1`, `GMT_Lcycle_2` (the year number modulo 3, used in long term resource memory).
+|===
+
+
+
+Linux agent (non exhaustive list)
+
+[cols="2", options="header"]
+|===
+|Description
+|Names
+
+| Always set class
+| any
+
+| Operating System Architecture
+| `arista`, `big_ip`, `debian`, `eos`, `fedora`, `Mandrake`, `Mandriva`, `oracle`, `redhat`, `slackware`, `smartmachine`, `smartos`, `solarisx86`, `sun4`, `SuSE`, `ubuntu`, `ultrix`, `unknown_ostype`, etc.
+
+| VM or hypervisor specific
+| `VMware`, `virt_guest_vz`, `virt_host_vz`, `virt_host_vz_vzps`, `xen`, `xen_dom0`, `xen_domu_hv`, `xen_domu_pv`, `oraclevmserver`, etc.
+
+| On Solaris-10 systems, the zone name 
+| in the form `zone_global`, zo`ne_foo, `zone_baz`...
+
+|===
+
+
+
+
+DSC agent
+
+[cols="2", options="header"]
+|===
+|Description
+|Names
+
+| Always set class
+| `any`
+
+| Operating System Architecture
+| `windows`, `rudder`, `powershell`, `64_bit`, `x86_64`, `i386`
+
+|===
+
+
+NOTE: In DSC agent, classes are defined in https://github.com/Normation/rudder-agent-windows/blob/master/packaging/Files/share/initial-policy/resources/environment.ps1[that source file].
+
+
+===== Condition classes from code
+
+Rudder provides several methods to define condition from code. They are explained in https://docs.rudder.io/reference/6.0/reference/generic_methods.html#_condition[the corresponding generic methods documentation] and cover three main use cases:
+
+- condition from expression, which defined new condition classes by combining existing condition classes, 
+- condition from variable, which allows to define a class based on the existence of a variable or based on predicate upon its value,
+- condition from command, which is the swiss knife to use when you want to test anything about anything. 
+
+
+==== Iterations
+
+As for conditionals, iterations in Rudder are not your well known programming language `for-loop`. 
+Iteration are used to apply some configuration logic to a list of elements without wondering about the low-level aspects of how the iteration is done. 
+
+You build an iterator either from a `JSON` variable or a file. You never explicitly iterate over it, you just reference the fields of the iterated item in following generic methods. 
+
+::imagevariable-iterator-example.png[Example of iterating on a list of package and use corresponding variable in another generic method to install them]
+
+=== File templates and edition
+
+A non negligible part of configuration management is filing template files with values and using that.
+In rudder, we provides three main way to do that:
+
+- the first fulfill simple use case, like lightly editing a file, or copying from a reference one and is available through `file edit` technique and generic method, 
+- the second, focused on configuration file edition, is available through `Augeas` tools already presented for variable definition, 
+- the last, which covers involved file edition with possibly logic and loops, can be achieve through full fledge template engine. Rudder natively provides too of them: `Jinja2` and `Mustache`.
+
+===== File edition technique and generic methods
+
+Rudder provide a swiss-knife file edition technique, `File Content` that allows to do a lots of thing like:
+
+- checking for file existence and permission, 
+- ensuring that the file exactly matches a reference content, 
+- ensuring lines are present or absent, 
+- checking that part of file exists by section,
+- enforce content by section. 
+
+Directive from that technique can become quite complex and most of the time, defining idempotent changes in files through regex is hard. This is specially true when several checks from that technique are used in conjunction.
+When it's possible, we advice to either use more atomic generic method to build your own simpler change, or even better to default to either `Augeas` for configuration file edition or a template engine for ensuring file content (see below).
+
+==== Augeas
+
+Augeas is not exactly a full-fledge template system but its primary goal is also to define values in files, and in the domain of configuration management it is a very common use case. 
+
+Augeas is not embedded in rudder agent and will need to install it on nodes before using it.
+
+You can execute Augeas command through corresponding generic method. 
+
+==== Mustache
+
+https://mustache.github.io/mustache.5.html[Mustache] is a simple template engine that allows to expand variables but does not support heavy logic like conditional.
+
+Mustache is embedded in rudder agent and you don't need to install anything on nodes to use it. 
+
+Conditions:
+
+----
+
+{{#classes.condition}}
+condition is defined
+{{/classes.condition}}
+
+{{^classes.condition}}
+condition is not defined
+{{/classes.condition}}
+
+----
+
+Variables: 
+
+----
+
+{{{vars.node.properties.variable_name}}}
+{{{vars.generic_variable_definition.variable_name}}}
+{{{vars.variable_prefix.string_name}}}
+{{{vars.variable_prefix.dict_name.key}}}
+
+----
+
+Iterations:
+
+----
+
+{{#vars.variable_prefix.iterator_name}}
+{{{.}}} is the current iterator_name value
+{{/vars.variable_prefix.iterator_name}}
+
+{{#vars.variable_prefix.dict_name}}
+{{{@}}} is the current dict_name key
+{{{.}}} is the current dict_name value
+{{/vars.variable_prefix.dict_name}}
+
+{{#vars.variable_prefix.dict_name}}
+{{{.name}}} is the current dict_name[name]
+{{/vars.variable_prefix.dict_name}}
+
+----
+
+
+==== Jinja2
+
+https://pypi.org/project/Jinja2/[Jinja2] is a full-feature Python template engine that supports anything you can imagine from a template engine, but with the corresponding complexity.
+
+Jinja2 is not embedded in rudder agent. You will need to install it by yourself on nodes where you want to use it (and of course you can use rudder for that!).
+
+Conditions: 
+
+----
+
+{% if classes.condition is defined %}
+condition is defined
+{% endif %}
+
+{% if not classes.condition is defined %}
+condition is not defined
+{% endif %}
+
+----
+
+Variables:
+
+----
+
+{{ vars.variable_prefix.my_variable }}
+
+----
+
+Iteration:
+
+----
+
+{% for item in vars.variable_prefix.dict %}
+{{ item }} is the current item value
+{{ item.key }} is the the current item[key] value
+{% endfor %}
+
+{% for key,value in vars.prefix.dict %}
+{{ key }} has value {{ value }}
+{% endfor %}
+
+----
+
+=== Directive
+
+Variable can be used in directive where technique parameters are defined. These variables are expanded for each node during policy generation and checks are done at that moment, like if the variable is correctly defined. 
+
+You should always prefer to use node properties with global parameter and group properties inheritance to define such parameters for configuration data and keep variable from generic methods or technique for information only available on node, at run time.
+
+
+==== Node properties expansion in directives
+
+In any directive text field, you can access properties defined on nodes using the following syntax:
+
+----
+
+${node.properties[property_name][key_one][key_two]}
+
+----
+
+
+where:
+
+- `property_name` is the name of the property defined via the API
+- `key_one` and `key_two` are keys in the JSON structure
+- the value obtained is the string representation, in compact mode, of the entire node property or sub-structure of the JSON value
+- if the key is not found, an error will be raised that will stop policy generation
+- spaces are authorized around separators ([,],|,}..)
+
+===== Providing a default value in Directives
+
+You may want to provide a default value to node properties expansion to avoid a policy generation error due to missing node properties.
+This is also a good case to allow a simple override mechanism for a parameter where only some nodes have a specific value.
+
+You can also use other node properties, or other Rudder parameters as defaults, using the same syntax as above.
+
+NOTE: This syntax is not available in Technique Editor. The preferred method in Technique Editor si to use `Variable String with Default`
+generic method, or use a Technique Parameter.
+
+Default values must quoted with double quotes (`"..."`) or triple double quotes (`"""..."""`). You can omit quotes in the case where the `default` is only composed of exactly one variable.
+
+Some examples:
+
+----
+
+${node.properties[datacenter][id] | default = "LON2" }
+${node.properties[datacenter][name] | default = """Co-location with "Hosting Company" in Paris (allows quotes)""" }
+${node.properties[datacenter][id] | default = "${rudder.parameters[default_datacenter]} }"
+${node.properties[netbios_name] | default = "${rudder.node.hostname}" }
+${node.properties[dns_suffix] | default = ${node.properties[datacenter][dns_suffix] | default = "${rudder.node.hostname}.example.com" }
+
+#or even use cfengine variables in the default
+${node.properties[my_override] | default = "${cfengine.key}"}
+
+----
+
+===== Forcing expansion on the node
+
+In some cases, you will want to use a `${node.properties[key]}` in a directive parameter, but you don't want to expand it during
+policy generation on the Rudder server, but instead let the value be expanded during the agent run on the node. Typically if the value is to be used by a templating
+tool, or if the value is known only on the node.
+
+For these cases, you can add the "node" option to the property expression:
+
+----
+
+${node.properties[datacenter][id] | node }
+
+----
+
+This will be rewritten during policy generation into:
+
+----
+
+${node.properties[datacenter][id]}
+
+----
+
+Which will be considered as a standard variable by the agent, which will replaced this expression by its value if it's defined, or kept as is if it's unknown.
+
+The variable content is read from `/var/rudder/cfengine-community/inputs/properties.d/properties.json`, and from the optionally defined `/var/rudder/local/properties.d/*.json` files.
+You can find more information on node properties in xref:usage:advanced_configuration_management.adoc#_node_properties[node properties documentation].
+
+
+==== JavaScript evaluation in Directives
+
+It is possible to use `javascript` expressions to build directive values. The
+resulting values will be computed during policy generation, and can therefore
+provide unique values for each node.
+
+===== Switching feature availability
+
+You can disable this feature in the Administration/Settings page, using the
+*Enable script evaluation in Directives* parameter.
+
+
+===== Usage
+
+All standard JavaScript methods are available, and a Rudder-specific
+library, prefixed with `rudder.` also provides some extra utilities. This
+library is documented below.
+
+For example, to get the first 3 letters of each node's hostname, you can write:
+----
+"${rudder.node.hostname}".substring(0,3)
+----
+
+[TIP]
+
+[[limits-of-scripts, Limitation of the scripting language]]
+
+.Limitation of the scripting language
+
+====
+
+JavaScript expressions are evaluated in a sandboxed JavaScript environment. It has some
+limitations, such as:
+
+* It cannot write on the filesystem
+* Scripts are killed after 5 seconds of execution, to prevent overloading the system
+
+====
+
+===== Rudder js utility library
+
+====== Standard hash methods
+
+The following methods allow to simply hash a value using standard algorithms:
+
+* `rudder.hash.md5(string)`
+* `rudder.hash.sha256(string)`
+* `rudder.hash.sha512(string)`
+
+These methods do not use a salt for hashing, and as such are not suitable for
+distributing passwords for user accounts on UNIX systems. See below for a
+preferable approach for this.
+
+====== UNIX password-compatible hash methods
+
+The following methods are specially designed to provided hashes that can be
+used as user passwords on UNIX systems (in `/etc/shadow`, for example). Use
+these if you want to distribute hashes of unique passwords for each of your
+nodes, for example.
+
+Two different cases exist: support for generic Unix-like systems (Linux, BSD,
+...) and support for AIX systems (which use a different hash algorithm).
+
+Available methods are:
+
+* `rudder.password.auto(algorithm, password [, salt])`
+* `rudder.password.unix(algorithm, password [, salt])`
+* `rudder.password.aix(algorithm, password [, salt])`
+
+The parameters are:
+
+* `algorithm` can be "MD5", "SHA-512", "SHA512", "SHA-256", "SHA256" (case insensitive)
+* `password` is the plain text password to hash
+* `salt` is the optional salt to use in the password (we *strongly* recommend providing this value - see warning below)
+
+The `unix` method generates Unix crypt password compatible hashes (for use on
+Linux, BSD, etc), while the `aix` method generates AIX password compatible
+hashes. The `auto` method automatically uses the appropriate algorithm for
+each node type (AIX nodes will have a AIX compatible hash, others will
+have a Unix compatible hash). We recommend always using `auto` for simplicity.
+
+For example, to use the first 8 letters of each node's hostname as a password,
+you could write:
+----
+rudder.password.auto("SHA-256", "${rudder.node.hostname}".substring(0,8), "abcdefg")
+----
+
+[WARNING]
+
+.Providing a salt
+
+====
+
+It is strongly recommended to provide a *salt* to the methods above. If no
+salt is provided, a random salt is created, and will be recreated at each
+policy generation, causing the resulting hashes to change each time. This, in
+turn, will generate an unnecessary "repaired" status for the password component on all nodes
+at each policy generation.
+
+====
+
+[TIP]
+
+.JVM requirements
+
+====
+
+This features is tested only on HotSpot 1.8, OpenJDK 1.8, and IBM JVM 1.8.
+
+====
+
+[TIP]
+
+.JVM requirements for AIX password hashes
+
+====
+
+AIX password generation depends on the availability of *PBKDF2WithHmacSHA256* and
+*PBKDF2WithHmacSHA512* in the JVM. These algorithms are included by default on
+HotSpot 1.8 and OpenJDK 1.8 and upward. In the case where your JVM does not support these
+algorithms, typically on an IBM JDK or a JVM 1.7 version of HotSpot and OpenJDK, the hashing
+algorithm falls back to *SHA1* with *PBKDF2WithHmacSHA1*, and an error message will be
+logged. You can also check your JVM editor manual to add support for these algorithms.
+
+====
+
+====== Status and future support
+
+In a future version of Rudder, JavaScript evaluation will be supported in all
+fields in Directives, including non plain-text fields.
+
+In the meantime, you can already test this functionality out by entering a JavaScript
+expression in any Directive field, prefixed by `evaljs:`. Please be aware that
+this is unsupported and untested, so do this at your own risk.
+
+There is currently no plan to extend this support to the fields in the
+Technique editor.
