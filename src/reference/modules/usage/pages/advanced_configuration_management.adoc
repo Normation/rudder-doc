@@ -293,18 +293,12 @@ agent from Directives based on the same Technique.
 
 === Policy generation and Directive merge
 
-In Rudder, Policies are generated from Directives, but several Directives based on the same Technique always lead to *one* Policy on the agent.
-For unique (non multi-instance) Technique, the one with the highest priority is selected. For multi-instance Technique, the different Directive values are *merged*
-into one Policy after having been sorted.
+In Rudder, Policies are generated from Directives. In the general case, each directive will lead to one policy on the node. 
 
-.Separated Policy Generation in Rudder 4.3
-[TIP]
-=====
- In Rudder 4.3, that limitation is lifted and Technique can be made to generate ONE Policy for each Directive. That capacity is controled by the
- `POLICYGENERATION` tag, where the value `merged` is the pre-4.3 default behavior, and values `separated` or `separated-with-param` lead to one Policy per Directive.
+There is two exception to that rule:
 
- See https://issues.rudder.io/issues/10625[Don't merge directive from same technique on generation] for more information.
-=====
+- for unique (non multi-instance) technique, the directive with the highest priority is selected.
+- for multi-instance technique, if the technique metadata `POLICYGENERATION` tag has value `merged`, then all directives will be merged into *one* policy on the agent. That behavior used to be the default one until Rudder 4.3. See https://issues.rudder.io/issues/10625[Don't merge directive from same technique on generation] for more information.
 
 
 === Sorting Directives based on the *same* Technique
@@ -326,20 +320,6 @@ This changed with https://issues.rudder.io/issues/11725 but if you knew Rudder b
 use "0" whenever the documentation says "highest priority".
 ======
 
-
-==== Special use case: overriding generic_variable_definition
-
-You can use the merging of Directive to define variable override with the "Generic Variable Definition" Technique.
-
-For example, let say you want to define a *DNS* variable with default value *[default dns]* and on some node case,
-a value *[overridden dns]*:
-
-- Create a Directive [1] with *high* priority: it will be your *default* case, so set *DNS* to *[default dns]*.
-- Create an other Directive [2] with *lower* priority: it will be your specialized case, so set *DNS* to *[overridden dns]*.
-
-Then, a node with only Directive [1] will have the default value defined, and a node with both Directives will have the overriding one.
-
-It works because on the agent, you can redeclare a variable name and reassign to it a new value: the last one wins (so in our case, the *lowest* priority).
 
 === Sorting Policies
 
