@@ -607,13 +607,13 @@ In most case, it's easier to use generic methods as they allow to:
 * group several variable definitions in the same place
 * encapsulate variable definition definition and usage in the technique, avoiding dependencies between directives (which should be avoided as much as possible).
 
-We present afterward a subset of interesting cases, but there is others that you can check out in https://docs.rudder.io/reference/latest/reference/generic_methods.html#_variable[generic method documentation].
+We present afterward a subset of interesting cases, but there is others that you can check out in https://docs.rudder.io/reference/current/reference/generic_methods.html#_variable[generic method documentation].
 
 ====== Variable override by order of rules and directives
 
 Variables defined with following generic methods or corresponding techniques can be overridden by other variables with same name defined in other rules or directives. 
 
-The exact ordering and rules are explain in the https://docs.rudder.io/reference/latest/usage/advanced_configuration_management.html#_sorting_directives_based_on_the_same_technique[ordering directive] chapter.
+The exact ordering and rules are explain in the https://docs.rudder.io/reference/current/usage/advanced_configuration_management.html#_sorting_directives_based_on_the_same_technique[ordering directive] chapter.
 
 It is not recommended to rely on this mechanism as dependencies between directives are not
 easily visualizable.
@@ -633,12 +633,12 @@ https://www.osquery.io/[osquery] is a tool that allows to query information abou
 ====== Variable from Vault
 
 https://www.vaultproject.io/[Vault] is becoming a de-facto tool to securely share secrets in a complex infrastructure, when your attack vector and mitigation includes having different people configuring systems and setting secrets. 
-Rudder provides a generic method through https://docs.rudder.io/reference/latest/plugins/vault.html[a plugin] to access a Vault secret and use it in a configuration only locally from the node.
+Rudder provides a generic method through https://docs.rudder.io/reference/current/plugins/vault.html[a plugin] to access a Vault secret and use it in a configuration only locally from the node.
 
 ====== Variable from Consul
 
 https://www.consul.io/[Consul] is a common tools used to synchronize a key=value store among your infrastructure.
-Rudder provides a generic method through https://docs.rudder.io/reference/latest/plugins/consul.html[a plugin]
+Rudder provides a generic method through https://docs.rudder.io/reference/current/plugins/consul.html[a plugin]
 to access values from a Consul key-value store.
 
 ====== Variable from command
