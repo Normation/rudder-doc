@@ -58,9 +58,9 @@ subsequent upgrade will not exhibit this problem anymore.
 
 If you don't want to wait up to 5 minutes for this issue to correct itself, you can run:
 
----
+----
 rudder agent check
----
+----
 
 that will restore the file from backup.
 
