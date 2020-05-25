@@ -60,7 +60,7 @@ vim /etc/default/rudder-jetty
 
 Notice: that file is alike to +/opt/rudder/etc/rudder-jetty.conf+, which is the file with
 default values. +/opt/rudder/etc/rudder-jetty.conf+ should never be modified directly because
-modification would be erased by packaging in the following Rudder versuib update.
+the modification would be erased by the next Rudder upgrade.
 
 # modify JAVA_XMX to set the value to your need.
 # The value is given in MB by default, but you can also use the "G" unit to specify a size in GB.
@@ -92,7 +92,7 @@ vim /etc/default/rudder-jetty
 
 Notice: that file is alike to +/opt/rudder/etc/rudder-jetty.conf+, which is the file with
 default values. +/opt/rudder/etc/rudder-jetty.conf+ should never be modified directly because
-modification would be erased by packaging in the following Rudder versuib update.
+the modification would be erased by the next Rudder upgrade.
 
 # Uncomment the lines related to "Java Garbage collector option"
 
