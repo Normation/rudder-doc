@@ -81,10 +81,10 @@ plugins: rudder-plugins-repo rudder-plugins-private-repo
 	cd rudder-plugins-repo && git pull && make clean && make doc
 	rm -rf plugins && mkdir -p plugins/
 	cp -r rudder-plugins-repo/doc/* plugins/
+	cp -r rudder-plugins-private-repo/doc/* plugins/
 	cp -r plugins/assets/images tmp-doc-plugins
 	mkdir -p plugins/assets/images/docs/
 	mv tmp-doc-plugins plugins/assets/images/docs/images
-	cp -r rudder-plugins-private-repo/doc/* plugins/
 
 ## Clean
 
