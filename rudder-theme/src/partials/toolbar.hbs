@@ -1,3 +1,16 @@
+{{~#if (eq page.componentVersion.version "6.1") }}
+<div class="banner-warning warning-beta">
+  <span class="icon-warning"></span>
+  This version is under development
+</div>
+{{else}}
+{{~#if (eq page.componentVersion.version "4.3") }}
+<div class="banner-warning warning-deprecated">
+  <span class="icon-warning"></span>
+  This version is deprecated
+</div>
+{{/if}}
+{{/if}}
 <div class="toolbar" role="navigation">
   <button class="navigation-toggle"></button>
   {{#if site.homeUrl}}
