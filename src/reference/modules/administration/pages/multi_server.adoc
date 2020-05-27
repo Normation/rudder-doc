@@ -30,7 +30,7 @@ su - postgres -c "psql -q -c \"CREATE DATABASE alternate_base_name WITH OWNER = 
 
 ----
 
- cp /opt/rudder/etc/postgresql/reportsSchema.sql /opt/rudder/etc/postgresql/reportsSchema-alternate.sql
+cp /opt/rudder/etc/postgresql/reportsSchema.sql /opt/rudder/etc/postgresql/reportsSchema-alternate.sql
 
 ----
 
@@ -84,8 +84,6 @@ root server will have indirect access to the content of the other databases.
 
 ====
 
-
-
 === On the database server
 
 * Install and configure the agent on the node, and install the *rudder-reports* package.
@@ -113,7 +111,7 @@ host    rudder          rudder          ROOT_SERVER_IP/32       md5
 
 ----
 
-service postgresql restart
+systemctl restart postgresql
 
 ----
 
@@ -142,8 +140,8 @@ the root server.
 
 ----
 
-service rudder restart
-apt-mark manual rudder-webapp rudder-inventory-endpoint
+systemctl restart rudder-server
+apt-mark manual rudder-webapp
 apt-get remove --purge rudder-reports
 
 ----
@@ -187,8 +185,8 @@ rudder agent inventory
 
 ----
 
-service rsyslog restart
-service rudder restart
+systemctl restart rsyslog
+systemctl restart rudder-server
 
 ----
 

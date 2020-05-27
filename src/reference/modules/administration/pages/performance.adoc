@@ -102,7 +102,7 @@ JAVA_GC="-XX:+UseG1GC
 -XX:+UseStringDeduplication"
 
 # save your changes, and restart Jetty:
-service restart rudder-jetty
+systemctl restart rudder-jetty
 
 ----
 

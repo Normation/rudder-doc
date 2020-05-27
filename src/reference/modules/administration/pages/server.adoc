@@ -156,7 +156,7 @@ To recover from this state, you need to regenerate the data with
 ----
 
 touch /opt/rudder/etc/force_ncf_technique_update
-service rudder-jetty restart
+systemctl restart rudder-jetty
 
 ----
 

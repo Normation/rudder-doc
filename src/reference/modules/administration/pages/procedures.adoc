@@ -142,7 +142,7 @@ Then restart postgresql, and set up the extension
 
 ----
 
-$ service postgresql restart
+$ systemctl restart postgresql
 
 $ su postgres
 $ psql -d rudder
@@ -238,13 +238,13 @@ during searches. In that case, OpenLDAP will output warnings to notify you that 
 ----
 
 # Stop OpenLDAP
-service rudder-slapd stop
+systemctl stop rudder-slapd
 
 # Reindex the databases
-service rudder-slapd reindex
+su -s /bin/sh rudder-slapd -c "/opt/rudder/sbin/slapindex -v -f /opt/rudder/etc/openldap/slapd.conf"
 
 # Restart OpenLDAP
-service rudder-slapd restart
+systemctl start rudder-slapd
 
 ----
 
@@ -320,10 +320,7 @@ Here is the restoration procedure:
 rudder agent disable
 
 # Stop Rudder services
-service rudder-server stop
-service rudder-agent stop
-# to stop using the database
-service rsyslog stop
+systemctl stop rudder-agent rudder-server rsyslog
 
 # Drop the OpenLDAP database
 rm -rf /var/rudder/ldap/openldap-data/*.mdb
@@ -344,7 +341,7 @@ tar -C /var/rudder -zxf rudder-backup-plugin-resources-XXXXXXXX.tar.gz
 /opt/rudder/sbin/slapadd -l rudder-backup-XXXXXXXX.ldif
 
 # Start PostgreSQL
-service postgresql start
+systemctl start postgresql
 
 # PostgreSQL backup
 sudo -u postgres pg_restore -d rudder --clean --create < rudder-backup-XXXXXXXX.sql
@@ -361,8 +358,7 @@ tar -C /var/log -zxf rudder-log-backup-XXXXXXXX.tar.gz
 rudder agent enable
 
 # And restart the machine or just Rudder:
-service rudder-server restart
-service rudder-agent restart
+systemctl start rudder-agent rudder-server
 
 ----
 
@@ -427,6 +423,8 @@ Here is the restoration procedure:
 rudder agent disable
 
 # Stop Rudder services
+systemctl stop rudder-agent
+# or depending on the system
 service rudder-agent stop
 
 # Import your backups
@@ -447,6 +445,8 @@ tar -C /var/log -zxf rudder-log-backup-XXXXXXXX.tar.gz
 rudder agent enable
 
 # And restart Rudder:
+systemctl start rudder-agent
+# or depending on the system
 service rudder-agent restart
 
 ----
@@ -505,6 +505,8 @@ Here is the restoration procedure:
 rudder agent disable
 
 # Stop Rudder services
+systemctl stop rudder-agent
+# or depending on the system
 service rudder-agent stop
 
 # Import your backups
@@ -522,6 +524,8 @@ tar -C /opt/rudder -zxf rudder-etc-backup-XXXXXXXX.tar.gz
 rudder agent enable
 
 # And restart Rudder:
+systemctl start rudder-agent
+# or depending on the system
 service rudder-agent restart
 
 ----
