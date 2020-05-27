@@ -143,12 +143,6 @@ html {
 
 .navigation-explore:not(.is-active) .components {
   display: none;
-  /*
-  display: block;
-  max-height: 140px;
-  overflow: hidden;
-  position: relative;
-  */
 }
 
 .navigation-explore:not(.is-active) .components::after {
@@ -971,4 +965,42 @@ html {
   overflow-y: initial;
   flex: 1;
   height: auto;
+}
+
+/* === WARNING BANNER === */
+
+.banner-warning {
+  position: sticky;
+  top: var(--navbar-height);
+  display: flex;
+  height: 45px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background: #c9302c;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1em;
+  text-shadow: 0 2px 4px #00000050;
+  z-index: 10;
+}
+
+.banner-warning.warning-deprecated {
+  background: #8d91a5;
+}
+
+.banner-warning .icon-warning {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url(../img/warning.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.31));
+}
+
+.banner-warning + .toolbar {
+  top: calc(3.25rem + 45px);
+  top: calc(var(--navbar-height) + 45px);
 }
