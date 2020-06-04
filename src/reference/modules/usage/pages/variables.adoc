@@ -783,6 +783,11 @@ Conditions can be combined using boolean operators:
 - `.` for and
 - `(` and `)` for grouping
 
+This is an example about how to define two generic methods, one for installing `python3-jinja2` on `CentOS 8` (with the predefined OS form, which is the preferred solution), and one for installing `python-jinja2` on `CentOS 6` and `7` (with the OS system variable (see below) and negation operator, for demo):
+
+image::generic-method-condition-os.png[Example of using OS variable to conditionally apply a generic method to some nodes.]
+
+
 ===== Automatically defined condition classes
 
 ====== Generic method result
