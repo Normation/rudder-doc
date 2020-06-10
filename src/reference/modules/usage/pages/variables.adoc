@@ -170,7 +170,7 @@ When such a conflict happens, you can solve it by changing the name of one of th
 
 The other possibility is to make both group part of the same hierarchy to manually define what must be the override order. To do so, create a new group with a group criteria pointing towards each of the conflicting groups. 
 
-image::solving-group-conflict-with-subgroup.png[Solving a group property conflict by defining a common subgroup]
+image::solving-hierarchies-conflict-with-subgroup.png[Solving a group property conflict by defining a common subgroup]
 
 The overriding is done from first criteria line to last, so that values of group in the last line are the ones going to the node (see full example below for illustration). 
 
@@ -443,12 +443,12 @@ NOTE: These properties are evaluated on the node at run time.
 [cols="3", options="header"]
 |===
 |Use case
-|name=sys.host, value="host.local.name"
-|No JSON like values
+|name=host, value="host.local.name"
+|No JSON like values: name=ipv4[eth0], value=192.168.41.2 
 
 |Classic (Unix) technique
 |`${sys.host}`
-|N/A
+|`${sys.ipv4[eth0]}`
 
 |DSC technique
 |N/A
@@ -456,15 +456,24 @@ NOTE: These properties are evaluated on the node at run time.
 
 |Directive
 |`${sys.host}`
-|N/A
+|`${sys.ipv4[eth0]}`
 
 |Mustache
 |`{{{vars.sys.host}}}`
-|N/A
+|Be careful! 
+
+System variables like `ipv4[eth0]` are actually STRINGS in mustache, not JSON, so accessed with:
+
+`{{{vars.sys.ipv4[eth0]}}}`
+
 
 |Jinja2
 |`{{vars.sys.host}}`
-|N/A
+|Be careful! 
+
+System variables like `ipv4[eth0]` are actually STRINGS in jinja2, not JSON, so accessed with:
+
+`{{vars.sys['ipv4[eth0]']}}`
 
 |===
 
