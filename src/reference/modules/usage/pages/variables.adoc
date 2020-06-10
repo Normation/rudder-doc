@@ -139,7 +139,7 @@ image::rudder-parameters.png[Parameters]
 
 ==== Group properties
 
-Group properties can be managed by using https://docs.rudder.io/api/#operation/updateGroup[goup's API] or they can be found in the *properties* tab of each group in Rudder UI.
+Group properties can be managed by using https://docs.rudder.io/api/#operation/updateGroup[group's API] or they can be found in the *properties* tab of each group in Rudder UI.
 
 image::group-properties.png[Group properties in UI]
 
