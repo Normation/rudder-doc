@@ -63,6 +63,19 @@ configuration (files name, ...), etc.
 
 For reference, a copy of Rudder `start.ini` is provided below.
 
+You can also override system properties that need to be passed to java command line 
+with `-D` option in that file. Typically, if you need to increase `maxFormContentSize` 
+or `maxFormKey` as explained 
+https://www.eclipse.org/jetty/documentation/current/configuring-form-size.html[in Jetty documentation], 
+you can just add corresponding lines at the end of `start.ini`:
+
+----
+
+-Dorg.eclipse.jetty.server.Request.maxFormKeys=200
+-Dorg.eclipse.jetty.server.Request.maxFormContentSize=400000
+
+----
+
 == Other Jetty places
 
 `Jetty` use other files and directories at run time, which are not linked to configuration but may be important to know:
