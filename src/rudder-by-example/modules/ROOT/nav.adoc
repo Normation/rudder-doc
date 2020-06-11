@@ -10,3 +10,5 @@
 ** xref:system/extend-inventories.adoc[Extend inventories with custom data]
 * Extending Rudder
 ** xref:extending-rudder/add-new-methods.adoc[Add new methods to the technique editor]
+* Configuration policy 
+** xref:policies/policies-configuration-with-vault-plugin.adoc[policies-configuration-with-vault-plugin.adoc]
