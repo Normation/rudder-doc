@@ -134,7 +134,7 @@ image::ConfPolicy4.png[Configuration Policy 4]
 image::ConfPolicy5.png[Configuration Policy 5]
 
 == Go Further
-Both examples we have introduced, showed a basic use case of Vault secret management and a best practice of how we can fetch those secrets and use them in Rudder configuration policy.
+Both examples we have introduced, showed a basic use case of Vault secret management and a best practice of how we can fetch those secrets and use them in Rudder configuration policies.
 
 To go further with Vault usage and learn more about Rudder configuration policies, check out the Rudder and Vault official documentation : `https://docs.rudder.io/get-started/current/configuration-policies/technique.html` & `https://www.vaultproject.io/docs/`.
 
