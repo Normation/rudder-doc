@@ -1,0 +1,96 @@
+= Update rudder-agent package
+
+== Use case
+
+You want to manage `rudder-agent` package update using rudder itself. 
+The package part is easy to do, but you may want to also manage package repository definition to take care of upgrading to a new major version of Rudder. This example explains how to do it. Example are based on CentOS distribution but they can easily be ported for other ones. 
+
+== `Update rudder agent` Technique
+
+We are going to create a technique that does two things:
+
+- it will configure Rudder repository for a chosen branch. To make it more flexible, the branch will be set in directive from a technique parameter, 
+- it will ensure that `rudder-agent` package is installed in last version available. 
+
+Unfortunately for us - but fortunately for I/O and CPU usage in permanent workout -, our agent keep a cache of packages that are available on repositories so that it doesn't have to query remote site and parse results at each run. So we will ensure that if the repository definition change, that cache is wiped out. 
+
+=== Create a new technique
+
+Go to Rudder `Techniques` menu, and create a new technique. We will name it `Update rudder agent` and give it a short description. 
+
+image::update-agent-create-technique.png[Create `Update rudder agent` technique]
+
+=== Manage repository
+
+The first part of the technique ensure that Rudder repository definition exists and is correct. 
+
+Since we want to make branch version parameterized, we will add a `rudder_branch` parameter in technique corresponding tab. We also add a definition for that parameter so that user of our technique what format is expected for it. 
+
+Now that we have access to Rudder branch version to use, we want to ensure that file `/etc/yum.repos.d/rudder.repo` content is: 
+
+[source]
+----
+[Rudder]
+name=Rudder ${rudder_branch} Repository
+baseurl=https://publisher.normation.com/rtf/rpm/${rudder_branch}/RHEL_$releasever/
+gpgcheck=1
+gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub
+----
+
+
+For such cases where the content is almost fixed, generic method `File content` is perfect. We give a better name to report component so that compliance reports are more meaningful and specify that we want to have exactly that content, always:
+
+image::update-agent-configure-repo.png[Ensure `rudder.repo` file content]
+
+
+=== Delete rpm list cache when repository change
+
+We said that Rudder agent use a cache of package list. We don't want to keep that cache if branch version changes since it will likely be the result of an human interaction, for example when someone changed the parameter content or apply the directive to a new group. In the contrary, we absolutely want to use that cache if repository definition didn't change to avoid extensive use of I/O and CPU.
+
+So, to start, that cache is stored in `packages_updates_*` files under `/var/rudder/cfengine-community/state` directory. We will simply delete them with `rm` command:
+
+[source]
+----
+rm -f /var/rudder/cfengine-community/state/packages_updates_*
+----
+
+[NOTE]
+====
+You should be careful about not deleting these files too often. That cache is here to avoid a big degradation on performances.
+====
+
+For that, we will use `Command execution` method, again with a meaningful report component name: 
+
+immage::update-agent-rm-cache-definition.png[Delete cache]
+
+
+And to execute that command only when necessary, we will use the `repair` result condition from the first configured method as a conditions for this one:
+
+
+image::update-agent-rm-cache-condition.png[Condition on delete cache]
+
+
+=== Check package last version installed
+
+Finally, we will check that last `rudder-agent` package is installed, and generic method `package present` does just that:
+
+image::update-agent-package-present.png[Ensure `rudder-agent` package is installed in last version]
+
+== Create a directive and rule
+
+Once you save your technique, it becomes available in your directive tree:
+
+image::update-agent-directive.png[Directive using our technique]
+
+Finally, add that new directive to a directive a rule. You can of course use different directive, with different branch version, for different rules and thus for different nodes, typically for testing a new branch on a small group of dedicated nodes.
+
+== Reports
+
+On the rules is save and agents run on corresponding node, you will get reports with the nice names we set earlier. If the repository definition changed, then cache are deleted (and likely package will be updated):
+
+
+image::update-agent-reports-with-repair.png[Change and repository definition and package update]
+
+Then, on subsequent runs, nothing will be done - in particular, cache deletion is avoided:
+
+image::update-agent-reports-no-change.png[Most of the time, nothing is done]
