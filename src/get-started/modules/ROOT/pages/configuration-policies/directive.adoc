@@ -7,12 +7,12 @@
 In this section you will:
 
 * Define a configuration policy from a pre-defined template
-* Create appliable configuration items called *directives* from
+* Create applicable configuration items called *directives* from
 
 ====
 
 You have just learnt to use the technique editor, which gives access to a broad
-range of building blocks for policies. To allow easy configuration of
+range of building blocks for policies. To allow an easy configuration of
 common system settings, Rudder also comes with a pre-defined set of techniques,
 directly usable after installation.
 
@@ -35,13 +35,13 @@ i.e. a technique plus a set of parameters.
 
 Defining a directive consist of choosing a technique and providing its parameters.
 
-First, let's give it a description. When using Rudder, keep in mind that filling all these documentation filed, though it may seem
+First, let's give it a description. When using Rudder, keep in mind that filling all these documentation fields, though it may seem
 tedious, is very important for future reference, or collaboration with other.
 It is for example useful to include reference to external information (ticketing system, etc.),
 to allow keeping a track of all configuration changes.
 Also, note these documentation fields are rendered as markdown, so you can include links, bullet points, etc.
 
-We now need to decide ho we want to configure our SSH server.
+We now need to decide how we want to configure our SSH server.
 Let's disable password authentication (it's always a good idea anyway):
 
 image::./ssh-password.png["SSH technique", align="center"]
