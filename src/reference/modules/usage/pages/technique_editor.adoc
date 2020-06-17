@@ -28,6 +28,7 @@ Directly accessible from Ruder menu (*Configuration policy -> Techniques*), this
 Here is an overview of its interface :
 
 image::technique_editor/1-rudder-technique-editor.png[]
+image::technique_editor/1-rudder-technique-editor-open.png[]
 
 The interface is divided into 3 columns:
 
