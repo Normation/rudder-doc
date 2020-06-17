@@ -34,7 +34,7 @@ How does this interface work?
 * The right part is the "methods" column (and a category list to navigate within methods)
 
 The methods will be the building blocks to our technique. You can think of them as small bricks
-you will assemble into a technique. Lets start the configuration, click on the *User* category (in the lower right of the interface),
+you will assemble into a technique. Let's start the configuration, click on the *User* category (in the lower right of the interface),
 and click on the *User present* method.
 It is now part of our technique's component list, with an orange warning asking for parameters. To provide them, click on the method instance in the technique.
 

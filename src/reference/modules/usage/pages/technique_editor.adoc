@@ -69,7 +69,7 @@ The Generic method details are divided into 3 blocks :
     * Repaired, when the configuration is wrong and actions to fix it were executed with success
     * Error, when the configuration is wrong but actions to fix it failed
 
-Theses conditions can be used in another Generic methods conditions. ie, you can execute a command if a previous one failed or was repaired.
+Those conditions can be used in another Generic methods conditions. ie, you can execute a command if a previous one failed or was repaired.
 
 
 == Create your first Technique
