@@ -11,12 +11,12 @@ In this section you will:
 
 ====
 
-You have just learnt to use the technique editor, which gives access to a broad
+You have just learnt to use the xref:reference:usage:technique_editor.adoc#_techniques[Technique Editor], which gives access to a broad
 range of building blocks for policies. To allow an easy configuration of
 common system settings, Rudder also comes with a pre-defined set of techniques,
 directly usable after installation.
 
-Go to the *Configuration Management -> Directives* page. What is a directive? It is a simply a technique instance:
+Go to the *Configuration Management -> Directives* page. What is a xref:reference:usage:configuration_management.adoc#_directives[Directive]? It is a simply a technique instance:
 a technique plus some parameters, making it an applicable piece of configuration.
 
 We will now configure the SSH service on our nodes using the dedicated pre-built technique.
@@ -61,7 +61,7 @@ it is applied to (we will see later which ones exactly).
 Let's create a second directive, based on the technique we have just created (our demo user).
 Use the filter to find it in the directive tree, still on the Directives page.
 
-This time, we will change one of the general parameters by overriding the policy mode to Audit mode.
+This time, we will change one of the general parameters by overriding the xref:reference:usage:configuration_management.adoc#_policy_mode_audit_enforce[policy mode] to Audit mode.
 
 image::./audit.png["Audit mode", align="center"]
 
