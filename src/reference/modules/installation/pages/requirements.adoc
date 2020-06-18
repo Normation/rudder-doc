@@ -152,6 +152,8 @@ PostgreSQL and rsyslog both need more computing power when a lot of nodes are in
 
 === Disk
 
+To manage more than 100 nodes, it is strongly recommended to use SSD or NAS/SAN with low latency, to avoid slowdown during policy generation and inventories management.
+
 The PostgreSQL database will take up most of the disk space needed by Rudder. The storage
 necessary for the database can be estimated by counting around
 500 to 900 kB per Directive per Node per Day of retention of node execution reports (default is 4 days),
