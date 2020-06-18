@@ -47,6 +47,14 @@ image::technique_editor/3-ntp-configuration.png[]
 
 Then we can see the name, the description, the Bundle name, the version and the Generic methods list of the current Technique. Only the name and the description are editable, the Bundle name and the version are automatically defined during the Technique creation.
 
+You can use xref:reference:usage:variables.adoc#_technique[technique parameter] to make it reusable. Go to *Parameters* and add a name and a description.
+
+image::technique_editor/technique-editor-parameters.png[]
+
+You can now use it in generic method instead of static value.
+
+image::technique_editor/technique-parameters-ntp.png[]
+
 - A column listing Generic methods / displaying generic method details
 
 To the right of the interface is the list of Generic methods available for Technique configuration.
