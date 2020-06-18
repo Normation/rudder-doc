@@ -90,10 +90,10 @@ In our case:
 
 Now, we have to find and add the generic methods which correspond to the actions we want to execute. In our case, we want to add the following methods:
 
-* Package install (You can find it in the *Package category*)
+* Package present (You can find it in the *Package category*)
   - This method only take one parameter, the name of the package to install. So here, fill in the *package_name* field with the value _ntp_.
 
-* File from template (You can find it in the *File category*)
+* File content (You can find it in the *File category*)
   - This method take two parameters. The first one corresponds to the absolute path of the source file containing a template to be expanded. We are going to use a Rudder variable here to get the correct path. Fill in the *source_template* field with the value _$\{path_technique\}/templates/ntp.conf_.
   - The second corresponds to the absolute path of the destination file. Fill in with the value _/etc/ntp.conf_.
 
@@ -101,7 +101,7 @@ Now, we have to find and add the generic methods which correspond to the actions
   - This method only take one parameter, the name of the service we want to restart. So here, fill in the *service_name* field with the value _ntp_.
   - Also, we want to restart the service only if it has just been installed, so only if the result conditions defined following the execution of *Package install* method is *Repaired* (package_install_ntp_repaired). So here, fill in the *Other conditions* field in the Conditions panel with the value _package_install_ntp_repaired_.
 
-* Service ensure running (You can find it in the *Service category*)
+* Service enabled at boot (You can find it in the *Service category*)
   - This method only take one parameter, the name of the service we want to check. Again, here, fill in the *service_name* field with the value _ntp_.
 
 === Save and apply your technique
