@@ -53,6 +53,14 @@ We now have specified one characteristic of our user.
 Let's save this technique! (with the *Save* button). We now have a configuration policy
 we can apply yo our machines.
 
+== In Summary
+
+image::./technique_editor_steps.png["Informations", align="center"]
+image::./technique_editor_filter.png["Filter generic methods", align="center"]
+image::./technique_editor_add_generic_method.png["Add generic method", align="center"]
+image::./technique_editor_save.png["Add more and save", align="center"]
+image::./technique_editor_first_technique_created.png["Overview of techniques", align="center"]
+
 As you can see it is really simple to define the expected state for our machines
 through this editor.
 Later in this guide, we will get back to the technique editor to explore the rest
