@@ -1,0 +1,130 @@
+= Network Security
+
+Communication between servers and nodes uses two channels:
+
+* HTTPS from nodes to servers
+* Custom protocol wrapped in TLS on tcp/5309, from nodes to server to
+download policies and (optionally) from server to nodes to trigger runs.
+
+
+We recommend using a VPN for all communications between node and server
+if on a public network. If it's not the case, it's necessary to follow the following
+guide to improve security level.
+
+== Secure setup
+
+Rudder's standard behavior is that:
+
+* data is transmitted as TLS 1.2+
+* reports and inventories are signed and validated by the root server before being processed
+* new nodes need to be accepted, based on an inventory (containing the public key of the node that will
+have to sign all reports and future inventories)
+* policies distribution is authenticated based on the certificate accepted in the inventory
+
+By default, nodes will:
+
+* trust and store ("Trust on first use" policy) their policy server's key hash at first connection, and check it in next communications
+* send inventories and reports to their policy server using HTTPS but without checking the certificate
+
+The following steps allows configuring Rudder to enforce certificate validation and
+establishing trust with pre-shared information during agent provisioning.
+
+=== Setup root server
+
+To enforce secure communications with the nodes, follow these steps on the root server.
+
+==== Reporting
+
+Check that the reporting protocol is set to *HTTPS only*, as it enforces only accepting signed reports.
+
+==== Certificate
+
+Replace the default self-signed certificate by a valid one (i.e. recognized by the nodes) certificate in place in:
+
+* `/opt/rudder/etc/ssl/rudder.key`
+* `/opt/rudder/etc/ssl/rudder.crt`
+
+CAUTION: You need to make sure all nodes use a hostname that matches this certificate
+as their configured policy server.
+
+You can for example use Let's Encrypt to get free certificates if your server
+has an access to the Internet.
+
+In this case you should copy `fullchain.pem` into `rudder.crt` and `privkey.pem` into
+`rudder.key`, and automate this copy to allow automatic renewal.
+
+Then enable *Enforce validation of policy server certificate for inventory and reporting* in *Settings -> General -> Certificate validation*. This will make nodes require a valid certificate to send
+reports and inventories.
+
+Once enabled, all nodes will check the server's certificate before sending reports or inventories (after the first successful policy update). Next step will do the same
+for the first agent run, with initial policies.
+
+==== Initial policies
+
+To enforce certificate verification from agent install (and not only after first generation and policy update), we need to modify initial policies served by the root server.
+
+CAUTION: Currently initial policies are not configurable, so this change needs to be done after each upgrade.
+
+On the root server, in `/var/rudder/cfengine-community/masterfiles/promises.cf`:
+
+----
+
+      "rudder_verify_certs"    expression => strcmp("", "true");
+
+# should be replaced by
+      "rudder_verify_certs"    expression => "true";
+
+----
+
+and in `/var/rudder/cfengine-community/masterfiles/rudder.json`:
+
+----
+
+# add
+  "RUDDER_VERIFY_CERTIFICATES":"true",
+
+----
+
+After these changes all new nodes will validate certificates from first run.
+
+=== Provisioning an agent with pre-established trust
+
+This section expects that the server-side setup has been done. At allows going a bit further by providing a hash of the server key at installation
+to validate the server identity from the first connection, and avoid trusting the
+first host it connects to.
+
+It requires providing local changes to the agent as part of the provisioning process.
+
+Compute root hash key with:
+
+----
+
+cf-key -p /var/rudder/cfengine-community/ppkeys/localhost.pub
+
+----
+
+Copy `/var/rudder/cfengine-community/ppkeys/localhost.pub` from the root server on each provisioned node to `/var/rudder/cfengine-community/ppkeys/root-${HASH}.pub`
+
+So that it looks like:
+
+----
+
+# cat /var/rudder/cfengine-community/ppkeys/root-MD5\=1ec2213e08921bd3444861f7b4a60919.pub
+-----BEGIN RSA PUBLIC KEY-----
+MIICCgKCAgEA78g1gmG98Sh4hso8mYGagj98M+SZU7mklbC5Ylv90mecsLD9QlcZ
+j64z5uABclz5lErdbtVu7ix4Tk5PyrTW0vbh40tqa48oifPl4iA7hQUmYpnnO8Sp
+h/HCcHGsiLrW5PytDN2JcOaRZz03cOaoze29KkQgjav+DNZdzqV79aVnujaRqTPY
+G6B3pInhVeKgiuJkXQEiql4f4GdBHZTkEDz2ammjqu507NL8iPkJs1mE8N0Q0CtC
+mgXNqzS6bIzTLMgBU1MK77NLsPs2GsNo9x6V/CuutmUHwlccdf1NVyhO9EpzxY1C
+TFzojgPT62pKR5Ehgl9bHyVGF1RY0kxwKfXJqyVZg87z7jh3YjyzG4RWsihNyiRe
+HUuKK+rpMj+QwRbbt/97siDxHb6OShKDEWJoR8aj//vY03c79zXtZtoAcpPDp5Et
+jNUEYqnVZabEuryaUsAOD0Dyx3twWEm1DW+4PJYUYDlNtcuD8X3kvyOnjBy9AbbR
+irG1iZFVLzyNaX/0ijdY94+iw2c1Ga4HQp6MAdkKiaJlN7pkRksd4778dZRimYiu
+dD42Nb36YQca50d0sHKalWFTBaT+ksRSrFZVs1Wb8yE9KkJf4bYLRYLhIdYTra22
+C9o5xHCOTDecATXMg0gGQHbjm0x0a1nt+X1gyyjNfHLX13n5as9JXf0CAwEAAQ==
+-----END RSA PUBLIC KEY-----
+
+----
+
+Now you can set your policy server with `rudder agent policy-server mypolicyserver`
+and the agent will only accept the connection if it matches the provided key hash.
