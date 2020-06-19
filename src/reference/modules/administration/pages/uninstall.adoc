@@ -1,0 +1,125 @@
+[[uninstall]]
+= Uninstall
+
+This chapter explains how to uninstall Rudder. 
+
+[CAUTION]
+====
+
+Of course, uninstalling `rudder-agent` means that the related server won't be configured anymore by Rudder even if the node is still registered in Rudder server.
+
+====
+
+== Uninstall Rudder agent on node
+
+=== Uninstall `rudder-agent` package
+
+Uninstalling Rudder agent on node is done through OS package manager. Usually, these command need `root` rights. Commands are presented below for each supported OS family.
+
+Once `rudder-package` is uninstalled, you should check that:
+
+- `rudder` related services are correctly stopped. Check with the `ps aux | grep rudder` command that none are still running or kill them. 
+- xref:reference:usage:advanced_node_management.adoc#_static_files[`rudder` static and generated files] were correctly deleted (especially for cron and init services)
+
+For the second point, you can ensure that everything is deleted by removing these two directories:
+
+----
+
+rm -rf /opt/rudder
+rm -rf /var/rudder
+
+----
+
+You may want to also delete `rudder-agent` logs:
+
+----
+
+rm -rf /var/log/rudder
+
+----
+
+
+==== Uninstall command by OS familly
+
+On CentOS or RedHat (all supported versions):
+
+----
+
+yum remove rudder-agent
+
+----
+
+On Debian or Ubuntu (all supported versions):
+
+
+----
+
+apt remove rudder-agent
+
+----
+
+
+On SLES (all supported versions):
+
+----
+
+zypper remove rudder-agent
+
+----
+
+On AIX (all supported version):
+
+----
+
+rpm -e rudder-agent
+
+----
+
+[CAUTION]
+====
+
+On AIX, you will need to edit main crontab to remove `rudder` related commands by hand:
+
+- edit `/var/spool/cron/crontabs/root`
+- remove line(s) about `rudder`. There should be only one, looking like:
+
+----
+
+0,5,10,15,20,25,30,35,40,45,50,55 * * * * /opt/rudder/bin/rudder agent check -q >> /var/log/rudder/agent-check/check.log 2>&1
+
+----
+
+====
+
+
+
+=== Backup files
+
+Uninstalling `rudder-agent` package will let backup files of node identifying files (`UUID`, node keys, etc) which allows to reinstall package and have Rudder server still know that it's the same node than the one previously registered. 
+
+If you want to definitely uninstall that node, you need to delete these backup files 
+
+----
+
+rm -rf /var/backups/rudder
+
+----
+
+[CAUTION]
+====
+
+This action is definitive and once done, you will need to reinstall and re-accept node as a new node in Rudder system.
+
+====
+
+
+=== Removing node in server
+
+Even if `rudder-agent` package is uninstalled from a node, the corresponding node is still active in Rudder system: policy are still generated for it, etc. Of course, the node won't send compliance reports anymore and so it will appear as a non answering node. 
+
+To delete a node from Rudder, you need to go to the node details page and click on the `Delete` button. 
+
+
+== Uninstalling Rudder server
+
+You should never uninstall a rudder server. Prefer a solution where the underlying virtual machine is stopped. With that solution, you won't loose important information regarding configuration of your systems that could be needed later on.

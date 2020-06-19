@@ -49,6 +49,22 @@ Then we can see the name, the description, the Bundle name, the version and the 
 
 NOTE: The description field of a technique supports markdown format and will be displayed in xref:reference:usage:configuration_management.adoc#_directives[directives] which are using it.
 
+You can add xref:reference:usage:variables.adoc#_technique[parameters] to a technique to make it reusable. Go to *Parameters* and add a name and a description.
+
+image::technique_editor/technique-editor-parameters.png[]
+
+You can now use it in generic method instead of static value.
+
+image::technique_editor/technique-parameters-ntp.png[]
+
+You can also add resources to a technique. Go to *Resources* and *Manage resources*.
+
+image::technique_editor/technique-resources.png[]
+image::technique_editor/technique-upload-resource.png[]
+image::technique_editor/technique-uploaded-file.png[]
+image::technique_editor/technique-resource-added.png[]
+
+
 - A column listing Generic methods / displaying generic method details
 
 To the right of the interface is the list of Generic methods available for Technique configuration.
@@ -105,6 +121,10 @@ Now, we have to find and add the generic methods which correspond to the actions
 
 * Service enabled at boot (You can find it in the *Service category*)
   - This method only take one parameter, the name of the service we want to check. Again, here, fill in the *service_name* field with the value _ntp_.
+
+You can also use parameters et resources to replace "File content" method by "File from local source with check" :
+
+image::technique_editor/technique-resource-usage.png[]
 
 === Save and apply your technique
 
