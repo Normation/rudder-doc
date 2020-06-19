@@ -5,7 +5,7 @@ To do so, got to the directives page (*Configuration management -> Directives*)
 and find our new technique (for example by using the filter with "Website"),
 and create a directive.
 
-We will configure the site using the node property we defined in xref:get-started:node-management:data.adoc#file_from_template_mustache[the node management section].
+We will configure the site using the node property we defined in xref:node-management:data.adoc#_classify_nodes_using_node_properties[the node management section].
 
 The syntax to use to access them is `${node.properties[property_name]}`.
 Here we have hierarchical JSON, so we access a sub-key with `${node.properties[property_name][sub_key]}`.
