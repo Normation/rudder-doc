@@ -47,7 +47,7 @@ image::technique_editor/3-ntp-configuration.png[]
 
 Then we can see the name, the description, the Bundle name, the version and the Generic methods list of the current Technique. Only the name and the description are editable, the Bundle name and the version are automatically defined during the Technique creation.
 
-NOTE: The description field of a technique support markdown format and will be displayed in xref:reference:usage:configuration_management.adoc#_directives[Directives] who are using it.
+NOTE: The description field of a technique supports markdown format and will be displayed in xref:reference:usage:configuration_management.adoc#_directives[directives] which are using it.
 
 - A column listing Generic methods / displaying generic method details
 
