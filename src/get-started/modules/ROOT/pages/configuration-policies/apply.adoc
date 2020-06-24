@@ -19,7 +19,7 @@ vagrant ssh server
 sudo -i # to get a root access
 ----
 
-We will use the `rudder` command that gives access to all Rudder actions.
+We will use the `rudder` command that gives access to all xref:reference:reference:man.adoc[Rudder actions].
 
 But first, let's explain a bit how things work on the agent.
 We saw that the server generates an applicable configuration
@@ -64,4 +64,4 @@ image::./node-compliance.png["Node compliance", align="center"]
 We have now finished our first policy application, from definition, using a new technique
 or a built-in one, to the actual application on our Rudder server.
 
-We will now dig a bit deeper on what the policy mode (we modified) is, and how to use it.
+We will now dig a bit deeper on what the xref:reference:usage:configuration_management.adoc#_policy_mode_audit_enforce[policy mode] (we modified) is, and how to use it.

@@ -14,7 +14,7 @@ In this section you will:
 As you saw just before, we configured one of our directives in "Audit mode".
 You may have guessed, according to its name, what this means.
 
-Rudder has two available policy modes:
+Rudder has two available xref:reference:usage:configuration_management.adoc#_policy_mode_audit_enforce[policy modes]:
 
 * *Enforce*: it will modify the target system, if necessary, to achieve the expected state
 * *Audit*: it will only report about non-compliant components
