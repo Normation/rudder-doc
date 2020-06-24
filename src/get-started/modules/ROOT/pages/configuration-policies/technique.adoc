@@ -14,7 +14,8 @@ In this section you will:
 Here you will learn to define a configuration policy through Rudder's technique editor.
 A technique is a configuration policy template, that will need to be instantiated afterwards.
 
-Go to *Configuration policy -> Techniques*. A configuration policy in Rudder is called a technique.
+First, go to the xref:reference:usage:technique_editor.adoc#_techniques[Technique Editor] in *Configuration policy -> Techniques*. A configuration policy in Rudder is called a
+xref:reference:usage:configuration_management.adoc#_techniques[technique].
 
 You may have expected to start writing configuration code at this point. We won't!
 (though it is also perfectly possible, but not the purpose of this guide).
@@ -33,7 +34,7 @@ How does this interface work?
 * The center is the technique itself
 * The right part is the "methods" column (and a category list to navigate within methods)
 
-The methods will be the building blocks to our technique. You can think of them as small bricks
+The xref:reference:reference:generic_methods.adoc[methods] will be the building blocks to our technique. You can think of them as small bricks
 you will assemble into a technique. Let's start the configuration, click on the *User* category (in the lower right of the interface),
 and click on the *User present* method.
 It is now part of our technique's component list, with an orange warning asking for parameters. To provide them, click on the method instance in the technique.
@@ -44,7 +45,7 @@ image::./demo.png["demo user", align="center"]
 
 We have defined a first policy! Let's add a second method: click on *Add methods*
 in the lower left of the technique details, to display the list of available methods,
-and navigate to the *User* category. Let's add a user description, with the *User fullname* method:
+and navigate to the *User* category. Let's add a user description, with the xref:reference:reference:generic_methods.adoc#_user_fullname[User fullname method]:
 
 image::./fullname.png["demo user's fullname", align="center"]
 
@@ -63,5 +64,5 @@ image::./technique_editor_first_technique_created.png["Overview of techniques", 
 
 As you can see it is really simple to define the expected state for our machines
 through this editor.
-Later in this guide, we will get back to the technique editor to explore the rest
+Later in this guide, we will get back to the xref:reference:usage:technique_editor.adoc#_techniques[Technique Editor] to explore the rest
 of the features, but you already know enough to define a lot of configuration policies.
