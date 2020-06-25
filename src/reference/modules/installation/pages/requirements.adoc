@@ -11,23 +11,19 @@ Internet Explorer is not supported.
 
 The following network flows are used by Rudder for regular operations. Make sure your firewalls allow these connections.
 
-Please bear in mind that a central Rudder server, called root server, requires network flows from both the 'Root server' and 'Policy server' sections below.
-
-.Network Flows
-[cols="<.^,<.^,<.^,<.^", options="header"]
+[cols="<.^2,<.^2,<.^1,<.^3", options="header"]
 |=======================
-|To|From|Port|Usage
-|Root Server|User or API client| *tcp/443* (https) | Access Web interface/API
-.5+|Policy Server |Linux/AIX Node < 6.0|_udp/514 (optional)_ (or _tcp/514_) |Send reports
-|Linux/AIX Node >= 6.0 .2+| *tcp/443* (https/WebDAV) | Send reports
-.2+|Linux/AIX Node | Send inventories
-|  *tcp/5309*    |Fetch policies
-|Windows Node | *tcp/443* (https/WebDAV) | Send inventories and fetch policies
-|Linux/AIX Node | Policy Server | _tcp/5309 (optional)_ | Trigger remote agent run
+|From|To|Destination|Usage
+|User or API client|Root| *tcp/443* | Access Web interface/API
+|Node .2+|Relay/Root | *tcp/443* | Send reports and inventories, fetch files
+|Linux/AIX node  | *tcp/5309* |Fetch policies
+.2+|Relay .2+|Root | *tcp/443* | Send reports and inventories, fetch files
+| *tcp/5309* |Fetch policies
+|Relay/Root|Linux/AIX node | _tcp/5309_ .2+| *[optional]* Trigger remote agent run
+|Root|Relay|_tcp/443_
 |=======================
 
-Note: The policy server is the server configured to manage the node, and can be
-either a root server or a relay server.
+NOTE: If you still have pre-6.0 agents, or use the syslog-only report mode, you also need to have *udp/514* (or *tcp/514* depending on what you configured) open from nodes to relays or root, and from relays to root server.
 
 === Security
 
