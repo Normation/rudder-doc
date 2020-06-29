@@ -1,0 +1,91 @@
+= Using Rudder policy server as generic file server
+
+As all Rudder policy servers use an HTTP server, it is possible to use them as
+standard file servers, which can be useful for package repositories for example.
+
+Coupled with a directive to synchronize those files from the root server, it is an easy way to distribute files on a multi-site infrastructure.
+
+NOTE: It is generally not advised to install other services on Rudder servers, mainly
+for security reasons, but a simple file server can make sense on limited infrastructures
+(embedded, etc.)
+
+== Web server configuration
+
+We will start by configuring apache httpd to serve our files, for example from `/var/www`.
+
+Rudder deploys one virtual host, so you can use another one. It needs to have a specific
+`ServerName` to allow using the right configuration.
+
+Let's deploy a `00-file-mirror.conf` file in `/etc/httpd/conf.d/` on RHEL or CentOS
+or `/etc/apache2/sites-enabled/` on Debian, Ubuntu or SLES.
+
+----
+<VirtualHost *:80>
+  ServerName repo.relay.test
+  DocumentRoot /var/www/repos
+
+  # Logs
+  LogLevel warn
+  CustomLog /var/log/rudder/apache2/access-repo.log combined
+  ErrorLog /var/log/rudder/apache2/error-repo.log
+</VirtualHost>
+----
+
+And if you need HTTP add:
+
+----
+<VirtualHost *:443>
+  ServerName repo.relay.test
+  DocumentRoot /var/www/repos
+
+  # Logs
+  LogLevel warn
+  CustomLog /var/log/rudder/apache2/access-repo.log combined
+  ErrorLog /var/log/rudder/apache2/error-repo.log
+
+  SSLEngine on
+  # Update with the path to your certificates
+  SSLCertificateFile      /opt/rudder/etc/ssl/rudder.crt
+  SSLCertificateKeyFile   /opt/rudder/etc/ssl/rudder.key
+</VirtualHost>
+----
+
+Let's automate this with a Rudder technique:
+
+* `File content` with the above config (or any other file management method of you choice)
+* `Service reload` on `apache2` or `httpd` depending on the OS
+
+== File synchronization
+
+You first need to put your files in place in `/var/www/repos` on the root server.
+If you have relays you may want to distribute the same content everywhere.
+
+You can do it using Rudder too, with a `Command execution` that runs:
+
+----
+rsync --archive --checksum --compress --sparse --delete \
+      ${USER}@${server_info.policy_server}:/var/www/repos /var/www/repos
+----
+
+and apply it on you relays (`${server_info.policy_server}` will be automatically be replaced by your root server's IP or hostname).
+
+The most secure way to do it is to setup a specific user for this on your root server,
+and add ssh keys from your relays as `authorized_keys`. This can be done using
+the `SSH key distribution` technique for example.
+
+== Usage
+
+You can now use your Rudder server as source to download various files.
+
+If you use it for package repositories, you can use `${server_info.policy_server}`
+as server hostname in your repository configuration. This will be replaced by each node's policy server at execution, for example:
+
+----
+[Rudder]
+name=Rudder 6.1 Repository
+baseurl=https://${server_info.policy_server}/rpm/6.1/RHEL_8/
+gpgcheck=1
+gpgkey=https://${server_info.policy_server}/rpm/rudder_rpm_key.pub
+----
+
+for a yum Rudder repository synchronized directly in `/var/www/repos`.
