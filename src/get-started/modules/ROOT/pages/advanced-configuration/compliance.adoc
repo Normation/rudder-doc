@@ -2,8 +2,14 @@
 
 == Trigger agent run
 
-Now we have applied our directive, we can trigger its application by connecting to
-our node using ssh:
+Now we have applied our directive, we can trigger its application by using two approaches:
+
+* by using "Trigger Agent Run" straight from the webapp:
+
+image::trigger-agent-run.png[Trigger directive application by trigger an agent run]
+
+
+* by connecting to our node using ssh:
 
 ----
 vagrant ssh node
