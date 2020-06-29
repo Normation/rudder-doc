@@ -1,0 +1,42 @@
+= Share files from an external git repository
+
+It is a common use case to share files with your nodes from a git repository (containing configuration files,
+configuration data, etc.) hosted outside of the Rudder server (Github, Gitlab, etc.).
+
+Rudder allows using its file synchronization mechanism to copy any files,
+all we have to do is to setup the git synchronization.
+
+== Prepare the repository
+
+=== Initialize
+
+You need to clone the repository on your Rudder server in
+`/var/rudder/configuration-repository/shared-files`.
+
+----
+
+cd /var/rudder/configuration-repository/shared-files
+git clone git://my.git.server/conf_files.git
+
+----
+
+=== Update
+
+The simplest way to keep the repository up to date is to use a cron job:
+
+image::git-update.png[Cron task configuration for update]
+
+NOTE: You could also make this cron task capable of running the clone in case the folder is missing
+to allow automated installation.
+
+== Synchronize files
+
+You can now use the standard methods for file copy from Rudder server:
+
+* *Files download (Rudder server)* technique
+* *File from shared folder* method
+* *File from remote source* and *File from remote source recursion* methods
+
+You only need to use the path of you repository (`/var/rudder/configuration-repository/shared-files/conf_files/`) as source, something like:
+
+image::nginx.conf.png[Source file selection for copy]
