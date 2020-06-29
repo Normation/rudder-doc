@@ -1,4 +1,4 @@
-= Network Security
+= Network security
 
 Communication between servers and nodes uses two channels:
 
@@ -6,25 +6,72 @@ Communication between servers and nodes uses two channels:
 * Custom protocol wrapped in TLS on tcp/5309, from nodes to server to
 download policies and (optionally) from server to nodes to trigger runs.
 
+Both enforce using TLS 1.2+.
 
 We recommend using a VPN for all communications between node and server
 if on a public network. If it's not the case, it's necessary to follow the following
 guide to improve security level.
 
+== Authentication mechanisms
+
+=== Credentials
+
+On all agents and relays, and servers:
+
+* `/var/rudder/cfengine-community/ppkeys/localhost.priv`, the node's private key, that allows the node to download its policies.
+* `/var/rudder/cfengine-community/ppkeys/localhost.pub`, the node's public key
+* `/opt/rudder/etc/agent.cert`, the node's certificate. It is embedded in inventories and signs inventories and compliance reports.
+
+Only on servers and relays:
+
+* `/opt/rudder/etc/rudder.key`, the HTTP server's private key
+* `/opt/rudder/etc/rudder.crt`, the HTTP server's certificate chain. It is generated as a self-signed certificate at server installation. See procedure below to replace it by a valid one.
+
+=== Policy update and remote run (tcp/443)
+
+This protocol is used for:
+
+* Policy download on Linux and AIX nodes
+* Remote run from policy servers to nodes
+
+It uses the key pairs in `/var/rudder/cfengine-community/ppkeys/` to authenticate the node and server during
+communication.
+
+==== Server authentication
+
+The server is trusted by the node at first connection ("Trust On First Use") by default, but you can provide a public
+key to pre-establish trust (see guide below).
+
+==== Agent authentication
+
+The first inventory sent by the node contains it's public key (apart of its certificates). Once accepted,
+it's policies are only available to a node having the matching private key.
+
+=== HTTPS
+
+HTTPS is used for:
+
+* Sending inventories and reports from nodes to policy servers
+* Remote-run trigger between root server and relays
+* File sharing between nodes and policy server
+* Policies and shared-files downloads on Windows nodes
+
+==== Server authentication
+
+Our HTTPS setup uses standard certificates, that are self-signed by default, and nodes
+do not verify their policy server's certificate when sending an inventory or a report.
+
+Follow the guide below to replace them by valid certificates and enable certificate validation.
+
+==== Agent authentication
+
+Inventories and reports are sent without client authentication at HTTP level, but they are signed the node's certificate,
+and checked on central server before being processed.
+
+For Windows policy and file download, HTTPS client authentication is done using the `agent.cert` node's certificate
+for allow allow access to the node with the matching private key.
+
 == Secure setup
-
-Rudder's standard behavior is that:
-
-* data is transmitted as TLS 1.2+
-* reports and inventories are signed and validated by the root server before being processed
-* new nodes need to be accepted, based on an inventory (containing the public key of the node that will
-have to sign all reports and future inventories)
-* policies distribution is authenticated based on the certificate accepted in the inventory
-
-By default, nodes will:
-
-* trust and store ("Trust on first use" policy) their policy server's key hash at first connection, and check it in next communications
-* send inventories and reports to their policy server using HTTPS but without checking the certificate
 
 The following steps allows configuring Rudder to enforce certificate validation and
 establishing trust with pre-shared information during agent provisioning.
