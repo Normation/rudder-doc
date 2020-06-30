@@ -301,3 +301,28 @@ include::{partialsdir}/glossary/sql-server.adoc[]
 systemctl restart postgresql
 
 ----
+
+== Communication resilience in case of network or Rudder server outage
+
+=== Between nodes and their policy server
+
+When connections between a policy server and its managed nodes breaks:
+
+* All current policies continue to be applied by the nodes at defined execution interval
+* Agent continues to generate local logs
+
+=== Between root and relay
+
+When connections between a root server and a relay breaks:
+
+* All current policies continue to be served by the relays
+* File sharing between nodes under the relay stays possible
+
+It is however not possible to:
+
+* Accept a new node
+* Continue to process inventories and reports
+
+NOTE: Processing old inventories and reports is supported on relay side
+and will be supported by the root server in a future version, which will allow proper
+data back-filling after network or server outage.
