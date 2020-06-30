@@ -19,7 +19,7 @@ available freely for these platforms:
 
 | Debian | 8, 9 and 10 | 32bit, 64bit
 .2+| Ubuntu | 14.04 and 16.04 LTS | 32bit, 64bit
-| 18.04 LTS | 64bit
+| 18.04 LTS and 20.04 LTS | 64bit
 .2+| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 6 | 32bit, 64bit
 | 7 and 8 | 64bit
 | SUSE Linux Enterprise Server (SLES) | 12 and 15 | 64bit
@@ -40,7 +40,7 @@ available for these platforms as part of the https://www.rudder.io/en/pricing/su
 | 8 | 32bit, 64bit, armhf (Raspbian)
 | 9 | 32bit, 64bit, arm64, armhf (Raspbian)
 .2+| Ubuntu | 10.04 to 16.04 LTS | 32bit, 64bit
-| 18.04 LTS | 64bit
+| 18.04 and 20.04 LTS | 64bit
 | Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 3, 5 to 7 | 32bit, 64bit
 .2+| SUSE Linux Enterprise Server (SLES) | 10SP3 and 11 | 32bit, 64bit
 | 12 and 15 | 64bit
@@ -74,7 +74,7 @@ The following operating systems are supported as a root or relay server:
 | OS | Version | Architecture
 
 | Debian | 9 and 10 | 64bit
-| Ubuntu | 16.04 and 18.04 LTS | 64bit
+| Ubuntu | 18.04 and 20.04 LTS | 64bit
 | Red Hat Enterprise Linux (RHEL) / CentOS | 7 and 8 | 64bit
 | SUSE Linux Enterprise Server (SLES) | 12 and 15 | 64bit
 
