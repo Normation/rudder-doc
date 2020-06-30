@@ -18,13 +18,13 @@ guide to improve security level.
 
 On all agents and relays, and servers:
 
-* `/var/rudder/cfengine-community/ppkeys/localhost.priv`, the node's private key, that allows the node to download its policies.
+* `/var/rudder/cfengine-community/ppkeys/localhost.priv`, the node's private key, that allows the node to download its policies. It is a 4096-bit RSA key.
 * `/var/rudder/cfengine-community/ppkeys/localhost.pub`, the node's public key
 * `/opt/rudder/etc/agent.cert`, the node's certificate. It is embedded in inventories and signs inventories and compliance reports.
 
 Only on servers and relays:
 
-* `/opt/rudder/etc/rudder.key`, the HTTP server's private key
+* `/opt/rudder/etc/rudder.key`, the HTTP server's private key. It is a 2048-bit RSA key by default.
 * `/opt/rudder/etc/rudder.crt`, the HTTP server's certificate chain. It is generated as a self-signed certificate at server installation. See procedure below to replace it by a valid one.
 
 === Policy update and remote run (tcp/443)

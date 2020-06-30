@@ -1,5 +1,23 @@
 = Server administration
 
+== Configuration repository
+
+The configuration defined on the server is stored in a local git repository, in `/var/rudder/configuration-repository`.
+
+This repository contains the history of the configuration, and in some cases may also manage
+the shared files in `/var/rudder/configuration-repository/shared-files`.
+
+NOTE: The files in this repository (outside of shared-files) should generally not be edited outside of Rudder
+as they contains generated IDs and there is a risk of corrupting the configuration
+data.
+
+You can synchronize this repository, for example if you want to synchronize
+configurations between a test and a prod environment.
+It allows having exactly the same configuration (group definition,
+techniques, directives, rules) with a different set of nodes.
+
+In this case synchronized servers need to have exactly the same Rudder version.
+
 [[reporting_protocol, Reporting]]
 == Reporting protocol
 
