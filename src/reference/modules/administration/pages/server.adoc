@@ -324,14 +324,14 @@ systemctl restart postgresql
 
 === Between nodes and their policy server
 
-When connections between a policy server and its managed nodes breaks:
+When the connection between a policy server and one of its managed nodes breaks:
 
 * All current policies continue to be applied by the nodes at defined execution interval
 * Agent continues to generate local logs
 
 === Between root and relay
 
-When connections between a root server and a relay breaks:
+When the connection between the root server and a relay breaks:
 
 * All current policies continue to be served by the relays
 * File sharing between nodes under the relay stays possible

@@ -942,7 +942,7 @@ Iteration are used to apply some configuration logic to a list of elements witho
 
 You build an iterator either from a `JSON` variable or a file. You never explicitly iterate over it, you just reference the fields of the iterated item in following generic methods. 
 
-::imagevariable-iterator-example.png[Example of iterating on a list of package and use corresponding variable in another generic method to install them]
+image::variable-iterator-example.png[Example of iterating on a list of package and use corresponding variable in another generic method to install them]
 
 === File content: templates and edition
 
