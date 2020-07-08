@@ -61,7 +61,7 @@ You should be careful about not deleting these files too often. That cache is he
 
 For that, we will use `Command execution` method, again with a meaningful report component name: 
 
-immage::update-agent-rm-cache-definition.png[Delete cache]
+image::update-agent-rm-cache-definition.png[Delete cache]
 
 
 And to execute that command only when necessary, we will use the `repair` result condition from the first configured method as a conditions for this one:
@@ -75,6 +75,14 @@ image::update-agent-rm-cache-condition.png[Condition on delete cache]
 Finally, we will check that last `rudder-agent` package is installed, and generic method `package present` does just that:
 
 image::update-agent-package-present.png[Ensure `rudder-agent` package is installed in last version]
+
+[NOTE]
+====
+On Debian-like system, you will need to use `Package state with options` generic method to take care of the case where `rudder-agent` dependencies change and new ones are added. This is because by default, `apt` will not update a package if new dependencies are added without option `--with-new-pkgs`
+====
+
+image::update-agent-debian-update-with-params.png[Ensure `rudder-agent` can be updated on Debian-like system with new dependencies]
+
 
 == Create a directive and rule
 
