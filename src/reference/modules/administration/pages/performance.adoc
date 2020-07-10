@@ -7,13 +7,15 @@ can be tuned to your needs.
 [[_reports_retention]]
 == Reports retention
 
-To lower Rudder server's disk usage, you can configure the retention duration
-for node's execution reports in
+To lower disk usage on Rudder Server, you can lower the retention duration
+for execution reports in
 `/opt/rudder/etc/rudder-web.properties` file with the options:
 
-* `rudder.batch.reportscleaner.archive.TTL=3`
-* `rudder.batch.reportscleaner.delete.TTL=7`
-* `rudder.batch.reportscleaner.compliancelevels.delete.TTL=10`
+* `rudder.batch.reportscleaner.archive.TTL=0`
+* `rudder.batch.reportscleaner.delete.TTL=3`
+* `rudder.batch.reportscleaner.compliancelevels.delete.TTL=0`
+
+To disable compliance storing, and lower the number of reports in database.
 
 == Apache web server
 
