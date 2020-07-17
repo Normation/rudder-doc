@@ -41,7 +41,7 @@ You can also check for the state of all plugins:
 
 ----
 
-rudder package list
+rudder package list --all
 
 ----
 
