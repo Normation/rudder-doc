@@ -27,7 +27,7 @@ rudder package plugin enable-all
 
 ----
 
-Without a subscription, proceed as you usually do get the last plugin package, 
+Without a subscription, proceed as you usually do get the latest plugin package, 
 and install it from file:
 
 ----
