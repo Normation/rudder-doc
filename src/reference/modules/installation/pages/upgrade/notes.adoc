@@ -9,6 +9,52 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 
 ====
 
+== Plugins disabled during upgrade
+
+Each time Rudder is upgraded, plugins are disabled. You need to enable them 
+back after upgrade.
+
+For that, start by checking if update are available for you new version (it will
+be mandatory for a minor or major version upgrade) and enable them back.
+
+If you have a subscription, it can done directly with the following commands:
+
+----
+
+rudder package update
+rudder package upgrade-all
+rudder package plugin enable-all
+
+----
+
+Without a subscription, proceed as you usually do get the latest plugin package, 
+and install it from file:
+
+----
+
+rudder package install-file /path/to/plugin.rpkg
+
+----
+
+
+You can also check for the state of all plugins:
+
+----
+
+rudder package list --all
+
+----
+
+And enable only a chosen one, for example for scale-out relay plugin:
+
+----
+
+rudder package enable rudder-plugin-scale-out-relay
+
+----
+
+More information about `rudder package` command is available with `rudder package --help`.
+
 == Upgrade from Rudder 6.0
 
 include::{partialsdir}/bcrypt.adoc[]
