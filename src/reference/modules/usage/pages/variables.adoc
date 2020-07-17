@@ -282,6 +282,12 @@ Two main cases:
 
 ===== Inventory variables
 
+Inventory variables are variable whose values are coming from node inventories. They only encompass a subset of generic inventory data defined below.
+
+NOTE: If you want to use an `inventory variable` that you gathered through a 
+xref:usage:advanced_node_management.adoc#extend-nodes-inventory[node inventory hook], you need to use `${node.properties[hook_first_level_key]}` syntax.
+You can also check in node `properties` tab for the name of the properties you are looking for.
+
 NOTE: These variables have been introduced in Rudder 5.0.13, if you are using a previous version of Rudder, please use *system variables*, described in next section
 
 [WARNING]
