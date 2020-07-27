@@ -3,8 +3,8 @@
 
 == Browser support for UI
 
-Rudder can be used with recent version (less than 2 years old) of Firefox, Chrome (and derivatives), and Edge. 
-Internet Explorer is not supported. 
+Rudder can be used with recent version (less than 2 years old) of Firefox, Chrome (and derivatives), and Edge.
+Internet Explorer is not supported.
 
 [[configure-the-network]]
 == Network flows - Firewall configuration
@@ -15,8 +15,9 @@ The following network flows are used by Rudder for regular operations. Make sure
 |=======================
 |From|To|Destination|Usage
 |User or API client|Root| *tcp/443* | Access Web interface/API
-|Node .2+|Relay/Root | *tcp/443* | Send reports and inventories, fetch files
+|Node .3+|Relay/Root | *tcp/443* | Send reports and inventories, fetch files
 |Linux/AIX node  | *tcp/5309* |Fetch policies
+|Windows node  | *tcp/443* |Fetch policies
 .2+|Relay .2+|Root | *tcp/443* | Send reports and inventories, fetch files
 | *tcp/5309* |Fetch policies
 |Relay/Root|Linux/AIX node | _tcp/5309_ .2+| *[optional]* Trigger remote agent run
