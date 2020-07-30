@@ -1,0 +1,180 @@
+
+= Using group properties for hierarchical variable and manage overriding conflict
+
+== Introduction
+
+This article explains what are the best practices in groups management and group properties definition to keep you Rudder installation easy to manage and let your coworkers easily understand where properties are defined, and how to change them. 
+
+The goal of that article is to define some configuration data with default values and to refine these values based on features of that node. In Rudder, we use groups to materialize set of nodes which share some characteristics, and so we will implement value refinement (and so hierarchical variables with overriding) thanks to
+groups and node properties. 
+
+Thus, this article will show: 
+
+- how to define groups and organize them in categories, 
+- how to define sub-groups of existing groups, 
+- how to define default properties with global parameters, 
+- how to define group properties and make them override global parameters,
+- how Rudder guards you from defining ambiguous overrides,
+- and finally how to resolve such ambiguities. 
+
+At the end of that article, you will have defined that whole use case: 
+
+image::node-property-hierarchy.png[Hierarchical variables with overriding]
+
+== Prerequisites
+
+== Theoretical aspects
+You can learn more about what is the goal of hierarchical variables as configuration data in IT automation and how we safely implemented them in Rudder, you can read https://www.rudder.io/blog/[that blog article] 
+
+=== Rudder installation
+
+For that example, you will need a Rudder server and a couple of nodes with clear
+segregating aspects, like: different OS, presence of a node property with 
+different value, etc so that it's easy to make groups. 
+
+== Groups and sub-groups
+
+In Rudder, node groups are "first citizen" configuration objects. Of course, they can be target of configuration policies, but they also allows to materialize the reality of your IT infrastructure and its properties. 
+It's ok to have dozens of them, as long as they are organized in a manageable way. 
+
+=== Nodes
+
+So, we have a few nodes: some Debian like (Debian 9 and 10, Ubuntu), some CentOS 7.  
+
+image::hierarchical-variables-all-nodes.png[Our nodes]
+
+
+Moreover, the Debian 10 and one CentOS are located in a datacenter named "DC1", and so we materialize that with a node property "datacenter=DC1". In real life, that property would be likely set automatically from a CMDB property thanks to the `datasources` plugin, or with an xref:usage/advanced_node_management.adoc#_creating_a_node_inventory_hook[Rudder actions][inventory hook].  
+
+image::hierarchical-variables-dc1-node-property.png[Nodes in DC1 have a property to know it]
+
+=== Groups and categories
+
+As a rule of thumb, if you say things like "the servers in that place", or "all the XXX servers", or even "servers from that client/with that property", then each of these things should be materialized by a group. 
+
+[INFO]
+====
+➤ If you talk about it, you will want to do and observe things on it. Make a group!
+====
+
+It is a best practice to define categories to contain groups that are defined with the same kind of criteria. Most of the time, finding these categories is a no-brainer: 
+
+- you will almost alway have a "By OS" category, with more or less subcategories based on the heterogeneity of your IT infrastructure. For example, perhaps it's important to split apart "old" OS and new ones. In our case, we will just make a sub-category for each Linux distribution; 
+- in our case, we have nodes in different datacenters. So it's a reality of our IT infrastructure, and we want to materialize it;
+- other common examples of categories like "environment" (for dev, production, etc), or "by customer".
+
+For each category, go to `Groups` menu and click on `Create` button. Then choose to create a `Category`, fill name and description:
+
+image::hierarchical-variables-new-category.png[Create a category for groups based on datacenter]
+
+Repeat for each category you want to create. For our example, we only need "By OS" and "By Datacenter", but we did some more for illustration:
+
+image::hierarchical-variables-all-categories.png[All our categories]
+
+
+=== Group based on node property
+
+So now, let's create a group for nodes in "DC1". Click on the same green `Create` button than previously used to create a category, but choose `Group`. Named it `DC1`, choose "Dynamic" so that new nodes will be automatically added to it when necessary, and click `Create`:
+
+image::hierarchical-variables-new-group-dc1.png[Create a group for nodes in DC1]
+
+Then, choose a `Node property` criterion and set it to `datacenter=DC1`. When you click `Search`, you see the two nodes with the corresponding property, and you can now save that group:
+
+image::hierarchical-variables-new-group-dc1-criteria.png[Group based on a node property value]
+
+=== OS group and sub-groups
+
+Now, we are going to create a group for "Debian like" nodes, i.e. nodes whose OS is Debian or Ubuntu. Create a new group as previously, but base search criteria on OS name: 
+
+image::hierarchical-variables-new-group-debian-criteria.png[Debian-like group]
+
+Next, we want to define a sub-group of `Debian like` that contains only `Debian 10` nodes. We could create it from scratch with search criteria on OS and Version, but to let Rudder knows that there is a sub-group relationship with `Debian like`, you need to use the `Group` criteria:
+
+image::hierarchical-variables-new-group-debian10-criteria.png[Debian 10 is a sub-group of Debian like]
+
+[INFO]
+====
+In Rudder, sub-group relationship is defined with a group criteria of type `Groups`
+when used with the `AND` operand. 
+====
+
+== Properties 
+
+=== Default property values
+
+In Rudder, `Global Parameter` allows to define properties and values that will be inherited on all nodes. For example, Rudder comes with a `rudder_file_edit_header` that is used on files managed by Rudder:
+
+image::hierarchical-variables-global-param-definition.png[A global parameter]
+
+If you go to a node, in its property tab, you will see it defined with the tag `inherited`. On mouseover, you can see where that property was defined:
+
+image::hierarchical-variables-global-param-inherited.png[Inherited global parameter]
+
+=== Group property
+
+You can also define properties at a group level. For example, if you want to define `dns` property for your `Debian like`, go to the `Properties` tab of the corresponding group:
+
+image::hierarchical-variables-prop-dns-debian.png[A property defined on group]
+
+You can also define `JSON` properties. Let's do it for a `pkg-config` on group `Debian like` too, with that value:
+
+[source,json]
+----
+{
+  "path": "/debian",
+  "pkg" : "deb"
+}
+----
+
+image::hierarchical-variables-prop-pkg-config-debian.png[A JSON property defined on group]
+
+Again, these properties are inherited on nodes - but of course, only for nodes of the corresponding group:
+
+image::hierarchical-variables-prop-pkg-config-inherited.png[Inherited property from a group]
+
+=== Value refinement with group properties and overriding
+
+Properties can be overridden, which allows for specialization. For that, redefine a property with the same name in a more precise set: a property defined as a global parameter can be overridden in any groups or directly on the node; and a property defined in a group can be overridden in a sub-group or on a node from the group. 
+
+So let's redefine the `path` part of `pkg-config` in `Debian 10` group:
+
+[source,json]
+----
+{"path":"/debian10"}
+----
+
+After adding it, the property tag switches from `inherited` to `overridden`, and if you look for the details, you will see the full inheritance path:
+
+image::hierarchical-variables-prop-pkg-config-overridden.png[Override property for Debian 10 group]
+
+
+And of course, on Debian 10 nodes - and only on these, you get the overridden value:
+
+image::hierarchical-variables-prop-pkg-config-overridden-node.png[Overridden property for Debian 10 nodes]
+
+
+=== Overriding conflict and conflict resolution
+
+Everything is nice, but what happens if two groups, not in a sub-group relationship, define the same property? Does a node in both group get one at random?
+
+Of course not! Rudder forbids it. Let's see it by defining a `dns` property on a our `DC1` group, with a *different* value than previously (if it's the same value, there's no conflict):
+
+In `DC1` group, define `dns` with value `9.9.9.9`, and see Rudder policy generation status switch to `failure`. If you look at its error details, you will see that Rudder found a property definition conflict:
+
+image::hierarchical-variables-overriding-conflict.png[Overriding conflict leads to policy generation failure]
+
+And it's a good thing to have that failure. Rudder doesn't have any clue about what should be the correct value to use. And actually, that decision is a pure business one: only you can know if the correct value will come from `Debian like` or from `DC1`.
+
+So let's say `dns` depends on server physical location, and so we want to use `DC1` value. To let Rudder know about that choice, we just need to define a group, sub-group of both `Debian like` and `DC1`. The order of criteria will tell Rudder what is the most winning group: the last one wins.
+
+So let's define a `property prioritization` category and a `DC1 > Debian like` group. As soon as the group is saved, policy generation switches back to "green":
+
+image::hierarchical-variables-overriding-conflict-resolution.png[Conflict resolution]
+
+Notice that we didn't have to define such override for each sub-group of debian like, even if they redefine `dns`. For illustration, I added `dns:1.1.0.0` to `Debian 10` group property, and on the corresponding node, you get what is expected:
+
+image::hierarchical-variables-overriding-conflict-resolution.png::[Property on node after conflict resolution]
+
+You can learn more about what allows to do so in the article linked in <<theoretical aspects, _theoretical_aspects>> paragraph. 
+
+With that last bit, we implemented all of the schema from introduction. Good job!
