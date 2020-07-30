@@ -1,0 +1,76 @@
+= Reboot after provisioning is done
+
+This page will show you an example of how to run a post-provisioning reboot with Rudder.
+It can be useful for example if your initial configuration applied by Rudder contains
+items that require a reboot to be applied (like firmware installation or upgrade).
+
+You can use a similar technique to reboot nodes later in their life cycle too.
+
+== Detect nodes that need a reboot
+
+We need a mechanism to decide when the provisioning is over and we want to reboot the node.
+
+In order to do so, we can rely on the node's state. First configure you default state to `initializing`
+in *Settings -> General*:
+
+image::initializing.png[Use initalizing state for new nodes]
+
+We will use this state to tag the nodes that are currently in provisioning state.
+Once provisioning is over, we'll switch the node to the `enabled` state.
+
+We now need to choose a criterion to detect the end of the initial configuration. A simple one is to
+consider reaching 100% compliance as marking the end of the provisioning.
+
+To switch the state automatically in this case, you can run this script on your root server (for
+example every minute, as a cron job):
+
+[source,bash]
+----
+#!/bin/sh
+
+set -e
+export PATH="/opt/rudder/bin/:${PATH}"
+
+token=$(cat /var/rudder/run/api-token)
+mkdir -p /var/log/rudder/jobs/
+
+initializing_nodes=$(curl --silent -k --header "X-API-Token: ${token}" 'https://127.0.0.1/rudder/api/latest/nodes?include=minimal&where=\[\{"objectType":"node","attribute":"state","comparator":"eq","value":"initializing"\}\]' | jq -r '.data.nodes[].id')
+
+for node in ${initializing_nodes}; do
+  compliance=$(curl --silent -k --header "X-API-Token: ${token}" "https://127.0.0.1/rudder/api/latest/compliance/nodes/${node}?level=0" | jq '.data.nodes[0].compliance')
+  if [ "${compliance}" = "100" ]; then
+    echo "$(date): ${node} has ${compliance}% compliance, switching to 'enabled' status" >> /var/log/rudder/jobs/provisioning.log
+    curl --silent -k --header "X-API-Token: ${token}" --request POST "https://127.0.0.1/rudder/api/latest/nodes/${node}?state=enabled" >/dev/null
+  else
+    echo "$(date): ${node} has ${compliance}% compliance, skipping for now" >> /var/log/rudder/jobs/provisioning.log
+  fi
+done
+----
+
+== Reboot the nodes
+
+We will create a dedicated technique, with a *Command execution once* method. This method executes a command and
+creates a flag to prevent it from running again.
+
+Make sure to specify the unique id parameter as it will be the name of the flag. If it changes, the command will
+be executed again.
+
+We use `reboot -r +1` to reboot the one after one minutes, which gives enough time to the agent to finish its run
+and send to reports to the server.
+
+image::reboot_once.png[Technique to reboot a machine once]
+
+We will need to apply this configuration to the enabled nodes, so let's create the group:
+
+image::enabled_group.png[Group of enabled machines]
+
+Then create a directive based on this technique, and link it to the *Enabled* group with a dedicated *Post-provisioning reboot* rule.
+
+Now when the script will change a node's status it will:
+
+* Enter the *Enabled nodes* group
+* Get the *Reboot once* directive
+* Download its policies, and set the reboot
+* Send a "repaired" log for the reboot component
+* Reboot
+* From now on, it will send a "compliant" report for the reboot, as it has been done

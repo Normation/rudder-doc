@@ -15,3 +15,4 @@
 * Configuration policy 
 ** xref:policies/using-secrets-in-configuration-policies.adoc[Use secrets in configuration policies]
 ** xref:policies/sync-git-repository.adoc[Synchronize files from external git repositories]
+** xref:policies/reboot-provisioning.adoc[Reboot after provisioning is done]
