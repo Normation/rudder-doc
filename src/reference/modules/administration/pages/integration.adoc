@@ -32,14 +32,16 @@ advantage of the groups defined for you policies.
 
 === Ansible
 
-There is an https://github.com/ansible/ansible/blob/devel/contrib/inventory/rudder.py[inventory plugin]
+There is an https://github.com/ansible-collections/community.general/blob/main/scripts/inventory/rudder.py[inventory plugin]
 for Ansible that makes possible to use Rudder inventory (including groups, nodes,
 group ids, node ids, and node properties) as inventory for Ansible, for example
 for orchestration tasks on your platform. An inventory in Ansible is the list of managed nodes,
 their groups and some pre-defined variables.
 
-You need to download the https://github.com/ansible/ansible/blob/devel/contrib/inventory/rudder.py[rudder.py]
-and https://github.com/ansible/ansible/blob/devel/contrib/inventory/rudder.ini[rudder.ini] files, then you have to
+NOTE: The Rudder inventory plugin is also part of the Community General Collection, installable with `ansible-galaxy collection install community.general`
+
+You need to download the https://github.com/ansible-collections/community.general/blob/main/scripts/inventory/rudder.py[rudder.py]
+and https://github.com/ansible-collections/community.general/blob/main/scripts/inventory/rudder.ini[rudder.ini] files, then you have to
 edit `rudder.ini` to fill (at least):
 
 * Your Rudder server URL
