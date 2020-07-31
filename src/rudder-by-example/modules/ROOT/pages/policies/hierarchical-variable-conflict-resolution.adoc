@@ -1,5 +1,5 @@
 
-= Using group properties for hierarchical variable and manage overriding conflict
+= Using group properties for hierarchical variables and manage overriding conflict
 
 == Introduction
 
@@ -19,7 +19,7 @@ Thus, this article will show:
 
 At the end of that article, you will have defined that whole use case: 
 
-image::node-property-hierarchy.png[Hierarchical variables with overriding]
+image::hierarchical-variables-node-properties-hierarchy.png[Hierarchical variables with overriding]
 
 == Prerequisites
 
@@ -173,8 +173,8 @@ image::hierarchical-variables-overriding-conflict-resolution.png[Conflict resolu
 
 Notice that we didn't have to define such override for each sub-group of debian like, even if they redefine `dns`. For illustration, I added `dns:1.1.0.0` to `Debian 10` group property, and on the corresponding node, you get what is expected:
 
-image::hierarchical-variables-overriding-conflict-resolution.png::[Property on node after conflict resolution]
+image::hierarchical-variables-overriding-conflict-resolution-node.png[Property on node after conflict resolution]
 
-You can learn more about what allows to do so in the article linked in <<theoretical aspects, _theoretical_aspects>> paragraph. 
+You can learn more about what allows to do so in the article linked in <<_theoretical_aspects, theoretical aspects>> paragraph. 
 
 With that last bit, we implemented all of the schema from introduction. Good job!
