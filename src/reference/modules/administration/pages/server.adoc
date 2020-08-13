@@ -344,3 +344,41 @@ It is however not possible to:
 NOTE: Processing old inventories and reports is supported on relay side
 and will be supported by the root server in a future version, which will allow proper
 data back-filling after network or server outage.
+
+== rudder-cf-serverd logging
+
+The log level of the policy server daemon is configurable.
+By default it logs all connections from nodes, to allow proper
+auditing of node connections, but you can disable these logs (or increase the log level).
+To only log errors:
+
+* On systemd systems
+                                                                            
+** Create a `/etc/systemd/system/rudder-cf-serverd.service.d/override.conf` file containing:
+
+----
+[Service]
+Environment=VERBOSITY_OPTION=
+----
+    
+** Run `systemctl daemon-reload` then `systemctl restart rudder-cf-serverd`
+
+* On systems using the init script
+
+** Edit the `/etc/default/rudder-agent` file:
+
+----
+# You need to uncomment and let empty
+CFENGINE_COMMUNITY_PARAMS_1=""                                                   
+----
+    
+** Restart the service with `service rudder-agent restart`
+
+Verbosity options can be:
+
+* empty for only errors
+* `--inform` for basic messages
+* `--verbose` for very detailed logs
+* `--debug` for unreasonnably detailed logs
+
+
