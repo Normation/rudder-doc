@@ -66,6 +66,21 @@ where systemd has been removed.
 [[server-supported-os, the list of supported Operating Systems for Root server]]
 === For Rudder root server or relay server
 
+[NOTE]
+
+.OS support policy
+
+====
+
+Out general policy for Rudder server is to support the two latest
+supported versions. It means:
+
+* Debian _stable_ and _oldstable_
+* The two latest Ubuntu LTS versions
+* The two latest major RHEL/CentOS and SLES versions
+
+====
+
 The following operating systems are supported as a root or relay server:
 
 [options="header"]

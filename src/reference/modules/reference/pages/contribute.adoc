@@ -1,0 +1,62 @@
+= Contribute
+
+== Licenses
+
+Rudder’s main components are available under the http://www.gnu.org/licenses/gpl-3.0.en.html[GNU General Public License 3.0], with a linking exception for modules including web software to allow plugins to use different licenses.
+
+Some libraries used by the web interface, written in Scala are published by the Rudder team under the http://www.apache.org/licenses/LICENSE-2.0[Apache Software License 2.0]. All other libraries required and bundled with the web interface are under http://www.apache.org/licenses/LICENSE-2.0[Apache Software License 2.0] or an equivalent license.
+
+Rudder’s documentation is under the http://creativecommons.org/licenses/by-sa/3.0/[Creative Commons Attribution-ShareAlike 3.0 (CC BY-SA 3.0)] license.
+
+We are currently progressively adding https://spdx.dev[SPDX] headers to our sources for easier license identification.
+
+== Bugs prioritization
+
+The bugs are prioritized using classification fields from the bug tracker. The most important are user visibility and severity. You can specify them when opening an issue, and the values will be re-evaluated when we classify new bugs (when happens every week).
+
+These fields allow us to:
+
+* Have an objective information (it shouldn't change based on someone’s mood)
+* Have a stable information (it shouldn't change for no good reason)
+* Have a better visibility on the priority we give to issues
+
+=== User visibility
+
+Which use case is impacted by the issue:
+
+* *First impression*: for a user that have not yet used Rudder but may be willing to. This includes few things like the general look, login page, the logo, and some prominent features.
+* *Getting started*: for a user that have just started using Rudder, for example during a demo or a proof of concept at home. This includes interface bugs, problem with installation or the technique that are likely to be used first.
+* *Operational*: for a user that already knows Rudder and uses it. This includes upgrade, command line usage and all other techniques.
+* *Infrequent*: for a user that has a specific but supported installation. This includes many thing we often see only once or twice
+
+=== Severity
+
+What is the problem gravity once we have it:
+
+* *Critical*: we cannot work anymore or we may lose data
+* *Major*: some part of Rudder doesn't work anymore, and it’s hard to find a workaround
+* *Minor*: some information is misleading or there is an easy workaround
+* *Trivial*: there is no functional impact but Rudder would be nicer if this bug didn’t exist
+
+=== Effort Required
+
+This is an estimate of how much work is required to solve this bug:
+
+* *Small*: it could be solved quickly
+* *Medium*: it could take some time but it is still solvable in a regular amount of time
+* *Large*: this issue is complex and need some reflection and a lot of time
+* *Very large*: this issue is so complex that we are not able to estimate its duration without a dedicated meeting
+
+=== Tags
+
+We also have some tags to express a specific situation:
+
+    *Sponsored* tag: this means someone is willing to pay to make sure this bug is solved quickly.
+
+=== Bug Priority
+
+As a result we have now many information on all our bugs in the bug-tracker, and this data is available for everyone to see. We use this to compute a priority for the bug, going from 0 to 150 (150 being the highest priority). The formula is based on a weight we give on user visibility and severity values.
+
+Those weights are then summed up. We also add a bonus or a malus depending on the effort required and on the sponsoring. Finally we have a very small factor to give a better priority to very old bugs.
+
+You can see the current bug list, sorted by decreasing priority on the https://issues.rudder.io/projects/rudder/issues?query_id=49[bug-tracker].
