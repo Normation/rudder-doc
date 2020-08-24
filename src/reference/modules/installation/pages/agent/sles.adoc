@@ -2,8 +2,6 @@
 
 include::{partialsdir}/quick_agent.adoc[]
 
-include::{partialsdir}/syslog.adoc[]
-
 include::{partialsdir}/zypper_segfault.adoc[]
 
 include::{partialsdir}/rpm_key.adoc[]

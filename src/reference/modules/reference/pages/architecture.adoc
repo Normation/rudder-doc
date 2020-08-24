@@ -290,12 +290,6 @@ rudder agent inventory
 
 No reports are generated until the Node has been validated in Rudder Server.
 
-=== Syslog
-
-After validation of the Node, the system log service of the Node is configured
-to send reports regularly to the server. Supported system log providers are:
-+syslogd+, +rsyslogd+ and +syslog-ng+.
-
 === Apply Directives
 
 Apply other policies and write reports locally.

@@ -2,8 +2,6 @@
 
 include::{partialsdir}/quick_agent.adoc[]
 
-include::{partialsdir}/syslog.adoc[]
-
 include::{partialsdir}/apt_key.adoc[]
 
 include::{partialsdir}/debian_repo.adoc[]

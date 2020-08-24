@@ -244,107 +244,6 @@ ulimit -Sn
 ulimit -Hn
 ----
 
-
-
-[[_rsyslog]]
-== Rsyslog
-
-On very large installation, with many reports sent to the rudder servers, some messages
-may be lost because the default UDP buffer is too small or because rsyslog doesn't consume the
-reports fast enough. If you experience random missing reports, there are several changes that
-will improve the situation.
-
-=== Increase the UDP buffer
-
-----
-sysctl -w net.core.rmem_max=26214400
-sysctl -w net.core.rmem_default=26214400
-----
-
-
-=== Upgrade rsyslog to a more recent version
-
-The version of rsyslog included in some distributions can be have trouble handling more than 
-1000 reports/seconds; our tests show that versions 8.1901.0 and later are necessay to consumme
-more than 1400 reports/seconds.
-List of rsyslog supported repositories can be found here: https://www.rsyslog.com/downloads/download-other/[rsyslog repositories]
-
-=== Increase the number of threads for rsyslog
-
-Edit the file `/var/rudder/configuration-repository/techniques/system/distributePolicy/1.0/rudder-rsyslog-root.st` on the rudder server, and replace the lines
-
-----
-$ModLoad imudp
-$UDPServerRun &SYSLOGPORT&
-----
-
-by 
-
-----
-module(load="imudp" threads="2")
-input(type="imudp" port="&SYSLOGPORT&")
-----
-
-and increase the number of action queue workers
-----
-$ActionQueueWorkerThreads 2
-----
-
-by
-
-----
-$ActionQueueWorkerThreads 4
-----
-
-and then commit the change
-
-----
-cd /var/rudder/configuration-repository/techniques
-git add system/distributePolicy/1.0/rudder-rsyslog-root.st
-git commit -m "Increase number of threads allocated to rsyslog"
-rudder server reload-techniques
-----
-
-
-=== Using syslog over TCP (not recommended)
-
-If you are using syslog over TCP as reporting protocol - which is not recommended
-(it is set in *Administration -> Settings -> Protocol*),
-you can experience issues with rsyslog on Rudder
-policy servers (root or relay) when managing a large number of nodes.
-This happens because using TCP implies the system has to keep track of
-the connections. It can lead to reach some limits, especially:
-
-* max number of open files for the user running rsyslog
-* size of network backlogs
-* size of the conntrack table
-
-You have two options in this situation:
-
-* Switch to UDP (in *Administration -> Settings -> Protocol*). It is less reliable
-  than TCP and you can lose reports in case of networking or load issues, but it will
-  prevent breaking your server, and allow to manage more Nodes. Note that this is the default
-  setting.
-* Stay on TCP. Do this only if you need to be sure you will get all your reports
-  to the server. You will should follow the instructions below to tune your system
-  to handle more connections.
-
-All settings needing to modify `/etc/sysctl.conf` require to run `sysctl -p`
-to be applied.
-
-==== Maximum number of TCP sessions in rsyslog
-
-You may need to increase the maximum number of TCP sessions that rsyslog will accept.
-Add to your `/etc/rsyslog.conf`:
-
-----
-$ModLoad imtcp
-# 500 for example, depends on the number of nodes and the agent run frequency
-$InputTCPMaxSessions 500
-----
-
-Note: You can use `MaxSessions` instead of `InputTCPMaxSessions` on rsyslog >= 7.
-
 ==== Network backlog
 
 You can also have issues with the network queues (which may for example lead to sending SYN cookies):
@@ -365,7 +264,7 @@ for details.
 == Agent
 
 If you are using Rudder on a highly stressed machine, which has especially slow or busy
-I/O's, you might experience a sluggish CFEngine agent run every time the machine
+I/O's, you might experience a sluggish agent run every time the machine
 tries to comply with your Rules.
 
 This is because the agent tries to update its internal databases every time the agent
