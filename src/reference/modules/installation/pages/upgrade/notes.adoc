@@ -61,9 +61,10 @@ include::{partialsdir}/bcrypt.adoc[]
 
 Upgrade from Rudder 6.0 is supported.
 
-== Upgrade from Rudder 5.0
+== Upgrade from Rudder 5.0 and older
 
-Migration from any 5.0 are supported from 5.0.16+ bug fix version and should be upgraded to at least 6.0.3 release (see below for migration from older versions).
+Migrations from any version older than 5.0.16 are not supported, migrations from 5.0.16 or
+newer versions are supported and should be upgraded to at least 6.0.3 release (see below for migration from older versions)
 
 include::{partialsdir}/bcrypt.adoc[]
 
