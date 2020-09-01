@@ -55,9 +55,10 @@ rudder package enable rudder-plugin-scale-out-relay
 
 More information about `rudder package` command is available with `rudder package --help`.
 
-== Upgrade from Rudder 5.0
+== Upgrade from Rudder 5.0 and older
 
-Migration from any 5.0 are supported from 5.0.16+ bugfix version and should be upgraded to at least 6.0.3 release (see below for migration from older versions).
+Migrations from any version older than 5.0.16 are not supported, migrations from 5.0.16 or
+newer versions are supported and should be upgraded to at least 6.0.3 release (see below for migration from older versions).
 
 [NOTE]
 ====
