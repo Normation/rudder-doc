@@ -1,0 +1,8 @@
+= Frequently Asked Questions
+
+== General
+
+* xref:reference:contribute.adoc#_licenses[What licenses apply to Rudder?]
+* https://docs.rudder.io/versions[When are versions published and how long are they maintained?]
+* xref:installation:operating_systems.adoc#server-supported-os[What is the OS support deprecation policy?]
+* xref:reference:contribute.adoc#_bugs_prioritization[How are Rudder bug prioritized?]
