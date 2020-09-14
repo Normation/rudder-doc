@@ -284,48 +284,27 @@ userManagement/7.0: Role: [user-role] (with login [login])
 ----
 
 
-== Directives ordering
+== Policies ordering
 
-Configuration in Rudder are based on desired states, describing the expected state of the system. However, there are cases where having order is desirable (like ensuring that a JVM is present before deploying an Application server, or ensuring a user is present before setting it sudoers), even if it will converge over the course of several agent runs.
+Configuration in Rudder is based on desired states, describing the expected state of the system, and not an ordered list of actions to run.
+However, there are cases where having order is desirable (like ensuring that a JVM is present before deploying an Application server, or ensuring a user is present before setting it sudoers), even if it will converge over the course of several agent runs.
 
-In Rudder, there is two separated ways to order things, depending the type of Technique". So, before that, we need to explain how Policies are generated on the
-agent from Directives based on the same Technique.
+Rudder sorts the policies following this (best-effort) principle:
 
-=== Policy generation and Directive merge
+* Rules are executed in alphanumeric order
+* Inside of a rule, directives are executed in alphanumeric order, except for:
 
-In Rudder, policies are generated from directives. In the general case, each directive will lead to one policy on the node. 
+** *Mono-instance* techniques: only one directive is selected and others are discarded (and they will be tagged as such in node detail compliance) 
 
-There are two exceptions to that rule:
+*** the directive with the highest priority will be selected
+*** in case of equal priorities, the rule name and then the directive name are used for sorting them (in alphanumeric order)
 
-- for unique (non multi-instance) technique, the directive with the highest priority is selected and others are discarded (and they will be tagged as such in node detail compliance),
-- for multi-instance technique, if the technique `POLICYGENERATION` metadata tag has value `merged`, then all directives will be merged into *one* policy on the node. That behavior used to be the default one until Rudder 4.3. See https://issues.rudder.io/issues/10625[Don't merge directive from same technique on generation] for more information about it.
+** *Limited multi-instance* techniques: all directives will be merged into *one* policy on the node
 
+*** the merge order is based on priority, then rule name, and then directive name
+*** the place of the merged policy itself in the global policies will be based on the rule and directive names of its most prioritary source directive
 
-=== Sorting Directives based on the *same* Technique
-
-For Directive based on the same Technique, the sort order is based on the *Priority* value of the Directive. Between two Directive, the one with the highest *Priority*
-is the first:
-
-- for a *non* multi-instance Technique, it means that it is there is only one that is chosen in the resulting Policies (the others are discarded),
-- for a multi-instance Technique, it means that the variables in the Policy will be declared and check in sorting order of Directives (so the first Directive's
-  variables will be declared in first position and check first during an agent run).
-
-If several *Directives* have the same *Priority*, the *Rule name*, and then the *Directive name* are used for sorting in alphanumeric order.
-
-.Priority field value and meaning
-[WARNING]
-======
-The *Priority* field of a Directive used to be a number, from 0 to 10, where 0 means "highest priority".
-This changed with https://issues.rudder.io/issues/11725 but if you knew Rudder before that change, please
-use "0" whenever the documentation says "highest priority".
-======
-
-
-=== Sorting Policies
-
-Rudder uses a best-effort method for ordering Policies, based on alphanumeric ordering of the corresponding Rule, then Directive name.
-
-When several Directive were merged, Rudder choose the first (Rule name, Directive name) as the ordering value to use for the resulting Policy.
+NOTE: The type of a technique is visible when clicking on the technique itself in the directives page.
 
 .Best practice
 [TIP]
