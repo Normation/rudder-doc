@@ -44,7 +44,18 @@ you will need your Root Server (and Relay Servers, if applicable) to be able to 
 using the provided hostname.
 
 [[jvm-requirements]]
-== JVM Security Policy
+== JVM requirements
+
+=== JVM Version
+
+Rudder fully supports OpenJDK JVM version 1.8 to 14. Usage of long term support version 11 is recommended.
+
+OpenJDK 15 is not yet fully supported in Rudder 6.x branch because of the removal of JVM native JS engine in that version.
+You can use JVM 15 but you will need to disable "script evaluation in Directives" in *Settings -> General*
+
+Other JVM should work but they are not thoroughly tested. Please contact Rudder team for more information on that topic.
+
+=== JVM Security Policy
 
 Rudder needs `unlimited strength` security policy because it uses a variety of advanced
 hashing and cryptographic algorithms only available in that mode.
