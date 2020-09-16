@@ -6,7 +6,7 @@
 *** xref:operating_systems.adoc#_partially_supported_operating_systems[Partially supported Operating Systems]
 ** xref:requirements.adoc[Requirements]
 *** xref:requirements.adoc#configure-the-network[Networking]
-*** xref:requirements.adoc#jvm-requirements[JVM Security Policy]
+*** xref:requirements.adoc#jvm-requirements[JVM requirements]
 *** xref:requirements.adoc#rudder-cloud-compatibility[Cloud compatibility]
 *** xref:requirements.adoc#node-hardware-requirements[Hardware specifications for Rudder Agent]
 *** xref:requirements.adoc#server-hardware-requirements[Hardware specifications and sizing for Rudder Root Server]
