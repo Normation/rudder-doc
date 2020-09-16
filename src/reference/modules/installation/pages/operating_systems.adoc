@@ -72,7 +72,7 @@ where systemd has been removed.
 
 ====
 
-Out general policy for Rudder server is to support the two latest
+Our general policy for Rudder server is to support the two latest
 supported versions. It means:
 
 * Debian _stable_ and _oldstable_
