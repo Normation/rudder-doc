@@ -1,0 +1,99 @@
+= Technical stack
+
+== Principles
+
+Technology choices are done component by component, trying to use the right tool for the different needs
+following these criteria:
+
+* Focus on reliability, as Rudder is used on critical production infrastructures, this means:
+
+** For components we develop, choosing languages and tools allowing us to maintain,
+add features and refactor with confidence.
+In this regard, we prefer statically typed languages, with a focus on safety. Our general choices
+are Scala for backend works, Rust for system services and Elm for Web frontend.
+
+** Limit script languages usage to integration/glue code. They are hard to maintain over time and hard to
+deploy in heterogeneous environments.
+
+** Avoid https://en.wikipedia.org/wiki/Not_invented_here[NIH]: use the existing tools that does the job well, especially for things out of our core
+business (web server, data storage, etc.). Use standard system components whenever possible, especially for the agent.
+
+** For components we integrate (programs or libraries), this means choosing a mature and reliable
+option, even more for the agent.
+
+* Agent and relay components need to be able to run on very light systems with low network requirements,
+allowing embedded use cases
+
+* Stay as simple as possible, particularly on the operating side. Users should not have to spend
+time managing the management software itself. We try to avoid technologies that are difficult to
+operate or require specific knowledge. This also means limiting the number of technologies in one given component.
+
+* Know and contribute to our technical environment. We are regular contributors to several
+open-source ecosystems used in Rudder.
+
+== Server
+
+=== Engine and user interface
+
+The main component, the core of Rudder, is the application
+written is *Scala*.
+It manages the configuration to apply to the nodes, generates the policies
+and handles nodes reports and compliance computation, among other things.
+It's also the interface with the users (through the Web UI or the REST API).
+
+image::tech_stack/scala.svg[Scala,200,200]
+
+We have chosen https://www.scala-lang.org/[Scala] since Rudder's early days,
+for its robustness and performance, as well as its wide ecosystem of libraries (thanks to its
+compatibility with Java).
+
+The Web frontend used AngularJS historically, and we are progressively moving to *Elm*
+which has static typing and focuses on reliability.
+
+=== Relay
+
+The second server service is the relay, which handles communication with the managed machines.
+It can be installed without the webapp part (and then be used as a kind of smart proxy).
+
+image::tech_stack/rust.svg[Rust,height=200]
+
+It is written in *https://www.rust-lang.org/[Rust]* (using the https://tokio.rs/[tokio] asynchronous runtime) to allow great performance even on very small hardware while providing security,
+safety and maintainability.
+
+We have a second Rust program in the making, that will be our configuration policies compiler.
+
+=== Integration
+
+The HTTP server used on the Rudder servers is *Apache httpd*, as it is widely available
+and mature. It does TLS and reverse-proxying for the webapp and the relay, and applies
+a first level of security filters.
+
+We use *python* on the server for integration plugins, allowing easy discovery for contributors
+and using official python APIs for some of the integrated tools.
+
+=== Databases
+
+There are three types of data managed by the server:
+
+* All the configuration data (configuration policies, groups, etc.) are stored in a *git* repository.
+It provides traceability over the configuration history and interoperability with external SCM.
+* The data generated from the configuration (reports, etc.) is stored in *PostgreSQL*, which
+is mature and reliable, but also provide modern features (JSON support, etc.).
+* The hierarchical information about nodes (inventories, etc.) are stored in an embedded *OpenLDAP*
+server.
+
+== Agent
+
+We use a common policies representation (soon a fully-fledged language, rudder-lang, with its own compiler), that is used on the server to generate configuration code for different backends depending on the
+target platform. These configuration backends are:
+
+* On Windows, *DSC*, the native management technology, plus *Powershell* for agent cli
+
+* On Unix systems, *CFEngine*. It is a fast and powerful low-level
+portable configuration engine. Various scripts and the cli are implemented in *POSIX shell* for
+maximal portability and limited dependencies.
+
+All our agents embed *FusionInventory* as inventory tool, allowing precise collection of software and
+hardware information, and use *curl* and *openssl* to communicate with the server in HTTPS.
+
+image::tech_stack/curl.svg["Curl logo",200,100]
