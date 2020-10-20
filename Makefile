@@ -1,5 +1,5 @@
-ALL_VERSIONS = 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10 2.11 3.0 3.1 3.2 4.0 4.1 4.2 4.3 5.0 6.0 6.1
-VERSIONS = 5.0 6.0 6.1
+ALL_VERSIONS = 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10 2.11 3.0 3.1 3.2 4.0 4.1 4.2 4.3 5.0 6.0 6.1 6.2
+VERSIONS = 6.1 6.2
 VERSION_DOCS = $(addprefix doc-, $(VERSIONS))
 VERSION_ARCHIVES = $(addsuffix .archive, $(VERSIONS))
 
@@ -9,11 +9,11 @@ SITES = $(GENERIC_DOCS) $(VERSIONS)
 
 LATEST_MAJOR=$(shell curl https://www.rudder-project.org/release-info/rudder/versions/latest)
 
-.PHONY: prepare rudder-theme/build/ui-bundle.zip optipng doc-build changelogs-build build/sites/site/.htaccess build/history/5.0/.htaccess build/history/6.0/.htaccess build/history/6.1/.htaccess build/files $(SITES)
+.PHONY: prepare rudder-theme/build/ui-bundle.zip optipng doc-build changelogs-build build/sites/site/.htaccess build/history/6.1/.htaccess build/history/6.2/.htaccess build/files $(SITES)
 .DEFAULT_GOAL := local
 
-all: $(GENERIC_DOCS) build/sites/site/.htaccess build/history/5.0/.htaccess build/history/6.0/.htaccess build/history/6.1/.htaccess $(VERSION_ARCHIVES) build/files test
-online: site site-dev build/sites/site/.htaccess build/history/5.0/.htaccess build/history/6.0/.htaccess build/history/6.1/.htaccess $(VERSION_ARCHIVES) build/files
+all: $(GENERIC_DOCS) build/sites/site/.htaccess build/history/6.1/.htaccess build/history/6.2/.htaccess $(VERSION_ARCHIVES) build/files test
+online: site site-dev build/sites/site/.htaccess build/history/6.1/.htaccess build/history/6.2/.htaccess $(VERSION_ARCHIVES) build/files
 local: site-local test
 
 rudder-theme/build/ui-bundle.zip:
@@ -23,17 +23,17 @@ rudder-theme/build/ui-bundle.zip:
 # Ugly workaround until we can use custom generators in antora
 doc-build:
 	[ -d $@ ] || git clone https://github.com/Normation/rudder-doc.git $@
-	cd $@ && git checkout branches/rudder/5.0 && git pull
-	cd $@/src/reference && make
-	cd $@ && git add -f src/reference && git commit --allow-empty -m "Build 5.0"
-	cd $@ && git clean -fd
-	cd $@ && git checkout branches/rudder/6.0 && git pull
-	cd $@/src/reference && make
-	cd $@ && git add -f src/reference && git commit --allow-empty -m "Build 6.0"
-	cd $@ && git clean -fd
 	cd $@ && git checkout branches/rudder/6.1 && git pull
 	cd $@/src/reference && make
 	cd $@ && git add -f src/reference && git commit --allow-empty -m "Build 6.1"
+	cd $@ && git clean -fd
+	cd $@ && git checkout branches/rudder/6.2 && git pull
+	cd $@/src/reference && make
+	cd $@ && git add -f src/reference && git commit --allow-empty -m "Build 6.2"
+	cd $@ && git clean -fd
+	cd $@ && git checkout master && git pull
+	cd $@/src/reference && make
+	cd $@ && git add -f src/reference && git commit --allow-empty -m "Build 7.0"
 
 changelogs-build:
 	[ -d $@ ] || git clone https://github.com/Normation/rudder-doc.git $@
@@ -64,17 +64,13 @@ build/sites/site/.htaccess:
 	echo 'Redirect /reference/current/ /reference/$(LATEST_MAJOR)/' > $@
 	echo 'Redirect /changelogs/current/ /changelogs/$(LATEST_MAJOR)/' >> $@
 
-build/history/5.0/.htaccess:
-	mkdir -p build/history/5.0/
-	echo 'Redirect /rudder-doc/reference/current/ /rudder-doc/reference/5.0/' > $@
-
-build/history/6.0/.htaccess:
-	mkdir -p build/history/6.0/
-	echo 'Redirect /rudder-doc/reference/current/ /rudder-doc/reference/6.0/' > $@
-
 build/history/6.1/.htaccess:
 	mkdir -p build/history/6.1/
 	echo 'Redirect /rudder-doc/reference/current/ /rudder-doc/reference/6.1/' > $@
+
+build/history/6.2/.htaccess:
+	mkdir -p build/history/6.2/
+	echo 'Redirect /rudder-doc/reference/current/ /rudder-doc/reference/6.2/' > $@
 
 # Download documentation files
 build/files:

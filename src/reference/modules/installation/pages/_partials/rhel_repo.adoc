@@ -2,9 +2,9 @@ Add a yum repository for Rudder:
 
 ----
 
-echo '[Rudder_6.1]
-name=Rudder 6.1
-baseurl=http://repository.rudder.io/rpm/6.1/RHEL_$releasever/
+echo '[Rudder_6.2]
+name=Rudder 6.2
+baseurl=http://repository.rudder.io/rpm/6.2/RHEL_$releasever/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
@@ -18,11 +18,11 @@ the user name and the password by your Rudder account):
 
 ----
 
-echo '[Rudder_6.1]
-name=Rudder 6.1
+echo '[Rudder_6.2]
+name=Rudder 6.2
 username=LOGIN
 password=PASSWORD
-baseurl=http://download.rudder.io/rpm/6.1/RHEL_$releasever/
+baseurl=http://download.rudder.io/rpm/6.2/RHEL_$releasever/
 gpgcheck=1
 gpgkey=https://download.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
@@ -32,9 +32,9 @@ Or for RHEL/CentOS < 7:
 
 ----
 
-echo '[Rudder_6.1]
-name=Rudder 6.1
-baseurl=https://LOGIN:PASSWORD@download.rudder.io/rpm/6.1/RHEL_$releasever/
+echo '[Rudder_6.2]
+name=Rudder 6.2
+baseurl=https://LOGIN:PASSWORD@download.rudder.io/rpm/6.2/RHEL_$releasever/
 gpgcheck=1
 gpgkey=https://LOGIN:PASSWORD@download.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
