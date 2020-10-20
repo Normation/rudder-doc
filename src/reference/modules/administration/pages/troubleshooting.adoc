@@ -1,5 +1,71 @@
-= Troubleshooting agent-server communication issues
+= Troubleshooting
 
 == Inventory problem
 
-== Reporting problem
+When you see error reports about the inventory component or when your last inventory date
+in node details is too old (i.e. more than one day).
+
+Run `rudder agent inventory -i`:
+
+* If it gives an *Invalid inventory* error, this is likely a bug, please open an issue with the provided error message.
+* If it fails with a curl error:
+
+** Check if the IP seen by the server (or relay) is in the allowed network
+** Check network connectivity to port 443 on server (or relay), for example using `telnet rudder.example.com 443`
+** Run the given curl command after removing the `-s` or `--silent` argument to have a complete error
+
+* If it succeeds then the problem is probably on the root server. Check the web application logs in
+  `/var/log/rudder/webapp/TODAY.stderrout.log` for lines about your node's inventory:
+
+** If you have an *Invalid signature* message
+
+*** It could be because of a change of node id or agent key. Compare the certificate fingerprint and node id from the web interface and the `rudder agent info` output.
+*** There was a problem with the signature process on the node. Particularly, when there is a problem with "openssl" command, the signature may be empty. Check the content of signature file for that inventory in `/var/rudder/inventories/failed/xxx-yyy-zzz.ocs.sig-DATE`
+*** The node sending the inventory is not the same as the one registered in Rudder. This can show a security problem, but it may also be due to two nodes having the same nodeID for some reason (a VM cloned followed with an update of the agent key of one the cloned node, but no change of the node ID).
+In this case `rudder agent factory-reset` should be run after VM clone.
+
+== Compliance problem
+
+NOTE: This section assumes you are using HTTPS reporting.
+
+Run `rudder agent update -i`:
+
+* If it gives a *Cannot find suitable server* error:
+
+** Check if the IP seen by the server (or relay) is in the allowed network
+** Check network connectivity to port 5309 on server (or relay), for example using `telnet rudder.example.com 5309`
+
+* If it gives an *Unspecified server refusal* error:
+
+** Check if the node has actually been accepted on the server and that a first policy generation finished after acceptation
+** Check the policy server logs on the server or relay for more details
+
+* If it succeeds then the problem is probably in the reporting process. Run `rudder agent run -i` and
+  check the messages about reporting at the end:
+
+** If it fails with a curl error:
+
+*** Check network connectivity to port 443 on server (or relay), for example using `telnet rudder.example.com 443`
+*** Run the given curl command after removing the `-s` or `--silent` argument to have a complete error
+
+** If it succeeds, check compliance view for the node in the web interface:
+
+*** If everything is red, check time synchronization between node and server, check for broken update on relays between node and server, and read the compliance message in the compliance tab.
+
+*** If mixed red and green, check if it's always the same red components. If you have constant isolated red components it is probably a bug, please open an issue with the details. If the end of the run is missing, then the agent probably stops in the middle of the run. In this case run it manually on the node to see the error message. You should also check if agent run does not take longer than 5 minutes (for example in `rudder agent history` output), as it can cause missing reports around the end of the run.
+
+*** If it's sometimes grey check webapp logs for messages indicating "[Store Agent Run Times] Task frequency is set too low!" that indicate the server cannot handle the report flow. In this case you can try to tune PostgreSQL performance or to increase the period between two save jobs by modifying the `rudder.batch.storeAgentRunTimes.updateInterval` property in `/opt/rudder/etc/rudder-web.properties`
+
+== Agent problems
+
+=== The copy of the file failed: the destination (/path/to/the/file) is not stored in a valid directory
+
+You may encounter the following error while trying to edit or manage some files when the path contains a symbolic link:
+
+====
+The copy of the file failed: the destination (/path/to/the/file) is not stored in a valid directory
+====
+
+This is due to a security policy, to avoid privilege escalation using the Rudder agent. You can edit links that are either owned by root, by the user currently running the agent (often root) or if the owner and group of the symbolic link are the same as the target.
+
+
