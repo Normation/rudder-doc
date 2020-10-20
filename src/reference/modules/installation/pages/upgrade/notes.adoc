@@ -218,28 +218,28 @@ Upgrading to 6.0.3 disables all plugins you may have installed because compatibi
 
 == Upgrade from Rudder 5.0 (< 5.0.16), 4.3 or older
 
-Direct upgrades from 5.0 versions older than 5.0.16, 4.3.x and older are no longer supported on 6.1.
+Direct upgrades from 5.0 versions older than 5.0.16, 4.3.x and older are no longer supported on 6.2.
 If you are still running one of those, either on servers or nodes,
-please first upgrade to one of the supported versions, and then upgrade to 6.1.
+please first upgrade to one of the supported versions, and then upgrade to 6.2.
 
-== Compatibility between Rudder agent 6.1 and older server versions
+== Compatibility between Rudder agent 6.2 and older server versions
 
-=== 5.0 and 6.0 servers
+=== 5.0, 6.0 and 6.1 servers
 
-Rudder agents 6.1 are compatible with 5.0.17+ and 6.0 Rudder servers.
+Rudder agents 6.2 are compatible with 5.0.17+, 6.0 and 6.1 Rudder servers.
 
 === Older servers
 
-Rudder agents 6.0 are not compatible with Rudder servers older than 5.0.
+Rudder agents 6.2 are not compatible with Rudder servers older than 5.0.
 You need to upgrade your server to a compatible version before the agents.
 
-== Compatibility between Rudder server 6.1 and older agent versions
+== Compatibility between Rudder server 6.2 and older agent versions
 
-=== 5.0 and 6.0 agents
+=== 5.0, 6.0 and 6.1 agents
 
-Rudder agent 5.0 and 6.0 are fully compatible with Rudder server 6.
+Rudder agent 5.0, 6.0 and 6.1 are fully compatible with Rudder server 6.
 
 === Older agents
 
-These agents are not compatible with Rudder 6.1, and you have to upgrade them.
+These agents are not compatible with Rudder 6.2, and you have to upgrade them.
 Be careful to follow the upgrade path explained xref:upgrade.adoc#_upgrade_from_rudder_4_3_or_older[above].

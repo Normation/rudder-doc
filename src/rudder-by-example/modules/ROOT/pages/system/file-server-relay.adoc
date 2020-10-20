@@ -82,8 +82,8 @@ as server hostname in your repository configuration. This will be replaced by ea
 
 ----
 [Rudder]
-name=Rudder 6.1 Repository
-baseurl=https://${server_info.policy_server}/rpm/6.1/RHEL_8/
+name=Rudder 6.2 Repository
+baseurl=https://${server_info.policy_server}/rpm/6.2/RHEL_8/
 gpgcheck=1
 gpgkey=https://${server_info.policy_server}/rpm/rudder_rpm_key.pub
 ----
