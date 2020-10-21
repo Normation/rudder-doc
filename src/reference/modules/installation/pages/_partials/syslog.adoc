@@ -1,9 +1,0 @@
-== Dependencies
-
-If you need to use syslog reporting, which is not the general case,
-Rudder agent requires that a syslog server
-is installed on the node. This syslog server can be either
-`syslogd`, `syslog-ng` or `rsyslog`.
-
-One of them is generally installed by default, but it may not be the case with minimal images.
-In this case you should install one (preferably `syslog-ng` or `rsyslog`).

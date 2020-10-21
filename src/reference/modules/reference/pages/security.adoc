@@ -46,7 +46,7 @@ These unprotected contents are:
 
 This section gives more details about the different flows between nodes and servers.
 
-* All flows use TLS 1.2+ (except for syslog reporting which is not encrypted by default).
+* All flows use TLS 1.2+.
 * All Rudder nodes have their own certificate and key pair, used for authentication.
 * The certificate that will be used is extracted from the inventory at node acceptation
 and can later by managed through the nodes API.
@@ -70,10 +70,4 @@ Reports are sent at the end of every agent run.
 
 They are sent by the node to its configured policy_server over HTTPS, with optional certificate validation.
 Once a node is accepted, all HTTPS reports and inventories will be checked before being accepted.
-To force reports signature, you need to use the "HTTPS only" reporting mode, which disables syslog reporting totally.
 
-=== Syslog reporting
-
-Syslog reports are sent in plain text and are not authentified. 
-Starting from 6.0, syslog reporting is disabled by default and
-present for compatibility with older agents.

@@ -24,8 +24,6 @@ The following network flows are used by Rudder for regular operations. Make sure
 |Root|Relay|_tcp/443_
 |=======================
 
-NOTE: If you still have pre-6.0 agents, or use the syslog-only report mode, you also need to have *udp/514* (or *tcp/514* depending on what you configured) open from nodes to relays or root, and from relays to root server.
-
 === Security
 
 Your Rudder server and relays should generally not be exposed on the Internet. If you manage
@@ -155,7 +153,7 @@ The number of cores necessary also depends on the number of managed nodes. A gen
 * more than 1000 nodes: 6 cores + one core per 500 nodes beyond 1000, when in full compliance
 
 Adding more cores makes the Web Interface faster, and especially the policy generation part.
-PostgreSQL and rsyslog both need more computing power when a lot of nodes are involved in full compliance, that's why the requirement grows more quickly.
+PostgreSQL needs more computing power when a lot of nodes are involved in full compliance, that's why the requirement grows more quickly.
 
 
 === Disk

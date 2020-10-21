@@ -165,14 +165,6 @@ rudder-db:DATABASE_HOST
 
 ----
 
-* Edit the /etc/rsyslog.d/rudder.conf file and change the hostname in:
-
-----
-
-:ompgsql:DATABASE_HOST,rudder,rudder,...
-
-----
-
 * Run an inventory:
 
 ----
@@ -185,7 +177,6 @@ rudder agent inventory
 
 ----
 
-systemctl restart rsyslog
 systemctl restart rudder-server
 
 ----
