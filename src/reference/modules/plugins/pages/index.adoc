@@ -58,7 +58,7 @@ command again.
 You will need to update your licenses with `rudder packages licenses` before their expiration.
 An alert will appear in Rudder's menu bar when a license is close to expiration.
 
-== Install plugins without a subscription
+== Manual plugins installation
 
 Plugin management uses the `rudder package` command.
 You need to download the `.rpkg` package file of the plugin on your Rudder server,
@@ -69,6 +69,11 @@ rudder package install-file <package.rpkg>
 ----
 
 To update a plugin, you need to reinstall it with the same command, but in the newer version.
+If the plugin requires a license, you can enable it by putting your `license.key` and `.license` files under:
+
+----
+/opt/rudder/etc/plugins/licenses/
+----
 
 == More about plugins
 
