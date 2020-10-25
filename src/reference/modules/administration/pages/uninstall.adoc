@@ -125,11 +125,24 @@ Even if `rudder-agent` package is uninstalled from a node, the corresponding nod
 
 To delete a node from Rudder, you need to go to the node details page and click on the `Delete` button.
 
-== Uninstalling Rudder server
-
-WARNING: Uninstalling the Rudder server package will remove configuration data,
-that will be lost if you don't have a backup. We advice to keep a backup of the server
-for future reference.
+== Uninstalling Rudder relay servers
 
 You can uninstall the Rudder packages with your package manager, and follow the
 same cleanup steps as for the agent.
+
+We recommend to keep a backup a relay configuration files for future reference.
+
+== Uninstalling Rudder root server
+
+
+WARNING: Uninstalling the Rudder server package will remove configuration data,
+that will be lost if you don't have a backup.
+
+In the general case, we advise to not uninstall Rudder server packages and to prefer to use a solution depending on your business and technical constraints where the underlying virtual machine is stopped, backupped, and hibernated. 
+
+In any case, you should keep a backup of the server for future reference, and make a xref:reference:administration:procedures.html#_migration_backups_and_restores[backup of server data] before processing. 
+
+
+You can uninstall the Rudder packages with your package manager, and follow the
+same cleanup steps as for the agent.
+
