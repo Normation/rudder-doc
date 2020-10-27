@@ -66,6 +66,7 @@ All the tag name in the .xml are in upper case, all the attributes are in camel 
     <AGENT version=">=3.6">cfengine-community</AGENT>         <!-- Optional; Agent name and version on which the Technique has been tested -->
   </COMPATIBLE>
   <MULTIINSTANCE>true/false</MULTIINSTANCE>                   <!-- Optional; defines if several instances of this template with differents variables can be deployed on a node; default value: false -->
+  <USEMETHODREPORTING>true</USEMETHODREPORTING>               <!-- Optional; true enables the reporting done by generic method calls, false disables them (default: false) -->
   <POLICYGENERATION>separated</POLICYGENERATION>              <!-- Optional; defines if each Directives based on this Technique will be in a separated folder; default value: false. Note, if this parameter is set, you'll have to use the RudderUniqueID special placeholder to avoid duplicate names for methods and bundles -->
 
   <SYSTEM>true/false</SYSTEM>                                 <!-- Optional, defines if this Technique is a system Technique (internal Rudder usage); default value: false -->
@@ -180,6 +181,20 @@ is equivalent to
 ----
 
 NOTE: `INPUT` fields are automatically escaped, meaning any quote will be written in the policies as \" ; and any backslash will be written as \\
+
+=== Report keys in the <SECTION> tags
+
+The REPORTKEYS element helps detecting the proper reporting key when it cannot be known in advance. The key can contain variables that will be matched based on a regex.
+The display of this component key will be the value from the metadata and not the reported value.
+
+----
+
+      <REPORTKEYS>
+        <VALUE>echo &quot;${name}&quot;</VALUE>    <!-- ${name} is a variable -->
+      </REPORTKEYS>
+
+----
+
 
 === Available types for an INPUT variable
 
