@@ -187,6 +187,21 @@ Event Categories::
 * Policy Node
 * Archives
 
+== Health Check
+To ensure the health of Rudder, some checks are executed every 5 minutes by default. To change the period
+you can add `metrics.healthcheck.scheduler.period` in `/opt/rudder/etc/rudder-web.properties`. For example,
+you can change it to "30 seconds". Every check will return a message with a `Severity Level`
+through the https://docs.rudder.io/api/#tag/Healthcheck[Health Check API]
+
+Severity Level::
+* Critical: Prevent the proper functioning of Rudder.
+* Warning: Should be improved, it may cause incidents in the future.
+* Ok: The check was successful.
+
+A notification will be displayed if at least one *Warning* or *Critical* has been returned by latest Health Check run.
+
+image::healthcheck-ok.png[All check passed]
+
 == Policy Server
 
 The *Settings -> General* page sum-up information about
