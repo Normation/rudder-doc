@@ -5,7 +5,11 @@
 
 === Get source
 
-Make sure you have network access and the git command.
+Make sure you have network access and the git command. Also make sure
+you have all prerequisites installed. If later on you see "Warning:
+prerequisite (something) not found" in the build log, go back and make
+sure to install the missing software before using the resulting
+package.
 
 Go to your build directory and checkout rudder-packages
 
