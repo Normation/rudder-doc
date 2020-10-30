@@ -14,7 +14,8 @@ read the https://rudder.io/plugins/[dedicated page on rudder.io].
 == Install plugins with a subscription
 
 First, you need to configure your Rudder technical account (username and password) in
-`/opt/rudder/etc/rudder-pkg/rudder-pkg.conf`.
+`/opt/rudder/etc/rudder-pkg/rudder-pkg.conf`. You can also define proxy information if your Rudder server need to get
+ through a proxy to download plugins, keep the values empty if you don't need them (no proxy or no authentication).
 
 [source,ini]
 ----
@@ -22,6 +23,9 @@ First, you need to configure your Rudder technical account (username and passwor
 url = https://download.rudder.io/plugins
 username = USERNAME
 password = PASSWORD
+proxy_url = 
+proxy_user = 
+proxy_password =
 ----
 
 Plugin management uses the `rudder package` command.
