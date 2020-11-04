@@ -141,8 +141,9 @@ to validate the server identity from the first connection, and avoid trusting th
 first host it connects to.
 
 It requires providing local changes to the agent as part of the provisioning process.
+Here policy server's refers to you node's server, it can be a relay or a root server.
 
-Compute root hash key with:
+Compute policy server's hash key with:
 
 ----
 
@@ -150,7 +151,7 @@ cf-key -p /var/rudder/cfengine-community/ppkeys/localhost.pub
 
 ----
 
-Copy `/var/rudder/cfengine-community/ppkeys/localhost.pub` from the root server on each provisioned node to `/var/rudder/cfengine-community/ppkeys/root-${HASH}.pub`
+Copy `/var/rudder/cfengine-community/ppkeys/localhost.pub` from the policy server server on each provisioned node to `/var/rudder/cfengine-community/ppkeys/root-${HASH}.pub`
 
 So that it looks like:
 
