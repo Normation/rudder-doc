@@ -982,7 +982,7 @@ html {
   font-weight: bold;
   font-size: 1.1em;
   text-shadow: 0 2px 4px #00000050;
-  z-index: 10;
+  z-index: 2;
 }
 
 .banner-warning.warning-deprecated {
