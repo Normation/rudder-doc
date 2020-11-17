@@ -81,8 +81,29 @@ For properties with a common name, an override is done with the following algori
 - if parent value is a string and child one is a JSON, JSON is kept
 - if parent value is a JSON array and child is a JSON object, child value is kept, 
 - if parent value is a JSON object and child is a JSON array, child value is kept, 
-- if both values are JSON array, array are concatenated, parent at lower indexes,
+- if both values are JSON array, child array is kept,
 - if both values are JSON object, object are merged using current algorithm recursively: missing keys are added, etc. 
+
+[TIP]
+
+====
+
+As arrays are replaced, if you want to accumulate attributes by inheritance, you should 
+always use JSON objects with an unique key for each element (to avoid overriding).
+You can always come back to an array by using embedded `jq` with for example a command like: 
+
+```
+// transform back object merged:
+// global: {"services": "service1":{"name":"service1", ...}}
+// node  : {"services": "service2":{"name":"service2", ...}}
+// into an array: { "services": [{"name":"service1", ...},{"name":"service2", ...}]}
+
+jq '{"services": .properties.services | map(values) }' /var/rudder/cfengine-community/inputs/properties.d/properties.json
+```
+
+Rudder 6.2 will have an option to specify for each property what inheritance behavior you want to apply to its values. 
+
+====
 
 ----
 
@@ -92,7 +113,7 @@ For properties with a common name, an override is done with the following algori
 , "replaced-string": "original"
 , "replaced-array" : ["original"]
 , "replaced-object": {"orig":"inal"}
-, "append-array"   : [1,2]
+, "replaced-array2": [1,2]
 , "merge-object"   : {
       "parent-kept"    : "parent-kept"
     , "parent-replaced": "original"
@@ -105,7 +126,7 @@ For properties with a common name, an override is done with the following algori
 , "replaced-string": "group"
 , "replaced-array" : {"replaced":"group"}
 , "replaced-object": ["group"]
-, "append-array"   : [3,4]
+, "replaced-array2": [3,4]
   "merge-object"   : {
       "group-added"    : "group-added"
     , "parent-replaced": "group"
@@ -120,7 +141,7 @@ For properties with a common name, an override is done with the following algori
 , "replaced-string": "group"
 , "replaced-array" : {"replaced":"group"}
 , "replaced-object": ["group"]
-, "append-array"   : [1,2,3,4]
+, "replaced-array2": [3,4]
 , "merge-object"   : {
       "parent-kept"    : "parent-kept"
     , "group-added"    : "group-added"
