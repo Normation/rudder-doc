@@ -75,7 +75,8 @@ A last level of overriding is available directly locally on node. Since that par
 Properties are inherited from global parameters to groups, then from groups to subgroups, and then from groups to nodes. 
 
 At each step, all properties from parent that are not defined in children are added to the latter. 
-For properties with a common name, an override is done with the following algorithm: 
+For properties with a common name, an override is done with a configurable algorithm, which by
+default overrides string values and arrays (i.e the child value is kept), and merge object as follow:
 
 - if child value is a string, it is kept, 
 - if parent value is a string and child one is a JSON, JSON is kept
@@ -84,26 +85,30 @@ For properties with a common name, an override is done with the following algori
 - if both values are JSON array, child array is kept,
 - if both values are JSON object, object are merged using current algorithm recursively: missing keys are added, etc. 
 
-[TIP]
+You can choose the behavior for each of string, array or object cases independently and at each level (global parameters by
+UI or API, group properties and node properties by API) with a string of tree letters alike file permissions string: 
 
-====
+- first letter is for object. Possible values are 'm' (merge object, default), or 'o' (override)
+- second letter is for array. Possible values are 'o' (override, default), 'a' (append child value to parent), or 'p' (prepend child value to parent)
+- third letter is for strings. Possible values are 'o' (override, default), 'a' (append child value to parent), or 'p' (prepend child value to parent)
 
-As arrays are replaced, if you want to accumulate attributes by inheritance, you should 
-always use JSON objects with an unique key for each element (to avoid overriding).
-You can always come back to an array by using embedded `jq` with for example a command like: 
+Example of setting the value for a global parameter to 'maa' (override object, append array and strings) in the UI:
 
-```
-// transform back object merged:
-// global: {"services": "service1":{"name":"service1", ...}}
-// node  : {"services": "service2":{"name":"service2", ...}}
-// into an array: { "services": [{"name":"service1", ...},{"name":"service2", ...}]}
+image::node-properties-choose-inheritance.png[Choose inheritance rules for objects, arrays and strings]
 
-jq '{"services": .properties.services | map(values) }' /var/rudder/cfengine-community/inputs/properties.d/properties.json
-```
+Example of setting the value for a node property to 'maa' (override object, append array and strings) via API:
 
-Rudder 6.2 will have an option to specify for each property what inheritance behavior you want to apply to its values. 
+----
 
-====
+ curl -X POST -H "X-API-TOKEN: $(cat /var/rudder/run/api-token)" -H "Content-Type: application/json" https://rudder-server/rudder/api/latest/nodes/9930cee5-1fc8-43dd-b8f8-feb3812b803f -d '{"properties":[{"name":"OverrideUpdate", "value":{"array":[3,4], "string":"child", "object":{"child":"other"}}, "inheritMode":"maa"}]}'
+
+----
+
+Result on child node `properties.d` directory:
+
+image::node-properties-choose-inheritance-result.png[Result of merging object, appending arrays and strings]
+
+Example of behavior for the default algorithm ('moo'):
 
 ----
 
