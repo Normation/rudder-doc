@@ -112,6 +112,7 @@ A filter is available in the Technique Editor to select either all generic metho
 
 image:rudder-technique-editor-filter.png[Technique editor filter]
 
+You can get more information about building your own Windows techniques with the Rudder By Example article: https://docs.rudder.io/rudder-by-example/current/system/manage-registry.html[Manage Windows Registry keys]
 
 == DSC Techniques
 
@@ -121,6 +122,9 @@ Unfortunately, not all Techniques are compatible with DSC agent, as some are dep
 
 
 image:rudder-technique-dsc.png[DSC compatible Techniques]
+
+There is a detailed walk-through example of the `Windows Software` technique in https://docs.rudder.io/rudder-by-example/current/application/install-exe-or-msi.html[Install software from a .exe or .msi installer]
+Rudder By Example article. 
 
 == DSC Agent CLI
 
