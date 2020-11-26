@@ -212,7 +212,7 @@ Event Categories::
 * Archives
 
 == Health Check
-To ensure the health of Rudder, some checks are executed every 5 minutes by default. To change the period
+To ensure the health of Rudder, some checks are executed every 6 hours by default. To change the period
 you can add `metrics.healthcheck.scheduler.period` in `/opt/rudder/etc/rudder-web.properties`. For example,
 you can change it to "30 seconds". Every check will return a message with a `Severity Level`
 through the https://docs.rudder.io/api/#tag/Healthcheck[Health Check API]
