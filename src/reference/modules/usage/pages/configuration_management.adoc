@@ -236,9 +236,10 @@ image:audit_mode_general_overview.png[]
 
 This mode can be set:
 
-* Globally on the Rudder root server. In this can case there are two options: allow to override this mode on specific items, or use the global configuration everywhere.
-* On a directive.
-* On a node.
+* Globally on the Rudder root server, in the `Settings > General` page. In this can case there are two options: allow to override this mode on specific items, or use the global configuration everywhere.
+* On a directive, in the directive configuration form, 
+* On a node, from the `Node details > Settings` page, 
+* From the node itself, which will override the mode configured on the Rudder server, thanks to `rudder agent set-force-audit` and `rudder agent unset-force-audit` commands.
 
 A lot of attention and several safeguards have been put in place to ensure that if you choose to use "Audit"
 for a target, nothing will be changed on the node for that target (except Rudder's own configuration under `/var/rudder`), and only some harmless
