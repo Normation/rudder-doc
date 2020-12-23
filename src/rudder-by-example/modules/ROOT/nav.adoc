@@ -6,9 +6,10 @@
 ** xref:files/edition-one-line.adoc[Enforce a line is present in a file only once]
 ** xref:files/edition-replace-line.adoc[Enforce part of a line in a file]
 * System management
-** xref:system/manage-registry.adoc[Manage Windows registry content]
+** xref:system/auto-accept-nodes.adoc[Auto-accept nodes]
 ** xref:system/extend-inventories.adoc[Extend inventories with custom data]
 ** xref:system/update-rudder-agent-package.adoc[Keep Rudder agents up to date]
+** xref:system/manage-registry.adoc[Manage Windows registry content]
 ** xref:system/file-server-relay.adoc[Use relays and server as repository mirrors]
 * Extending Rudder
 ** xref:extending-rudder/add-new-methods.adoc[Add new methods to the technique editor]

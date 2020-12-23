@@ -1,0 +1,88 @@
+= Auto-accept nodes
+
+== Use case
+
+By default, Rudder forces an interactive action for accepting new nodes. This is done in complement 
+to "Trust On First Use" (TOFU) cryptographic security scheme used for authentication of nodes. 
+
+Nonetheless, in numerous use cases, you need to automate node acceptation. Typically, your Rudder is part of a 
+cloud environment where node provisioning is based on a fully automated self-service. In such an
+environment, you can't have an human validating each new nodes before they start to be configured!
+
+We will describe here an example showing how to add a server-side hook to auto-accept nodes
+when a new inventory comes.  
+
+=== Server-side hook on inventory events
+
+Rudder allows to xref:reference:usage:advanced_configuration_management.adoc#_server_event_hooks[trigger script execution (hooks) on specific server side events]. Three of these events are related to node inventory processing:
+
+- when a new inventory is received for a not-yet-accepted node. Hook scripts for that event are stored in 
+  directory `/opt/rudder/etc/hooks.d/node-inventory-received-pending/`; 
+
+- when a new inventory is received for an already accepted node (and so, that inventory is an update). Hook scripts for 
+  that event are stored in directory `/opt/rudder/etc/hooks.d/node-inventory-received-accepted/`; 
+
+- and finally when a new inventory was received but its processing by Rudder failed. Hook scripts for 
+  that event are stored in directory `/opt/rudder/etc/hooks.d/node-inventory-received-failed/`. 
+
+It's the first of these cases that is of interest for reaching our goal.
+
+== Auto-acceptation hook
+
+Rudder provides an example script to auto-accept node: `/opt/rudder/etc/hooks.d/node-inventory-received-pending/auto-accept-nodes.example`.
+
+This file is just an example and should not be used directly in production. Nonetheless, it provides the main necessary steps and let
+space for tailored integration to your processes. The hook is fairly well documented, but still, let's review these steps together.
+
+=== Enable auto-accept hook
+
+As explained in xref:reference:usage:advanced_configuration_management.adoc#_server_event_hooks[hooks documentation], Rudder only
+execute hooks that are executable and not named "example":
+
+[source,shell]
+----
+cd /opt/rudder/etc/hooks.d/node-inventory-received-pending/
+cp auto-accept-nodes.example auto-accept-nodes
+chmod +x auto-accept-nodes
+----
+
+=== Node acceptation condition: set-up
+
+In our example, we only accept node if they have the corresponding property/value in their inventory. 
+For that, we add the property `accept:auto-accept` thanks to a an 
+xref:reference:system:extend-inventories.adoc[inventory extension hook] (yes, hooks everywhere!).
+
+Of course, that logic is trivial and not secure. You typically want to check with your CMDB or other reference base to
+now if the node is actually authorized to be accepted.
+
+=== Getting more information about the node in hook
+
+In the hook, by default you only have access to a sub-set of node information, like the node ID (`${RUDDER_NODE_ID}`), 
+but properties are not part of that set. 
+The hook shows how to query that missing piece of data and extract only the relevant value for property `accept` thanks 
+to `jq` (provided as a dependency of Rudder):
+
+[source,shell]
+----
+MODE=$(curl -k -X GET -H "X-API-TOKEN: $(cat /var/rudder/run/api-token)" -H "Content-Type: application/json" \
+  "https://localhost/rudder/api/latest/nodes/${RUDDER_NODE_ID}?include=minimal,properties" | \
+  jq -r '.data.nodes[0].properties | map(select(.name = "accept"))[0].value')
+
+----
+
+=== Node acceptation condition: check
+
+Now that we have everything we need, we can play our business logic to check if the node should be auto-accepted. 
+In the example, it's an `if`; likely yours will be a bit more complex!
+
+=== Accept node
+
+Now that we know that the node can be accepted, we are doing it via an API call
+
+[source,shell]
+----
+curl -f -k -X POST -H "X-API-TOKEN: $(cat /var/rudder/run/api-token)" \
+  "https://localhost/rudder/api/latest/nodes/pending/${RUDDER_NODE_ID}" -d 'status=accepted'
+----
+
+And done! That node is now managed by Rudder. 
