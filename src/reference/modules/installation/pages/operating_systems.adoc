@@ -45,6 +45,7 @@ available for these platforms as part of the https://www.rudder.io/en/pricing/su
 .2+| SUSE Linux Enterprise Server (SLES) | 10SP3 and 11 | 32bit, 64bit
 | 12 and 15 | 64bit
 | Slackware | 14 | 64bit
+| Solaris | 11.4 | 64bit
 | IBM AIX | 5.3, 6.1 and 7.1 | ppc
 | Microsoft Windows Server | 2008 R2, 2012, 2012 R2, 2016 | 32bit, 64bit
 
@@ -116,12 +117,13 @@ wish to get Rudder support on those systems, please get in touch with us!
 The following operating systems have had an agent built using xref:reference:build.adoc#_building_the_rudder_agent[Building the Rudder Agent]:
 
 * FreeBSD
-* Solaris 10 and 11
+* Solaris 10
 
 The following operating systems work with packages built for another operating system:
 
 * OpenSUSE LEAP (with SLES packages)
-* Amazon Linux and Amazon Linux 2 (with RHEL6 and 7 packages)
+* Amazon Linux and Amazon Linux 2 (with RHEL packages)
+* Oracle Linux (with RHEL packages)
 
 [TIP]
 
