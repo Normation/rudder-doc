@@ -1,0 +1,71 @@
+= Containers - Docker support
+
+== Rudder relay
+
+Starting with Rudder 6.2, there is a Docker image for running a fully containerized relay.
+
+It is still in technical preview state, and we would like to discuss your container use cases
+on https://chat.rudder.io[out char room] to improve our container support, especially in the context of
+container orchestration tools (Kubernetes, Nomad, etc.)
+
+=== Download
+
+Download the image from the https://hub.docker.com/r/rudderio/rudder-relay[Docker Hub] with:
+
+```
+docker pull rudderio/rudder-relay
+```
+
+=== Build
+
+You can also build it from the https://github.com/Normation/rudder/tree/master/docker/rudder-relay[repository].
+
+Specify a version to build with:
+
+```bash
+docker build --build-arg VERSION=6.2.0 .
+```
+
+### Configuration
+
+The container is configurable with env variables:
+
+* `RUDDER_RELAY_ID`: agent id
+* `RUDDER_RELAY_PRIVKEY`: agent private key
+* `RUDDER_RELAY_CERTIFICATE`: agent certificate
+* `RUDDER_RELAY_SERVER`: hostname/IP of the server, default is `rudder`
+* `RUDDER_RELAY_SERVER_PUBKEY`: server public key
+
+The env variables have priority over persisted values.
+If not provided at first start of the container, the id and keys will be generated.
+
+The id, keys and certificates can be persisted by making `/var/rudder/cfengine-community/ppkeys/`
+a persistent volume.
+
+### Docker
+
+Start the container with:
+
+```bash
+docker run -p443:443 -p5309:5309
+```
+
+The fist start will take several seconds to generate the required keys and certificates,
+to download initial policies from the root server, and will then start the services.
+
+It is currently not possible to modify the ports used by the container.
+
+### Nomad
+
+We provide a sample Nomad configuration in `rudder-relay.nomad`, but it has not been
+tested in a real use case, we're open to feedbacks and improvements.
+
+### Upgrade
+
+To upgrade, you need to keep the `ppkeys` volume and replace the container by
+the new one.
+
+//== Rudder server
+//
+// TODO: demo all-in-one container for root server
+
