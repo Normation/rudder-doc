@@ -3,8 +3,6 @@
 
 This plugins allows to manage Windows systems, using Microsoft Powershell DSC. Rudder Windows agent is available with a annual subscription, read more about it https://www.rudder.io/en/pricing/subscription/[on our website].
 
-IMPORTANT: Currently the DSC agent does not support yet the *HTTPS only* report mode which is the default mode on Rudder 6.0+. You can change it in the *Settings* page of your Rudder server.
-
 == Install Windows DSC plugin on the server
 
 === Prerequisite
@@ -97,7 +95,7 @@ Then the installer need to be executed with the following command:
 
 ----
 
-rudder-agent-dsc-<Rudder version>-<plugin version>.exe /S
+rudder-agent-dsc-<Rudder version>-<plugin version>.exe /S /POLICYSERVER=xxx.xxx.xxx.xxx
 
 ----
 
@@ -124,7 +122,7 @@ Unfortunately, not all Techniques are compatible with DSC agent, as some are dep
 image:rudder-technique-dsc.png[DSC compatible Techniques]
 
 There is a detailed walk-through example of the `Windows Software` technique in https://docs.rudder.io/rudder-by-example/current/application/install-exe-or-msi.html[Install software from a .exe or .msi installer]
-Rudder By Example article. 
+Rudder By Example article.
 
 == DSC Agent CLI
 
@@ -208,5 +206,5 @@ Get-ChildItem : Access to the path 'C:\Program Files\Rudder\tmp\dsc\ncf' is deni
 ----
 +
 
-This may broke your agent. If it happens, please rename the folder `C:\Program Files\Rudder\Policy.swap` in `C:\Program Files\Rudder\Policy`, close all
+This may broke agents prior to 6.2. If it happens, please rename the folder `C:\Program Files\Rudder\Policy.swap` in `C:\Program Files\Rudder\Policy`, close all
 Windows File Explorer and try again to update.
