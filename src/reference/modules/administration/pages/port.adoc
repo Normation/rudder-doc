@@ -1,0 +1,55 @@
+[[port]]
+= Change server port
+
+This chapter explains how to change cf-serverd listening port (default 5309).
+
+[CAUTION]
+====
+
+All agents and relays must use the same port to communicate, if you change the port on an existing infrastructure you must do it on all machines.
+
+====
+
+== Change listening port on the policy-server
+
+To change the cf-serverd port on th policy-server, edit `/opt/rudder/etc/rudder-web.properties` and replace the key `rudder.community.port`.
+
+For example : 
+
+----
+
+rudder.community.port=5310
+
+----
+
+Then restart the server and the agent :
+
+----
+
+systemctl restart rudder-jetty
+systemctl restart rudder-agent
+
+----
+
+== Set connection port on the agent
+
+The agent cannot know in advance that the server port has changed, so you must declare it when configuring the agent.
+
+To do this, add the port to the server name in `/var/rudder/cfengine-community/policy_server.dat`.
+
+For example :
+
+----
+
+x=rudder.example.com:5310
+
+----
+
+You must restart the agent to get its new set of promises and to make sure it listens for remote-run on this specific port :
+
+----
+
+systemctl restart rudder-agent
+
+----
+
