@@ -212,6 +212,32 @@ Match Address 10.111.20.1,10.111.20.2, Group admins,
 
 * Apparently the `sshd_config` is still valid if the Match-Group has commas on the end of a list, and if you don't want to have any Groups or Users, just keep the json array for them as an empty array (`[ ]`), and it will still be a valid sshd_config (but it will definitely look strange).
 
-* Please check the configuration options that are available for the version of your sshd, most importantly of what is supported in the Match-Block. Earlier versions of sshd do not support all config options, this is also why validation the generated file is always a good option so an update of sshd can not break your access easily, just make sure you check the compliance after updates. 
+* Please check the configuration options that are available for the version of your sshd, most importantly of what is supported in the Match-Block. Earlier versions of sshd do not support all config options, this is also why validation the generated file is always a good option so an update of sshd can not break your access easily, just make sure you check the compliance after updates.
 
-* This approaches can be mixed with both node-property and generic-variable based input data, and is only an example on the 
+* This approaches can be mixed with both node-property and generic-variable based input data, and is only an example on the
+
+== Advanced example: select IP by interface name priority
+
+Jinja2 templates can contains more advanced logic. In this example, we will show how to get an IP
+by interface priority. It allows providing an algorithm to compute the "main IP address" based
+on the interface names that can exist on the machine.
+
+In our case, we want the resulting IP to come from:
+
+* The `bond0` interface if it exists
+* If not, then try to use the `eth0` fallback
+* Finally, if none are found, just use the first IP provided by the agent
+
+[source,jinja2]
+```
+{%- if   'bond0' in vars.sys.interfaces %}
+    # 'bond0' in vars.sys.interfaces
+    {%- set my_ip = vars.sys['ipv4[bond0]'] %}
+{%- elif 'eth0' in vars.sys.interfaces %}
+    # Use eth0 as fallback
+    {%- set my_ip = vars.sys['ipv4[eth0]'] %}
+{%- else %}
+    # Not found bond0 or eth0, using default sys.ipv4
+    {%- set my_ip = vars.sys.ipv4 %}
+{%- endif %}
+```
