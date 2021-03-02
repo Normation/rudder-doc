@@ -63,9 +63,9 @@ You can then use them in the configuration, for example:
 
 ----
 # To execute the hostname command evewhere and get the result
-ansible -i rudder.py All_nodes -a "hostname"
+ansible -i rudder.py All_classic_Nodes -a "hostname"
 # To use Rudder node id, group id and node properties inside ansible commands or playbooks
-ansible -i rudder.py All_nodes -a "echo {{rudder_node_id}} {{rudder_group_id}} {{node_property}} {{node_property2.key}}"
+ansible -i rudder.py All_classic_Nodes -a "echo {{rudder_node_id}} {{rudder_group_id}} {{node_property}} {{node_property2.key}}"
 ----
 
 Will try to connect over SSH to all nodes managed by your Rudder server and display the given information.
