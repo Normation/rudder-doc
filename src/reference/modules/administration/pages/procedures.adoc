@@ -142,10 +142,10 @@ cd /tmp/backup
 /opt/rudder/sbin/slapcat -l rudder-backup-$(date +%Y%m%d).ldif
 
 # Second, the PostgreSQL database:
-sudo -u postgres pg_dump -Fc rudder > rudder-backup-$(date +%Y%m%d).pgsql
+sudo -u postgres pg_dump -Fc rudder > rudder-backup-$(date +%Y%m%d).sql
 
 # Or without sudo, use the rudder application password:
-pg_dump -Fc -U rudder rudder > rudder-backup-$(date +%Y%m%d).pgsql
+pg_dump -Fc -U rudder rudder > rudder-backup-$(date +%Y%m%d).sql
 
 # Third, backup the configuration repository:
 tar -C /var/rudder -zcf rudder-backup-$(date +%Y%m%d).tar.gz configuration-repository/ cfengine-community/ppkeys/
@@ -202,13 +202,16 @@ tar -C /var/rudder -zxf rudder-backup-plugin-resources-XXXXXXXX.tar.gz
 # LDAP backup
 /opt/rudder/sbin/slapadd -l rudder-backup-XXXXXXXX.ldif
 
+# Change ownership of files to rudder-slapd
+chown -R rudder-slapd:rudder-slapd /var/rudder/ldap/openldap-data
+
 # Start PostgreSQL
 systemctl start postgresql
 
 # PostgreSQL backup
 sudo -u postgres pg_restore -d rudder --clean --create < rudder-backup-XXXXXXXX.sql
 # or
-pg_restore -u rudder -d rudder --clean --create -W < rudder-backup-XXXXXXXX.sql
+pg_restore --username rudder -d rudder --clean --create -W < rudder-backup-XXXXXXXX.sql
 
 # Configuration backup
 tar -C /opt/rudder -zxf rudder-etc-backup-XXXXXXXX.tar.gz
@@ -220,7 +223,7 @@ tar -C /var/log -zxf rudder-log-backup-XXXXXXXX.tar.gz
 rudder agent enable
 
 # And restart the machine or just Rudder:
-systemctl start rudder-agent rudder-server
+systemctl start rudder-agent rudder-server rsyslog
 
 ----
 
