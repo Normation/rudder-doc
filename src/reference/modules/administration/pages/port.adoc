@@ -12,9 +12,17 @@ All agents and relays must use the same port to communicate, if you change the p
 
 == Change listening port on the policy-server
 
-To change the cf-serverd port on th policy-server, edit `/opt/rudder/etc/rudder-web.properties` and replace the key `rudder.community.port`.
+To change the cf-serverd port on th policy-server, edit `/opt/rudder/etc/rudder-web.properties` and replace the key `rudder.policy.distribution.port.cfengine` (before 7.0: `rudder.community.port`).
 
-For example : 
+For example:
+
+----
+
+rudder.policy.distribution.port.cfengine=5310
+
+----
+
+Or for version earlier than 7.0:
 
 ----
 
