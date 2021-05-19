@@ -51,7 +51,7 @@ using the provided hostname.
 Rudder fully supports OpenJDK JVM version 1.8u92 to 14.x. Usage of long term support version 11 is recommended.
 
 Version 1.8 prior to u92 are not supported due to the use of JVM option `CrashOnOutOfMemoryError`. In any case, even if you 
-are blocked on java 1.8 branch, you should really use the latest version available (8u292 as of 2021-04): there is *major* 
+are blocked on java 1.8 branch, you should really use the latest version available (8u292 as of 2021-04): there are *major* 
 performance impact and security risk by not doing so. 
 
 OpenJDK 15 is not yet fully supported in Rudder 6.x branch because of the removal of JVM native JS engine in that version.
