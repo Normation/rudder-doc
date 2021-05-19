@@ -48,12 +48,18 @@ using the provided hostname.
 
 === JVM Version
 
-Rudder fully supports OpenJDK JVM version 1.8 to 14. Usage of long term support version 11 is recommended.
+Rudder fully supports OpenJDK JVM version 1.8u92 to 14.x. Usage of long term support version 11 is recommended.
+
+Version 1.8 prior to u92 are not supported due to the use of JVM option `CrashOnOutOfMemoryError`. In any case, even if you 
+are blocked on java 1.8 branch, you should really use the latest version available (8u292 as of 2021-04): there is *major* 
+performance impact and security risk by not doing so. 
 
 OpenJDK 15 is not yet fully supported in Rudder 6.x branch because of the removal of JVM native JS engine in that version.
-You can use JVM 15 but you will need to disable "script evaluation in Directives" in *Settings -> General*
+You can use JVM 15 but you will need to disable "script evaluation in Directives" in *Settings -> General*. That limit 
+will be lifted in Rudder 7.0.
 
-Other JVM should work but they are not thoroughly tested. Please contact Rudder team for more information on that topic.
+Other JVM should work but they are not thoroughly tested. Please contact Rudder team for more information on that topic or
+dedicated support. 
 
 === JVM Security Policy
 
