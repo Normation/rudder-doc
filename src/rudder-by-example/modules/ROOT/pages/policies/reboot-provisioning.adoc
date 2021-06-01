@@ -13,7 +13,7 @@ We need a mechanism to decide when the provisioning is over and we want to reboo
 In order to do so, we can rely on the node's state. First configure you default state to `initializing`
 in *Settings -> General*:
 
-image::initializing.png[Use initalizing state for new nodes]
+image::initializing.png[Use initializing state for new nodes]
 
 We will use this state to tag the nodes that are currently in provisioning state.
 Once provisioning is over, we'll switch the node to the `enabled` state.
