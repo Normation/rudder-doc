@@ -191,7 +191,7 @@ retention duration.
 
 Be careful to correctly size your */var* partition. Compliance data are growing
 fast, and PostgreSQL doesn't like at all to encounter a write error because
-the disk is full. It is also adviced to set-up your monitoring to check for
+the disk is full. It is also advised to set-up your monitoring to check for
 available space on that partition.
 
 Special attention should be given to:

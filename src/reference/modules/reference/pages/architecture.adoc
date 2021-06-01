@@ -341,7 +341,7 @@ Package to setup a Rudder relay. It must be installed on a system that should be
 One single package integrates everything needed for the Rudder Agent. It
 contains CFEngine Community, FusionInventory.
 
-The +rudder-agent+ package mays either depends on or embed a few libraries and utilities depending on their existence withing the target distribution.
+The +rudder-agent+ package mays either depends on or embed a few libraries and utilities depending on their existence within the target distribution.
 
 +rudder-server-root+::
 

@@ -322,7 +322,7 @@ When the node inventory is processed server side, the node properties will get n
 first-level key of all hooks.
 
 These node properties are marked as "provided by inventory" and can not be deleted nor overwritten.
-Appart from that characteristic, they are normal node properties that can be used to create group, or as
+Apart from that characteristic, they are normal node properties that can be used to create group, or as
 variables in Directives parameters.
 
 === Creating a node inventory hook
