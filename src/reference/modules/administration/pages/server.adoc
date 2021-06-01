@@ -74,7 +74,7 @@ committed in the repository.
 Currently, Archiving also add all unstaged files in the commit in +/var/rudder/configuration-repository+.
 So it can change the Techniques used by Rudder (Rudder uses the latest commit in git as a reference). You
 should away ensure that there are no unstaged files before doing any Archive to avoid any side effect.
-In the future, Rudder will prevent any Archive in Techniques or Generic Methods are not commited.
+In the future, Rudder will prevent any Archive in Techniques or Generic Methods are not committed.
 
 ===========
 
@@ -141,7 +141,7 @@ you may have the following error message
 
 ----
 
-Error when trying to open template 'TechniqueResourceIdByPath(List(dsc, ncf, 50_techniques, TechniqueName, 1.0),TechniqueFile.ps1)'. Check that the file exists with a .st extension and is correctly commited in Git, or that the metadata for the technique are corrects.
+Error when trying to open template 'TechniqueResourceIdByPath(List(dsc, ncf, 50_techniques, TechniqueName, 1.0),TechniqueFile.ps1)'. Check that the file exists with a .st extension and is correctly committed in Git, or that the metadata for the technique are corrects.
 
 ----
 

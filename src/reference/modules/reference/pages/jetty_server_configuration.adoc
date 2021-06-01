@@ -2,7 +2,7 @@
 
 Rudder web application is a `Java` web application (`war`) deployed on http://www.eclipse.org/jetty/[Jetty 9.4 server]. 
 
-`Jetty` is highly configurable and let you customize most of its behavior throught
+`Jetty` is highly configurable and let you customize most of its behavior through
 modules defined text or `xml` files. 
 
 This section will present `Jetty` installation directories used in `RUDDER` and how to proceed to modify default behavior if it happened to be needed.  
@@ -239,7 +239,7 @@ you can just add corresponding lines at the end of `start.ini`:
 ##  + a package name e.g. 'net.example.'
 ##  + a jar file e.g. '${jetty.base.uri}/lib/dependency.jar'
 ##  + a directory of jars,resource or classes e.g. '${jetty.base.uri}/resources'
-##  + A pattern preceeded with a '-' is an exclusion, all other patterns are inclusions
+##  + A pattern preceded with a '-' is an exclusion, all other patterns are inclusions
 ##
 ## The +=, operator appends to a CSV list with a comma as needed.
 ##

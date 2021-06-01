@@ -187,7 +187,7 @@ htpasswd -nBC 12 "" | tr -d ':\n' | sed 's/$2y/$2b/'
 [WARNING]
 ====
 
-Upgrading from versions older 5.0.16 leads to problems when removing rudder-jetty package causing the upgrade command to fail and leave rudder-jetty package in a non functionnal state.
+Upgrading from versions older 5.0.16 leads to problems when removing rudder-jetty package causing the upgrade command to fail and leave rudder-jetty package in a non functional state.
 
 However your Rudder 6.0 should be working, but we recommend to upgrade at least to 5.0.16 before upgrading to 6.0.
 
