@@ -35,7 +35,7 @@ reports received from the nodes under the file `/var/log/rudder/reports/all.log`
 
 === Compliance
 
-The `compliance` folder will agregate by default all non `Success` or `N/A` reports under `/var/log/rudder/compliance/non-compliant-reports.log`
+The `compliance` folder will aggregate by default all non `Success` or `N/A` reports under `/var/log/rudder/compliance/non-compliant-reports.log`
 One line per reports that is neither `Success` nor `N/A`, as described below:
 
 ----

@@ -541,7 +541,7 @@ The following rules should be followed when naming a new Technique:
 
 bundle common control
 {
-  bundlesequence => { "exemple" };
+  bundlesequence => { "example" };
 }
 
 ----

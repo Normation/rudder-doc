@@ -21,7 +21,7 @@ templating engine, with a very simple syntax, and the best performance. It shoul
 
 All our Linux methods are built on the same manner, using the underlying tool CFEngine.
 Some basic knowledge on CFEngine will be required to fully understand this guide.
-In Rudder we are using a slighty different vocabulary than CFEngine:
+In Rudder we are using a slightly different vocabulary than CFEngine:
 
 * The `classes` are called `conditions` in Rudder
 * The `bundle name` is the `method name`
@@ -33,7 +33,7 @@ All methods are always bundles of the `agent type`.
 The bundle name must respects the `[a-z_]+` syntax.
 
 The bundle will take 3 parameters:
-* `variable_prefix` and `variable_name` to decribe the full naming space of the variable
+* `variable_prefix` and `variable_name` to describe the full naming space of the variable
 we want to set.
 * `template_path` which is the path of the source template we will use.
 
@@ -117,8 +117,8 @@ used in the technique editor.
 
 ==== Class prefix
 
-Another variable `class_prefix`, used to differenciate the different calls to the same method.
-It basically is the old_clas_prefix but build with the concatenation of all the args of the methods.
+Another variable `class_prefix`, used to differentiate the different calls to the same method.
+It basically is the old_class_prefix but build with the concatenation of all the args of the methods.
 
 [source,bash]
 ----
@@ -223,7 +223,7 @@ You can now commit and try to use the method.
 
 === To go further
 
-Now that we have a functionnal method, we could try to make it more bullet proof.
+Now that we have a functional method, we could try to make it more bullet proof.
 * What if the template file does not exists
 * Or the template is malformed?
 

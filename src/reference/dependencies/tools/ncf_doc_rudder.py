@@ -23,7 +23,7 @@ def slugify(s):
     return s
 
 def get_min_versions():
-  "Build the dictionnary of minimal Rudder version including compatibility with a given CFEngine version"
+  "Build the dictionary of minimal Rudder version including compatibility with a given CFEngine version"
   min_version = {}
   
   try:

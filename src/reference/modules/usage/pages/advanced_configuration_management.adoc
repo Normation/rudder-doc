@@ -102,7 +102,7 @@ End finally summary of generation: success or failure, total time:
 ----
 
 Much more information can be logged about policy generation (hook execution and timing, much more precise timing, 
-updated nodes, files writen, etc). All corresponding logs and verbosity levels are documented and controlled 
+updated nodes, files written, etc). All corresponding logs and verbosity levels are documented and controlled 
 in `/opt/rudder/etc/logback.xml`.
 
 == Understanding how Technique Editor works
