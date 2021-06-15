@@ -40,8 +40,6 @@ You can switch between the following reporting options at any time:
 * HTTPS with syslog compatibility: keeps compatibility with pre-6.0 agents by using HTTPS reporting for 6.0 agents but still allowing syslog reporting
 * HTTPS: switches to HTTPS only, and disables syslog report forwarding, removing all Rudder-specific log configuration from nodes and servers. This should only be done once all agents are upgraded to 6.0. This allows enforcing report signature and transport through HTTPS.
 
-For now, if you are using the Change only report mode, you cannot use HTTPS reporting yet, and have to stick to syslog.
-
 [[archives, Archives]]
 == Archives
 
