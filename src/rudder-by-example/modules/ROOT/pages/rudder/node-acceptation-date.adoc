@@ -1,0 +1,31 @@
+= Get acceptation and deletion date and time of nodes
+
+== Use case
+
+You want to know when nodes were added and deleted in your Rudder. 
+
+== Solution
+
+Connect to Rudder PostgreSQL base and use the following request: 
+
+[source,json]
+====
+with added as ( 
+  select 
+    unnest(xpath('/entry/node/id/text()', data))::text as id
+  , unnest(xpath('/entry/node/hostname/text()', data))::text as hostname
+  , creationdate as date 
+  from eventlog where eventtype = 'AcceptNode'
+  )
+ , deleted as (
+  select 
+    unnest(xpath('/entry/node/id/text()', data))::text as id
+  , creationdate as date from eventlog 
+  where eventtype = 'DeleteNode')
+select added.id, array_agg(hostname) as hostnames, array_agg(added.date) as creationDates, array_agg(deleted.date) as deletionDates  
+from added left join deleted on added.id = deleted.id 
+group by added.id;
+====
+
+The `group by` clause (and the associated array_agg) are necessary because one node could have been added and deleted several times from Rudder. 
+
