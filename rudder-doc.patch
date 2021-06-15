@@ -1,0 +1,3877 @@
+commit b6bfa29af7f4f7051436832987c6c3290ec82603
+Author: Felix Dallidet <felix.dallidet@normation.com>
+Date:   Sun Nov 22 18:23:59 2020 +0100
+
+    RUDDER-THEME
+
+diff --git a/docs/modules/ROOT/_attributes.adoc b/docs/modules/ROOT/_attributes.adoc
+new file mode 100644
+index 0000000..fb98244
+--- /dev/null
++++ b/docs/modules/ROOT/_attributes.adoc
+@@ -0,0 +1,2 @@
++:moduledir: ..
++include::{moduledir}/_attributes.adoc[]
+diff --git a/preview-site-src/404.html b/preview-site-src/404.html
+new file mode 100644
+index 0000000..e69de29
+diff --git a/preview-site-src/index.html b/preview-site-src/index.html
+new file mode 100644
+index 0000000..70b1a4b
+--- /dev/null
++++ b/preview-site-src/index.html
+@@ -0,0 +1,335 @@
++<div id="preamble">
++<div class="sectionbody">
++<div class="paragraph">
++<p>Platonem complectitur mediocritatem ea eos.
++Ei nonumy deseruisse ius.
++Mel id omnes verear.
++Vis no velit audiam, sonet <a href="#dependencies">praesent</a> eum ne.
++<strong>Prompta eripuit</strong> nec ad.</p>
++</div>
++</div>
++</div>
++<div class="sect1">
++<h2 id="cu-solet"><a class="anchor" href="#cu-solet"></a>Cu solet</h2>
++<div class="sectionbody">
++<div class="paragraph">
++<p>Nominavi luptatum eos, an vim hinc philosophia intellegebat.
++Lorem <code>expetenda</code> pertinacia et nec, wisi illud sonet qui ea.
++Eum an doctus <a href="#liber-recusabo">maiestatis efficiantur</a>.
++Eu mea inani iriure.</p>
++</div>
++<div class="listingblock">
++<div class="content">
++<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
++  "name": "module-name",
++  "version": "10.0.1",
++  "description": "An example module to illustrate the usage of package.json",
++  "author": "Author Name &lt;author@example.com&gt;",
++  "scripts": {
++    "test": "mocha",
++    "lint": "eslint"
++  }
++}</code></pre>
++</div>
++</div>
++<div class="listingblock">
++<div class="title">Example paragraph syntax</div>
++<div class="content">
++<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">.Optional title
++[example]
++This is an example paragraph.</code></pre>
++</div>
++</div>
++<div class="exampleblock">
++<div class="title">Optional title</div>
++<div class="content">
++This is an example paragraph.
++</div>
++</div>
++<div class="paragraph">
++<p>How about some code?</p>
++</div>
++<div class="listingblock">
++<div class="content">
++<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">vfs
++  .src('js/vendor/*.js', { cwd: 'src', cwdbase: true, read: false })
++  .pipe(tap((file) =&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
++    file.contents = browserify(file.relative, { basedir: 'src', detectGlobals: false }).bundle()
++  }))
++  .pipe(buffer())
++  .pipe(uglify())
++  .pipe(gulp.dest('build'))</code></pre>
++</div>
++</div>
++<div class="colist arabic">
++<table>
++<tr>
++<td><i class="conum" data-value="1"></i><b>1</b></td>
++<td>The tap function is used to wiretap the data in the pipe.</td>
++</tr>
++</table>
++</div>
++<div class="paragraph">
++<p>Cum dicat <mark>putant</mark> ne.
++Est in <a href="#inline">reque</a> homero principes, meis deleniti mediocrem ad has.
++Altera atomorum his ex, has cu elitr melius propriae.
++Eos suscipit scaevola at.</p>
++</div>
++<div class="literalblock">
++<div class="content">
++<pre>pom.xml
++src/
++  main/
++    java/
++      HelloWorld.java
++  test/
++    java/
++      HelloWorldTest.java</pre>
++</div>
++</div>
++<div class="paragraph">
++<p>Select <span class="menuseq"><b class="menu">File</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Open Project</b></span> to open the project in your IDE.
++Per ea <b class="button">Cancel</b> inimicus.
++Ferri <kbd>F11</kbd> tacimates constituam sed ex, eu mea munere vituperata <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>T</kbd></span> constituam.</p>
++</div>
++<div class="sidebarblock">
++<div class="content">
++<div class="title">Sidebar</div>
++<div class="paragraph">
++<p>Platonem complectitur mediocritatem ea eos.
++Ei nonumy deseruisse ius.
++Mel id omnes verear.</p>
++</div>
++<div class="paragraph">
++<p>Altera atomorum his ex, has cu elitr melius propriae.
++Eos suscipit scaevola at.</p>
++</div>
++</div>
++</div>
++<div class="sect2">
++<h3 id="liber-recusabo"><a class="anchor" href="#liber-recusabo"></a>Liber recusabo</h3>
++<div class="paragraph">
++<p>No sea, at invenire voluptaria mnesarchum has.
++Ex nam suas nemore dignissim, vel apeirian democritum et.
++At ornatus splendide sed, phaedrum omittantur usu an, vix an noster voluptatibus.</p>
++</div>
++<div class="olist arabic">
++<ol class="arabic">
++<li>
++<p>potenti donec cubilia tincidunt</p>
++</li>
++<li>
++<p>etiam pulvinar inceptos velit quisque aptent himenaeos</p>
++</li>
++<li>
++<p>lacus volutpat semper porttitor aliquet ornare primis nulla enim</p>
++</li>
++</ol>
++</div>
++<div class="paragraph">
++<p>Natum facilisis theophrastus an duo.
++No sea, at invenire voluptaria mnesarchum has.</p>
++</div>
++<div class="ulist">
++<ul>
++<li>
++<p>ultricies sociosqu tristique integer</p>
++</li>
++<li>
++<p>lacus volutpat semper porttitor aliquet ornare primis nulla enim</p>
++</li>
++<li>
++<p>etiam pulvinar inceptos velit quisque aptent himenaeos</p>
++</li>
++</ul>
++</div>
++<div class="paragraph">
++<p>Eu sed antiopam gloriatur.
++Ea mea agam graeci philosophia.</p>
++</div>
++<div class="ulist checklist">
++<ul class="checklist">
++<li>
++<p><i class="fa fa-square-o"></i> todo</p>
++</li>
++<li>
++<p><i class="fa fa-check-square-o"></i> done!</p>
++</li>
++</ul>
++</div>
++<div class="paragraph">
++<p>Vis veri graeci legimus ad.</p>
++</div>
++<div class="dlist">
++<dl>
++<dt class="hdlist1">sed</dt>
++<dd>
++<p>splendide sed</p>
++</dd>
++<dt class="hdlist1">mea</dt>
++<dd>
++<p>agam graeci</p>
++</dd>
++</dl>
++</div>
++<div class="paragraph">
++<p>At ornatus splendide sed.</p>
++</div>
++<table id="dependencies" class="tableblock frame-all grid-all">
++<colgroup>
++<col>
++<col>
++</colgroup>
++<thead>
++<tr>
++<th class="tableblock halign-left valign-top">Library</th>
++<th class="tableblock halign-left valign-top">Version</th>
++</tr>
++</thead>
++<tbody>
++<tr>
++<td class="tableblock halign-left valign-top"><p class="tableblock">eslint</p></td>
++<td class="tableblock halign-left valign-top"><p class="tableblock">^1.7.3</p></td>
++</tr>
++<tr>
++<td class="tableblock halign-left valign-top"><p class="tableblock">eslint-config-gulp</p></td>
++<td class="tableblock halign-left valign-top"><p class="tableblock">^2.0.0</p></td>
++</tr>
++<tr>
++<td class="tableblock halign-left valign-top"><p class="tableblock">expect</p></td>
++<td class="tableblock halign-left valign-top"><p class="tableblock">^1.20.2</p></td>
++</tr>
++<tr>
++<td class="tableblock halign-left valign-top"><p class="tableblock">istanbul</p></td>
++<td class="tableblock halign-left valign-top"><p class="tableblock">^0.4.3</p></td>
++</tr>
++<tr>
++<td class="tableblock halign-left valign-top"><p class="tableblock">istanbul-coveralls</p></td>
++<td class="tableblock halign-left valign-top"><p class="tableblock">^1.0.3</p></td>
++</tr>
++<tr>
++<td class="tableblock halign-left valign-top"><p class="tableblock">jscs</p></td>
++<td class="tableblock halign-left valign-top"><p class="tableblock">^2.3.5</p></td>
++</tr>
++</tbody>
++</table>
++<div class="paragraph">
++<p>Cum dicat putant ne.
++Est in reque homero principes, meis deleniti mediocrem ad has.
++Altera atomorum his ex, has cu elitr melius propriae.
++Eos suscipit scaevola at.</p>
++</div>
++<div class="admonitionblock tip">
++<table>
++<tr>
++<td class="icon">
++<i class="fa icon-tip" title="Tip"></i>
++</td>
++<td class="content">
++This oughta do it!
++</td>
++</tr>
++</table>
++</div>
++<div class="paragraph">
++<p>Cum dicat putant ne.
++Est in reque homero principes, meis deleniti mediocrem ad has.
++Altera atomorum his ex, has cu elitr melius propriae.
++Eos suscipit scaevola at.</p>
++</div>
++<div class="admonitionblock note">
++<table>
++<tr>
++<td class="icon">
++<i class="fa icon-note" title="Note"></i>
++</td>
++<td class="content">
++<div class="paragraph">
++<p>You&#8217;ve been down <em>this</em> road before.</p>
++</div>
++</td>
++</tr>
++</table>
++</div>
++<div class="paragraph">
++<p>Cum dicat putant ne.
++Est in reque homero principes, meis deleniti mediocrem ad has.
++Altera atomorum his ex, has cu elitr melius propriae.
++Eos suscipit scaevola at.</p>
++</div>
++<div class="admonitionblock warning">
++<table>
++<tr>
++<td class="icon">
++<i class="fa icon-warning" title="Warning"></i>
++</td>
++<td class="content">
++<div class="paragraph">
++<p>Watch out!</p>
++</div>
++</td>
++</tr>
++</table>
++</div>
++<div class="admonitionblock caution">
++<table>
++<tr>
++<td class="icon">
++<i class="fa icon-caution" title="Caution"></i>
++</td>
++<td class="content">
++<div class="paragraph">
++<p><span id="inline">I wouldn&#8217;t try that if I were you.</span></p>
++</div>
++</td>
++</tr>
++</table>
++</div>
++<div class="admonitionblock important">
++<table>
++<tr>
++<td class="icon">
++<i class="fa icon-important" title="Important"></i>
++</td>
++<td class="content">
++<div class="paragraph">
++<p>Don&#8217;t forget this step!</p>
++</div>
++</td>
++</tr>
++</table>
++</div>
++<div class="admonitionblock tip">
++<table>
++<tr>
++<td class="icon">
++<i class="fa icon-tip" title="Tip"></i>
++</td>
++<td class="content">
++<div class="title">Key Points to Remember</div>
++<div class="paragraph">
++<p>If you installed the CLI and the default site generator globally, you can upgrade both of them with the same command.</p>
++</div>
++<div class="literalblock">
++<div class="content">
++<pre>$ npm i -g @antora/cli @antora/site-generator-default</pre>
++</div>
++</div>
++</td>
++</tr>
++</table>
++</div>
++<div class="paragraph">
++<p>Nominavi luptatum eos, an vim hinc philosophia intellegebat.
++Eu mea inani iriure.</p>
++</div>
++<h2 id="voluptua-singulis" class="discrete">Voluptua singulis</h2>
++<div class="paragraph">
++<p>Cum dicat putant ne.
++Est in reque homero principes, meis deleniti mediocrem ad has.
++Altera atomorum his ex, has cu elitr melius propriae.
++Eos suscipit scaevola at.</p>
++</div>
++</div>
++</div>
++</div>
+\ No newline at end of file
+diff --git a/preview-site-src/ui-model.yml b/preview-site-src/ui-model.yml
+new file mode 100644
+index 0000000..78faeb0
+--- /dev/null
++++ b/preview-site-src/ui-model.yml
+@@ -0,0 +1,96 @@
++antoraVersion: '1.0.0'
++site:
++  url: http://localhost:5252
++  title: Brand Docs
++  components:
++  - name: abc
++    title: Project ABC
++    url: '#'
++    versions:
++    - &latest_version_abc
++      url: '#' 
++      version: '1.1'
++    - url: '#' 
++      version: '1.0'
++    latestVersion: *latest_version_abc
++  - &component
++    name: xyz
++    title: Project XYZ
++    url: /xyz/6.0/index.html
++    versions:
++    - &latest_version_xyz
++      url: /xyz/6.0/index.html
++      version: '6.0'
++    - &component_version
++      url: '#' 
++      version: '5.2'
++    - url: '#' 
++      version: '5.1'
++    - url: '#' 
++      version: '5.0'
++    latestVersion: *latest_version_xyz
++  - name: 123
++    title: Project 123
++    url: '#'
++    versions:
++    - &latest_version_123
++      url: '#' 
++      version: '2.2'
++    - url: '#' 
++      version: '2.1'
++    - url: '#' 
++      version: '2.0'
++    latestVersion: *latest_version_123
++page:
++  title: Brand&#8217;s Hardware &amp; Software Requirements
++  url: /xyz/5.2/index.html
++  component: *component
++  componentVersion: *component_version
++  version: '5.2'
++  module: ROOT
++  home: false
++  editUrl: http://example.com/project-xyz/blob/master/index.adoc
++  breadcrumbs:
++  - content: Quickstart
++    url: '#'
++    urlType: fragment
++  - content: Brand&#8217;s Hardware &amp; Software Requirements
++    url: /xyz/5.2/index.html
++    urlType: internal
++  versions:
++  - version: '6.0'
++    url: '#'
++  - version: '5.2'
++    url: '#'
++  - version: '5.1'
++    url: '#'
++  - version: '5.0'
++    missing: true
++    url: '#'
++  navigation:
++  - root: true
++    content: Project XYZ
++    url: '#'
++    urlType: fragment
++    items:
++    - content: Quickstart
++      url: '#'
++      urlType: fragment
++      items:
++      - content: Brand&#8217;s Hardware &amp; Software Requirements
++        url: /xyz/5.2/index.html
++        urlType: internal
++      - title: IDE Integration
++        url: '#'
++        urlType: fragment
++    - content: Liber Recusabo
++      url: '#liber-recusabo'
++      urlType: fragment
++    - content: Reference
++      items:
++      - content: Keyboard Shortcuts
++        url: '#'
++        urlType: fragment
++      - content: Importing and Exporting
++        url: '#'
++        urlType: fragment
+diff --git a/src/css/custom.css b/src/css/custom.css
+new file mode 100644
+index 0000000..b59f62d
+--- /dev/null
++++ b/src/css/custom.css
+@@ -0,0 +1,1006 @@
++html {
++  font-size: 19px;
++}
++
++.doc h1,
++.doc h2,
++.doc h3,
++.doc h4,
++.doc h5,
++.doc h6 {
++  color: #333;
++  font-weight: 500;
++}
++
++.doc h3 {
++  font-size: 1.3em;
++}
++
++.doc h4 {
++  border-left: 4px solid #f08004;
++  font-size: 1em;
++  padding-left: 12px;
++}
++
++.doc h4 .anchor {
++  left: 2px;
++  margin-left: 0;
++}
++
++.doc h5 {
++  font-size: 1em;
++  font-style: italic;
++}
++
++.doc h5 .anchor {
++  font-style: normal;
++}
++
++.doc h6 {
++  font-size: 1em;
++  border-bottom: 1px solid #e0e0e0;
++}
++
++.doc .exampleblock > .content {
++  background-color: #f5f5f5;
++  border: 1px solid #e6e6e6;
++  box-shadow: none;
++  border-radius: 4px;
++}
++
++.crumb > a {
++  text-decoration: none !important;
++}
++
++.crumb:last-child > a {
++  color: #555;
++  font-weight: 500;
++}
++
++/* --- NAVBAR --- */
++
++.is-current-page > .nav-link,
++.is-current-page > .nav-text {
++  font-weight: normal;
++}
++
++.navbar-brand a.navbar-item.logo {
++  background-color: #e07a07;
++  background-image: url(../img/logo-rudder-documentation.svg);
++  background-size: 10rem;
++  background-repeat: no-repeat;
++  background-position: 2rem center;
++}
++
++.navbar-brand a.navbar-item.logo:hover {
++  background-color: #ff8702;
++}
++
++.navbar-brand a.navbar-item.logo img {
++  height: auto;
++}
++
++@media screen and (min-width: 769px) {
++  .navbar-brand a.navbar-item.logo {
++    width: 16rem;
++    font-size: 0.9rem;
++  }
++}
++
++.navigation {
++  background-color: #222d32;
++}
++
++.navigation .nav-menu {
++  padding: 0;
++}
++
++.nav-item {
++  padding-top: 0;
++}
++
++.navigation .nav-menu > h3 {
++  padding: 0;
++}
++
++.navigation .nav-menu > ul > li > ul > li {
++  padding-top: 0;
++  font-size: 16px;
++}
++
++.navigation .nav-menu > ul li a {
++  text-decoration: none !important;
++}
++
++.navigation .nav-menu > ul li ul li button,
++.doc-title .nav-toggle {
++  background-image: url(../img/caret-white.svg);
++  display: inline-block;
++  background-size: 18px;
++  background-position: center;
++  width: 35px;
++  padding: 6px;
++  color: #fff;
++  min-height: 36px;
++  opacity: 0.5;
++  position: absolute;
++  right: 0;
++}
++
++.doc-title.docs {
++  cursor: pointer;
++}
++
++.doc-title .nav-toggle {
++  top: 0;
++  height: 100%;
++}
++
++.doc-title:hover .nav-toggle,
++.navigation-explore:not(.is-active):hover .nav-toggle {
++  opacity: 1;
++}
++
++.navigation-explore:not(.is-active) .components {
++  display: none;
++}
++
++.navigation-explore:not(.is-active) .components::after {
++  content: "";
++  position: absolute;
++  top: 0;
++  bottom: 0;
++  left: 0;
++  right: 0;
++  background: rgb(0, 0, 0);
++  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 1) 100%);
++  opacity: 0.5;
++  cursor: pointer;
++}
++
++.navigation .nav-menu > ul > li ul li.nav-item.is-active > button,
++.is-active .doc-title .nav-toggle {
++  background-image: url(../img/caret-white-d.svg);
++  transform: none;
++  -webkit-transform: none;
++}
++
++.navigation .nav-menu > h3 > a,
++.navigation .nav-menu > ul > li > ul > li > a {
++  padding: 6px;
++  display: inline-block;
++  color: #b8c7ce;
++  text-decoration: none !important;
++  border-left: 3px solid transparent;
++  width: 100%;
++  margin-left: 0;
++}
++
++#topbar-nav > div > .navbar-item > a {
++  text-transform: uppercase;
++}
++
++#topbar-nav > div > .navbar-item > .control > a {
++  padding-right: 40px;
++  position: relative;
++  border-radius: 4px;
++  transition-duration: 0.2s;
++}
++
++#topbar-nav > div > .navbar-item > .control > a.chat {
++  color: #144b7b;
++}
++
++#topbar-nav > div > .navbar-item > .control > a.site {
++  color: #555;
++}
++
++#topbar-nav > div > .navbar-item > .control > a.chat:hover {
++  color: #144b7b;
++}
++
++#topbar-nav > div > .navbar-item > .control > a.site:hover {
++  color: #333;
++}
++
++#topbar-nav > div > .navbar-item > .control > a::after {
++  content: "";
++  position: absolute;
++  right: 0;
++  top: 0;
++  bottom: 0;
++  width: 35px;
++  background-size: 70%;
++  background-position: center;
++  background-repeat: no-repeat;
++  transition-property: filter, opacity;
++  transition-duration: 0.2s;
++}
++
++#topbar-nav > div > .navbar-item > .control > a.chat::after {
++  background-image: url(../img/chatbubbles.svg);
++}
++
++#topbar-nav > div > .navbar-item > .control > a.chat:hover::after {
++  filter: brightness(0.8);
++}
++
++#topbar-nav > div > .navbar-item > .control > a.site::after {
++  background-image: url(../img/globe.svg);
++  opacity: 0.6;
++}
++
++#topbar-nav > div > .navbar-item > .control > a:hover.site::after {
++  opacity: 0.8;
++}
++
++.navigation .nav-menu > ul > li > ul > li > ul > li {
++  background-color: #303d43;
++}
++
++.navigation .nav-menu > ul > li > ul li button + a {
++  width: calc(100% - 35px) !important;
++  padding-left: 35px;
++}
++
++.navigation .nav-menu > ul > li > ul > li > button + a,
++.navigation .nav-menu > ul > li > ul > li > button + span {
++  padding-left: 6px !important;
++}
++
++.nav-menu > ul > li > button + a {
++  padding-left: 35px !important;
++}
++
++.navigation .nav-menu > h3 > a {
++  padding-left: 9px;
++}
++
++.navigation .nav-menu > h3 > a,
++.navigation .nav-menu > ul > li > ul > li {
++  border-left: 3px solid transparent;
++}
++
++.navigation .nav-menu > ul > li > ul > li:hover,
++.navigation .nav-menu > ul > li > ul > li.is-current-path,
++.navigation .nav-menu > ul > li > ul > li.is-current-page {
++  border-left-color: #f08004;
++  background-color: #20272a;
++}
++
++.navigation .nav-menu > ul > li > ul > li.is-current-page > a {
++  color: #fff;
++}
++
++.navigation .nav-menu > h3 > a:hover,
++.navigation .nav-menu > ul > li > ul > li > a:hover,
++.navigation .nav-menu > ul > li > ul li button:hover {
++  color: #fff;
++  background-color: #1a2226;
++}
++
++.navigation .nav-menu > ul > li > ul li button:hover {
++  opacity: 1;
++}
++
++.navigation .nav-menu > ul.nav-list {
++  color: #8aa4af;
++}
++
++.navigation .nav-menu ul.nav-list {
++  margin-left: 0;
++  padding-left: 0;
++  margin-bottom: 0 !important;
++}
++
++.navigation .nav-menu li.nav-item {
++  margin-top: 0;
++}
++
++.navigation .nav-menu > ul > li > ul > li > button + a,
++.navigation .nav-menu > ul > li > ul > li > ul > li > a,
++.navigation .nav-menu > ul > li > ul > li > ul > li > ul li a,
++.navigation .nav-menu > ul li > span.nav-text {
++  padding: 6px 6px 6px 35px;
++  display: block;
++  margin: 0;
++  width: 100%;
++  position: relative;
++  min-height: 36px;
++}
++
++.navigation .nav-menu > ul > li > ul > li > ul > li > ul > li a {
++  padding-left: 50px;
++}
++
++.navigation .nav-menu > ul > li > ul > li > ul > li.is-current-page > a,
++.navigation .nav-menu > ul > li > ul > li > ul > li ul li.is-current-page > a,
++.navigation .nav-menu > ul li > span.nav-text:hover {
++  color: #fff;
++}
++
++.navigation .nav-menu > ul > li > ul > li > ul > li.is-current-page > a::before,
++.navigation .nav-menu > ul > li > ul > li > ul > li ul li.is-current-page > a::before,
++.navigation .nav-menu > ul > li > ul > li.is-current-page > button + a::after,
++.navigation .nav-menu > ul > li > ul > li ul li.is-current-page > button + a::after {
++  content: "";
++  position: absolute;
++  top: 0;
++  width: 35px;
++  height: 36px;
++  background-image: url(../img/current-page.svg);
++  background-size: 18px;
++  background-position: center;
++  background-repeat: no-repeat;
++}
++
++.navigation .nav-menu > ul > li > ul > li > ul li.is-current-page > a::before {
++  left: 0;
++}
++
++.navigation .nav-menu > ul > li > ul > li > ul > li ul li.is-current-page > a::before {
++  left: 15px;
++}
++
++.navigation .nav-menu > ul > li > ul li.is-current-page > button + a::before,
++.navigation .nav-menu > ul > li > ul li.is-current-page > button + a::after {
++  content: initial !important;
++}
++
++.navigation .nav-menu > ul > li > ul > li.is-current-page.is-active {
++  background-color: #1e282c;
++}
++
++.navigation .nav-menu > ul > li > ul > li.is-current-page > button + a::after,
++.navigation .nav-menu > ul > li > ul > li ul li.is-current-page > button + a::after {
++  left: 0;
++}
++
++.navigation .nav-menu > ul > li > ul > li > ul li a:hover {
++  color: #fff;
++}
++
++.navigation .panels {
++  position: relative;
++  height: 100%;
++  overflow-y: auto;
++}
++
++.navigation-explore {
++  width: 100%;
++  height: auto !important;
++}
++
++.navigation-explore .context {
++  color: #8aa4af;
++  background: #1a2226;
++  -webkit-box-shadow: none !important;
++  box-shadow: none !important;
++  border-bottom: 2px solid #536169;
++  position: relative;
++}
++
++.navigation-explore:hover .context {
++  border-color: #f08004 !important;
++}
++
++.navigation-explore .context::after {
++  content: "";
++  position: absolute;
++  right: 0;
++  top: 1px;
++  bottom: 0;
++  width: 30px;
++  background-image: url(../../_/img/menu-nav.svg);
++  background-repeat: no-repeat;
++  background-size: 50%;
++  background-position: center;
++  opacity: 0.5;
++}
++
++.navigation-explore:hover .context::after {
++  opacity: 1;
++}
++
++.navigation-explore.is-active .context::after {
++  background-image: url(../../_/img/menu-nav-close.svg);
++  opacity: 1;
++}
++
++.navigation-explore .context .version {
++  background-image: none;
++  padding-right: none;
++}
++
++.navigation-explore .context:hover {
++  color: #fff;
++}
++
++.navigation-explore .components {
++  color: #8aa4af;
++  background-color: #2c3b41;
++  padding-bottom: 30px;
++  box-shadow: none;
++}
++
++.navigation-explore .component .version a {
++  border: 2px solid #fff;
++  border-radius: 4px;
++  color: #88a0ad;
++  white-space: nowrap;
++  padding: 1px 10px;
++  display: inline-block;
++  text-decoration: none !important;
++}
++
++.navigation-explore .component .version a:hover,
++.navigation-explore .component .version.is-current a:hover {
++  color: #fff;
++}
++
++.navigation-explore .component .version.is-current a {
++  border: 2px solid #f08004;
++  color: #88a0ad;
++  white-space: nowrap;
++  padding: 1px 10px;
++  display: inline-block;
++  text-decoration: none !important;
++}
++
++.doc-title {
++  position: relative;
++  padding: 10px 8px 10px 45px;
++  background-color: #20272a;
++  color: #fff;
++  font-size: 1.1em;
++  border-bottom: 2px solid #8aa4af;
++  transition-property: border-bottom-color;
++  transition-duration: 0.2s;
++}
++
++.navigation-explore:hover .doc-title,
++.navigation-menu:hover .doc-title {
++  border-bottom-color: #f08004;
++}
++
++.doc-title::before {
++  content: "";
++  background-image: url(../img/book.svg);
++  background-size: 70%;
++  background-position: 50%;
++  background-repeat: no-repeat;
++  position: absolute;
++  top: 0;
++  left: 8px;
++  bottom: 0;
++  width: 35px;
++  opacity: 0.6;
++}
++
++.doc-title.docs::before {
++  background-image: url(../img/books.svg);
++}
++
++.doc-title .version {
++  float: right;
++  color: #8aa4af;
++  opacity: 0.8;
++  font-size: 0.9em;
++}
++
++/* --- ADMONITION BLOCKS --- */
++
++.doc .admonitionblock {
++  margin: 1.4rem 0 0;
++  border-radius: 4px;
++  overflow: hidden;
++}
++
++.doc .admonitionblock p,
++.doc .admonitionblock td.content {
++  font-size: 0.9rem;
++}
++
++.doc .admonitionblock td.content > :first-child {
++  margin: 0;
++}
++
++.doc .admonitionblock pre {
++  font-size: 0.85rem;
++}
++
++.doc .admonitionblock > table {
++  border-collapse: collapse;
++  table-layout: fixed;
++  position: relative;
++  width: 100%;
++}
++
++.doc .admonitionblock td.content {
++  padding: 1rem 1rem 0.75rem;
++  width: 100%;
++}
++
++.doc .admonitionblock .icon {
++  width: 60px;
++  background-repeat: no-repeat;
++  background-size: 40px;
++  background-position: center;
++}
++
++.doc .admonitionblock.note .icon {
++  background-image: url(../img/info.svg);
++  background-color: #2a4e68;
++}
++
++.doc .admonitionblock.note td.content {
++  background-color: #edf5fd;
++  color: #2a4e68;
++}
++
++.doc .admonitionblock.warning .icon,
++.doc .admonitionblock.caution .icon {
++  background-image: url(../img/warning.svg);
++  background-color: #f08004;
++}
++
++.doc .admonitionblock.warning,
++.doc .admonitionblock.caution {
++  background-color: #fff0de;
++  color: #825e36;
++}
++
++.doc .admonitionblock.important .icon {
++  background-image: url(../img/important.svg);
++  background-color: #c80004;
++}
++
++.doc .admonitionblock.important {
++  background-color: #ffe7e8;
++  color: #a70c0f;
++}
++
++.doc .admonitionblock.tip .icon {
++  background-image: url(../img/tip.svg);
++  background-color: #9dca32;
++}
++
++.doc .admonitionblock.tip {
++  background-color: #ecfbe5;
++  color: #3f5803;
++}
++
++.doc .admonitionblock.tip .title {
++  font-weight: 500;
++  color: #2f4007;
++}
++
++.doc .admonitionblock .icon i {
++  display: none;
++}
++
++/* --- CODE BLOCKS --- */
++
++.doc pre {
++  border-radius: 4px;
++  overflow: hidden;
++  color: #555;
++}
++
++.doc p code {
++  color: #555;
++}
++
++/* --- IMAGES --- */
++
++.doc .imageblock img,
++.doc .paragraph .image img {
++  box-shadow: 0 0 15px 0 #cacaca;
++}
++
++/* --- FOOTER --- */
++
++.footer {
++  display: none;
++}
++
++/* =================== HOME PAGE=================== */
++
++#homepage {
++  margin: 0;
++  max-width: none;
++  padding: 0;
++  width: 100%;
++}
++
++#homepage > h1 {
++  text-align: center;
++  margin-top: 0;
++  padding-top: 2rem;
++}
++
++#homepage > .ulist {
++  background-color: #f5f5f0;
++}
++
++#homepage .ulist > ul {
++  list-style: none;
++  padding: 0;
++  margin: 0;
++}
++
++#homepage > .ulist > ul > li {
++  text-align: center;
++  position: relative;
++  padding: 50px 10%;
++  margin-bottom: 0;
++  background-color: #fff;
++}
++
++#homepage > .ulist > ul > li:first-child {
++  padding-bottom: 10px;
++}
++
++#homepage > .ulist > ul > li:first-child::after,
++#homepage > .ulist > ul > li:first-child::before {
++  content: "";
++  position: absolute;
++  width: 50px;
++  height: 50px;
++  background-color: transparent;
++  bottom: -20px;
++  left: 48%;
++  transform: rotate(45deg);
++  z-index: 9;
++}
++
++#homepage > .ulist > ul > li > .ulist {
++  text-align: left;
++  margin-top: 1rem;
++  margin-bottom: 2rem;
++}
++
++#homepage > .ulist > ul > li > p {
++  font-size: 1.6em;
++  color: #333;
++  font-weight: 500;
++  padding-bottom: 2px;
++  display: inline-block;
++  border-bottom: 2px solid #f08004;
++  margin-bottom: 30px;
++  min-height: 0;
++  height: auto;
++  line-height: 40px;
++}
++
++#homepage > .ulist > ul > li > p::after {
++  content: "";
++  height: 0;
++  width: 100%;
++  border-bottom: 2px solid #f1f1f1;
++  position: absolute;
++  left: 0;
++  top: 20px;
++  z-index: -1;
++}
++
++/* -- DISCOVER RUDDER */
++
++#homepage > .ulist > ul > li > .ulist > ul {
++  display: flex;
++}
++
++#homepage > .ulist > ul > li > .ulist > ul > li {
++  display: inline-block;
++  width: 33.3%;
++  padding: 0 15px;
++}
++
++#homepage > .ulist > ul > li > .ulist > ul > li > p {
++  text-align: center;
++  color: #555;
++}
++
++#homepage > .ulist > ul > li > .ulist > ul > li > p a {
++  display: block;
++  text-align: center;
++  text-decoration: none !important;
++  position: relative;
++  font-size: 1.1rem;
++}
++
++#homepage > .ulist > ul > li:first-child > .ulist > ul > li > p a::before {
++  content: "";
++  display: block;
++  width: 100%;
++  height: 100px;
++  background-size: contain;
++  background-repeat: no-repeat;
++  background-position: center;
++  -webkit-filter: grayscale(100%);
++  filter: grayscale(100%);
++  opacity: 0.8;
++  transition-duration: 0.4s;
++  transition-property: filter, opacity;
++  margin-bottom: 15px;
++}
++
++#homepage > .ulist > ul > li:first-child > .ulist > ul > li > p a:hover::before {
++  -webkit-filter: grayscale(0%);
++  filter: grayscale(0%);
++  opacity: 1;
++}
++
++#homepage > .ulist > ul > li:first-child > .ulist > ul > li:nth-child(1) > p a::before {
++  background-image: url(../img/home-logo-rudder.svg);
++}
++
++#homepage > .ulist > ul > li:first-child > .ulist > ul > li:nth-child(2) > p a::before {
++  background-image: url(../img/home-logo-demo.svg);
++}
++
++#homepage > .ulist > ul > li:first-child > .ulist > ul > li:nth-child(3) > p a::before {
++  background-image: url(../img/home-logo-getstarted.svg);
++}
++
++#homepage > .ulist > ul > li:first-child > .ulist > ul > li > p a::after {
++  content: initial;
++}
++
++/* -- INSTALL RUDDER */
++
++#homepage > .ulist > ul > li:nth-child(2) > .ulist {
++  padding-top: 60px;
++  margin-top: -10px;
++  position: relative;
++}
++
++#homepage > .ulist > ul > li:nth-child(2) > .ulist::before {
++  content: "";
++  display: inline-block;
++  position: absolute;
++  left: calc(33.3% / 2);
++  top: 30px;
++  background-color: gainsboro;
++  height: 4px;
++  width: calc(66.6%);
++}
++
++#homepage > .ulist > ul > li:nth-child(2) > .ulist > ul > li > p a {
++  margin-bottom: 10px;
++}
++
++#homepage > .ulist > ul > li:nth-child(2) > .ulist > ul > li > p a::before {
++  content: "";
++  display: inline-block;
++  height: 24px;
++  width: 24px;
++  position: absolute;
++  left: calc(50% - 12.5px);
++  top: -40px;
++  background-color: #fff;
++  border-radius: 50%;
++  border: 4px solid #dcdcdc;
++  transition-property: background-color;
++  transition-duration: 0.2s;
++  box-shadow: inset 0 0 0 3px #fff;
++}
++
++#homepage > .ulist > ul > li:nth-child(2) > .ulist > ul > li > p a::after {
++  content: "";
++  position: absolute;
++  top: 0;
++  bottom: 0;
++  left: 0;
++  right: 0;
++}
++
++#homepage > .ulist > ul > li:nth-child(2) > .ulist > ul > li > p a:hover::before {
++  background-color: #b7b7b7;
++}
++
++/* -- USE RUDDER && JOIN THE COMMUNITY */
++
++#homepage > .ulist > ul > li:nth-child(3),
++#homepage > .ulist > ul > li:nth-child(4) {
++  background-color: transparent;
++  text-align: left;
++  display: inline-block;
++  width: 49%;
++}
++
++#homepage > .ulist > ul > li:nth-child(3) {
++  padding: 50px 5% 50px 10%;
++}
++
++#homepage > .ulist > ul > li:nth-child(4) {
++  padding: 50px 10% 50px 5%;
++  margin-left: -5px;
++}
++
++#homepage > .ulist > ul > li:nth-child(3) > .ulist,
++#homepage > .ulist > ul > li:nth-child(4) > .ulist {
++  margin-top: 0;
++}
++
++#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul,
++#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul {
++  display: block;
++}
++
++#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li,
++#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li {
++  display: block;
++  width: 100%;
++  padding-left: 0;
++}
++
++#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li > p,
++#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li > p {
++  padding-left: 70px;
++  text-align: left;
++  position: relative;
++}
++
++#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li > p::before,
++#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li > p::before {
++  content: "";
++  display: inline-block;
++  width: 60px;
++  height: 60px;
++  position: absolute;
++  top: 0;
++  left: 0;
++  background-size: 90%;
++  background-repeat: no-repeat;
++  background-position: center;
++  transition-duration: 0.2s;
++  opacity: 0.6;
++}
++
++#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li > p::before {
++  background-image: url(../img/list-icon-use-rudder.svg);
++}
++
++#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li:nth-child(1) > p::before {
++  background-image: url(../img/list-icon-community-1.svg);
++}
++
++#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li:nth-child(2) > p::before {
++  background-image: url(../img/list-icon-community-2.svg);
++}
++
++#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li:nth-child(3) > p::before {
++  background-image: url(../img/list-icon-community-3.svg);
++}
++
++#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li > p:hover::before,
++#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li > p:hover::before {
++  opacity: 1;
++}
++
++#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li p a::before,
++#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li p a::before {
++  content: "";
++  position: absolute;
++  top: 0;
++  bottom: 0;
++  left: 0;
++  right: 0;
++}
++
++#homepage > .ulist > ul > li:nth-child(3) > .ulist > ul > li p a,
++#homepage > .ulist > ul > li:nth-child(4) > .ulist > ul > li p a {
++  text-align: left;
++  position: static;
++}
++
++/* =============================== SEARCH BAR =============================== */
++
++.navbar-item > .algolia-autocomplete {
++  position: relative;
++}
++
++#docsearch {
++  background-color: transparent;
++  border: none;
++  padding: 8px 12px 6px 52px;
++  height: 35px;
++  outline: none !important;
++  color: #555;
++}
++
++#docsearch-addon {
++  display: inline-block;
++  position: absolute;
++  z-index: -1;
++  top: 0;
++  bottom: 0;
++  left: 0;
++  right: 0;
++  transition-duration: 0.2s;
++  transition-property: background-color;
++  background-color: #fff;
++}
++
++#docsearch-addon::before,
++#docsearch-addon::after {
++  content: "";
++  display: inline-block;
++  width: 40px;
++  height: 35px;
++  position: absolute;
++  top: 0;
++  left: 0;
++}
++
++#docsearch-addon::before {
++  background-color: #f9d3ab;
++}
++
++#docsearch-addon::after {
++  background-image: url(../img/search.svg);
++  background-position: 50%;
++  background-size: 50%;
++  background-repeat: no-repeat;
++  opacity: 0.5;
++  transition-duration: 0.2s;
++}
++
++.navbar-item > .algolia-autocomplete:hover #docsearch-addon::after {
++  opacity: 0.8;
++}
++
++.navbar-item > .algolia-autocomplete .algolia-docsearch-suggestion--wrapper {
++  padding: 0;
++}
++
++.navbar-item > .algolia-autocomplete .algolia-docsearch-suggestion--title {
++  color: #555;
++  font-weight: 600;
++}
++
++.navigation-menu {
++  display: flex !important;
++  overflow-y: initial;
++  flex: 1;
++  height: auto;
++}
++
++/* === WARNING BANNER === */
++
++.banner-warning {
++  position: sticky;
++  top: var(--navbar-height);
++  display: flex;
++  height: 45px;
++  width: 100%;
++  align-items: center;
++  justify-content: center;
++  background: #c9302c;
++  color: #fff;
++  font-weight: bold;
++  font-size: 1.1em;
++  text-shadow: 0 2px 4px #00000050;
++  z-index: 2;
++}
++
++.banner-warning.warning-deprecated {
++  background: #8d91a5;
++}
++
++.banner-warning .icon-warning {
++  display: inline-block;
++  width: 20px;
++  height: 20px;
++  background-image: url(../img/warning.svg);
++  background-size: contain;
++  background-repeat: no-repeat;
++  margin-right: 10px;
++  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.31));
++}
++
++.banner-warning + .toolbar {
++  top: calc(3.25rem + 45px);
++  top: calc(var(--navbar-height) + 45px);
++}
+diff --git a/src/css/site.css b/src/css/site.css
+index 36e1767..97794a5 100644
+--- a/src/css/site.css
++++ b/src/css/site.css
+@@ -15,3 +15,4 @@
+ @import "footer.css";
+ @import "highlight.css";
+ @import "print.css";
++@import "custom.css";
+diff --git a/src/img/book.svg b/src/img/book.svg
+new file mode 100644
+index 0000000..2b14190
+--- /dev/null
++++ b/src/img/book.svg
+@@ -0,0 +1,54 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   width="1792"
++   height="1792"
++   version="1.1"
++   id="svg1082"
++   sodipodi:docname="book.svg"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)">
++  <metadata
++     id="metadata1088">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++        <dc:title></dc:title>
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <defs
++     id="defs1086" />
++  <sodipodi:namedview
++     pagecolor="#ffffff"
++     bordercolor="#666666"
++     borderopacity="1"
++     objecttolerance="10"
++     gridtolerance="10"
++     guidetolerance="10"
++     inkscape:pageopacity="0"
++     inkscape:pageshadow="2"
++     inkscape:window-width="1853"
++     inkscape:window-height="1025"
++     id="namedview1084"
++     showgrid="false"
++     inkscape:zoom="0.13169643"
++     inkscape:cx="-842.84746"
++     inkscape:cy="896"
++     inkscape:window-x="67"
++     inkscape:window-y="27"
++     inkscape:window-maximized="1"
++     inkscape:current-layer="svg1082" />
++  <path
++     d="M1703 478q40 57 18 129l-275 906q-19 64-76.5 107.5T1247 1664H324q-77 0-148.5-53.5T76 1479q-24-67-2-127 0-4 3-27t4-37q1-8-3-21.5t-3-19.5q2-11 8-21t16.5-23.5T116 1179q23-38 45-91.5t30-91.5q3-10 .5-30t-.5-28q3-11 17-28t17-23q21-36 42-92t25-90q1-9-2.5-32t.5-28q4-13 22-30.5t22-22.5q19-26 42.5-84.5T404 411q1-8-3-25.5t-2-26.5q2-8 9-18t18-23 17-21q8-12 16.5-30.5t15-35 16-36 19.5-32 26.5-23.5 36-11.5T620 134l-1 3q38-9 51-9h761q74 0 114 56t18 130l-274 906q-36 119-71.5 153.5T1089 1408H220q-27 0-38 15-11 16-1 43 24 70 144 70h923q29 0 56-15.5t35-41.5l300-987q7-22 5-57 38 15 59 43zm-1064 2q-4 13 2 22.5t20 9.5h608q13 0 25.5-9.5T1311 480l21-64q4-13-2-22.5t-20-9.5H702q-13 0-25.5 9.5T660 416zm-83 256q-4 13 2 22.5t20 9.5h608q13 0 25.5-9.5T1228 736l21-64q4-13-2-22.5t-20-9.5H619q-13 0-25.5 9.5T577 672z"
++     fill="#fff"
++     id="path1080" />
++</svg>
+diff --git a/src/img/books.svg b/src/img/books.svg
+new file mode 100644
+index 0000000..693b9ba
+--- /dev/null
++++ b/src/img/books.svg
+@@ -0,0 +1,66 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   width="1792"
++   height="1792"
++   viewBox="0 0 1792 1792"
++   version="1.1"
++   id="svg817"
++   sodipodi:docname="books.svg"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)">
++  <metadata
++     id="metadata823">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++        <dc:title />
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <defs
++     id="defs821" />
++  <sodipodi:namedview
++     pagecolor="#ffffff"
++     bordercolor="#666666"
++     borderopacity="1"
++     objecttolerance="10"
++     gridtolerance="10"
++     guidetolerance="10"
++     inkscape:pageopacity="0"
++     inkscape:pageshadow="2"
++     inkscape:window-width="1853"
++     inkscape:window-height="1025"
++     id="namedview819"
++     showgrid="false"
++     inkscape:zoom="0.16414979"
++     inkscape:cx="-2431.569"
++     inkscape:cy="740.16548"
++     inkscape:window-x="67"
++     inkscape:window-y="27"
++     inkscape:window-maximized="1"
++     inkscape:current-layer="svg817" />
++  <g
++     id="g976"
++     transform="translate(8.7807208,7.8460099)"
++     style="fill:#ffffff">
++    <path
++       inkscape:connector-curvature="0"
++       id="path815-2"
++       d="M 1621.7703,380.54658 1280.4539,1430.572 H 130.0984 c -0.58083,5.1079 -1.23386,10.5437 -2.02148,16.5821 -2,15.3333 -3,24.3333 -3,27 -14.66667,40 -14,82.3333 2,127 18.66667,52 51.83333,95.8333 99.5,131.5 47.66667,35.6666 97.16669,53.5 148.5,53.5 h 922.99998 c 43.3333,0 84.1667,-14.5 122.5,-43.5 38.3333,-29 63.8333,-64.8334 76.5,-107.5 l 275,-906.00012 c 14.6667,-48 8.6667,-91 -18,-129 -14,-18.6666 -33.6667,-33 -59,-43 1.3333,23.3334 -0.3333,42.3334 -5,57 l -300,987.00012 c -5.3333,17.3333 -17,31.1666 -35,41.5 -18,10.3333 -36.6667,15.5 -56,15.5 H 376.07692 c -79.99998,0 -128,-23.3334 -144,-70 -6.66667,-18 -6.33333,-32.3334 1,-43 7.33333,-10 20,-15 38,-15 h 868.99998 c 62,0 104.8333,-11.5 128.5,-34.5 23.6667,-23 47.5,-74.1667 71.5,-153.5 l 274,-906.00012 c 5.7889,-19.4719 8.3437,-38.005 7.6934,-55.6074 z"
++       style="fill:#ffffff;fill-opacity:1" />
++    <path
++       inkscape:connector-curvature="0"
++       style="fill:#ffffff"
++       id="path815"
++       d="m 1634.0769,340.15388 q 40,57 18,129 l -275,906.00002 q -19,64 -76.5,107.5 -57.5,43.5 -122.5,43.5 H 255.07692 q -77,0 -148.5,-53.5 -71.499997,-53.5 -99.4999968,-131.5 -24.0000002,-67 -2,-127 0,-4 3,-27 2.9999998,-23 3.9999998,-37 1,-8 -2.9999998,-21.5 -4,-13.5 -3,-19.5 2,-11 7.9999998,-21 6,-10 16.5,-23.5 10.5,-13.5 16.5,-23.5 23,-38 45,-91.50002 21.999997,-53.5 29.999997,-91.5 3,-10 0.5,-30 -2.5,-20 -0.5,-28 3,-11 17,-28 14,-17 17,-23 21,-36 42,-92 21,-56 25,-90 1,-9 -2.5,-32 -3.5,-23 0.5,-28 4,-13 22,-30.5 18,-17.5 22,-22.5 19,-26 42.5,-84.5 23.5,-58.5 27.5,-96.5 1,-8 -3,-25.5 -4,-17.5 -2,-26.5 2,-8 9,-18 7,-10 18,-23 11,-13 17,-21 8,-12 16.5,-30.5 8.5,-18.5 15,-35 6.5,-16.5 16,-36 9.5,-19.5 19.5,-32 10,-12.5 26.5,-23.4999998 16.5,-11 36,-11.5 19.5,-0.5 47.5,5.5 l -1,3.00000003 q 38,-9.00000003 51,-9.00000003 h 760.99998 q 74,0 114,55.9999998 40,56 18,130 l -274,906.00002 q -36,119 -71.5,153.5 -35.5,34.5 -128.5,34.5 H 151.07692 q -27,0 -38,15 -11,16 -1,43 24,70 144,70 h 922.99998 q 29,0 56,-15.5 27,-15.5 35,-41.5 l 300,-987.00002 q 7,-22 5,-57 38,15 59,43 z m -1063.99998,2 q -4,13 2,22.5 6,9.5 20,9.5 h 607.99998 q 13,0 25.5,-9.5 12.5,-9.5 16.5,-22.5 l 21,-64 q 4,-13 -2,-22.5 -6,-9.5 -20,-9.5 H 633.07692 q -13,0 -25.5,9.5 -12.5,9.5 -16.5,22.5 z m -83,256 q -4,13 2,22.5 6,9.5 20,9.5 h 607.99998 q 13,0 25.5,-9.5 12.5,-9.5 16.5,-22.5 l 21,-64 q 4,-13 -2,-22.5 -6,-9.5 -20,-9.5 H 550.07692 q -13,0 -25.5,9.5 -12.5,9.5 -16.5,22.5 z" />
++  </g>
++</svg>
+diff --git a/src/img/caret-white-d.svg b/src/img/caret-white-d.svg
+new file mode 100644
+index 0000000..f7e6c84
+--- /dev/null
++++ b/src/img/caret-white-d.svg
+@@ -0,0 +1,63 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<!-- Created with Inkscape (http://www.inkscape.org/) -->
++
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   width="30"
++   height="30"
++   viewBox="0 0 30 30"
++   id="svg2"
++   version="1.1"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)"
++   sodipodi:docname="caret-white-d.svg">
++  <defs
++     id="defs4" />
++  <sodipodi:namedview
++     id="base"
++     borderopacity="1.0"
++     inkscape:pageopacity="0.0"
++     inkscape:pageshadow="2"
++     inkscape:zoom="16"
++     inkscape:cx="23.40919"
++     inkscape:cy="11.230414"
++     inkscape:document-units="px"
++     inkscape:current-layer="layer1"
++     showgrid="false"
++     units="px"
++     inkscape:window-width="1853"
++     inkscape:window-height="1025"
++     inkscape:window-x="67"
++     inkscape:window-y="1107"
++     inkscape:window-maximized="1" />
++  <metadata
++     id="metadata7">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++        <dc:title></dc:title>
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <g
++     inkscape:label="Calque 1"
++     inkscape:groupmode="layer"
++     id="layer1"
++     transform="translate(0,-1022.3622)">
++    <path
++       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.99999976;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
++       d="m 27.00015,1032.5496 -12.0002,14.0001 -12.0001,-14.0001 z"
++       id="rect3338"
++       inkscape:connector-curvature="0"
++       sodipodi:nodetypes="cccc"
++       inkscape:transform-center-y="2.1875" />
++  </g>
++</svg>
+diff --git a/src/img/caret-white.svg b/src/img/caret-white.svg
+new file mode 100644
+index 0000000..0c4142a
+--- /dev/null
++++ b/src/img/caret-white.svg
+@@ -0,0 +1,63 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<!-- Created with Inkscape (http://www.inkscape.org/) -->
++
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   width="30"
++   height="30"
++   viewBox="0 0 30 30"
++   id="svg2"
++   version="1.1"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)"
++   sodipodi:docname="caret-white.svg">
++  <defs
++     id="defs4" />
++  <sodipodi:namedview
++     id="base"
++     borderopacity="1.0"
++     inkscape:pageopacity="0.0"
++     inkscape:pageshadow="2"
++     inkscape:zoom="16"
++     inkscape:cx="20.90919"
++     inkscape:cy="23.730414"
++     inkscape:document-units="px"
++     inkscape:current-layer="layer1"
++     showgrid="false"
++     units="px"
++     inkscape:window-width="1920"
++     inkscape:window-height="1052"
++     inkscape:window-x="120"
++     inkscape:window-y="0"
++     inkscape:window-maximized="1" />
++  <metadata
++     id="metadata7">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++        <dc:title></dc:title>
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <g
++     inkscape:label="Calque 1"
++     inkscape:groupmode="layer"
++     id="layer1"
++     transform="translate(0,-1022.3622)">
++    <path
++       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.99999976;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
++       d="m 10.18745,1025.362 14.0001,12.0002 -14.0001,12.0001 z"
++       id="rect3338"
++       inkscape:connector-curvature="0"
++       sodipodi:nodetypes="cccc"
++       inkscape:transform-center-x="-2.1875" />
++  </g>
++</svg>
+diff --git a/src/img/chatbubbles.svg b/src/img/chatbubbles.svg
+new file mode 100644
+index 0000000..31925cd
+--- /dev/null
++++ b/src/img/chatbubbles.svg
+@@ -0,0 +1,58 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<!-- Generator: Adobe Illustrator 16.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
++
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   version="1.1"
++   id="Layer_1"
++   x="0px"
++   y="0px"
++   width="512px"
++   height="512px"
++   viewBox="0 0 512 512"
++   style="enable-background:new 0 0 512 512;"
++   xml:space="preserve"
++   sodipodi:docname="chatbubbles.svg"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)"><metadata
++   id="metadata13"><rdf:RDF><cc:Work
++       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
++         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
++   id="defs11" /><sodipodi:namedview
++   pagecolor="#ffffff"
++   bordercolor="#666666"
++   borderopacity="1"
++   objecttolerance="10"
++   gridtolerance="10"
++   guidetolerance="10"
++   inkscape:pageopacity="0"
++   inkscape:pageshadow="2"
++   inkscape:window-width="1853"
++   inkscape:window-height="1025"
++   id="namedview9"
++   showgrid="false"
++   inkscape:zoom="0.4609375"
++   inkscape:cx="-240.81356"
++   inkscape:cy="82.440678"
++   inkscape:window-x="67"
++   inkscape:window-y="27"
++   inkscape:window-maximized="1"
++   inkscape:current-layer="Layer_1" />
++<g
++   id="g6"
++   style="fill:#337ab7;fill-opacity:1">
++	<path
++   d="M73.3,391C73.3,391,73.3,391,73.3,391c1.8,3,2.8,6.4,2.8,10.2L64,464l56.2-22.1c2.7-1.1,5.6-1.7,8.7-1.7   c2.8,0,5.5,0.5,8,1.4c0,0,0.1,0,0.2,0c0.4,0.2,0.8,0.3,1.2,0.5c17.8,7.3,37.4,11.4,57.9,11.4c46.3,0,87.6-20.5,114.8-52.6   c-14.1,3.6-28.9,5.7-44.1,5.7c-95.9,0-173.7-75-173.7-167.5c0-11.8,1.3-23.2,3.7-34.3C66.9,230.9,48,268.6,48,310.6   c0,28.4,8.6,55.2,23.5,77.5C72.1,388.9,72.7,390,73.3,391z"
++   id="path2"
++   style="fill:#265b88;fill-opacity:1" />
++	<path
++   d="M290.3,48c-83.7,0-153.6,57.2-170,133.2c-2.4,11.1-3.7,22.5-3.7,34.3c0,92.5,77.7,167.5,173.7,167.5   c15.3,0,30-2.1,44.1-5.7c8.1-2.1,16.1-4.5,23.8-7.6c0.5-0.2,0.9-0.4,1.4-0.6c0.1,0,0.2,0,0.2-0.1c2.9-1.1,6.1-1.7,9.3-1.7   c3.6,0,7,0.7,10.1,2l68.6,25.8l-17-73.8c0-4.4,1.2-8.6,3.3-12.2c0,0,0,0,0,0c0.6-1.1,1.4-2.1,2.1-3.1   c17.4-26.1,27.5-57.2,27.5-90.5C464,123,386.3,48,290.3,48z"
++   id="path4"
++   style="fill:#337ab7;fill-opacity:1" />
++</g>
++</svg>
+\ No newline at end of file
+diff --git a/src/img/current-page.svg b/src/img/current-page.svg
+new file mode 100644
+index 0000000..d55bd04
+--- /dev/null
++++ b/src/img/current-page.svg
+@@ -0,0 +1,55 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   width="1792"
++   height="1792"
++   viewBox="0 0 1792 1792"
++   version="1.1"
++   id="svg4"
++   sodipodi:docname="current-page.svg"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)">
++  <metadata
++     id="metadata10">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <defs
++     id="defs8" />
++  <sodipodi:namedview
++     pagecolor="#ffffff"
++     bordercolor="#666666"
++     borderopacity="1"
++     objecttolerance="10"
++     gridtolerance="10"
++     guidetolerance="10"
++     inkscape:pageopacity="0"
++     inkscape:pageshadow="2"
++     inkscape:window-width="1920"
++     inkscape:window-height="1052"
++     id="namedview6"
++     showgrid="false"
++     inkscape:zoom="0.13169643"
++     inkscape:cx="896"
++     inkscape:cy="896"
++     inkscape:window-x="120"
++     inkscape:window-y="0"
++     inkscape:window-maximized="1"
++     inkscape:current-layer="svg4" />
++  <path
++     d="m 1600,960 q 0,54 -37,91 l -651,651 q -39,37 -91,37 -51,0 -90,-37 l -75,-75 q -38,-38 -38,-91 0,-53 38,-91 L 949,1152 H 245 q -52,0 -84.5,-37.5 Q 128,1077 128,1024 V 896 q 0,-53 32.5,-90.5 Q 193,768 245,768 H 949 L 656,474 q -38,-36 -38,-90 0,-54 38,-90 l 75,-75 q 38,-38 90,-38 53,0 91,38 l 651,651 q 37,35 37,90 z"
++     id="path2"
++     style="fill:#f08004;fill-opacity:1"
++     inkscape:connector-curvature="0" />
++</svg>
+diff --git a/src/img/favicon.ico b/src/img/favicon.ico
+new file mode 100644
+index 0000000..bd3ca7d
+Binary files /dev/null and b/src/img/favicon.ico differ
+diff --git a/src/img/globe.svg b/src/img/globe.svg
+new file mode 100644
+index 0000000..515280b
+--- /dev/null
++++ b/src/img/globe.svg
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M896 128q209 0 385.5 103t279.5 279.5 103 385.5-103 385.5-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103zm274 521q-2 1-9.5 9.5t-13.5 9.5q2 0 4.5-5t5-11 3.5-7q6-7 22-15 14-6 52-12 34-8 51 11-2-2 9.5-13t14.5-12q3-2 15-4.5t15-7.5l2-22q-12 1-17.5-7t-6.5-21q0 2-6 8 0-7-4.5-8t-11.5 1-9 1q-10-3-15-7.5t-8-16.5-4-15q-2-5-9.5-11t-9.5-10q-1-2-2.5-5.5t-3-6.5-4-5.5-5.5-2.5-7 5-7.5 10-4.5 5q-3-2-6-1.5t-4.5 1-4.5 3-5 3.5q-3 2-8.5 3t-8.5 2q15-5-1-11-10-4-16-3 9-4 7.5-12t-8.5-14h5q-1-4-8.5-8.5t-17.5-8.5-13-6q-8-5-34-9.5t-33-.5q-5 6-4.5 10.5t4 14 3.5 12.5q1 6-5.5 13t-6.5 12q0 7 14 15.5t10 21.5q-3 8-16 16t-16 12q-5 8-1.5 18.5t10.5 16.5q2 2 1.5 4t-3.5 4.5-5.5 4-6.5 3.5l-3 2q-11 5-20.5-6t-13.5-26q-7-25-16-30-23-8-29 1-5-13-41-26-25-9-58-4 6-1 0-15-7-15-19-12 3-6 4-17.5t1-13.5q3-13 12-23 1-1 7-8.5t9.5-13.5.5-6q35 4 50-11 5-5 11.5-17t10.5-17q9-6 14-5.5t14.5 5.5 14.5 5q14 1 15.5-11t-7.5-20q12 1 3-17-4-7-8-9-12-4-27 5-8 4 2 8-1-1-9.5 10.5t-16.5 17.5-16-5q-1-1-5.5-13.5t-9.5-13.5q-8 0-16 15 3-8-11-15t-24-8q19-12-8-27-7-4-20.5-5t-19.5 4q-5 7-5.5 11.5t5 8 10.5 5.5 11.5 4 8.5 3q14 10 8 14-2 1-8.5 3.5t-11.5 4.5-6 4q-3 4 0 14t-2 14q-5-5-9-17.5t-7-16.5q7 9-25 6l-10-1q-4 0-16 2t-20.5 1-13.5-8q-4-8 0-20 1-4 4-2-4-3-11-9.5t-10-8.5q-46 15-94 41 6 1 12-1 5-2 13-6.5t10-5.5q34-14 42-7l5-5q14 16 20 25-7-4-30-1-20 6-22 12 7 12 5 18-4-3-11.5-10t-14.5-11-15-5q-16 0-22 1-146 80-235 222 7 7 12 8 4 1 5 9t2.5 11 11.5-3q9 8 3 19 1-1 44 27 19 17 21 21 3 11-10 18-1-2-9-9t-9-4q-3 5 .5 18.5t10.5 12.5q-7 0-9.5 16t-2.5 35.5-1 23.5l2 1q-3 12 5.5 34.5t21.5 19.5q-13 3 20 43 6 8 8 9 3 2 12 7.5t15 10 10 10.5q4 5 10 22.5t14 23.5q-2 6 9.5 20t10.5 23q-1 0-2.5 1t-2.5 1q3 7 15.5 14t15.5 13q1 3 2 10t3 11 8 2q2-20-24-62-15-25-17-29-3-5-5.5-15.5t-4.5-14.5q2 0 6 1.5t8.5 3.5 7.5 4 2 3q-3 7 2 17.5t12 18.5 17 19 12 13q6 6 14 19.5t0 13.5q9 0 20 10.5t17 19.5q5 8 8 26t5 24q2 7 8.5 13.5t12.5 9.5l16 8 13 7q5 2 18.5 10.5t21.5 11.5q10 4 16 4t14.5-2.5 13.5-3.5q15-2 29 15t21 21q36 19 55 11-2 1 .5 7.5t8 15.5 9 14.5 5.5 8.5q5 6 18 15t18 15q6-4 7-9-3 8 7 20t18 10q14-3 14-32-31 15-49-18 0-1-2.5-5.5t-4-8.5-2.5-8.5 0-7.5 5-3q9 0 10-3.5t-2-12.5-4-13q-1-8-11-20t-12-15q-5 9-16 8t-16-9q0 1-1.5 5.5t-1.5 6.5q-13 0-15-1 1-3 2.5-17.5t3.5-22.5q1-4 5.5-12t7.5-14.5 4-12.5-4.5-9.5-17.5-2.5q-19 1-26 20-1 3-3 10.5t-5 11.5-9 7q-7 3-24 2t-24-5q-13-8-22.5-29t-9.5-37q0-10 2.5-26.5t3-25-5.5-24.5q3-2 9-9.5t10-10.5q2-1 4.5-1.5t4.5 0 4-1.5 3-6q-1-1-4-3-3-3-4-3 7 3 28.5-1.5t27.5 1.5q15 11 22-2 0-1-2.5-9.5t-.5-13.5q5 27 29 9 3 3 15.5 5t17.5 5q3 2 7 5.5t5.5 4.5 5-.5 8.5-6.5q10 14 12 24 11 40 19 44 7 3 11 2t4.5-9.5 0-14-1.5-12.5l-1-8v-18l-1-8q-15-3-18.5-12t1.5-18.5 15-18.5q1-1 8-3.5t15.5-6.5 12.5-8q21-19 15-35 7 0 11-9-1 0-5-3t-7.5-5-4.5-2q9-5 2-16 5-3 7.5-11t7.5-10q9 12 21 2 8-8 1-16 5-7 20.5-10.5t18.5-9.5q7 2 8-2t1-12 3-12q4-5 15-9t13-5l17-11q3-4 0-4 18 2 31-11 10-11-6-20 3-6-3-9.5t-15-5.5q3-1 11.5-.5t10.5-1.5q15-10-7-16-17-5-43 12zm-163 877q206-36 351-189-3-3-12.5-4.5t-12.5-3.5q-18-7-24-8 1-7-2.5-13t-8-9-12.5-8-11-7q-2-2-7-6t-7-5.5-7.5-4.5-8.5-2-10 1l-3 1q-3 1-5.5 2.5t-5.5 3-4 3 0 2.5q-21-17-36-22-5-1-11-5.5t-10.5-7-10-1.5-11.5 7q-5 5-6 15t-2 13q-7-5 0-17.5t2-18.5q-3-6-10.5-4.5t-12 4.5-11.5 8.5-9 6.5-8.5 5.5-8.5 7.5q-3 4-6 12t-5 11q-2-4-11.5-6.5t-9.5-5.5q2 10 4 35t5 38q7 31-12 48-27 25-29 40-4 22 12 26 0 7-8 20.5t-7 21.5q0 6 2 16z"/></svg>
+\ No newline at end of file
+diff --git a/src/img/home-logo-demo.svg b/src/img/home-logo-demo.svg
+new file mode 100644
+index 0000000..ff3e6c9
+--- /dev/null
++++ b/src/img/home-logo-demo.svg
+@@ -0,0 +1,253 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<!-- Created with Inkscape (http://www.inkscape.org/) -->
++
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   width="100"
++   height="100"
++   viewBox="0 0 26.458333 26.458334"
++   version="1.1"
++   id="svg8"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)"
++   sodipodi:docname="home-logo-demo.svg">
++  <defs
++     id="defs2" />
++  <sodipodi:namedview
++     id="base"
++     pagecolor="#ffffff"
++     bordercolor="#666666"
++     borderopacity="1.0"
++     inkscape:pageopacity="0.0"
++     inkscape:pageshadow="2"
++     inkscape:zoom="20.48"
++     inkscape:cx="78.482697"
++     inkscape:cy="57.67277"
++     inkscape:document-units="mm"
++     inkscape:current-layer="layer1"
++     showgrid="false"
++     units="px"
++     inkscape:window-width="1853"
++     inkscape:window-height="1025"
++     inkscape:window-x="67"
++     inkscape:window-y="1107"
++     inkscape:window-maximized="1" />
++  <metadata
++     id="metadata5">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++        <dc:title />
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <g
++     inkscape:label="Calque 1"
++     inkscape:groupmode="layer"
++     id="layer1"
++     transform="translate(0,-270.54165)">
++    <rect
++       style="opacity:1;fill:#ebeff5;fill-opacity:1;stroke:none;stroke-width:1.53326166;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++       id="rect1405"
++       width="19.265984"
++       height="11.761673"
++       x="5.7405138"
++       y="277.34521" />
++    <rect
++       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#cccccc;stroke-width:0.03889376;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++       id="rect1407-6-1-2"
++       width="8.2483511"
++       height="4.7089009"
++       x="5.9543228"
++       y="277.67438"
++       ry="0.14331436"
++       rx="0.20282824" />
++    <rect
++       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#cccccc;stroke-width:0.04130821;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++       id="rect1407-6-1"
++       width="9.3089943"
++       height="4.7064867"
++       x="14.532194"
++       y="277.6756"
++       ry="0.14324088"
++       rx="0.22890964" />
++    <rect
++       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#cccccc;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++       id="rect1407-6"
++       width="11.861046"
++       height="5.4118266"
++       x="11.978459"
++       y="282.74219"
++       ry="0.16470775"
++       rx="0.29166502" />
++    <rect
++       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#cccccc;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++       id="rect1407"
++       width="5.7641373"
++       height="5.4334078"
++       x="5.9531393"
++       y="282.73138"
++       ry="0.16536458"
++       rx="0.14174107" />
++    <rect
++       style="opacity:1;fill:#222c32;fill-opacity:1;stroke:none;stroke-width:1.56871474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++       id="rect1023"
++       width="3.8379693"
++       height="11.811763"
++       x="1.9025441"
++       y="277.34521" />
++    <rect
++       style="opacity:1;fill:#f08004;fill-opacity:1;stroke:none;stroke-width:1.13355708;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++       id="rect1021"
++       width="23.103954"
++       height="1.013927"
++       x="1.9025441"
++       y="276.3313"
++       ry="0" />
++    <g
++       id="g1009"
++       transform="matrix(0.0570339,0,0,0.0570339,-1.3715117,270.85604)"
++       style="fill:#515257;fill-opacity:1">
++      <path
++         id="path1005"
++         d="M 468.7,64 H 43.3 C 37.3,64 32,69 32,75.1 v 265.7 c 0,6.2 5.2,11.1 11.3,11.1 h 425.4 c 6,0 11.3,-5 11.3,-11.1 V 75.1 C 480,69 474.8,64 468.7,64 Z M 448,320 H 64 V 96 h 384 z"
++         inkscape:connector-curvature="0"
++         style="fill:#515257;fill-opacity:1" />
++      <path
++         id="path1007"
++         d="m 302.5,448 c 28,-0.5 41.5,-3.9 29,-12.5 -12.5,-8.7 -28.5,-15.3 -29,-22.5 -0.3,-3.7 -1.7,-45 -1.7,-45 H 256 211.2 c 0,0 -1.5,41.3 -1.7,45 -0.5,7.1 -16.5,13.8 -29,22.5 -12.5,8.7 1,12 29,12.5 z"
++         inkscape:connector-curvature="0"
++         style="fill:#515257;fill-opacity:1" />
++    </g>
++    <g
++       id="g1082-5"
++       transform="matrix(0.80795373,0,0,0.80795373,10.062654,54.710518)">
++      <path
++         id="path1078-6"
++         transform="matrix(0.26458333,0,0,0.26458333,0,270.54165)"
++         d="m 37.410156,49.285156 a 7.2321427,7.2321427 0 0 0 -7.232422,7.232422 7.2321427,7.2321427 0 0 0 7.232422,7.232422 7.2321427,7.2321427 0 0 0 4.19336,-1.347656 l -2.47461,-2.47461 a 3.8196391,3.8196391 0 0 1 -1.71875,0.410157 3.8196391,3.8196391 0 0 1 -3.818359,-3.820313 3.8196391,3.8196391 0 0 1 3.818359,-3.820312 3.8196391,3.8196391 0 0 1 2.574219,1.001953 l 2.414063,-2.414063 a 7.2321427,7.2321427 0 0 0 -4.988282,-2 z"
++         style="opacity:1;fill:#3a93d0;fill-opacity:1;stroke:none;stroke-width:5.6692915;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++         inkscape:connector-curvature="0" />
++      <path
++         id="path1025-2"
++         transform="matrix(0.26458333,0,0,0.26458333,0,270.54165)"
++         d="m 42.619141,51.511719 -2.410157,2.410156 a 3.8196391,3.8196391 0 0 1 1.021485,2.595703 3.8196391,3.8196391 0 0 1 -1.816407,3.25 l 2.44336,2.44336 a 7.2321427,7.2321427 0 0 0 2.785156,-5.69336 7.2321427,7.2321427 0 0 0 -2.023437,-5.005859 z"
++         style="opacity:1;fill:#21bdce;fill-opacity:1;stroke:none;stroke-width:5.6692915;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++         inkscape:connector-curvature="0" />
++    </g>
++    <g
++       id="g1219"
++       style="opacity:1"
++       transform="matrix(0.80998097,0,0,0.80998097,5.8125601,57.27437)">
++      <path
++         id="path1215"
++         transform="matrix(0.26458333,0,0,0.26458333,0,270.54165)"
++         d="m 39.285156,34.621094 a 7.2321429,7.2321429 0 0 0 -6.632812,4.36914 l 2.988281,1.726563 a 3.8196389,3.8196389 0 0 1 3.644531,-2.683594 3.8196389,3.8196389 0 0 1 3.642578,2.683594 l 2.996094,-1.728516 a 7.2321429,7.2321429 0 0 0 -6.638672,-4.367187 z"
++         style="opacity:1;fill:#21bdce;fill-opacity:1;stroke:none;stroke-width:5.6692915;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++         inkscape:connector-curvature="0" />
++      <path
++         id="path1025-0"
++         transform="matrix(0.26458333,0,0,0.26458333,0,270.54165)"
++         d="m 32.527344,39.283203 a 7.2321429,7.2321429 0 0 0 -0.47461,2.570313 7.2321429,7.2321429 0 0 0 7.232422,7.232422 7.2321429,7.2321429 0 0 0 7.232422,-7.232422 7.2321429,7.2321429 0 0 0 -0.478516,-2.566407 l -3.027343,1.746094 a 3.8196389,3.8196389 0 0 1 0.09375,0.820313 3.8196389,3.8196389 0 0 1 -3.820313,3.820312 3.8196389,3.8196389 0 0 1 -3.818359,-3.820312 3.8196389,3.8196389 0 0 1 0.0918,-0.820313 z"
++         style="opacity:1;fill:#3a93d0;fill-opacity:1;stroke:none;stroke-width:5.6692915;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++         inkscape:connector-curvature="0" />
++    </g>
++    <g
++       id="g1311"
++       style="opacity:1"
++       transform="matrix(0.81173577,0,0,0.81173577,4.2668984,53.086419)">
++      <path
++         id="path1281-2"
++         d="m 21.710009,284.24321 a 1.9135044,1.9135044 0 0 0 -1.5782,0.83457 l 0.786,0.45372 a 1.0106128,1.0106128 0 0 1 0.7922,-0.3855 1.0106128,1.0106128 0 0 1 0.806667,0.40204 l 0.78445,-0.4532 a 1.9135044,1.9135044 0 0 0 -1.591117,-0.85163 z"
++         style="opacity:1;fill:#3a93d0;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++         inkscape:connector-curvature="0" />
++      <path
++         id="path1279-0"
++         d="m 20.085816,285.14755 a 1.9135044,1.9135044 0 0 0 -0.289388,1.00924 1.9135044,1.9135044 0 0 0 0.329182,1.07228 l 0.785997,-0.45371 a 1.0106128,1.0106128 0 0 1 -0.211873,-0.61857 1.0106128,1.0106128 0 0 1 0.168466,-0.55759 z"
++         style="opacity:1;fill:#ffdf13;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++         inkscape:connector-curvature="0" />
++      <path
++         id="path1277-2"
++         d="m 23.345049,285.16615 -0.780314,0.45062 a 1.0106128,1.0106128 0 0 1 0.156064,0.54002 1.0106128,1.0106128 0 0 1 -0.245464,0.65939 l 0.78755,0.45475 a 1.9135044,1.9135044 0 0 0 0.360702,-1.11414 1.9135044,1.9135044 0 0 0 -0.278538,-0.99064 z"
++         style="opacity:1;fill:#21bdce;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++         inkscape:connector-curvature="0" />
++      <path
++         id="path1025-0-3-6-3"
++         d="m 20.9669,286.83995 -0.790649,0.45682 a 1.9135044,1.9135044 0 0 0 1.533758,0.7736 1.9135044,1.9135044 0 0 0 1.504299,-0.73071 l -0.797367,-0.46044 a 1.0106128,1.0106128 0 0 1 -0.706932,0.28836 1.0106128,1.0106128 0 0 1 -0.743109,-0.32763 z"
++         style="opacity:1;fill:#ff7129;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++         inkscape:connector-curvature="0" />
++    </g>
++    <g
++       id="g1339"
++       transform="matrix(0.28084542,0,0,0.34261806,6.4595135,182.00832)">
++      <rect
++         y="283.06857"
++         x="30.201456"
++         height="3.9422255"
++         width="18.842501"
++         id="rect1313"
++         style="opacity:1;fill:#9ac735;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++      <rect
++         y="283.06857"
++         x="50.316509"
++         height="3.9422255"
++         width="10.156241"
++         id="rect1313-7"
++         style="opacity:1;fill:#838383;fill-opacity:1;stroke:none;stroke-width:1.10125649;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++      <rect
++         y="283.06857"
++         x="47.841244"
++         height="3.9422255"
++         width="3.0735984"
++         id="rect1313-5"
++         style="opacity:1;fill:#c7342f;fill-opacity:1;stroke:none;stroke-width:0.60582268;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++    </g>
++    <g
++       id="g1311-9"
++       style="opacity:1"
++       transform="matrix(0,1.1574012,-1.1574012,0,340.03342,260.40148)">
++      <path
++         id="path1281-2-2"
++         d="m 21.710009,284.24321 a 1.9135044,1.9135044 0 0 0 -1.5782,0.83457 l 0.786,0.45372 a 1.0106128,1.0106128 0 0 1 0.7922,-0.3855 1.0106128,1.0106128 0 0 1 0.806667,0.40204 l 0.78445,-0.4532 a 1.9135044,1.9135044 0 0 0 -1.591117,-0.85163 z"
++         style="opacity:1;fill:#5db65c;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++         inkscape:connector-curvature="0" />
++      <path
++         id="path1279-0-2"
++         d="m 20.085816,285.14755 a 1.9135044,1.9135044 0 0 0 -0.289388,1.00924 1.9135044,1.9135044 0 0 0 0.329182,1.07228 l 0.785997,-0.45371 a 1.0106128,1.0106128 0 0 1 -0.211873,-0.61857 1.0106128,1.0106128 0 0 1 0.168466,-0.55759 z"
++         style="opacity:1;fill:#c7342f;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++         inkscape:connector-curvature="0" />
++      <path
++         id="path1277-2-8"
++         d="m 23.345049,285.16615 -0.780314,0.45062 a 1.0106128,1.0106128 0 0 1 0.156064,0.54002 1.0106128,1.0106128 0 0 1 -0.245464,0.65939 l 0.78755,0.45475 a 1.9135044,1.9135044 0 0 0 0.360702,-1.11414 1.9135044,1.9135044 0 0 0 -0.278538,-0.99064 z"
++         style="opacity:1;fill:#9ac735;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++         inkscape:connector-curvature="0" />
++      <path
++         id="path1025-0-3-6-3-9"
++         d="m 20.9669,286.83995 -0.790649,0.45682 a 1.9135044,1.9135044 0 0 0 1.533758,0.7736 1.9135044,1.9135044 0 0 0 1.504299,-0.73071 l -0.797367,-0.46044 a 1.0106128,1.0106128 0 0 1 -0.706932,0.28836 1.0106128,1.0106128 0 0 1 -0.743109,-0.32763 z"
++         style="opacity:1;fill:#efac4f;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++         inkscape:connector-curvature="0" />
++    </g>
++    <g
++       id="g1403"
++       transform="translate(0.52916667)">
++      <path
++         inkscape:connector-curvature="0"
++         id="path1025-0-7"
++         d="m 10.317426,279.03694 a 2.162985,2.162985 0 0 0 -2.1433382,1.88588 h 1.0363307 a 1.1423753,1.1423753 0 0 1 1.1070075,-0.86542 1.1423753,1.1423753 0 0 1 1.107006,0.86542 h 1.035609 a 2.162985,2.162985 0 0 0 -2.142615,-1.88588 z"
++         style="opacity:1;fill:#70c1a2;fill-opacity:1;stroke:none;stroke-width:1.6955682;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++      <path
++         inkscape:connector-curvature="0"
++         id="path932-3"
++         style="fill:#515257;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.00091722"
++         d="m 10.132009,280.59549 c -0.07714,0.0771 -0.07714,0.20214 0,0.27925 0.03852,0.0385 0.08897,0.0578 0.139592,0.0578 0.05045,0 0.101115,-0.0192 0.139556,-0.0578 l 1.4098,-1.61152 c 0.02139,-0.0214 0.02139,-0.0561 0,-0.0775 -0.02143,-0.0214 -0.05614,-0.0214 -0.0775,0 l -1.611452,1.40977" />
++    </g>
++  </g>
++</svg>
+diff --git a/src/img/home-logo-getstarted.svg b/src/img/home-logo-getstarted.svg
+new file mode 100644
+index 0000000..46ff33d
+--- /dev/null
++++ b/src/img/home-logo-getstarted.svg
+@@ -0,0 +1,96 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<!-- Created with Inkscape (http://www.inkscape.org/) -->
++
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   width="100"
++   height="100"
++   viewBox="0 0 26.458333 26.458334"
++   version="1.1"
++   id="svg8"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)"
++   sodipodi:docname="home-logo-getstarted.svg">
++  <defs
++     id="defs2" />
++  <sodipodi:namedview
++     id="base"
++     pagecolor="#ffffff"
++     bordercolor="#666666"
++     borderopacity="1.0"
++     inkscape:pageopacity="0.0"
++     inkscape:pageshadow="2"
++     inkscape:zoom="2.8"
++     inkscape:cx="13.102576"
++     inkscape:cy="-51.466615"
++     inkscape:document-units="mm"
++     inkscape:current-layer="layer1"
++     showgrid="false"
++     units="px"
++     inkscape:window-width="1853"
++     inkscape:window-height="1025"
++     inkscape:window-x="67"
++     inkscape:window-y="1107"
++     inkscape:window-maximized="1" />
++  <metadata
++     id="metadata5">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++        <dc:title />
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <g
++     inkscape:label="Calque 1"
++     inkscape:groupmode="layer"
++     id="layer1"
++     transform="translate(0,-270.54165)">
++    <g
++       id="g1570"
++       transform="matrix(0.90428788,0,0,0.90428788,1.2661916,28.369764)">
++      <path
++         inkscape:connector-curvature="0"
++         id="path1543"
++         d="m 10.512537,279.17833 a 2.8111976,2.8111976 0 0 0 -2.8111984,2.8112 2.8111976,2.8111976 0 0 0 2.8111984,2.8112 2.8111976,2.8111976 0 0 0 2.811197,-2.8112 2.8111976,2.8111976 0 0 0 -2.811197,-2.8112 z m -0.6743779,1.51205 0.9575639,0.64958 0.958081,0.64957 -0.958081,0.64957 -0.9575639,0.64958 v -1.29915 z"
++         style="opacity:1;fill:#4f94d6;fill-opacity:1;stroke:none;stroke-width:0.04194964;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++      <path
++         style="fill:#515257;fill-opacity:1;stroke-width:0.06427561"
++         inkscape:connector-curvature="0"
++         d="m 22.407724,278.44225 c -0.04499,-0.18639 -0.128551,-0.32138 -0.224965,-0.43706 l -5.379868,-5.89408 c -0.122117,-0.13492 -0.263529,-0.19926 -0.424218,-0.28281 -0.186399,-0.0963 -0.392082,-0.10291 -0.60419,-0.10291 H 5.4968111 c -0.797017,0 -1.5233324,0.61706 -1.5233324,1.47191 v 21.5452 c 0,0.86128 0.7263154,1.66473 1.5233324,1.66473 H 21.122213 c 0.797017,0 1.362642,-0.80345 1.362642,-1.66473 v -15.68969 c 0,-0.23139 -0.0257,-0.39851 -0.07713,-0.61062 z m -6.029051,-3.72155 3.727988,4.0815 H 16.378673 Z M 6.0302994,294.35691 V 273.7887 h 8.2915566 v 5.25132 c 0,0.95128 0.861291,1.819 1.806144,1.819 h 4.300036 v 13.49789 z"
++         id="path1473" />
++      <rect
++         ry="0.56696427"
++         y="291.56659"
++         x="7.8430057"
++         height="1.1339285"
++         width="10.819569"
++         id="rect1518"
++         style="opacity:1;fill:#979797;fill-opacity:1;stroke:#cccccc;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++      <rect
++         ry="0.56961793"
++         y="289.01257"
++         x="7.8403521"
++         height="1.1392359"
++         width="8.6042662"
++         id="rect1518-9"
++         style="opacity:1;fill:#979797;fill-opacity:1;stroke:#cccccc;stroke-width:0.04469263;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++      <rect
++         ry="0.5677225"
++         y="286.46313"
++         x="7.8422475"
++         height="1.135445"
++         width="10.159627"
++         id="rect1518-3"
++         style="opacity:1;fill:#979797;fill-opacity:1;stroke:#cccccc;stroke-width:0.04848352;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++    </g>
++  </g>
++</svg>
+diff --git a/src/img/home-logo-rudder.svg b/src/img/home-logo-rudder.svg
+new file mode 100644
+index 0000000..9b755e7
+--- /dev/null
++++ b/src/img/home-logo-rudder.svg
+@@ -0,0 +1,87 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<!-- Created with Inkscape (http://www.inkscape.org/) -->
++
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   width="100"
++   height="100"
++   viewBox="0 0 26.458333 26.458334"
++   version="1.1"
++   id="svg8"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)"
++   sodipodi:docname="home-logo-rudder.svg">
++  <defs
++     id="defs2" />
++  <sodipodi:namedview
++     id="base"
++     pagecolor="#ffffff"
++     bordercolor="#666666"
++     borderopacity="1.0"
++     inkscape:pageopacity="0.0"
++     inkscape:pageshadow="2"
++     inkscape:zoom="3.959798"
++     inkscape:cx="8.8727599"
++     inkscape:cy="61.525822"
++     inkscape:document-units="mm"
++     inkscape:current-layer="layer1"
++     showgrid="false"
++     units="px"
++     inkscape:window-width="1853"
++     inkscape:window-height="1025"
++     inkscape:window-x="67"
++     inkscape:window-y="1107"
++     inkscape:window-maximized="1" />
++  <metadata
++     id="metadata5">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++        <dc:title></dc:title>
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <g
++     inkscape:label="Calque 1"
++     inkscape:groupmode="layer"
++     id="layer1"
++     transform="translate(0,-270.54165)">
++    <g
++       id="g984"
++       transform="matrix(0.15700601,0,0,0.15700601,17.631684,248.2204)">
++      <path
++         d="m -15.639591,273.12274 c 4.251326,-1.12712 8.2627619,-2.8194 11.9725732,-4.98157 -1.8439695,-4.84929 -0.8187972,-10.53113 3.08539468,-14.43638 3.90242802,-3.90525 9.58708952,-4.92513 14.43496212,-3.08821 2.166056,-3.70699 3.859742,-7.71843 4.978753,-11.96693 -4.736395,-2.12478 -8.040864,-6.87352 -8.040864,-12.40226 0,-5.53296 3.304469,-10.27747 8.040864,-12.40508 -1.119011,-4.24427 -2.812697,-8.2557 -4.978753,-11.9641 -1.356078,0.51682 -2.778125,0.7814 -4.2114615,0.84596 l -13.8257147,15.89017 c 0.7704667,2.41018 1.1973278,4.97346 1.1973278,7.63305 0,13.81337 -11.2363256,25.05287 -25.0539266,25.05287 -13.811956,0 -25.050046,-11.2395 -25.050046,-25.05287 0,-13.81619 11.23809,-25.05145 25.050046,-25.05145 2.54247,0 4.996745,0.38311 7.307792,1.09713 L -4.5133317,188.1735 c 0.1005417,-1.29787 0.3735917,-2.58516 0.8463139,-3.82129 -3.7098113,-2.16606 -7.7212472,-3.85833 -11.9725732,-4.98158 -2.121958,4.7431 -6.873522,8.0451 -12.400845,8.0451 -5.528734,0 -10.277476,-3.302 -12.398376,-8.0451 -4.248503,1.12325 -8.26135,2.81552 -11.967987,4.98158 1.838326,4.84399 0.815623,10.53394 -3.089628,14.43919 -3.90278,3.90243 -9.587089,4.92654 -14.437784,3.08681 -2.164997,3.7084 -3.850217,7.71983 -4.978753,11.96834 4.740275,2.12337 8.040864,6.86788 8.040864,12.40084 0,5.53156 -3.300589,10.27748 -8.040864,12.40226 1.128536,4.2485 2.815167,8.25994 4.978753,11.96693 4.850695,-1.83692 10.539237,-0.81704 14.437784,3.08821 3.905251,3.90525 4.930423,9.58709 3.089628,14.43638 3.706637,2.16217 7.719484,3.85445 11.967987,4.98157 2.1209,-4.7431 6.869642,-8.04368 12.398376,-8.04368 5.527323,0 10.278887,3.30058 12.400845,8.04368"
++         style="fill:#979797;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.03527778"
++         id="path930"
++         inkscape:connector-curvature="0" />
++      <path
++         d="m -32.397947,219.66174 c -2.966862,2.96545 -2.966862,7.77487 0,10.74032 1.481666,1.48272 3.421944,2.22285 5.368925,2.22285 1.940278,0 3.889022,-0.74013 5.367514,-2.22285 l 54.223006,-61.9813 c 0.822678,-0.82268 0.822678,-2.15653 0,-2.98062 -0.824089,-0.82268 -2.159353,-0.82268 -2.980619,0 l -61.978826,54.2216"
++         style="fill:#515257;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.03527778"
++         id="path932"
++         inkscape:connector-curvature="0" />
++      <path
++         d="m -99.725943,214.39759 8.448675,8.73689 c 1.73355,-33.4257 29.381099,-59.99304 63.235421,-59.99304 14.345356,0 27.57170166,4.77626 38.191019,12.81571 L 23.439017,164.55396 C 9.4820692,152.93699 -8.459857,145.94352 -28.041847,145.94352 c -43.461872,0 -78.858253,34.4357 -80.442863,77.51058 l 8.758767,-9.05651"
++         style="fill:#81cc2b;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.03527778"
++         id="path934"
++         inkscape:connector-curvature="0" />
++      <path
++         d="m -40.107906,298.14915 8.735484,-8.44867 c -30.423205,-1.57657 -55.15187,-24.62566 -59.349573,-54.28228 l -9.003948,-9.30874 -8.407367,8.69279 c 4.07212,39.57038 36.800335,70.62718 77.084738,72.10849 l -9.059334,-8.76159"
++         style="fill:#4f94d6;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.03527778"
++         id="path936"
++         inkscape:connector-curvature="0" />
++      <path
++         d="m 35.196396,229.79704 c -1.577975,30.4218 -24.629888,55.15081 -54.283684,59.35099 l -9.307337,9.00112 8.692798,8.40881 c 39.571791,-4.0707 70.621529,-36.79754 72.105666,-77.08195 l -17.207443,0.32103"
++         style="fill:#f25c19;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.03527778"
++         id="path938"
++         inkscape:connector-curvature="0" />
++    </g>
++  </g>
++</svg>
+diff --git a/src/img/important.svg b/src/img/important.svg
+new file mode 100644
+index 0000000..540848c
+--- /dev/null
++++ b/src/img/important.svg
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1088 1248v224q0 26-19 45t-45 19h-256q-26 0-45-19t-19-45v-224q0-26 19-45t45-19h256q26 0 45 19t19 45zm30-1056l-28 768q-1 26-20.5 45t-45.5 19h-256q-26 0-45.5-19t-20.5-45l-28-768q-1-26 17.5-45t44.5-19h320q26 0 44.5 19t17.5 45z" fill="#fff"/></svg>
+\ No newline at end of file
+diff --git a/src/img/info.svg b/src/img/info.svg
+new file mode 100644
+index 0000000..0364cd5
+--- /dev/null
++++ b/src/img/info.svg
+@@ -0,0 +1,31 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   width="1792"
++   height="1792"
++   viewBox="0 0 1792 1792"
++   version="1.1"
++   id="svg3777">
++  <metadata
++     id="metadata3783">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++        <dc:title></dc:title>
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <defs
++     id="defs3781" />
++  <path
++     d="M1152 1376v-160q0-14-9-23t-23-9h-96v-512q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v160q0 14 9 23t23 9h96v320h-96q-14 0-23 9t-9 23v160q0 14 9 23t23 9h448q14 0 23-9t9-23zm-128-896v-160q0-14-9-23t-23-9h-192q-14 0-23 9t-9 23v160q0 14 9 23t23 9h192q14 0 23-9t9-23zm640 416q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"
++     id="path3775"
++     style="fill:#ffffff;fill-opacity:1" />
++</svg>
+diff --git a/src/img/list-icon-community-1.svg b/src/img/list-icon-community-1.svg
+new file mode 100644
+index 0000000..60cd5d4
+--- /dev/null
++++ b/src/img/list-icon-community-1.svg
+@@ -0,0 +1,86 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<!-- Created with Inkscape (http://www.inkscape.org/) -->
++
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   width="60"
++   height="60"
++   viewBox="0 0 15.875 15.875"
++   version="1.1"
++   id="svg8"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)"
++   sodipodi:docname="list-icon-community-1.svg">
++  <defs
++     id="defs2" />
++  <sodipodi:namedview
++     id="base"
++     pagecolor="#ffffff"
++     bordercolor="#666666"
++     borderopacity="1.0"
++     inkscape:pageopacity="0.0"
++     inkscape:pageshadow="2"
++     inkscape:zoom="3.959798"
++     inkscape:cx="-2.4232971"
++     inkscape:cy="-1.9621702"
++     inkscape:document-units="mm"
++     inkscape:current-layer="layer1"
++     showgrid="false"
++     units="px"
++     inkscape:window-width="1853"
++     inkscape:window-height="1025"
++     inkscape:window-x="67"
++     inkscape:window-y="27"
++     inkscape:window-maximized="1" />
++  <metadata
++     id="metadata5">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++        <dc:title></dc:title>
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <g
++     inkscape:label="Calque 1"
++     inkscape:groupmode="layer"
++     id="layer1"
++     transform="translate(0,-281.12498)">
++    <circle
++       style="opacity:1;fill:none;fill-opacity:1;stroke:#555555;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++       id="path815"
++       cx="7.9375"
++       cy="289.06247"
++       r="7.6057873" />
++    <g
++       id="g846"
++       transform="matrix(0.08275965,0,0,0.08275965,10.135893,265.97383)"
++       style="fill:#555555;fill-opacity:1">
++      <g
++         transform="matrix(0.26458333,0,0,0.26458333,-89.994355,207.95824)"
++         id="g821"
++         style="fill:#555555;fill-opacity:1">
++	<path
++   inkscape:connector-curvature="0"
++   d="m 73.3,391 c 0,0 0,0 0,0 1.8,3 2.8,6.4 2.8,10.2 L 64,464 120.2,441.9 c 2.7,-1.1 5.6,-1.7 8.7,-1.7 2.8,0 5.5,0.5 8,1.4 0,0 0.1,0 0.2,0 0.4,0.2 0.8,0.3 1.2,0.5 17.8,7.3 37.4,11.4 57.9,11.4 46.3,0 87.6,-20.5 114.8,-52.6 -14.1,3.6 -28.9,5.7 -44.1,5.7 -95.9,0 -173.7,-75 -173.7,-167.5 0,-11.8 1.3,-23.2 3.7,-34.3 -30,26.1 -48.9,63.8 -48.9,105.8 0,28.4 8.6,55.2 23.5,77.5 0.6,0.8 1.2,1.9 1.8,2.9 z"
++   id="path817"
++   style="fill:#555555;fill-opacity:1;stroke:#555555;stroke-opacity:1" />
++
++	<path
++   inkscape:connector-curvature="0"
++   d="m 290.3,48 c -83.7,0 -153.6,57.2 -170,133.2 -2.4,11.1 -3.7,22.5 -3.7,34.3 0,92.5 77.7,167.5 173.7,167.5 15.3,0 30,-2.1 44.1,-5.7 8.1,-2.1 16.1,-4.5 23.8,-7.6 0.5,-0.2 0.9,-0.4 1.4,-0.6 0.1,0 0.2,0 0.2,-0.1 2.9,-1.1 6.1,-1.7 9.3,-1.7 3.6,0 7,0.7 10.1,2 l 68.6,25.8 -17,-73.8 c 0,-4.4 1.2,-8.6 3.3,-12.2 0,0 0,0 0,0 0.6,-1.1 1.4,-2.1 2.1,-3.1 17.4,-26.1 27.5,-57.2 27.5,-90.5 C 464,123 386.3,48 290.3,48 Z"
++   id="path819"
++   style="fill:#555555;fill-opacity:1;stroke:#555555;stroke-opacity:1" />
++
++</g>
++    </g>
++  </g>
++</svg>
+diff --git a/src/img/list-icon-community-2.svg b/src/img/list-icon-community-2.svg
+new file mode 100644
+index 0000000..25acf8c
+--- /dev/null
++++ b/src/img/list-icon-community-2.svg
+@@ -0,0 +1,132 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<!-- Created with Inkscape (http://www.inkscape.org/) -->
++
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   width="60"
++   height="60"
++   viewBox="0 0 15.875 15.875"
++   version="1.1"
++   id="svg8"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)"
++   sodipodi:docname="list-icon-community-2.svg">
++  <defs
++     id="defs2">
++	
++</defs>
++  <sodipodi:namedview
++     id="base"
++     pagecolor="#ffffff"
++     bordercolor="#666666"
++     borderopacity="1.0"
++     inkscape:pageopacity="0.0"
++     inkscape:pageshadow="2"
++     inkscape:zoom="5.6"
++     inkscape:cx="-17.243897"
++     inkscape:cy="19.907525"
++     inkscape:document-units="mm"
++     inkscape:current-layer="layer1"
++     showgrid="false"
++     units="px"
++     inkscape:window-width="1853"
++     inkscape:window-height="1025"
++     inkscape:window-x="67"
++     inkscape:window-y="27"
++     inkscape:window-maximized="1" />
++  <metadata
++     id="metadata5">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++        <dc:title></dc:title>
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <g
++     inkscape:label="Calque 1"
++     inkscape:groupmode="layer"
++     id="layer1"
++     transform="translate(0,-281.12498)">
++    <circle
++       style="opacity:1;fill:none;fill-opacity:1;stroke:#555555;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++       id="path815"
++       cx="7.9375"
++       cy="289.06247"
++       r="7.6057873" />
++    <g
++       id="g846"
++       transform="matrix(-0.08275965,0,0,0.08275965,6.8429716,266.99745)"
++       style="fill:#555555;fill-opacity:1">
++      <g
++         transform="matrix(0.26458333,0,0,0.26458333,-89.994355,207.95824)"
++         id="g821"
++         style="fill:#555555;fill-opacity:1">
++	
++	<path
++   style="fill:#555555;fill-opacity:1;stroke:#555555;stroke-width:0.09000824;stroke-opacity:1"
++   d="M 29.986328 14.365234 C 21.345537 14.365234 14.351903 21.115643 14.378906 29.441406 C 14.378906 32.43868 15.287373 35.238676 16.853516 37.587891 C 16.916521 37.677899 16.988964 37.768179 17.042969 37.867188 C 17.231986 38.191216 17.339844 38.568807 17.339844 38.964844 L 15.810547 45.607422 L 21.984375 43.285156 C 22.263401 43.168146 22.570502 43.105469 22.894531 43.105469 C 23.182557 43.105469 23.469445 43.158804 23.730469 43.257812 C 23.730469 43.266813 23.739046 43.267578 23.748047 43.267578 C 23.793051 43.28558 23.829995 43.304264 23.875 43.322266 C 24.568063 43.601291 25.288512 43.816842 26.017578 44.005859 C 27.286695 44.329889 28.609202 44.517578 29.986328 44.517578 C 38.627119 44.517578 45.621094 37.767168 45.621094 29.441406 C 45.621094 28.379309 45.503129 27.354561 45.287109 26.355469 C 43.810974 19.514843 37.520018 14.365234 29.986328 14.365234 z M 30.115234 20.441406 C 31.839485 20.441406 33.199713 20.756877 34.40625 21.673828 C 35.520652 22.520593 36.113281 23.710121 36.113281 25.320312 C 36.113281 26.307487 35.767261 27.14074 35.271484 27.816406 C 34.981915 28.228828 34.326305 28.750071 33.505859 29.390625 L 32.597656 30.019531 C 32.158915 30.361767 31.879161 30.760495 31.734375 31.216797 C 31.659786 31.45812 31.607381 32.098819 31.589844 32.515625 C 31.585459 32.594617 31.531816 32.787109 31.277344 32.787109 L 28.566406 32.787109 C 28.276857 32.787109 28.245616 32.616731 28.25 32.533203 C 28.289487 31.388082 28.461226 30.431358 28.939453 29.667969 C 29.580015 28.641298 31.400391 27.558594 31.400391 27.558594 C 31.676797 27.347998 31.895777 27.128482 32.0625 26.882812 C 32.365233 26.466045 32.621094 26.004089 32.621094 25.503906 C 32.621094 24.924769 32.47987 24.382084 32.111328 23.925781 C 31.676975 23.390562 31.217297 23.130859 30.322266 23.130859 C 29.440397 23.130859 28.927135 23.578588 28.558594 24.162109 C 28.190052 24.745631 28.25 25.424855 28.25 26.056641 L 24.880859 26.056641 C 24.880859 23.691828 25.495287 22.197286 26.802734 21.306641 C 27.688991 20.709929 28.807787 20.441406 30.115234 20.441406 z M 29.882812 34.533203 C 31.067413 34.568315 31.935502 35.411687 31.900391 36.644531 C 31.865291 37.877413 30.948272 38.639484 29.763672 38.605469 C 28.622946 38.570357 27.732466 37.758713 27.767578 36.521484 C 27.807065 35.288602 28.746474 34.499187 29.882812 34.533203 z "
++   transform="matrix(-12.083183,0,0,12.083183,652.64593,-140.79764)"
++   id="path819" />
++
++</g>
++    </g>
++    <g
++       id="g846-3"
++       transform="matrix(0.08275965,0,0,0.08275965,-18.06599,265.89522)"
++       style="fill:#555555;fill-opacity:1">
++      <g
++         transform="matrix(0.26458333,0,0,0.26458333,-89.994355,207.95824)"
++         id="g821-6"
++         style="fill:#555555;fill-opacity:1">
++        <path
++           inkscape:connector-curvature="0"
++           d="m 73.3,391 c 0,0 0,0 0,0 1.8,3 2.8,6.4 2.8,10.2 L 64,464 120.2,441.9 c 2.7,-1.1 5.6,-1.7 8.7,-1.7 2.8,0 5.5,0.5 8,1.4 0,0 0.1,0 0.2,0 0.4,0.2 0.8,0.3 1.2,0.5 17.8,7.3 37.4,11.4 57.9,11.4 46.3,0 87.6,-20.5 114.8,-52.6 -14.1,3.6 -28.9,5.7 -44.1,5.7 -95.9,0 -173.7,-75 -173.7,-167.5 0,-11.8 1.3,-23.2 3.7,-34.3 -30,26.1 -48.9,63.8 -48.9,105.8 0,28.4 8.6,55.2 23.5,77.5 0.6,0.8 1.2,1.9 1.8,2.9 z"
++           id="path817-7"
++           style="fill:#555555;fill-opacity:1;stroke:#555555;stroke-opacity:1" />
++        <path
++           inkscape:connector-curvature="0"
++           d="m 290.3,48 c -83.7,0 -153.6,57.2 -170,133.2 -2.4,11.1 -3.7,22.5 -3.7,34.3 0,92.5 77.7,167.5 173.7,167.5 15.3,0 30,-2.1 44.1,-5.7 8.1,-2.1 16.1,-4.5 23.8,-7.6 0.5,-0.2 0.9,-0.4 1.4,-0.6 0.1,0 0.2,0 0.2,-0.1 2.9,-1.1 6.1,-1.7 9.3,-1.7 3.6,0 7,0.7 10.1,2 l 68.6,25.8 -17,-73.8 c 0,-4.4 1.2,-8.6 3.3,-12.2 0,0 0,0 0,0 0.6,-1.1 1.4,-2.1 2.1,-3.1 17.4,-26.1 27.5,-57.2 27.5,-90.5 C 464,123 386.3,48 290.3,48 Z"
++           id="path819-5"
++           style="fill:#555555;fill-opacity:1;stroke:#555555;stroke-opacity:1" />
++      </g>
++    </g>
++    <flowRoot
++       xml:space="preserve"
++       id="flowRoot908"
++       style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
++         id="flowRegion910"><rect
++           id="rect912"
++           width="165.71428"
++           height="44.285713"
++           x="-106.42857"
++           y="-42.857143" /></flowRegion><flowPara
++         id="flowPara914"></flowPara></flowRoot>    <g
++       id="g948"
++       transform="matrix(0.01063058,0,0,0.01063058,69.241402,297.5041)">
++	<path
++   id="path942"
++   d="M 374.64,127.327 C 345.365,88.512 303.062,64 256,64 c -47.062,0 -89.365,24.512 -118.64,63.327 6.354,15.64 15.833,30 28.13,42.297 24.176,24.176 56.319,37.49 90.51,37.49 34.191,0 66.334,-13.314 90.51,-37.49 12.297,-12.297 21.776,-26.658 28.13,-42.297 z"
++   inkscape:connector-curvature="0" />
++
++	<path
++   id="path944"
++   d="m 126.836,142.824 c -1.725,2.827 -3.396,5.703 -4.992,8.644 -2.926,-1.84 -5.319,-3.74 -7.745,-5.773 -1.171,-0.981 -2.954,-3.949 -4.546,-7.35 5.41,-11.314 1.181,-25.037 -9.914,-31.261 -11.561,-6.484 -26.188,-2.372 -32.674,9.189 -6.485,11.56 -2.371,26.188 9.187,32.673 1.251,0.702 2.539,1.272 3.847,1.729 2.816,6.269 7.32,14.331 13.548,19.547 4.184,3.507 8.792,7.117 15.204,10.674 -7.195,20.259 -11.576,42.303 -12.545,65.427 -11.026,0.207 -18.619,2.1 -25.474,4.122 -4.16,1.227 -8.192,3.395 -11.823,5.852 -0.954,-0.115 -1.923,-0.182 -2.908,-0.182 -13.255,0 -24,10.745 -24,24 0,13.255 10.745,24 24,24 12.93,0 23.467,-10.227 23.976,-23.032 5.046,-1.482 9.888,-2.659 17.095,-2.774 3.167,33.015 13.304,63.483 28.613,89.224 -14.166,11.006 -22.882,23.016 -26.605,36.317 0,0 -0.75,0.438 -1.873,1.366 -0.982,0.794 -1.932,1.65 -2.804,2.619 -8.865,9.855 -8.062,25.031 1.793,33.895 9.854,8.865 25.028,8.062 33.893,-1.793 8.087,-8.988 8.095,-22.381 0.558,-31.395 3.074,-5.562 6.236,-9.014 13.67,-14.961 C 171.368,425.235 207.723,445.619 248,448 V 222.872 c -53.236,-2.918 -98.771,-34.734 -121.164,-80.048 z"
++   inkscape:connector-curvature="0" />
++
++	<path
++   id="path946"
++   d="m 456,256.114 c -0.985,0 -1.954,0.066 -2.908,0.182 -3.631,-2.457 -7.663,-4.625 -11.823,-5.852 -6.854,-2.021 -14.447,-3.915 -25.474,-4.122 -0.969,-23.125 -5.35,-45.168 -12.545,-65.427 6.412,-3.557 11.021,-7.167 15.204,-10.674 6.228,-5.216 10.731,-13.278 13.548,-19.547 1.308,-0.458 2.596,-1.028 3.847,-1.729 11.558,-6.485 15.672,-21.114 9.187,-32.673 -6.485,-11.561 -21.113,-15.673 -32.674,-9.189 -11.095,6.225 -15.324,19.947 -9.914,31.261 -1.592,3.401 -3.375,6.369 -4.546,7.35 -2.426,2.033 -4.819,3.933 -7.745,5.773 -1.596,-2.941 -3.268,-5.817 -4.992,-8.644 -22.393,45.314 -67.928,77.13 -121.164,80.048 V 448 c 40.277,-2.381 76.632,-22.765 103.686,-54.42 7.434,5.947 10.596,9.399 13.67,14.961 -7.537,9.014 -7.529,22.406 0.558,31.395 8.864,9.855 24.038,10.658 33.893,1.793 9.854,-8.863 10.658,-24.039 1.793,-33.895 -0.872,-0.969 -1.821,-1.825 -2.804,-2.619 -1.123,-0.929 -1.873,-1.366 -1.873,-1.366 -3.724,-13.302 -12.439,-25.312 -26.605,-36.317 15.31,-25.74 25.446,-56.209 28.613,-89.224 7.207,0.115 12.049,1.292 17.095,2.774 0.509,12.806 11.046,23.032 23.976,23.032 13.255,0 24,-10.745 24,-24 0,-13.255 -10.748,-24 -24.003,-24 z"
++   inkscape:connector-curvature="0" />
++
++</g>
++  </g>
++</svg>
+diff --git a/src/img/list-icon-community-3.svg b/src/img/list-icon-community-3.svg
+new file mode 100644
+index 0000000..a06cc61
+--- /dev/null
++++ b/src/img/list-icon-community-3.svg
+@@ -0,0 +1,119 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<!-- Created with Inkscape (http://www.inkscape.org/) -->
++
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   width="60"
++   height="60"
++   viewBox="0 0 15.875 15.875"
++   version="1.1"
++   id="svg8"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)"
++   sodipodi:docname="list-icon-community-3.svg">
++  <defs
++     id="defs2">
++	
++</defs>
++  <sodipodi:namedview
++     id="base"
++     pagecolor="#ffffff"
++     bordercolor="#666666"
++     borderopacity="1.0"
++     inkscape:pageopacity="0.0"
++     inkscape:pageshadow="2"
++     inkscape:zoom="5.6"
++     inkscape:cx="-17.243897"
++     inkscape:cy="19.907525"
++     inkscape:document-units="mm"
++     inkscape:current-layer="layer1"
++     showgrid="false"
++     units="px"
++     inkscape:window-width="1853"
++     inkscape:window-height="1025"
++     inkscape:window-x="67"
++     inkscape:window-y="27"
++     inkscape:window-maximized="1" />
++  <metadata
++     id="metadata5">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++        <dc:title></dc:title>
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <g
++     inkscape:label="Calque 1"
++     inkscape:groupmode="layer"
++     id="layer1"
++     transform="translate(0,-281.12498)">
++    <circle
++       style="opacity:1;fill:none;fill-opacity:1;stroke:#555555;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++       id="path815"
++       cx="7.9375"
++       cy="289.06247"
++       r="7.6057873" />
++    <g
++       id="g846-3"
++       transform="matrix(0.08275965,0,0,0.08275965,-18.06599,265.89522)"
++       style="fill:#555555;fill-opacity:1">
++      <g
++         transform="matrix(0.26458333,0,0,0.26458333,-89.994355,207.95824)"
++         id="g821-6"
++         style="fill:#555555;fill-opacity:1">
++        <path
++           inkscape:connector-curvature="0"
++           d="m 73.3,391 c 0,0 0,0 0,0 1.8,3 2.8,6.4 2.8,10.2 L 64,464 120.2,441.9 c 2.7,-1.1 5.6,-1.7 8.7,-1.7 2.8,0 5.5,0.5 8,1.4 0,0 0.1,0 0.2,0 0.4,0.2 0.8,0.3 1.2,0.5 17.8,7.3 37.4,11.4 57.9,11.4 46.3,0 87.6,-20.5 114.8,-52.6 -14.1,3.6 -28.9,5.7 -44.1,5.7 -95.9,0 -173.7,-75 -173.7,-167.5 0,-11.8 1.3,-23.2 3.7,-34.3 -30,26.1 -48.9,63.8 -48.9,105.8 0,28.4 8.6,55.2 23.5,77.5 0.6,0.8 1.2,1.9 1.8,2.9 z"
++           id="path817-7"
++           style="fill:#555555;fill-opacity:1;stroke:#555555;stroke-opacity:1" />
++        <path
++           inkscape:connector-curvature="0"
++           d="m 290.3,48 c -83.7,0 -153.6,57.2 -170,133.2 -2.4,11.1 -3.7,22.5 -3.7,34.3 0,92.5 77.7,167.5 173.7,167.5 15.3,0 30,-2.1 44.1,-5.7 8.1,-2.1 16.1,-4.5 23.8,-7.6 0.5,-0.2 0.9,-0.4 1.4,-0.6 0.1,0 0.2,0 0.2,-0.1 2.9,-1.1 6.1,-1.7 9.3,-1.7 3.6,0 7,0.7 10.1,2 l 68.6,25.8 -17,-73.8 c 0,-4.4 1.2,-8.6 3.3,-12.2 0,0 0,0 0,0 0.6,-1.1 1.4,-2.1 2.1,-3.1 17.4,-26.1 27.5,-57.2 27.5,-90.5 C 464,123 386.3,48 290.3,48 Z"
++           id="path819-5"
++           style="fill:#555555;fill-opacity:1;stroke:#555555;stroke-opacity:1" />
++      </g>
++    </g>
++    <flowRoot
++       xml:space="preserve"
++       id="flowRoot908"
++       style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
++         id="flowRegion910"><rect
++           id="rect912"
++           width="165.71428"
++           height="44.285713"
++           x="-106.42857"
++           y="-42.857143" /></flowRegion><flowPara
++         id="flowPara914"></flowPara></flowRoot>    <g
++       id="g948"
++       transform="matrix(0.02014619,0,0,0.02014619,2.7800341,283.90506)"
++       style="fill:#555555;fill-opacity:1">
++	<path
++   id="path942"
++   d="M 374.64,127.327 C 345.365,88.512 303.062,64 256,64 c -47.062,0 -89.365,24.512 -118.64,63.327 6.354,15.64 15.833,30 28.13,42.297 24.176,24.176 56.319,37.49 90.51,37.49 34.191,0 66.334,-13.314 90.51,-37.49 12.297,-12.297 21.776,-26.658 28.13,-42.297 z"
++   inkscape:connector-curvature="0"
++   style="fill:#555555;fill-opacity:1" />
++
++	<path
++   id="path944"
++   d="m 126.836,142.824 c -1.725,2.827 -3.396,5.703 -4.992,8.644 -2.926,-1.84 -5.319,-3.74 -7.745,-5.773 -1.171,-0.981 -2.954,-3.949 -4.546,-7.35 5.41,-11.314 1.181,-25.037 -9.914,-31.261 -11.561,-6.484 -26.188,-2.372 -32.674,9.189 -6.485,11.56 -2.371,26.188 9.187,32.673 1.251,0.702 2.539,1.272 3.847,1.729 2.816,6.269 7.32,14.331 13.548,19.547 4.184,3.507 8.792,7.117 15.204,10.674 -7.195,20.259 -11.576,42.303 -12.545,65.427 -11.026,0.207 -18.619,2.1 -25.474,4.122 -4.16,1.227 -8.192,3.395 -11.823,5.852 -0.954,-0.115 -1.923,-0.182 -2.908,-0.182 -13.255,0 -24,10.745 -24,24 0,13.255 10.745,24 24,24 12.93,0 23.467,-10.227 23.976,-23.032 5.046,-1.482 9.888,-2.659 17.095,-2.774 3.167,33.015 13.304,63.483 28.613,89.224 -14.166,11.006 -22.882,23.016 -26.605,36.317 0,0 -0.75,0.438 -1.873,1.366 -0.982,0.794 -1.932,1.65 -2.804,2.619 -8.865,9.855 -8.062,25.031 1.793,33.895 9.854,8.865 25.028,8.062 33.893,-1.793 8.087,-8.988 8.095,-22.381 0.558,-31.395 3.074,-5.562 6.236,-9.014 13.67,-14.961 C 171.368,425.235 207.723,445.619 248,448 V 222.872 c -53.236,-2.918 -98.771,-34.734 -121.164,-80.048 z"
++   inkscape:connector-curvature="0"
++   style="fill:#555555;fill-opacity:1" />
++
++	<path
++   id="path946"
++   d="m 456,256.114 c -0.985,0 -1.954,0.066 -2.908,0.182 -3.631,-2.457 -7.663,-4.625 -11.823,-5.852 -6.854,-2.021 -14.447,-3.915 -25.474,-4.122 -0.969,-23.125 -5.35,-45.168 -12.545,-65.427 6.412,-3.557 11.021,-7.167 15.204,-10.674 6.228,-5.216 10.731,-13.278 13.548,-19.547 1.308,-0.458 2.596,-1.028 3.847,-1.729 11.558,-6.485 15.672,-21.114 9.187,-32.673 -6.485,-11.561 -21.113,-15.673 -32.674,-9.189 -11.095,6.225 -15.324,19.947 -9.914,31.261 -1.592,3.401 -3.375,6.369 -4.546,7.35 -2.426,2.033 -4.819,3.933 -7.745,5.773 -1.596,-2.941 -3.268,-5.817 -4.992,-8.644 -22.393,45.314 -67.928,77.13 -121.164,80.048 V 448 c 40.277,-2.381 76.632,-22.765 103.686,-54.42 7.434,5.947 10.596,9.399 13.67,14.961 -7.537,9.014 -7.529,22.406 0.558,31.395 8.864,9.855 24.038,10.658 33.893,1.793 9.854,-8.863 10.658,-24.039 1.793,-33.895 -0.872,-0.969 -1.821,-1.825 -2.804,-2.619 -1.123,-0.929 -1.873,-1.366 -1.873,-1.366 -3.724,-13.302 -12.439,-25.312 -26.605,-36.317 15.31,-25.74 25.446,-56.209 28.613,-89.224 7.207,0.115 12.049,1.292 17.095,2.774 0.509,12.806 11.046,23.032 23.976,23.032 13.255,0 24,-10.745 24,-24 0,-13.255 -10.748,-24 -24.003,-24 z"
++   inkscape:connector-curvature="0"
++   style="fill:#555555;fill-opacity:1" />
++
++</g>
++  </g>
++</svg>
+diff --git a/src/img/list-icon-use-rudder.svg b/src/img/list-icon-use-rudder.svg
+new file mode 100644
+index 0000000..0a199e9
+--- /dev/null
++++ b/src/img/list-icon-use-rudder.svg
+@@ -0,0 +1,160 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<!-- Created with Inkscape (http://www.inkscape.org/) -->
++
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   width="60"
++   height="60"
++   viewBox="0 0 15.875 15.875"
++   version="1.1"
++   id="svg8"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)"
++   sodipodi:docname="list-icon-use-rudder.svg">
++  <defs
++     id="defs2">
++	
++</defs>
++  <sodipodi:namedview
++     id="base"
++     pagecolor="#ffffff"
++     bordercolor="#666666"
++     borderopacity="1.0"
++     inkscape:pageopacity="0.0"
++     inkscape:pageshadow="2"
++     inkscape:zoom="2.8"
++     inkscape:cx="-25.472356"
++     inkscape:cy="-39.278002"
++     inkscape:document-units="mm"
++     inkscape:current-layer="layer1"
++     showgrid="false"
++     units="px"
++     inkscape:window-width="1853"
++     inkscape:window-height="1025"
++     inkscape:window-x="67"
++     inkscape:window-y="27"
++     inkscape:window-maximized="1" />
++  <metadata
++     id="metadata5">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++        <dc:title></dc:title>
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <g
++     inkscape:label="Calque 1"
++     inkscape:groupmode="layer"
++     id="layer1"
++     transform="translate(0,-281.12498)">
++    <circle
++       style="opacity:1;fill:none;fill-opacity:1;stroke:#555555;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++       id="path815"
++       cx="7.9375"
++       cy="289.06247"
++       r="7.6057873" />
++    <g
++       id="g846-3"
++       transform="matrix(0.08275965,0,0,0.08275965,-18.06599,265.89522)"
++       style="fill:#555555;fill-opacity:1">
++      <g
++         transform="matrix(0.26458333,0,0,0.26458333,-89.994355,207.95824)"
++         id="g821-6"
++         style="fill:#555555;fill-opacity:1">
++        <path
++           inkscape:connector-curvature="0"
++           d="m 73.3,391 c 0,0 0,0 0,0 1.8,3 2.8,6.4 2.8,10.2 L 64,464 120.2,441.9 c 2.7,-1.1 5.6,-1.7 8.7,-1.7 2.8,0 5.5,0.5 8,1.4 0,0 0.1,0 0.2,0 0.4,0.2 0.8,0.3 1.2,0.5 17.8,7.3 37.4,11.4 57.9,11.4 46.3,0 87.6,-20.5 114.8,-52.6 -14.1,3.6 -28.9,5.7 -44.1,5.7 -95.9,0 -173.7,-75 -173.7,-167.5 0,-11.8 1.3,-23.2 3.7,-34.3 -30,26.1 -48.9,63.8 -48.9,105.8 0,28.4 8.6,55.2 23.5,77.5 0.6,0.8 1.2,1.9 1.8,2.9 z"
++           id="path817-7"
++           style="fill:#555555;fill-opacity:1;stroke:#555555;stroke-opacity:1" />
++        <path
++           inkscape:connector-curvature="0"
++           d="m 290.3,48 c -83.7,0 -153.6,57.2 -170,133.2 -2.4,11.1 -3.7,22.5 -3.7,34.3 0,92.5 77.7,167.5 173.7,167.5 15.3,0 30,-2.1 44.1,-5.7 8.1,-2.1 16.1,-4.5 23.8,-7.6 0.5,-0.2 0.9,-0.4 1.4,-0.6 0.1,0 0.2,0 0.2,-0.1 2.9,-1.1 6.1,-1.7 9.3,-1.7 3.6,0 7,0.7 10.1,2 l 68.6,25.8 -17,-73.8 c 0,-4.4 1.2,-8.6 3.3,-12.2 0,0 0,0 0,0 0.6,-1.1 1.4,-2.1 2.1,-3.1 17.4,-26.1 27.5,-57.2 27.5,-90.5 C 464,123 386.3,48 290.3,48 Z"
++           id="path819-5"
++           style="fill:#555555;fill-opacity:1;stroke:#555555;stroke-opacity:1" />
++      </g>
++    </g>
++    <flowRoot
++       xml:space="preserve"
++       id="flowRoot908"
++       style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
++         id="flowRegion910"><rect
++           id="rect912"
++           width="165.71428"
++           height="44.285713"
++           x="-106.42857"
++           y="-42.857143" /></flowRegion><flowPara
++         id="flowPara914"></flowPara></flowRoot>    <g
++       id="g948"
++       transform="matrix(0.02014619,0,0,0.02014619,-12.387512,283.90506)"
++       style="fill:#555555;fill-opacity:1">
++	<path
++   id="path942"
++   d="M 374.64,127.327 C 345.365,88.512 303.062,64 256,64 c -47.062,0 -89.365,24.512 -118.64,63.327 6.354,15.64 15.833,30 28.13,42.297 24.176,24.176 56.319,37.49 90.51,37.49 34.191,0 66.334,-13.314 90.51,-37.49 12.297,-12.297 21.776,-26.658 28.13,-42.297 z"
++   inkscape:connector-curvature="0"
++   style="fill:#555555;fill-opacity:1" />
++
++	<path
++   id="path944"
++   d="m 126.836,142.824 c -1.725,2.827 -3.396,5.703 -4.992,8.644 -2.926,-1.84 -5.319,-3.74 -7.745,-5.773 -1.171,-0.981 -2.954,-3.949 -4.546,-7.35 5.41,-11.314 1.181,-25.037 -9.914,-31.261 -11.561,-6.484 -26.188,-2.372 -32.674,9.189 -6.485,11.56 -2.371,26.188 9.187,32.673 1.251,0.702 2.539,1.272 3.847,1.729 2.816,6.269 7.32,14.331 13.548,19.547 4.184,3.507 8.792,7.117 15.204,10.674 -7.195,20.259 -11.576,42.303 -12.545,65.427 -11.026,0.207 -18.619,2.1 -25.474,4.122 -4.16,1.227 -8.192,3.395 -11.823,5.852 -0.954,-0.115 -1.923,-0.182 -2.908,-0.182 -13.255,0 -24,10.745 -24,24 0,13.255 10.745,24 24,24 12.93,0 23.467,-10.227 23.976,-23.032 5.046,-1.482 9.888,-2.659 17.095,-2.774 3.167,33.015 13.304,63.483 28.613,89.224 -14.166,11.006 -22.882,23.016 -26.605,36.317 0,0 -0.75,0.438 -1.873,1.366 -0.982,0.794 -1.932,1.65 -2.804,2.619 -8.865,9.855 -8.062,25.031 1.793,33.895 9.854,8.865 25.028,8.062 33.893,-1.793 8.087,-8.988 8.095,-22.381 0.558,-31.395 3.074,-5.562 6.236,-9.014 13.67,-14.961 C 171.368,425.235 207.723,445.619 248,448 V 222.872 c -53.236,-2.918 -98.771,-34.734 -121.164,-80.048 z"
++   inkscape:connector-curvature="0"
++   style="fill:#555555;fill-opacity:1" />
++
++	<path
++   id="path946"
++   d="m 456,256.114 c -0.985,0 -1.954,0.066 -2.908,0.182 -3.631,-2.457 -7.663,-4.625 -11.823,-5.852 -6.854,-2.021 -14.447,-3.915 -25.474,-4.122 -0.969,-23.125 -5.35,-45.168 -12.545,-65.427 6.412,-3.557 11.021,-7.167 15.204,-10.674 6.228,-5.216 10.731,-13.278 13.548,-19.547 1.308,-0.458 2.596,-1.028 3.847,-1.729 11.558,-6.485 15.672,-21.114 9.187,-32.673 -6.485,-11.561 -21.113,-15.673 -32.674,-9.189 -11.095,6.225 -15.324,19.947 -9.914,31.261 -1.592,3.401 -3.375,6.369 -4.546,7.35 -2.426,2.033 -4.819,3.933 -7.745,5.773 -1.596,-2.941 -3.268,-5.817 -4.992,-8.644 -22.393,45.314 -67.928,77.13 -121.164,80.048 V 448 c 40.277,-2.381 76.632,-22.765 103.686,-54.42 7.434,5.947 10.596,9.399 13.67,14.961 -7.537,9.014 -7.529,22.406 0.558,31.395 8.864,9.855 24.038,10.658 33.893,1.793 9.854,-8.863 10.658,-24.039 1.793,-33.895 -0.872,-0.969 -1.821,-1.825 -2.804,-2.619 -1.123,-0.929 -1.873,-1.366 -1.873,-1.366 -3.724,-13.302 -12.439,-25.312 -26.605,-36.317 15.31,-25.74 25.446,-56.209 28.613,-89.224 7.207,0.115 12.049,1.292 17.095,2.774 0.509,12.806 11.046,23.032 23.976,23.032 13.255,0 24,-10.745 24,-24 0,-13.255 -10.748,-24 -24.003,-24 z"
++   inkscape:connector-curvature="0"
++   style="fill:#555555;fill-opacity:1" />
++
++</g>
++    <g
++       id="g1167"
++       transform="matrix(1.1736186,0,0,1.1736186,-1.418813,-50.197088)">
++      <path
++         style="fill:#515257;fill-opacity:1;stroke-width:0.01984287"
++         inkscape:connector-curvature="0"
++         d="m 11.005571,287.38649 c -0.01389,-0.0575 -0.03969,-0.0992 -0.06945,-0.13493 l -1.6608483,-1.81959 c -0.037699,-0.0417 -0.081355,-0.0615 -0.1309626,-0.0873 -0.057544,-0.0297 -0.1210418,-0.0318 -0.1865228,-0.0318 H 5.7849114 c -0.2460514,0 -0.4702762,0.1905 -0.4702762,0.4544 v 6.65134 c 0,0.26589 0.2242248,0.51393 0.4702762,0.51393 h 4.8238026 c 0.246052,0 0.420669,-0.24804 0.420669,-0.51393 v -4.84365 c 0,-0.0714 -0.0079,-0.12303 -0.02381,-0.18851 z m -1.8612609,-1.1489 1.1508869,1.26002 H 9.1443101 Z m -3.1947026,6.062 v -6.34972 h 2.5597314 v 1.62116 c 0,0.29367 0.2658939,0.56155 0.5575846,0.56155 h 1.3274875 v 4.16701 z"
++         id="path1473" />
++      <rect
++         ry="0.17503062"
++         y="291.43817"
++         x="6.5092177"
++         height="0.35006124"
++         width="3.3401678"
++         id="rect1518"
++         style="opacity:1;fill:#979797;fill-opacity:1;stroke:#cccccc;stroke-width:0.01543577;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++      <rect
++         ry="0.17584984"
++         y="290.50873"
++         x="6.5083985"
++         height="0.35169968"
++         width="2.6562698"
++         id="rect1518-9"
++         style="opacity:1;fill:#979797;fill-opacity:1;stroke:#cccccc;stroke-width:0.0137973;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++      <rect
++         ry="0.1752647"
++         y="289.58069"
++         x="6.5089836"
++         height="0.3505294"
++         width="3.1364336"
++         id="rect1518-3"
++         style="opacity:1;fill:#979797;fill-opacity:1;stroke:#cccccc;stroke-width:0.01496761;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++      <rect
++         ry="0.17564304"
++         y="288.6517"
++         x="6.5086055"
++         height="0.35128608"
++         width="2.8212209"
++         id="rect1518-9-6"
++         style="opacity:1;fill:#979797;fill-opacity:1;stroke:#cccccc;stroke-width:0.01421088;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++    </g>
++  </g>
++</svg>
+diff --git a/src/img/logo-rudder-documentation.svg b/src/img/logo-rudder-documentation.svg
+new file mode 100644
+index 0000000..ca7dcfe
+--- /dev/null
++++ b/src/img/logo-rudder-documentation.svg
+@@ -0,0 +1,137 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   viewBox="0 0 223 50"
++   height="50"
++   width="223"
++   xml:space="preserve"
++   id="svg2"
++   version="1.1"
++   sodipodi:docname="logo-rudder-documentation.svg"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)"><sodipodi:namedview
++     pagecolor="#ffffff"
++     bordercolor="#666666"
++     borderopacity="1"
++     objecttolerance="10"
++     gridtolerance="10"
++     guidetolerance="10"
++     inkscape:pageopacity="0"
++     inkscape:pageshadow="2"
++     inkscape:window-width="1920"
++     inkscape:window-height="1052"
++     id="namedview24"
++     showgrid="false"
++     inkscape:zoom="2.1345291"
++     inkscape:cx="111.5"
++     inkscape:cy="25"
++     inkscape:window-x="120"
++     inkscape:window-y="0"
++     inkscape:window-maximized="1"
++     inkscape:current-layer="svg2" /><metadata
++     id="metadata8"><rdf:RDF><cc:Work
++         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
++     id="defs6" /><g
++     transform="matrix(1.3333333,0,0,-1.3333333,0,49.999997)"
++     id="g10"><g
++   transform="matrix(0.45634381,0,0,0.45634381,21.110695,-30.43041)"
++   id="g892"><g
++     id="g852"><path
++       d="m -9.830406,98.839737 c 1.6679,0.441 3.2418,1.1051 4.6988,1.953103 -0.723,1.9063 -0.3238,4.1332 1.2109,5.668 1.5313,1.5313 3.7622,1.9301 5.6641,1.2109 0.8481,1.4532 1.5121,3.0274 1.9531,4.6954 -1.859,0.832 -3.1558,2.6949 -3.1558,4.8628 0,2.1719 1.2968,4.036 3.1558,4.8719 -0.441,1.6641 -1.105,3.2379 -1.9531,4.691 -0.5348,-0.1988 -1.0898,-0.305 -1.6519,-0.3281 l -5.4258,-6.2379 c 0.3008,-0.9461 0.4687,-1.95 0.4687,-2.9969 0,-5.4179 -4.4109,-9.8281 -9.8289,-9.8281 -5.4211,0 -9.832,4.4102 -9.832,9.8281 0,5.4258 4.4109,9.8321 9.832,9.8321 0.9961,0 1.957,-0.1481 2.868,-0.4289 l 6.3629,5.5386 c 0.039,0.5082 0.1441,1.0153 0.332,1.5 -1.457,0.8481 -3.0309,1.5122 -4.6988,1.9532 -0.8321,-1.859 -2.6961,-3.1559 -4.8641,-3.1559 -2.1711,0 -4.0351,1.2969 -4.8672,3.1559 -1.6679,-0.441 -3.2418,-1.1051 -4.6949,-1.9532 0.7231,-1.9019 0.3199,-4.1328 -1.2148,-5.6636 -1.527,-1.5352 -3.7582,-1.934 -5.6602,-1.2153 -0.8519,-1.4531 -1.5117,-3.0269 -1.957,-4.6949 1.859,-0.832 3.1562,-2.6961 3.1562,-4.868 0,-2.1679 -1.2972,-4.0308 -3.1562,-4.8628 0.4453,-1.668 1.1051,-3.2422 1.957,-4.6954 1.902,0.7192 4.1332,0.3204 5.6602,-1.2109 1.5347,-1.5348 1.9379,-3.7617 1.2148,-5.668 1.4531,-0.848003 3.027,-1.512103 4.6949,-1.953103 0.8321,1.859403 2.6961,3.156303 4.8672,3.156303 2.168,0 4.032,-1.2969 4.8641,-3.156303"
++       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.1"
++       id="path28" /><path
++       d="m -16.405406,119.81594 c -1.1641,-1.1641 -1.1641,-3.05 0,-4.2141 0.5789,-0.582 1.3437,-0.8719 2.1058,-0.8719 0.7621,0 1.527,0.2899 2.1051,0.8719 l 21.2781,24.3199 c 0.32,0.3243 0.32,0.8481 0,1.1723 -0.3242,0.3199 -0.848,0.3199 -1.1722,0 l -24.3168,-21.2781"
++       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.1"
++       id="path30" /><path
++       d="m -42.822616,121.88314 3.31211,-3.4301 c 0.68398,13.1168 11.5309,23.5391 24.8121,23.5391 5.6289,0 10.8207,-1.8711 14.9891,-5.0274 l 5.2148,4.4762 c -5.4808,4.559 -12.5199,7.3012 -20.2039,7.3012 -17.05,0 -30.941006,-13.5122 -31.5621,-30.4141 l 3.43789,3.5551"
++       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.1"
++       id="path32" /><path
++       d="m -19.432406,89.019827 3.4297,3.31602 c -11.9379,0.61718 -21.64061,9.664093 -23.28866,21.297293 l -3.53125,3.6519 -3.296874,-3.4101 c 1.592964,-15.527003 14.437084,-27.710972 30.241784,-28.293003 l -3.5547,3.43789"
++       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.1"
++       id="path34" /><path
++       d="m 10.114494,115.83974 c -0.6172,-11.9379 -9.6602,-21.640613 -21.2969,-23.288663 l -3.6519,-3.53125 3.4097,-3.296874 c 15.527,1.592964 27.711,14.437087 28.293,30.241787 l -6.7539,-0.125"
++       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.1"
++       id="path36" /></g><g
++     id="g873"><g
++   id="g861"><path
++     id="path14"
++     style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.1"
++     d="m 62.805494,117.27294 c 2.465,0 4.426,0.5899 5.887,1.7699 1.457,1.1801 2.188,2.777 2.188,4.7969 v 0.1133 c 0,2.1367 -0.715,3.7539 -2.133,4.859 -1.418,1.1019 -3.422,1.6527 -6,1.6527 h -10.035 v -13.1918 z m -16.914,19.3988 h 17.442 c 2.457,0 4.636,-0.3476 6.539,-1.0347 1.902,-0.6922 3.484,-1.6492 4.75,-2.875 1.043,-1.0821 1.844,-2.3321 2.402,-3.75 0.563,-1.4141 0.844,-2.9813 0.844,-4.6961 v -0.109 c 0,-1.6051 -0.234,-3.0469 -0.699,-4.332 -0.469,-1.2852 -1.114,-2.4219 -1.934,-3.4102 -0.816,-0.9879 -1.797,-1.8277 -2.93,-2.5156 -1.136,-0.691 -2.394,-1.2192 -3.777,-1.5942 l 10.566,-14.812103 h -8.105 l -9.645,13.641103 h -8.632 V 97.542837 h -6.821 v 39.128903" /><path
++     id="path16"
++     style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.1"
++     d="m 109.05549,96.929937 c -2.535,0 -4.828,0.359 -6.875,1.086 -2.05,0.7301 -3.799996,1.8199 -5.252996,3.273003 -1.454,1.4532 -2.571,3.25 -3.356,5.395 -0.781,2.1402 -1.172,4.6281 -1.172,7.4601 v 22.5277 h 6.817 v -22.2457 c 0,-3.6531 0.881996,-6.43 2.643996,-8.332 1.762,-1.8992 4.195,-2.848 7.309,-2.848 3.074,0 5.488,0.9097 7.25,2.7379 1.761,1.825 2.644,4.5468 2.644,8.1601 v 22.5277 h 6.821 v -22.1918 c 0,-2.9058 -0.403,-5.4601 -1.204,-7.6601 -0.804,-2.1988 -1.929,-4.0309 -3.382,-5.5039 -1.454,-1.471903 -3.215,-2.569903 -5.282,-3.300003 -2.07,-0.727 -4.386,-1.086 -6.961,-1.086" /><path
++     id="path18"
++     style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.1"
++     d="m 156.56749,103.74994 c 2.051,0 3.914,0.3242 5.59,0.98 1.68,0.6532 3.105,1.5711 4.277,2.75 1.176,1.1801 2.086,2.5821 2.739,4.211 0.652,1.625 0.98,3.3949 0.98,5.3051 v 0.1129 c 0,1.907 -0.328,3.6839 -0.98,5.3281 -0.653,1.6488 -1.563,3.059 -2.739,4.239 -1.172,1.1829 -2.597,2.1047 -4.277,2.7809 -1.676,0.6719 -3.539,1.0078 -5.59,1.0078 h -7.711 v -26.7148 z m -14.531,32.9218 h 14.59 c 3.054,0 5.859,-0.4918 8.414,-1.4808 2.551,-0.9879 4.75,-2.359 6.594,-4.109 1.843,-1.75 3.269,-3.809 4.277,-6.1801 1.004,-2.3629 1.508,-4.925 1.508,-7.6828 v -0.1101 c 0,-2.761 -0.504,-5.3321 -1.508,-7.718 -1.008,-2.3828 -2.434,-4.4539 -4.277,-6.2039 -1.844,-1.75 -4.043,-3.1281 -6.594,-4.136003 -2.555,-1.0043 -5.36,-1.5082 -8.414,-1.5082 h -14.59 v 39.128903" /><path
++     id="path20"
++     style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.1"
++     d="m 206.98949,103.74994 c 2.051,0 3.914,0.3242 5.59,0.98 1.68,0.6532 3.105,1.5711 4.277,2.75 1.172,1.1801 2.086,2.5821 2.738,4.211 0.653,1.625 0.981,3.3949 0.981,5.3051 v 0.1129 c 0,1.907 -0.328,3.6839 -0.981,5.3281 -0.652,1.6488 -1.566,3.059 -2.738,4.239 -1.172,1.1829 -2.597,2.1047 -4.277,2.7809 -1.676,0.6719 -3.539,1.0078 -5.59,1.0078 h -7.711 v -26.7148 z m -14.531,32.9218 h 14.586 c 3.058,0 5.863,-0.4918 8.414,-1.4808 2.551,-0.9879 4.754,-2.359 6.597,-4.109 1.844,-1.75 3.27,-3.809 4.274,-6.1801 1.008,-2.3629 1.512,-4.925 1.512,-7.6828 v -0.1101 c 0,-2.761 -0.504,-5.3321 -1.512,-7.718 -1.004,-2.3828 -2.43,-4.4539 -4.274,-6.2039 -1.843,-1.75 -4.046,-3.1281 -6.597,-4.136003 -2.551,-1.0043 -5.356,-1.5082 -8.414,-1.5082 h -14.586 v 39.128903" /><path
++     id="path22"
++     style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.1"
++     d="m 303.95049,117.27294 c 2.465,0 4.43,0.5899 5.887,1.7699 1.457,1.1801 2.187,2.777 2.187,4.7969 v 0.1133 c 0,2.1367 -0.711,3.7539 -2.133,4.859 -1.418,1.1019 -3.418,1.6527 -6,1.6527 h -10.035 v -13.1918 z m -16.914,19.3988 h 17.441 c 2.457,0 4.641,-0.3476 6.539,-1.0347 1.903,-0.6922 3.485,-1.6492 4.75,-2.875 1.043,-1.0821 1.844,-2.3321 2.407,-3.75 0.558,-1.4141 0.836,-2.9813 0.836,-4.6961 v -0.109 c 0,-1.6051 -0.231,-3.0469 -0.696,-4.332 -0.469,-1.2852 -1.109,-2.4219 -1.933,-3.4102 -0.817,-0.9879 -1.797,-1.8277 -2.93,-2.5156 -1.141,-0.691 -2.399,-1.2192 -3.773,-1.5942 l 10.562,-14.812103 h -8.105 l -9.645,13.641103 h -8.633 V 97.542837 h -6.82 v 39.128903" /><path
++     id="path24"
++     style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.1"
++     d="m 249.69649,130.46474 h 22.137 v 6.207 h -28.957 v -6.207 h 6.82" /><path
++     id="path26"
++     style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.1"
++     d="m 249.69649,103.74994 v 10.4492 h 19.621 v 6.2066 h -26.441 V 97.542837 h 29.234 v 6.207103 h -22.414" /></g><path
++   inkscape:connector-curvature="0"
++   id="path834"
++   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:medium;line-height:1.25;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic Bold';letter-spacing:0.76704746px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.66417122"
++   d="m 87.979752,86.360812 h 4.306735 q 4.164042,0 6.187689,-1.037767 2.023644,-1.024796 3.333824,-3.3468 1.31019,-2.322005 1.31019,-5.422336 0,-2.205256 -0.73941,-4.060265 -0.72644,-1.842038 -2.02365,-3.061414 -1.284238,-1.219377 -2.789001,-1.686373 -1.504763,-0.466995 -5.214781,-0.466995 h -4.371596 z m 3.619214,-3.502465 V 70.833216 h 1.686372 q 2.490642,0 3.606243,0.570772 1.128572,0.570772 1.842037,1.91987 0.713465,1.349098 0.713465,3.320856 0,3.03547 -1.699344,4.70887 -1.530707,1.504763 -4.916424,1.504763 z" /><path
++   inkscape:connector-curvature="0"
++   id="path836"
++   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:medium;line-height:1.25;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic Bold';letter-spacing:0.76704746px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.66417122"
++   d="m 116.37736,86.84078 q 4.04729,0 6.95304,-2.931693 2.91872,-2.931694 2.91872,-7.147624 0,-4.177015 -2.8798,-7.069791 -2.86683,-2.892777 -6.96601,-2.892777 -4.29377,0 -7.13466,2.970609 -2.84089,2.97061 -2.84089,7.056819 0,2.737112 1.32316,5.033173 1.32315,2.29606 3.63218,3.632186 2.32201,1.349098 4.99426,1.349098 z m -0.0389,-3.554354 q -2.6463,0 -4.44942,-1.842037 -1.80312,-1.842038 -1.80312,-4.682926 0,-3.165191 2.27011,-5.007229 1.76421,-1.439902 4.0473,-1.439902 2.58144,0 4.39753,1.867982 1.8161,1.867981 1.8161,4.605093 0,2.72414 -1.82907,4.605093 -1.82906,1.893926 -4.44943,1.893926 z" /><path
++   inkscape:connector-curvature="0"
++   id="path838"
++   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:medium;line-height:1.25;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic Bold';letter-spacing:0.76704746px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.66417122"
++   d="m 147.97908,83.00104 -2.54253,-2.425782 q -2.59442,2.737112 -5.83745,2.737112 -2.73711,0 -4.61806,-1.867981 -1.86798,-1.867982 -1.86798,-4.605094 0,-1.906897 0.83021,-3.385716 0.83021,-1.478819 2.34795,-2.322005 1.51773,-0.843186 3.37274,-0.843186 1.5826,0 2.89278,0.583744 1.31018,0.596716 2.87981,2.153368 l 2.46469,-2.568475 q -2.11445,-2.062563 -3.9954,-2.866833 -1.88095,-0.791297 -4.29376,-0.791297 -4.44943,0 -7.29032,2.814944 -2.82792,2.827916 -2.82792,7.238428 0,2.853861 1.28424,5.072089 1.29721,2.218228 3.69705,3.567326 2.41281,1.349098 5.18883,1.349098 2.36093,0 4.54024,-0.998851 2.19228,-0.998852 3.77488,-2.840889 z" /><path
++   inkscape:connector-curvature="0"
++   id="path840"
++   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:medium;line-height:1.25;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic Bold';letter-spacing:0.76704746px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.66417122"
++   d="m 151.78159,86.360812 h 3.64516 V 74.011379 q 0,-1.595568 0.27242,-2.257145 0.28538,-0.661576 0.92101,-1.063711 0.64861,-0.389163 1.55666,-0.389163 0.95993,0 1.64745,0.441051 0.70049,0.441051 0.95994,1.1156 0.27241,0.687521 0.27241,2.607391 v 11.89541 h 3.64516 V 74.984286 q 0,-2.879805 -0.3243,-3.995405 -0.32431,-1.1156 -1.24532,-2.153368 -0.90805,-1.037767 -2.10148,-1.543679 -1.19344,-0.492939 -2.77603,-0.492939 -2.07554,0 -3.61922,0.946962 -1.5307,0.959935 -2.19228,2.386866 -0.66158,1.439902 -0.66158,4.851563 z" /><path
++   inkscape:connector-curvature="0"
++   id="path842"
++   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:medium;line-height:1.25;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic Bold';letter-spacing:0.76704746px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.66417122"
++   d="m 171.53979,86.360812 h 3.55435 l 4.41052,-13.309368 4.47537,13.309368 h 3.50246 l 3.21708,-19.08195 h -3.50246 l -2.04959,12.051075 -4.06027,-12.051075 h -3.20411 l -4.00837,12.051075 -2.08851,-12.051075 h -3.54138 z" /><path
++   inkscape:connector-curvature="0"
++   id="path844"
++   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:medium;line-height:1.25;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic Bold';letter-spacing:0.76704746px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.66417122"
++   d="m 194.39831,86.360812 h 10.41659 v -3.554353 h -6.81035 v -3.450577 h 6.81035 v -3.489494 h -6.81035 v -5.0202 h 6.81035 v -3.567326 h -10.41659 z" /><path
++   inkscape:connector-curvature="0"
++   id="path846"
++   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:medium;line-height:1.25;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic Bold';letter-spacing:0.76704746px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.66417122"
++   d="m 208.96767,86.360812 h 3.47652 l 8.18539,-12.556987 v 12.556987 h 3.63219 v -19.08195 h -3.4895 l -8.17242,12.518071 V 67.278862 h -3.63218 z" /><path
++   inkscape:connector-curvature="0"
++   id="path848"
++   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:medium;line-height:1.25;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic Bold';letter-spacing:0.76704746px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.66417122"
++   d="m 227.50648,86.360812 h 10.54631 v -3.580298 h -3.47652 V 67.278862 h -3.68407 v 15.501652 h -3.38572 z" /><path
++   inkscape:connector-curvature="0"
++   id="path850"
++   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:medium;line-height:1.25;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic Bold';letter-spacing:0.76704746px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.66417122"
++   d="m 247.12198,86.360812 h 3.68408 l 7.3422,-19.08195 h -3.77488 l -1.49179,3.930545 h -7.78325 l -1.55666,-3.930545 h -3.77488 z m 1.86798,-5.059116 -2.54253,-6.550908 h 5.07209 z" /><path
++   inkscape:connector-curvature="0"
++   id="path852"
++   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:medium;line-height:1.25;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic Bold';letter-spacing:0.76704746px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.66417122"
++   d="m 259.86227,86.360812 h 10.54631 v -3.580298 h -3.47652 V 67.278862 h -3.68407 v 15.501652 h -3.38572 z" /><path
++   inkscape:connector-curvature="0"
++   id="path854"
++   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:medium;line-height:1.25;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic Bold';letter-spacing:0.76704746px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.66417122"
++   d="m 273.40683,86.360812 h 3.60624 v -19.08195 h -3.60624 z" /><path
++   inkscape:connector-curvature="0"
++   id="path856"
++   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:medium;line-height:1.25;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic Bold';letter-spacing:0.76704746px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.66417122"
++   d="m 290.86897,86.84078 q 4.04729,0 6.95304,-2.931693 2.91872,-2.931694 2.91872,-7.147624 0,-4.177015 -2.8798,-7.069791 -2.86684,-2.892777 -6.96602,-2.892777 -4.29376,0 -7.13465,2.970609 -2.84089,2.97061 -2.84089,7.056819 0,2.737112 1.32315,5.033173 1.32316,2.29606 3.63219,3.632186 2.32201,1.349098 4.99426,1.349098 z m -0.0389,-3.554354 q -2.64631,0 -4.44943,-1.842037 -1.80312,-1.842038 -1.80312,-4.682926 0,-3.165191 2.27012,-5.007229 1.7642,-1.439902 4.04729,-1.439902 2.58145,0 4.39754,1.867982 1.81609,1.867981 1.81609,4.605093 0,2.72414 -1.82906,4.605093 -1.82907,1.893926 -4.44943,1.893926 z" /><path
++   inkscape:connector-curvature="0"
++   id="path858"
++   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:medium;line-height:1.25;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic Bold';letter-spacing:0.76704746px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.66417122"
++   d="m 304.94539,86.360812 h 3.47652 l 8.18539,-12.556987 v 12.556987 h 3.63219 v -19.08195 h -3.4895 l -8.17241,12.518071 V 67.278862 h -3.63219 z" />
++</g></g>
++</g></svg>
+\ No newline at end of file
+diff --git a/src/img/menu-nav-close.svg b/src/img/menu-nav-close.svg
+new file mode 100644
+index 0000000..ab89729
+--- /dev/null
++++ b/src/img/menu-nav-close.svg
+@@ -0,0 +1,65 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<!-- Created with Inkscape (http://www.inkscape.org/) -->
++
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   width="30"
++   height="30"
++   viewBox="0 0 30 30"
++   id="svg2"
++   version="1.1"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)"
++   sodipodi:docname="menu-nav-close.svg">
++  <defs
++     id="defs4" />
++  <sodipodi:namedview
++     id="base"
++     borderopacity="1.0"
++     inkscape:pageopacity="0.0"
++     inkscape:pageshadow="2"
++     inkscape:zoom="16"
++     inkscape:cx="-10.430598"
++     inkscape:cy="10.122609"
++     inkscape:document-units="px"
++     inkscape:current-layer="layer1"
++     showgrid="false"
++     units="px"
++     inkscape:window-width="1920"
++     inkscape:window-height="1052"
++     inkscape:window-x="412"
++     inkscape:window-y="0"
++     inkscape:window-maximized="1" />
++  <metadata
++     id="metadata7">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++        <dc:title />
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <g
++     inkscape:label="Calque 1"
++     inkscape:groupmode="layer"
++     id="layer1"
++     transform="translate(0,-1022.3622)">
++    <g
++       id="g835"
++       style="fill:#ffffff">
++      <path
++         id="rect816"
++         d="m 24.710289,1026.1245 c -0.372769,-0.3728 -0.972393,-0.3728 -1.345161,0 L 15,1034.4896 6.6348716,1026.1245 c -0.3727679,-0.3728 -0.972392,-0.3728 -1.3451603,0 l -1.527461,1.5274 c -0.3727683,0.3728 -0.3727679,0.9724 0,1.3452 l 8.3651287,8.3651 -8.3651287,8.3651 c -0.3727683,0.3728 -0.3727683,0.9724 0,1.3452 l 1.527461,1.5274 c 0.3727683,0.3728 0.972392,0.3728 1.3451603,0 L 15,1040.2348 l 8.365128,8.3651 c 0.372769,0.3728 0.972392,0.3728 1.345161,0 l 1.527461,-1.5274 c 0.372768,-0.3728 0.372768,-0.9724 0,-1.3452 l -8.365129,-8.3651 8.365129,-8.3651 c 0.372768,-0.3728 0.372768,-0.9724 0,-1.3452 z"
++         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:5.17596149;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
++         inkscape:connector-curvature="0" />
++    </g>
++  </g>
++</svg>
+diff --git a/src/img/menu-nav.svg b/src/img/menu-nav.svg
+new file mode 100644
+index 0000000..055a123
+--- /dev/null
++++ b/src/img/menu-nav.svg
+@@ -0,0 +1,85 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<!-- Created with Inkscape (http://www.inkscape.org/) -->
++
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   width="30"
++   height="30"
++   viewBox="0 0 30 30"
++   id="svg2"
++   version="1.1"
++   inkscape:version="0.92.3 (2405546, 2018-03-11)"
++   sodipodi:docname="menu-nav.svg">
++  <defs
++     id="defs4" />
++  <sodipodi:namedview
++     id="base"
++     borderopacity="1.0"
++     inkscape:pageopacity="0.0"
++     inkscape:pageshadow="2"
++     inkscape:zoom="11.313709"
++     inkscape:cx="-17.008249"
++     inkscape:cy="-3.3522354"
++     inkscape:document-units="px"
++     inkscape:current-layer="layer1"
++     showgrid="false"
++     units="px"
++     inkscape:window-width="1920"
++     inkscape:window-height="1052"
++     inkscape:window-x="412"
++     inkscape:window-y="0"
++     inkscape:window-maximized="1" />
++  <metadata
++     id="metadata7">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++        <dc:title />
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <g
++     inkscape:label="Calque 1"
++     inkscape:groupmode="layer"
++     id="layer1"
++     transform="translate(0,-1022.3622)">
++    <g
++       id="g842"
++       transform="matrix(1.1011865,0,0,1.1011865,-1.517797,-104.80547)"
++       style="fill:#ffffff">
++      <rect
++         ry="1.3905003"
++         y="1025.9521"
++         x="1.8972082"
++         height="5.0271935"
++         width="26.205584"
++         id="rect8"
++         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:4.85117006;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++      <rect
++         ry="1.3905003"
++         y="1034.9664"
++         x="1.8972082"
++         height="5.0271935"
++         width="26.205584"
++         id="rect8-3"
++         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:4.85117006;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++      <rect
++         ry="1.3905003"
++         y="1043.4517"
++         x="1.8972082"
++         height="5.0271935"
++         width="26.205584"
++         id="rect8-6"
++         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:4.85117006;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++    </g>
++  </g>
++</svg>
+diff --git a/src/img/search.svg b/src/img/search.svg
+new file mode 100644
+index 0000000..a48cf0e
+--- /dev/null
++++ b/src/img/search.svg
+@@ -0,0 +1,31 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<svg
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:cc="http://creativecommons.org/ns#"
++   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
++   viewBox="0 0 308 313"
++   height="313"
++   width="308"
++   id="svg2"
++   version="1.1">
++  <metadata
++     id="metadata8">
++    <rdf:RDF>
++      <cc:Work
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
++        <dc:type
++           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
++        <dc:title></dc:title>
++      </cc:Work>
++    </rdf:RDF>
++  </metadata>
++  <defs
++     id="defs6" />
++  <path
++     id="path817"
++     d="m 135.30807,50.772916 a 86.870766,86.870766 0 0 0 -86.869134,86.871094 86.870766,86.870766 0 0 0 86.869134,86.8711 86.870766,86.870766 0 0 0 46.29493,-13.48243 l 5.82617,5.82618 12.72656,12.72656 29.67969,29.67969 c 3.9493,3.9493 10.30851,3.9493 14.25781,0 l 12.50586,-12.50586 c 3.9493,-3.94931 3.9493,-10.30851 0,-14.25782 l -29.68164,-29.67968 -12.74414,-12.74414 -5.66797,-5.66797 a 86.870766,86.870766 0 0 0 13.67383,-46.76563 86.870766,86.870766 0 0 0 -86.8711,-86.871094 z m 0,29.841797 a 57.029667,57.029667 0 0 1 57.03125,57.029297 57.029667,57.029667 0 0 1 -57.03125,57.0293 57.029667,57.029667 0 0 1 -57.02929,-57.0293 57.029667,57.029667 0 0 1 57.02929,-57.029297 z"
++     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:3.13147402;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
++</svg>
+diff --git a/src/img/tip.svg b/src/img/tip.svg
+new file mode 100644
+index 0000000..94aae32
+--- /dev/null
++++ b/src/img/tip.svg
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1024 1376v-192q0-14-9-23t-23-9h-192q-14 0-23 9t-9 23v192q0 14 9 23t23 9h192q14 0 23-9t9-23zm256-672q0-88-55.5-163t-138.5-116-170-41q-243 0-371 213-15 24 8 42l132 100q7 6 19 6 16 0 25-12 53-68 86-92 34-24 86-24 48 0 85.5 26t37.5 59q0 38-20 61t-68 45q-63 28-115.5 86.5t-52.5 125.5v36q0 14 9 23t23 9h192q14 0 23-9t9-23q0-19 21.5-49.5t54.5-49.5q32-18 49-28.5t46-35 44.5-48 28-60.5 12.5-81zm384 192q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z" fill="#fff"/></svg>
+\ No newline at end of file
+diff --git a/src/img/warning.svg b/src/img/warning.svg
+new file mode 100644
+index 0000000..b9f8b6f
+--- /dev/null
++++ b/src/img/warning.svg
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1024 1375v-190q0-14-9.5-23.5t-22.5-9.5h-192q-13 0-22.5 9.5t-9.5 23.5v190q0 14 9.5 23.5t22.5 9.5h192q13 0 22.5-9.5t9.5-23.5zm-2-374l18-459q0-12-10-19-13-11-24-11h-220q-11 0-24 11-10 7-10 21l17 457q0 10 10 16.5t24 6.5h185q14 0 23.5-6.5t10.5-16.5zm-14-934l768 1408q35 63-2 126-17 29-46.5 46t-63.5 17h-1536q-34 0-63.5-17t-46.5-46q-37-63-2-126l768-1408q17-31 47-49t65-18 65 18 47 49z" fill="#fff"/></svg>
+\ No newline at end of file
+diff --git a/src/partials/article.hbs b/src/partials/article.hbs
+index 55167ca..25a23ce 100644
+--- a/src/partials/article.hbs
++++ b/src/partials/article.hbs
+@@ -1,4 +1,4 @@
+-<article class="doc">
++<article class="doc" {{~#if (eq page.url '/get-started/current/home.html')}}id="homepage"{{/if}}>
+ {{#if (eq page.layout '404')}}
+ <h1 class="page">{{{or page.title 'Page Not Found'}}}</h1>
+ <div class="paragraph">
+@@ -13,6 +13,19 @@ If you typed the URL of this page manually, please double check that you entered
+ <h1 class="page">{{{this}}}</h1>
+ {{/with}}
+ {{{page.contents}}}
++
++{{#if (not (eq page.url '/get-started/current/home.html'))}}
++
++<br/>
++{{#if page.previous}}
++<a href="{{{page.previous.url}}}">&larr; {{page.previous.content}}</a>
++{{/if}}
++{{#if page.next}}
++<a style="float: right;" href="{{{page.next.url}}}">{{page.next.content}} &rarr;</a>
++{{/if}}
++
++{{/if}}
++
+ {{/if}}
+ {{> pagination}}
+ </article>
+diff --git a/src/partials/footer-scripts.hbs b/src/partials/footer-scripts.hbs
+index d106cd3..30c6d93 100644
+--- a/src/partials/footer-scripts.hbs
++++ b/src/partials/footer-scripts.hbs
+@@ -1,2 +1,13 @@
+ <script src="{{{uiRootPath}}}/js/site.js"></script>
+ <script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
++<script>hljs.initHighlighting()</script>
++{{#if (eq site.url "https://docs.rudder.io")}}
++<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
++<script type="text/javascript"> docsearch({
++apiKey: 'cd30a0d30ff5152bad8f0f74d6b73875',
++indexName: 'rudder',
++inputSelector: '#docsearch',
++debug: false // Set debug to true if you want to inspect the dropdown
++});
++</script>
++{{/if}}
+diff --git a/src/partials/head-scripts.hbs b/src/partials/head-scripts.hbs
+index e7da2bb..09422cc 100644
+--- a/src/partials/head-scripts.hbs
++++ b/src/partials/head-scripts.hbs
+@@ -2,3 +2,12 @@
+     <script async src="https://www.googletagmanager.com/gtag/js?id={{this}}"></script>
+     <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','{{this}}')</script>
+     {{/with}}
++    {{#if (eq site.url "https://docs.rudder.io")}}
++        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
++    {{/if}}
++    {{#if site.url}}
++        <link rel="icon" href="{{site.url}}/_/img/favicon.ico" type="image/x-icon">
++    {{else}}
++        <link rel="icon" href="/rudder-doc/_/img/favicon.ico" type="image/x-icon">
++    {{/if}}
++
+diff --git a/src/partials/header-content.hbs b/src/partials/header-content.hbs
+index 6973507..c9e8683 100644
+--- a/src/partials/header-content.hbs
++++ b/src/partials/header-content.hbs
+@@ -9,35 +9,33 @@
+       </button>
+     </div>
+     <div id="topbar-nav" class="navbar-menu">
++{{#if (eq site.url "https://docs.rudder.io")}}
++      <div class="navbar-item">
++        <span class="algolia-autocomplete">
++          <input type="text" size="35" id="docsearch" name="search" placeholder="Search the docs..." />
++          <span id="docsearch-addon"></span>
++        </span>
++      </div>
++{{/if}}
+       <div class="navbar-end">
+-        <a class="navbar-item" href="#">Home</a>
+         <div class="navbar-item has-dropdown is-hoverable">
+-          <a class="navbar-link" href="#">Products</a>
+-          <div class="navbar-dropdown">
+-            <a class="navbar-item" href="#">Product A</a>
+-            <a class="navbar-item" href="#">Product B</a>
+-            <a class="navbar-item" href="#">Product C</a>
+-          </div>
+-        </div>
+-        <div class="navbar-item has-dropdown is-hoverable">
+-          <a class="navbar-link" href="#">Services</a>
++          <a class="navbar-link" href="#">Resources</a>
+           <div class="navbar-dropdown">
+-            <a class="navbar-item" href="#">Service A</a>
+-            <a class="navbar-item" href="#">Service B</a>
+-            <a class="navbar-item" href="#">Service C</a>
++            <a class="navbar-item" href="https://docs.rudder.io/files/rudder-cheatsheet-advanced.pdf">Cheatsheet</a>
++            <a class="navbar-item" href="https://www.youtube.com/user/RudderProject/playlists?view=50&sort=dd&shelf_id=3">Videos</a>
+           </div>
+         </div>
+         <div class="navbar-item has-dropdown is-hoverable">
+-          <a class="navbar-link" href="#">Resources</a>
++          <a class="navbar-link" href="#">Support</a>
+           <div class="navbar-dropdown">
+-            <a class="navbar-item" href="#">Resource A</a>
+-            <a class="navbar-item" href="#">Resource B</a>
+-            <a class="navbar-item" href="#">Resource C</a>
++            <a class="navbar-item" href="https://www.rudder.io/open-source/community/">Community</a>
++            <a class="navbar-item" href="https://www.rudder.io/pricing/subscription/">Subscription</a>
+           </div>
+         </div>
+         <div class="navbar-item">
+           <span class="control">
+-            <a class="button is-primary" href="#">Download</a>
++            <a class="button is-primary chat" target="_blank" href="https://chat.rudder.io">CHAT</a>
++            <a class="button is-primary site" target="_blank" href="https://www.rudder.io">WEBSITE</a>
+           </span>
+         </div>
+       </div>
+diff --git a/src/partials/nav-explore.hbs b/src/partials/nav-explore.hbs
+index 94bc5b4..3470883 100644
+--- a/src/partials/nav-explore.hbs
++++ b/src/partials/nav-explore.hbs
+@@ -1,12 +1,12 @@
+ <div class="nav-panel-explore{{#unless page.navigation}} is-active{{/unless}}" data-panel="explore">
+   {{#if page.component}}
+-  <div class="context">
+-    <span class="title">{{page.component.title}}</span>
+-    <span class="version">{{page.componentVersion.displayVersion}}</span>
++  <div class="doc-title docs">
++    All resources <button class="nav-toggle"></button>
+   </div>
+   {{/if}}
+   <ul class="components">
+     {{#each site.components}}
++    {{#if (not (eq this.name "changelogs"))}}
+     <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
+       <span class="title">{{{./title}}}</span>
+       <ul class="versions">
+@@ -14,11 +14,66 @@
+         <li class="version
+           {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
+           {{~#if (eq this ../latest)}} is-latest{{/if}}">
+-          <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
++          {{~#if (eq ./version "6.2") }}
++              <a href="{{{relativize @root.page.url ./url}}}">{{./version}}-beta</a>
++          {{else}}
++              <a href="{{{relativize @root.page.url ./url}}}">{{./version}}</a>
++          {{/if}}
+         </li>
+         {{/each}}
++        {{~#if (and @root.site.url (eq this.name "reference"))}}
++        <li class="version">
++           <a href="https://docs.rudder.io/history/">older</a>
++        </li>
++        {{/if}}
+       </ul>
+     </li>
++    {{/if}}
+     {{/each}}
++    <li class="component">
++      <span class="title">Public API reference</span>
++        <ul class="versions">
++          <li class="version is-latest">
++            <a href="https://docs.rudder.io/api/">6.0-6.1 (v12)</a>
++          </li>
++          <li class="version">
++            <a href="https://docs.rudder.io/api/11/">5.0 (v11)</a>
++          </li>
++	  <li class="version">
++            <a href="https://docs.rudder.io/api/old/">older</a>
++          </li>
++        </ul>
++      </span>
++    </li>
++    <li class="component">
++      <span class="title">Relay API reference</span>
++        <ul class="versions">
++	  <li class="version is-latest">
++	    <a href="https://docs.rudder.io/api/relay/">6.0-6.1 (v1)</a>
++	  </li>
++        </ul>
++      </span>
++    </li>
++    {{#if site.url}}
++    <li class="component">
++      <span class="title">Changelogs</span>
++        <ul class="versions">
++          {{#each site.components}}
++          {{#if (eq this.name "reference")}}
++          {{#each ./versions}}
++          <li class="version {{~#if (eq this ../latestVersion)}} is-latest{{/if}}">
++	    {{~#if (eq ./version "6.2") }}
++            <a href="{{@root.site.url}}/changelogs/{{./version}}/index.html">{{./version}}-beta</a>
++	    {{else}}
++	    <a href="{{@root.site.url}}/changelogs/{{./version}}/index.html">{{./version}}</a>
++	    {{/if}}
++          </li>
++          {{/each}}
++          {{/if}}
++          {{/each}}
++        </ul>
++      </span>
++    </li>
++    {{/if}}
+   </ul>
+ </div>
+diff --git a/src/partials/nav-menu.hbs b/src/partials/nav-menu.hbs
+index 46adf92..5a2aeaa 100644
+--- a/src/partials/nav-menu.hbs
++++ b/src/partials/nav-menu.hbs
+@@ -2,7 +2,7 @@
+ <div class="nav-panel-menu is-active" data-panel="menu">
+   <nav class="nav-menu">
+     {{#with @root.page.componentVersion}}
+-    <h3 class="title"><a href="{{{relativize ./url}}}">{{./title}}</a></h3>
++    <!--h3 class="title"><a href="{{{relativize ./url}}}">{{./title}}</a></h3>-->
+     {{/with}}
+ {{> nav-tree navigation=this}}
+   </nav>
+diff --git a/src/partials/nav-tree.hbs b/src/partials/nav-tree.hbs
+index 79e3c1e..cd67d5e 100644
+--- a/src/partials/nav-tree.hbs
++++ b/src/partials/nav-tree.hbs
+@@ -1,3 +1,9 @@
++{{#if page.component}}
++<div class="doc-title">
++  <span class="title">{{page.component.title}}</span>
++  <span class="version">{{page.version}}</span>
++</div>
++{{/if}}
+ {{#if navigation.length}}
+ <ul class="nav-list">
+   {{#each navigation}}
+diff --git a/src/partials/nav.hbs b/src/partials/nav.hbs
+index 7e0f091..eccb19a 100644
+--- a/src/partials/nav.hbs
++++ b/src/partials/nav.hbs
+@@ -1,8 +1,8 @@
+ <div class="nav-container"{{#if page.component}} data-component="{{page.component.name}}" data-version="{{page.version}}"{{/if}}>
+   <aside class="nav">
+     <div class="panels">
+-{{> nav-menu}}
+-{{> nav-explore}}
++      {{> nav-menu}}
++      {{> nav-explore}}
+     </div>
+   </aside>
+ </div>
+diff --git a/src/partials/toolbar.hbs b/src/partials/toolbar.hbs
+index c6e9ea6..6fd202a 100644
+--- a/src/partials/toolbar.hbs
++++ b/src/partials/toolbar.hbs
+@@ -1,3 +1,16 @@
++{{~#if (eq page.componentVersion.version "6.2") }}
++<div class="banner-warning warning-beta">
++  <span class="icon-warning"></span>
++  This version is under development
++</div>
++{{else}}
++{{~#if (eq page.componentVersion.version "4.3") }}
++<div class="banner-warning warning-deprecated">
++  <span class="icon-warning"></span>
++  This version is deprecated
++</div>
++{{/if}}
++{{/if}}
+ <div class="toolbar" role="navigation">
+ {{> nav-toggle}}
+   {{#with site.homeUrl}}
+diff --git a/tasks/build-preview.js b/tasks/build-preview.js
+new file mode 100644
+index 0000000..77c8411
+--- /dev/null
++++ b/tasks/build-preview.js
+@@ -0,0 +1,90 @@
++'use strict'
++
++const fs = require('fs')
++const handlebars = require('handlebars')
++const map = require('map-stream')
++const path = require('path')
++const { promisify } = require('util')
++const requireFromString = require('require-from-string')
++const vfs = require('vinyl-fs')
++const yaml = require('js-yaml')
++
++module.exports = async (src, dest, siteSrc, siteDest, sink) => {
++  const [uiModel, layouts] = await Promise.all([
++    loadSampleUiModel(siteSrc),
++    compileLayouts(src),
++    registerPartials(src),
++    registerHelpers(src),
++  ])
++
++  const stream = vfs
++    .src('**/*.html', { base: siteSrc, cwd: siteSrc })
++    .pipe(
++      map((file, next) => {
++        const compiledLayout = layouts[file.stem === '404' ? '404.hbs' : 'default.hbs']
++        const siteRootPath = path.relative(path.dirname(file.path), path.resolve(siteSrc))
++        uiModel.env = process.env
++        uiModel.siteRootPath = siteRootPath
++        uiModel.siteRootUrl = path.join(siteRootPath, 'index.html')
++        uiModel.uiRootPath = path.join(siteRootPath, '_')
++        uiModel.page.contents = file.contents.toString().trim()
++        file.contents = Buffer.from(compiledLayout(uiModel))
++        next(null, file)
++      })
++    )
++    .pipe(vfs.dest(siteDest))
++
++  if (sink) stream.pipe(sink())
++  return stream
++}
++
++function loadSampleUiModel (siteSrc) {
++  return promisify(fs.readFile)(path.join(siteSrc, 'ui-model.yml'), 'utf8').then((contents) => yaml.safeLoad(contents))
++}
++
++function registerPartials (src) {
++  return new Promise((resolve, reject) => {
++    vfs
++      .src('partials/*.hbs', { base: src, cwd: src })
++      .pipe(
++        map((file, next) => {
++          handlebars.registerPartial(file.stem, file.contents.toString())
++          next(null, file)
++        })
++      )
++      .on('error', reject)
++      .on('end', resolve)
++  })
++}
++
++function registerHelpers (src) {
++  return new Promise((resolve, reject) => {
++    vfs
++      .src('helpers/*.js', { base: src, cwd: src })
++      .pipe(
++        map((file, next) => {
++          const helperFunction = requireFromString(file.contents.toString())
++          handlebars.registerHelper(file.stem, helperFunction)
++          next(null, file)
++        })
++      )
++      .on('error', reject)
++      .on('end', resolve)
++  })
++}
++
++function compileLayouts (src) {
++  const layouts = {}
++  return new Promise((resolve, reject) => {
++    vfs
++      .src('layouts/*.hbs', { base: src, cwd: src })
++      .pipe(
++        map((file, next) => {
++          layouts[file.basename] = handlebars.compile(file.contents.toString(), { preventIndent: true })
++          next(null, file)
++        })
++      )
++      .on('error', reject)
++      .on('end', () => resolve(layouts))
++  })
++}
+diff --git a/tasks/build.js b/tasks/build.js
+new file mode 100644
+index 0000000..03808dd
+--- /dev/null
++++ b/tasks/build.js
+@@ -0,0 +1,81 @@
++'use strict'
++
++const autoprefixer = require('autoprefixer')
++const browserify = require('browserify')
++const buffer = require('vinyl-buffer')
++const concat = require('gulp-concat')
++const cssnano = require('cssnano')
++const fs = require('fs')
++const imagemin = require('gulp-imagemin')
++const map = require('map-stream')
++const merge = require('merge-stream')
++const mkdirp = require('mkdirp')
++const path = require('path')
++const postcss = require('gulp-postcss')
++const postcssCalc = require('postcss-calc')
++const postcssImport = require('postcss-import')
++const postcssUrl = require('postcss-url')
++const postcssVar = require('postcss-custom-properties')
++const uglify = require('gulp-uglify')
++const vfs = require('vinyl-fs')
++
++module.exports = (src, dest) => {
++  const opts = { base: src, cwd: src }
++  const postcssPlugins = [
++    postcssImport(),
++    postcssUrl([
++      {
++        filter: '**/~typeface-*/files/*',
++        url: (asset) => {
++          const relpath = asset.pathname.substr(1)
++          const abspath = path.resolve('node_modules', relpath)
++          const basename = path.basename(abspath)
++          const destpath = path.join(dest, 'font', basename)
++          if (!fs.existsSync(destpath)) {
++            const dirname = path.dirname(destpath)
++            if (!fs.existsSync(dirname)) {
++              mkdirp.sync(dirname)
++            }
++            fs.copyFileSync(abspath, destpath)
++          }
++          return path.join('..', 'font', basename)
++        },
++      },
++    ]),
++    postcssVar(),
++    postcssCalc(),
++    autoprefixer({ browsers: ['last 2 versions'] }),
++    cssnano({ preset: 'default' }),
++  ]
++
++  return merge([
++    vfs
++      .src('js/+([0-9])-*.js', opts)
++      .pipe(uglify())
++      .pipe(concat('js/site.js')),
++
++    vfs
++      .src('js/vendor/*.js', Object.assign({ read: false }, opts))
++      .pipe(
++        // see https://gulpjs.org/recipes/browserify-multiple-destination.html
++        map((file, next) => {
++          file.contents = browserify(file.relative, { basedir: src, detectGlobals: false }).bundle()
++          next(null, file)
++        })
++      )
++      .pipe(buffer())
++      .pipe(uglify()),
++
++    vfs.src('css/site.css', opts).pipe(postcss(postcssPlugins)),
++
++    vfs.src('font/*.woff*(2)', opts),
++
++    vfs.src('img/**/*.{jpg,ico,png,svg}', opts).pipe(imagemin()),
++
++    vfs.src('helpers/*.js', opts),
++
++    vfs.src('layouts/*.hbs', opts),
++
++    vfs.src('partials/*.hbs', opts),
++  ]).pipe(vfs.dest(dest))
++}
+diff --git a/tasks/format.js b/tasks/format.js
+new file mode 100644
+index 0000000..628408d
+--- /dev/null
++++ b/tasks/format.js
+@@ -0,0 +1,10 @@
++'use strict'
++
++const vfs = require('vinyl-fs')
++const prettier = require('./lib/gulp-prettier-eslint')
++
++module.exports = (files) =>
++  vfs
++    .src(files)
++    .pipe(prettier())
++    .pipe(vfs.dest((file) => file.base))
+diff --git a/tasks/lib/gulp-prettier-eslint.js b/tasks/lib/gulp-prettier-eslint.js
+new file mode 100644
+index 0000000..ed79458
+--- /dev/null
++++ b/tasks/lib/gulp-prettier-eslint.js
+@@ -0,0 +1,42 @@
++'use strict'
++
++const { PluginError } = require('gulp-util')
++const prettierEslint = require('prettier-eslint')
++const map = require('map-stream')
++
++module.exports = () => {
++  const report = { changed: 0, unchanged: 0 }
++  return map(format).on('end', () => {
++    if (report.changed > 0) {
++      const changed = 'formatted '
++        .concat(report.changed)
++        .concat(' file')
++        .concat(report.changed === 1 ? '' : 's')
++      const unchanged = 'left '
++        .concat(report.unchanged)
++        .concat(' file')
++        .concat(report.unchanged === 1 ? '' : 's')
++        .concat(' unchanged')
++      console.log(`prettier-eslint: ${changed}; ${unchanged}`)
++    } else {
++      console.log(`prettier-eslint: left ${report.unchanged} file${report.unchanged === 1 ? '' : 's'} unchanged`)
++    }
++  })
++
++  function format (file, next) {
++    if (file.isNull()) return next()
++    if (file.isStream()) return next(new PluginError('gulp-prettier-eslint', 'Streaming not supported'))
++
++    const input = file.contents.toString()
++    const output = prettierEslint({ text: input })
++
++    if (input === output) {
++      report.unchanged += 1
++    } else {
++      report.changed += 1
++      file.contents = Buffer.from(output)
++    }
++
++    next(null, file)
++  }
++}
+diff --git a/tasks/lint-css.js b/tasks/lint-css.js
+new file mode 100644
+index 0000000..f9ebfe9
+--- /dev/null
++++ b/tasks/lint-css.js
+@@ -0,0 +1,11 @@
++'use strict'
++
++const vfs = require('vinyl-fs')
++const stylelint = require('gulp-stylelint')
++
++module.exports = (files) =>
++  vfs.src(files).pipe(
++    stylelint({
++      reporters: [{ formatter: 'string', console: true }],
++    })
++  )
+diff --git a/tasks/lint-js.js b/tasks/lint-js.js
+new file mode 100644
+index 0000000..64ca9e7
+--- /dev/null
++++ b/tasks/lint-js.js
+@@ -0,0 +1,11 @@
++'use strict'
++
++const vfs = require('vinyl-fs')
++const eslint = require('gulp-eslint')
++
++module.exports = (files) =>
++  vfs
++    .src(files)
++    .pipe(eslint())
++    .pipe(eslint.format())
++    .pipe(eslint.failAfterError())
+diff --git a/tasks/pack.js b/tasks/pack.js
+new file mode 100644
+index 0000000..28111eb
+--- /dev/null
++++ b/tasks/pack.js
+@@ -0,0 +1,10 @@
++'use strict'
++
++const vfs = require('vinyl-fs')
++const zip = require('gulp-vinyl-zip')
++
++module.exports = (src, dest, bundleName) =>
++  vfs
++    .src('**/*', { base: src, cwd: src })
++    .pipe(zip.zip(`${bundleName}-bundle.zip`))
++    .pipe(vfs.dest(dest))
+diff --git a/tasks/preview.js b/tasks/preview.js
+new file mode 100644
+index 0000000..ee4c574
+--- /dev/null
++++ b/tasks/preview.js
+@@ -0,0 +1,29 @@
++'use strict'
++
++const connect = require('gulp-connect')
++const chokidar = require('chokidar')
++
++module.exports = (serveDir, opts) => {
++  let watch
++  if (opts) {
++    opts = Object.assign({}, opts)
++    watch = opts.watch
++    delete opts.watch
++  } else {
++    opts = {}
++  }
++
++  let onStart
++  if (watch && watch.src && watch.onChange) {
++    onStart = () => {
++      chokidar
++        .watch(watch.src, { ignoreInitial: true })
++        .on('add', watch.onChange)
++        .on('change', watch.onChange)
++        .on('unlink', watch.onChange)
++    }
++  }
++
++  opts.root = serveDir
++  connect.server(opts, onStart)
++}
