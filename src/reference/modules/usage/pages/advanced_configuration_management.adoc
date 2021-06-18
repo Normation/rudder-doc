@@ -291,6 +291,7 @@ However, there are cases where having order is desirable (like ensuring that a J
 
 Rudder sorts the policies following this (best-effort) principle:
 
+* Methods in a technique are executed in the order they appear in the interface
 * Rules are executed in alphanumeric order
 * Inside of a rule, directives are executed in alphanumeric order, except for:
 
@@ -316,7 +317,7 @@ Do not use: "My general security rule" and "Check ssh configuration"
 But use: "05. My general security rule" and "40. Check ssh configuration"
 =====
 
-=== Example
+=== Advanced example
 
 - given three Techniques A, B and C
 - directives A1 and A2 based on Technique A, directives B1 and B2 based on B, directives C1 and C2 based on C
