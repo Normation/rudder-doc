@@ -61,12 +61,6 @@ include::{partialsdir}/bcrypt.adoc[]
 
 Upgrade from Rudder 6.0 is supported.
 
-== Upgrade from Rudder 5.0 (>= 5.0.16)
-
-Upgrade from Rudder 5.0 if >= 5.0.16 is supported.
-
-include::{partialsdir}/bcrypt.adoc[]
-
 [WARNING]
 ====
 
@@ -78,16 +72,17 @@ if you have not done it yet, to test that everything is ready for it.
 
 ====
 
-[NOTE]
-====
+[WARNING]
+===
 
-The Rudder packages ncf, ncf-api-virtualenv, rudder-inventory-endpoint, rudder-inventory-ldap, rudder-jetty 
-and rudder-techniques have been merged into rudder-webapp. This means that on a server upgrade from Rudder 5.0
-those packages will all be removed.
+Rudder agent 7.0 and later use a standardized versioning scheme as described in https://docs.rudder.io/versions
 
-This is normal!
+If you parse the output of `rudder agent version` you may expect some little change in its output.
 
-====
+Previous version of this command directly outputed the package version as provided by the system.
+It now outputs the same rudder version for every system.
+
+===
 
 
 [NOTE]
@@ -100,65 +95,6 @@ The folder is left in place, but not automatically shared anymore.
 
 If you relied on the tools copy mechanism to share files, you can replace it by a standard recursive copy
 from the shared files.
-
-====
-
-[NOTE]
-====
-
-Rudder generic method `condition from command` will change its behaviour in `audit` policy mode starting 6.0.
-
-Before the 6.0 Rudder version, when in audit policy mode, the method was not executing the command passed in
-parameters and would always report an error.
-
-In order to limit the compliance drift when switching policy mode we chose to make the method behave in the
-exact same way in audit mode than in enforce mode because:
-
-* Audit and enforce policy mode should do the same check on the node, and differ on the remediation part
-* The method is mainly used to bypass missing components in the current generic methods library
-and so, not applying it in audit restrain Rudder from complex use cases
-* The command passed as parameter should always be system impact free, and so, it can be executed without
-impacting the overall configuration state of the node
-
-====
-
-[NOTE]
-====
-
-Rudder 5.0.9 changes the default log level for the configuration server in Rudder.
-
-This allows easier debugging and tracability of policy updates, so we enabled
-it by default, but will produce more logs.
-If you want to revert to the previous behavior (which only logs errors):
-
-* On systemd systems
-
-** Create a `/etc/systemd/system/rudder-cf-serverd.service.d/override.conf` file containing:
-
-----
-[Service]
-Environment=VERBOSITY_OPTION=
-----
-
-** Run `systemctl daemon-reload` then `systemctl restart rudder-cf-serverd`
-
-* On systems using the init script
-
-** Edit the `/etc/default/rudder-agent` file:
-
-----
-# You need to uncomment and let empty
-CFENGINE_COMMUNITY_PARAMS_1=""
-----
-
-** Restart the service with `service rudder-agent restart`
-
-Verbosity options can be:
-
-* empty for only errors
-* `--inform` for basic messages
-* `--verbose` for very detailed logs
-* `--debug` for unreasonnably detailed logs
 
 ====
 
@@ -187,15 +123,6 @@ htpasswd -nBC 12 "" | tr -d ':\n' | sed 's/$2y/$2b/'
 [WARNING]
 ====
 
-Upgrading from versions older 5.0.16 leads to problems when removing rudder-jetty package causing the upgrade command to fail and leave rudder-jetty package in a non functional state.
-
-However your Rudder 6.0 should be working, but we recommend to upgrade at least to 5.0.16 before upgrading to 6.0.
-
-====
-
-[WARNING]
-====
-
 Upgrading to versions before 6.0.3 leads to several errors (service not started, ldap conf not updated to new format ...), all these bugs are fixed in 6.0.3 and you consider upgrading at least to 6.0.3.
 
 ====
@@ -207,30 +134,30 @@ Upgrading to 6.0.3 disables all plugins you may have installed because compatibi
 
 ====
 
-== Upgrade from Rudder 5.0 (< 5.0.16), 4.3 or older
+== Upgrade from Rudder 5.0 or older
 
-Direct upgrades from 5.0 versions older than 5.0.16, 4.3.x and older are no longer supported on 6.2.
+Direct upgrades from 5.0 versions and older are no longer supported on 7.0.
 If you are still running one of those, either on servers or nodes,
-please first upgrade to one of the supported versions, and then upgrade to 6.2.
+please first upgrade to one of the supported versions, and then upgrade to 7.0.
 
-== Compatibility between Rudder agent 6.2 and older server versions
+== Compatibility between Rudder agent 7.0 and older server versions
 
-=== 5.0, 6.0 and 6.1 servers
+=== 6.0, 6.1 and 6.2 servers
 
-Rudder agents 6.2 are compatible with 5.0.17+, 6.0 and 6.1 Rudder servers.
+Rudder agents 7.0 are compatible with 6.0, 6.1 and 6.2 Rudder servers.
 
 === Older servers
 
-Rudder agents 6.2 are not compatible with Rudder servers older than 5.0.
+Rudder agents 7.0 are not compatible with Rudder servers older than 6.0.
 You need to upgrade your server to a compatible version before the agents.
 
-== Compatibility between Rudder server 6.2 and older agent versions
+== Compatibility between Rudder server 7.0 and older agent versions
 
-=== 5.0, 6.0 and 6.1 agents
+=== 6.0, 6.1 and 6.2 agents
 
-Rudder agent 5.0, 6.0 and 6.1 are fully compatible with Rudder server 6.
+Rudder agent 6.0, 6.1 and 6.2 are fully compatible with Rudder server 7.
 
 === Older agents
 
-These agents are not compatible with Rudder 6.2, and you have to upgrade them.
-Be careful to follow the upgrade path explained xref:upgrade.adoc#_upgrade_from_rudder_4_3_or_older[above].
+These agents are not compatible with Rudder 7.0, and you have to upgrade them.
+Be careful to follow the upgrade path explained xref:upgrade.adoc#_upgrade_from_rudder_5_0_or_older[above].
