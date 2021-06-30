@@ -207,6 +207,7 @@ effective_cache_size = 128MB
 ==== Maximum number of file descriptors
 
 If you manage thousands of nodes with Rudder, you should increase the open file limits as policy generation opens and write a lot of file.
+
 If you experience the error
 
 ----
@@ -221,30 +222,26 @@ fs.file-max = 3247518
 ----
 
 Then you have to get the rudder application enough file descriptors. To do so,
-you have to:
-
-* Have a high enough hard limit for rudder
-* Set the limit used by rudder and root
-
-These can be set in `/etc/security/limits.conf`:
+you have to override the rudder-jetty unit configuration:
 
 ----
-rudder soft nofile 8192
-root soft nofile 8192
-root hard nofile 8192
+# Or edit /etc/systemd/system/rudder-jetty.service.d/override.conf directly
+systemctl edit rudder-jetty
 ----
 
-
-You have to restart rudder-jetty for these settings to take effect.
-
-You can check current soft and hard limits by running the following commands as the user you want to check:
+And add:
 
 ----
-ulimit -Sn
-ulimit -Hn
+[Service]
+LimitNOFILE=64000
 ----
 
+Then run:
 
+----
+systemctl daemon-reload
+systemctl restart rudder-jetty
+----
 
 [[_rsyslog]]
 == Rsyslog
