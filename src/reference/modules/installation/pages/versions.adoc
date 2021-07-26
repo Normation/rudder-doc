@@ -8,6 +8,24 @@ Rudder releases follow a `X.Y.Z` version scheme (for example, 6.1.2):
 * *`Y` version increments* are *minor* releases. These versions include small new features and various improvements, but no major change in the architecture of Rudder. An upgrade path from one minor version to the next ones (for a given major version) will be provided – check the xref:reference:installation:upgrade.adoc[upgrade section] of the user manual for specifics). They are released every few months.
 * *`Z` version increments* are *patch* releases. They contains bug or security fixes, and we make a lot of effort to reduce the amount of changes that go into these version (a full change log is always available). Upgrading your Rudder version to the latest patch release is always recommended, and is designed to be easy. They are released every few weeks.
 
+=== Pre-release versioning scheme
+
+Final release just have the version described above: `X.Y.Z`. However before a release we have many steps.
+
+* alpha: only available as nightly so no versioning, expect breakage
+* beta: `X.Y.Z~betaN` where N increments for each new beta, this is a version that builds but new feature and breakage should still be expected.
+* rc: `X.Y.Z~rcN` where N increments for each new rc, this is a version that should pass most tests and new feature should not happen anymore.
+* release: `X.Y.Z̀` which is the final version as described above
+
+=== Nightly versioning scheme
+
+Rudder packages are built every night. There is a nightly scheme for each release step. Note that nightly dependencies between rudder packages are less strict than release dependencies to allow installing even if some packages failed to build.
+
+* alpha: `X.Y.Z~alpha~gitYYYYMMDDHHMM`
+* beta: `X.Y.Z~betaN~gitYYYYMMDDHHMM`
+* rc: `X.Y.Z~rcN~gitYYYYMMDDHHMM`
+* release: `X.Y.Z~gitYYYYMMDDHHMM`
+
 == Rudder life cycle
 
 A maintained version is a major version for which we release minor bug fix releases and communicate about security vulnerabilities.
