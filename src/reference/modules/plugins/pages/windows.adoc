@@ -189,6 +189,26 @@ New-Eventlog -Source "Rudder" -LogName "Rudder"
 
 Then reboot the system.
 
+== Proxy settings
+
+Starting `6.2-1.26` the agent support communications through proxy. The proxy can be configured in the file `C:\Program Files\Rudder\etc\agent.conf` which does exist by default.
+It is a key-value based file, currently only supporting the `https_proxy` key.
+
+Correct value formats for the `https_proxy` key are listed below:
+
+----
+https_proxy =
+
+https_proxy = "192.168.2.4"
+
+https_proxy = "192.168.2.4:3128"
+
+# For authenticated proxy
+https_proxy = "user:password@192.168.2.4:3128"
+
+# To use the system defined proxy
+https_proxy = "system"
+----
 
 == Known issues
 
