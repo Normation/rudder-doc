@@ -103,7 +103,7 @@ and all others will remain untouched.
 To import the archive on the target Rudder server, you can follow the following steps:
 
 . Uncompress the zip archive in `/var/rudder/configuration-repository`
-. If necessary, correct all files permissions: `chown -R root:rudder directives groups parameters ruleCategories rules techniques` and `chown -R ncf-api-venv:rudder ncf/50_techniques techniques/ncf_techniques`
+. If necessary, correct all files permissions: `chown -R root:rudder directives groups parameters ruleCategories rules techniques`
 . Add all files in the git repository: `git add . && git commit -am "Importing configuration"`
 . In the Web interface, go to the *Settings > General* page, at the bottom of the page in *Manage Technique library* section, click *Reload Techniques* button
 . Finally, in the Web interface, go to the *Utilities > Archives* page, in the *Global Archive* section (first section), select *Latest Git commit* in the drop down list, and click on *Restore everything* to restore the configuration.
