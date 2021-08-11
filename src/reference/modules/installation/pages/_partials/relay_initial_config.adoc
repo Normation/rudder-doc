@@ -43,11 +43,12 @@ You then have two possible cases:
 The procedure on both cases is the same, you have to:
 
 - Update the policy server with the IP address or the fully qualified domain name of the relay server
-(instead of the root server)
+(instead of the root server) and reset pinned public key
 
 ----
 
 rudder agent policy-server <rudder relay ip or hostname>                                                     
+rudder agent server-keys-reset
 
 ----
 
