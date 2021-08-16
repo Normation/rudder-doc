@@ -53,7 +53,8 @@
   },
   "dependencies": {
     "chokidar": "^2.1.2",
-    "gulp-util": "^3.0.8"
+    "gulp-util": "^3.0.8",
+    "typeface-lato": "^1.1.13"
   },
   "resolutions": {
     "graceful-fs": "4.2.4"
