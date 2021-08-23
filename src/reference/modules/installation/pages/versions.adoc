@@ -2,7 +2,7 @@
 
 == Rudder versioning
 
-Rudder releases follow a `X.Y.Z` version scheme (for example, 6.1.2):
+Rudder releases follow a `X.Y.Z` version scheme (for example, 7.1.2):
 
 * *`X` version increments* are *major* releases. These versions include new features and architecture changes, and the amount of modifications can be considerable. An upgrade path from one major version to the next will always be provided (i.e., upgrading from 5 to 6 is supported, and from 6 to 7 is too, but upgrading directly from 5 to 7 will generally not be – check the xref:reference:installation:upgrade.adoc[upgrade section] of the user manual for specifics). They are released approximately every 9 to 12 months.
 * *`Y` version increments* are *minor* releases. These versions include small new features and various improvements, but no major change in the architecture of Rudder. An upgrade path from one minor version to the next ones (for a given major version) will be provided – check the xref:reference:installation:upgrade.adoc[upgrade section] of the user manual for specifics). They are released every few months.

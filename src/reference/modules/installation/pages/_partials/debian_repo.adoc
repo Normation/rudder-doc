@@ -21,7 +21,7 @@ the user name and the password by your Rudder account):
 [source, Bash]
 ----
 
-echo "deb https://LOGIN:PASSWORD@download.rudder.io/apt/6.2/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
+echo "deb https://LOGIN:PASSWORD@download.rudder.io/apt/7.0/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 
 ----
 

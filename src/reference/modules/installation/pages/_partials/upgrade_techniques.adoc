@@ -40,7 +40,7 @@ If you did not modify any of the Technique from standard library (default case),
 
 ----
 
-rudder server upgrade-techniques  -o
+rudder server upgrade-techniques -o
 
 ----
 
@@ -78,7 +78,7 @@ And then you can merge your changes in the upgraded Techniques with
 ----
 
 # Upgrade the techniques
-$ rudder server upgrade-techniques  -u
+$ rudder server upgrade-techniques -u
 Switched to branch 'rudder_update'
 Switched to branch 'master'
 Merge made by the 'recursive' strategy.

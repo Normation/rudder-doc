@@ -17,11 +17,9 @@ available freely for these platforms:
 
 | OS | Version | Architecture
 
-| Debian | 8, 9 and 10 | 32bit, 64bit
-.2+| Ubuntu | 14.04 and 16.04 LTS | 32bit, 64bit
-| 18.04 LTS and 20.04 LTS | 64bit
-.2+| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 6 | 32bit, 64bit
-| 7 and 8 | 64bit
+| Debian | 10 and 11 | 64bit
+| Ubuntu | 18.04 LTS and 20.04 LTS | 64bit
+| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 7 and 8 | 64bit
 | SUSE Linux Enterprise Server (SLES) | 12 and 15 | 64bit
 
 |===
@@ -35,10 +33,11 @@ available for these platforms as part of the https://www.rudder.io/en/pricing/su
 |===
 
 | OS | Version | Architecture
-
-.3+| Debian | 6 and 7 |32bit, 64bit
+.5+| Debian | 6 and 7 |32bit, 64bit
 | 8 | 32bit, 64bit, armhf (Raspbian)
 | 9 | 32bit, 64bit, arm64, armhf (Raspbian)
+| 10 | 32bit, 64bit, arm64, armhf (Raspbian)
+| 11 | 32bit, 64bit, arm64, armhf (Raspbian)
 .2+| Ubuntu | 10.04 to 16.04 LTS | 32bit, 64bit
 | 18.04 and 20.04 LTS | 64bit
 | Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 3, 5 to 7 | 32bit, 64bit
@@ -47,7 +46,7 @@ available for these platforms as part of the https://www.rudder.io/en/pricing/su
 | Slackware | 14 | 64bit
 | Solaris | 11.4 | 64bit
 | IBM AIX | 5.3, 6.1 and 7.1 | ppc
-| Microsoft Windows Server | 2008 R2, 2012, 2012 R2, 2016 | 32bit, 64bit
+| Microsoft Windows Server | 2008 R2, 2012, 2012 R2, 2016, 2019 | 32bit, 64bit
 
 |===
 
@@ -74,7 +73,7 @@ where systemd has been removed.
 ====
 
 Our general policy for Rudder server is to support the two latest
-supported versions. It means:
+supported versions . It means:
 
 * Debian _stable_ and _oldstable_
 * The two latest Ubuntu LTS versions
@@ -89,10 +88,10 @@ The following operating systems are supported as a root or relay server:
 
 | OS | Version | Architecture
 
-| Debian | 9 and 10 | 64bit
-| Ubuntu | 18.04 and 20.04 LTS | 64bit
-| Red Hat Enterprise Linux (RHEL) / CentOS | 7 and 8 | 64bit
-| SUSE Linux Enterprise Server (SLES) | 12 and 15 | 64bit
+| Debian | 10 and 11 | 64bit
+| Ubuntu | 20.04 LTS | 64bit
+| Red Hat Enterprise Linux (RHEL) / CentOS | 8 | 64bit
+| SUSE Linux Enterprise Server (SLES) | 15 | 64bit
 
 |===
 
