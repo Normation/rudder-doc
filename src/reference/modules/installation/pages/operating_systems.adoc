@@ -18,7 +18,7 @@ available freely for these platforms:
 | OS | Version | Architecture
 
 | Debian | 8, 9 and 10 | 32bit, 64bit
-.2+| Ubuntu | 14.04 and 16.04 LTS | 32bit, 64bit
+.2+| Ubuntu | 16.04 LTS | 32bit, 64bit
 | 18.04 LTS and 20.04 LTS | 64bit
 .2+| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 6 | 32bit, 64bit
 | 7 and 8 | 64bit
