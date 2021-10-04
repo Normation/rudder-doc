@@ -38,7 +38,7 @@ by following the preceding tip to use a different database than the default one.
 
 The provisioning script is located on the root server in `/opt/rudder/share/upgrade-tools/reportsSchema.sql`.
 
-If you database has a name different from `rudder`, you need to make a copy of this file
+If your database has a name different from `rudder`, you need to make a copy of this file
 and edit it. Change the line:
 
 ----
