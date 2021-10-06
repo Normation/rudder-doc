@@ -110,7 +110,7 @@ These values are automatically escaped to be managed correctly. The escaping dou
 
 ====
 
-Values in the Technique Editor in Rudder 6.X are *not* escaped - their content need to be escaped, based on the previous rules. Starting in Rudder 7.0, values in Technique Editor are escaped properly.
+Values in the Technique Editor in Rudder 6.X are *not* escaped - their content needs to be escaped, based on the previous rules. Starting in Rudder 7.0, values in Technique Editor are escaped properly.
 
 
 Prior to upgrading from 6.X to 7.0, you need to review values in Techniques from the Technique Editor to detect any unescaped ", \ and `
