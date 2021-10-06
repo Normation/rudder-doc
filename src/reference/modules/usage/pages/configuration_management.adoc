@@ -102,7 +102,7 @@ image::Rule_config.png[]
 [[Variables-and-values]]
 == Variables and Values
 
-Values used in Directives, Parameters and Properties have several types - Parameters and Properties are either String or JSON, while in Directives they can be free String, String validated by regular expression, or Javascript.
+Values used in directives, parameters and properties have several types - parameters and properties are either String or JSON, while in directives they can be free String, String validated by regular expression, or Javascript.
 
 These values are automatically escaped to be managed correctly. The escaping doubles the backslashes ( `\` -> `\\` ), and replace a quote by a backslash quote ( `"` -> `\\"`) on Linux/Unix systems, and on Windows it replaces a quote by a backtick quote ( `` " `` -> `` `" `` ), and doubles the backticks.
 
@@ -112,7 +112,9 @@ These values are automatically escaped to be managed correctly. The escaping dou
 
 Values in the Technique Editor in Rudder 6.X are *not* escaped - their content need to be escaped, based on the previous rules. Starting in Rudder 7.0, values in Technique Editor are escaped properly.
 
-Prior to upgrading from 6.X to 7.0, you need to review values in Techniques from the Technique Editor to unescape ", \ and ` 
+
+Prior to upgrading from 6.X to 7.0, you need to review values in Techniques from the Technique Editor to detect any unescaped ", \ and `
+Safest approach is to disable these Techniques for the upgrade, and unescape the values and enable back the Techniques once upgrade to 7.0 is done 
 
 ====
 
