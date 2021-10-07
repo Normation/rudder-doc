@@ -1,21 +1,34 @@
 [[_performance_tuning]]
 = Performance tuning
 
-Rudder and some applications used by Rudder (like the Apache web server, or Jetty)
-can be tuned to your needs.
+Rudder provides many options to tune its configuration to support either very large or very small systems. This
+part describes the different options and their impact, on Disk usage, Memory and CPU.
+
+[[_disk_usage]]
+== Disk usage
+
+On the Rudder Server, most of the disk usage comes from the reports from nodes.
 
 [[_reports_retention]]
 == Reports retention
 
-To lower disk usage on Rudder Server, you can lower the retention duration
-for execution reports in
-`/opt/rudder/etc/rudder-web.properties` file with the options:
+Reports are sent by default from the nodes to the Rudder Server at each run - on large installation, or on systems
+with little available disk space, this may be problematic.
+There are two strategies, that can be combined, to lower the requirement on disk usage.
+
+First, you can lower the retention duration for reports from nodes, by setting in file
+`/opt/rudder/etc/rudder-web.properties` the options:
 
 * `rudder.batch.reportscleaner.archive.TTL=0`
 * `rudder.batch.reportscleaner.delete.TTL=3`
-* `rudder.batch.reportscleaner.compliancelevels.delete.TTL=0`
 
-To disable compliance storing, and lower the number of reports in database.
+Second possibility is to make the agents send less reports to the Rudder server, by switching to `Non compliance only` compliance reporting mode. In this mode, only reports of changes or errors will be sent to the Rudder server. his mode saves a lot of log space and bandwidth, but leads to some assumptions about actual configuration status in reporting.
+This can be configured in the Settings/General page, section `Compliance reporting mode`
+
+Finally, compliance levels are also historized over time; disabling their saving also save disk space:
+`/opt/rudder/etc/rudder-web.properties`:
+
+* `rudder.batch.reportscleaner.compliancelevels.delete.TTL=0`
 
 == Apache web server
 
@@ -25,12 +38,13 @@ application server, and to receive inventories using the WebDAV protocol.
 There are tons of documentation about Apache performance tuning available on the
 Internet, but the defaults should be enough for most setups.
 
+[[_memory_usage]]
 == Jetty
 
 The Jetty application server is the service that runs Rudder web application and inventory
 endpoint. It uses the Java runtime environment (JRE).
 
-The default settings fit the basic recommendations for minimal Rudder hardware requirements,
+The default settings fit the basic recommendations for standard Rudder hardware requirements,
 but there are some configuration switches that you might need to tune to obtain better
 performance with Rudder, or correct e.g. timezone issues.
 
@@ -53,16 +67,9 @@ You can follow the configuration steps described in the following paragraph.
 [[_configure_ram_allocated_to_jetty]]
 == Configure RAM allocated to Jetty
 
-To change the RAM given to Jetty, you have to:
+To change the RAM given to Jetty, you have to edit +/etc/default/rudder-jetty+ to modify JAVA_XMX value:
 
 ----
-
-# edit +/etc/default/rudder-jetty+ with your preferred text editor, for example vim:
-vim /etc/default/rudder-jetty
-
-Notice: that file is alike to +/opt/rudder/etc/rudder-jetty.conf+, which is the file with
-default values. +/opt/rudder/etc/rudder-jetty.conf+ should never be modified directly because
-the modification would be erased by the next Rudder upgrade.
 
 # modify JAVA_XMX to set the value to your need.
 # The value is given in MB by default, but you can also use the "G" unit to specify a size in GB.
@@ -74,27 +81,30 @@ systemctl restart rudder-jetty
 
 ----
 
-On small installations (less than 1000 nodes), the amount of memory should be the half of the RAM of the server, rounded up to the nearest GB.
+[NOTE]
+
+====
+
+This file is alike to +/opt/rudder/etc/rudder-jetty.conf+, which is the file with
+default values. +/opt/rudder/etc/rudder-jetty.conf+ should never be modified directly because
+the modification would be erased by the next Rudder upgrade.
+
+====
+
+On standard installations (less than 1000 nodes), the amount of memory should be the half of the RAM of the server, rounded up to the nearest GB.
 For example, if the server has 5GB of RAM, 3GB should be allocated to Jetty.
 
 On installations with more than 1000 nodes, two-third (rounded up to the nearest GB) should be allocated to Jetty.
 For example, if the server has 16GB of RAM, 11GB should be allocated to Jetty
 
 
-=== Memory usage of the JVM
+=== Garbage collector
 
 When RAM allocated to jetty reaches 4 to 6GB (or higher), you may experience long freeze of Rudder, up 
-to several tens of seconds. If this is the case, and if you use `Rudder 5.0.12` or newer, you can change
-the JVM garbage collector used by the `JVM` to one better fitted for larger memory footprint:
+to several tens of seconds. If this is the case, you can change
+the JVM garbage collector to one better fitted for larger memory footprint by editing +/etc/default/rudder-jetty+:
 
 ----
-
-# edit +/etc/default/rudder-jetty+ with your preferred text editor, for example vim:
-vim /etc/default/rudder-jetty
-
-Notice: that file is alike to +/opt/rudder/etc/rudder-jetty.conf+, which is the file with
-default values. +/opt/rudder/etc/rudder-jetty.conf+ should never be modified directly because
-the modification would be erased by the next Rudder upgrade.
 
 # Uncomment the lines related to "Java Garbage collector option"
 
@@ -113,11 +123,68 @@ The String deduplication option of `G1GC` saves between one fifth to one fourth 
 used by rudder-jetty.
 
 
+== Configure Jetty for very small instances
+
+
+On very small instances, you may be both memory and CPU constrained.
+With less than 20 nodes, the following options in +/etc/default/rudder-jetty+ should fit on small systems
+
+----
+
+JAVA_XMX=2G
+
+JAVA_GC="-XX:+UseG1GC
+-XX:+UnlockExperimentalVMOptions
+-XX:MaxGCPauseMillis=500
+-XX:+UseStringDeduplication"
+
+JETTY_START_TIMEOUT=360 
+
+----
+
+[[_cpu_usage_in_rudder]]
+== Make better use of resources
+
+Most operations can be parallelized within Rudder, to take most advantage of the available resources.
+These parameters can be set through the https://docs.rudder.io/api/v/13/#operation/getAllSettings[setting API]
+Most notable settings, with recommended values are:
+
+[cols="<.^2,<.^2,<.^1,<.^3", options="header"]
+|=======================
+|Name|Default value|Recommended value for large instance|Recommended value for very small instance
+|rudder_generation_max_parallelism|x0.5|x0.5|1
+|rudder_compute_dyngroups_max_parallelism|1|4|1
+|rudder_generation_delay|"0 seconds"|5 seconds|10 seconds
+|rudder_report_protocol_default|HTTPS|HTTPS|HTTPS
+|reporting_mode|full-compliance|`recommended value depends on your needs`|changes-only
+|rudder_compute_changes|true|true|false
+|rudder_save_db_compliance_levels|true|false|false
+|=======================
+
+Note: x0.5 means half the number of available CPUs
+
+[[_ldap_configuration]]
+== LDAP connection pool configuration
+
+By default, there are 2 availables connections to the internal LDAP in Rudder. On large systems, or systems
+with a high load, that may not be sufficient.
+A good heuristic is "Number of threads for dynamic group computation" + "half the number of CPUs available" + 2
+
+This value is set in file +/opt/rudder/etc/rudder-web.properties+, with the value `ldap.maxPoolSize`.
+For a large system with 16 CPUs, 4 threads allocated to dynamic groups updates, this would result in
+
+----
+
+ldap.maxPoolSize=14
+
+----
+
+
 [[_optimize_postgresql_server]]
-== Optimize PostgreSQL server
+== Configure PostgreSQL server
 
 The default out-of-the-box configuration of PostgreSQL server is really not
-compliant for high end (or normal) servers. It uses a really small amount of
+adapted for high end or even normal by todays standard servers, as it uses a really small amount of
 memory.
 
 The location of the PostgreSQL server configuration file is usually:
@@ -125,7 +192,7 @@ The location of the PostgreSQL server configuration file is usually:
 On a Debian system:
 ----
 
-/etc/postgresql/9.x/main/postgresql.conf
+/etc/postgresql/X.Y/main/postgresql.conf
 
 ----
 
@@ -152,7 +219,7 @@ shared_buffers = 256MB
 #   $ sysctl -w kernel.shmmax=268435456
 #
 # Reference:
-# http://www.postgresql.org/docs/8.4/interactive/kernel-resources.html#SYSVIPC
+# http://www.postgresql.org/docs/9.2/interactive/kernel-resources.html#SYSVIPC
 #
 # Memory for complex operations
 # -----------------------------
@@ -190,7 +257,7 @@ effective_cache_size = 1024MB
 
 ----
 
-=== Suggested values on a small server
+=== Suggested values on a standard server
 
 ----
 
@@ -263,8 +330,7 @@ for details.
 == Agent
 
 If you are using Rudder on a highly stressed machine, which has especially slow or busy
-I/O's, you might experience a sluggish agent run every time the machine
-tries to comply with your Rules.
+I/O's, you might experience a sluggish agent run every time the system evaluates the policies.
 
 This is because the agent tries to update its internal databases every time the agent
 executes a policy (the `.lmdb` files in the `/var/rudder/cfengine-community/state directory`),
