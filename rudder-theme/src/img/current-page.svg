@@ -13,7 +13,7 @@
    version="1.1"
    id="svg4"
    sodipodi:docname="current-page.svg"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
   <metadata
      id="metadata10">
     <rdf:RDF>
@@ -22,6 +22,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -36,20 +37,20 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1920"
-     inkscape:window-height="1052"
+     inkscape:window-width="1848"
+     inkscape:window-height="1016"
      id="namedview6"
      showgrid="false"
      inkscape:zoom="0.13169643"
-     inkscape:cx="896"
-     inkscape:cy="896"
-     inkscape:window-x="120"
-     inkscape:window-y="0"
+     inkscape:cx="-979.52541"
+     inkscape:cy="865.62713"
+     inkscape:window-x="1992"
+     inkscape:window-y="912"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg4" />
   <path
      d="m 1600,960 q 0,54 -37,91 l -651,651 q -39,37 -91,37 -51,0 -90,-37 l -75,-75 q -38,-38 -38,-91 0,-53 38,-91 L 949,1152 H 245 q -52,0 -84.5,-37.5 Q 128,1077 128,1024 V 896 q 0,-53 32.5,-90.5 Q 193,768 245,768 H 949 L 656,474 q -38,-36 -38,-90 0,-54 38,-90 l 75,-75 q 38,-38 90,-38 53,0 91,38 l 651,651 q 37,35 37,90 z"
      id="path2"
-     style="fill:#f08004;fill-opacity:1"
+     style="fill:#13beb7;fill-opacity:1"
      inkscape:connector-curvature="0" />
 </svg>

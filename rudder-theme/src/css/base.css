@@ -1,8 +1,8 @@
 :root {
-  --color-text: #222;
-  --color-navbar-bg: #f08004;
-  --color-navbar-bg-focus: #d87304;
-  --color-navbar-text: #fff;
+  --color-text: #36474e;
+  --color-navbar-bg: #fff;
+  --color-navbar-bg-focus: #e5e5e5;
+  --color-navbar-text: #041922;
 }
 
 html,
@@ -18,7 +18,7 @@ body {
 
 html {
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: "Lato", "Roboto", sans-serif;
   font-size: 1.1em;
   text-size-adjust: 100%;
 }
