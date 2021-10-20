@@ -5,7 +5,7 @@
   src:
     local("Lato Regular"),
     local("Lato-Regular"),
-    url(~typeface-lato/files/lato-latin-400.woff2) format("woff2")
+    url(~typeface-lato/files/lato-latin-400.woff2) format("woff2"),
     url(~typeface-lato/files/lato-latin-400.woff) format("woff");
 }
 
@@ -16,7 +16,7 @@
   src:
     local("Lato Regular"),
     local("Lato-Regular"),
-    url(~typeface-lato/files/lato-latin-400italic.woff2) format("woff2")
+    url(~typeface-lato/files/lato-latin-400italic.woff2) format("woff2"),
     url(~typeface-lato/files/lato-latin-400italic.woff) format("woff");
 }
 
@@ -27,7 +27,7 @@
   src:
     local("Lato Bold"),
     local("Lato-Bold"),
-    url(~typeface-lato/files/lato-latin-700.woff2) format("woff2")
+    url(~typeface-lato/files/lato-latin-700.woff2) format("woff2"),
     url(~typeface-lato/files/lato-latin-700.woff) format("woff");
 }
 
@@ -38,6 +38,6 @@
   src:
     local("Lato Bold"),
     local("Lato-Bold"),
-    url(~typeface-lato/files/lato-latin-700italic.woff2) format("woff2")
+    url(~typeface-lato/files/lato-latin-700italic.woff2) format("woff2"),
     url(~typeface-lato/files/lato-latin-700italic.woff) format("woff");
 }
