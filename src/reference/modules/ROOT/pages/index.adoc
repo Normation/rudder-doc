@@ -1,8 +1,6 @@
 [[what-is-rudder]]
 = What is Rudder?
 
-image::big-rudder-logo.png["Rudder logo", align="center"]
-
 Rudder is an easy to use, web-driven, role-based solution for IT Infrastructure
 Automation and Compliance. With a focus on continuously checking configurations
 and centralising real-time status data, Rudder can show a high-level summary
