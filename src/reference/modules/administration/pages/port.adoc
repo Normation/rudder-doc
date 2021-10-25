@@ -1,7 +1,10 @@
 [[port]]
-= Change server port
+= Change server ports
 
-This chapter explains how to change cf-serverd listening port (default 5309).
+This chapter explains how to change the ports used by the two communication protocols:
+
+* HTTPS port used by Windows and Unix nodes (default `443`)
+* cf-serverd port used by Unix nodes (default `5309`)
 
 [CAUTION]
 ====
@@ -10,23 +13,16 @@ All agents and relays must use the same port to communicate, if you change the p
 
 ====
 
-== Change listening port on the policy-server
+== Change listening ports on the root server
 
-To change the cf-serverd port on th policy-server, edit `/opt/rudder/etc/rudder-web.properties` and replace the key `rudder.policy.distribution.port.cfengine` (before 7.0: `rudder.community.port`).
-
-For example:
-
-----
-
-rudder.policy.distribution.port.cfengine=5310
+To change the ports on the Rudder server, edit `/opt/rudder/etc/rudder-web.properties` and set the
+values of (replace 443 and 5309 by the values you want):
 
 ----
 
-Or for version earlier than 7.0:
-
-----
-
-rudder.community.port=5310
+rudder.policy.distribution.port.cfengine=5309
+rudder.policy.distribution.port.https=443
+rudder.server.relay.api=https://localhost:443/rudder/relay-api
 
 ----
 
@@ -39,17 +35,50 @@ systemctl restart rudder-agent
 
 ----
 
-== Set connection port on the agent
-
-The agent cannot know in advance that the server port has changed, so you must declare it when configuring the agent.
-
-To do this, add the port to the server name in `/var/rudder/cfengine-community/policy_server.dat`.
-
-For example :
+Then you need to edit your Rudder virtual host in Apache httpd configuration. Edit `/etc/apache2/sites-enabled/rudder.conf` or `/etc/httpd/conf.d/rudder.conf` (depending on your operating system), and modify
+the port:
 
 ----
 
-x=rudder.example.com:5310
+<VirtualHost *:443>
+
+----
+
+Note that you can duplicate the virtual host if you want to keep the API and Web access
+on port 443 and use another port for agent-server communication.
+
+You may also need to add a directive to listen on the new port:
+
+----
+
+Listen 443
+
+----
+
+Then restart the `apache2` or `httpd` service.
+
+Server services configuration is now over. You then must follow the next section on your root
+server too, as it also runs an agent.
+
+== Set connection port on the agents (for nodes, relays, and root server)
+
+The agent cannot know in advance that the server port has changed, so you must declare it when configuring the agent.
+
+To do this, add the port to the server name in your policy server configuration with:
+
+----
+
+rudder agent policy-server hostname:5309
+
+----
+
+(or enforce the value in `/opt/rudder/etc/policy_server.dat`).
+
+And configure the HTTPS port in `/etc/rudder/etc/agent.conf` (you need to create the file):
+
+----
+
+https_port=443
 
 ----
 
