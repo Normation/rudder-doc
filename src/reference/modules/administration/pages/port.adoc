@@ -15,6 +15,14 @@ All agents and relays must use the same port to communicate, if you change the p
 
 == Change listening ports on the root server
 
+[NOTE]
+====
+
+It is currently not possible to change the HTTP port when SELinux is enabled on the system
+(without a custom SELinux policy).
+
+====
+
 To change the ports on the Rudder server, edit `/opt/rudder/etc/rudder-web.properties` and set the
 values of (replace 443 and 5309 by the values you want):
 
