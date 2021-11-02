@@ -21,7 +21,7 @@ and more. You will need:
 * https://www.virtualbox.org/wiki/Downloads[VirtualBox], to run the demo virtual machines
 * https://www.vagrantup.com/downloads.html[Vagrant], to handle the virtual machines configuration and provisioning
 
-To instal them, run:
+To install them, run:
 
 * `sudo apt install -y virtualbox vagrant` on Debian/Ubuntu systems
 * `sudo yum install -y VirtualBox vagrant` on RHEL systems
