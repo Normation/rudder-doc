@@ -19,7 +19,8 @@ available freely for these platforms:
 
 | Debian | 10 and 11 | 64bit
 | Ubuntu | 18.04 LTS and 20.04 LTS | 64bit
-| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 7 and 8 | 64bit
+| Red Hat Enterprise Linux (RHEL) / Oracle Linux / CentOS | 7 | 64bit
+| Red Hat Enterprise Linux (RHEL) / AlmaLinux, Rocky Linux, Oracle Linux / CentOS Stream | 8 | 64bit
 | SUSE Linux Enterprise Server (SLES) | 12 and 15 | 64bit
 
 |===
@@ -90,7 +91,7 @@ The following operating systems are supported as a root or relay server:
 
 | Debian | 10 and 11 | 64bit
 | Ubuntu | 20.04 LTS | 64bit
-| Red Hat Enterprise Linux (RHEL) / CentOS | 8 | 64bit
+| Red Hat Enterprise Linux (RHEL) / AlmaLinux, Rocky Linux, Oracle Linux / CentOS Stream | 8 | 64bit
 | SUSE Linux Enterprise Server (SLES) | 15 | 64bit
 
 |===
@@ -122,7 +123,6 @@ The following operating systems work with packages built for another operating s
 
 * OpenSUSE LEAP (with SLES packages)
 * Amazon Linux and Amazon Linux 2 (with RHEL packages)
-* Oracle Linux (with RHEL packages)
 
 [TIP]
 
