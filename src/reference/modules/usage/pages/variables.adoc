@@ -1093,11 +1093,13 @@ Iteration:
 {{ item.key }} is the the current item[key] value
 {% endfor %}
 
-{% for key,value in vars.prefix.dict %}
+{% for key,value in vars.prefix.dict.items() %}
 {{ key }} has value {{ value }}
 {% endfor %}
 
 ----
+
+More information about https://jinja.palletsprojects.com/en/2.11.x/templates/#for[loops] and other control structures is available in https://jinja.palletsprojects.com/en/2.11.x/templates/[Jinja2 template documentation].
 
 === Directive
 
