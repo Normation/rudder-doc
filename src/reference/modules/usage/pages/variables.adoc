@@ -1056,6 +1056,8 @@ Iterations:
 
 ----
 
+You can read a xref:rudder-by-example:ROOT:files/advanced-file-templating.adoc[full example] of file template in Rudder by example.
+
 ==== Jinja2
 
 https://pypi.org/project/Jinja2/[Jinja2] is a full-featured Python template engine that supports anything you can imagine from a template engine, but with the corresponding complexity.
@@ -1100,6 +1102,8 @@ Iteration:
 ----
 
 More information about https://jinja.palletsprojects.com/en/2.11.x/templates/#for[loops] and other control structures is available in https://jinja.palletsprojects.com/en/2.11.x/templates/[Jinja2 template documentation].
+
+You can read a xref:rudder-by-example:ROOT:files/advanced-file-templating.adoc[full example] of file template in Rudder by example.
 
 === Directive
 
