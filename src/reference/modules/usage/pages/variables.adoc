@@ -541,19 +541,19 @@ There are also more variables available, all documented in https://docs.cfengine
 |Name
 |Description
 
-|`const.dollar`
+|`ncf_const.dollar`
 |`$`
 
-|`const.dirsep`
+|`ncf_const.dirsep`
 |`/`
 
-|`const.endl or const.n`
+|`ncf_const.endl or ncf_const.n`
 |`\n`
 
-|`const.r`
+|`ncf_const.r`
 |carriage return
 
-|`const.t`
+|`ncf_const.t`
 |tabulation
 
 |`ncf_const.s`
