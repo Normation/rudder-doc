@@ -541,22 +541,22 @@ There are also more variables available, all documented in https://docs.cfengine
 |Name
 |Description
 
-|`ncf_const.dollar`
+|`rudder_const.dollar`
 |`$`
 
-|`ncf_const.dirsep`
+|`rudder_const.dirsep`
 |`/`
 
-|`ncf_const.endl or ncf_const.n`
+|`rudder_const.endl or rudder_const.n`
 |`\n`
 
-|`ncf_const.r`
+|`rudder_const.r`
 |carriage return
 
-|`ncf_const.t`
+|`rudder_const.t`
 |tabulation
 
-|`ncf_const.s`
+|`rudder_const.s`
 |space char
 |===
 
