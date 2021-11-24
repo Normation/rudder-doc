@@ -36,12 +36,10 @@ available for these platforms as part of the https://www.rudder.io/en/pricing/su
 | OS | Version | Architecture
 .5+| Debian | 6 and 7 |32bit, 64bit
 | 8 | 32bit, 64bit, armhf (Raspbian)
-| 9 | 32bit, 64bit, arm64, armhf (Raspbian)
-| 10 | 32bit, 64bit, arm64, armhf (Raspbian)
-| 11 | 32bit, 64bit, arm64, armhf (Raspbian)
+| 9 to 11 | 32bit, 64bit, arm64, armhf (Raspbian)
 .2+| Ubuntu | 10.04 to 16.04 LTS | 32bit, 64bit
 | 18.04 and 20.04 LTS | 64bit
-| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 3, 5 to 7 | 32bit, 64bit
+| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 3, 5 to 8 | 32bit, 64bit
 .2+| SUSE Linux Enterprise Server (SLES) | 10SP3 and 11 | 32bit, 64bit
 | 12 and 15 | 64bit
 | Slackware | 14 | 64bit
@@ -78,7 +76,7 @@ supported versions . It means:
 
 * Debian _stable_ and _oldstable_
 * The two latest Ubuntu LTS versions
-* The two latest major RHEL/CentOS and SLES versions
+* The latest major RHEL/CentOS and SLES versions (plus the previous one if the latest is less the 2 years old)
 
 ====
 
