@@ -1,9 +1,6 @@
 @Library('slack-notification')
 import org.gradiant.jenkins.slack.SlackNotifier
 
-// uid of the jenkins user of the docker runners
-def user_id = "1007"
-
 pipeline {
     agent none
 
@@ -27,7 +24,7 @@ pipeline {
                     agent {
                         dockerfile {
                             filename 'Dockerfile'
-                            additionalBuildArgs  '--build-arg USER_ID='+user_id
+                            additionalBuildArgs  '--build-arg USER_ID=$JENKINS_UID'
                         }
                     }
                     steps {
