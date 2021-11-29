@@ -24,7 +24,7 @@ pipeline {
                     agent {
                         dockerfile {
                             filename 'Dockerfile'
-                            additionalBuildArgs  '--build-arg USER_ID=$JENKINS_UID'
+                            additionalBuildArgs "--build-arg USER_ID=${JENKINS_UID}"
                         }
                     }
                     steps {
