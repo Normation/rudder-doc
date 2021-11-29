@@ -28,7 +28,7 @@ pipeline {
                         }
                     }
                     steps {
-                        sh script: 'make site', label: 'build docs'
+                        sh script: 'make', label: 'build docs'
                     }
                     post {
                         always {
