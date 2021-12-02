@@ -31,6 +31,8 @@ Each step can be scheduled using one of these method:
 
 - Delay after previous step
 
+There is also a special step that is used to check for remaining unapplied KBs. This step is scheduled with a simple short interval in hours (typically 24 hours).
+
 
 === Update a system
 
@@ -53,4 +55,9 @@ And if you want the application to be done on the day after, use ̀`Download dat
 
 One last parameter is `Force reboot`. When a reboot is needed and someone is connected to the system at that time, reboot is prevented if `Force reboot` is not checked.
 
+=== Reports ===
 
+The system update technique reports are maintained through executions, as opposed to regular technique that make new report for each agent run.
+This means that if the update fail, a fail report is continuously sent to the server until the next update tentative.
+
+Each run also provides a report of unapplied KBs, so that is a KB fail to apply, it is reported in the "KB not applied" section.
