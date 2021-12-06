@@ -2,21 +2,19 @@
 
 == Windows
 
-To keep a windows up-to-date with Rudder you need the `dsc` plugin and the `Windows Update` technique.
+To keep a Windows up-to-date with Rudder you need the `dsc` plugin and the `Windows Update` technique.
 
 The technique is currently separately provided but may be included with the plugin depending on your subscription plan.
 
 === Windows Update Technique
 
 The `Windows Update` technique can be found in the directive page under the `Application` category.
-
 To update a Windows machine with this technique, you must apply it via a rule to your Windows node.
-
 The update is done in 3 separate steps:
 
 - KB download: download KB from system repository (Microsoft servers by default, WSUS if configured)
 
-- KB application: apply last downloaded KBs
+- KB application: apply latest downloaded KBs
 
 - Reboot if necessary: reboot if some applied KB asked for it
 
@@ -37,23 +35,21 @@ There is also a special step that is used to check for remaining unapplied KBs. 
 === Update a system
 
 Let's create a directive to apply the technique to a given Windows node.
-
-In the parameters, check the `Test mode`, this ignores the scheduling options so that every steps is always tried on each agent run.
+In the parameters, check the `Test mode`, this ignores the scheduling options so that every step is always tried on each agent run.
 This means you can check that you directive works on your nodes without having to wait for next patch Tuesday.
 
-Note: don't forget to remove this parameter since it may be a bit heavy to run all the time on your machines.
+NOTE: Don't forget to remove this parameter after testing since it may be a bit heavy to run all the time on your machines.
 
-The first section of parameters is about checking for unapplied KBs. This part has no monthly scheduling since it is done much more often.
+* The first section of parameters is about checking for unapplied KBs. This part has no monthly scheduling since it is done much more often.
 The parameter is a check period in hours.
 
-The next 3 sections are the scheduling of the 3 method steps described above.
+* The next 3 sections are the scheduling of the 3 method steps described above.
 Note that you can disable each step, either to separate them in different directives or just to make sure they don't run.
-
 The scheduling is done by specifying the reference date, the delay in days and the startup time of the task.
 So for example if you want to download KBs on Saturday after the patch Tuesday after 8AM, use `Patch Tuesday` as the reference time, `4` days delay, and start hour `8`.
-And if you want the application to be done on the day after, use ̀`Download date` as the reference time, `1` day delay.
+And if you want the application to be done on the day after, use `Download date` as the reference time, `1` day delay.
 
-One last parameter is `Force reboot`. When a reboot is needed and someone is connected to the system at that time, reboot is prevented if `Force reboot` is not checked.
+* One last parameter is `Force reboot`. When a reboot is needed and someone is connected to the system at that time, reboot is prevented if `Force reboot` is not checked.
 
 === Reports ===
 
