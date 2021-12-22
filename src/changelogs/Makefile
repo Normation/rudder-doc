@@ -8,6 +8,7 @@ changelogs:
 	mkdir -p modules/ROOT/pages/
 	cd dependencies && make $@
 	cp -r dependencies/$@/* modules/ROOT/pages/
+	[ -d dependencies/$@/images ] && cp -r dependencies/$@/images modules/ROOT/assets/images/
 	[ -f modules/ROOT/pages/index.adoc ] && echo "* xref:index.adoc[Release notes]" > modules/ROOT/nav.adoc || true
 	[ -f modules/ROOT/pages/index.adoc ] && echo "* xref:main.adoc[Main changelogs]" >> modules/ROOT/nav.adoc || true
 	[ -f modules/ROOT/pages/index.adoc ] || echo "* xref:index.adoc[Main changelogs]" > modules/ROOT/nav.adoc
