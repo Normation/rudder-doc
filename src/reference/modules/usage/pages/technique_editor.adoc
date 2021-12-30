@@ -122,7 +122,7 @@ Now, we have to find and add the generic methods which correspond to the actions
 * Service enabled at boot (You can find it in the *Service category*)
   - This method only take one parameter, the name of the service we want to check. Again, here, fill in the *service_name* field with the value _ntp_.
 
-You can also use parameters et resources to replace "File content" method by "File from local source with check" :
+You can also use parameters and resources to replace "File content" method by "File from local source with check" :
 
 image::technique_editor/technique-resource-usage.png[]
 
