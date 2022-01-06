@@ -1,0 +1,155 @@
+= Manage resource files from external git
+
+Technique resources can be modified via the technique editor interface.
+
+But you may prefer managing those resources from your own git repository.
+Here is how to do this using github and webhooks.
+
+== Github, gitlab and co.
+
+First you need to have your resources in a central git repository with webhooks that can
+remotely trigger an update on your machine. If you don't want this mechanism you can
+replace it with a simple cron that will periodically poll the git repository. It is easier
+to setup but increases the latency between your push and the update on the finale machine.
+In this case, just skip to the script part.
+
+Now go to your github repository configuration page and setup a new webhook.
+
+This hook must point to you public facing URL (see below), for example: https://mydomain.example.com/hooks/rudder
+
+Then trigger this hook on each ̀ push` on the repository.
+
+== Reverse proxy
+
+Next you need a reverse proxy to make a public webhook url available.
+This is not mandatory if you use your own git servers (like gitlab), but still strongly advised.
+
+On the public side you would have an url like : https://mydomain.example.com/hooks/rudder where:
+* mydomain.example.com must be a domain you own
+* it must redirect to your reverse proxy
+* the reverse proxy must be listening to the https port
+
+On the private side, the proxy would call : http://rudder.private.example.com:9000/hooks/technique-resources where:
+* rudder.private.example.com is the domain name of your rudder server
+* 9000 is the default port of the webhook tool if you didn't change it
+* /technique_resources is a hook we are going to define
+
+This can be done with apache using
+
+----
+<VirtualHost *:443>
+    ServerName mydomain.example.com
+    SSLEngine on
+
+    ProxyPass /hooks/rudder  http://rudder.private.example.com:9000/hooks/technique-resources
+    ProxyPassReverse /hooks/rudder  http://rudder.private.example.com:9000/hooks/technique-resources
+    ProxyRequests Off
+</VirtualHost>
+----
+
+== Webhook
+
+Webhook is a tool to create webhooks receivers as expected by github.
+It is available at https://github.com/adnanh/webhook or directly in debian using `apt-get install webhook̀
+
+Let's install it on the Rudder server and make it work.
+
+Webhook is disabled as long as it's configuration file `/etc/webhook.conf` doesn't exist.
+
+So let's create one that will run our update script. It can be either YAML or JSON, let's choose JSON.
+
+----
+
+[
+  {
+    "id": "technique-resources",
+    "execute-command": "/usr/local/bin/technique-resource-update.sh",
+    "command-working-directory": "/var/tmp"
+  }
+]
+
+----
+
+This will execute the script `/usr/local/bin/technique-resource-update.sh` when the technique-resources hook is called.
+
+Now start webhook with systemd (restart if already started):
+
+----
+systemctl start webhook
+----
+
+== Script
+
+Now we are at a point where a script is automatically run on the Rudder server whenever there is a change in a remote git repository.
+
+Let's write this script called `/usr/local/bin/technique-resource-update.sh` (don't forget to make it executable):
+
+----
+
+#!/bin/bash
+
+# please tweak this to your needs
+LOCAL_DIR="/var/tmp"
+REPO_NAME="technique-resources"
+REMOTE_GIT="git@github.com:mycompany/${REPO_NAME}.git"
+
+# create local version if it doesn't already exist
+mkdir -p "${LOCAL_DIR}"
+cd "${LOCAL_DIR}"
+# use depth 1 to make it quicker
+[ ! -d "${REPO_NAME}/.git" ] && git clone --quiet --depth 1 "${REMOTE_GIT}"
+
+# update the local repo
+cd "${LOCAL_DIR}/${REPO_NAME}"
+git pull
+# useful for a meaningful commit message
+commit_id=$(git rev-parse HEAD)
+
+# update resources for a single technique
+# call it this way:
+#   update_resource "resource_directory" "<technique category>/<technique name>/<technique version>"
+update_resource() {
+  rsync -a "$1/" "/var/rudder/configuration-repository/techniques/$2/resources/"
+  cd "/var/rudder/configuration-repository/techniques/$2/resources/"
+  git add .
+}
+
+# put here your source directory and destination directory by pair
+
+# example where my_technique/* are resources for the technique "my_technique" version "1.0" in the category "ncf_techniques"
+update_resource "my_technique" "ncf_techniques/my_technique/1.0
+# other example
+update_resource "another_technique" "other_category/another_technique/1.1"
+
+# commit to Rudder git repository if needed
+cd /var/rudder/configuration-repository/techniques
+if [ -n "$(git status --porcelain)" ]
+then
+  git commit --quiet --message="Automatically synchronize technique resources based on ${REPO_NAME} commit ${commit_id}"
+  # inform the server
+  rudder server reload-techniques
+fi
+
+----
+
+== Instant update
+
+If you don' have too many impacted nodes, you can also force them to run an agent instantly after this change
+which will further reduce the latency between push and update.
+
+Just go to the "Administration/Settings" menu and make sure the "Trigger immediate update of nodes when their configuration changes"
+setting will trigger your nodes in case a little number of them are impacted (choose a value that is not too high
+to avoid overloading the server).
+
+== Conclusion
+
+We now have a full process that update a node as soon as we push something in our git repo.
+
+If your apache configuration is stored as a template in your git repository and configured to be a resource in your technique;
+then just push it to the git(hub|lab) instance after committing and the machinery will call the local script on the Rudder server,
+which will update the technique resource and notify the server,
+which will update policies and notify the agent,
+which will run and apply the new template.
+
+There is now a direct link between your push and the application on the agent.
+

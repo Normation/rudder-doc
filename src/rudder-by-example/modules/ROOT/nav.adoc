@@ -5,6 +5,7 @@
 ** xref:files/advanced-file-templating.adoc[Advanced file templating]
 ** xref:files/edition-one-line.adoc[Enforce a line is present in a file only once]
 ** xref:files/edition-replace-line.adoc[Enforce part of a line in a file]
+** xref:files/external-resource.adoc[Manage resource files from external git]
 * System management
 ** xref:system/auto-accept-nodes.adoc[Auto-accept nodes]
 ** xref:system/extend-inventories.adoc[Extend inventories with custom data]
