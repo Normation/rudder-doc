@@ -39,8 +39,8 @@ on the central server.
 === Policy generation info log
 
 Policy generation is a complex process and it is central to Rudder use. You will often want to know more
-about a policy generation result: what was the reason for a failure? What nodes where upated? Or even 
-more specifics info like: where are info and debug log? 
+about a policy generation result: what was the reason for a failure? What nodes where upated? Or even
+more specifics info like: where are info and debug log?
 
 ==== /var/rudder/policy-generation-info
 
@@ -49,30 +49,30 @@ in the following files:
 
 - `last-failure-message`: when a generation fails, failure message is stored here. It is helpful for
   debugging purpose (for example when message is very long), or to know what happened in case of
-  transient errors. 
-- `last-updated-nodeids`: this file contains list of node updated in last generation. It is in a 
+  transient errors.
+- `last-updated-nodeids`: this file contains list of node updated in last generation. It is in a
   source-able format which defined three bash array:
   - `RUDDER_UPDATED_POLICY_SERVER_IDS`: contains the set of updated policy servers (root or relay)
   - `RUDDER_UPDATED_NODE_IDS`: contains the set of updated standard nodes
   - `RUDDER_NODE_IDS`: contains both updated policy server and nodes. Policy servers always come first.
 
-Each file starts with a comment describing what policy generation generated it. 
+Each file starts with a comment describing what policy generation generated it.
 Two version of each of these files is concerved: the oldest one has a `.old` suffix.
 
 ==== `webapp` logs
 
-Rudder web application logs located in `/var/log/rudder/webapp/yyyy_MM_dd.stderrout.log` contains information 
+Rudder web application logs located in `/var/log/rudder/webapp/yyyy_MM_dd.stderrout.log` contains information
 about policy generation process. In rudder 6.0, all policy generation logs are gathered under `policy.generation`
-namespace (with optionally more precise namespace, like `policy.generation.timing` for timing information, or 
+namespace (with optionally more precise namespace, like `policy.generation.timing` for timing information, or
 `policy.generation.update` for updated nodes, etc).
-By default, policy generation logs when it starts with generic information about system: 
+By default, policy generation logs when it starts with generic information about system:
 
 ----
 [2020-03-12 15:32:28+0100] INFO  policy.generation - Start policy generation, checking updated rules
 [2020-03-12 15:32:29+0100] INFO  policy.generation - [metrics] Xmx:1.55 GB nodes:8 (cached:0) rules:248 (enabled:35) techniques:131 (enabled:127) directives:238 (enabled:224) groups:26 (dynamic:17) parameters:3
 ----
 
-How many nodes were updated: 
+How many nodes were updated:
 
 ----
 [2020-03-12 15:32:39+0100] INFO  policy.generation - Configuration of 8 nodes were updated, their policies are going to be written
@@ -101,8 +101,8 @@ End finally summary of generation: success or failure, total time:
 [2020-03-12 15:33:37+0100] INFO  policy.generation - Successful policy update '10198' [started 2020-03-12 15:32:28 - ended 2020-03-12 15:33:37]
 ----
 
-Much more information can be logged about policy generation (hook execution and timing, much more precise timing, 
-updated nodes, files written, etc). All corresponding logs and verbosity levels are documented and controlled 
+Much more information can be logged about policy generation (hook execution and timing, much more precise timing,
+updated nodes, files written, etc). All corresponding logs and verbosity levels are documented and controlled
 in `/opt/rudder/etc/logback.xml`.
 
 == Understanding how Technique Editor works
@@ -295,7 +295,7 @@ Rudder sorts the policies following this (best-effort) principle:
 * Rules are executed in alphanumeric order
 * Inside of a rule, directives are executed in alphanumeric order, except for:
 
-** *Mono-instance* techniques: only one directive is selected and others are discarded (and they will be tagged as such in node detail compliance) 
+** *Mono-instance* techniques: only one directive is selected and others are discarded (and they will be tagged as such in node detail compliance)
 
 *** the directive with the highest priority will be selected
 *** in case of equal priorities, the rule name and then the directive name are used for sorting them (in alphanumeric order)
@@ -350,3 +350,23 @@ To use this feature, two generic methods are available in the technique editor:
 See the documentation of these methods for details about the required parameters,
 and especially xref:reference:generic_methods.adoc#sharedfile_to_node[sharedfile_to_node] for a complete usage example.
 
+== Update technique resources from command line
+
+Since Rudder 6.2 techniques can have resource files that are automatically deployed to each node applying these techniques.
+
+Technique resources can be modified via the technique editor interface.
+
+It can however be useful to update a technique resource from outside the interface, for example to update it after an external change.
+To do this, on your Rudder server, edit the technique resource file(s) located in
+`/var/rudder/configuration-repository/techniques/<technique category>/<technique name>/<technique version>/resource`
+
+Then add them to git and reload the technique:
+
+----
+cd /var/rudder/configuration-repository/techniques/<technique category>/<technique name>/<technique version>/
+git add resource
+git commit -m"My technique resource updated"
+rudder server reload-techniques
+----
+
+You're done.
