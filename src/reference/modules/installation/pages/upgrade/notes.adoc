@@ -11,10 +11,12 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 
 == Plugins upgrade
 
-If you server is connected to the Internet (directly or through a proxy) and you have configured
-your account in `/opt/rudder/etc/rudder-pkg/rudder-pkg.conf`, the upgrade process will take care of upgrading to plugins to a compatible version.
+If your server is connected to the Internet (directly or through a proxy), and you have configured
+your account in `/opt/rudder/etc/rudder-pkg/rudder-pkg.conf`, the upgrade process will take care of upgrading to
+plugins to a compatible version.
 
-If it is not the case, you will need to download the new ones from downloads.rudder.io[https://downloads.rudder.io]. and install them following the usual xref:reference:plugins:index.adoc[installation procedure].
+If it is not the case, you will need to download the new ones from https://downloads.rudder.io[downloads.rudder.io].
+and install them following the usual xref:reference:plugins:index.adoc[installation procedure].
 
 You can check the current state of plugins with:
 
@@ -38,19 +40,29 @@ Two cases are unsupported:
 
 ==== Changed default certificate
 
-The certificate used by default for HTTPS access is now the same as used for policy update. This means you will see a warning message indicating the server certificate has changed (if you used Rudder's self signed certificate).This is normal, and you can accept to update the known certificate.
+The certificate used by default for HTTPS access is now the same as was already used for policy
+updates. This means you will see a warning message indicating the server certificate has changed
+(if you used Rudder's self-signed certificate). This is expected, and you can accept to update the
+known certificate.
 
 ==== Use a custom certificate
 
 ===== Server side
 
-If you used a custom certificate, you will need to apply manual changes to Rudder's configuration. As the self-signed certificate is used for internal communication, you will need to create a dedicated virtual host for the Web and API access.
+If you used a custom certificate, you will need to apply manual changes to Rudder's configuration.
+As the self-signed certificate is used for internal communication, you will need to create a
+dedicated virtual host for the Web and API access.
 
-The easiest way is probably to start over from the new default configuration and adapt it to your needs (you can access it as a new configuration file deployed by your package manager or directly in [our repository](https://raw.githubusercontent.com/Normation/rudder/master/relay/sources/apache/rudder-vhost.conf).
+The easiest way is probably to start over from the new default configuration and adapt it to your
+needs (you can access it as a new configuration file deployed by your package manager or directly
+in https://raw.githubusercontent.com/Normation/rudder/master/relay/sources/apache/rudder-vhost.conf[our repository].
 
 ===== Agent side - Server certificate verification
 
-If you use a custom valid certificate and have enabled certificate verification in the settings you need may encounter missing reports and inventories after upgrade. This is caused by 6.X agent trying to validate your custom certificate while 7.0 relies on internal self-signed certificate for node-server communication.
+If you use a custom valid certificate and have enabled certificate verification in the settings you
+need may encounter missing reports and inventories after upgrade. This is caused by 6.X agent
+trying to validate your custom certificate while 7.0 relies on internal self-signed certificate
+for node-server communication.
 
 Before upgrade:
 
@@ -58,16 +70,21 @@ Before upgrade:
 
 If you upgraded without following this step:
 
-- Policy generation and update will continue to work so you can use Rudder to fix the problem
+- Policy generation and update will continue to work, so you can use Rudder to fix the problem
 - You have two options:
     - Disable certificate verification to get reports and inventories back
-    - Upgrade your agent to 7.0 so they can verifify certificates correctly
+    - Upgrade your agent to 7.0, so they can verify certificates correctly
 
 ==== Custom Apache configuration
 
-The easiest way is probably to start over from the new default configuration and adapt it to your needs (you can access it as a new configuration file deployed by your package manager or directly in [our repository](https://raw.githubusercontent.com/Normation/rudder/master/relay/sources/apache/rudder-vhost.conf).
+The easiest way is probably to start over from the new default configuration and adapt it to your
+needs (you can access it as a new configuration file deployed by your package manager or directly
+in https://raw.githubusercontent.com/Normation/rudder/master/relay/sources/apache/rudder-vhost.conf[our repository].
 
-In particular the set of included files from /opt/rudder/etc has changed to be simpler. Please note the all /opt/rudder/etc/apache-* files are actually overridden at each upgrade and should not be modified. You should only edit the virtual host in /etc/apache2 or /etc/httpd which is treated as a configuration file by package managers and not automatically replaced.
+In particular the set of included files from `/opt/rudder/etc` has changed to be simpler. Please
+note the all `/opt/rudder/etc/apache-*` files are actually overridden at each upgrade and should
+not be modified. You should only edit the virtual host in `/etc/apache2/sites-available` or `/etc/httpd/conf.d` which
+is treated as a configuration file by package managers and not automatically replaced.
 
 In addition, we also redirect all requests to port 80 to 443 by default.
 
@@ -75,13 +92,17 @@ In addition, we also redirect all requests to port 80 to 443 by default.
 
 ==== Syslog reporting
 
-Syslog reporting is removed totally from 7.0, so if you had not switched to HTTPS reporting to the settings yet, the switch will be automatically made at upgrade.
+Syslog reporting is removed totally from 7.0, so if you had not switched to HTTPS reporting to
+the settings yet, the switch will be automatically made at upgrade.
 
-We advise you to test HTTPS reporting before upgrading 7.0 to avoid unexpected consequences (as you won't be able to fallback to syslog on 7.0).
+We advise you to test HTTPS reporting before upgrading 7.0 to avoid unexpected consequences 
+(as you won't be able to fall back to syslog on 7.0).
 
 ==== Non-compliant only
 
-If you use the non-compliant only reporting mode you will see missing reporting in the system techniques before the first agent run on you systems. This is due to changes in expected reports in these techniques, and the way the compliance is computed in this case.
+If you use the non-compliant only reporting mode you will see missing reporting in the system
+techniques before the first agent run on you systems. This is due to changes in expected
+reports in these techniques, and the way the compliance is computed in this case.
 
 === Agent
 
@@ -97,41 +118,51 @@ The output has been updated to be more readable, and you may need to adapt tooli
 
 ===== rudder agent inventory
 
-/etc/profile is not sourced for inventories anymore, so the set of environment variables sent to the server may change. To properly sent information from the node in the inventory, we advise to rely on inventory extension scripts.
+`/etc/profile` is not sourced for inventories anymore, so the set of environment variables sent to the server
+may change. To properly sent information from the node in the inventory, we advise relying on inventory extension scripts.
 
 === Configuration policies
 
 ==== Removed techniques
 
-Removed deprecated techniques, you are encouraged to use the technique editor:
+We have removed deprecated techniques, you are encouraged to use the technique editor to replace them:
 
-- routingManagement
-- nfsClient
+- Routing management
+- NFS client
 
-## Recent changes in rules page
+==== Recent changes in rules page
 
-The recent changes view is more limited than in previous versions due to the rewrite, but will be imprived in following patch releases.
+The recent changes view is more limited than in previous versions due to the rewrite, but will be improved in following
+patch releases.
+In particular no graphs are currently displayed, this will be improved in the upcoming releases.
 
 ==== Removed role-based system groups
 
-We removed the role-based system groups as part of the removal of Rudder server roles. If you had a rule linked to one of these, it will be disabled after upgrade, and you will need to link it to a new group.
+We removed the role-based system groups as part of the removal of Rudder server roles. If you
+had a rule linked to one of these, it will be disabled after upgrade, and you will need to link it to a new group.
 
 === Server
 
 ==== Legacy local HTTP API removed
 
-The old server HTTP API (sometimes known as "v1") that existed before our public authenticated API and was deprecated for several years has finally been removed.
+The old local server HTTP API (sometimes known as "v1") that existed before our public authenticated
+API and was deprecated for several years has finally been removed.
 
-The list of removed endpoints is visible in the [documentation](https://docs.rudder.io/history/4.3/rest-api.html#_status).
+The list of removed endpoints is visible in the https://docs.rudder.io/history/4.3/rest-api.html#_status[documentation].
 
-You should switch to the public API (which implements all features of the legacy one), and you can use the local system token (in /var/lib/rudder/api-token) in local scripts.
+If you still relied on this API should switch to the public API (which implements all features of the legacy one), and you
+can use the local system token (present in `/var/lib/rudder/api-token`) in local scripts.
 
 ==== Server roles and remote postgresql server
 
-If you have an external postgresql database you need to add a little change in your server configuration following the [documentation](https://docs.rudder.io/reference/7.0/administration/multi_server.html#_configure_the_database). In short:
+If you have an external postgresql database you need to add a little change in your server configuration
+following the https://docs.rudder.io/reference/7.0/administration/multi_server.html#_configure_the_database[documentation].
+In short:
 
-- The roles based on the presence of the rudder-reports package and some configuration in roles files has been removed
-- There is now a `rudder.postgresql.local` boolean option in the webapp configuration allowing to disable local postgresql configuration. Then you only need to configure the URL to your postgresql server in `rudder.jdbc.url` , the username in `rudder.jdbc.username` and the password in `/opt/rudder/etc/rudder-passwords.conf` and you're all set.))
+- The roles based on the presence of the `rudder-reports` package and some configuration in roles files has been removed
+- There is now a `rudder.postgresql.local` boolean option in the webapp configuration allowing to disable local postgresql
+  configuration. Then you only need to configure the URL to your postgresql server in `rudder.jdbc.url` , the username
+  in `rudder.jdbc.username` and the password in `/opt/rudder/etc/rudder-passwords.conf` and you're all set.
 
 == Upgrade from Rudder 6.0 or older
 
