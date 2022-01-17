@@ -145,6 +145,7 @@ the user experience is good.
 === CPU
 
 The number of cores necessary also depends on the number of managed nodes. A general rule for the minimal values, on a stand-alone server is:
+
 * less than 50 nodes: 2 cores
 * between 50 and 1000 nodes: 4 cores
 * more than 1000 nodes: 4 cores + one core per 1000 nodes beyond 1000, when not in full compliance
