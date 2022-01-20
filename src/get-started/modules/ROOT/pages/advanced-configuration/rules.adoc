@@ -30,7 +30,8 @@ You can then save your rule.
 
 Add the *All managed nodes* group, and do not link it to any directive for now, and save it.
 
-image::./new-rule.png["New rule settings", align="center"]
+image::./new-rule-1.png["New rule settings directives", align="center"]
+image::./new-rule-2.png["New rule settings groups", align="center"]
 
 In the upper right, you can see two tabs, *Settings* and *Compliance*.
 We are in the *Settings* tabs, which allows configuring the rule. The *Compliance* tab will show you the compliance details of the rule.

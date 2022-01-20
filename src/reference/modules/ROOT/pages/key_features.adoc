@@ -147,5 +147,6 @@ which allows to use all the same modules, but with a *web UI* and
 with *drag'n'drop*. Of course, you can configure each unitary module to use data from
 a node and behave specifically on each one.
 
-image::introduction/technique_editor_overview.png["Graphical Technique Editor - the simplest way to build new configuration", align="center"]
+image::introduction/technique_editor_overview_1.png["Graphical Technique Editor - the simplest way to build new configuration", align="center"]
+image::introduction/technique_editor_overview_2.png["Graphical Technique Editor - the simplest way to build new configuration", align="center"]
 
