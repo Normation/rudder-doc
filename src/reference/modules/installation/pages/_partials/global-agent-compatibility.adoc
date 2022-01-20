@@ -1,0 +1,22 @@
+
+In the tables below:
+
+* a `+` sign means any newer versions
+* a `-` is used to define a range
+
+.Compatibility table
+[options="header,footer"]
+|=======================
+|Server |Relay    |Linux agent | Windows agent
+include::{partialsdir}/current-agent-compatibility.adoc[]
+|=======================
+
+.Compatibility table (with deprecated versions)
+[options="header,footer"]
+|=======================
+|Server          |Relay    |Linux agent | Windows agent
+|5.0.1-5.0.16    |5.0-6.0  |5.0-6.0     |5.0-6.0
+|5.0.17          |5.0-6.1  |5.0-6.1     |5.0-6.1
+include::{partialsdir}/current-agent-compatibility.adoc[]
+|=======================
+
