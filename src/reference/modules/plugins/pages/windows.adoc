@@ -153,7 +153,7 @@ where action can be one of the following
 
 image:rudder-agent-dsc-cli.png[Example of a Rudder DSC agent output on Windows]
 
-=== Agent logs
+== Agent logs
 
 Rudder logs are visible in the output of the agent. You can get more details about what is done with the 
 `-Verbose` option:
