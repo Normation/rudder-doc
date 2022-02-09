@@ -239,8 +239,8 @@ image::view-property-inheritance.png[Viewing property overrides]
 |`${node.properties[datacenter][dns]}`
 
 |DSC technique
-|`$(${node.properties}.datacenter)`
-|`$(${node.properties}.datacenter.dns)`
+|`$($node.properties.datacenter)`
+|`$($node.properties.datacenter.dns)`
 
 |Directive
 |`${node.properties[datacenter]}`
@@ -278,8 +278,8 @@ node property which may have been overridden.
 |`${rudder.parameters[datacenter][dns]}`
 
 |DSC technique
-|`$(${rudder.parameters}.datacenter)`
-|`$(${rudder.parameters}.datacenter.dns)`
+|`$($rudder.parameters.datacenter)`
+|`$($rudder.parameters.datacenter.dns)`
 
 |Directive
 |`${rudder.parameters[datacenter]}`
@@ -337,8 +337,8 @@ These variables are expanded at policy generation and their values are based on 
 |`${node.inventory[os][name]}`
 
 |DSC technique
-|`$(${node.inventory}.hostname)`
-|`$(${node.inventory}.os.name)`
+|`$($node.inventory.hostname)`
+|`$($node.inventory.os.name)`
 
 |Directive
 |`${node.inventory[hostname]}`
