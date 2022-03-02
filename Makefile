@@ -1,5 +1,5 @@
-ALL_VERSIONS = 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10 2.11 3.0 3.1 3.2 4.0 4.1 4.2 4.3 5.0 6.0 6.1 6.2 7.0
-VERSIONS = 6.1 6.2 7.0
+ALL_VERSIONS = 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10 2.11 3.0 3.1 3.2 4.0 4.1 4.2 4.3 5.0 6.0 6.1 6.2 7.0 7.1
+VERSIONS = 6.1 6.2 7.0 7.1
 VERSION_DOCS = $(addprefix doc-, $(VERSIONS))
 VERSION_ARCHIVES = $(addsuffix .archive, $(VERSIONS))
 
@@ -12,8 +12,8 @@ LATEST_MAJOR=$(shell curl https://www.rudder-project.org/release-info/rudder/ver
 .PHONY: prepare rudder-theme/build/ui-bundle.zip optipng doc-build changelogs-build build/sites/site/.htaccess build/history/6.1/.htaccess build/history/6.2/.htaccess build/history/7.0/.htaccess build/files $(SITES)
 .DEFAULT_GOAL := local
 
-all: $(GENERIC_DOCS) build/sites/site/.htaccess build/history/6.1/.htaccess build/history/6.2/.htaccess build/history/7.0/.htaccess $(VERSION_ARCHIVES) build/files test
-online: site site-dev build/sites/site/.htaccess build/history/6.1/.htaccess build/history/6.2/.htaccess build/history/7.0/.htaccess $(VERSION_ARCHIVES) build/files
+all: $(GENERIC_DOCS) build/sites/site/.htaccess build/history/6.1/.htaccess build/history/6.2/.htaccess build/history/7.0/.htaccess build/history/7.1/.htaccess $(VERSION_ARCHIVES) build/files test
+online: site site-dev build/sites/site/.htaccess build/history/6.1/.htaccess build/history/6.2/.htaccess build/history/7.0/.htaccess build/history/7.1/.htaccess $(VERSION_ARCHIVES) build/files
 local: site-local test
 
 rudder-theme/build/ui-bundle.zip:
@@ -34,14 +34,18 @@ doc-build:
 	cd $@ && git checkout branches/rudder/7.0 && git pull
 	cd $@/src/reference && make
 	cd $@ && git add -f src/reference && git commit --allow-empty -m "Build 7.0"
+	cd $@ && git clean -fd
+	cd $@ && git checkout branches/rudder/7.1 && git pull
+	cd $@/src/reference && make
+	cd $@ && git add -f src/reference && git commit --allow-empty -m "Build 7.1"
 
 changelogs-build:
 	[ -d $@ ] || git clone https://github.com/Normation/rudder-doc.git $@
 	cd $@ && git checkout master && git pull
 	for version in $(ALL_VERSIONS); do \
 	  cd $@ && git checkout master && git branch -df "branches/rudder/$$version" ; git checkout -b "branches/rudder/$$version" ; \
-	  sed -i "s@version: \"7.0\"@version: \"$$version\"@" src/changelogs/antora.yml ; \
-	  sed -i "s@RUDDER_VERSION = 7.0@RUDDER_VERSION = $$version@" src/changelogs/dependencies/Makefile ; \
+	  sed -i "s@version: \"7.1\"@version: \"$$version\"@" src/changelogs/antora.yml ; \
+	  sed -i "s@RUDDER_VERSION = 7.1@RUDDER_VERSION = $$version@" src/changelogs/dependencies/Makefile ; \
 	  cd src/changelogs && make ; \
 	  cd ../.. && git add -f src/changelogs && git commit --allow-empty -m "Build" ; cd .. ; \
 	done
@@ -75,6 +79,10 @@ build/history/6.2/.htaccess:
 build/history/7.0/.htaccess:
 	mkdir -p build/history/7.0/
 	echo 'Redirect /rudder-doc/reference/current/ /rudder-doc/reference/7.0/' > $@
+
+build/history/7.1/.htaccess:
+	mkdir -p build/history/7.1/
+	echo 'Redirect /rudder-doc/reference/current/ /rudder-doc/reference/7.1/' > $@
 
 # Download documentation files
 build/files:
