@@ -170,28 +170,6 @@ Direct upgrades from 6.0 versions and older are no longer supported on 7.0.
 If you are still running one of those, either on servers or nodes,
 please first upgrade to one of the supported versions, and then upgrade to 7.0.
 
-== Compatibility between Rudder agent 7.0 and older server versions
+== Compatibility between Rudder components
 
-=== 6.1 and 6.2 servers
-
-Rudder agents 7.0 are compatible with 6.1 and 6.2 Rudder servers.
-
-=== Older servers
-
-Rudder agents 7.0 are not compatible with Rudder servers older than 6.1.
-You need to upgrade your server to a compatible version before the agents.
-
-== Compatibility between Rudder server 7.0 and older agent versions
-
-=== 6.1 and 6.2 agents
-
-WARNING: If you had enabled certificate verification in the settings on a 6.1 or 6.2 server,
-the HTTP requests will fail after the upgrade.
-
-Rudder agent 6.1 and 6.2 are compatible with Rudder server 7.0 if certificate verification with a custom
-certificate is not enabled.
-
-=== Older agents
-
-These agents are not compatible with Rudder 7.0, and you have to upgrade them.
-Be careful to follow the upgrade path explained xref:upgrade.adoc#_upgrade_from_rudder_5_0_or_older[above].
+include::{partialsdir}/global-agent-compatibility.adoc[]
