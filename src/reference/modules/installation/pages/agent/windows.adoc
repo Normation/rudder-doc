@@ -1,0 +1,76 @@
+= Install Rudder agent on Windows systems
+
+[TIP]
+
+====
+
+Windows agents are only available with a subscription and can be downloaded on https://download.rudder.io.
+
+====
+
+== Installation
+
+On `Windows Server 2008R2` and `Windows Server 2012` you may need to check the requirements sections before installing the agent.
+Desktop versions are not officially supported but should be mostly compatible as long as the requirements listed in the dedicated section are filled.
+The agent is currently distributed via an `.exe` installer which both support graphical and cli based installs.
+
+The policy server configuration can be pushed before install by writing its hostname in the file:
+
+----
+C:\Program Files\Rudder\etc\policy-server.conf
+----
+Other agent configuration options can be pre-configured if needed, see the https://docs.rudder.io/reference/6.2/plugins/windows.html#_proxy_settings[dedicated documentation].
+
+An inventory will be run after the installation to send an up-to-date inventory to the policy-server after each installation/upgrade.
+
+=== Graphical Installation
+
+Run the `.exe` file and follow the installer steps:
+
+----
+rudder-agent-dsc-<Rudder version>-<plugin version>.exe
+----
+
+=== CLI Installation
+
+Add the `/S` switch option to make the installation in silent mode.
+
+----
+rudder-agent-dsc-<Rudder version>-<plugin version>.exe /S /POLICYSERVER=my.rudder.server
+----
+
+=== Installer options
+
+Several options can be passed via the CLI to the installer:
+
+* `/S`: Silent install
+* `/?`: Open a graphical help page for the installer
+* `/POLICYSERVER`: If not empty, will override at install time the value of the `policyserver.conf`.
+* `/SCHEDULEDTASKUSER`: If not empty, will use the given user to run the Rudder scheduled tasks, responsible for the agent execution.
+* `/SCHEDULEDTASKPASSWORD`: Only neeed if `/SCHEDULEDTASKUSER` is used, password of the target user (required to define the scheduled task).
+
+The `SCHEDULEDTASK*` options are only available through the CLI, and when used, the agent will not try to modify the defined task afterward without manual intervention.
+The scheduled tasks can be manually modified using the rudder command `rudder agent check-scheduled-tasks`.
+By default, if no user is given at install time, the scheduled tasks will be run as the `SYSTEM` user.
+
+== Requirements
+
+The agent is written in `PowerShell` and requires it to be installed at least in the version 4. It is by default shipped in `Windows Server 2012R2` and later.
+For `Windows Server 2008R2` and `Windows Server 2012` you can upgrade the `PowerShell` version by following for instance, https://social.technet.microsoft.com/wiki/contents/articles/20623.windows-78-and-windows-server-2008-r22012-step-by-step-upgrading-powershell-to-version-4.aspx[this guide].
+
+On desktop or old Windows versions you may need to activate the `DSC` features and `WinRM` features.
+Plase note that older desktop versions (`Windows 7 and 8`), you will need to install `PowerShell 4` and make sure `WinRM` is activated with the following command:
+
+----
+Set-WSManQuickConfig DSC
+----
+
+Moreover, the Windows DSC agent comes without digital signature, you need to allow the unsigned source code execution on the Windows node.
+In some environment, this policy change can lead to security issues, please read the dedicated Microsoft Windows https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.2&viewFallbackFrom=powershell-6[documentation].
+This can be done in powershell by executing the following command:
+
+----
+Set-ExecutionPolicy RemoteSigned
+----
+
+
