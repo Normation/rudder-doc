@@ -14,7 +14,7 @@ To update a Windows machine with this technique, you must apply it via a rule to
 
 The update is done in 3 separate steps:
 
-- KB download: download KB from system repository (Microsoft servers by default, WSUS if configured)
+- KB download: download KB from system repository (Microsoft update servers - WSUS is not supported yet)
 
 - KB application: apply last downloaded KBs
 
