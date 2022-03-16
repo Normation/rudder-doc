@@ -309,6 +309,9 @@ tar -C /var/log -zxf rudder-log-backup-XXXXXXXX.tar.gz
 # Enable Rudder agent
 rudder agent enable
 
+# Run the agent to configure authorizations on Postgres
+rudder agent run
+
 # And restart Rudder:
 systemctl start rudder-agent
 # or depending on the system
@@ -387,6 +390,9 @@ tar -C /opt/rudder -zxf rudder-etc-backup-XXXXXXXX.tar.gz
 
 # Enable Rudder agent
 rudder agent enable
+
+# Run the agent to configure authorizations on Postgres
+rudder agent run
 
 # And restart Rudder:
 systemctl start rudder-agent
