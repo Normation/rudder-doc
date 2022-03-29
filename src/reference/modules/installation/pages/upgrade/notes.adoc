@@ -26,15 +26,20 @@ rudder package list --all
 
 ----
 
-== Upgrade from Rudder 6.1 or 6.2 to 7.0
+== Upgrade from Rudder 7.0 to 7.1
+
+Upgrade from Rudder 7.0 is supported.
+
+== Upgrade from Rudder 6.1 or 6.2 to 7.1
+
 
 Upgrade from Rudder 6.1 or 6.2 is supported.
 
-It is advised to upgrade the root server before upgrading the relays and the nodes, but 7.0 nodes are also compatible with older server.
+It is advised to upgrade the root server before upgrading the relays and the nodes, but 7.1 nodes are also compatible with older server.
 Two cases are unsupported:
 
-* You can't upgrade a relay to 7.0 before its root server. You need a 7.0 root server for 7.0 relays.
-* You can't upgrade a root server and a node behind a relay to 7.0 without upgrading the relay. You need to upgrade the relay before the nodes. 
+* You can't upgrade a relay to 7.1 before its root server. You need a 7.1 root server for 7.1 relays.
+* You can't upgrade a root server and a node behind a relay to 7.1 without upgrading the relay. You need to upgrade the relay before the nodes.
 
 === HTTPS certificate
 
@@ -164,7 +169,7 @@ In short:
   configuration. Then you only need to configure the URL to your postgresql server in `rudder.jdbc.url` , the username
   in `rudder.jdbc.username` and the password in `/opt/rudder/etc/rudder-passwords.conf` and you're all set.
 
-== Upgrade from Rudder 6.0 or older to 7.0
+== Upgrade from Rudder 6.0 or older to 7.1
 
 Direct upgrades from 6.0 versions and older are no longer supported on 7.0.
 If you are still running one of those, either on servers or nodes,
