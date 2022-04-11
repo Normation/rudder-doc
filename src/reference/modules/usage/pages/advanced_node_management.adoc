@@ -452,6 +452,7 @@ image::node-lifecycle-settings.png[]
 In the future, these states will be configurable on a per node basis at acceptation, and the
 lifecycle states list will be configurable by users.
 
+[[disable_listen_port_5309]]
 == Disable the service listening for remote run on nodes
 
 By default, every Rudder node runs a service that listens on port 5309 for remote execution triggers,
