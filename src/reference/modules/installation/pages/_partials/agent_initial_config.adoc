@@ -44,13 +44,13 @@ rudder agent run
 ----
 
 
-[INFO]
+[NOTE]
 
 =====
 
-By default, a node listen on port 5309 to allow remote agent trigger. 
+By default, a node listens on port 5309 to allow remote agent trigger. 
 This feature is optional and 
-xref:reference:modules:usage:pages:advanced_node_management.adoc#_disable_the_service_listening_for_remote_run_on_nodes[can be disabled for security reason].
+xref:reference:modules:usage:pages:advanced_node_management.adoc#disable_listen_port_5309[can be disabled for security reason].
 
 =====
 
