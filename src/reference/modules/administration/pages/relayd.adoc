@@ -45,7 +45,7 @@ See the https://docs.rudder.io/api/relay/[API documentation] for more informatio
 
 Relayd outputs its logs on stdout. You can access its logs through `journalctl -u rudder-relay`.
 
-The log level and filters are configurable in `/opt/rudder/etc/logging.conf`:
+The log level and filters are configurable in `/opt/rudder/etc/relayd/logging.conf`:
 
 * `level` is the global minimal log level. It can be `error`, `warning`, `info`, `debug` or `trace`
 * `filter` allows increasing the log level of a particular component, with `[component]=level`, like
