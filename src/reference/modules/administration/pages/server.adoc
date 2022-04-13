@@ -365,27 +365,30 @@ By default it logs all connections from nodes, to allow proper
 auditing of node connections, but you can disable these logs (or increase the log level).
 To only log errors:
 
-* On systemd systems
-                                                                            
-** Create a `/etc/systemd/system/rudder-cf-serverd.service.d/override.conf` file containing:
+==== On systemd systems
+
+* Create a `/etc/systemd/system/rudder-cf-serverd.service.d/override.conf` file containing:
 
 ----
 [Service]
-Environment=VERBOSITY_OPTION=
+Environment=VERBOSITY_OPTION
 ----
-    
-** Run `systemctl daemon-reload` then `systemctl restart rudder-cf-serverd`
 
-* On systems using the init script
+* Run `systemctl daemon-reload` then `systemctl restart rudder-cf-serverd`
 
-** Edit the `/etc/default/rudder-agent` file:
+`VERBOSITY_OPTION` possible values: 'error', 'warning', 'info', 'verbose', 'debug'.
+
+
+==== On systems using the init script
+
+* Edit the `/etc/default/rudder-agent` file:
 
 ----
 # You need to uncomment and let empty
-CFENGINE_COMMUNITY_PARAMS_1=""                                                   
+CFENGINE_COMMUNITY_PARAMS_1=""
 ----
-    
-** Restart the service with `service rudder-agent restart`
+
+* Restart the service with `service rudder-agent restart`
 
 Verbosity options can be:
 
