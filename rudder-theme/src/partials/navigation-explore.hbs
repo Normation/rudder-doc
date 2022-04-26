@@ -14,7 +14,7 @@
         <li class="version
           {{~#if (and (eq ../this @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
           {{~#if (eq this ../latestVersion)}} is-latest{{/if}}">
-	  {{~#if (eq ./version "7.1") }}
+	  {{~#if (eq ./version "7.2") }}
           <a href="{{{relativize @root.page.url ./url}}}">{{./version}}-beta</a>
 	  {{else}}
 	  <a href="{{{relativize @root.page.url ./url}}}">{{./version}}</a>
@@ -34,7 +34,7 @@
       <span class="title">Rudder language</span>
         <ul class="versions">
           <li class="version">
-            <a href="https://docs.rudder.io/language/7.1/">7.1-beta</a>
+            <a href="https://docs.rudder.io/language/7.1/">7.1</a>
           </li>
           <li class="version is-latest">
             <a href="https://docs.rudder.io/language/7.0/">7.0</a>
@@ -46,7 +46,7 @@
       <span class="title">Public API reference</span>
         <ul class="versions">
           <li class="version">
-            <a href="https://docs.rudder.io/api/v/15/">7.1-beta (v15)</a>
+            <a href="https://docs.rudder.io/api/v/15/">7.1 (v15)</a>
           </li>
           <li class="version is-latest">
             <a href="https://docs.rudder.io/api/v/14/">7.0 (v14)</a>
@@ -80,7 +80,7 @@
           {{#if (eq this.name "reference")}}
           {{#each ./versions}}
           <li class="version {{~#if (eq this ../latestVersion)}} is-latest{{/if}}">
-	    {{~#if (eq ./version "7.1") }}
+	    {{~#if (eq ./version "7.2") }}
             <a href="{{@root.site.url}}/changelogs/{{./version}}/index.html">{{./version}}-beta</a>
 	    {{else}}
 	    <a href="{{@root.site.url}}/changelogs/{{./version}}/index.html">{{./version}}</a>
