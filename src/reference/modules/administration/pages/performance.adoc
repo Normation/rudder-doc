@@ -100,7 +100,7 @@ For example, if the server has 16GB of RAM, 11GB should be allocated to Jetty
 
 === Garbage collector
 
-When RAM allocated to jetty reaches 4 to 6GB (or higher), you may experience long freeze of Rudder, up 
+When RAM allocated to jetty reaches 4 to 6GB (or higher), you may experience long freeze of Rudder, up
 to several tens of seconds. If this is the case, you can change
 the JVM garbage collector to one better fitted for larger memory footprint by editing +/etc/default/rudder-jetty+:
 
@@ -119,7 +119,7 @@ systemctl restart rudder-jetty
 ----
 
 This option is also a good solution if you are constrained by the amount of memory available.
-The String deduplication option of `G1GC` saves between one fifth to one fourth of memory 
+The String deduplication option of `G1GC` saves between one fifth to one fourth of memory
 used by rudder-jetty.
 
 
@@ -138,7 +138,7 @@ JAVA_GC="-XX:+UseG1GC
 -XX:MaxGCPauseMillis=500
 -XX:+UseStringDeduplication"
 
-JETTY_START_TIMEOUT=360 
+JETTY_START_TIMEOUT=360
 
 ----
 

@@ -13,7 +13,7 @@ Rudder integrates a node inventory tool which harvests useful information
 about the nodes. This information is used by Rudder to handle the nodes, and
 you can use the inventory information for Configuration Management purposes:
 search Nodes, create Groups of Nodes, determine some configuration management
-variables. 
+variables.
 
 In the Rudder Web Interface, each time you see a Node name, you can click on it
 and display the collection of information about this Node. The inventory is
@@ -207,7 +207,7 @@ You can use regular expressions to find whatever you want in Node inventories.
 A search request using a regexp will look for every node that match the pattern you
 entered.
 
-Those regexps follow Java Pattern rules. See http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
+Those regexps follow Java Pattern rules. See https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html
 for more details.
 
 .Search node having an ip address matching +192.168.x.y+
