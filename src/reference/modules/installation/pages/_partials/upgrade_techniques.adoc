@@ -24,7 +24,7 @@ If you want to do any modification in a Technique from the standard library, it 
 
 ====
 
-To upgrade you local techniques, run the following commands on the Rudder root server:
+To upgrade you local techniques, run the following commands on the Rudder server:
 If you did any manual modifications in existing Techniques from standard library, you will need to merge the changes during upgrade of Techniques.
 
 ====

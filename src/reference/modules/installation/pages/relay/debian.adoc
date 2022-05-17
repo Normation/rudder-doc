@@ -10,7 +10,7 @@ Install the package:
 
 ----
 
-apt-get install rudder-server-relay
+apt-get install rudder-relay
 
 ----
 

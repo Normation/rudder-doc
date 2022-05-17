@@ -10,7 +10,7 @@ Install the package:
 
 ----
 
-yum install rudder-server-relay
+yum install rudder-relay
 
 ----
 

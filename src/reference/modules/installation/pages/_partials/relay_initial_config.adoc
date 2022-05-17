@@ -1,10 +1,10 @@
 To complete this step, please make sure that your node is configured successfully
 and appears in your Rudder web interface.
 
-== On the root server
+== On Rudder server
 
-You have to tell the Rudder root server that a node will be a relay. To do so,
-launch the rudder-node-to-relay script on the root server, supplying the UUID of the
+You have to tell the Rudder server that a node will be a relay. To do so,
+launch the rudder-node-to-relay script on the server, supplying the UUID of the
 host to be considered as a relay. You can find the UUID of your node with the
 `rudder agent info` command.
 
@@ -18,19 +18,19 @@ rudder server node-to-relay <aaaaaaaa-bbbb-cccc-dddd-eeeeeeee>
 
 When every step has completed successfully:
 
-- The Rudder root server will recognize the new node as a relay
+- The Rudder server will recognize the new node as a relay
 - It will generate specific policies for the relay
 - The relay will update and switch to his new role
 
-This is an example of node details pane showing a relay server. Note the "Role:
-Rudder relay server" part that shows that the machine has successfully changed
+This is an example of node details pane showing a Rudder relay. Note the "Role:
+Rudder relay" part that shows that the machine has successfully changed
 from a node to a relay.
 
 .Rudder relay node
 
 image::RudderRelay.png[Relay]
 
-== Adding nodes to a relay server
+== Adding nodes to a relay
 
 When you have at least one relay, you will likely want to add nodes
 on it.
@@ -42,12 +42,12 @@ You then have two possible cases:
 
 The procedure on both cases is the same, you have to:
 
-- Update the policy server with the IP address or the fully qualified domain name of the relay server
-(instead of the root server) and reset pinned public key
+- Update the policy server with the IP address or the fully qualified domain name of the relay
+(instead of Rudder server) and reset pinned public key
 
 ----
 
-rudder agent policy-server <rudder relay ip or hostname>                                                     
+rudder agent policy-server <rudder relay ip or hostname>
 rudder agent server-keys-reset
 
 ----

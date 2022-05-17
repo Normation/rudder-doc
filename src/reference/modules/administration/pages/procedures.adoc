@@ -62,7 +62,7 @@ to prevent database bloating.
 However, database can grow significantly, resulting in large disk usage, and slower performance, due to massive
 bloating (with database 3 or 4 times larger than necessary).
 
-To cure (or prevent) this behaviour, you can trigger vacuum full operations, which put an exclusive lock on tables, 
+To cure (or prevent) this behaviour, you can trigger vacuum full operations, which put an exclusive lock on tables,
 and will lock both the Rudder interface and the reporting system for quite a long time.
 
 ==== Reclaming space with locking, using VACUUM FULL
@@ -223,7 +223,7 @@ tar -C /var/log -zxf rudder-log-backup-XXXXXXXX.tar.gz
 rudder agent enable
 
 # And restart the machine or just Rudder:
-systemctl start rudder-agent rudder-server rsyslog
+systemctl start rudder-agent rudder-server
 
 ----
 

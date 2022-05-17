@@ -60,25 +60,25 @@ On the Root server, the start of the workflow is the same than on a relay:
 
 * the inventory is received by a `webdav` endpoint,
 * the `webdav` service store the file in the folder
-  `/var/rudder/inventories/incoming` (for nodes not already accepted in Rudder) 
+  `/var/rudder/inventories/incoming` (for nodes not already accepted in Rudder)
   or in `/var/rudder/inventories/accepted-nodes-updates` (for node already
-  accepted). 
+  accepted).
 
 As soon as a file is created or modified in these two directories, an `inotify`
 event is sent to in inventory watcher process which:
 
-- check if the file is of any interest for it based on extension (`.ocs`, 
+- check if the file is of any interest for it based on extension (`.ocs`,
   `.xml`, `.gz`, `.sign` extension are processed)
-- if the file is an archive, it's extracted, 
+- if the file is an archive, it's extracted,
 - if the file is a signature (respectively an inventory), it waits for the
-  corresponding inventory (respectively signature) for up to 10s, 
+  corresponding inventory (respectively signature) for up to 10s,
 - if only the signature is present, nothing is done (only a log),
-- if only the inventory file is present, the processing is done in 
-  "compatibility" mode to support rudder agent below version 5.0, 
-- if the pair is present, both are processed together. 
+- if only the inventory file is present, the processing is done in
+  "compatibility" mode to support rudder agent below version 5.0,
+- if the pair is present, both are processed together.
 - processing starts by parsing inventory file and check for mandatory
   elements (especially `<RUDDER>` tag and content)
-- then, inventory is queued to be saved in LDAP.   
+- then, inventory is queued to be saved in LDAP.
 
 === Queue of inventories waiting to be parsed
 
@@ -304,7 +304,7 @@ Apply other policies and write reports locally.
 
 Rudder components are distributed as a set of packages.
 
-+rudder-webapp+::
++rudder-server+::
 
 Main package for the Rudder server.
 It includes :
@@ -313,20 +313,13 @@ It includes :
 * the application server (namely jetty), it depends on a compatible Java 8 Runtime Environment
 * the Techniques (installed into +/opt/rudder/share/techniques+)
 * the database containing the inventory and configuration information (namely OpenLDAP)
-
-+rudder-reports+::
-
-Package for the database containing the logs sent by each Node and the reports
-computed by Rudder. This is a 'PostgreSQL' database using the 'PostgreSQL'
-engine of the distribution. The package has a dependency on the +postgresl+
-package, creates the database named +rudder+ and installs the inialisation
-scripts for that database in +/opt/rudder/etc/postgresql/*.sql+.
+* the database script and dependency to store logs using the 'PostgreSQL' engine of the distribution
 
 +rudder-api-client+::
 
 Package that contains a command line to access the Rudder server API and a library to access it from python.
 
-+rudder-server-relay+::
++rudder-relay+::
 
 Package to setup a Rudder relay. It must be installed on a system that should be used as relays.
 
@@ -336,10 +329,4 @@ One single package integrates everything needed for the Rudder Agent. It
 contains CFEngine Community, FusionInventory.
 
 The +rudder-agent+ package mays either depends on or embed a few libraries and utilities depending on their existence within the target distribution.
-
-+rudder-server-root+::
-
-Package to ease installation of all Rudder services. This package depends on
-above packages.
-
 

@@ -1,5 +1,5 @@
 [[install-server-sles, Install Rudder Root server on SLES]]
-= Install Rudder root server on SLES
+= Install Rudder server on SLES
 
 include::{partialsdir}/quick_server.adoc[]
 
@@ -13,7 +13,7 @@ include::{partialsdir}/zypper_segfault.adoc[]
 
 ====
 
-Zypper seems to be quite tolerant to missing dependencies and will let you install rudder-server-root even if you are missing
+Zypper seems to be quite tolerant to missing dependencies and will let you install rudder-server even if you are missing
 something like +git-core+ for example, if nothing provides it or you did not install it beforehand.
 
 Special care should be taken during initial installation not to say "Continue anyway" if Zypper does complain a dependency can
@@ -27,14 +27,14 @@ include::{partialsdir}/rpm_key.adoc[]
 
 include::{partialsdir}/sles_repo.adoc[]
 
-== Install Rudder root server
+== Install Rudder server
 
-To begin the installation, you should simply install the rudder-server-root
-metapackage, which will install the required components:
+To begin the installation, you should simply install the rudder-server
+package, which will install the required components:
 
 ----
 
-zypper install rudder-server-root
+zypper install rudder-server
 
 ----
 

@@ -1,6 +1,6 @@
 = Relayd administration
 
-The `rudder-relayd` service (added in 6.0) is part of the `rudder-server-relay` package
+The `rudder-relayd` service (added in 6.0) is part of the `rudder-relay` package
 and runs on all relays and root servers. It provides the https://docs.rudder.io/api/relay/[relay API]
 and handles inventories and reports forwarding to the root server from nodes.
 

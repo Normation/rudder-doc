@@ -35,11 +35,11 @@ Upgrade from Rudder 7.0 is supported.
 
 Upgrade from Rudder 6.1 or 6.2 is supported.
 
-It is advised to upgrade the root server before upgrading the relays and the nodes, but 7.1 nodes are also compatible with older server.
+It is advised to upgrade the Rudder server before upgrading the relays and the nodes, but 7.1 nodes are also compatible with older server.
 Two cases are unsupported:
 
-* You can't upgrade a relay to 7.1 before its root server. You need a 7.1 root server for 7.1 relays.
-* You can't upgrade a root server and a node behind a relay to 7.1 without upgrading the relay. You need to upgrade the relay before the nodes.
+* You can't upgrade a relay to 7.1 before its server. You need a Rudder server 7.1 for 7.1 relays.
+* You can't upgrade a server and a node behind a relay to 7.1 without upgrading the relay. You need to upgrade the relay before the nodes.
 
 === HTTPS certificate
 
@@ -100,7 +100,7 @@ In addition, we also redirect all requests to port 80 to 443 by default.
 Syslog reporting is removed totally from 7.0, so if you had not switched to HTTPS reporting to
 the settings yet, the switch will be automatically made at upgrade.
 
-We advise you to test HTTPS reporting before upgrading 7.0 to avoid unexpected consequences 
+We advise you to test HTTPS reporting before upgrading 7.0 to avoid unexpected consequences
 (as you won't be able to fall back to syslog on 7.0).
 
 ==== Non-compliant only

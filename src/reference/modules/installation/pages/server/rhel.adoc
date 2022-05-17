@@ -1,4 +1,4 @@
-= Install Rudder root server on RHEL or CentOS
+= Install Rudder server on RHEL or CentOS
 
 include::{partialsdir}/quick_server.adoc[]
 
@@ -8,12 +8,12 @@ include::{partialsdir}/rpm_key.adoc[]
 
 include::{partialsdir}/rhel_repo.adoc[]
 
-To begin the installation, you should simply install the rudder-server-root
+To begin the installation, you should simply install the rudder-server
 metapackage, which will install the required components:
 
 ----
 
-yum install rudder-server-root
+yum install rudder-server
 
 ----
 

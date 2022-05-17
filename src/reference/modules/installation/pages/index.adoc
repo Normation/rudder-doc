@@ -1,24 +1,24 @@
 = Rudder components
 
-== Root server
+== Rudder server
 
 This is the central server that will define configuration for the nodes it manages.
-You generally need to install only one root server, except if you have completely
+You generally need to install only one Rudder server, except if you have completely
 separated environments where each environment requires its own server.
 
 Installation instructions:
 
-* Install a root server on: xref:installation:server/debian.adoc[Debian/Ubuntu] | xref:installation:server/rhel.adoc[RHEL/CentOS] | xref:installation:server/sles.adoc[SLES]
+* Install a Rudder server on: xref:installation:server/debian.adoc[Debian/Ubuntu] | xref:installation:server/rhel.adoc[RHEL/CentOS] | xref:installation:server/sles.adoc[SLES]
 
-* Upgrade a root server on: xref:upgrade:server/debian.adoc[Debian/Ubuntu] | xref:upgrade:server/rhel.adoc[RHEL/CentOS] | xref:upgrade:server/sles.adoc[SLES]
+* Upgrade a Rudder server on: xref:upgrade:server/debian.adoc[Debian/Ubuntu] | xref:upgrade:server/rhel.adoc[RHEL/CentOS] | xref:upgrade:server/sles.adoc[SLES]
 
 == Node
 
 The machines managed by Rudder are called nodes, and can be any type of machine
 (physical, virtual, cloud instance, container, etc).
 For a machine to become a managed Node, you need to install the Rudder agent on it.
-The agent will run a local inventory and register itself to the root server. Then, 
-you can accept the node in the Rudder root server interface for it to become a managed node.
+The agent will run a local inventory and register itself to the Rudder server. Then,
+you can accept the node in the Rudder server interface for it to become a managed node.
 
 Installation instructions:
 
@@ -36,7 +36,7 @@ Relay server's purpose is to solve a simple problem: sometimes, one would want t
 multiple networks from Rudder, without having to allow all the subnet access to the other
 for security reasons. A solution for this would be to have a kind of "Rudder" proxy that
 would be relaying information between the subnet and the main Rudder server. This is the
-reason relay servers were created.
+reason Rudder relays were created.
 
 Using a relay, you are able to:
 
@@ -46,5 +46,5 @@ Using a relay, you are able to:
 
 Installation instructions:
 
-* Install a relay server on: xref:installation:relay/debian.adoc[Debian/Ubuntu] | xref:installation:relay/rhel.adoc[RHEL/CentOS] | xref:installation:relay/sles.adoc[SLES]
-* Upgrade a relay server on: xref:upgrade:relay/debian.adoc[Debian/Ubuntu] | xref:upgrade:relay/rhel.adoc[RHEL/CentOS] | xref:upgrade:relay/sles.adoc[SLES]
+* Install Rudder relay on: xref:installation:relay/debian.adoc[Debian/Ubuntu] | xref:installation:relay/rhel.adoc[RHEL/CentOS] | xref:installation:relay/sles.adoc[SLES]
+* Upgrade Rudder relay on: xref:upgrade:relay/debian.adoc[Debian/Ubuntu] | xref:upgrade:relay/rhel.adoc[RHEL/CentOS] | xref:upgrade:relay/sles.adoc[SLES]

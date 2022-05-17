@@ -31,7 +31,7 @@ For Rudder server, upgrade the server packages:
 
 ----
 
-apt-get install rudder-server-root
+apt-get install rudder-server
 
 ----
 

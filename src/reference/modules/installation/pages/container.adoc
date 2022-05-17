@@ -59,7 +59,7 @@ docker run -p443:443 -p5309:5309
 ```
 
 The fist start will take several seconds to generate the required keys and certificates,
-to download initial policies from the root server, and will then start the services.
+to download initial policies from the Rudder server, and will then start the services.
 
 It is currently not possible to modify the ports used by the container.
 
@@ -75,5 +75,5 @@ the new one.
 
 //== Rudder server
 //
-// TODO: demo all-in-one container for root server
+// TODO: demo all-in-one container for Rudder server
 

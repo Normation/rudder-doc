@@ -20,7 +20,7 @@ For Rudder server, upgrade the server packages:
 
 ----
 
-yum update rudder-server-root
+yum update rudder-server
 
 ----
 

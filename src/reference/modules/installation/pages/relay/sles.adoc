@@ -12,7 +12,7 @@ Install the package:
 
 ----
 
-zypper install rudder-server-relay
+zypper install rudder-relay
 
 ----
 

@@ -1,4 +1,4 @@
-= Install Rudder root server on Debian or Ubuntu
+= Install Rudder server on Debian or Ubuntu
 
 include::{partialsdir}/quick_server.adoc[]
 
@@ -12,12 +12,12 @@ include::{partialsdir}/apt_key.adoc[]
 
 include::{partialsdir}/debian_repo.adoc[]
 
-To begin the installation, you should simply install the rudder-server-root
-metapackage, which will install the required components:
+To begin the installation, you should simply install the rudder-server
+package, which will install the required components:
 
 ----
 
-apt-get install rudder-server-root
+apt-get install rudder-server
 
 ----
 

@@ -63,7 +63,7 @@ where systemd has been removed.
 ====
 
 [[server-supported-os, the list of supported Operating Systems for Root server]]
-=== For Rudder root server or relay server
+=== For Rudder server or relay
 
 [NOTE]
 
@@ -80,7 +80,7 @@ supported versions . It means:
 
 ====
 
-The following operating systems are supported as a root or relay server:
+The following operating systems are supported as a Rudder relay or server:
 
 [options="header"]
 |===
