@@ -9,6 +9,13 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 
 ====
 
+[WARNING]
+
+====
+
+If you upgrade from 6.x and you changed the default cetificate, you will need to change the Apache2 configuration. Read the xref:notes.adoc#_changed_default_certificate_upgrade[guidelines] to change the default certificate in 7.x.
+====
+
 == Plugins upgrade
 
 If your server is connected to the Internet (directly or through a proxy), and you have configured
@@ -43,55 +50,51 @@ Two cases are unsupported:
 
 === HTTPS certificate
 
+[[_changed_default_certificate_upgrade]]
 ==== Changed default certificate
 
-The certificate used by default for HTTPS access is now the same as was already used for policy
-updates. This means you will see a warning message indicating the server certificate has changed
-(if you used Rudder's self-signed certificate). This is expected, and you can accept to update the
-known certificate.
+The certificate used for HTTPS access is now the same as the one used for policy updates. During the upgrade from 6.x, the HTTPS certificate
+is replaced by the certificate used by policy update.
+After the upgrade from 6.x, you will see a warning message indicating the server certificate has changed. This is expected, and you can accept to update the
+certificate if you used Rudder's self-signed certificate.
 
-==== Use a custom certificate
-
-===== Server side
+==== Server side - Use a custom certificate
 
 If you used a custom certificate, you will need to apply manual changes to Rudder's configuration.
 As the self-signed certificate is used for internal communication, you will need to create a
-dedicated virtual host for the Web and API access.
+dedicated virtual host for the Web and API access. You need a way to distinguish access to these two virtual
+hosts, most often by IP, Port or ServerName (using specific DNS name).
 
 The easiest way is probably to start over from the new default configuration and adapt it to your
-needs (you can access it as a new configuration file deployed by your package manager or directly
+needs. You can access it as a new configuration file deployed by your package manager or directly
 in https://raw.githubusercontent.com/Normation/rudder/master/relay/sources/apache/rudder-vhost.conf[our repository].
 
-===== Agent side - Server certificate verification
+You should only edit the virtual hosts in `/etc/apache2/sites-available` or `/etc/httpd/conf.d` which
+is treated as a configuration file by package managers and not automatically replaced. The most common approach is to
+comment the first virtual host and uncomment the last two virtual hosts, and distinguish either by hostname, IP or by port the virtual host
+for policy distribution and the virtual host for Web Interface/API
 
-If you use a custom valid certificate and have enabled certificate verification in the settings you
-need may encounter missing reports and inventories after upgrade. This is caused by 6.X agent
+
+[INFO]
+====
+Please note the all `/opt/rudder/etc/apache-*` files are actually overridden at each upgrade and should
+not be modified.
+====
+
+==== Agent side - Server certificate verification
+
+If you use a custom valid certificate and have enabled certificate verification in the settings, you
+may encounter missing reports and inventories after upgrade. This is caused by 6.X agent
 trying to validate your custom certificate while 7.0 relies on internal self-signed certificate
 for node-server communication.
 
-Before upgrade:
-
-- Upgrade agents to 7.0 before the server. This will allow the agent to
+In this specific case, it is necessary to upgrade agents to 7.0 before the server.
 
 If you upgraded without following this step:
 
-- Policy generation and update will continue to work, so you can use Rudder to fix the problem
-- You have two options:
+- Policy generation and update will still work, so you can use Rudder to fix the problem. You have two options:
     - Disable certificate verification to get reports and inventories back
-    - Upgrade your agent to 7.0, so they can verify certificates correctly
-
-==== Custom Apache configuration
-
-The easiest way is probably to start over from the new default configuration and adapt it to your
-needs (you can access it as a new configuration file deployed by your package manager or directly
-in https://raw.githubusercontent.com/Normation/rudder/master/relay/sources/apache/rudder-vhost.conf[our repository].
-
-In particular the set of included files from `/opt/rudder/etc` has changed to be simpler. Please
-note the all `/opt/rudder/etc/apache-*` files are actually overridden at each upgrade and should
-not be modified. You should only edit the virtual host in `/etc/apache2/sites-available` or `/etc/httpd/conf.d` which
-is treated as a configuration file by package managers and not automatically replaced.
-
-In addition, we also redirect all requests to port 80 to 443 by default.
+    - Upgrade your agents to 7.0, so they can verify the certificates correctly
 
 === Reporting
 
