@@ -69,7 +69,6 @@ is treated as a configuration file by package managers and not automatically rep
 comment the first virtual host and uncomment the last two virtual hosts, and distinguish either by hostname, IP or by port the virtual host
 for policy distribution and the virtual host for Web Interface/API
 
-In addition, we also redirect all requests to port 80 to 443 by default.
 
 [INFO]
 ====
