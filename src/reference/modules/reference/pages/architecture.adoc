@@ -310,7 +310,7 @@ Main package for the Rudder server.
 It includes :
 * the graphical interface for Rudder
 * the inventory reception service
-* the application server (namely jetty), it depends on a compatible Java 8 Runtime Environment
+* the application server (namely jetty), it depends on a compatible Java 11 Runtime Environment
 * the Techniques (installed into +/opt/rudder/share/techniques+)
 * the database containing the inventory and configuration information (namely OpenLDAP)
 * the database script and dependency to store logs using the 'PostgreSQL' engine of the distribution

@@ -1,29 +1,29 @@
 = Jetty server configuration
 
-Rudder web application is a `Java` web application (`war`) deployed on http://www.eclipse.org/jetty/[Jetty 9.4 server]. 
+Rudder web application is a `Java` web application (`war`) deployed on http://www.eclipse.org/jetty/[Jetty server].
 
 `Jetty` is highly configurable and let you customize most of its behavior through
-modules defined text or `xml` files. 
+modules defined text or `xml` files.
 
-This section will present `Jetty` installation directories used in `RUDDER` and how to proceed to modify default behavior if it happened to be needed.  
+This section will present `Jetty` installation directories used in `RUDDER` and how to proceed to modify default behavior if it happened to be needed.
 
 == Jetty start and JVM parameters
 
-`Jetty` being a `Java` application, it runs on `JVM`. 
-`JVM` parameters and `Jetty` starting options are defined in `/opt/rudder/etc/rudder-jetty.conf` file. 
+`Jetty` being a `Java` application, it runs on `JVM`.
+`JVM` parameters and `Jetty` starting options are defined in `/opt/rudder/etc/rudder-jetty.conf` file.
 You should never change anything in that file, since it would be lost during
-next `RUDDER` package upgrade. 
-Instead, you can change these parameters in `/etc/default/rudder-jetty`. It's 
-typically the place where you set-up `JVM` memory parameters, like `-Xmx`. 
+next `RUDDER` package upgrade.
+Instead, you can change these parameters in `/etc/default/rudder-jetty`. It's
+typically the place where you set-up `JVM` memory parameters, like `-Xmx`.
 
 == Jetty modules configurations architecture
 
-`Jetty` use a system of default installation + overrides to provide customization. 
+`Jetty` use a system of default installation + overrides to provide customization.
 
 Module configuration files are located in `/opt/rudder/jetty/etc`, and there is an overriding system that allows to store specific
-configuration in `/opt/rudder/etc/rudder-jetty-base/etc`. 
-Files in the latter directory have a higher precedence, and so you can copy files from `/opt/rudder/etc` to 
-`/opt/rudder/etc/rudder-jetty-base/etc` to customize them. 
+configuration in `/opt/rudder/etc/rudder-jetty-base/etc`.
+Files in the latter directory have a higher precedence, and so you can copy files from `/opt/rudder/etc` to
+`/opt/rudder/etc/rudder-jetty-base/etc` to customize them.
 
 A main configuration file allows to decide what modules are enable and to change parameters value: `/opt/rudder/etc/rudder-jetty-base/start.ini`
 
@@ -31,13 +31,13 @@ A main configuration file allows to decide what modules are enable and to change
 
 === Default installation: `/opt/rudder/jetty/`
 
-In `RUDDER`, `Jetty` default installation is `/opt/rudder/jetty/`. This directory contains a direct unzip of `Jetty` upstream archive. 
+In `RUDDER`, `Jetty` default installation is `/opt/rudder/jetty/`. This directory contains a direct unzip of `Jetty` upstream archive.
 `/opt/rudder/jetty/etc` contains all `Jetty` module configuration, each in one or several `xml` configuration files, sometimes along
-with parameter files (`.ini` or `.properties`). 
+with parameter files (`.ini` or `.properties`).
 
-A lot of modules are available, related to supported protocol (HTTP, HTTP2, etc) security (SPNEGO, SSL, etc), proxying, logs, etc. Please refer to `Jetty` 
+A lot of modules are available, related to supported protocol (HTTP, HTTP2, etc) security (SPNEGO, SSL, etc), proxying, logs, etc. Please refer to `Jetty`
 https://www.eclipse.org/jetty/documentation/[official documentation] if you need to
-learn about them. 
+learn about them.
 
 You should not change anything here. Each time you want to customize a module, copy its relevant configuration files in `/opt/rudder/etc/rudder-jetty-base/`.
 
@@ -47,26 +47,26 @@ This directory contains `RUDDER` specific configuration files, mainly `etc` subd
 
 ==== /opt/rudder/etc/rudder-jetty-base/etc
 
-This directory contains overrides for default modules. You can copy module configuration from `/opt/rudder/jetty/etc` here and customize them as you wish. 
+This directory contains overrides for default modules. You can copy module configuration from `/opt/rudder/jetty/etc` here and customize them as you wish.
 
 ==== `start.ini` configuration file
 
 This file is the main configuration file for `Jetty` modules. It tells `Jetty`
-which modules are enable, and what are their parameters. 
+which modules are enable, and what are their parameters.
 
 For example, if you want to customize authorized header request size, you can
 change value of parameter `requestHeaderSize` defined for module `server`
 
 This file contains important parameters, like `setuid`, thread pool configuration , ;
 various configuration on `HTTP` and request and answer sizes, log and request log
-configuration (files name, ...), etc. 
+configuration (files name, ...), etc.
 
 For reference, a copy of Rudder `start.ini` is provided below.
 
-You can also override system properties that need to be passed to java command line 
-with `-D` option in that file. Typically, if you need to increase `maxFormContentSize` 
-or `maxFormKey` as explained 
-https://www.eclipse.org/jetty/documentation/current/configuring-form-size.html[in Jetty documentation], 
+You can also override system properties that need to be passed to java command line
+with `-D` option in that file. Typically, if you need to increase `maxFormContentSize`
+or `maxFormKey` as explained
+https://www.eclipse.org/jetty/documentation/current/configuring-form-size.html[in Jetty documentation],
 you can just add corresponding lines at the end of `start.ini`:
 
 ----
@@ -80,9 +80,9 @@ you can just add corresponding lines at the end of `start.ini`:
 
 `Jetty` use other files and directories at run time, which are not linked to configuration but may be important to know:
 
-- `/var/rudder/tmp/jetty` is the directory where `Jetty` unzip web application `war` to run them. 
+- `/var/rudder/tmp/jetty` is the directory where `Jetty` unzip web application `war` to run them.
 - `/var/rudder/run/rudder-jetty.pid`: file containing `Jetty` PID
-- `/opt/rudder/share/webapps` contains `RUDDER` `war` files. 
+- `/opt/rudder/share/webapps` contains `RUDDER` `war` files.
 
 == Rudder defaults `start.ini`
 

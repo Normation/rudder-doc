@@ -46,33 +46,10 @@ using the provided hostname.
 
 === JVM Version
 
-Rudder fully supports OpenJDK JVM version 11 to 14.x. Usage of long term support version 11 is recommended.
+Rudder fully supports OpenJDK JVM version 11 to 17. Usage of long term support version 11 is recommended.
 
 Other JVM should work but they are not thoroughly tested. Please contact Rudder team for more information on that topic or
-dedicated support. 
-
-=== JVM Security Policy
-
-Rudder needs `unlimited strength` security policy because it uses a variety of advanced
-hashing and cryptographic algorithms only available in that mode.
-
-Any recent JVM (JDK 8 > 8u161, all JDK 9 and more recent) is configured by default with this policy.
-
-You can check your case by running the following command on your server:
-
-----
-
-jrunscript -e 'exit (javax.crypto.Cipher.getMaxAllowedKeyLength("RC5") >= 256 ? 0 : 1);'; echo $?
-
-----
-
-If it returns 0, you have the correct policy. In other cases, you will need to change it.
-
-For that, you can download the
-http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html[`unlimited strength` policy for JDK 8 here].
-
-
-Then, simply copy the `java.policy` file into `$JAVA_HOME/jre/lib/security/java.policy`.
+dedicated support.
 
 [[rudder-cloud-compatibility]]
 == Cloud compatibility
