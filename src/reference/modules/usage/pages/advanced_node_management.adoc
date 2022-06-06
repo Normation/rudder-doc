@@ -1,5 +1,24 @@
 = Advanced node management
 
+== Create node
+
+This node allows to create nodes via API.
+
+The goal is to be able to pre-accept (node in accepted status) or pre-defined (node in pending status) a node and defined some of his parameters, in particular properties.
+
+It's typically what you are looking for in your provisioning and integration patterns.
+
+A node need at least the following information:
+
+- UUID,
+- hostname,
+- status,
+- OS: type, name
+
+Other information are possible. See the https://docs.rudder.io/api/#tag/Create-Node[plugin API documentation] for more information.
+
+Whatever the final status, a node is created in pending status. Then, if the status is "accepted", node acceptation is automatically and immediately triggered. This ensures that nodes added by that API also follow the standard Rudder validation rules and dynamic group/policies are correctly updated.
+
 == Reinitialize policies for a Node
 
 To reinitialize the policies for a Node, delete the local copy of the applied
