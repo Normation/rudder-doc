@@ -82,7 +82,7 @@ rudder agent policy-server hostname:5309
 
 (or enforce the value in `/opt/rudder/etc/policy_server.dat`).
 
-And configure the HTTPS port in `/etc/rudder/etc/agent.conf` (you need to create the file):
+And configure the HTTPS port in `/opt/rudder/etc/agent.conf` (you need to create the file):
 
 ----
 
