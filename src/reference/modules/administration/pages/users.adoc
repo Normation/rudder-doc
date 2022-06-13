@@ -13,7 +13,7 @@ The credentials of a user are defined in the XML file
 
 ----
 
-<authentication hash="bcrypt">
+<authentication hash="bcrypt" case-sensitivity="true">
   <user name="alice"  password="xxxxxxx" role="administrator"/>
   <user name="bob"    password="xxxxxxx" role="administration_only, node_read"/>
   <user name="custom" password="xxxxxxx" role="node_read,node_write,configuration_read,rule_read,rule_edit,directive_read,technique_read"/>
@@ -33,6 +33,21 @@ web application to be taken into account:
 systemctl restart rudder-jetty
 
 ----
+
+[[_logins]]
+=== Login
+
+Your login is case-sensitive by default, to change this behavior yon can modify the parameter `case-sensitivity` to `false`
+This option can be used to have consistent authentication constraints on login with an external xref:plugins:auth-backends.adoc[authentication provider] .
+
+[CAUTION]
+====
+
+When you change the case-sensitivity, make sure there is no potential conflicts between logins, otherwise all conflicting
+users will be ignored from Rudder.
+
+====
+
 
 [[_passwords]]
 === Passwords
@@ -68,7 +83,7 @@ Here is an example of authentication file with hashed password:
 
 ----
 
-<authentication hash="sha256">
+<authentication hash="sha256" case-sensitivity="true">
 
   <!-- In this example, the hashed password is: "secret", hashed as a sha256 value -->
   <user name="carol" password="2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b" role="administrator"/>
