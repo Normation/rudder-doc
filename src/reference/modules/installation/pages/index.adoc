@@ -8,7 +8,7 @@ separated environments where each environment requires its own server.
 
 Installation instructions:
 
-* Install a root server on: xref:installation:server/debian.adoc[Debian/Ubuntu] | xref:installation:server/rhel.adoc[RHEL/CentOS] | xref:installation:server/sles.adoc[SLES]
+* Install a root server on: xref:installation:server/debian.adoc[Debian/Ubuntu] | xref:installation:server/rhel.adoc[RHEL/CentOS] | xref:installation:server/sles.adoc[SLES] | xref:installation:server/rhel7.adoc[Amazon Linux 2]
 
 * Upgrade a root server on: xref:upgrade:server/debian.adoc[Debian/Ubuntu] | xref:upgrade:server/rhel.adoc[RHEL/CentOS] | xref:upgrade:server/sles.adoc[SLES]
 
@@ -17,7 +17,7 @@ Installation instructions:
 The machines managed by Rudder are called nodes, and can be any type of machine
 (physical, virtual, cloud instance, container, etc).
 For a machine to become a managed Node, you need to install the Rudder agent on it.
-The agent will run a local inventory and register itself to the root server. Then, 
+The agent will run a local inventory and register itself to the root server. Then,
 you can accept the node in the Rudder root server interface for it to become a managed node.
 
 Installation instructions:
@@ -25,6 +25,7 @@ Installation instructions:
 * Install an agent on: xref:installation:agent/debian.adoc[Debian/Ubuntu] | xref:installation:agent/rhel.adoc[RHEL/CentOS/Amazon Linux] | xref:installation:agent/sles.adoc[SLES]
 
 * Upgrade an agent on: xref:upgrade:agent/debian.adoc[Debian/Ubuntu] | xref:upgrade:agent/rhel.adoc[RHEL/CentOS/Amazon Linux] | xref:upgrade:agent/sles.adoc[SLES]
+
 
 [[relay-servers]]
 == Relay (optional)
