@@ -15,6 +15,7 @@
 *** xref:server/debian.adoc[on Debian/Ubuntu]
 *** xref:server/rhel.adoc[on RHEL/CentOS]
 *** xref:server/sles.adoc[on SLES]
+*** xref:server/rhel7.adoc[on Amazon Linux 2]
 ** Install agent
 *** xref:agent/debian.adoc[on Debian/Ubuntu]
 *** xref:agent/rhel.adoc[on RHEL/CentOS]
