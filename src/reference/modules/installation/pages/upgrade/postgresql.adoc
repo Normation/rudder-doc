@@ -1,0 +1,93 @@
+= Upgrade PostgreSQL
+
+Rudder depends on a specific version of postgresql, which makes sure that the correct package is installed.
+However, multiple version of postgresql can be installed at once and upgrading the package doesn't make sure your database is also upgraded.
+
+As a consequence, you have to make sure your database is up to date before upgrading Rudder.
+
+This simplified PostgreSQL documentation. If in doubt, please always refer to the officiel PostgreSQL documentation https://www.postgresql.org/docs/
+
+This documentation is about Debian and derived distributions since it is usual to upgrade major versions with them.
+On RHEL and SLES, it is recommended to reinstall the system, this documentation is then not needed. If you need it, please ask.
+
+== Upgrade the package
+
+First make sure you have the right version installed for the Rudder version you want to upgrade to.
+
+Rudder 7.2 needs PortgreSQL 10.3.
+
+On debian like:
+
+----
+
+$ apt-get update && apt-get upgrade postgresql-server
+
+----
+
+== Upgrade your database
+
+PostgreSQL data must be migrated from the current version to the next version.
+Distributions provide a script to automate this, but you first need to check that you have as much free space on your disk as your database size.
+
+=== Find your versions
+
+[WARNING]
+
+====
+
+Be careful with versions, we are upgrading postgresql from `OldVersion` to `NewVersion`. It is up to you to check that V1 is the version wher your data is stored and V2 is the version you want to upgrade to.
+
+Carelessly copy-pasting versions could result in unwanted data removal.
+
+====
+
+Check the status of the service for the multiple versions you have. The one handling rudder data should have a rudder line
+
+----
+
+$ systemctl status postgresql@13-main.service
+
+$ systemctl status postgresql@11-main.service
+
+             ├─19837 postgres: 11/main: rudder rudder ::1(47994) idle
+
+----
+
+Check for the rudder database version:
+
+----
+
+$ su postgres -c 'psql -q -d rudder -c "SHOW server_version;"'
+        server_version
+------------------------------
+ 13.5 (Debian 13.5-0+deb11u1)
+
+----
+
+Here we have OldVersion=11 and NewVersion=13.
+
+
+=== Upgrade the cluster
+
+On debian like:
+
+----
+
+# Stop rudder
+$ systemctl stop rudder-server
+
+# Debian creates an empty cluster on the new version, drop it
+$ pg_dropcluster --stop ${NewVersion} main
+
+# Upgrade the cluster
+$ pg_upgradecluster -v ${NewVersion} ${OldVersion} main
+
+# Restart Rudder and check that everything works
+$ systemctl start rudder-server
+
+# Drop the old cluster
+$ pg_dropcluster ${OldVersion} main
+
+----
+
+

@@ -1,0 +1,135 @@
+= Install Rudder server with an external database
+
+Rudder uses a PostgreSQL server to store its reports.
+
+People having a dedicated database server or having a report database becoming too big can setup an external database instead of letting Rudder manage one on the Rudder server itself.
+
+== Install a new server with a separate database
+
+[[install-postgresql]]
+=== Install PostgreSQL server
+
+If you have to install the PostgreSQL service on a separate server, we provide here a simplified PostgreSQL documentation.
+
+If your organization has a database administrator, just ask him to create a new database with an associated user and permissions.
+
+If in doubt, please always refer to the officiel PostgreSQL documentation https://www.postgresql.org/docs/
+
+As much as possible, install your distribution postgresql package on the target SQL host.
+Check that you have the minimu required PostgreSQL version and install it.
+
+[WARNING]
+
+====
+
+Rudder requires PostgreSQL 10 or higher.
+
+====
+
+----
+
+# rhel,centos,...
+$ yum install postgresql-server
+$ /usr/pgsql-*/bin/postgresql*-setup initdb
+
+# debian,ubuntu
+$ apt-get install postgresql
+
+# SLES
+$ zypper install postgresql-server
+
+----
+
+On RHEL you must also intialize the database :
+
+----
+
+$ postgresql-setup --initdb
+$ systemctl start postgresql
+
+----
+
+Create the `rudder` database and the `rudder` user with its password (the names can be changed)?
+
+----
+
+# please use a secure password
+$ su postgres -c "psql -q -c \"CREATE USER rudder WITH PASSWORD '${PASSWORD}'\""
+
+$ su postgres -c "psql -q -c 'CREATE DATABASE rudder WITH OWNER = rudder'"
+
+----
+
+Make sure to give access to this user from the outside by editing `pg_hba.conf`.
+
+On debian like it is `/etc/postgresql/<your version>/main/pg_hba.conf`, on redhat like it is `/var/lib/pgsql/data/pg_hba.conf`.
+
+In any case, it can be found with the command : ̀ su postgres -c "psql -t -P format=unaligned -c 'show hba_file';"`
+
+----
+
+# this line must be adapted to you installation and put into pg_hba.conf
+# host  <database>         <user>          <rudder server IP>/32       md5
+host    rudder             rudder          196.168.0.1/32           md5
+
+----
+
+Make sure your postgresql server listens on a public interface. In `postgresql.conf`.
+
+On debian like it is `/etc/postgresql/<your version>/main/postgresql.conf`, on redhat like it is `/var/lib/pgsql/data/postgresql.conf`.
+
+In any case, it should be in the same directory as `pg_hba.conf`.
+
+----
+
+listen_addresses = '*'
+
+----
+
+Finally restart PostgreSQL service:
+
+----
+
+systemctl restart postgresql
+
+----
+
+=== Install rudder-external-db
+
+On Rudder host, first install rudder-external-db, before installing any rudder package:
+
+----
+
+# rhel,centos,...
+$ yum install rudder-external-db
+
+# debian,ubuntu
+$ apt-get install rudder-external-db
+
+# SLES
+$ zypper install rudder-external-db
+
+----
+
+You now have everythng to fill in the configuration file `/opt/rudder/etc/external-db.conf`:
+
+----
+
+# Host where rudder server must connect to access the database
+DB_HOST="postgresql.example.com"
+
+# Database user and password, to create them ask your database administrator or use the following command
+#    su postgres -c "psql -q -c \"CREATE USER ${DB_USER} WITH PASSWORD '${DB_PASSWORD}'\""
+DB_USER="rudder"
+DB_PASSWORD="xxx"
+
+# Postgresql database name, to create it ask your database administrator or use the following command
+#    su postgres -c "psql -q -c \"CREATE DATABASE ${DB_NAME} WITH OWNER = ${DB_USER}\""
+DB_NAME="rudder"
+
+----
+
+=== Install Rudder
+
+Finally follow the regular Rudder server installation process depending on your system: xref:installation:server/debian.adoc[Debian/Ubuntu] | xref:installation:server/rhel.adoc[RHEL/CentOS] | xref:installation:server/sles.adoc[SLES] | xref:installation:server/rhel7.adoc[Amazon Linux 2]
+

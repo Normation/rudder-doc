@@ -16,6 +16,12 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 If you upgrade from 6.x and you changed the default cetificate, you will need to change the Apache2 configuration. Read the xref:notes.adoc#_changed_default_certificate_upgrade[guidelines] to change the default certificate in 7.x.
 ====
 
+== PostgreSQL upgrade
+
+Please check that your PostgreSQL is at least on version 10.3 befor upgrading to Rudder 7.2.
+
+If not, we have a xref:postgresql.adoc[guide] to help you upgrade your postgresql version here.
+
 == Plugins upgrade
 
 If your server is connected to the Internet (directly or through a proxy), and you have configured
@@ -33,16 +39,16 @@ rudder package list --all
 
 ----
 
-== Upgrade from Rudder 7.0 to 7.1
+== Upgrade from Rudder 7.0 or 7.1 to 7.2
 
-Upgrade from Rudder 7.0 is supported.
+Upgrade from Rudder 7.x is supported.
 
-== Upgrade from Rudder 6.1 or 6.2 to 7.1
+== Upgrade from Rudder 6.1 or 6.2 to 7.2
 
 
 Upgrade from Rudder 6.1 or 6.2 is supported.
 
-It is advised to upgrade the Rudder server before upgrading the relays and the nodes, but 7.1 nodes are also compatible with older server.
+It is advised to upgrade the Rudder server before upgrading the relays and the nodes, but 7.2 nodes are also compatible with older server.
 Two cases are unsupported:
 
 * You can't upgrade a relay to 7.1 before its server. You need a Rudder server 7.1 for 7.1 relays.
@@ -161,16 +167,12 @@ The list of removed endpoints is visible in the https://docs.rudder.io/history/4
 If you still relied on this API should switch to the public API (which implements all features of the legacy one), and you
 can use the local system token (present in `/var/lib/rudder/api-token`) in local scripts.
 
-==== Server roles and remote postgresql server
+==== Remote postgresql server
 
-If you have an external postgresql database you need to add a little change in your server configuration
-following the https://docs.rudder.io/reference/7.0/administration/multi_server.html#_configure_the_database[documentation].
-In short:
+If you have an external postgresql database and you upgrade from pre-7.0 you need to add a little change in your server configuration.
 
-- The roles based on the presence of the `rudder-reports` package and some configuration in roles files has been removed
 - There is now a `rudder.postgresql.local` boolean option in the webapp configuration allowing to disable local postgresql
-  configuration. Then you only need to configure the URL to your postgresql server in `rudder.jdbc.url` , the username
-  in `rudder.jdbc.username` and the password in `/opt/rudder/etc/rudder-passwords.conf` and you're all set.
+  configuration that need to be set to false.
 
 == Upgrade from Rudder 6.0 or older to 7.1
 

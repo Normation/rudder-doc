@@ -2,25 +2,7 @@
 
 == Installation modifiers with environment variables
 
-There are two environment variables that can be set to change specific part of the installation
-
-=== Do not edit /etc/sudoers file at installation
-
-On RPM-based system (SLES, CentOS and RedHat), Rudder server installation validates that the `/etc/sudoers` file contains the line
-
-----
-
-#includedir /etc/sudoers.d
-
-----
-
-If this file shouldn't be changed during installation, you should set the environment variable RUDDER_NO_SUDOERS_EDIT to 1
-
-----
-
-export RUDDER_NO_SUDOERS_EDIT=1
-
-----
+There are environment variables that can be set to change specific part of the installation
 
 === Do not modify system Techniques at upgrade
 

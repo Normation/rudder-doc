@@ -1,0 +1,57 @@
+= Migrate an existing Rudder server to an external database
+
+== Install database
+
+See the setup documentation for installing xref:server/external-db.adoc#install-postgresql[the PostgreSQL server] on a separate host.
+This documentation is provided for information only; you may already have a PostgreSQL server installed.
+
+No need to setup rudder-external-db on Rudder server.
+
+Copy existing database to the new server:
+
+----
+
+# On Rudder server host
+$ pg_dump -C -h localhost -U rudder rudder | psql -h ${DB_HOST} -U ${DB_USERNAME} ${DB_NAME}
+
+----
+
+== Configure Rudder
+
+Update `/opt/rudder/etc/rudder-web.properties` with the following lines where ${} variables must be replaced by their values:
+
+----
+
+rudder.jdbc.url=jdbc:postgresql://${DB_HOST}:5432/${DB_NAME}
+rudder.jdbc.username=${DB_USERNAME}
+rudder.jdbc.password=${DB_PASSWORD}
+rudder.postgresql.local=false
+
+----
+
+Update `/opt/rudder/etc/rudder-passwords.conf`, change the line with the PostgreSQL password:
+
+----
+
+RUDDER_PSQL_PASSWORD:${DB_PASSWORD}
+
+----
+
+Once done, you can restart rudder server:
+
+----
+
+$ systemctl restart rudder-server
+
+----
+
+== Optional : install rudder-external-db and remove postgresql
+
+Optionaly, only on debian and ubuntu, if you want to remove the postgresql server from Rudder server host, you must install the rudder-external-db package to avoid a direct dependency that would keep postgresql installed.
+
+[WARNING]
+====
+
+If you install `rudder-external-db`, you should remove `/opt/rudder/etc/external-db.conf` after installation.
+
+====

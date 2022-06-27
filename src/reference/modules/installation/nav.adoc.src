@@ -11,17 +11,18 @@
 *** xref:requirements.adoc#node-hardware-requirements[Hardware specifications for Rudder Agent]
 *** xref:requirements.adoc#server-hardware-requirements[Hardware specifications and sizing for Rudder Root Server]
 ** xref:quick_install.adoc[Quick installation]
-** Install root server
+** Install server
 *** xref:server/debian.adoc[on Debian/Ubuntu]
 *** xref:server/rhel.adoc[on RHEL/CentOS]
 *** xref:server/sles.adoc[on SLES]
 *** xref:server/rhel7.adoc[on Amazon Linux 2]
+*** xref:server/external-db.adoc[with a separate DB]
 ** Install agent
 *** xref:agent/debian.adoc[on Debian/Ubuntu]
 *** xref:agent/rhel.adoc[on RHEL/CentOS]
 *** xref:agent/sles.adoc[on SLES]
 *** xref:agent/windows.adoc[on Windows]
-** Install relay server
+** Install relay
 *** xref:relay/debian.adoc[on Debian/Ubuntu]
 *** xref:relay/rhel.adoc[on RHEL/CentOS]
 *** xref:relay/sles.adoc[on SLES]
@@ -30,5 +31,7 @@
 *** xref:upgrade/debian.adoc[on Debian/Ubuntu]
 *** xref:upgrade/rhel.adoc[on RHEL/CentOS]
 *** xref:upgrade/sles.adoc[on SLES]
+*** xref:upgrade/postresql.adoc[upgrade PostgreSQL]
+** xref:migrate-db.adoc[Migrate to external DB]
 ** xref:container.adoc[Containers - Docker]
 ** xref:dev.adoc[Development versions]

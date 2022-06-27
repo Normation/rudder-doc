@@ -12,6 +12,8 @@ Installation instructions:
 
 * Upgrade a Rudder server on: xref:upgrade:server/debian.adoc[Debian/Ubuntu] | xref:upgrade:server/rhel.adoc[RHEL/CentOS] | xref:upgrade:server/sles.adoc[SLES]
 
+include::{partialsdir}/upgrade_notes.adoc[]
+
 == Node
 
 The machines managed by Rudder are called nodes, and can be any type of machine
