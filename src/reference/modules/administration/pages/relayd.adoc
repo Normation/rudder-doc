@@ -30,7 +30,7 @@ Relayd operates on different data directories:
 * `/var/rudder/inventories` (on on simple relays): to forward inventories to upstream relay or root server. On root server, the webapp monitors this folder directly.
 * `/var/rudder/reports`: to forward reports to upstream relay, or, on root server, to parse and insert reports into the database.
 * `/var/rudder/shared-files/`: files shared between nodes
-* `/var/rudder/configuration-repository/shared-files` (read-only): global shared files for Windows agents (Unix agent uses policy download protocol).
+* `/var/rudder/configuration-repository/shared-files` (read-only): global shared files for Windows agents (Linux agent uses policy download protocol).
 
 == API
 

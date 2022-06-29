@@ -12,9 +12,9 @@ Windows agents are only available with a subscription and can be downloaded on h
 
 On `Windows Server 2008R2` and `Windows Server 2012` you may need to check the requirements sections before installing the agent.
 Desktop versions are not officially supported but should be mostly compatible as long as the requirements listed in the dedicated section are filled.
-The agent is currently distributed via an `.exe` installer which both support graphical and cli based installs.
+The agent is currently distributed via an `.exe` installer which both support graphical and cli based installations.
 
-The policy server configuration can be defined before installtion by writing its hostname or IP in the file:
+The policy server configuration can be defined before installation by writing its hostname or IP in the file:
 
 ----
 C:\Program Files\Rudder\etc\policy-server.conf
@@ -47,7 +47,7 @@ Several options can be passed via the CLI to the installer:
 * `/?`: Open a graphical help page for the installer
 * `/POLICYSERVER`: If not empty, will override at install time the value of the `policyserver.conf`.
 * `/SCHEDULEDTASKUSER`: If not empty, will use the given user to run the Rudder scheduled tasks, responsible for the agent execution.
-* `/SCHEDULEDTASKPASSWORD`: Only neeed if `/SCHEDULEDTASKUSER` is used, password of the target user (required to define the scheduled task).
+* `/SCHEDULEDTASKPASSWORD`: Only need if `/SCHEDULEDTASKUSER` is used, password of the target user (required to define the scheduled task).
 
 The `SCHEDULEDTASK*` options are only available through the CLI, and when used, the agent will not try to modify the defined task afterward without manual intervention.
 The scheduled tasks can be manually modified using the rudder command `rudder agent check-scheduled-tasks`.
@@ -65,7 +65,7 @@ Plase note that older desktop versions (`Windows 7 and 8`), you will need to ins
 Set-WSManQuickConfig DSC
 ----
 
-Moreover, the Windows DSC agent comes without digital signature, you need to allow the unsigned source code execution on the Windows node.
+Moreover, the Windows agent comes without digital signature, you need to allow the unsigned source code execution on the Windows node.
 In some environment, this policy change can lead to security issues, please read the dedicated Microsoft Windows https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.2&viewFallbackFrom=powershell-6[documentation].
 This can be done in powershell by executing the following command:
 

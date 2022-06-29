@@ -316,7 +316,7 @@ in the standard Rudder inventory information.
 As of Rudder 4.3.0, you can get more information about a node thanks to
 `inventory hooks`. These information will be available as standard *node properties*.
 
-Starting from 6.0.3, the inventory extension is also available on DSC based agents.
+Starting from 6.0.3, the inventory extension is also available on Windows based agents.
 
 
 === Overview
@@ -324,7 +324,7 @@ Starting from 6.0.3, the inventory extension is also available on DSC based agen
 On the node, you create `inventory hooks` executable and place them in `/var/rudder/hooks.d`.
 These binaries are executed in the alphanumerical order, only if executable, and their output is checked to
 ensure that it is proper JSON.
-On DSC based agents, they must be powershell scripts and be located under `C:\Program Files\Rudder\hooks.d`.
+On Windows based agents, they must be powershell scripts and be located under `C:\Program Files\Rudder\hooks.d`.
 
 For example, one hook can output:
 

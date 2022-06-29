@@ -234,11 +234,11 @@ image::view-property-inheritance.png[Viewing property overrides]
 |name=datacenter, value="Paris"
 |name=datacenter, value={"dns": "1.1.1.1"}
 
-|Classic (Unix) technique
+|Linux technique
 |`${node.properties[datacenter]}`
 |`${node.properties[datacenter][dns]}`
 
-|DSC technique
+|Windows technique
 |`$($node.properties.datacenter)`
 |`$($node.properties.datacenter.dns)`
 
@@ -273,11 +273,11 @@ node property which may have been overridden.
 |name=datacenter, value="Paris"
 |name=datacenter, value={"dns": "1.1.1.1"}
 
-|Classic (Unix) technique
+|Linux technique
 |`${rudder.parameters[datacenter]}`
 |`${rudder.parameters[datacenter][dns]}`
 
-|DSC technique
+|Windows technique
 |`$($rudder.parameters.datacenter)`
 |`$($rudder.parameters.datacenter.dns)`
 
@@ -332,11 +332,11 @@ These variables are expanded at policy generation and their values are based on 
 |name=hostname, value="Paris"
 |name=os, value={"name": "Debian"}
 
-|Classic (Unix) technique
+|Linux technique
 |`${node.inventory[hostname]}`
 |`${node.inventory[os][name]}`
 
-|DSC technique
+|Windows technique
 |`$($node.inventory.hostname)`
 |`$($node.inventory.os.name)`
 
@@ -464,7 +464,7 @@ Information about a node's policy server:
 ====
 
 These variables are not available on Windows nodes, but
-only on with the classic Linux/AIX agent.
+only on with the Linux/AIX agent.
 
 ====
 
@@ -478,11 +478,11 @@ NOTE: These properties are evaluated on the node at run time.
 |name=host, value="host.local.name"
 |No JSON like values: name=ipv4[eth0], value=192.168.41.2
 
-|Classic (Unix) technique
+|Linux technique
 |`${sys.host}`
 |`${sys.ipv4[eth0]}`
 
-|DSC technique
+|Windows technique
 |N/A
 |N/A
 
@@ -633,9 +633,9 @@ The resulting properties will be:
 
 Agents can define variables:
 
-* For the classic (Unix) agent, https://docs.cfengine.com/docs/3.15/reference-special-variables-sys.html[CFEngine system variable] are available.
+* For the Linux agent, https://docs.cfengine.com/docs/3.15/reference-special-variables-sys.html[CFEngine system variable] are available.
 
-* For the DSC agent, no specific variables are provided.
+* For the Windows agent, no specific variables are provided.
 
 ==== Variable defined from techniques and generic methods
 
@@ -646,7 +646,7 @@ Rudder also provides techniques similar to generic methods that allow to define 
 In most case, it's easier to use generic methods as they allow to:
 
 * group several variable definitions in the same place
-* encapsulate variable definition definition and usage in the technique, avoiding dependencies between directives (which should be avoided as much as possible).
+* encapsulate variable definition and usage in the technique, avoiding dependencies between directives (which should be avoided as much as possible).
 
 We present afterward a subset of interesting cases, but there is others that you can check out in https://docs.rudder.io/reference/current/reference/generic_methods.html#_variable[generic method documentation].
 
@@ -654,7 +654,7 @@ We present afterward a subset of interesting cases, but there is others that you
 
 Variables defined with following generic methods or corresponding techniques can be overridden by other variables with same name defined in other rules or directives.
 
-The exact ordering and rules are explain in the https://docs.rudder.io/reference/current/usage/advanced_configuration_management.html#_sorting_directives_based_on_the_same_technique[ordering directive] chapter.
+The exact ordering and rules are explained in the https://docs.rudder.io/reference/current/usage/advanced_configuration_management.html#_sorting_directives_based_on_the_same_technique[ordering directive] chapter.
 
 It is not recommended to rely on this mechanism as dependencies between directives are not
 easily visualizable.
@@ -742,7 +742,7 @@ There's little use defining variables if you don't use them. In this section, we
 - variable in templates are a special cases of previous case: they are expanded on node, during agent run. But their syntax and usage are directed by the template engine, `mustache` or `jinja2` in Rudder;
 - on the other hand, variables in directives parameters are likely only configuration data defined elsewhere and used to parameterized a technique used as a configuration template. Variables in directive are generally expanded during policy generation in the policy server, and most errors can be caught at that time.
 
-The next paragraph will detail specificities of each cases.
+The next paragraph will detail specificities of each case.
 
 === Technique
 
@@ -855,7 +855,7 @@ Group conditions are defined only if the node is in the given group (available i
 In the same spirit that some variables are defined by default when the agent runs, a set of condition is defined based on the environment execution context.
 These conditions cover mainly information about the system (os, etc) and information about time.
 
-These conditions are different on each agent, and of course on each run depending of the context. You can see which one are defined by executing the following command on your node:
+These conditions are different on each agent, and of course on each run depending on the context. You can see which one are defined by executing the following command on your node:
 
 ----
 
@@ -863,7 +863,7 @@ rudder agent info -v
 
 ----
 
-On classic (Unix) agent, you can also start a run with some defined condition with the command:
+On Linux agent, you can also start a run with some defined condition with the command:
 
 ----
 
@@ -918,7 +918,7 @@ Note the second number indicates up to what minute the interval extends and does
 | `Lcycle_0`, `Lcycle_1`, `Lcycle_2` and `GMT_Lcycle_0`, `GMT_Lcycle_1`, `GMT_Lcycle_2` (the year number modulo 3, used in long term resource memory).
 |===
 
-Classic (Unix) agent (non exhaustive list)
+Linux agent (non exhaustive list)
 
 [cols="2", options="header"]
 |===
@@ -942,7 +942,7 @@ Classic (Unix) agent (non exhaustive list)
 
 |===
 
-DSC agent
+Windows agent
 
 [cols="2", options="header"]
 |===
@@ -957,7 +957,7 @@ DSC agent
 
 |===
 
-NOTE: In DSC agent, classes are defined in https://github.com/Normation/rudder-agent-windows/blob/master/packaging/Files/share/initial-policy/resources/environment.ps1[that source file].
+NOTE: In Windows agent, classes are defined in https://github.com/Normation/rudder-agent-windows/blob/master/packaging/Files/share/initial-policy/resources/environment.ps1[that source file].
 
 ===== Condition classes from code
 
