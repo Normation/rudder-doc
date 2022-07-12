@@ -24,12 +24,12 @@ sudo yum install -y amazon-linux-extras
 
 ----
 
-Finally you need postgresql 9.6 (a more recent version should work):
+Finally you need postgresql 11 and openjdk 11 (more recent versions should work too):
 
 ----
 
-amazon-linux-extras install postgresql9.6
+amazon-linux-extras install postgresql11 java-openjdk11
 
 ----
 
-Finally, just follow the standad Rudder installation for xref:installation:server/rhel.adoc[RHEL/CentOS] documentation.
+Finally, just follow the standard Rudder installation for xref:installation:server/rhel.adoc[RHEL/CentOS] documentation.

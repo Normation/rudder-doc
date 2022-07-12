@@ -18,9 +18,9 @@ available freely for these platforms:
 | OS | Version | Architecture
 
 | Debian | 10 and 11 | 64bit
-| Ubuntu | 18.04 LTS and 20.04 LTS | 64bit
+| Ubuntu | 18.04 LTS, 20.04 LTS and 22.04 LTS | 64bit
 | Red Hat Enterprise Linux (RHEL) / Oracle Linux / CentOS | 7 | 64bit
-| Red Hat Enterprise Linux (RHEL) / AlmaLinux, Rocky Linux, Oracle Linux / CentOS Stream | 8 | 64bit
+| Red Hat Enterprise Linux (RHEL) / AlmaLinux, Rocky Linux, Oracle Linux / CentOS Stream | 8  and 9 | 64bit
 | SUSE Linux Enterprise Server (SLES) | 12 and 15 | 64bit
 
 |===
@@ -88,8 +88,8 @@ The following operating systems are supported as a Rudder relay or server:
 | OS | Version | Architecture
 
 | Debian | 10 and 11 | 64bit
-| Ubuntu | 20.04 LTS | 64bit
-| Red Hat Enterprise Linux (RHEL) / AlmaLinux, Rocky Linux, Oracle Linux / CentOS Stream | 8 | 64bit
+| Ubuntu | 20.04 LTS and 22.04 LTS | 64bit
+| Red Hat Enterprise Linux (RHEL) / AlmaLinux, Rocky Linux, Oracle Linux / CentOS Stream | 8 and 9 | 64bit
 | SUSE Linux Enterprise Server (SLES) | 15 | 64bit
 
 |===

@@ -13,12 +13,12 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 
 ====
 
-If you upgrade from 6.x and you changed the default cetificate, you will need to change the Apache2 configuration. Read the xref:notes.adoc#_changed_default_certificate_upgrade[guidelines] to change the default certificate in 7.x.
+If you upgrade from 6.x and you changed the default certificate, you will need to change the Apache httpd configuration. Read the xref:notes.adoc#_changed_default_certificate_upgrade[guidelines] to change the default certificate in 7.x.
 ====
 
 == PostgreSQL upgrade
 
-Please check that your PostgreSQL is at least on version 10.3 befor upgrading to Rudder 7.2.
+Please check that your PostgreSQL is at least on version 10.3 before upgrading to Rudder 7.2.
 
 If not, we have a xref:postgresql.adoc[guide] to help you upgrade your postgresql version here.
 
@@ -43,10 +43,9 @@ rudder package list --all
 
 Upgrade from Rudder 7.x is supported.
 
-== Upgrade from Rudder 6.1 or 6.2 to 7.2
+== Upgrade from Rudder 6.2 to 7.2
 
-
-Upgrade from Rudder 6.1 or 6.2 is supported.
+Upgrade from Rudder 6.2 is supported.
 
 It is advised to upgrade the Rudder server before upgrading the relays and the nodes, but 7.2 nodes are also compatible with older server.
 Two cases are unsupported:
@@ -91,26 +90,26 @@ not be modified.
 
 If you use a custom valid certificate and have enabled certificate verification in the settings, you
 may encounter missing reports and inventories after upgrade. This is caused by 6.X agent
-trying to validate your custom certificate while 7.0 relies on internal self-signed certificate
+trying to validate your custom certificate while 7.X relies on internal self-signed certificate
 for node-server communication.
 
-In this specific case, it is necessary to upgrade agents to 7.0 before the server.
+In this specific case, it is necessary to upgrade agents to 7.X before the server.
 
 If you upgraded without following this step:
 
 - Policy generation and update will still work, so you can use Rudder to fix the problem. You have two options:
     - Disable certificate verification to get reports and inventories back
-    - Upgrade your agents to 7.0, so they can verify the certificates correctly
+    - Upgrade your agents to 7.X, so they can verify the certificates correctly
 
 === Reporting
 
 ==== Syslog reporting
 
-Syslog reporting is removed totally from 7.0, so if you had not switched to HTTPS reporting to
+Syslog reporting is removed totally from 7.X, so if you had not switched to HTTPS reporting to
 the settings yet, the switch will be automatically made at upgrade.
 
-We advise you to test HTTPS reporting before upgrading 7.0 to avoid unexpected consequences
-(as you won't be able to fall back to syslog on 7.0).
+We advise you to test HTTPS reporting before upgrading 7.X to avoid unexpected consequences
+(as you won't be able to fall back to syslog on 7.X).
 
 ==== Non-compliant only
 
@@ -174,11 +173,11 @@ If you have an external postgresql database and you upgrade from pre-7.0 you nee
 - There is now a `rudder.postgresql.local` boolean option in the webapp configuration allowing to disable local postgresql
   configuration that need to be set to false.
 
-== Upgrade from Rudder 6.0 or older to 7.1
+== Upgrade from Rudder 6.1 or older to 7.2
 
-Direct upgrades from 6.0 versions and older are no longer supported on 7.0.
+Direct upgrades from 6.1 versions and older are no longer supported on 7.2.
 If you are still running one of those, either on servers or nodes,
-please first upgrade to one of the supported versions, and then upgrade to 7.0.
+please first upgrade to one of the supported versions, and then upgrade to 7.2.
 
 == Compatibility between Rudder components
 
