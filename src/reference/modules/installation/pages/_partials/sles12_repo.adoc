@@ -1,27 +1,3 @@
-Add the Rudder packages repository:
-
-* on SLES 15:
-
-----
-
-zypper ar -n 'Rudder 7.0' http://repository.rudder.io/rpm/7.0/SLES_15/ Rudder
-
-----
-
-[NOTE]
-====
-
-If you have an active subscription, use the following to get access to long term support (you need to replace
-the user name and the password by your Rudder account):
-
-----
-
-zypper ar -n 'Rudder 7.0' https://LOGIN:PASSWORD@download.rudder.io/rpm/7.0/SLES_15/ Rudder
-
-----
-
-====
-
 * on SLES 12:
 
 ----
