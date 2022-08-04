@@ -68,7 +68,7 @@ upgrade, easy to start with and growth with.
 Rudder comes with a graphical interface, a standard library of configuration
 policy ready to use, and a graphical rule editor.
 
-image::introduction/web_api_cli.png["Use what best feets your need: Web interface, API, or console", align="center"]
+image::introduction/web_api_cli.png["Use what best fits your need: Web interface, API, or console", align="center"]
 
 Developers can script Rudder through its APIs and security teams can check
 conformity level to their policies or inventory (both software and hardware) of a

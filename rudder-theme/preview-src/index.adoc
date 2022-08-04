@@ -12,7 +12,7 @@ Vis no velit audiam, sonet <<dependencies,praesent>> eum ne.
 
 == Cu solet
 
-Nominavi luptatum eos, an vim hinc philosophia intellegebat.
+Nominavi luptatum eos, an vim hinc philosophical intellegebat.
 Lorem `expetenda` pertinacia et nec, wisi illud sonet qui ea.
 Eum an doctus <<liber-recusabo,maiestatis efficiantur>>.
 Eu mea inani iriure.
@@ -106,7 +106,7 @@ No sea, at invenire voluptaria mnesarchum has.
 * etiam pulvinar inceptos velit quisque aptent himenaeos
 
 Eu sed antiopam gloriatur.
-Ea mea agam graeci philosophia.
+Ea mea agam graeci philosophical.
 
 * [ ] todo
 * [x] done!
@@ -190,7 +190,7 @@ If you installed the CLI and the default site generator globally, you can upgrad
  $ npm i -g @antora/cli @antora/site-generator-default
 ====
 
-Nominavi luptatum eos, an vim hinc philosophia intellegebat.
+Nominavi luptatum eos, an vim hinc philosophical intellegebat.
 Eu mea inani iriure.
 
 [discrete]

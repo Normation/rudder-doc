@@ -40,7 +40,7 @@ $ zypper install postgresql-server
 
 ----
 
-On RHEL you must also intialize the database :
+On RHEL you must also initialize the database :
 
 ----
 

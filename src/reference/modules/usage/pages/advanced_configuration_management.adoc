@@ -39,7 +39,7 @@ on the central server.
 === Policy generation info log
 
 Policy generation is a complex process and it is central to Rudder use. You will often want to know more
-about a policy generation result: what was the reason for a failure? What nodes where upated? Or even
+about a policy generation result: what was the reason for a failure? What nodes where updated? Or even
 more specifics info like: where are info and debug log?
 
 ==== /var/rudder/policy-generation-info

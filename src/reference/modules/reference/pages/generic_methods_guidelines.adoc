@@ -55,7 +55,7 @@ A generic method is:
 
 The generic method is made of:
 * One file in `tree/30_generic_methods`, named with the name of the method, that contains the implementation and metadata
-** Often splitted in a *Metadata* header part and the effective CFEngine implementation of the method.
+** Often split in a *Metadata* header part and the effective CFEngine implementation of the method.
 * One or more files in `tests/acceptance/30_generic_methods/`, starting with the name of the method
 
 The main file is made of CFEngine code plus some metadata in commentaries. The available fields are:

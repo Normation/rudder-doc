@@ -47,7 +47,7 @@ $ systemctl restart rudder-server
 
 == Optional : install rudder-external-db and remove postgresql
 
-Optionaly, only on debian and ubuntu, if you want to remove the postgresql server from Rudder server host, you must install the rudder-external-db package to avoid a direct dependency that would keep postgresql installed.
+Optionally, only on debian and ubuntu, if you want to remove the postgresql server from Rudder server host, you must install the rudder-external-db package to avoid a direct dependency that would keep postgresql installed.
 
 [WARNING]
 ====

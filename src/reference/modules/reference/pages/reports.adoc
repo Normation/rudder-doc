@@ -52,7 +52,7 @@ A report has the following format :
 | log
 | any
 | infinity
-| Should be used for advanced debuging purpose only.
+| Should be used for advanced debugging purpose only.
 
 | log_debug
 | log
