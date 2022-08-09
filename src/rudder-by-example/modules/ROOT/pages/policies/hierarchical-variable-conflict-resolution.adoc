@@ -59,7 +59,7 @@ As a rule of thumb, if you say things like "the servers in that place", or "all 
 
 It is a best practice to define categories to contain groups that are defined with the same kind of criteria. Most of the time, finding these categories is a no-brainer: 
 
-- you will almost alway have a "By OS" category, with more or less subcategories based on the heterogeneity of your IT infrastructure. For example, perhaps it's important to split apart "old" OS and new ones. In our case, we will just make a sub-category for each Linux distribution; 
+- you will almost always have a "By OS" category, with more or less subcategories based on the heterogeneity of your IT infrastructure. For example, perhaps it's important to split apart "old" OS and new ones. In our case, we will just make a sub-category for each Linux distribution; 
 - in our case, we have nodes in different datacenters. So it's a reality of our IT infrastructure, and we want to materialize it;
 - other common examples of categories like "environment" (for dev, production, etc), or "by customer".
 

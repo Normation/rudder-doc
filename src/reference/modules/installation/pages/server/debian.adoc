@@ -4,10 +4,6 @@ include::{partialsdir}/quick_server.adoc[]
 
 include::{partialsdir}/server_notes.adoc[]
 
-== Dependencies
-
-Rudder requires Java RE (version 11 at least).
-
 include::{partialsdir}/apt_key.adoc[]
 
 include::{partialsdir}/debian_repo.adoc[]

@@ -50,7 +50,7 @@ npm i -g yarn
 ** `reference`
 *** `modules`: contains the actual doc sources
 *** `dependencies`: contains the doc built from external sources
-*** `tools`: contaisn tools to help build the doc
+*** `tools`: contains tools to help build the doc
 *** `antora.yml`: entry point for antora
 * `tests`: contains test for the doc
 * `build`: contains built files

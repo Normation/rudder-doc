@@ -50,7 +50,7 @@ This will download the virtual machine image if needed, and will setup a Rudder 
 
 Here are the basic vagrant commands useful to manage your environment:
 
-* `vagrant up` to bring the environment up, wether the VM need to created or only started
+* `vagrant up` to bring the environment up, whether the VM need to created or only started
 * `vagrant halt` to stop the virtual machines (but keep them for later use)
 * `vagrant destroy` to totally remove virtual machines
 * `vagrant ssh server|agent` to connect to one of your nodes using SSH

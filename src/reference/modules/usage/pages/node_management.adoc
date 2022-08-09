@@ -267,7 +267,7 @@ If you want to lookup nodes by a property name and its value, you can use the "n
 as explained in paragraph "composite search" above.
 
 Please note that if the value is JSON, you will need to use the exact serialization of the JSON
-value (in a compact formating: no spaces, etc). It is generally not what you want to do with
+value (in a compact formatting: no spaces, etc). It is generally not what you want to do with
 JSON value, and for them it is better to use JSON path query (see below).
 
 .Search for the node property "datacenter" with value "Paris"

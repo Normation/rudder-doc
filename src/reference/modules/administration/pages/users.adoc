@@ -101,8 +101,8 @@ centralized database, you can enable LDAP authentication for Rudder users.
 [CAUTION]
 ====
 
-LDAP authentification requires the plugin `Authentication backends` to be installed.
-Check the xref:plugins:auth-backends.adoc[plugin's documentation] to enable and configure your LDAP authentification.
+LDAP authentication requires the plugin `Authentication backends` to be installed.
+Check the xref:plugins:auth-backends.adoc[plugin's documentation] to enable and configure your LDAP authentication.
 
 ====
 

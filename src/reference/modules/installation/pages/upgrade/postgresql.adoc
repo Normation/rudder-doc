@@ -35,7 +35,7 @@ Distributions provide a script to automate this, but you first need to check tha
 
 ====
 
-Be careful with versions, we are upgrading postgresql from `OldVersion` to `NewVersion`. It is up to you to check that V1 is the version wher your data is stored and V2 is the version you want to upgrade to.
+Be careful with versions, we are upgrading postgresql from `OldVersion` to `NewVersion`. It is up to you to check that V1 is the version where your data is stored and V2 is the version you want to upgrade to.
 
 Carelessly copy-pasting versions could result in unwanted data removal.
 

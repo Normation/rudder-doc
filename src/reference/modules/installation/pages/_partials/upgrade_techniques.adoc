@@ -15,7 +15,7 @@ However, Techniques from Rudder standard library are not updated automatically i
 
 ====
 
-If you want to do any modification in a Technique from the standard library, it is recommanded to create a whole new Technique (copy the source one with a new name and version), and do your changes in this new Technique. Thus, your standard library won't diverge from Rudder upstream one, and you will be able to benefit from its updates.
+If you want to do any modification in a Technique from the standard library, it is recommended to create a whole new Technique (copy the source one with a new name and version), and do your changes in this new Technique. Thus, your standard library won't diverge from Rudder upstream one, and you will be able to benefit from its updates.
 
 ====
 

@@ -30,7 +30,7 @@ rudder-setup can also install an agent or a relay in any version, here is the fu
 Usage rudder-setup (add-repository|setup-agent|setup-server|upgrade-agent|upgrade-server) <rudder_version> [<policy_server>]
   Adds a repository and setup rudder on your OS
   Should work on as many OS as possible
-  Currently suported : Debian, Ubuntu, RHEL, Fedora, Centos, Amazon, Oracle, SLES
+  Currently supported : Debian, Ubuntu, RHEL, Fedora, Centos, Amazon, Oracle, SLES
 
   rudder_version : x.y or x.y.z or x.y-nightly or ci/x.y or lts or latest
        x.y:            the latest x.y release (ex: 3.2)

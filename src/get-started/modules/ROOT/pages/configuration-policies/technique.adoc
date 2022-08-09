@@ -56,7 +56,7 @@ we can apply yo our machines.
 
 == In Summary
 
-image::./technique_editor_steps.png["Informations", align="center"]
+image::./technique_editor_steps.png["Information", align="center"]
 image::./technique_editor_filter.png["Filter generic methods", align="center"]
 image::./technique_editor_add_generic_method.png["Add generic method", align="center"]
 image::./technique_editor_save.png["Add more and save", align="center"]

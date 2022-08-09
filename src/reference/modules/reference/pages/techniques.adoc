@@ -65,7 +65,7 @@ All the tag name in the .xml are in upper case, all the attributes are in camel 
     <OS version=">=2.5">OS Name</OS>                          <!-- Optional; OS Name and version on which the Technique has been tested -->
     <AGENT version=">=3.6">cfengine-community</AGENT>         <!-- Optional; Agent name and version on which the Technique has been tested -->
   </COMPATIBLE>
-  <MULTIINSTANCE>true/false</MULTIINSTANCE>                   <!-- Optional; defines if several instances of this template with differents variables can be deployed on a node; default value: false -->
+  <MULTIINSTANCE>true/false</MULTIINSTANCE>                   <!-- Optional; defines if several instances of this template with different variables can be deployed on a node; default value: false -->
   <USEMETHODREPORTING>true</USEMETHODREPORTING>               <!-- Optional; true enables the reporting done by generic method calls, false disables them (default: false) -->
   <POLICYGENERATION>separated</POLICYGENERATION>              <!-- Optional; defines if each Directives based on this Technique will be in a separated folder; default value: false. Note, if this parameter is set, you'll have to use the RudderUniqueID special placeholder to avoid duplicate names for methods and bundles -->
 
@@ -88,14 +88,14 @@ All the tag name in the .xml are in upper case, all the attributes are in camel 
     <SAMESIZEAS>VariableName</SAMESIZEAS>                     <!-- Optional; defines the cardinality of this variable based on the cardinality of the VariableName -->
   </TRACKINGVARIABLE>
 
-  <RUNHOOKS>                                                  <!-- Optionnal; defines the list of pre and post hooks for techniques with separated policy generation mode -->
-    <PRE bundle="pre_hook_bundle">                            <!-- Optionnal; name of the bundle/method to run before any directive based on this technique is run -->
+  <RUNHOOKS>                                                  <!-- Optional; defines the list of pre and post hooks for techniques with separated policy generation mode -->
+    <PRE bundle="pre_hook_bundle">                            <!-- Optional; name of the bundle/method to run before any directive based on this technique is run -->
       <REPORT name="Component name"/>                         <!-- Component Name for the report of the hook
-      <PARAMETER name="name" value="value"/>                  <!-- Optionnal; parameter to pass to the hook
+      <PARAMETER name="name" value="value"/>                  <!-- Optional; parameter to pass to the hook
     </PRE>
-    <POST bundle="post_hook_bundle">                          <!-- Optionnal; name of the bundle/method to run after all the directives based on this technique are run -->
+    <POST bundle="post_hook_bundle">                          <!-- Optional; name of the bundle/method to run after all the directives based on this technique are run -->
       <REPORT name="Component name"/>                         <!-- Component Name for the report of the hook
-      <PARAMETER name="name" value="value"/>                  <!-- Optionnal; parameter to pass to the hook
+      <PARAMETER name="name" value="value"/>                  <!-- Optional; parameter to pass to the hook
     </POST>
   </RUNHOOKS>
 
@@ -300,7 +300,7 @@ For now, the password field support these hash algorithms :
    * *MD5, SHA1, SHA256, SHA512*  : uses the matching hash algorithm
    * *LINUX-SHADOW-MD5, LINUX-SHADOW-SHA256, LINUX-SHADOW-SHA512*  : build a string compatible with the Linux /etc/shadow format, as "specified" in http://man7.org/linux/man-pages/man3/crypt.3.html
 
-*Technique metatdata content*
+*Technique metadata content*
 
 To configure a password, you must specify two things in the `<CONSTRAINT>` section of the field:
 
