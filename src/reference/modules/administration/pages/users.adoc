@@ -1,10 +1,57 @@
 [[user-management]]
 = User management
 
-Change the users authorized to connect to the application.
-You can define authorization level for each user
+This will help you manage Rudder users and their permissions.
 
-== Configuration of the users using a XML file
+Most of the configuration can be done directly in the web application from
+an account with the administrator role.
+It requires the `user-management` plugin to be installed.
+You can add, remove and chose the permissions of user accounts.
+
+The accounts are stored in a file on the server which can also be edited directly.
+
+== General configuration
+
+This section covers common options which are not configurable through the Web interface.
+
+[[_logins]]
+=== Login case-sensitivity
+
+Logins are case-sensitive by default. To change this behavior yon can modify the parameter `case-sensitivity` to `false`
+in `/opt/rudder/etc/rudder-users.xml`, then restart the application (`systemctl restart rudder-jetty`).
+
+This option can be used to get consistent authentication constraints on login with an external xref:plugins:auth-backends.adoc[authentication provider].
+
+[CAUTION]
+====
+
+When you change the case-sensitivity, make sure there is no potential conflicts between logins, otherwise all conflicting
+users will be ignored from Rudder.
+
+====
+
+[[ldap-auth-provider, external authentication provider for Rudder]]
+=== Configuring an external authentication provider for Rudder
+
+If you are operating on a corporate network or want to have your users in a
+centralized database, you can enable external authentication for Rudder users.
+Rudder supports *LDAP/Active Directory*, *OAUTHv2* and *OpenID Connect* authentication providers.
+
+External authentication requires the `Authentication backends` plugin to be installed.
+Read the xref:plugins:auth-backends.adoc[plugin's documentation] to enable and configure your external authentication.
+
+Take care of the following limitation of the current process: only *authentication*
+is delegated to LDAP, NOT *authorizations*. So you still have to
+declare user's authorizations in Rudder.
+
+A user whose authentication is accepted by the external provider but not declared in Rudder
+is considered to have no rights at all (and so will only see a reduced version of Rudder homepage,
+with no action nor tabs available).
+
+== Configuration of the users using a configuration file
+
+This sections the configuration of Rudder users directly in the configuration, equivalent
+to what the user management interface does.
 
 === Generality
 
@@ -26,28 +73,7 @@ The role attribute can be omitted but the user will have no permission, and
 only valid attributes are recognized.
 
 Every modification of this file should be followed by a restart of the Rudder
-web application to be taken into account:
-
-----
-
-systemctl restart rudder-jetty
-
-----
-
-[[_logins]]
-=== Login
-
-Your login is case-sensitive by default, to change this behavior yon can modify the parameter `case-sensitivity` to `false`
-This option can be used to have consistent authentication constraints on login with an external xref:plugins:auth-backends.adoc[authentication provider] .
-
-[CAUTION]
-====
-
-When you change the case-sensitivity, make sure there is no potential conflicts between logins, otherwise all conflicting
-users will be ignored from Rudder.
-
-====
-
+web application to be taken into account (`systemctl restart rudder-jetty`).
 
 [[_passwords]]
 === Passwords
@@ -66,12 +92,12 @@ the "secret" password for this algorithm are listed here:
 [options="header"]
 
 |====
-|Value                 | Algorithm | Linux command to hash the password
-|"bcrypt"              | BCRYPT    | htpasswd -nBC 12 ""  \| tr -d ':\n' \| sed 's/$2y/$2b/'
-|"md5"                 | MD5       | read mypass; echo -n $mypass \| md5sum
-|"sha" or "sha1"       | SHA1      | read mypass; echo -n $mypass \| shasum
-|"sha256" or "sha-256" | SHA256    | read mypass; echo -n $mypass \| sha256sum
-|"sha512" or "sha-512" | SHA512    | read mypass; echo -n $mypass \| sha512sum
+|Value                 | Algorithm | Linux command to hash the password | Note
+|"bcrypt"              | bcrypt    | `htpasswd -nBC 12 ""  \| tr -d ':\n' \| sed 's/$2y/$2b/'` | Highly recommended
+|"md5"                 | md5       | `read mypass; echo -n $mypass \| md5sum` | *Unsecure*, should not be used
+|"sha" or "sha1"       | sha1      | `read mypass; echo -n $mypass \| shasum` | *Unsecure*, should not be used
+|"sha256" or "sha-256" | sha256    | `read mypass; echo -n $mypass \| sha256sum` | *Unsecure*, should not be used
+|"sha512" or "sha-512" | sha512    | `read mypass; echo -n $mypass \| sha512sum` | *Unsecure*, should not be used
 |====
 
 When using the suggested commands to hash a password, you must enter the
@@ -83,58 +109,24 @@ Here is an example of authentication file with hashed password:
 
 ----
 
-<authentication hash="sha256" case-sensitivity="true">
-
-  <!-- In this example, the hashed password is: "secret", hashed as a sha256 value -->
-  <user name="carol" password="2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b" role="administrator"/>
-
+<authentication hash="bcrypt" case-sensitivity="true">
+  <!-- In this example, the hashed password is: "secret", hashed as a bcrypt value -->
+  <user name="carol" password="$2b$12$C5QXJEHER1vwriBe7s7FROpfMmeKc9.Lz.n68SOYsxagQIsJARv.S" role="administrator"/>
 </authentication>
 
 ----
 
-[[ldap-auth-provider, LDAP authentication provider for Rudder]]
-== Configuring an LDAP authentication provider for Rudder
+=== Externally-authenticated users
 
-If you are operating on a corporate network or want to have your users in a
-centralized database, you can enable LDAP authentication for Rudder users.
-
-[CAUTION]
-====
-
-LDAP authentication requires the plugin `Authentication backends` to be installed.
-Check the xref:plugins:auth-backends.adoc[plugin's documentation] to enable and configure your LDAP authentication.
-
-====
-
-=== LDAP is only for authentication
-
-Take care of the following limitation of the current process: only *authentication*
-is delegated to LDAP, NOT *authorizations*. So you still have to
-declare user's authorizations in the Rudder user file (`rudder-users.xml`).
-
-A user whose authentication is accepted by LDAP but not declared in the
-`rudder-users.xml` file is considered to have no rights at all (and so will
-only see a reduced version of Rudder homepage, with no action nor tabs available).
-
-
-The credentials of a user are defined in the XML file
-`/opt/rudder/etc/rudder-users.xml`. It expects the same format as regular file-based
-user login, but in this case "name" will be the login used to connect to LDAP and the
-'password' field will be ignored and should be set to "LDAP" to make it clear that
-this Rudder installation uses LDAP to log users in.
-
+It expects the same format as regular file-based
+users, but in this case "name" will be the login used to connect to the external provider and the
+'password' field will be ignored and should be set to "LDAP/OpenID/etc." to make it clear that
+this Rudder installation uses external provider to log users in.
 
 Every modification of this file should be followed by a restart of the Rudder
-web application to be taken into account:
+web application to be taken into account (`systemctl restart rudder-jetty`).
 
-----
-
-systemctl restart rudder-jetty
-
-----
-
-
-== Authorization management
+=== Authorization management
 
 For every user you can define an access level, allowing it to access different
 pages or to perform different actions depending on its level.
@@ -142,24 +134,9 @@ pages or to perform different actions depending on its level.
 You can also build custom roles with whatever permission you want, using a type
 and a level as specified in the xref:plugins:user-management.adoc[user-management plugin's documentation].
 
-image::workflow_roles.png[Roles can match different types of users]
-
-
 [CAUTION]
 ====
 
 Defining and using different roles in Rudder require the `User-management` plugin.
 
 ====
-
-
-== Going further
-
-Rudder aims at integrating with your IT system transparently, so it can't force
-its own authentication system.
-
-To meet this need, Rudder relies on the modular authentication system Spring
-Security that allows to easily integrate with databases or an
-enterprise SSO like CAS, OpenID or SPNEGO. The documentation for this
-integration is not yet available, but don't hesitate to reach us on this topic.
-
