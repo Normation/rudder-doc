@@ -56,16 +56,16 @@ the physical storage backend does not reclaim space on the hard drive, resulting
 
 This is often not an issue, as PostgreSQL handles this automatically,
 and new reports sent by the nodes to Rudder should fill the blanks in the database.
-This task is handled by the autovacuum process, which periodically cleans the storage regularly
+This task is handled by the auto-vacuum process, which periodically cleans the storage regularly
 to prevent database bloating.
 
 However, database can grow significantly, resulting in large disk usage, and slower performance, due to massive
 bloating (with database 3 or 4 times larger than necessary).
 
-To cure (or prevent) this behaviour, you can trigger vacuum full operations, which put an exclusive lock on tables,
+To cure (or prevent) this behavior, you can trigger vacuum full operations, which put an exclusive lock on tables,
 and will lock both the Rudder interface and the reporting system for quite a long time.
 
-==== Reclaming space with locking, using VACUUM FULL
+==== Reclaiming space with locking, using VACUUM FULL
 
 [source,shell]
 

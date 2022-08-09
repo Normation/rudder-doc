@@ -32,19 +32,10 @@ command[check_rudder]=/opt/rudder/bin/rudder agent health -n
 To get the last run time, you can lookup the modification date of
 `/var/rudder/cfengine-community/last_successful_inputs_update`.
 
-=== Monitoring a Server
+=== Monitoring the health of the Rudder server
 
-You can use use regular API calls to check the server is running and has access to its data.
-For example, you can issue the following command to get the list of currently defined rules:
-
-----
-curl -X GET -H "X-API-Token: yourToken" http://your.rudder.server/rudder/api/latest/rules
-----
-
-You can then check the status code (which should be 200). See the xref:administration/server.adoc#rest-api[API documentation] for more information.
-
-You can also check the webapp logs (in `/var/log/rudder/webapp/year_month_day.stderrout.log`)
-for error messages.
+See the xref:administration:webapp.adoc#_monitoring[Web application monitoring] and
+xref:administration:relayd.adoc#_monitoring[relayd monitoring] sections.
 
 == Monitoring your configuration management
 

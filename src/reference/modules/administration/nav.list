@@ -7,6 +7,8 @@ installation_option.adoc
 integration.adoc
 uninstall.adoc
 security.adoc
+webapp.adoc
 relayd.adoc
+slapd.adoc
 port.adoc
 troubleshooting.adoc

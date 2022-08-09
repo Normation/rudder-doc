@@ -1,0 +1,35 @@
+= Slapd administration
+
+The `rudder-slapd` service is part of the `rudder-server` package
+and runs only on Rudder server. It is mainly used by the webapp to store
+information about the nodes.
+
+It is a standard https://www.openldap.org/software/man.cgi?query=slapd[OpenLDAP slapd]
+service, embedded with Rudder.
+
+Rudder also comes with its ldap tooling in `/opt/rudder/bin/ldap*` and `/opt/rudder/sbin/slap*`
+(`slapcat`, etc.).
+
+== Configuration
+
+Relay configuration is stored in `/opt/rudder/etc/openldap/slapd.conf` and managed by
+the system techniques. You shouldn't need to edit it.
+
+== Data files
+
+`rudder-slapd` stores its data in `/var/rudder/ldap/openldap-data/` with the `mdb` backend.
+
+== Backup
+
+See the xref:administration:procedures.adoc#_migration_backups_and_restores[backup documentation].
+
+== Logging
+
+`rudder-slapd` logs into `/var/log/rudder/ldap/slapd.log`, and Rudder comes with a logrotate configuration
+for its logs.
+
+== Security
+
+Relayd runs with the `rudder-slapd` user and the `rudder` group.
+On recent systemd versions it runs with limited access to the filesystem (can only
+access predefined data directories).

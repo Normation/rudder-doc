@@ -54,9 +54,50 @@ filters by separating them with a comma.
 
 Reload the service to update log level and filters.
 
+[[_monitoring]]
+== Monitoring
+
+=== Status
+
+You can use the service's system API to check if it's correctly running:
+
+[source, bash]
+----
+# Locally on the server or relay
+curl http://localhost:3030/rudder/relay-api/1/system/status
+----
+
+Gives:
+
+[source, json]
+----
+{
+  "result": "success",
+  "action": "getStatus",
+  "data": {
+    "database": {
+      "status": "success",
+      "details": "string"
+    },
+    "configuration": {
+      "status": "error",
+      "details": "configuration parsing error: missing field `node_id` for key `general` at line 45 column 1"
+    }
+  }
+}
+----
+
+See the https://docs.rudder.io/api/relay/#tag/System/operation/getStatus[API documentation] for details.
+
+=== Prometheus endpoint
+
+`rudder-relayd` provides a prometheus endpoint on `http://localhost:3030/metrics`.
+
+See the https://docs.rudder.io/api/relay/#tag/System/operation/getMetrics[API documentation] for details.
+
 == Security
 
 Relayd runs with the `rudder-relayd` user and the `rudder` group.
 It also runs in a dedicated SELinux context on RHEL, and on recent
-systemd versions it runs with limited access to filesystem (can only
+systemd versions it runs with limited access to the filesystem (can only
 write into predefined data directories).
