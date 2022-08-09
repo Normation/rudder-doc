@@ -29,16 +29,10 @@ proxy_password =
 ----
 
 Plugin management uses the `rudder package` command.
-Start by updating the repository index:
+Start by updating the repository index and you licenses:
 
 ----
 rudder package update
-----
-
-Then download your licenses:
-
-----
-rudder package licenses
 ----
 
 List available packages:
@@ -47,10 +41,11 @@ List available packages:
 rudder package list --all
 ----
 
-You can then install a plugin with:
+You can then install plugins with:
 
 ----
-rudder package install <package_name>
+rudder package install <plugin_name>
+rudder package install <plugin_name_1> <plugin_name_2>
 ----
 
 The application will restart if necessary. Please read install output carefully as some
@@ -59,7 +54,7 @@ plugins require additional dependencies.
 To update a plugin, refresh repository index with `rudder package update` and run the install
 command again.
 
-You will need to update your licenses with `rudder packages licenses` before their expiration.
+You will need to update your licenses with `rudder package update` before their expiration.
 An alert will appear in Rudder's menu bar when a license is close to expiration.
 
 == Manual plugins installation
