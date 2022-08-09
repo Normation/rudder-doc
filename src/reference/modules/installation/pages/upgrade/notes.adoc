@@ -61,7 +61,7 @@ Notable changes:
 
 * The default behavior of node deletion changed. Instead of moving the nodes into an archive, they
   are now completely removed by default. As this archive was not exposed to the users, it should
-  not change anything.
+  be transparent for most users.
 
 * The way the Windows agent gets the hostname of the system for the inventory has been modified,
   to try to get the fully-qualified domain when possible, matching Linux agent behavior. The
