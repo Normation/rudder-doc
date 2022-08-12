@@ -1,0 +1,47 @@
+= Install Rudder agent on AIX
+
+[NOTE]
+====
+
+AIX uses the same agent as Linux, so any method or directive with the "Linux" agent type
+are also compatible with AIX.
+
+====
+
+== Import key
+
+include::{partialsdir}/rpm_key.adoc[]
+
+== With yum
+
+include::{partialsdir}/aix_repo.adoc[]
+
+Install the package:
+
+----
+
+yum install rudder-agent
+
+----
+
+== With rpm
+
+Download the rpm file directly from our repository:
+
+----
+
+wget https://LOGIN:PASSWORD@download.rudder.io/rpm/7.2/AIX_5/ppc/rudder-agent-7.2.0.beta1-1.AIX.5.3.aix5.3.ppc.rpm
+
+----
+
+Install the package using rpm:
+
+----
+
+rpm -ivh rudder-agent-7.2.0-1.AIX.5.3.aix5.3.ppc.rpm
+
+----
+
+== Configuration
+
+include::{partialsdir}/agent_initial_config.adoc[]

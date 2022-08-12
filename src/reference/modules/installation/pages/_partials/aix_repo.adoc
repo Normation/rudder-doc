@@ -1,0 +1,19 @@
+[NOTE]
+====
+
+Downloading the AIX agent requires an active subscription.
+
+====
+
+Add a yum repository for Rudder:
+
+----
+
+echo '[Rudder_7.2]
+name=Rudder 7.2
+baseurl=https://LOGIN:PASSWORD@download.rudder.io/rpm/7.2/RHEL_$releasever/
+gpgcheck=1
+gpgkey=https://LOGIN:PASSWORD@download.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
+
+----
+
