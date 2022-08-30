@@ -90,7 +90,7 @@ The following operating systems are supported as a Rudder relay or server:
 | Debian | 10 and 11 | 64bit
 | Ubuntu | 20.04 LTS and 22.04 LTS | 64bit
 | Red Hat Enterprise Linux (RHEL) / AlmaLinux, Rocky Linux, Oracle Linux / CentOS Stream | 8 and 9 | 64bit
-| SUSE Linux Enterprise Server (SLES) | 15 | 64bit
+| SUSE Linux Enterprise Server (SLES) | 15 SP2+ | 64bit
 
 |===
 
