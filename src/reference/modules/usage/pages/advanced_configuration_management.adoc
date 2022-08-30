@@ -4,7 +4,7 @@
 
 Each time a change occurs in the Rudder interface, having an impact on the
 policy needed by a node, it is necessary to regenerate the modified
-policies for every impacted node. By default this process is launched after each
+policies for every impacted node. By default, this process is launched after each
 change.
 
 The process of policy generation:
@@ -57,7 +57,7 @@ in the following files:
   - `RUDDER_NODE_IDS`: contains both updated policy server and nodes. Policy servers always come first.
 
 Each file starts with a comment describing what policy generation generated it.
-Two version of each of these files is concerved: the oldest one has a `.old` suffix.
+Two version of each of these files is conserved: the oldest one has a `.old` suffix.
 
 ==== `webapp` logs
 
@@ -78,7 +78,7 @@ How many nodes were updated:
 [2020-03-12 15:32:39+0100] INFO  policy.generation - Configuration of 8 nodes were updated, their policies are going to be written
 ----
 
-Timing information about generation steps (they are always logged to allows to check general performance evolution):
+Timing information about generation steps (they are always logged to allow to check general performance evolution):
 
 ----
 [2020-03-12 15:33:37+0100] INFO  policy.generation.timing - Timing summary:
@@ -119,12 +119,12 @@ from internal libraries to Techniques and user services. All the files and logic
 ncf directory structure exists in two root folders:
 
 * `/usr/share/ncf/tree`
-** This is the standard library installation folder. It is created and updated by the
+** This is the standard library installation folder. It is created and updated by
    the ncf package. This folder will be completely overwritten when you update ncf
-   package so you should never modify anything here: it will be lost at some point.
+   package, so you should never modify anything here: it will be lost at some point.
 
 * `/var/rudder/configuration-repository/ncf`
-** This is were you add your own ncf Generic Methods and Techniques.
+** This is where you add your own ncf Generic Methods and Techniques.
    Techniques created with the Technique Editor will be located here, and both
    Generic and Techniques in that place will be accessible in the Technique Editor
    alongside what is provided by the standard library.
@@ -213,7 +213,7 @@ As of March 2015, we have two post-hooks defined and no pre-hooks:
 ** It commits the Technique newly created into Rudder Git configuration repository
 located in `/var/rudder/configuration-repository`.
 * `post.write_technique.rudderify.sh`
-** It generates a valid Rudder Technique from a the newly created Technique and reloads Rudder
+** It generates a valid Rudder Technique from a newly created Technique and reloads Rudder
 Technique Library so that updates are taken into account.
 
 If you want to run post hooks by hand, you can use the following command:
@@ -333,7 +333,7 @@ But use: "05. My general security rule" and "40. Check ssh configuration"
 
 Rudder 4.1 introduced a way to share files from one node to another.
 It allows a node to send a file to its relay, which will make it available
-for another target node, that has to to specifically download it.
+for another target node, that has to specifically download it.
 
 This file sharing method is secured by:
 
@@ -370,3 +370,198 @@ rudder server reload-techniques
 ----
 
 You're done.
+
+
+== (BETA) Import / Export archive of rules, directives, techniques, groups and related dependencies
+
+Rudder 7.2 introduces as a beta feature the possibility to export configuration items (rules, directives, techniques, groups) and
+their dependencies (for example, the technique used to define a directive, or the directives and groups for rules) into `ZIP` archive
+and import them back.
+
+This feature may be used to transfer configuration items from a development environment to a qualification one, or to edit by hand
+in a third party system some aspects of the configuration items and then import them back into rudder.
+
+This feature is in Beta. It is only available through API queries and after the corresponding feature switch is enabled.
+
+[CAUTION]
+====
+This feature is in BETA preview.
+API endpoints should be rather stable, but the format of files inside the archive WILL change in the future.
+We also welcome feedbacks about that feature, for example through chat.rudder.io.
+====
+
+
+This section will present you the main aspect of the feature usage: how to enable it, exports items, control dependency resolution, and
+import the archive back.
+For all API related operation, you can check https://docs.rudder.io/api/v/16/#tag/Archives[the corresponding API documentation].
+
+
+=== Enable archive feature
+
+The feature is not available by default, it needs to be enabled. This is done by the following API request, and you should get the corresponding answer below:
+
+----
+curl -k -X POST -H "X-API-TOKEN: ...." -H "Content-Type: application/json" 'https://rudderhost/rudder/api/latest/settings/rudder_featureSwitch_archiveApi' -d '{ "value":"enabled" }'
+
+{
+  "action": "modifySetting",
+  "id": "rudder_featureSwitch_archiveApi",
+  "result": "success",
+  "data": {
+    "settings": {
+      "rudder_featureSwitch_archiveApi": "enabled"
+    }
+  }
+}
+----
+
+=== Export configuration items
+
+The first aspect of the archive feature allows to export configuration items and their dependencies into a `ZIP` archive.
+The most common use case is to export a rule and its directives (with related user defined techniques) and groups so that it can be transferred into another
+rudder server.
+Another common use case is to export a set of configuration items, for example to build a template of a configuration that needs to span on several rules.
+Let's see these two use cases in turn.
+The last use case described here will be how to retrieve configuration items at a specific past revision.
+
+==== Exporting a rule with its directives, techniques and groups
+
+Once you have found the rule's ID (for example, in the rule details page), you just need to call the export API with that parameter: all dependencies up to techniques are
+resolved and included by default. This is equivalent to using the parameter `include=all` as shown in the command below.
+
+[NOTICE]
+----
+System configuration items are not included in the archive, so for example you will not get system groups used by a rule in the archive (of course, the rule configuration
+still use them if the archive if imported back).
+----
+
+----
+curl -k -X GET -H "X-API-TOKEN: ...." 'https://rudderhost/rudder/api/latest/archives/export?rules=2278f76f-28d3-4326-8199-99561dd8c785&include=all' -o archive.zip
+----
+
+==== Archive internal
+
+Now, we will take a quick look at the content of an archive.
+
+[CAUTION]
+===
+Remember, even if the general layout is likely to be stable, file format WILL change.
+===
+
+----
+% unzip archive.zip
+Archive:  archive.zip
+   creating: archive/
+....
+
+% ls
+archive  archive.zip
+
+% tree archive
+.
+├── directives
+│   ├── 10_-_default_time_setting.json
+│   └── 20_-_Welcome_message.json
+├── groups
+│   ├── Agents.json
+│   ├── All_centos.json
+│   └── All_debian.json
+├── rules
+│   └── Generic_rule_for_all_env.json
+└── techniques
+    └── systemSettings
+        ├── misc
+        │   └── clockConfiguration
+        │       └── 3.1
+        │           ├── changelog
+        │           ├── clockConfiguration.st
+        │           ├── metadata.xml
+        │           └── tz_vars.st
+        └── systemManagement
+            └── motdConfiguration
+                └── 3.3
+                    ├── changelog
+                    ├── config.st
+                    ├── main.st
+                    ├── metadata.xml
+                    └── motd.ps1.st
+----
+
+We see that the archive has a standard directory layout looking like the one in `/var/rudder/configuration-repository`.
+In each directory, you find serialisation of the corresponding configuration items.
+For rules, directives, and groups, the file has the item name normalized. The content is the same as the one you get when you query the item details on REST API.
+For techniques, the subdirectory layout and technique content is exactly the same as the one in have in `/var/rudder/configuration-repository/techniques`.
+
+You can update content in that archive, create a new `ZIP` with the following command, and import it back into rudder to update policies.
+For example:
+
+- edit the rule `shortDescription` property in `archive/rules/Generic_rule_for_all_env.json`
+- zip back:
+
+----
+% zip -r archive.zip archive
+  adding: archive/ (stored 0%)
+  adding: archive/techniques/ (stored 0%)
+  adding: archive/techniques/systemSettings/ (stored 0%)
+...
+----
+
+And see next chapter for importing it.
+
+==== Exporting a set of rules and directives for configuration templating
+
+Another common use case is when you need several rules with specific directive to achieve a configuration need on several OS - typically, you want to enforce
+some security checks on Debian and Redhat, but these checks vary.
+So you develop things in QA, and when it's ok, you import them prod - but not the groups, which are different.
+For that, you will restrict the scope of what dependencies are included in the archive (`rule1` and `rule2` are used in place of UUIDs for readability):
+
+----
+curl -k -X GET -H "X-API-TOKEN: ...." 'https://rudderhost/rudder/api/latest/archives/export?rules=rule1,rule2&include=directives,techniques' -o archive.zip
+----
+
+And if you still need a specific group, directive or technique, or directive added in the archive, just add them in the query:
+
+----
+curl -k -X GET -H "X-API-TOKEN: ...." 'https://rudderhost/rudder/api/latest/archives/export?rules=...&directives=...&groups=...&techniques=...&include=directives,techniques' -o archive.zip
+----
+
+
+==== Extracting configuration items fom a past revision
+
+Finally, you can obtain an archive with configuration from a past revision. Just append the revision to the item id after a URL-encoded `+` (ie `%2B`) and its dependencies will be resolved for the same revision.
+
+For example, for getting a rule and its dependencies from revision with commit ID `5962a856684ab8ce2363f302ed4ee9455786fd03`, use the command:
+
+----
+curl -k -X GET -H "X-API-TOKEN: ...." 'https://rudderhost/rudder/api/latest/archives/export?rules=2278f76f-28d3-4326-8199-99561dd8c785%2B5962a856684ab8ce2363f302ed4ee9455786fd03' -o archive.zip
+----
+
+=== Import configuration items
+
+
+Import feature is very unsophisticated in that version. In particular, you need to know:
+- that the archive format is expected to be the one from the export feature, bad serialization format will lead to errors,
+- that configuration items with the same UUID as in the archive will be overwritten.
+
+Once you're ready, importing an archive is done with that REST API call:
+
+----
+curl -k -X POST -H "X-API-TOKEN: ...." https://rudderhost/rudder/api/latest/archives/import --form "archive=@archive.zip"
+----
+
+Where `archive.zip` is the path toward your archive file.
+
+
+=== Log information relative to archives processing server-side
+
+Archives import/export feature has its own logger named `application.archive`.
+
+You can get more information about what is happening in `/var/log/rudder/webapp/yyyy_MM_dd.stderrout.log` by adding the following logger definition in file
+`/opt/rudder/etc/logback.xml` (no need to restart rudder after change) above lines `YOU SHOULD NOT HAVE TO CHANGE THINGS BELOW THAT LINE`:
+
+----
+  <logger name="application.archive" level="debug" />
+----
+
+
+
