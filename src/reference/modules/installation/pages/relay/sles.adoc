@@ -2,11 +2,11 @@
 
 include::{partialsdir}/relay_plugin.adoc[]
 
-include::{partialsdir}/zypper_segfault.adoc[]
-
 include::{partialsdir}/rpm_key.adoc[]
 
-include::{partialsdir}/sles_repo.adoc[]
+Add the Rudder packages repository:
+
+include::{partialsdir}/sles15_repo.adoc[]
 
 Install the package:
 
