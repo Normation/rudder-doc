@@ -2,7 +2,11 @@
 
 include::{partialsdir}/upgrade_notes.adoc[]
 
-include::{partialsdir}/sles_repo.adoc[]
+Add the Rudder packages repository:
+
+include::{partialsdir}/sles15_repo.adoc[]
+
+include::{partialsdir}/sles12_repo.adoc[]
 
 == Rudder agent
 
