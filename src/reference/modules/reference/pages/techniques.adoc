@@ -205,9 +205,9 @@ The display of this component key will be the value from the metadata and not th
    * *datetime* : display a JQuery calendar and check date format
    * *boolean* : display a checkbox
    * *mail* : only accept emails
-   * *ip* : only accept ips. Before Rudder 3.1.14, 3.2.7 and 4.0.0, "ip" was accepting only IPv4 ip. Since these releases, it accepts both IPv4 and IPv6 format. <br />
-   *  *ipv4* [since Rudder 3.1.14, 3.2.7, 4.0.0]: only accept IPv4 formatted IPs
-   * *ipv6* [since Rudder 3.1.14, 3.2.7, 4.0.0]: only accept IPv6 formatted IPs
+   * *ip* : only accept ips, support both IPv4 and IPv6 format.
+   *  *ipv4* : only accept IPv4 formatted IPs
+   *  *ipv6* : only accept IPv6 formatted IPs
    * *size-<unit>* : (size-b, size-kb, size-mb, size-gb ou size-tb)
    * *raw* : the content of this field will not be escaped when written in the policies (Rudder >= 2.6)
    * *password* : the content of this field will be handled as a password, and thus be hidden and transformed if necessary (see "Password handling" below)

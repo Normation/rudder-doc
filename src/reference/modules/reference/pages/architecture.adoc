@@ -73,9 +73,7 @@ event is sent to in inventory watcher process which:
 - if the file is a signature (respectively an inventory), it waits for the
   corresponding inventory (respectively signature) for up to 10s,
 - if only the signature is present, nothing is done (only a log),
-- if only the inventory file is present, the processing is done in
-  "compatibility" mode to support rudder agent below version 5.0,
-- if the pair is present, both are processed together.
+- if the pair is present, both are processed together. 
 - processing starts by parsing inventory file and check for mandatory
   elements (especially `<RUDDER>` tag and content)
 - then, inventory is queued to be saved in LDAP.

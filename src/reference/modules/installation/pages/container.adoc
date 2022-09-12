@@ -10,7 +10,7 @@ read more about plugins on https://www.rudder.io/software/plugins/[our website].
 
 == Rudder relay
 
-Starting with Rudder 6.2, there is a Docker image for running a fully containerized relay.
+There is a Docker image for running a fully containerized relay.
 
 It is still in technical preview state, and we would like to discuss your container use cases
 on https://chat.rudder.io[our chat room] to improve our container support, especially in the context of
@@ -31,7 +31,7 @@ You can also build it from the https://github.com/Normation/rudder/tree/master/d
 Specify a version to build with:
 
 ```bash
-docker build --build-arg VERSION=6.2.0 .
+docker build --build-arg VERSION=7.1.6 .
 ```
 
 ### Configuration
