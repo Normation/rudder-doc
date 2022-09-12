@@ -242,9 +242,7 @@ You will have to add that search line to your request:
 
 === Node properties search
 
-Node properties are special because they support both `key=value` and `key=JSON` content.
-As of Rudder 4.3.2, we have the possibility to choose among three operator given the use case,
-so let's see which is the best on each case.
+Node properties are special because they support both `key=value` and `key=JSON` content. There are three search operators available:
 
 ==== Check for property existence: [Name equals]
 
@@ -311,7 +309,7 @@ the following examples allow to fill different purposes:
 [[search-nodes-properties-json-path, JSON Path queries on Node Properties]]
 ==== JSON Path queries on Node Properties
 
-Since Rudder 4.3.2, you can use a JSON path query to lookup nodes based of specific feature
+You can use a JSON path query to lookup nodes based of specific feature
 of the JSON value of a node property.
 
 The operator is +Name:JSON Path+ and the general usage is:

@@ -314,8 +314,6 @@ NOTE: If you want to use an `inventory variable` that you gathered through a
 xref:usage:advanced_node_management.adoc#extend-nodes-inventory[node inventory hook], you need to use `${node.properties[hook_first_level_key]}` syntax.
 You can also check in node `properties` tab for the name of the properties you are looking for.
 
-NOTE: These variables have been introduced in Rudder 5.0.13, if you are using a previous version of Rudder, please use *system variables*, described in next section
-
 [WARNING]
 
 ====
@@ -532,7 +530,7 @@ System variables like `ipv4[eth0]` are actually STRINGS in jinja2, not JSON, so 
 |Node's domain as discovered by the agent
 |===
 
-There are also more variables available, all documented in https://docs.cfengine.com/docs/3.15/reference-special-variables-sys.html[this page].
+There are also more variables available, all documented in https://docs.cfengine.com/docs/3.18/reference-special-variables-sys.html[this page].
 
 ====== Constants
 
@@ -633,7 +631,7 @@ The resulting properties will be:
 
 Agents can define variables:
 
-* For the Linux agent, https://docs.cfengine.com/docs/3.15/reference-special-variables-sys.html[CFEngine system variable] are available.
+* For the Linux agent, https://docs.cfengine.com/docs/3.18/reference-special-variables-sys.html[CFEngine system variable] are available.
 
 * For the Windows agent, no specific variables are provided.
 

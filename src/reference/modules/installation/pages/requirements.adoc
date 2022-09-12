@@ -184,7 +184,7 @@ compliance from node, a safe estimation of disk usage is 200MB as a baseline, pl
 
 Note: When using Syslog reporting, ticking "Log all reports received to `/var/log/rudder/reports/all.log`"
 under the *Administration -> Settings* tab in the Rudder web interface will record all logs from nodes in a text file,
-on top from the SQL database. This uses a lot of disk space, and is disabled by default in Rudder 6.1.
+on top from the SQL database. This uses a lot of disk space, and is disabled by default.
 
 =======
 

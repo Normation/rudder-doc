@@ -27,7 +27,7 @@ Choose the branch to build
 
 # For branch x.y
 #git checkout branches/rudder/x.y
-# 7.0 is still master when this documentation is written
+# 7.3 is still master when this documentation is written
 git checkout master
 cd rudder-agent
 

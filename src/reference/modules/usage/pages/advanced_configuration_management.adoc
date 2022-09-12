@@ -62,7 +62,7 @@ Two version of each of these files is conserved: the oldest one has a `.old` suf
 ==== `webapp` logs
 
 Rudder web application logs located in `/var/log/rudder/webapp/yyyy_MM_dd.stderrout.log` contains information
-about policy generation process. In rudder 6.0, all policy generation logs are gathered under `policy.generation`
+about policy generation process. All policy generation logs are gathered under `policy.generation`
 namespace (with optionally more precise namespace, like `policy.generation.timing` for timing information, or
 `policy.generation.update` for updated nodes, etc).
 By default, policy generation logs when it starts with generic information about system:
@@ -223,8 +223,7 @@ If you want to run post hooks by hand, you can use the following command:
 [[_server_event_hooks]]
 == Server Event Hooks
 
-Rudder 4.1 introduces the possibility to execute files (hooks), typically scripts,
-when some predefined event occurs on Rudder.
+Files (hooks), typically scripts, can be executed on the server, when some predefined event occurs on Rudder.
 
 include::{partialsdir}/dyn/hooks.adoc[leveloffset=+3]
 
@@ -331,7 +330,7 @@ But use: "05. My general security rule" and "40. Check ssh configuration"
 
 == Share files between nodes
 
-Rudder 4.1 introduced a way to share files from one node to another.
+There is a way to share files from one node to another.
 It allows a node to send a file to its relay, which will make it available
 for another target node, that has to specifically download it.
 

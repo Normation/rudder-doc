@@ -363,10 +363,8 @@ load across your infrastructure.
 It is quite common to need to gather information on your nodes that are not present
 in the standard Rudder inventory information.
 
-As of Rudder 4.3.0, you can get more information about a node thanks to
+You can obtain more information about a node thanks to
 `inventory hooks`. These information will be available as standard *node properties*.
-
-Starting from 6.0.3, the inventory extension is also available on Windows based agents.
 
 
 === Overview
