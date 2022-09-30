@@ -70,6 +70,18 @@ It contains one file per Rudder related package installation, with all the logs 
 
 Logs every run of the command `rudder agent check -q` triggered by a cron every 5 minutes.
 
-== Agent side
+== Linux agents
 
 The agent only comes with the `install` and `agent-check` logs.
+
+== Windows agents
+
+Install logs are available under `C:\Program Files\Rudder\logs\*.log`.
+Logs of every agent run are stored under `C:\Program Files\Rudder\logs\history\`.
+
+You can save the verbose output of an agent run using the `-LogFile` option:
+
+----
+rudder agent run -v -LogFile "C:\rudder_run.log"
+----
+

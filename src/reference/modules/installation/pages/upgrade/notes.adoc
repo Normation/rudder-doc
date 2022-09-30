@@ -69,6 +69,12 @@ Notable changes:
   the node will report its FQDN to the rudder server, and dynamic groups using the hostname
   criteria might not contain the node anymore.
 
+* The Windows agents now require that `dotnet45` or newer is installed on the node. It is by
+  default installed on all Windows Server releases starting `2012R2`.
+
+* Windows agents now use the 64 bits registry, meaning that any reference to Rudder registries
+  are now made in `'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Rudder`
+
 [WARNING]
 
 ====
