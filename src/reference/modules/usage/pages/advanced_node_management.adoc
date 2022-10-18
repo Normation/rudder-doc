@@ -1,6 +1,7 @@
 = Advanced node management
 
-== Create node
+[[create-node-api]]
+== Create node API
 
 This node allows to create nodes via API.
 
@@ -18,6 +19,53 @@ A node need at least the following information:
 Other information are possible. See the https://docs.rudder.io/api/#tag/Nodes/operation/createNodes[API documentation] for more information.
 
 Whatever the final status, a node is created in pending status. Then, if the status is "accepted", node acceptation is automatically and immediately triggered. This ensures that nodes added by that API also follow the standard Rudder validation rules and dynamic group/policies are correctly updated.
+
+[[override-node-fqdn]]
+== Override node FQDN
+
+Sometime, the node's FQDN reported in inventory is not the correct one. For example, the configured
+FQDN is an internal name, or it's incorrectly set-up by OS or not found in a normalized format by the agent. 
+
+This can be problematic and for example break the possibility for Rudder to trigger an agent run from node's 
+compliance page.
+
+In these cases, you can override the FQDN from the node thanks to a xref:extend-nodes-inventory[node inventory extension].
+
+The inventory extension must define the reserved property key `rudder_override_hostname` with a string value.
+
+If that key is defined, it is preferred to other values retrieved in agent inventory (`<RUDDER><HOSTNAME>` or else
+`<OPERATINGSYSTEM><FQDN>`) as the FQDN for the node. 
+
+When the override is used, an additional inventory extension key `rudder_original_hostname` is also defined. That key's value
+contains the original node hostname which would have been used without an override.
+
+[NOTE]
+
+====
+The value used for overriding FQDN must be legit https://datatracker.ietf.org/doc/html/rfc1123#page-13[as of RFC1123 (section 2.1)]
+else it won't be used in place of the original one.
+====
+
+Example inventory hook script to put on the node so that the node will be
+seen on Rudder with the FQDN `node1-overridden.rudder.local.override`:
+
+----
+
+$ cat /var/rudder/hooks.d/override-hostname.sh
+echo '{"rudder_override_hostname": "node1-overridden.rudder.local.override"}'
+
+----
+
+Example of resulting node properties (in Rudder UI and API):
+
+----
+
+{
+  "rudder_override_hostname": "node1-overridden.rudder.local.override",
+  "rudder_original_hostname": "agent1.rudder.local"
+}
+
+----
 
 == Reinitialize policies for a Node
 
