@@ -9,6 +9,9 @@ docsearch({
   appId: 'A64MVOXGZA',
   indexName: 'rudder',
   apiKey: 'ba8b4d59e14683ba991ad4956618589e',
+  getMissingResultsUrl({ query }) {
+    return `https://chat.rudder.io`;
+  },
 });
 </script>
 {{/if}}

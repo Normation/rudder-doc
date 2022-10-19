@@ -6,6 +6,10 @@
 {{/if}}
 {{#if (eq site.url "https://docs.rudder.io")}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+    <!-- set Rudder blue as main color -->
+    <style>
+    :root{--docsearch-primary-color:#13beb7;}
+    </style>
 {{/if}}
 {{#if site.url}}
     <link rel="icon" href="{{site.url}}/_/img/favicon.ico" type="image/x-icon">
