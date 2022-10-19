@@ -11,10 +11,7 @@
     <div id="topbar-nav" class="navbar-menu">
 {{#if (eq site.url "https://docs.rudder.io")}}
       <div class="navbar-item">
-        <span class="algolia-autocomplete">
-          <input type="text" size="35" id="docsearch" name="search" placeholder="Search the docs..." />
-          <span id="docsearch-addon"></span>
-        </span>
+        <span id="docsearch-results"></span>
       </div>
 {{/if}}
       <div class="navbar-end">
