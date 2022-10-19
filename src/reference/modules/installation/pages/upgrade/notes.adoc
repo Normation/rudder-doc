@@ -20,7 +20,7 @@ If you upgrade from 6.x and you changed the default certificate, you will need t
 
 Please check that your PostgreSQL is at least on version 10.3 before upgrading to Rudder 7.2.
 
-If not, we have a xref:postgresql.adoc[guide] to help you upgrade your postgresql version here.
+If not, we have a xref:upgrade/postgresql.adoc[guide] to help you upgrade your postgresql version here.
 
 == Plugins upgrade
 
