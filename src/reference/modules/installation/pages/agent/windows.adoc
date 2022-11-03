@@ -4,7 +4,7 @@
 
 ====
 
-Windows agents are only available with a subscription and can be downloaded on https://download.rudder.io.
+Windows agents are only available with a subscription and can be downloaded on https://download.rudder.io/misc/windows/.
 
 ====
 
