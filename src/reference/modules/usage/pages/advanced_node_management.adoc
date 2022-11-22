@@ -29,7 +29,7 @@ FQDN is an internal name, or it's incorrectly set-up by OS or not found in a nor
 This can be problematic and for example break the possibility for Rudder to trigger an agent run from node's 
 compliance page.
 
-In these cases, you can override the FQDN from the node thanks to a xref:extend-nodes-inventory[node inventory extension].
+In these cases, you can override the FQDN from the node using xref:extend-nodes-inventory[node inventory extension].
 
 The inventory extension must define the reserved property key `rudder_override_hostname` with a string value.
 
@@ -38,6 +38,8 @@ If that key is defined, it is preferred to other values retrieved in agent inven
 
 When the override is used, an additional inventory extension key `rudder_original_hostname` is also defined. That key's value
 contains the original node hostname which would have been used without an override.
+
+This feature has beed introduced in Rudder 7.1.7 and 7.2.1.
 
 [NOTE]
 
