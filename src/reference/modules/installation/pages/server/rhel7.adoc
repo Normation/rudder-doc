@@ -28,7 +28,7 @@ Finally you need postgresql 11 and openjdk 11 (more recent versions should work 
 
 ----
 
-amazon-linux-extras install postgresql11 java-openjdk11
+amazon-linux-extras install postgresql11 java-openjdk11-headless
 
 ----
 
