@@ -241,10 +241,6 @@ maintenance_work_mem = 2GB
 
 wal_buffers = 4MB
 
-# Number of checkpoints
-checkpoint_segments = 16
-
-
 # Query planner
 # -------------
 #
@@ -265,7 +261,6 @@ shared_buffers = 64MB
 work_mem = 4MB
 maintenance_work_mem = 256MB
 wal_buffers = 1MB
-checkpoint_segments = 8
 effective_cache_size = 128MB
 
 
