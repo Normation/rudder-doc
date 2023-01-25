@@ -16,6 +16,11 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 If you upgrade from 6.x and you changed the default certificate, you will need to change the Apache httpd configuration. Read the xref:notes.adoc#_changed_default_certificate_upgrade[guidelines] to change the default certificate in 7.x.
 ====
 
+== Jetty Server upgrade
+
+Jetty Server have been upgraded to major version 10, in `/opt/rudder/etc/rudder-jetty-base/start.ini` parameter `jetty.deploy.monitoredPath` changed to
+`jetty.deploy.monitoredDir`. If you have modified this file, you should change the parameter's name.
+
 == PostgreSQL upgrade
 
 Please check that your PostgreSQL is at least on version 10.3 before upgrading to Rudder 7.2.
@@ -45,14 +50,14 @@ Upgrade from Rudder 7.x is supported. There are no specific upgrade notes.
 
 Notable changes:
 
-* Some packages have been renamed and merged:
+** Some packages have been renamed and merged:
 
   * `rudder-webapp`, `rudder-server-root` and `rudder-reports` are merged into rudder-server
   * `rudder-server-relay` becomes `rudder-relay`
   * due to the way the renaming is implemented, some dummy packages with the old names can persist on the systems
     you can remove them safely after the upgrade.
 
-* We renamed the agent types to make them clearer for users:
+** We renamed the agent types to make them clearer for users:
 
   * Classic is now named Linux (but still also covers AIX)
   * DSC is now named Windows
