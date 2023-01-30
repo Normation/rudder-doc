@@ -12,46 +12,52 @@ Windows agents are only available with a subscription and can be downloaded on h
 
 On `Windows Server 2008R2` and `Windows Server 2012` you may need to check the requirements sections before installing the agent.
 Desktop versions are not officially supported but should be mostly compatible as long as the requirements listed in the dedicated section are filled.
-The agent is currently distributed via an `.exe` installer which both support graphical and cli based installations.
+The agent is currently distributed via an `.msi` installer which both support graphical and cli based installations.
 
 The policy server configuration can be defined before installation by writing its hostname or IP in the file:
 
 ----
 C:\Program Files\Rudder\etc\policy-server.conf
 ----
-Proxy options for the agent can be pre-configured if needed, see the https://docs.rudder.io/reference/6.2/plugins/windows.html#_proxy_settings[dedicated documentation].
+Proxy options for the agent can be pre-configured if needed, see the https://docs.rudder.io/reference/7.3/plugins/windows.html#_proxy_settings[dedicated documentation].
 
 An inventory will be run after the installation to send an up-to-date inventory to the policy-server after each installation/upgrade.
 
 === Graphical Installation
 
-Run the `.exe` file and follow the installer steps:
+Double click on the `.msi` file or run it and follow the installer steps:
 
 ----
-rudder-agent-dsc-<Rudder version>-<plugin version>.exe
+msiexec /i rudder-agent-<Rudder version>.msi
 ----
 
 === CLI Installation
 
-Add the `/S` switch option to make the installation in silent mode.
+Use `msiexec` with the `/quiet` switch to make the installation in silent mode.
 
 ----
-rudder-agent-dsc-<Rudder version>-<plugin version>.exe /S /POLICYSERVER=my.rudder.server
+msiexec /i rudder-agent-<Rudder version>.msi /quiet /POLICYSERVER=my.rudder.server
 ----
 
 === Installer options
 
-Several options can be passed via the CLI to the installer:
+Several options can be passed via the CLI to the installer (`KEY=value` options must come last):
 
-* `/S`: Silent install
-* `/?`: Open a graphical help page for the installer
-* `/POLICYSERVER`: If not empty, will override at install time the value of the `policyserver.conf`.
-* `/SCHEDULEDTASKUSER`: If not empty, will use the given user to run the Rudder scheduled tasks, responsible for the agent execution.
-* `/SCHEDULEDTASKPASSWORD`: Only need if `/SCHEDULEDTASKUSER` is used, password of the target user (required to define the scheduled task).
+* `/quiet`: Silent install
+* `/l*v MyLogFile.txt`: Create a verbose log file
+* `POLICYSERVER=xxx`: If not empty, will override at install time the value of the `policy-server.conf`.
+* `SCHEDULEDTASKUSER=xxx`: If not empty, will use the given user to run the Rudder scheduled tasks, responsible for the agent execution.
+* `SCHEDULEDTASKPASSWORD=xxx`: Only need if `SCHEDULEDTASKUSER` is used, password of the target user (required to define the scheduled task).
 
 The `SCHEDULEDTASK*` options are only available through the CLI, and when used, the agent will not try to modify the defined task afterward without manual intervention.
 The scheduled tasks can be manually modified using the rudder command `rudder agent check-scheduled-tasks`.
 By default, if no user is given at install time, the scheduled tasks will be run as the `SYSTEM` user.
+
+== Logs
+
+In case of error, logs are available in `C:\Users\vagrant\AppData\Local\Temp`. The file will be named MSIxxx.log, sort them by date to find the last one.
+
+To get verbose logs, use msiexec's option `/l*v MyLogFile.txt`. You can then find errors by looking for `value 3`.
 
 == Requirements
 
