@@ -82,7 +82,7 @@ sudo -u postgres psql -d rudder
 psql -u rudder -d rudder
 
 # And then, when you are connected to the rudder database in the psql shell, trigger a vacuum:
-rudder# VACUUM FULL rudder;
+rudder# VACUUM FULL ruddersysevents;
 rudder# VACUUM FULL archivedruddersysevents;
 rudder# VACUUM FULL nodecompliancelevels;
 ----
