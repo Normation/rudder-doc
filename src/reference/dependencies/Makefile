@@ -60,7 +60,7 @@ generic_methods.adoc: ncf-repo rudder-agent-windows-repo
 	cd rudder-agent-windows-repo && git pull
 	cd ncf-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
 	cd ncf-repo && git pull
-	cp rudder-agent-windows-repo/plugin/ncf/30_generic_methods/*.cf ncf-repo/tree/30_generic_methods/ || true
+	cp rudder-agent-windows-repo/plugin/src/ncf/30_generic_methods/*.cf ncf-repo/tree/30_generic_methods/ || true
 	cp tools/ncf_doc_rudder.py ncf-repo/tools/
 	./ncf-repo/tools/ncf_doc_rudder.py
 	# Remove language setting on code field (#9621)
