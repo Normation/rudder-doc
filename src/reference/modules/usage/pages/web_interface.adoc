@@ -7,10 +7,10 @@ the search fields and the reporting screens.
 
 == Authentication
 
-When accessing the Rudder web interface, a login / password is required.  The
-default account is *admin* (password: *admin*).
+When accessing the Rudder web interface for the first time, it will
+ask you to create an admin account.
 
-You can change the user accounts by following the xref:administration:users.adoc#user-management[user management]
+You can create and modify user accounts by following the xref:administration:users.adoc#user-management[user management]
 procedure.
 
 == Presentation of Rudder Web Interface
