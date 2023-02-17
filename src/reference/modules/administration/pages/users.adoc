@@ -1,34 +1,36 @@
 [[user-management]]
 = User management
 
-This will help you manage Rudder users and their permissions.
+Rudder user management allows to define:
 
-Most of the configuration can be done directly in the web application from
-an account with the administrator role.
-It requires the `user-management` plugin to be installed.
-You can add, remove and chose the permissions of user accounts.
+- identification: which users exists on Rudder and what is their login identifier. A user must be declared before having any access to Rudder,
+- authentication: what means of authentication is used to assess that an user is who he claims to be,
+- authorization: what set of actions the user can do in Rudder, from seeing pages to changing data or using APIs.
 
-The accounts are stored in a file on the server which can also be edited directly.
+Defaults authentication and authorization capabilities are limited, file-based configured and simple. These capabilities can be extended through several plugins:
 
-== General configuration
+- xref:plugins:auth-backends.adoc[authentication backends plugin] allows to rely on LDAP/AD and OAUTH2/OpenID Connect to authenticate users,
+- xref:plugins:user-management.adoc[user-management plugin] allows to extend authorization granularity, define custom roles and have an UI for user management.
+- xref:plugins:api-authorizations.adoc[api-authorization plugin] allows to extend API authorization granularity and to allow users to get personal API token corresponding to their authorization.
 
-This section covers common options which are not configurable through the Web interface.
+You can consult these plugin documentations for the corresponding details.
+In that part of the documentation, we will focus of user management without these plugins by directly editing the corresponding configuration files.
 
-[[_logins]]
-=== Login case-sensitivity
 
-Logins are case-sensitive by default. To change this behavior yon can modify the parameter `case-sensitivity` to `false`
-in `/opt/rudder/etc/rudder-users.xml`, then restart the application (`systemctl restart rudder-jetty`).
+== Configuration files related to user authentication and authorizations
 
-This option can be used to get consistent authentication constraints on login with an external xref:plugins:auth-backends.adoc[authentication provider].
+In Rudder, authentication providers and user/role credentials are defined separately:
 
-[CAUTION]
-====
+- authentication providers are configured in the `/opt/rudder/etc/rudder-web.properties` main configuration file. Change to that file require a restart of Rudder.
+- user/role credentials are configured in the `/opt/rudder/etc/rudder-users.xml` file. Changes in that file only require a reload action, either thanks to the UI or via an API call, when the `user-management plugin` is installed, but they require a restart of Rudder without it.
 
-When you change the case-sensitivity, make sure there is no potential conflicts between logins, otherwise all conflicting
-users will be ignored from Rudder.
+Their content and modification are detailed in the following sections.
 
-====
+== Authentication providers configuration
+
+Authentication providers define what mean of authentications will be used to check a user authentication claim.
+They are configured in the `/opt/rudder/etc/rudder-web.properties` main configuration file, in the `rudder.auth.provider` property. Other `rudder.auth.*` properties are linked to authentication providers.
+Without the xref:plugins:auth-backends.adoc[authentication backends plugin], only the `file` provider is available and used by default. This provider is a password-based authentication, for which the password hashes are stored in the `rudder-users.xml` file detailed below.
 
 [[ldap-auth-provider, external authentication provider for Rudder]]
 === Configuring an external authentication provider for Rudder
@@ -48,12 +50,19 @@ A user whose authentication is accepted by the external provider but not declare
 is considered to have no rights at all (and so will only see a reduced version of Rudder homepage,
 with no action nor tabs available).
 
-== Configuration of the users using a configuration file
+== User and role configuration file
 
-This sections the configuration of Rudder users directly in the configuration, equivalent
-to what the user management interface does.
+`/opt/rudder/etc/rudder-users.xml` is the main configuration file for managing users and roles in Rudder.
+More precisely, it allows to:
 
-=== Generality
+- list each user allowed to access Rudder, along with his granted permissions to see or do things in Rudder. In the case of the default `file` authentication provider, it also allows to store user password hash.
+- define `custom-roles` which are a way to give a name to a set of permissions so that it can be reused in user credential definition,
+- define general properties like user login case-sensitivity, or the hash algorithm used for passwords.
+
+Without the `user-managedment` plugin, every modification of this file should be followed by a restart of the Rudder web application to be taken into account (`systemctl restart rudder-jetty`).
+
+
+=== File format
 
 The credentials of a user are defined in the XML file
 `/opt/rudder/etc/rudder-users.xml`. This file expects the following format:
@@ -61,28 +70,59 @@ The credentials of a user are defined in the XML file
 ----
 
 <authentication hash="bcrypt" case-sensitivity="true">
-  <user name="alice"  password="xxxxxxx" role="administrator"/>
-  <user name="bob"    password="xxxxxxx" role="administration_only, node_read"/>
-  <user name="custom" password="xxxxxxx" role="node_read,node_write,configuration_read,rule_read,rule_edit,directive_read,technique_read"/>
+  <custom-roles>
+    <role name="NodeAccess" permissions="node_read,node_write" />
+    <role name="RuleAccess" permissions="rule_read,rule_edit" />
+    <role name="SecurityDashboards" permissions="cve_read,system-update_read" />
+  </custom-roles>
+  <user name="alice"  password="xxxxxxx" permissions="administrator"/>
+  <user name="bob"    password="xxxxxxx" permissions="administration_only, node_read"/>
+  <user name="custom1" password="xxxxxxx" permissions="node_read,node_write,rule_read,rule_edit,directive_read,technique_read"/>
+  <user name="custom2" password="xxxxxxx" permissions="NodeAccess,RuleAccess,directive_read,technique_read"/>
+  <user name="audit"  password="xxxxxxx" permissions="SecurityDashboards"/>
 </authentication>
 
 ----
 
-The name and password attributes are mandatory (non empty) for the user tags.
-The role attribute can be omitted but the user will have no permission, and
-only valid attributes are recognized.
+**<custom-role>**
 
-Every modification of this file should be followed by a restart of the Rudder
-web application to be taken into account (`systemctl restart rudder-jetty`).
+`custom-role` section is optional and only available with the xref:plugins:user-management.adoc[user-management plugin]. It allows to define new named roles. See the plugin documentation for more information.
+
+**<user>**
+
+The `user` tag allows to declare a known user in Rudder.
+
+The `name` attributes is mandatory (non-empty).
+It defines the login that the user will use to connect to Rudder.
+
+The `password` attribute is optional. It stores the user's password hash when the `file` authentication provider is used.
+
+The `permissions` attribute is optional. It lists granted permissions to the user.
+
+[[_logins]]
+=== Login case-sensitivity
+
+Logins are case-sensitive by default. To change this behavior yon can modify the parameter `case-sensitivity` to `false` in `/opt/rudder/etc/rudder-users.xml`, then restart the application (`systemctl restart rudder-jetty`).
+
+This option can be used to get consistent authentication constraints on login with an external xref:plugins:auth-backends.adoc[authentication provider], typically with an `Active Directory` based authentication.
+
+[CAUTION]
+====
+
+When you change the case-sensitivity, make sure there is no potential conflicts between logins, otherwise all conflicting users will be ignored from Rudder.
+
+====
+
 
 [[_passwords]]
 === Passwords
 
 The authentication tag should have a "hash" attribute, making "password" attributes
-on every user expect hashed passwords. Not specifying a hash attribute will fallback
-to plain text passwords, but it is strongly advised not to do so for security reasons.
+on every user expect hashed passwords. Not specifying a hash attribute will fall back
+to `bcrypt` passwords, but it is strongly advised to always specify the algorithm used.
+There is no guaranty that this default will remain at that value, which may lead to version upgrade inconveniences.
 
-The algorithm to be used to create the hash (and verify it during authentication)
+The algorithm used to create the hash (and verify it during authentication)
 depend on the value of the hash attribute. The possible values, the
 corresponding algorithm and the Linux shell command need to obtain the hash of
 the "secret" password for this algorithm are listed here:
@@ -104,8 +144,8 @@ the "secret" password for this algorithm are listed here:
 [NOTICE]
 ===========
 
-By default Rudder uses bcrypt with **2b** as version and the *cost set to 12*. If you want to change the cost you need
-set it in the `rudder.bcrypt.cost` property in `/opt/rudder/etc/rudder-web.properties` +
+By default, RUDDER uses bcrypt with **2b** as version and the *cost set to 12*. If you want to change the cost value, you need to set it
+in the `rudder.bcrypt.cost` property in `/opt/rudder/etc/rudder-web.properties`.
 
 ===========
 
@@ -114,7 +154,7 @@ command, then type your password, and hit return. The hash will then be
 displayed in your terminal. This avoids storing the password in your shell
 history.
 
-Here is an example of authentication file with hashed password:
+Here is an example of authentication file with the `secret` password hashed using `bcrypt` for user `carol`:
 
 ----
 
@@ -125,23 +165,14 @@ Here is an example of authentication file with hashed password:
 
 ----
 
-=== Externally-authenticated users
 
-It expects the same format as regular file-based
-users, but in this case "name" will be the login used to connect to the external provider and the
-'password' field will be ignored and should be set to "LDAP/OpenID/etc." to make it clear that
-this Rudder installation uses external provider to log users in.
+=== User roles and fine-grained authorizations
 
-Every modification of this file should be followed by a restart of the Rudder
-web application to be taken into account (`systemctl restart rudder-jetty`).
+For every user you can define a set of permissions (roles or individual rights), allowing it to access different
+pages or to perform different operations in Rudder.
 
-=== Authorization management
-
-For every user you can define an access level, allowing it to access different
-pages or to perform different actions depending on its level.
-
-You can also build custom roles with whatever permission you want, using a type
-and a level as specified in the xref:plugins:user-management.adoc[user-management plugin's documentation].
+To ease management of authorization, you can also build custom roles with their own permission list of individual rights and 
+roles. See xref:plugins:user-management.adoc[user-management plugin's documentation] for more information on that topic.
 
 [CAUTION]
 ====
@@ -149,3 +180,5 @@ and a level as specified in the xref:plugins:user-management.adoc[user-managemen
 Defining and using different roles in Rudder require the `User-management` plugin.
 
 ====
+
+When the `user-management` plugin is not used, only the `administrator` roles is available.
