@@ -21,11 +21,7 @@ The Rudder server listens for incoming connections from the agents installed on 
 and communicates with them. The connection frequency from nodes to server is configurable, from several
 minutes to several hours.
 
-The following diagram shows the network architecture of a Rudder installation:
-
-image::introduction/network_connections.png[Network architecture]
-
-You can see that relay server allow separating some network areas (for example a DMZ,
+Relays allow separating some network areas (for example a DMZ,
 a specific datacenter or remote site) using a local server for each area to distribute
 configuration policies and centralize agent reports and inventories.
 
