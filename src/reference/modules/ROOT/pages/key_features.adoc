@@ -101,13 +101,12 @@ a CMDB, so that it can integrated into an existing company workflow. This
 integration is done thanks to xref:TODO[an existing
 plugin or a dedicated synchronisation tool].
 
-== Centralized authentication (LDAP, Active Directory, plugins)
+== Centralized authentication (LDAP, Active Directory, OpenID Connect)
 
-Rudder can use enterprise directories (LDAP, Active Directory)
-or be connected to an SSO to manage users authentication.
-
-Moreover, Rudder authentication layer is pluggable and can be extended to other
-authentication protocol xref:TODO[like Radius or SPNEGO with plugins].
+By default, Rudder uses a dedicated configuration file to manage user credentials. 
+Thanks to the ref:plugins:auth-backends.adoc[authentication backend plugin],
+Rudder can use a centralized authentication provider, like enterprise directories
+(LDAP, Active Directory) or an SSO via OpenID Connect (OIDC).
 
 [[intro-rudder-extensibility]]
 == Extensibility
