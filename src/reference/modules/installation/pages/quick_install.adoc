@@ -33,13 +33,13 @@ Usage rudder-setup (add-repository|setup-agent|setup-server|upgrade-agent|upgrad
   Currently supported : Debian, Ubuntu, RHEL, Fedora, Centos, Amazon, Oracle, SLES
 
   rudder_version : x.y or x.y.z or x.y-nightly or ci/x.y or lts or latest
-       x.y:            the latest x.y release (ex: 3.2)
-       x.y.z:          the exact x.y.z release (ex: 3.2.1)
-       x.y.z~a:        the latest x.y.z pre-release where a can be alpha1, beta1, rc1... (ex: 4.0.0~rc1) 
-       x.y-nightly:    the latest public x.y nightly build (ex: 3.2-nightly)
-       ci/x.y.z:       the latest development x.y.z release build (ex: ci/3.2.16)
-       ci/x.y.z~a:     the latest development x.y.z pre-release build (ex: ci/4.0.0~rc1)
-       ci/x.y-nightly: the latest development x.y nightly build (ex: ci/5.1-nightly)
+       x.y:            the latest x.y release (ex: 7.2)
+       x.y.z:          the exact x.y.z release (ex: 7.2.5)
+       x.y.z~a:        the latest x.y.z pre-release where a can be alpha1, beta1, rc1... (ex: 7.3.0~rc1) 
+       x.y-nightly:    the latest public x.y nightly build (ex: 7.2-nightly)
+       ci/x.y.z:       the latest development x.y.z release build (ex: ci/7.2.5)
+       ci/x.y.z~a:     the latest development x.y.z pre-release build (ex: ci/7.3.0~rc1)
+       ci/x.y-nightly: the latest development x.y nightly build (ex: ci/7.3-nightly)
        latest:         the latest stable version
 
   Environment variables
