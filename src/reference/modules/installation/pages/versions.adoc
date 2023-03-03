@@ -33,7 +33,7 @@ A maintained version is a major version for which we release minor bug fix relea
 * Our general policy is to *provide patch releases for an X.Y version during at least 3 months after the next minor or major version* is released to give some time for upgrading.
 * For a slower major upgrade pace, Rudder subscription provides (among other benefits) *long-term maintenance of 18 to 24 months after release* (depending on the subscription level) for Rudder major versions, with a minimal upgrade window of 6 to 9 months. You can read more about it on the https://www.rudder.io/en/pricing/subscription/[subscription page].
 
-You can subscribe to the https://www.rudder.io/en/expand/new-releases-security/[rudder-announce mailing-list] to receive release and end of life announcements. Here is a table of all versions of Rudder, their status, release dates and planned maintenance termination date:
+You can subscribe to the https://www.rudder-project.org/mailman/listinfo/rudder-announce[rudder-announce mailing-list] to receive release and end of life announcements. Here is a table of all versions of Rudder, their status, release dates and planned maintenance termination date:
 
 == Versions
 
