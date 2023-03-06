@@ -8,8 +8,7 @@ configuration. There are two types of Rudder pre-packaged plugins:
 * Integration plugins, that allow linking Rudder to other tools (monitoring, inventory, notification, etc.). They are freely available.
 * Advanced features plugins (reporting, validation workflow, etc.) which are part of the Rudder subscription.
 
-To download free plugins or get information about plugins included in the subscription,
-read the https://rudder.io/plugins/[dedicated page on rudder.io].
+You can download free plugins https://repository.rudder.io/plugins/[on repository.rudder.io] or get information about plugins included in the subscription the https://www.rudder.io/software/features/[dedicated page on rudder.io].
 
 == Install plugins with a subscription
 
