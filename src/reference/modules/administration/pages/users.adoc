@@ -104,7 +104,7 @@ the "secret" password for this algorithm are listed here:
 [NOTICE]
 ===========
 
-By default RUDDER uses bcrypt with **2b** as version and the *cost set to 12*. If you want to change the cost you need
+By default Rudder uses bcrypt with **2b** as version and the *cost set to 12*. If you want to change the cost you need
 set it in the `rudder.bcrypt.cost` property in `/opt/rudder/etc/rudder-web.properties` +
 
 ===========
