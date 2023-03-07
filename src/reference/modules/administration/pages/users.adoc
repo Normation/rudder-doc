@@ -100,6 +100,15 @@ the "secret" password for this algorithm are listed here:
 |"sha512" or "sha-512" | sha512    | `read mypass; echo -n $mypass \| sha512sum` | *Unsecure*, should not be used
 |====
 
+.BCrypt parameters
+[NOTICE]
+===========
+
+By default Rudder uses bcrypt with **2b** as version and the *cost set to 12*. If you want to change the cost you need
+set it in the `rudder.bcrypt.cost` property in `/opt/rudder/etc/rudder-web.properties` +
+
+===========
+
 When using the suggested commands to hash a password, you must enter the
 command, then type your password, and hit return. The hash will then be
 displayed in your terminal. This avoids storing the password in your shell
