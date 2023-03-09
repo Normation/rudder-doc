@@ -5,8 +5,8 @@ Add Rudder's package repository:
 
 # If lsb_release is not installed on your machine, change $(lb_release -cs) by your distribution codename.
 # Ex:
-#   stretch for Debian 9
-#   bionic  for Ubuntu 18.04 LTS
+#   "bullseye" for Debian 11
+#   "jammy"    for Ubuntu 22.04 LTS
 
 echo "deb http://repository.rudder.io/apt/7.2/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 
@@ -23,13 +23,8 @@ You need to replace the user name (LOGIN) and the password (PASSWORD) by your Ru
 
 echo "deb https://download.rudder.io/apt/7.2/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 
-# for recent debian (>=10) and ubuntu (>=20)
 echo "machine download.rudder.io login LOGIN password PASSWORD" > /etc/apt/auth.conf.d/rudder.conf
 chmod 640 /etc/apt/auth.conf.d/rudder.conf
-
-# on old debian (<10) and ubuntu (<20) use this instead
-#echo "machine download.rudder.io login LOGIN password PASSWORD" >> /etc/apt/auth.conf
-#chmod 640 /etc/apt/auth.conf
 
 ----
 

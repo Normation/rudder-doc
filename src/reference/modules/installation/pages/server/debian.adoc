@@ -4,9 +4,9 @@ include::{partialsdir}/quick_server.adoc[]
 
 include::{partialsdir}/server_notes.adoc[]
 
-include::{partialsdir}/apt_key.adoc[]
+include::{partialsdir}/apt_key_new.adoc[]
 
-include::{partialsdir}/debian_repo.adoc[]
+include::{partialsdir}/debian_repo_new.adoc[]
 
 To begin the installation, you should simply install the rudder-server
 package, which will install the required components:
