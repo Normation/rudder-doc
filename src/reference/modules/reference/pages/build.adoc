@@ -33,7 +33,7 @@ cd rudder-agent
 
 ----
 
-Edit SOURCES/Makefile file and set the value of `RUDDER_VERSION_TO_PACKAGE`: see https://repository.rudder.io/sources/ for a complete list of available versions. You can also choose a nightly version from https://repository.rudder.io/sources/nightly/
+Edit SOURCES/Makefile file and set the value of `RUDDER_VERSION_TO_PACKAGE`: see https://repository.rudder.io/sources/ for a complete list of available versions. This version MUST be of the for x.y.z. You can also choose a nightly version from https://repository.rudder.io/sources/nightly/
 
 Download the source tarball and put it in the SOURCES directory under the name rudder-sources.tar.bz2
 
