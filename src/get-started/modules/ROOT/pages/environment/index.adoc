@@ -42,6 +42,20 @@ vagrant up
 
 This will download the virtual machine image if needed, and will setup a Rudder environment using two virtual machines.
 
+[NOTE]
+
+====
+
+With recent VirtualBox, you need to defined the https://www.virtualbox.org/manual/ch06.html#network_hostonly[authorized IP range] for created boxes. Boxes created with this method use networks from 192.168.42.0/24 and upward, incrementing with each new environment running.
+
+To define this range, you need to create or edit as root file `/etc/vbox/networks.conf` to add
+
+----
+* 192.168.0.0/16
+----
+
+====
+
 [TIP]
 
 .Vagrant commands
