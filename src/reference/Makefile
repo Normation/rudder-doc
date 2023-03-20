@@ -3,7 +3,7 @@
 .PHONY: clean $(ADOC_DYN_FILES) nav
 
 ADOC_SRC_FILES = $(shell find modules/ROOT/pages -type f -name '*.adoc')
-ADOC_DYN_FILES = generic_methods.adoc generic_methods_categories.txt hooks.adoc rudder.adoc rudder-relayd.1.adoc versions.adoc version-compat.adoc
+ADOC_DYN_FILES = generic_methods.adoc generic_methods_categories.txt hooks.adoc rudder.adoc rudder-relayd.1.adoc versions.adoc
 GRAPHVIZ_FILES = $(shell find modules/reference/assets/graphviz -type f -name '*.dot')
 GRAPHVIZ_IMAGES = $(addprefix modules/reference/assets/images/graphviz/, $(notdir $(GRAPHVIZ_FILES:dot=png)))
 
@@ -42,16 +42,11 @@ hooks.adoc:
 	mkdir -p modules/usage/pages/_partials/dyn/
 	cp dependencies/$@ modules/usage/pages/_partials/dyn/$@
 
-version-compat.adoc:
-	cd dependencies && make $@
-	mkdir -p modules/plugins/pages/_partials/dyn/
-	cp dependencies/$@ modules/plugins/pages/_partials/dyn/$@
-
 plugins:
 	cd dependencies && make $@
 	cp -r dependencies/$@/* modules/plugins/
 	echo "index.adoc" > modules/plugins/nav.list
-	find modules/plugins/pages ! -name 'index.adoc' ! -name 'version-compat.adoc' -type f | sed 's/.*\///' | sort >> modules/plugins/nav.list
+	find modules/plugins/pages ! -name 'index.adoc' -type f | sed 's/.*\///' | sort >> modules/plugins/nav.list
 
 nav: $(ADOC_SRC_FILES) plugins generic_methods_categories.txt
 	./tools/generate-nav.py ROOT "Introduction" > modules/ROOT/nav.adoc

@@ -105,4 +105,3 @@ See all available commands with:
 rudder package --help
 ----
 
-include::{partialsdir}/dyn/version-compat.adoc[leveloffset=+1]
