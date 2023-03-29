@@ -55,7 +55,15 @@ By default, if no user is given at install time, the scheduled tasks will be run
 
 == Logs
 
-To get install logs, use msiexec's option `/l*v C:\MyLogFile.txt`. You can then find errors by looking for `value 3`.
+To get install logs, use msiexec's option `/L*V C:\MyLogFile.txt`. You can then find errors by looking for `value 3`.
+
+[WARNING]
+
+====
+
+The MyLogFile.txt could be interpreted as a binary file from some editor resulting with corrupted text.
+
+====
 
 == Requirements
 
