@@ -28,7 +28,7 @@ An inventory will be run after the installation to send an up-to-date inventory 
 Double click on the `.msi` file or run it and follow the installer steps:
 
 ----
-msiexec /i rudder-agent-<Rudder version>.msi
+msiexec /i <absolute path to rudder agent>.msi
 ----
 
 === CLI Installation
@@ -36,7 +36,7 @@ msiexec /i rudder-agent-<Rudder version>.msi
 Use `msiexec` with the `/quiet` switch to make the installation in silent mode.
 
 ----
-msiexec /i rudder-agent-<Rudder version>.msi /quiet /POLICYSERVER=my.rudder.server
+msiexec /i <absolute path to rudder agent>.msi /quiet POLICYSERVER=my.rudder.server
 ----
 
 === Installer options
@@ -55,9 +55,7 @@ By default, if no user is given at install time, the scheduled tasks will be run
 
 == Logs
 
-In case of error, logs are available in `C:\Users\vagrant\AppData\Local\Temp`. The file will be named MSIxxx.log, sort them by date to find the last one.
-
-To get verbose logs, use msiexec's option `/l*v MyLogFile.txt`. You can then find errors by looking for `value 3`.
+To get install logs, use msiexec's option `/l*v C:\MyLogFile.txt`. You can then find errors by looking for `value 3`.
 
 == Requirements
 
