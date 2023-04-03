@@ -207,7 +207,7 @@ systemctl restart postgresql
 
 # PostgreSQL restore
 sudo -u postgres dropdb -U postgres rudder
-sudo -u postgres pg_restore -d postgres --clean --create < rudder-backup-XXXXXXXX.sql
+sudo -u postgres pg_restore -d postgres --create < rudder-backup-XXXXXXXX.sql
 
 # Configuration backup
 tar -C /opt/rudder -zxf rudder-etc-backup-XXXXXXXX.tar.gz
