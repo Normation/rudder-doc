@@ -25,7 +25,7 @@ An inventory will be run after the installation to send an up-to-date inventory 
 
 === Graphical Installation
 
-Double click on the `.msi` file or run it and follow the installer steps:
+Double-click on the `.msi` file or run it and follow the installer steps:
 
 ----
 msiexec /i <absolute path to rudder agent>.msi

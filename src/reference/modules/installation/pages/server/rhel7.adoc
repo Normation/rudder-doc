@@ -24,7 +24,7 @@ sudo yum install -y amazon-linux-extras
 
 ----
 
-Finally you need postgresql 11 and openjdk 11 (more recent versions should work too):
+Finally, you need postgresql 11 and openjdk 11 (more recent versions should work too):
 
 ----
 
@@ -32,7 +32,7 @@ amazon-linux-extras install postgresql11 java-openjdk11-headless
 
 ----
 
-Depending of your exact version of Amazon Linux 2 and corresponding repositories, `java-openjdk11-headless`
+Depending on your exact version of Amazon Linux 2 and corresponding repositories, `java-openjdk11-headless`
 may not be available. In that case, you may need to install `java-11-amazon-corretto-headless` (version
 of OpenJDK11 built and maintained by Amazon) or `java-openjdk11` (non headless version of OpenJDK with some
 frontend related dependencies).

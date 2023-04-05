@@ -10,9 +10,9 @@ include::{partialsdir}/rhel_repo.adoc[]
 
 ----
 
-echo '[Rudder_7.2]
-name=Rudder 7.2
-baseurl=http://repository.rudder.io/rpm/7.2/RHEL_6/
+echo '[Rudder_7.3]
+name=Rudder 7.3
+baseurl=http://repository.rudder.io/rpm/7.3/RHEL_6/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
@@ -22,9 +22,9 @@ gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/r
 
 ----
 
-echo '[Rudder_7.2]
-name=Rudder 7.2
-baseurl=http://repository.rudder.io/rpm/7.2/RHEL_7/
+echo '[Rudder_7.3]
+name=Rudder 7.3
+baseurl=http://repository.rudder.io/rpm/7.3/RHEL_7/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 

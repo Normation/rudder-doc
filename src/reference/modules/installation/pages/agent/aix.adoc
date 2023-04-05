@@ -30,7 +30,7 @@ Download the rpm file directly from our repository:
 
 ----
 
-wget https://LOGIN:PASSWORD@download.rudder.io/rpm/7.2/AIX_5/ppc/rudder-agent-7.2.0.beta1-1.AIX.5.3.aix5.3.ppc.rpm
+wget https://LOGIN:PASSWORD@download.rudder.io/rpm/7.3/AIX_5/ppc/rudder-agent-7.3.0-1.AIX.5.3.aix5.3.ppc.rpm
 
 ----
 
@@ -38,7 +38,7 @@ Install the package using rpm:
 
 ----
 
-rpm -ivh rudder-agent-7.2.0-1.AIX.5.3.aix5.3.ppc.rpm
+rpm -ivh rudder-agent-7.3.0-1.AIX.5.3.aix5.3.ppc.rpm
 
 ----
 

@@ -14,7 +14,7 @@ On RHEL and SLES, it is recommended to reinstall the system, this documentation 
 
 First make sure you have the right version installed for the Rudder version you want to upgrade to.
 
-Rudder 7.2 needs PostgreSQL 10.3.
+Rudder 7.3 needs PostgreSQL 10.3.
 
 On debian like:
 

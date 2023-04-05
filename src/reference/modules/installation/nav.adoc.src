@@ -32,6 +32,7 @@
 *** xref:upgrade/debian.adoc[on Debian/Ubuntu]
 *** xref:upgrade/rhel.adoc[on RHEL/CentOS]
 *** xref:upgrade/sles.adoc[on SLES]
+*** xref:upgrade/windows.adoc[on Windows]
 *** xref:upgrade/postgresql.adoc[upgrade PostgreSQL]
 ** xref:migrate-db.adoc[Migrate to external DB]
 ** xref:container.adoc[Containers - Docker]

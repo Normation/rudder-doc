@@ -1,6 +1,6 @@
 = Upgrade notes
 
-[WARNING]
+[NOTE]
 
 ====
 
@@ -9,28 +9,10 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 
 ====
 
-[WARNING]
-
-====
-
-If you upgrade from 6.x and you changed the default certificate, you will need to change the Apache httpd configuration. Read the xref:notes.adoc#_changed_default_certificate_upgrade[guidelines] to change the default certificate in 7.x.
-====
-
-== Jetty Server upgrade
-
-Jetty Server have been upgraded to major version 10, in `/opt/rudder/etc/rudder-jetty-base/start.ini` parameter `jetty.deploy.monitoredPath` changed to
-`jetty.deploy.monitoredDir`. If you have modified this file, you should change the parameter's name.
-
-== PostgreSQL upgrade
-
-Please check that your PostgreSQL is at least on version 10.3 before upgrading to Rudder 7.2.
-
-If not, we have a xref:upgrade/postgresql.adoc[guide] to help you upgrade your postgresql version here.
-
 == Plugins upgrade
 
 If your server is connected to the Internet (directly or through a proxy), and you have configured
-your account in `/opt/rudder/etc/rudder-pkg/rudder-pkg.conf`, the upgrade process will take care of upgrading to
+your account in the setup wizard (or directly in `/opt/rudder/etc/rudder-pkg/rudder-pkg.conf`), the upgrade process will take care of upgrading to
 plugins to a compatible version.
 
 If it is not the case, you will need to download the new ones from https://downloads.rudder.io[downloads.rudder.io].
@@ -44,23 +26,29 @@ rudder package list --all
 
 ----
 
-== Upgrade from Rudder 7.0 or 7.1 to 7.2
+== Upgrade from Rudder 7.2 to 7.3
 
-Upgrade from Rudder 7.x is supported. There are no specific upgrade notes.
+Upgrade from Rudder 7.2 is supported. There are no specific upgrade notes.
 
-Notable changes:
+include::{partialsdir}/msi.adoc[]
 
-** Some packages have been renamed and merged:
+== Upgrade from Rudder 7.1 to 7.3
 
-  * `rudder-webapp`, `rudder-server-root` and `rudder-reports` are merged into rudder-server
-  * `rudder-server-relay` becomes `rudder-relay`
-  * due to the way the renaming is implemented, some dummy packages with the old names can persist on the systems
+Upgrade from Rudder 7.1 is supported. Notable changes:
+
+include::{partialsdir}/msi.adoc[]
+
+* Some packages have been renamed and merged:
+
+  ** `rudder-webapp`, `rudder-server-root` and `rudder-reports` are merged into rudder-server
+  ** `rudder-server-relay` becomes `rudder-relay`
+  ** due to the way the renaming is implemented, some dummy packages with the old names can persist on the systems
     you can remove them safely after the upgrade.
 
-** We renamed the agent types to make them clearer for users:
+* We renamed the agent types to make them clearer for users:
 
-  * Classic is now named Linux (but still also covers AIX)
-  * DSC is now named Windows
+  ** Classic is now named Linux (but still also covers AIX)
+  ** DSC is now named Windows
 
 * The `create-node` plugin has been removed and all its feature are now part of Rudder base API
 
@@ -80,6 +68,11 @@ Notable changes:
 * Windows agents now use the 64 bits registry, meaning that any reference to Rudder registries
   are now made in `'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Rudder`
 
+* Jetty Server have been upgraded to major version 10, in `/opt/rudder/etc/rudder-jetty-base/start.ini` parameter `jetty.deploy.monitoredPath` changed to
+`jetty.deploy.monitoredDir`. If you have modified this file, you should change the parameter's name.
+
+* Please check that your PostgreSQL is at least on version 10.3 before upgrading to Rudder 7.3. If not, we have a xref:upgrade/postgresql.adoc[guide] to help you upgrade your postgresql version here.
+
 [WARNING]
 
 ====
@@ -95,139 +88,9 @@ curl -k --header "X-API-Token: $(cat /var/rudder/run/api-token)" --request GET h
 
 ====
 
-== Upgrade from Rudder 6.2 to 7.2
+== Upgrade from Rudder 7.0 or older to 7.3
 
-Direct upgrade from Rudder 6.2 is supported. All notes applying for upgrade from 7.0/7.1 also apply here.
-
-It is advised to upgrade the Rudder server before upgrading the relays and the nodes, but 7.2 nodes are also compatible with older server.
-Two cases are unsupported:
-
-* You can't upgrade a relay to 7.1 before its server. You need a Rudder server 7.1 for 7.1 relays.
-* You can't upgrade a server and a node behind a relay to 7.1 without upgrading the relay. You need to upgrade the relay before the nodes.
-
-=== HTTPS certificate
-
-[[_changed_default_certificate_upgrade]]
-==== Changed default certificate
-
-The certificate used for HTTPS access is now the same as the one used for policy updates. During the upgrade from 6.x, the HTTPS certificate
-is replaced by the certificate used by policy update.
-After the upgrade from 6.x, you will see a warning message indicating the server certificate has changed. This is expected, and you can accept to update the
-certificate if you used Rudder's self-signed certificate.
-
-==== Server side - Use a custom certificate
-
-If you used a custom certificate, you will need to apply manual changes to Rudder's configuration.
-As the self-signed certificate is used for internal communication, you will need to create a
-dedicated virtual host for the Web and API access. You need a way to distinguish access to these two virtual
-hosts, most often by IP, Port or ServerName (using specific DNS name).
-
-The easiest way is probably to start over from the new default configuration and adapt it to your
-needs. You can access it as a new configuration file deployed by your package manager or directly
-in https://raw.githubusercontent.com/Normation/rudder/master/relay/sources/apache/rudder-vhost.conf[our repository].
-
-You should only edit the virtual hosts in `/etc/apache2/sites-available` or `/etc/httpd/conf.d` which
-is treated as a configuration file by package managers and not automatically replaced. The most common approach is to
-comment the first virtual host and uncomment the last two virtual hosts, and distinguish either by hostname, IP or by port the virtual host
-for policy distribution and the virtual host for Web Interface/API
-
-
-[INFO]
-====
-Please note the all `/opt/rudder/etc/apache-*` files are actually overridden at each upgrade and should
-not be modified.
-====
-
-==== Agent side - Server certificate verification
-
-If you use a custom valid certificate and have enabled certificate verification in the settings, you
-may encounter missing reports and inventories after upgrade. This is caused by 6.X agent
-trying to validate your custom certificate while 7.X relies on internal self-signed certificate
-for node-server communication.
-
-In this specific case, it is necessary to upgrade agents to 7.X before the server.
-
-If you upgraded without following this step:
-
-- Policy generation and update will still work, so you can use Rudder to fix the problem. You have two options:
-    - Disable certificate verification to get reports and inventories back
-    - Upgrade your agents to 7.X, so they can verify the certificates correctly
-
-=== Reporting
-
-==== Syslog reporting
-
-Syslog reporting is removed totally from 7.X, so if you had not switched to HTTPS reporting to
-the settings yet, the switch will be automatically made at upgrade.
-
-We advise you to test HTTPS reporting before upgrading 7.X to avoid unexpected consequences
-(as you won't be able to fall back to syslog on 7.X).
-
-==== Non-compliant only
-
-If you use the non-compliant only reporting mode you will see missing reporting in the system
-techniques before the first agent run on you systems. This is due to changes in expected
-reports in these techniques, and the way the compliance is computed in this case.
-
-=== Agent
-
-==== Command output changes
-
-===== rudder agent version
-
-The version number now comes from Rudder itself and not from the package manager, so its format will slightly change.
-
-===== rudder agent info
-
-The output has been updated to be more readable, and you may need to adapt tooling if you relied on its output.
-
-===== rudder agent inventory
-
-`/etc/profile` is not sourced for inventories anymore, so the set of environment variables sent to the server
-may change. To properly sent information from the node in the inventory, we advise relying on inventory extension scripts.
-
-=== Configuration policies
-
-==== Removed techniques
-
-We have removed deprecated techniques, you are encouraged to use the technique editor to replace them:
-
-- Routing management
-- NFS client
-
-==== Recent changes in rules page
-
-The recent changes view is more limited than in previous versions due to the rewrite, but will be improved in following
-patch releases.
-In particular no graphs are currently displayed, this will be improved in the upcoming releases.
-
-==== Removed role-based system groups
-
-We removed the role-based system groups as part of the removal of Rudder server roles. If you
-had a rule linked to one of these, it will be disabled after upgrade, and you will need to link it to a new group.
-
-=== Server
-
-==== Legacy local HTTP API removed
-
-The old local server HTTP API (sometimes known as "v1") that existed before our public authenticated
-API and was deprecated for several years has finally been removed.
-
-The list of removed endpoints is visible in the https://docs.rudder.io/history/4.3/rest-api.html#_status[documentation].
-
-If you still relied on this API should switch to the public API (which implements all features of the legacy one), and you
-can use the local system token (present in `/var/lib/rudder/api-token`) in local scripts.
-
-==== Remote postgresql server
-
-If you have an external postgresql database and you upgrade from pre-7.0 you need to add a little change in your server configuration.
-
-- There is now a `rudder.postgresql.local` boolean option in the webapp configuration allowing to disable local postgresql
-  configuration that need to be set to false.
-
-== Upgrade from Rudder 6.1 or older to 7.2
-
-Direct upgrades from 6.1 versions and older are no longer supported on 7.2.
+Direct upgrades from 7.0 versions and older are no longer supported on 7.3.
 If you are still running one of those, either on servers or nodes,
-please first upgrade to one of the supported versions, and then upgrade to 7.2.
+please first upgrade to one of the supported versions, and then upgrade to 7.3.
 
