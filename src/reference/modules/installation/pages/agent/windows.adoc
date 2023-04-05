@@ -56,6 +56,7 @@ By default, if no user is given at install time, the scheduled tasks will be run
 == Logs
 
 To get install logs, use msiexec's option `/L*V C:\MyLogFile.txt`. You can then find errors by looking for `value 3`.
+You can also get the rudder agent run logs by running this command: `rudder agent run -v -LogFile C:\debug.txt`
 
 [WARNING]
 
