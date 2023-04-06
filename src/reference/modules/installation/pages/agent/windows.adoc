@@ -8,27 +8,18 @@ Windows agents are only available with a subscription and can be downloaded on h
 
 ====
 
-== Installation
+== Installation for Windows server 2012R2 and later
 
-On `Windows Server 2008R2` and `Windows Server 2012` you may need to check the requirements sections before installing the agent.
-Desktop versions are not officially supported but should be mostly compatible as long as the requirements listed in the dedicated section are filled.
-The agent is currently distributed via an `.msi` installer which both support graphical and cli based installations.
-
-The policy server configuration can be defined before installation by writing its hostname or IP in the file:
-
-----
-C:\Program Files\Rudder\etc\policy-server.conf
-----
-Proxy options for the agent can be pre-configured if needed, see the https://docs.rudder.io/reference/7.3/plugins/windows.html#_proxy_settings[dedicated documentation].
+The agent is currently distributed via an `msi` installer which both support graphical and cli based installations.
 
 An inventory will be run after the installation to send an up-to-date inventory to the policy-server after each installation/upgrade.
 
-=== Graphical Installation
-
-Double-click on the `.msi` file or run it and follow the installer steps:
+The agent comes without digital signature, you may need to allow powershell to execute remote signed source code to be able to properly install the agent.
+In some environment, this policy change can lead to security issues, please read the dedicated Microsoft Windows https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.2&viewFallbackFrom=powershell-6[documentation].
+This can be done in powershell by executing the following command:
 
 ----
-msiexec /i <absolute path to rudder agent>.msi
+Set-ExecutionPolicy RemoteSigned
 ----
 
 === CLI Installation
@@ -41,34 +32,68 @@ msiexec /i <absolute path to rudder agent>.msi /quiet POLICYSERVER=my.rudder.ser
 
 === Installer options
 
-Several options can be passed via the CLI to the installer (`KEY=value` options must come last):
+[cols="1,1"]
+|===
+|POLICYSERVER (optional)
+|Hostname or ip of the policy server to overwrite the `policy-server.conf` file.
 
-* `/quiet`: Silent install
-* `/l*v MyLogFile.txt`: Create a verbose log file
-* `POLICYSERVER=xxx`: If not empty, will override at install time the value of the `policy-server.conf`.
-* `SCHEDULEDTASKUSER=xxx`: If not empty, will use the given user to run the Rudder scheduled tasks, responsible for the agent execution.
-* `SCHEDULEDTASKPASSWORD=xxx`: Only need if `SCHEDULEDTASKUSER` is used, password of the target user (required to define the scheduled task).
+
+|SCHEDULEDTASKUSER (optional)
+|Overwrite the user that will be used to run the scheduled task responsible of running the agent every 5minutes.
+If left empty, the task will run as the `SYSTEM` account.
+
+
+|SCHEDULEDTASKPASSWORD (optional)
+|Only used with the `SCHEDULEDTASKPASSWORD` option. Password of the user.
+
+|/L*v <path to logfile>
+|MSI verbose installation log.
+
+|/quiet
+|MSI non graphical installation.
+|===
 
 The `SCHEDULEDTASK*` options are only available through the CLI, and when used, the agent will not try to modify the defined task afterward without manual intervention.
 The scheduled tasks can be manually modified using the rudder command `rudder agent check-scheduled-tasks`.
-By default, if no user is given at install time, the scheduled tasks will be run as the `SYSTEM` user.
+
+== Configuration
+
+The policy server configuration can be provisionned prior to the installation by writing its hostname or IP in the file:
+
+----
+C:\Program Files\Rudder\etc\policy-server.conf
+----
+Proxy options for the agent can be pre-configured if needed, see the https://docs.rudder.io/reference/7.3/plugins/windows.html#_proxy_settings[dedicated documentation].
 
 == Logs
 
-To get install logs, use msiexec's option `/L*V C:\MyLogFile.txt`. You can then find errors by looking for `value 3`.
+To get install logs, use msiexec's option `/L*V C:\MyLogFile.txt`, other verbose log files are available in `C:\Program Files\Rudder\logs`.
 You can also get the rudder agent run logs by running this command: `rudder agent run -v -LogFile C:\debug.txt`
 
 [WARNING]
 
 ====
 
-The MyLogFile.txt could be interpreted as a binary file from some editor resulting with corrupted text.
+The MSI install log file is a binary data file, some usual text editors may not be able to read it.
 
 ====
 
-== Requirements
+== Requirements for non server or server version older than 2012R2
 
-The agent is written in `PowerShell` and requires it to be installed at least in the version 4. It is by default shipped in `Windows Server 2012R2` and later.
+Desktop versions are not officially supported but should be mostly compatible as long as the requirements listed below are filled.
+
+[cols="1,1"]
+|===
+|Powershell
+|version 4 or later
+
+|.NET
+|version 4.5 or later
+
+|PSDesiredStateConfiguration
+|installed
+|===
+
 For `Windows Server 2008R2` and `Windows Server 2012` you can upgrade the `PowerShell` version by following for instance, https://social.technet.microsoft.com/wiki/contents/articles/20623.windows-78-and-windows-server-2008-r22012-step-by-step-upgrading-powershell-to-version-4.aspx[this guide].
 
 On desktop or old Windows versions you may need to activate the `DSC` features and `WinRM` features.
@@ -78,12 +103,35 @@ Please note that older desktop versions (`Windows 7 and 8`), you will need to in
 Set-WSManQuickConfig DSC
 ----
 
-Moreover, the Windows agent comes without digital signature, you need to allow the unsigned source code execution on the Windows node.
-In some environment, this policy change can lead to security issues, please read the dedicated Microsoft Windows https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.2&viewFallbackFrom=powershell-6[documentation].
-This can be done in powershell by executing the following command:
 
-----
-Set-ExecutionPolicy RemoteSigned
-----
+== Versioning policy
 
+The agent version follows the rudder version schema for its first three digits. As MSI requires a four digit based versioning, the fourth is used to describe the release type.
+Timestamps are calculated from the 1 January 2020.
 
+[cols="1,1"]
+|===
+|alpha
+|x.y.z.0000000000<timestamp>
+
+|beta
+|x.y.z.0<patch version>0000000
+
+|rc
+|x.y.z.1<patch version>0000000
+
+|release
+|x.y.z.2000000000
+
+|nightly
+|x.y.z.109<timestamp>
+
+|alpha-nightly
+|x.y.z.000<timestamp>
+
+|beta-nightly
+|x.y.z.0<patch version><timestamp>
+
+|rc-nightly
+|x.y.z.1<patch version><timestamp>
+|===
