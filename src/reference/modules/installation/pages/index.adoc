@@ -8,7 +8,7 @@ separated environments where each environment requires its own server.
 
 Installation instructions:
 
-* Install a Rudder server on: xref:installation:server/debian.adoc[Debian/Ubuntu] | xref:installation:server/rhel.adoc[RHEL/CentOS] | xref:installation:server/sles.adoc[SLES] | xref:installation:server/rhel7.adoc[Amazon Linux 2]
+* Install a Rudder server on: xref:installation:server/debian.adoc[Debian/Ubuntu] | xref:installation:server/rhel.adoc[RHEL/CentOS] | xref:installation:server/sles.adoc[SLES] | xref:installation:server/al2.adoc[Amazon Linux 2]
 
 * Upgrade a Rudder server on: xref:upgrade:server/debian.adoc[Debian/Ubuntu] | xref:upgrade:server/rhel.adoc[RHEL/CentOS] | xref:upgrade:server/sles.adoc[SLES]
 

@@ -1,14 +1,8 @@
 = Install Rudder root server on Amazon Linux 2
 
-Amazon Linux 2 is derived from RHEL 7.
+To install a Rudder Server on Amazon Linux 2, you need a subscription and access to the private repositories.
 
-Base RHEL 7 is not supported anymore because of missing components, but Amazon Linux 2
-provides amazon-linux-extras that contains missing parts.
-
-To install a Rudder Server on Amazon Linux 2 you first need a support access to
-Rudder downloads with RHEL 7 server access.
-
-Then make sure amazon-linux-extras is installed:
+Then make sure `amazon-linux-extras` is installed:
 
 ----
 
@@ -24,7 +18,7 @@ sudo yum install -y amazon-linux-extras
 
 ----
 
-Finally, you need postgresql 11 and openjdk 11 (more recent versions should work too):
+Finally, you need to install postgresql 11 and openjdk 11 (more recent versions should work too):
 
 ----
 
@@ -38,3 +32,5 @@ of OpenJDK11 built and maintained by Amazon) or `java-openjdk11` (non headless v
 frontend related dependencies).
 
 Finally, just follow the standard Rudder installation for xref:installation:server/rhel.adoc[RHEL/CentOS] documentation.
+
+NOTE: As Amazon Linux 2 is based on RHEL 7, the Amazon Linux repository is still named `RHEL_7` even if RHEL/CentOS 7 are not supported as Rudder servers anymore.
