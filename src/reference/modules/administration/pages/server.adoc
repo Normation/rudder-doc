@@ -373,3 +373,49 @@ Verbosity options can be:
 * `--debug` for unreasonnably detailed logs
 
 
+[usage_survey]
+== Optional usage survey and data collection
+
+If you give it the right to do so, Rudder will collect anonymous data about your rudder instance sizing. 
+This information are mainly used to help us understand what kind of sizing performance should be check
+for, and what versions of OS and languages we need to support. 
+
+In any case, that data collection is anonymous and optional. And to be very clear: we know what prod is, 
+so we won't ever send configuration related data out of Rudder server. Configuration is for the nodes and 
+relays only. 
+
+
+=== Configuration of survey level
+
+The configuration is available in the settings pages, under the name `Usage Survey`.
+
+
+There is three level of data collection: 
+- full metrics (see below for what is collected)
+- minimal,
+- nothing, zero, nada. 
+
+To change you usage level, just select the new one and save. 
+
+image::usage-survey-configuration.png[Usage Survey Configuration]
+
+
+
+=== Metric collected
+
+The maximum level of data collected get information:
+
+- Rudder server installation date and version
+- list of installed plugins
+- number of nodes 
+- DB size
+- setting for audit log, workflow, policy mode, report mode
+- OS name and version
+- sizing of compliance report in DB: archive TTL, DB size, 
+
+
+=== Technical details
+
+The logic of what is sent is handled by the script  `/opt/rudder/bin/rudder-metrics-reporting`. 
+You can go by yourself and see what is sent, how, or just replace it by a noop script if you wish.
+
