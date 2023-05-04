@@ -25,7 +25,7 @@ For Rudder server, upgrade the server packages:
 
 ----
 
-zypper update rudder-server
+zypper install rudder-server
 
 ----
 
