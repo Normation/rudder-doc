@@ -58,63 +58,33 @@ By default, Rudder agent and server/relay mutually authenticate based on a Trust
 
 ==== Provisioning an agent with pre-established server trust
 
-Pre-configuring the server information requires providing local changes to the agent just after installation, and should be scripted as part of the node provisioning process. Here the _policy server_ refers to you node's server, either a relay or a server.
+Pre-configuring the server information requires you to know the server key hash to trust. Here the _policy server_ refers to you node's server, either a relay or a server.
 
 On the policy server, get the key hashes with:
 
 ----
-
 # rudder agent info
-
 [...]
 Key/Certificate
            Key hash: MD5=595221aa16c00dcec78ba1259d7708de
            Key hash: sha256//2cMrJbjcdh25hJkzFVlyKs62DXsaFmumbcFpQ6/ZguU=
 [...]
-
 ----
 
-Now you need to pin the certificate for both protocols.
-
-* For HTTPS, put the value of the hash starting with `sha256//` into
-`/var/rudder/lib/ssl/policy_server_hash` on the node.
-
-* For the policy update protocol:
-
-  ** First copy the content of `/var/rudder/cfengine-community/ppkeys/localhost.pub` from the policy server on the node into `/var/rudder/cfengine-community/ppkeys/root-${HASH}.pub`, where `HASH` is the hash starting with `MD5=` from the info command. It should look like:
+On the agent, provide the hash to trust when configuring the policy-server:
 
 ----
-
-# cat /var/rudder/cfengine-community/ppkeys/root-MD5=595221aa16c00dcec78ba1259d7708de.pub
------BEGIN RSA PUBLIC KEY-----
-MIICCgKCAgEA78g1gmG98Sh4hso8mYGagj98M+SZU7mklbC5Ylv90mecsLD9QlcZ
-[...]
-C9o5xHCOTDecATXMg0gGQHbjm0x0a1nt+X1gyyjNfHLX13n5as9JXf0CAwEAAQ==
------END RSA PUBLIC KEY-----
-
+# rudder agent policy-server -t sha256//2cMrJbjcdh25hJkzFVlyKs62DXsaFmumbcFpQ6/ZguU= mypolicyserver
 ----
 
-  ** Then put the `MD5=` hash into `/var/rudder/cfengine-community/ppkeys/policy_server_hash` so that it looks like:
-
-----
-
-# cat /var/rudder/cfengine-community/ppkeys/policy_server_hash
-MD5=595221aa16c00dcec78ba1259d7708de
-
-----
-
-* To check if the key pinning is correctly configured on the node, you can check the output of `rudder agent info` (it should indicate **full**):
+You can check that the trust is established by running the following command:
 
 ----
 [root@rudder ~]# rudder agent info
-
 [...]
         Key pinning: full
 [...]
 ----
-
-Now you can set your policy server with `rudder agent policy-server mypolicyserver`
-and the agent will only accept the connection if it matches the provided key hash, on both communication protocols.
 
 ==== Pre-provision a node on the server
 
