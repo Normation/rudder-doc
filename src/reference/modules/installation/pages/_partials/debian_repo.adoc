@@ -24,11 +24,11 @@ You need to replace the user name (LOGIN) and the password (PASSWORD) by your Ru
 echo "deb https://download.rudder.io/apt/7.2/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 
 # for recent debian (>=10) and ubuntu (>=20)
-echo "machine download.rudder.io login LOGIN password PASSWORD" > /etc/apt/auth.conf.d/rudder.conf
+echo 'machine download.rudder.io login LOGIN password PASSWORD' > /etc/apt/auth.conf.d/rudder.conf
 chmod 640 /etc/apt/auth.conf.d/rudder.conf
 
 # on old debian (<10) and ubuntu (<20) use this instead
-#echo "machine download.rudder.io login LOGIN password PASSWORD" >> /etc/apt/auth.conf
+#echo 'machine download.rudder.io login LOGIN password PASSWORD' >> /etc/apt/auth.conf
 #chmod 640 /etc/apt/auth.conf
 
 ----
