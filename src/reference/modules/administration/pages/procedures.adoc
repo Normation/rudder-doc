@@ -138,6 +138,10 @@ It will also backup the application logs.
 # Where you want to put the backups
 cd /tmp/backup
 
+# Stop the rudder services
+rudder agent disable
+systemctl stop rudder-agent rudder-server rudder-relayd
+
 # First, backup the LDAP database:
 /opt/rudder/sbin/slapcat -l rudder-backup-$(date +%Y%m%d).ldif
 
@@ -150,12 +154,17 @@ tar -C /var/rudder -zcf rudder-backup-$(date +%Y%m%d).tar.gz configuration-repos
 # These may not exist
 [ -d /var/rudder/packages ] && tar -C /var/rudder -zcf rudder-backup-packages-$(date +%Y%m%d).tar.gz packages/
 [ -d /var/rudder/plugin-resources ] && tar -C /var/rudder -zcf rudder-backup-plugin-resources-$(date +%Y%m%d).tar.gz plugin-resources/
+[ -d /opt/rudder/share/plugins ] && tar -C /opt/rudder -zcf rudder-backup-plugin-share-$(date +%Y%m%d).tar.gz share/plugins/
 
 # Then backup Rudder configuration
 tar -C /opt/rudder -zcf rudder-etc-backup-$(date +%Y%m%d).tar.gz etc/
 
 # Finally, backup the logs (if you need them)
 tar -C /var/log -zcf rudder-log-backup-$(date +%Y%m%d).tar.gz rudder/
+
+# Restart the services and agent
+rudder agent enable
+systemctl start rudder-agent rudder-server rudder-relayd
 
 ----
 
@@ -195,6 +204,7 @@ tar -C /var/rudder -zxf rudder-backup-XXXXXXXX.tar.gz
 # If they exist
 tar -C /var/rudder -zxf rudder-backup-packages-XXXXXXXX.tar.gz
 tar -C /var/rudder -zxf rudder-backup-plugin-resources-XXXXXXXX.tar.gz
+tar -C /opt/rudder -zxf rudder-backup-plugin-share-XXXXXXXX.tar.gz
 
 # LDAP backup
 /opt/rudder/sbin/slapadd -l rudder-backup-XXXXXXXX.ldif
@@ -312,6 +322,9 @@ rudder agent run
 systemctl start rudder-agent
 # or depending on the system
 service rudder-agent restart
+
+# Reenable the plugins
+rudder package plugin enable-all
 
 ----
 
