@@ -14,7 +14,7 @@
 ** Install server
 *** xref:server/debian.adoc[on Debian/Ubuntu]
 *** xref:server/rhel.adoc[on RHEL/CentOS/AL2023]
-*** xref:server/al2.adoc[on Amazon Linux 2]
+*** xref:server/al.adoc[on Amazon Linux]
 *** xref:server/sles.adoc[on SLES]
 *** xref:server/external-db.adoc[with a separate DB]
 ** Install agent

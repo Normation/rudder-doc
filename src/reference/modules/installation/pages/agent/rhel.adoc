@@ -30,6 +30,18 @@ gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/r
 
 ----
 
+* on Amazon Linux 2023:
+
+----
+
+echo '[Rudder_7.3]
+name=Rudder 7.3
+baseurl=http://repository.rudder.io/rpm/7.3/AL_2023/
+gpgcheck=1
+gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
+
+----
+
 Install the package:
 
 ----

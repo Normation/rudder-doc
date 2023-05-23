@@ -1,4 +1,28 @@
-= Install Rudder root server on Amazon Linux 2
+= Install Rudder root server
+
+== on Amazon Linux 2023
+
+include::{partialsdir}/quick_server.adoc[]
+
+include::{partialsdir}/server_notes.adoc[]
+
+include::{partialsdir}/rpm_key.adoc[]
+
+include::{partialsdir}/rhel_repo.adoc[]
+
+To begin the installation, you should simply install the rudder-server
+metapackage, which will install the required components:
+
+----
+
+yum install rudder-server
+
+----
+
+include::{partialsdir}/initial_config.adoc[]
+
+
+== on Amazon Linux 2
 
 To install a Rudder Server on Amazon Linux 2, you need a subscription and access to the private repositories.
 
