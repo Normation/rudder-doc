@@ -330,13 +330,9 @@ These variables are expanded at policy generation and their values are based on 
 |name=hostname, value="Paris"
 |name=os, value={"name": "Debian"}
 
-|Linux technique
+|Linux / Windows technique
 |`${node.inventory[hostname]}`
 |`${node.inventory[os][name]}`
-
-|Windows technique
-|`$($node.inventory.hostname)`
-|`$($node.inventory.os.name)`
 
 |Directive
 |`${node.inventory[hostname]}`
