@@ -234,9 +234,13 @@ image::view-property-inheritance.png[Viewing property overrides]
 |name=datacenter, value="Paris"
 |name=datacenter, value={"dns": "1.1.1.1"}
 
-|Linux / Windows technique
+|Linux technique
 |`${node.properties[datacenter]}`
 |`${node.properties[datacenter][dns]}`
+
+|Windows technique
+|`$($node.properties.datacenter)`
+|`$($node.properties.datacenter.dns)`
 
 |Directive
 |`${node.properties[datacenter]}`
