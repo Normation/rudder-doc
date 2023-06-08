@@ -234,13 +234,9 @@ image::view-property-inheritance.png[Viewing property overrides]
 |name=datacenter, value="Paris"
 |name=datacenter, value={"dns": "1.1.1.1"}
 
-|Linux technique
+|Linux / Windows technique
 |`${node.properties[datacenter]}`
 |`${node.properties[datacenter][dns]}`
-
-|Windows technique
-|`$($node.properties.datacenter)`
-|`$($node.properties.datacenter.dns)`
 
 |Directive
 |`${node.properties[datacenter]}`
@@ -330,13 +326,9 @@ These variables are expanded at policy generation and their values are based on 
 |name=hostname, value="Paris"
 |name=os, value={"name": "Debian"}
 
-|Linux technique
+|Linux / Windows technique
 |`${node.inventory[hostname]}`
 |`${node.inventory[os][name]}`
-
-|Windows technique
-|`$($node.inventory.hostname)`
-|`$($node.inventory.os.name)`
 
 |Directive
 |`${node.inventory[hostname]}`
