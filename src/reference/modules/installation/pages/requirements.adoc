@@ -51,6 +51,11 @@ Rudder fully supports OpenJDK JVM version 11 to 17. Usage of long term support v
 Other JVM should work but they are not thoroughly tested. Please contact Rudder team for more information on that topic or
 dedicated support.
 
+== PostgreSQL
+
+We ensure that the version of PostgreSQL provided by all supported OS is compatible with Rudder. 
+If you want to use an external database, please check specific requirments in the setup documentation for installing xref:server/external-db.adoc#install-postgresql[the PostgreSQL server] on a separate host.
+
 [[rudder-cloud-compatibility]]
 == Cloud compatibility
 
