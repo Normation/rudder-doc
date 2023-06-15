@@ -22,7 +22,7 @@ Check that you have the minimu required PostgreSQL version and install it.
 
 ====
 
-Rudder requires PostgreSQL 10 or higher.
+Rudder requires PostgreSQL 10.3 or higher.
 
 ====
 
