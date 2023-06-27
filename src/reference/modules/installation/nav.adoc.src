@@ -13,7 +13,7 @@
 ** xref:quick_install.adoc[Quick installation]
 ** Install server
 *** xref:server/debian.adoc[on Debian/Ubuntu]
-*** xref:server/rhel.adoc[on RHEL/CentOS/AL2023]
+*** xref:server/rhel.adoc[on RHEL/CentOS]
 *** xref:server/al.adoc[on Amazon Linux]
 *** xref:server/sles.adoc[on SLES]
 *** xref:server/external-db.adoc[with a separate DB]
@@ -25,7 +25,7 @@
 *** xref:agent/aix.adoc[on AIX]
 ** Install relay
 *** xref:relay/debian.adoc[on Debian/Ubuntu]
-*** xref:relay/rhel.adoc[on RHEL/CentOS/AL2023]
+*** xref:relay/rhel.adoc[on RHEL/CentOS]
 *** xref:relay/sles.adoc[on SLES]
 ** Upgrade Rudder
 *** xref:upgrade/notes.adoc[Upgrade notes]
