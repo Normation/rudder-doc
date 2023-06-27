@@ -318,7 +318,8 @@ You can also check in node `properties` tab for the name of the properties you a
 
 ====
 
-These variables are expanded at policy generation and their values are based on node inventory values: they may not represent current reality of the node. If you want to get facts about the node when the check is done, look at next section, especially paragraph about OSQuery and Augeas generic methods.
+These values are computed at policy generation, based on node inventory content: they may not represent current reality of the node.
+If you want to get facts about the node when the check is done, look at next section, especially paragraph about osquery and Augeas generic methods.
 
 ====
 
