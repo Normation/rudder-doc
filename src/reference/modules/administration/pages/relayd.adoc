@@ -101,3 +101,26 @@ Relayd runs with the `rudder-relayd` user and the `rudder` group.
 It also runs in a dedicated SELinux context on RHEL, and on recent
 systemd versions it runs with limited access to the filesystem (can only
 write into predefined data directories).
+
+== Synchronization via ssh
+
+By default a relay synchronizes its managed nodes' policies via regular file download, the same as nodes use for update.
+This method doesn't download a file if it's not needed, but it can become slow when a lot of files are involved.
+For this reason, there is an option to replace this synchronization with rsync.
+
+For this option to work, you need to have an ssh access from the relay to the server.
+
+Here are the steps to enable it:
+* have a default key on the relay, if you don't, simply run `ssh-keygen`
+* copy the relay's public key on the server
+** on the relay `cat /root/.ssh/id_rsa.pub`
+** on the server `echo "<above content>" >> /root/.ssh/authorized_keys`
+* check that ssh works from the relay: `ssh root@<rudder server>`
+* enable the option on the webapp in "Administration > Settings > Relay synchronization"
+* check that the synchronization works on the relay with `agent run -ui`
+
+Be careful, this setup allows root access from the relay to the server. Two options can be used to limit
+the threat. On the server you should limit ssh options like agent forwarding and limit login via this key
+to the relay only. This is done by prefixing the line in `/root/.ssh/authorized_keys` with `restrict,from="<relay ip>"`.
+
+
