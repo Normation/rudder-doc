@@ -51,6 +51,28 @@ rudder.auth.provider=ldap
 
 Then it's this value that will be used (as it has higher priority due to override file name ordering).
 
+=== Application server (Jetty) configuration
+
+A part of the application configuration (especially HTTP related items) is configured in a different location,
+`/opt/rudder/etc/rudder-jetty-base/`. You can learn more about the usage of the Jetty application server in the
+xref:reference:reference:jetty_server_configuration.adoc[dedicated section].
+
+In particular, to set the maximum size of file uploads on the server (used for shared files and technique resources uploads),
+add these lines at the end of `/opt/rudder/etc/rudder-jetty-base/start.ini`:
+
+----
+# 100MB
+-Dorg.eclipse.jetty.server.Request.maxFormContentSize=1048576
+----
+
+Or for the maximum number of keys in HTTP forms:
+
+----
+-Dorg.eclipse.jetty.server.Request.maxFormKeys=200
+----
+
+Then restart the application with `systemctl restart rudder-jetty` for these settings to take effect.
+
 == Data files
 
 The webapp is loaded from `/opt/rudder/share/webapp/rudder.war`.

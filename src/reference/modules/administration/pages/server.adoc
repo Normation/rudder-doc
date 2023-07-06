@@ -112,7 +112,7 @@ To import the archive on the target Rudder server, you can follow the following 
 
 ====
 
-You can also perform the synchronisation from on environment to another by
+You can also perform the synchronization from on environment to another by
 using git, through a unique git repository referenced on both environment.
 
 For instance, using one unique git repository you can follow this workflow:
