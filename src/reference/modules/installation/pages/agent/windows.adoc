@@ -27,8 +27,13 @@ Set-ExecutionPolicy RemoteSigned
 Use `msiexec` with the `/quiet` switch to make the installation in silent mode.
 
 ----
-msiexec /i <absolute path to rudder agent>.msi /quiet POLICYSERVER=my.rudder.server
+# When done manually
+msiexec /i <absolute path to rudder agent>.msi /quiet POLICYSERVER=my.rudder.server /L*v C:\install.log
+
+# When scripted
+$errCode = (Start-Process "msiexec" -ArgumentList "/i", "<absolute path to rudder agent>", "POLICYSERVER=my.rudder.server", "/quiet", "/L*v", "C:\install.log" -Wait -Passthru).ExitCode
 ----
+
 
 === Installer options
 
