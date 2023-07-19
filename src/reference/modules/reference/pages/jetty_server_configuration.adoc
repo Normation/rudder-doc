@@ -43,7 +43,7 @@ You should not change anything here. Each time you want to customize a module, c
 
 === Overrides: /opt/rudder/etc/rudder-jetty-base/
 
-This directory contains `RUDDER` specific configuration files, mainly `etc` subdirectory and `start.ini` configuration file.
+This directory contains Rudder specific configuration files, mainly `etc` subdirectory and `start.ini` configuration file.
 
 ==== /opt/rudder/etc/rudder-jetty-base/etc
 
@@ -61,8 +61,6 @@ This file contains important parameters, like `setuid`, thread pool configuratio
 various configuration on `HTTP` and request and answer sizes, log and request log
 configuration (files name, ...), etc.
 
-For reference, a copy of Rudder `start.ini` is provided below.
-
 You can also override system properties that need to be passed to java command line
 with `-D` option in that file. Typically, if you need to increase `maxFormContentSize`
 or `maxFormKey` as explained
@@ -70,10 +68,8 @@ https://www.eclipse.org/jetty/documentation/current/configuring-form-size.html[i
 you can just add corresponding lines at the end of `start.ini`:
 
 ----
-
 -Dorg.eclipse.jetty.server.Request.maxFormKeys=200
 -Dorg.eclipse.jetty.server.Request.maxFormContentSize=400000
-
 ----
 
 == Other Jetty places
@@ -82,9 +78,9 @@ you can just add corresponding lines at the end of `start.ini`:
 
 - `/var/rudder/tmp/jetty` is the directory where `Jetty` unzip web application `war` to run them.
 - `/var/rudder/run/rudder-jetty.pid`: file containing `Jetty` PID
-- `/opt/rudder/share/webapps` contains `RUDDER` `war` files.
+- `/opt/rudder/share/webapps` contains Rudder `war` files.
 
-== Rudder defaults `start.ini`
+== Rudder default `start.ini`
 
 .start.ini
 [source,ini]
