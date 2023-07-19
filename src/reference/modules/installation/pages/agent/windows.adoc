@@ -10,13 +10,13 @@ Windows agents are only available with a subscription and can be downloaded on h
 
 == Installation for Windows server 2012R2 and later
 
-The agent is currently distributed via an `msi` installer which both support graphical and cli based installations.
+The agent is currently distributed as an `msi` installer which both support graphical and cli based installations.
 
 An inventory will be run after the installation to send an up-to-date inventory to the policy-server after each installation/upgrade.
 
-The agent comes without digital signature, you may need to allow powershell to execute remote signed source code to be able to properly install the agent.
+The agent comes without digital signature, you may need to allow Powershell to execute remote signed source code to be able to properly install the agent.
 In some environment, this policy change can lead to security issues, please read the dedicated Microsoft Windows https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.2&viewFallbackFrom=powershell-6[documentation].
-This can be done in powershell by executing the following command:
+This can be done in Powershell by executing the following command:
 
 ----
 Set-ExecutionPolicy RemoteSigned
@@ -24,7 +24,8 @@ Set-ExecutionPolicy RemoteSigned
 
 === CLI Installation
 
-Use `msiexec` with the `/quiet` switch to make the installation in silent mode.
+Use `msiexec` with the `/quiet` switch to make the installation in silent mode. You need to run
+this command as administrator.
 
 ----
 # When done manually
@@ -63,7 +64,7 @@ The scheduled tasks can be manually modified using the rudder command `rudder ag
 
 == Configuration
 
-The policy server configuration can be provisionned prior to the installation by writing its hostname or IP in the file:
+The policy server configuration can be provisioned prior to the installation by writing its hostname or IP in the file:
 
 ----
 C:\Program Files\Rudder\etc\policy-server.conf
