@@ -289,3 +289,27 @@ The result is:
 ** If *N* uses the *global* value and *D* is overridden to *Audit* or *Enforce*, the *D* value is used.
 ** If *D* uses the *global* value and *N* is overridden to *Audit* or *Enforce*, the *N* value is used.
 ** If *N* and *D* are overridden to *Audit* or *Enforce*, the value is *Audit* if at least one of *N* or *D* is *Audit*, *Enforce* if both are in *Enforce* mode
+
+[[_reporting_mode_non_compliant_only]]
+== Reporting Mode (non-compliant only)
+
+The main goal of Rudder is to compute compliance of configured rules on nodes by comparing the list of check results sent back by a node in its
+compliance reports with the list of expected checks for that node that Rudder knows about, and of course that the value of each check matches what
+is expected.
+
+This modelization of what Rudder expects allow it to be sure that all checks were actually done correctly. This reporting mode is the default one in Rudder, and 
+is called `full compliance` reporting mode.
+
+On some cases, especially when bandwidth between nodes and Rudder is low or when there is a really big number of nodes with lots of checks, you may want to
+reduce the number of check statuses sent in reports. 
+For that, there is a setting allowing to send only non-compliant checks in report. Since Rudder keeps a model of what is expected to be checked, 
+Rudder can then compute what check were actually done by assuming that the missing one are successes. 
+
+On extreme cases, for example for embedded hardware with costly network data plan, you may want to totally disable reporting. In that case, 
+Rudder will assume that the node is doing what it needs and Rudder will not put a "no answer" status for it, even if it does not get reports back.
+
+The setting is available either globally in the `Settings` menu (see image below), or on a node-by-node basis in its setting tab. 
+
+We strongly advise to keep the default configuration and use the `Full compliance` mode.
+
+image:assets/images/reporting-mode-setting.png[Global configuration of reporting mode]
