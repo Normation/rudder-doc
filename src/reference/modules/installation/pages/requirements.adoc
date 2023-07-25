@@ -82,14 +82,14 @@ number of configured components to check, etc...).
 == Hardware specifications and sizing for Rudder Root Server
 
 A dedicated server is strongly recommended, either physical or virtual with at least one dedicated core.
-Rudder Server runs on both 32 (if available) and 64 bit versions of every supported Operating System.
+Rudder Server runs on 64 bits versions of every supported Operating System.
 
 [NOTE]
 
 ====
 
 Rudder does not fear big infrastructures. It is currently used in production in
-infrastructure with more than *9000* nodes.
+infrastructure with more than *15000* nodes.
 
 ====
 
