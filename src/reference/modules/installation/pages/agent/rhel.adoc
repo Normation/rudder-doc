@@ -6,13 +6,13 @@ include::{partialsdir}/rpm_key.adoc[]
 
 include::{partialsdir}/rhel_repo.adoc[]
 
-* on Amazon Linux:
+* on Amazon Linux 1:
 
 ----
 
-echo '[Rudder_7.3]
-name=Rudder 7.3
-baseurl=http://repository.rudder.io/rpm/7.3/RHEL_6/
+echo '[Rudder_8.0]
+name=Rudder 8.0
+baseurl=http://repository.rudder.io/rpm/8.0/RHEL_6/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
@@ -22,9 +22,9 @@ gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/r
 
 ----
 
-echo '[Rudder_7.3]
-name=Rudder 7.3
-baseurl=http://repository.rudder.io/rpm/7.3/RHEL_7/
+echo '[Rudder_8.0]
+name=Rudder 8.0
+baseurl=http://repository.rudder.io/rpm/8.0/RHEL_7/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
@@ -34,9 +34,9 @@ gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/r
 
 ----
 
-echo '[Rudder_7.3]
-name=Rudder 7.3
-baseurl=http://repository.rudder.io/rpm/7.3/AL_2023/
+echo '[Rudder_8.0]
+name=Rudder 8.0
+baseurl=http://repository.rudder.io/rpm/8.0/AL_2023/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 

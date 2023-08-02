@@ -20,7 +20,7 @@ pub  4096R/474A19E8 2011-12-15 Rudder Project (release key) <security@rudder-pro
 
 ----
 
-On very old versions (before Debian 7 and before Ubuntu 10.04), you need to use the apt-key tool instead:
+On ancient versions (before Debian 7 and before Ubuntu 10.04), you need to use the apt-key tool instead:
 
 ----
 

@@ -21,7 +21,7 @@ We have a quick procedure for people who just want to test Rudder:
 
 ----
 
-This will setup Rudder repository on your system and the use the package manager to install rudder server in latest version.
+This will setup Rudder repository on your system and use the package manager to install rudder server in the latest version.
 
 rudder-setup can also install an agent or a relay in any version, here is the full usage:
 

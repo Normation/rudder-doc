@@ -2,27 +2,27 @@
 
 Rudder uses a PostgreSQL server to store its reports.
 
-People having a dedicated database server or having a report database becoming too big can setup an external database instead of letting Rudder manage one on the Rudder server itself.
+People having a dedicated database server or having a report database becoming too big can set up an external database instead of letting Rudder manage one on the Rudder server itself.
 
 == Install a new server with a separate database
 
 [[install-postgresql]]
 === Install PostgreSQL server
 
-If you have to install the PostgreSQL service on a separate server, we provide here a simplified PostgreSQL documentation.
+If you have to install the PostgreSQL service on a separate server, we provide here simplified PostgreSQL documentation.
 
-If your organization has a database administrator, just ask him to create a new database with an associated user and permissions.
+If your organization has a database administrator, just ask them to create a new database with an associated user and permissions.
 
 If in doubt, please always refer to the officiel PostgreSQL documentation https://www.postgresql.org/docs/
 
-As much as possible, install your distribution postgresql package on the target SQL host.
-Check that you have the minimu required PostgreSQL version and install it.
+As much as possible, install your distribution PostgreSQL package on the target SQL host.
+Check that you have the minimum required PostgreSQL version and install it.
 
 [WARNING]
 
 ====
 
-Rudder requires PostgreSQL 10.3 or higher.
+Rudder requires PostgreSQL 13 or higher.
 
 ====
 
@@ -40,7 +40,7 @@ $ zypper install postgresql-server
 
 ----
 
-On RHEL you must also initialize the database :
+On RHEL, you must also initialize the database :
 
 ----
 
@@ -64,7 +64,7 @@ Make sure to give access to this user from the outside by editing `pg_hba.conf`.
 
 On debian like it is `/etc/postgresql/<your version>/main/pg_hba.conf`, on redhat like it is `/var/lib/pgsql/data/pg_hba.conf`.
 
-In any case, it can be found with the command : ̀ su postgres -c "psql -t -P format=unaligned -c 'show hba_file';"`
+In any case, it can be found with the command :  `su postgres -c "psql -t -P format=unaligned -c 'show hba_file';"`
 
 ----
 
@@ -111,7 +111,7 @@ $ zypper install rudder-external-db
 
 ----
 
-You now have everythng to fill in the configuration file `/opt/rudder/etc/external-db.conf`:
+You now have everything to fill in the configuration file `/opt/rudder/etc/external-db.conf`:
 
 ----
 
@@ -131,5 +131,5 @@ DB_NAME="rudder"
 
 === Install Rudder
 
-Finally follow the regular Rudder server installation process depending on your system: xref:installation:server/debian.adoc[Debian/Ubuntu] | xref:installation:server/rhel.adoc[RHEL/CentOS] | xref:installation:server/sles.adoc[SLES] | xref:installation:server/al.adoc[Amazon Linux]
+Finally, follow the regular Rudder server installation process depending on your system: xref:installation:server/debian.adoc[Debian/Ubuntu] | xref:installation:server/rhel.adoc[RHEL/CentOS] | xref:installation:server/sles.adoc[SLES] | xref:installation:server/al.adoc[Amazon Linux]
 

@@ -8,9 +8,6 @@ When upgrading Rudder to another version, a new (updated) technique library will
 in `/opt/rudder/share/techniques`, and Rudder will only update the *system*
 Techniques in the configuration-repository directory.
 
-However, Techniques from Rudder standard library are not updated automatically in Rudder 4.x, so it needs a user action.
-
-
 [TIP]
 
 ====
@@ -24,8 +21,8 @@ If you want to do any modification in a Technique from the standard library, it 
 
 ====
 
-To upgrade you local techniques, run the following commands on the Rudder server:
-If you did any manual modifications in existing Techniques from standard library, you will need to merge the changes during upgrade of Techniques.
+To upgrade your local techniques, run the following commands on the Rudder server.
+If you have made any manual modifications to existing Techniques from the standard library, you will need to merge the changes during the techniques upgrade.
 
 ====
 
@@ -44,7 +41,7 @@ rudder server upgrade-techniques -o
 
 ----
 
-Techniques created with the Technique Editor are not impacted by this command.
+This command does not impact techniques created with the Technique Editor.
 
 ===== Special case: Techniques from standard library were modified
 

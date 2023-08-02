@@ -5,7 +5,7 @@
 
 This node allows to create nodes via API.
 
-The goal is to be able to pre-accept (node in accepted status) or pre-defined (node in pending status) a node and defined some of his parameters, in particular properties.
+The goal is to be able to pre-accept (node in accepted status) or pre-defined (node in pending status) a node and defined some of its parameters, in particular properties.
 
 It's typically what you are looking for in your provisioning and integration patterns.
 

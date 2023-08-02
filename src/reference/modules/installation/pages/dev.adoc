@@ -14,7 +14,7 @@ We provide different kinds of development versions:
 * *nightly builds* of every maintained branch on all supported operating systems
 * *pre-release* cycle before new versions:
 
-** *alpha* which are actually nightly builds and never released
+** *alpha* releases which are actually nightly builds and never released
 ** *beta* releases
 ** *rc* releases
 
@@ -22,7 +22,7 @@ The best way to help us improve a future release is to test the beta and rc pack
 provide feedback:
 
 * Report bugs on https://issues.rudder.io[our bug tracker]
-* Discuss problems or possible improvements in https://chat.rudder.io[out chat room]
+* Discuss problems or possible improvements in https://chat.rudder.io[our chat room]
 
 To get the full list of repository URLs, go
 to https://docs.rudder.io/versions[the page presenting Rudder versions].

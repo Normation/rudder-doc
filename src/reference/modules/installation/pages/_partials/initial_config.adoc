@@ -19,8 +19,8 @@ Read more about user account options in the xref:administration:users.adoc[dedic
 Once all these steps have been completed, use your web browser to go to the server URL.
 Use your first user credentials to connect.
 
-Now you should go to Settings -> General -> Allowed Networks and check that the networks listed there properly include all your nodes network addresses.
-By default this will contain your server's attached networks.
+Now you should go to **Settings -> General -> Allowed Networks** and check that the networks listed there properly include all your nodes network addresses.
+By default, this will contain your server's attached networks.
 
 The setup of the Rudder server is now over. If you plan to manage hundreds or thousands of nodes,
 please note that some xref:administration:performance.adoc#_performance_tuning[performance tuning] can be necessary on the system.

@@ -12,7 +12,7 @@ and avoids Rudder servers left with open access.
 [NOTE]
 ====
 
-Rudder now provides bcrypt as hash type for local user passwords. It is the default
+Rudder now provides bcrypt as a hash type for local user passwords. It is the default
 for new server, but upgraded servers will continue to use existing hashes.
 
 It is advised to use bcrypt. To do so, you need to reset existing passwords and compute new hashes,

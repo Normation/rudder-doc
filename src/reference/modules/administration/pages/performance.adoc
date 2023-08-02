@@ -22,7 +22,7 @@ First, you can lower the retention duration for reports from nodes, by setting i
 * `rudder.batch.reportscleaner.archive.TTL=0`
 * `rudder.batch.reportscleaner.delete.TTL=3`
 
-Second possibility is to make the agents send less reports to the Rudder server, by switching to `Non compliance only` compliance reporting mode. In this mode, only reports of changes or errors will be sent to the Rudder server. his mode saves a lot of log space and bandwidth, but leads to some assumptions about actual configuration status in reporting.
+Second possibility is to make the agents send less reports to the Rudder server, by switching to `Non compliance only` compliance reporting mode. In this mode, only reports of changes or errors will be sent to the Rudder server. This mode saves a lot of log space and bandwidth, but leads to some assumptions about actual configuration status in reporting.
 This can be configured in the Settings/General page, section `Compliance reporting mode`
 
 Finally, compliance levels are also historized over time; disabling their saving also save disk space:

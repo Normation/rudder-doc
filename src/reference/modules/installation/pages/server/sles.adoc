@@ -11,9 +11,6 @@ include::{partialsdir}/server_notes.adoc[]
 
 ====
 
-Zypper seems to be quite tolerant to missing dependencies and will let you install rudder-server even if you are missing
-something like +git-core+ for example, if nothing provides it or you did not install it beforehand.
-
 Special care should be taken during initial installation not to say "Continue anyway" if Zypper does complain a dependency can
 not be resolved and asks what to do.
 

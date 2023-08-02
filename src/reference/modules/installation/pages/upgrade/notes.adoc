@@ -26,71 +26,15 @@ rudder package list --all
 
 ----
 
-== Upgrade from Rudder 7.2 to 7.3
+== Upgrade from Rudder 7.3 to 8.0
 
 Upgrade from Rudder 7.2 is supported. There are no specific upgrade notes.
 
 include::{partialsdir}/msi.adoc[]
 
-== Upgrade from Rudder 7.1 to 7.3
+== Upgrade from Rudder 7.2 or older to 7.3
 
-Upgrade from Rudder 7.1 is supported. Notable changes:
-
-include::{partialsdir}/msi.adoc[]
-
-* Some packages have been renamed and merged:
-
-  ** `rudder-webapp`, `rudder-server-root` and `rudder-reports` are merged into rudder-server
-  ** `rudder-server-relay` becomes `rudder-relay`
-  ** due to the way the renaming is implemented, some dummy packages with the old names can persist on the systems
-    you can remove them safely after the upgrade.
-
-* We renamed the agent types to make them clearer for users:
-
-  ** Classic is now named Linux (but still also covers AIX)
-  ** DSC is now named Windows
-
-* The `create-node` plugin has been removed and all its feature are now part of Rudder base API
-
-* The default behavior of node deletion changed. Instead of moving the nodes into an archive, they
-  are now completely removed by default. As this archive was not exposed to the users, it should
-  be transparent for most users.
-
-* The way the Windows agent gets the hostname of the system for the inventory has been modified,
-  to try to get the fully-qualified domain when possible, matching Linux agent behavior. The
-  change is in the agent, and not the server, so once the rudder agent is updated on a node,
-  the node will report its FQDN to the rudder server, and dynamic groups using the hostname
-  criteria might not contain the node anymore.
-
-* The Windows agents now require that `dotnet45` or newer is installed on the node. It is by
-  default installed on all Windows Server releases starting `2012R2`.
-
-* Windows agents now use the 64 bits registry, meaning that any reference to Rudder registries
-  are now made in `'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Rudder`
-
-* Jetty Server have been upgraded to major version 10, in `/opt/rudder/etc/rudder-jetty-base/start.ini` parameter `jetty.deploy.monitoredPath` changed to
-`jetty.deploy.monitoredDir`. If you have modified this file, you should change the parameter's name.
-
-* Please check that your PostgreSQL is at least on version 10.3 before upgrading to Rudder 7.3. If not, we have a xref:upgrade/postgresql.adoc[guide] to help you upgrade your postgresql version here.
-
-[WARNING]
-
-====
-
-We recommend that you review all groups criteria prior to the upgrade, and if necessary change the conditions on hostname to match the FQDN and not only the short name for Windows nodes.
-
-To get a list of the groups containing a hostname criteria:
-
-[source,bash]
-----
-curl -k --header "X-API-Token: $(cat /var/rudder/run/api-token)" --request GET https://localhost/rudder/api/latest/groups | jq '.data.groups | map(select(.query.where[].attribute=="nodeHostname")) | unique_by(.id) | .[] | {id: .id, name: .displayName}'
-----
-
-====
-
-== Upgrade from Rudder 7.0 or older to 7.3
-
-Direct upgrades from 7.0 versions and older are no longer supported on 7.3.
+Direct upgrades from 7.2 versions and older are no longer supported on 8.0.
 If you are still running one of those, either on servers or nodes,
-please first upgrade to one of the supported versions, and then upgrade to 7.3.
+please first upgrade to one of the supported versions, and then upgrade to 8.0.
 

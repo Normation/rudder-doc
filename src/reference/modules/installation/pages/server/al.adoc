@@ -11,7 +11,7 @@ include::{partialsdir}/rpm_key.adoc[]
 include::{partialsdir}/rhel_repo.adoc[]
 
 To begin the installation, you should simply install the rudder-server
-metapackage, which will install the required components:
+meta-package, which will install the required components:
 
 ----
 

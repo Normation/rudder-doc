@@ -6,7 +6,7 @@ If you are working on a test system, you can use the xref:quick_install.adoc[qui
 
 ----
 
-curl https://repository.rudder.io/tools/rudder-setup | bash -s setup-server 7.3
+curl https://repository.rudder.io/tools/rudder-setup | bash -s setup-server 8.0
 
 ----
 

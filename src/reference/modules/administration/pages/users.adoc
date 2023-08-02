@@ -55,7 +55,7 @@ with no action nor tabs available).
 `/opt/rudder/etc/rudder-users.xml` is the main configuration file for managing users and roles in Rudder.
 More precisely, it allows to:
 
-- list each user allowed to access Rudder, along with his granted permissions to see or do things in Rudder. In the case of the default `file` authentication provider, it also allows to store user password hash.
+- list each user allowed to access Rudder, along with their granted permissions to see or do things in Rudder. In the case of the default `file` authentication provider, it also allows to store user password hash.
 - define `custom-roles` which are a way to give a name to a set of permissions so that it can be reused in user credential definition,
 - define general properties like user login case-sensitivity, or the hash algorithm used for passwords.
 

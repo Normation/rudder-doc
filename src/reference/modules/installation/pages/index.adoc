@@ -44,7 +44,7 @@ reason Rudder relays were created.
 Using a relay, you are able to:
 
 * Separate your Rudder architecture into separate entities that still report to one server
-* Prevent laxist security exceptions to the Rudder server
+* Prevent lax security exceptions to the Rudder server
 * Ease maintenance
 
 Installation instructions:

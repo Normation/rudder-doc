@@ -2,7 +2,7 @@
 
 ----
 
-zypper ar -n 'Rudder 7.3' http://repository.rudder.io/rpm/7.3/SLES_15/ Rudder
+zypper ar -n 'Rudder 8.0' http://repository.rudder.io/rpm/8.0/SLES_15/ Rudder
 
 ----
 
@@ -10,17 +10,17 @@ zypper ar -n 'Rudder 7.3' http://repository.rudder.io/rpm/7.3/SLES_15/ Rudder
 ====
 
 If you have an active subscription, use the following to get access to long term support (you need to replace
-the user name and the password by your Rudder account):
+the username and the password by your Rudder account):
 
 ----
 
-zypper ar -n 'Rudder 7.3' https://LOGIN:PASSWORD@download.rudder.io/rpm/7.3/SLES_15/ Rudder
+zypper ar -n 'Rudder 8.0' https://LOGIN:PASSWORD@download.rudder.io/rpm/8.0/SLES_15/ Rudder
 
 ----
 
 ====
 
-Update your local package database to retrieve the list of packages available on our repository:
+Update your local package database to retrieve the list of packages available in our repository:
 
 ----
 

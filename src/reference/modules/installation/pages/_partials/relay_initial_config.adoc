@@ -20,7 +20,7 @@ When every step has completed successfully:
 
 - The Rudder server will recognize the new node as a relay
 - It will generate specific policies for the relay
-- The relay will update and switch to his new role
+- The relay will update and switch to its new role
 
 This is an example of node details pane showing a Rudder relay. Note the "Role:
 Rudder relay" part that shows that the machine has successfully changed

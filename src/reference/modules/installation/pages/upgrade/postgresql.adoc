@@ -1,22 +1,22 @@
 = Upgrade PostgreSQL
 
 Rudder depends on a specific version of postgresql, which makes sure that the correct package is installed.
-However, multiple version of postgresql can be installed at once and upgrading the package doesn't make sure your database is also upgraded.
+However, multiple versions of PostgreSQL can be installed at once, and upgrading the package doesn't make sure your database is also upgraded.
 
 As a consequence, you have to make sure your database is up-to-date before upgrading Rudder.
 
 This simplified PostgreSQL documentation. If in doubt, please always refer to the official PostgreSQL documentation https://www.postgresql.org/docs/
 
 This documentation is about Debian and derived distributions since it is usual to upgrade major versions with them.
-On RHEL and SLES, it is recommended to reinstall the system, this documentation is then not needed. If you need it, please ask.
+On RHEL and SLES, it is recommended to reinstall the system; this documentation is then not needed. If you need it, please ask.
 
 == Upgrade the package
 
-First make sure you have the right version installed for the Rudder version you want to upgrade to.
+First, make sure you have the right version installed for the Rudder version you want to upgrade to.
 
-Rudder 7.3 needs PostgreSQL 10.3.
+Rudder 8.0 requires at least PostgreSQL 13.
 
-On debian like:
+On Debian-like systems:
 
 ----
 

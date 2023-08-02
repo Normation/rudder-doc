@@ -6,7 +6,7 @@ Relay servers won't work if you don't have a valid scale-out-relay plugin instal
 
 If you install a relay without that plugin, policy generation will fail, preventing new policies to be applied to your Nodes.
 
-More information about plugins in xref:plugins:index.adoc[dedicated] section
+More information about plugins in the xref:plugins:index.adoc[dedicated] section
 
 ====
 
