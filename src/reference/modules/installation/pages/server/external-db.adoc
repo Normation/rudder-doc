@@ -1,6 +1,6 @@
 = Install Rudder server with an external database
 
-Rudder uses a PostgreSQL databse to store its reports.
+Rudder uses a PostgreSQL database to store its reports.
 
 People having a dedicated database server or having a report database becoming too big can setup an external database instead of letting Rudder manage one on the Rudder server itself.
 
@@ -85,7 +85,7 @@ In any case, it should be in the same directory as `pg_hba.conf`.
 
 ----
 
-listen_addresses = 'localhost,<rudder server IP>'
+listen_addresses = '*'
 
 ----
 
@@ -126,7 +126,7 @@ $ zypper install rudder-external-db
 
 ----
 
-You need to complet the configuration file `/opt/rudder/etc/external-db.conf`:
+You need to complete the configuration file `/opt/rudder/etc/external-db.conf`:
 
 ----
 
@@ -141,6 +141,14 @@ DB_PASSWORD="xxx"
 # Postgresql database name, to create it ask your database administrator or use the following command
 #    su postgres -c "psql -q -c \"CREATE DATABASE ${DB_NAME} WITH OWNER = ${DB_USER}\""
 DB_NAME="rudder"
+
+----
+
+And check that you can connect to the database server
+
+----
+
+psql -U rudder -h $DB_HOST
 
 ----
 
