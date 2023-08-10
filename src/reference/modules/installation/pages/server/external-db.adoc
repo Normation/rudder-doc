@@ -1,6 +1,6 @@
 = Install Rudder server with an external database
 
-Rudder uses a PostgreSQL server to store its reports.
+Rudder uses a PostgreSQL database to store its reports.
 
 People having a dedicated database server or having a report database becoming too big can set up an external database instead of letting Rudder manage one on the Rudder server itself.
 
@@ -9,14 +9,13 @@ People having a dedicated database server or having a report database becoming t
 [[install-postgresql]]
 === Install PostgreSQL server
 
-If you have to install the PostgreSQL service on a separate server, we provide here simplified PostgreSQL documentation.
+If you have to install the PostgreSQL service on a separate server, we provide here a simplified PostgreSQL documentation.
 
 If your organization has a database administrator, just ask them to create a new database with an associated user and permissions.
 
 If in doubt, please always refer to the officiel PostgreSQL documentation https://www.postgresql.org/docs/
 
-As much as possible, install your distribution PostgreSQL package on the target SQL host.
-Check that you have the minimum required PostgreSQL version and install it.
+As much as possible, install your distribution PostgreSQL package on the target SQL host. Check that you have the minimum required PostgreSQL version and install it.
 
 [WARNING]
 
@@ -26,16 +25,30 @@ Rudder requires PostgreSQL 13 or higher.
 
 ====
 
+On a RHEL-like system
+
 ----
 
-# rhel,centos,...
 $ yum install postgresql-server
-$ /usr/pgsql-*/bin/postgresql*-setup initdb
+$ postgresql-setup --initdb
+$ systemctl start postgresql
 
-# debian,ubuntu
+
+----
+
+On a Debian-like system
+
+----
+
 $ apt-get install postgresql
 
-# SLES
+----
+
+
+On a SLES system
+
+----
+
 $ zypper install postgresql-server
 
 ----
@@ -49,11 +62,10 @@ $ systemctl start postgresql
 
 ----
 
-Create the `rudder` database and the `rudder` user with its password (the names can be changed)?
+Then, you need to create the `rudder` user with a secure password, and then the `rudder` database
 
 ----
 
-# please use a secure password
 $ su postgres -c "psql -q -c \"CREATE USER rudder WITH PASSWORD '${PASSWORD}'\""
 
 $ su postgres -c "psql -q -c 'CREATE DATABASE rudder WITH OWNER = rudder'"
@@ -96,22 +108,34 @@ systemctl restart postgresql
 
 === Install rudder-external-db
 
-On Rudder host, first install rudder-external-db, before installing any rudder package:
+On Rudder host, first install the `rudder-external-db` package, before installing any rudder package:
+
+
+On a RHEL-like system
 
 ----
 
-# rhel,centos,...
 $ yum install rudder-external-db
 
-# debian,ubuntu
+----
+
+On a Debian-like system
+
+----
+
 $ apt-get install rudder-external-db
 
-# SLES
+----
+
+On a SLES system
+
+----
+
 $ zypper install rudder-external-db
 
 ----
 
-You now have everything to fill in the configuration file `/opt/rudder/etc/external-db.conf`:
+You need to complete the configuration file `/opt/rudder/etc/external-db.conf`:
 
 ----
 
@@ -129,7 +153,14 @@ DB_NAME="rudder"
 
 ----
 
+And check that you can connect to the database server
+
+----
+
+psql -U rudder -h $DB_HOST
+
+----
+
 === Install Rudder
 
-Finally, follow the regular Rudder server installation process depending on your system: xref:installation:server/debian.adoc[Debian/Ubuntu] | xref:installation:server/rhel.adoc[RHEL/CentOS] | xref:installation:server/sles.adoc[SLES] | xref:installation:server/al.adoc[Amazon Linux]
-
+Finally, follow the regular Rudder server installation process depending on your system: xref:installation:server/debian.adoc[Debian/Ubuntu] | xref:installation:server/rhel.adoc[RHEL/CentOS/AlmaLinux/Rocky] | xref:installation:server/sles.adoc[SLES] | xref:installation:server/al.adoc[Amazon Linux]
