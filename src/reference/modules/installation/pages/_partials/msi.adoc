@@ -1,3 +1,0 @@
-* The Windows agent installer is now an MSI file (replacing the previous `.exe` installer). This changes the installation and upgrade processes.
-
-WARNING: You can't use the Rudder agent to migrate itself from the `.exe` based-agent (used in 7.1/7.2) by the `.msi`-based installed, due to the requirement to remove the old files. You can use a script (the installer options are documented in the installation documentation) or a GPO to deploy the new agent.
