@@ -28,9 +28,25 @@ rudder package list --all
 
 == Upgrade from Rudder 7.3 to 8.0
 
-Upgrade from Rudder 7.2 is supported. There are no specific upgrade notes.
+Upgrade from Rudder 7.3 is supported.
 
-include::{partialsdir}/msi.adoc[]
+=== API tokens
+
+The API tokens storage changes starting from 8.0.
+Plain tokens are now only available once after creation or
+re-generation, and the server only stores a hash.
+This improves the security and traceability of the tokens.
+
+It does not change anything from a user perspective: the
+tokens are still a 32-character string, and are used in the same way
+in the requests, all changes are in the server.
+
+For compatibility, previous tokens will continue working
+after upgrade, and a warning will be displayed in the interface
+if you still use them.
+Users are encouraged to plan replacement of the old tokens
+after upgrade, as they will stop
+working in a future Rudder version.
 
 == Upgrade from Rudder 7.2 or older to 7.3
 
