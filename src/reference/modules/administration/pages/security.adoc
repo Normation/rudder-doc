@@ -23,9 +23,9 @@ rudder.server.hstsIncludeSubDomains=true
 
 === Authentication and user management
 
-* It is recommended to use an external authentication backend exposing an OpenID connect or OAUTH2 interface with a second authentication factor (TOTP, WebAuthn, etc.), configured through the **auth-backends** plugins.
+* It is recommended to use an external authentication backend exposing an OpenID Connect or OAUTH2 interface with a second authentication factor (TOTP, WebAuthn, etc.), configured through the **auth-backends** plugins.
 
-* In case you use local Rudder users, your passwords should be hashed with `bcrypt`. It may not be the case of you upgraded your server from pre-6.0 versions. You can check this either in the user management page or `/opt/rudder/etc/rudder-users.xml`.
+* In case you use local Rudder users, your passwords must be hashed with `bcrypt`. It may not be the case if you upgraded your server from pre-6.0 versions. You can check this either in the user management page or `/opt/rudder/etc/rudder-users.xml`.
 
 * Session expiration is configured by default to 30 minutes of user inactivity. You may want to shorten this value in `/opt/rudder/etc/rudder-web.properties` by modifying or adding the following property (and restarting the `rudder-jetty` service to apply it):
 
@@ -34,9 +34,16 @@ rudder.server.hstsIncludeSubDomains=true
 rudder.auth.idle-timeout=15 minutes
 ----
 
-* Give minimal privileges to Rudder users using roles (through the **user-management** plugin).
+* Give minimal privileges to Rudder users using roles (through the **user-management** plugin). You can create custom roles to match your needs in `/opt/rudder/etc/rudder-users.xml`.
 
-* Give minimal privileges to your HTTP API tokens (though the **api-authorizations** plugin) and use a different token for each application.
+* After a configuration change on a user that might have a security impact
+(e.g., password reset if it may have leaked or permissions restriction), currently existing sessions will not be affected, so you need to
+restart the web application to enforce it (`systemctl restart rudder-jetty`).
+
+* When upgrading from a previous version to 8.0, regenerate all your exiting API tokens to use the more secure hashed storage.
+
+* Give minimal privileges to your HTTP API tokens (though the **api-authorizations** plugin) and use a different token for each application or use-case.
+
 
 == Agent
 
@@ -48,17 +55,17 @@ rudder.auth.idle-timeout=15 minutes
 
 === Generalities
 
-* Even if all communications are encrypted with TLS 1.2+, we recommend avoiding Rudder communications across public networks, and using a VPN in case you need access outside your private network.
+* Even if all communications are encrypted with TLS 1.3, we recommend avoiding Rudder communications across public networks, and using a VPN in case you need access outside your private network.
 
 * Add firewall rules to limit access to Rudder ports to relevant systems.
 
 === Pre-establish trust
 
-By default, Rudder agent and server/relay mutually authenticate based on a Trust On First Use (_TOFU_) principle. The first inventory will provide a key that will be stored by the server on node acceptation, and the agent will pin the server certificate present in the first policies downloaded. The following steps allows configuring Rudder to perform certificate validation from the start by establishing mutual trust with pre-shared information during agent provisioning.
+By default, Rudder agent and server/relay mutually authenticate (with _mTLS_) based on a Trust On First Use (_TOFU_) principle. The first inventory will provide a key that will be stored by the server on node acceptation, and the agent will pin the server certificate present in the first policies downloaded. The following steps allow configuring Rudder to perform certificate validation from the start by establishing mutual trust with pre-shared information during agent provisioning.
 
 ==== Provisioning an agent with pre-established server trust
 
-Pre-configuring the server information requires you to know the server key hash to trust. Here the _policy server_ refers to you node's server, either a relay or a server.
+Pre-configuring the server information requires you to know the server key hash to trust. Here the _policy server_ refers to your node's server, either a relay or a server.
 
 On the policy server, get the key hashes with:
 
@@ -88,10 +95,10 @@ You can check that the trust is established by running the following command:
 
 ==== Pre-provision a node on the server
 
-To automate node acceptation on the server while checking
+In order to automate node acceptation on the server while checking
 the node's identity, you can use the https://docs.rudder.io/api/#tag/Nodes/operation/createNodes[node creation] API.
 You can make a call to this API in your node provisioning process, and provide
 the `agentKey` parameter (which should contain the content of `/opt/rudder/etc/ssl/agent.cert` on the node), and the `accepted` status.
 
 This way, once the node sends its first inventory, if the node id and certificate match the pre-provisioned entry, the node inventory will be updated.
-Please note that you can also pre-defined node properties using this API, to ensure that the pre-provisionned node is already in the correct groups
+Please note that you can also pre-define node properties using this API to ensure that the pre-provisionned node will immediately join in the correct groups
