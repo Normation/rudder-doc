@@ -56,7 +56,7 @@ real deletion of information. The choice was configured by property
 `rudder.nodes.delete.defaultMode` and the default was `erase` since Rudder 7.2.
 At the same time, the `move` mode was deprecated.
 As of Rudder 8.0, the old `move` mode is removed and node information is erased
-from base when a node is deleted.
+from the database when a node is deleted.
 
 == Upgrade from Rudder 7.2 or older to 7.3
 
