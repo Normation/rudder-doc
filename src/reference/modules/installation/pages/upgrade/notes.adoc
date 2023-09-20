@@ -50,7 +50,7 @@ working in a future Rudder version.
 
 === Node delete mode is "erase"
 
-Historically, Rudder has supported an node delete mode where node information
+Historically, Rudder has supported a node delete mode where node information
 were move in a dedicated LDAP branch and not deleted in addition to the 
 real deletion of information. The choice was configured by property
 `rudder.nodes.delete.defaultMode` and the default was `erase` since Rudder 7.2.
