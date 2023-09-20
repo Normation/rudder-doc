@@ -48,6 +48,16 @@ Users are encouraged to plan replacement of the old tokens
 after upgrade, as they will stop
 working in a future Rudder version.
 
+=== Node delete mode is "erase"
+
+Historically, Rudder has supported a node delete mode where node information
+was moved in a dedicated LDAP branch and not deleted in addition to the 
+real deletion of information. The choice was configured by property
+`rudder.nodes.delete.defaultMode` and the default was `erase` since Rudder 7.2.
+At the same time, the `move` mode was deprecated.
+As of Rudder 8.0, the old `move` mode is removed and node information is erased
+from the database when a node is deleted.
+
 == Upgrade from Rudder 7.2 or older to 7.3
 
 Direct upgrades from 7.2 versions and older are no longer supported on 8.0.
