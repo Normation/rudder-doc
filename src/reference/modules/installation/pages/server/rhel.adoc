@@ -6,6 +6,8 @@ include::{partialsdir}/server_notes.adoc[]
 
 include::{partialsdir}/rpm_key.adoc[]
 
+include::{partialsdir}/rhel_postgres.adoc[]
+
 include::{partialsdir}/rhel_repo.adoc[]
 
 To begin the installation, you should simply install the rudder-server

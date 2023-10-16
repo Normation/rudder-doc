@@ -18,7 +18,7 @@ Two ways to do it:
 
 - Using the web interface in Administration -> Setup
 
-image::../credential_setup.png[]
+image::credential_setup.png[]
 
 - Edit the configuration file `/opt/rudder/etc/rudder-pkg/rudder-pkg.conf` where you can also define proxy information if your Rudder server need to get
  through a proxy to download plugins, keep the values empty if you don't need them (no proxy or no authentication).

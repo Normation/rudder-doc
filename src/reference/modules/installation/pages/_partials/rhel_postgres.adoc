@@ -1,0 +1,19 @@
+[WARNING]
+====
+
+Rudder 8.0 requires PostgreSQL 13 or newer, but on RHEL 8 (and derivatives), the version present
+by default in the system repositories is PostgreSQL 10.
+
+Before installing or upgrading to 8.0, you need to install a compatible PostgreSQL version on
+your server. You can do so it two ways:
+
+* By enabling the https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/installing_managing_and_removing_user-space_components/finding-rhel-8-content_using-appstream[AppStream module]:
+
+[source,bash]
+----
+yum module enable postgresql:13
+----
+
+* By installing PostgreSQL from the upstream official repository, following https://www.postgresql.org/download/linux/redhat/[these instructions].
+
+====

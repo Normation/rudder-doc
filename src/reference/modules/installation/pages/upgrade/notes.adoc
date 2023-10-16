@@ -30,6 +30,22 @@ rudder package list --all
 
 Upgrade from Rudder 7.3 is supported.
 
+=== PostgreSQL>=13 version on RHEL 8 (and related distributions)
+
+include::{partialsdir}/rhel_postgres.adoc[]
+
+=== Rudder run now update the policies by default
+
+Until Rudder 7, running `rudder agent run` only ran local policies, and to update the policies
+from the server before running them, users had to add the `-u` flag.
+
+In Rudder 8 the default behavior is now to update the policies before running them.
+A new `-l` (for "local") flag disables the update, and the `-u` flag is now ignored.
+
+=== Drop radius support for user authentication
+
+The support of user authentication through Radius, which was deprecated since Rudder 7, has been removed.
+
 === API tokens
 
 The API tokens storage changes starting from 8.0.
