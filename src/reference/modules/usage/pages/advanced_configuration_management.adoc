@@ -236,7 +236,7 @@ and especially xref:reference:generic_methods.adoc#sharedfile_to_node[sharedfile
 
 == Update technique resources from command line
 
-Since Rudder 6.2 techniques can have resource files that are automatically deployed to each node applying these techniques.
+Techniques can have resource files that are automatically deployed to each node applying these techniques.
 
 Technique resources can be modified via the technique editor interface.
 
