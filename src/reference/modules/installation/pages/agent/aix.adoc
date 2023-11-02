@@ -8,8 +8,6 @@ is also compatible with AIX.
 
 ====
 
-== Import key
-
 include::{partialsdir}/rpm_key.adoc[]
 
 == With yum
