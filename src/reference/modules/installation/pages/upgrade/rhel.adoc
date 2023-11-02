@@ -26,4 +26,5 @@ yum update rudder-server
 
 ----
 
-include::{partialsdir}/upgrade_techniques.adoc[]
+Note: If you have manually edited the built-in techniques in the git repository, you might
+need to xref:reference:reference:techniques.adoc#_technique_upgrade[upgrade you techniques manually].
