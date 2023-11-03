@@ -11,7 +11,7 @@ Add a yum repository for Rudder:
 
 echo '[Rudder_8.0]
 name=Rudder 8.0
-baseurl=https://LOGIN:PASSWORD@download.rudder.io/rpm/8.0/RHEL_$releasever/
+baseurl=https://LOGIN:PASSWORD@download.rudder.io/rpm/8.0/AIX_5/
 gpgcheck=1
 gpgkey=https://LOGIN:PASSWORD@download.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 

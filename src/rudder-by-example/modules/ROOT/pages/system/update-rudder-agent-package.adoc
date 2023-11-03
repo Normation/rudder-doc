@@ -2,37 +2,37 @@
 
 == Use case
 
-You want to manage `rudder-agent` package update using rudder itself. 
-The package part is easy to do, but you may want to also manage package repository definition to take care of upgrading to a new major version of Rudder. This example explains how to do it. Example are based on CentOS distribution but they can easily be ported for other ones. 
+You want to manage `rudder-agent` package update using rudder itself.
+The package part is easy to do, but you may want to also manage package repository definition to take care of upgrading to a new major version of Rudder. This example explains how to do it. Example are based on CentOS distribution but they can easily be ported for other ones.
 
 == `Update rudder agent` Technique
 
 We are going to create a technique that does two things:
 
-- it will configure Rudder repository for a chosen branch. To make it more flexible, the branch will be set in directive from a technique parameter, 
-- it will ensure that `rudder-agent` package is installed in last version available. 
+- it will configure Rudder repository for a chosen branch. To make it more flexible, the branch will be set in directive from a technique parameter,
+- it will ensure that `rudder-agent` package is installed in last version available.
 
-Unfortunately for us - but fortunately for I/O and CPU usage in permanent workout -, our agent keep a cache of packages that are available on repositories so that it doesn't have to query remote site and parse results at each run. So we will ensure that if the repository definition change, that cache is wiped out. 
+Unfortunately for us - but fortunately for I/O and CPU usage in permanent workout -, our agent keep a cache of packages that are available on repositories so that it doesn't have to query remote site and parse results at each run. So we will ensure that if the repository definition change, that cache is wiped out.
 
 === Create a new technique
 
-Go to Rudder `Techniques` menu, and create a new technique. We will name it `Update rudder agent` and give it a short description. 
+Go to Rudder `Techniques` menu, and create a new technique. We will name it `Update rudder agent` and give it a short description.
 
 image::update-agent-create-technique.png[Create `Update rudder agent` technique]
 
 === Manage repository
 
-The first part of the technique ensure that Rudder repository definition exists and is correct. 
+The first part of the technique ensure that Rudder repository definition exists and is correct.
 
-Since we want to make branch version parameterized, we will add a `rudder_branch` parameter in technique corresponding tab. We also add a definition for that parameter so that user of our technique what format is expected for it. 
+Since we want to make branch version parameterized, we will add a `rudder_branch` parameter in technique corresponding tab. We also add a definition for that parameter so that user of our technique what format is expected for it.
 
-Now that we have access to Rudder branch version to use, we want to ensure that file `/etc/yum.repos.d/rudder.repo` content is: 
+Now that we have access to Rudder branch version to use, we want to ensure that file `/etc/yum.repos.d/rudder.repo` content is:
 
 [source]
 ----
 [Rudder]
 name=Rudder ${rudder_branch} Repository
-baseurl=https://publisher.normation.com/rtf/rpm/${rudder_branch}/RHEL_$releasever/
+baseurl=https://publisher.normation.com/rtf/rpm/${rudder_branch}/RHEL_${version}/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub
 ----
@@ -59,7 +59,7 @@ rm -f /var/rudder/cfengine-community/state/packages_updates_*
 You should be careful about not deleting these files too often. That cache is here to avoid a big degradation on performances.
 ====
 
-For that, we will use `Command execution` method, again with a meaningful report component name: 
+For that, we will use `Command execution` method, again with a meaningful report component name:
 
 immage::update-agent-rm-cache-definition.png[Delete cache]
 
