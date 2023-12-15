@@ -104,7 +104,7 @@ plugin or a dedicated synchronisation tool].
 == Centralized authentication (LDAP, Active Directory, OpenID Connect)
 
 By default, Rudder uses a dedicated configuration file to manage user credentials. 
-Thanks to the ref:plugins:auth-backends.adoc[authentication backend plugin],
+Thanks to the xref:plugins:auth-backends.adoc[authentication backends plugin], 
 Rudder can use a centralized authentication provider, like enterprise directories
 (LDAP, Active Directory) or an SSO via OpenID Connect (OIDC).
 
