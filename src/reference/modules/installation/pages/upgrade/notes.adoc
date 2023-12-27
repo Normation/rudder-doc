@@ -30,6 +30,22 @@ rudder package list --all
 
 Upgrade from Rudder 7.3 is supported.
 
+=== New implementation of `rudder package`
+
+The plugin manager has been rewritten and its command-line interface is now simpler
+and more user-friendly.
+All commands taking plugin names now accept multiple values.
+
+The new interface is not compatible with the earlier one and the arguments and options
+were reworked. For most used commands the changes are:
+
+* `rudder package install-file <file>` -> `rudder package install <file>`
+* `rudder package plugin enable/disable <plugin>` -> `rudder package enable/disable <plugin>`
+* `rudder package check-connection` -> `rudder package update --check`
+
+You can still use the previous implementation with `RUDDER_PKG_COMPAT=1 rudder package ...`, but it will
+be removed in an upcoming release.
+
 === PostgreSQL>=13 version on RHEL 8 (and related distributions)
 
 include::{partialsdir}/rhel_postgres.adoc[]
