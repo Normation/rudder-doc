@@ -26,9 +26,9 @@ rudder package list --all
 
 ----
 
-== Upgrade from Rudder 7.3 to 8.0
+== Upgrade from Rudder 7.3 or 8.0 to 8.1
 
-Upgrade from Rudder 7.3 is supported.
+Upgrade from Rudder 7.3 or 8.0 is supported.
 
 === New implementation of `rudder package`
 
@@ -109,9 +109,9 @@ You should hence make sure your Windows agents are >=8.0 or >=7.3.4 before using
 
 ====
 
-== Upgrade from Rudder 7.2 or older to 8.0
+== Upgrade from Rudder 7.2 or older to 8.1
 
-Direct upgrades from 7.2 versions and older are no longer supported on 8.0.
+Direct upgrades from 7.2 versions and older are no longer supported on 8.1.
 If you are still running one of those, either on servers or nodes,
-please first upgrade to one of the supported versions, and then upgrade to 8.0.
+please first upgrade to one of the supported versions, and then upgrade to 8.1.
 

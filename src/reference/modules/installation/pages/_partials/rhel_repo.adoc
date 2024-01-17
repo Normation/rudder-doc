@@ -2,9 +2,9 @@ Add a yum repository for Rudder (replace VERSION with RHEL version):
 
 ----
 
-echo '[Rudder_8.0]
-name=Rudder 8.0
-baseurl=http://repository.rudder.io/rpm/8.0/RHEL_<VERSION>/
+echo '[Rudder_8.1]
+name=Rudder 8.1
+baseurl=http://repository.rudder.io/rpm/8.1/RHEL_<VERSION>/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
@@ -18,11 +18,11 @@ the VERSION, username and the password by your Rudder account):
 
 ----
 
-echo '[Rudder_8.0]
-name=Rudder 8.0
+echo '[Rudder_8.1]
+name=Rudder 8.1
 username=LOGIN
 password=PASSWORD
-baseurl=http://download.rudder.io/rpm/8.0/RHEL_<VERSION>/
+baseurl=http://download.rudder.io/rpm/8.1/RHEL_<VERSION>/
 gpgcheck=1
 gpgkey=https://download.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
@@ -32,9 +32,9 @@ Or for RHEL/CentOS < 7 (replace VERSION with RHEL version):
 
 ----
 
-echo '[Rudder_8.0]
-name=Rudder 8.0
-baseurl=https://LOGIN:PASSWORD@download.rudder.io/rpm/8.0/RHEL_<VERSION>/
+echo '[Rudder_8.1]
+name=Rudder 8.1
+baseurl=https://LOGIN:PASSWORD@download.rudder.io/rpm/8.1/RHEL_<VERSION>/
 gpgcheck=1
 gpgkey=https://LOGIN:PASSWORD@download.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
