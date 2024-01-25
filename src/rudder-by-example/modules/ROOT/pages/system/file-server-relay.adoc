@@ -85,7 +85,7 @@ as server hostname in your repository configuration. This will be replaced by ea
 name=Rudder 6.2 Repository
 baseurl=https://${server_info.policy_server}/rpm/6.2/RHEL_8/
 gpgcheck=1
-gpgkey=https://${server_info.policy_server}/rpm/rudder_rpm_key.pub
+gpgkey=https://${server_info.policy_server}/rudder_release_key.pub
 ----
 
 for a yum Rudder repository synchronized directly in `/var/www/repos`.

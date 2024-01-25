@@ -13,7 +13,7 @@ echo '[Rudder_8.1]
 name=Rudder 8.1
 baseurl=https://LOGIN:PASSWORD@download.rudder.io/rpm/8.1/AIX_5/
 gpgcheck=1
-gpgkey=https://LOGIN:PASSWORD@download.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
+gpgkey=https://LOGIN:PASSWORD@download.rudder.io/rudder_release_key.pub' > /etc/yum.repos.d/rudder.repo
 
 ----
 
