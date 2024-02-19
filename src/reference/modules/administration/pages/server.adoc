@@ -28,7 +28,7 @@ The archive feature of Rudder allows to:
 * Exchange configuration between multiple Rudder instances, in particular when
 having distinct environments;
 
-* Keep an history of major changes.
+* Keep a history of major changes.
 
 ==== Changes testing
 
@@ -88,11 +88,11 @@ the *Utilities -> Archives* page of the Rudder Server web interface.
 
 To perform a global archive, the steps are:
 
-. Click on *Archive everything* - it will update the drop down list *Choose an archive* with
+. Click on *Archive everything* - it will update the drop-down list *Choose an archive* with
 the latest data
 . In the drop down list *Choose an archive*, select the newly created archive (archives are sorted
 by date), for example 2015-01-08 16:39
-. Click on *Download as zip* to download an archive that will contains all elements.
+. Click on *Download as zip* to download an archive that will include all elements.
 
 === Importing configuration
 
@@ -130,6 +130,9 @@ For instance, using one unique git repository you can follow this workflow:
 .. +git pull+ from the central repository;
 
 .. Use  Rudder web interface to import the qualified archive.
+
+====
+
 
 === Deploy a preconfigured instance
 
@@ -345,14 +348,14 @@ Verbosity options can be:
 * empty for only errors
 * `--inform` for basic messages
 * `--verbose` for very detailed logs
-* `--debug` for unreasonnably detailed logs
+* `--debug` for unreasonably detailed logs
 
 
 [usage_survey]
 == Optional usage survey and data collection
 
 If you give it the right to do so, Rudder will collect anonymous data about your rudder instance sizing. 
-This information are mainly used to help us understand what kind of sizing performance should be check
+This information is mainly used to help us understand what kind of sizing performance should be checked
 for, and what versions of OS and languages we need to support. 
 
 In any case, that data collection is anonymous and optional. And to be very clear: we know what prod is, 
