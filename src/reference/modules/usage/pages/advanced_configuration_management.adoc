@@ -38,9 +38,9 @@ on the central server.
 
 === Policy generation info log
 
-Policy generation is a complex process and it is central to Rudder use. You will often want to know more
+Policy generation is a complex process, and it is central to Rudder use. You will often want to know more
 about a policy generation result: what was the reason for a failure? What nodes where updated? Or even
-more specifics info like: where are info and debug log?
+more specific info like: where are info and debug log?
 
 ==== /var/rudder/policy-generation-info
 
@@ -78,7 +78,7 @@ How many nodes were updated:
 [2020-03-12 15:32:39+0100] INFO  policy.generation - Configuration of 8 nodes were updated, their policies are going to be written
 ----
 
-Timing information about generation steps (they are always logged to allow to check general performance evolution):
+Timing information about generation steps (they are always logged to allow checking general performance evolution):
 
 ----
 [2020-03-12 15:33:37+0100] INFO  policy.generation.timing - Timing summary:
@@ -177,7 +177,7 @@ Rudder sorts the policies following this (best-effort) principle:
 
 * Methods in a technique are executed in the order they appear in the interface
 * Rules are executed in alphanumeric order
-* Inside of a rule, directives are executed in alphanumeric order, except for:
+* Inside a rule, directives are executed in alphanumeric order, except for:
 
 ** *Mono-instance* techniques: only one directive is selected and others are discarded (and they will be tagged as such in node detail compliance)
 
@@ -187,7 +187,7 @@ Rudder sorts the policies following this (best-effort) principle:
 ** *Limited multi-instance* techniques: all directives will be merged into *one* policy on the node
 
 *** the merge order is based on priority, then rule name, and then directive name
-*** the place of the merged policy itself in the global policies will be based on the rule and directive names of its most prioritary source directive
+*** the place of the merged policy itself in the global policies will be based on the rule and directive names of its most priority source directive
 
 NOTE: The type of a technique is visible when clicking on the technique itself in the directives page.
 
@@ -256,52 +256,22 @@ rudder server reload-techniques
 You're done.
 
 
-== (BETA) Import / Export archive of rules, directives, techniques, groups and related dependencies
+== Import / Export archive of rules, directives, techniques, groups and related dependencies
 
-Rudder 7.2 introduces as a beta feature the possibility to export configuration items (rules, directives, techniques, groups) and
+This feature introduces the possibility to export configuration items (rules, directives, techniques, groups) and
 their dependencies (for example, the technique used to define a directive, or the directives and groups for rules) into `ZIP` archive
 and import them back.
 
 This feature may be used to transfer configuration items from a development environment to a qualification one, or to edit by hand
-in a third party system some aspects of the configuration items and then import them back into rudder.
+in a third party system some aspects of the configuration items and then import them back into Rudder. It is only available through API queries.
 
-This feature is in Beta. It is only available through API queries and after the corresponding feature switch is enabled.
-
-[CAUTION]
-====
-This feature is in BETA preview.
-API endpoints should be rather stable, but the format of files inside the archive WILL change in the future.
-We also welcome feedbacks about that feature, for example through chat.rudder.io.
-====
-
-
-This section will present you the main aspect of the feature usage: how to enable it, exports items, control dependency resolution, and
+This section will present you the main aspect of the feature usage: exports items, control dependency resolution, and
 import the archive back.
-For all API related operation, you can check https://docs.rudder.io/api/v/16/#tag/Archives[the corresponding API documentation].
-
-
-=== Enable archive feature
-
-The feature is not available by default, it needs to be enabled. This is done by the following API request, and you should get the corresponding answer below:
-
-----
-curl -k -X POST -H "X-API-TOKEN: ...." -H "Content-Type: application/json" 'https://rudderhost/rudder/api/latest/settings/rudder_featureSwitch_archiveApi' -d '{ "value":"enabled" }'
-
-{
-  "action": "modifySetting",
-  "id": "rudder_featureSwitch_archiveApi",
-  "result": "success",
-  "data": {
-    "settings": {
-      "rudder_featureSwitch_archiveApi": "enabled"
-    }
-  }
-}
-----
+For all API related operation, you can check https://docs.rudder.io/api/v/18/#tag/Archives[the corresponding API documentation].
 
 === Export configuration items
 
-The first aspect of the archive feature allows to export configuration items and their dependencies into a `ZIP` archive.
+The first aspect of the archive feature allows exporting configuration items and their dependencies into a `ZIP` archive.
 The most common use case is to export a rule and its directives (with related user defined techniques) and groups so that it can be transferred into another
 rudder server.
 Another common use case is to export a set of configuration items, for example to build a template of a configuration that needs to span on several rules.
@@ -328,9 +298,9 @@ curl -k -X GET -H "X-API-TOKEN: ...." 'https://rudderhost/rudder/api/latest/arch
 Now, we will take a quick look at the content of an archive.
 
 [CAUTION]
-===
+----
 Remember, even if the general layout is likely to be stable, file format WILL change.
-===
+----
 
 ----
 % unzip archive.zip
