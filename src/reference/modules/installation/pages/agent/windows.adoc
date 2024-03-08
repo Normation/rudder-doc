@@ -8,6 +8,15 @@ Windows agents are only available with a subscription and can be downloaded on h
 
 ====
 
+[CAUTION]
+
+====
+
+The Windows agent can only work if the DSC plugin installed on the Rudder server. You can find the documentation about
+how to install a plugin https://docs.rudder.io/reference/8.0/plugins/index.html#_install_plugins_with_a_subscription[here]
+
+====
+
 == Installation for Windows server 2012R2 and later
 
 The agent is currently distributed as an `msi` installer which both support graphical and cli based installations.
