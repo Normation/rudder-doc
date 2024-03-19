@@ -1287,3 +1287,50 @@ this is unsupported and untested, so do this at your own risk.
 
 There is currently no plan to extend this support to the fields in the
 Technique editor.
+
+== Auto-conditions
+
+If you need to define classes based on the value of properties for your policy,
+auto-conditions are a nice feature avoiding to having to define the conditions
+manually in the techniques.
+This allows easily taking advantage of the inheritance and merge mechanisms
+of the properties directly in your techniques.
+
+=== Define auto-conditions
+
+The feature is enabled by defining a `rudder_auto_conditions` JSON property
+containing an array of strings. The strings are the names of the property to enable
+the auto-conditions for.
+
+=== Use auto-conditions
+
+Once enabled, the auto-conditions expect a specific data structure, and the variable needs
+to be an object (containing key-value pairs) with either string or boolean values.
+
+* If the value is a boolean
+** If the value is `true`, the `${variable_name}_${key}` condition will be defined
+** If the value is `false`, nothing happens
+* If the value is a string
+** the `${variable_name}_${key}_${value}` condition is defined
+* If the value has any other type, nothing happens
+* If the property is not defined, nothing happens
+
+=== Example
+
+Define `rudder_auto_conditions` TO `["myautocond"]`.
+Then you can define the `myautocond` property (at any level, and using
+the override and merge features), giving on the node level:
+
+[source,json]
+----
+{
+  "choice": "A",
+  "enable_policy": true,
+  "enable_purge": false
+}
+----
+
+When your agent runs, it will define before running any policy the conditions:
+
+* `myautocond_choice_A`
+* `myautocond_policy`
