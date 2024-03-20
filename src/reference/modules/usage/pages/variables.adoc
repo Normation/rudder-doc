@@ -1304,7 +1304,7 @@ the auto-conditions for.
 
 === Use auto-conditions
 
-Once enabled, the auto-conditions expect a specific data structure, and the variable needs
+Once enabled, the auto-conditions expect a specific data structure, and the properties that will be translated to conditions have
 to be an object (containing key-value pairs) with either string or boolean values.
 
 * If the value is a boolean
