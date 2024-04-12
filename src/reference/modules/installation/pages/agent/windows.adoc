@@ -17,6 +17,15 @@ how to install a plugin https://docs.rudder.io/reference/8.0/plugins/index.html#
 
 ====
 
+[WARNING]
+
+====
+
+Note that even if properties' name is case-sensitive, collision can occur, on nodes based on Windows agent.
+We strongly recommend to use distinct strings for property's name, in particular on Windows node.
+
+====
+
 == Installation for Windows server 2012R2 and later
 
 The agent is currently distributed as an `msi` installer which both support graphical and cli based installations.
