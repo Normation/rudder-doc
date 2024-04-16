@@ -183,7 +183,7 @@ During this period, the configuration is said 'Applying'.
 No report::
 
 The system didn't send any reports since a time incompatible with the agent frequency run interval. Most
-likelly, the node is not online or there is an ongoing network issue between the node and Rudder server.
+likely, the node is not online or there is an ongoing network issue between the node and Rudder server.
 
 
 
@@ -226,6 +226,27 @@ Based on these facts, the compliance of a rule is calculated like this:
 
 Number of nodes for which conformity is reached for every directive of the
 rule / Total number of nodes on which the rule has been applied
+
+== Rudder score
+
+Nodes have an individual score, represented by a letter from F (worst) to A (best).
+This score aims at aggregating information from various sources to give an overall
+view of its state.
+
+The node score is computed from several sub-scores:
+
+* The compliance score. It is computed based on the policies' compliance score, associating the score with a compliance percentage.
+* The system updates score. It is based on the number of available upgrades, with a special focus on security upgrades. It represents the score of the patch management for this node.
+* The vulnerability score. Complementary to the available updates scores, it shows the impact of current known vulnerabilities in installed packages. The score is computed using the number of vulnerabilities and their score.
+
+NOTE: The vulnerability score requires the presence of the vulnerability management plugin (`cve`).
+
+The sub-score are then combined to create the node score.
+The scores are visible in the node details and in the node list, which also allows sorting the nodes
+by score, for example to identify the systems needed most attention.
+
+image:score.png[]
+image:score2.png[]
 
 [[_policy_mode_audit_enforce]]
 == Policy Mode (Audit/Enforce)

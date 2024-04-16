@@ -13,14 +13,13 @@ You can download free plugins https://repository.rudder.io/plugins/[on repositor
 == Install plugins with a subscription
 
 First, you need to configure your Rudder technical account (username and password)
+There are two ways to do it:
 
-Two ways to do it:
-
-- Using the web interface in Administration -> Setup
+- Using the web interface in *Administration -> Setup*
 
 image::credential_setup.png[]
 
-- Edit the configuration file `/opt/rudder/etc/rudder-pkg/rudder-pkg.conf` where you can also define proxy information if your Rudder server need to get
+- By editing the configuration file `/opt/rudder/etc/rudder-pkg/rudder-pkg.conf` where you can also define proxy information if your Rudder server need to get
  through a proxy to download plugins, keep the values empty if you don't need them (no proxy or no authentication).
 
 [source,ini]
@@ -57,11 +56,16 @@ rudder package install <plugin_name_1> <plugin_name_2>
 The application will restart if necessary. Please read install output carefully as some
 plugins require additional dependencies.
 
-To update a plugin, refresh repository index with `rudder package update` and run the install
-command again.
+To update a plugin, refresh repository index with `rudder package update` and run:
 
-You will need to update your licenses with `rudder package update` before their expiration.
-An alert will appear in Rudder's menu bar when a license is close to expiration.
+----
+rudder package upgrade <plugin_name>
+----
+
+If your server is configured to use the Rudder plugin repository, a daily job will automatically
+update your plugin index and licenses.
+If is fails or your server can't reach the repository, when one or more licenses come close to expiration,
+an alert will appear in Rudder's menu bar when a license is close to expiration.
 
 == Manual plugins installation
 
@@ -92,8 +96,6 @@ You can get information about available plugins with:
 rudder package list
 # List currently available plugins
 rudder package list --all
-# List all available versions of a plugin
-rudder package search <package_name>
 # Display details of a plugin
 rudder package show <package_name>
 ----
@@ -101,8 +103,8 @@ rudder package show <package_name>
 You can manage installed plugins with:
 
 ----
-rudder package plugin enable <plugin>
-rudder package plugin disable <plugin>
+rudder package enable <plugin>
+rudder package disable <plugin>
 rudder package remove <package>
 ----
 
