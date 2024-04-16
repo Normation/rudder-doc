@@ -10,6 +10,24 @@ This simplified PostgreSQL documentation. If in doubt, please always refer to th
 This documentation is about Debian and derived distributions since it is usual to upgrade major versions with them.
 On RHEL and SLES, it is recommended to reinstall the system, this documentation is then not needed. If you need it, please ask.
 
+[CAUTION]
+
+====
+
+Before performing any upgrade, make sure to *disable those services*, by disabling rudder agent *first* to be
+sure that it will not enable rudder-relayd and rudder-jetty back during the upgrade
+
+1. `rudder agent disable`
+2. `systemctl stop rudder-relayd rudder-jetty`
+
+Upgrading PostgreSQL without disabling these service can lead to inconsistencies and might break constraints within the database schema.
+When the database constraints are broken, the typical symptom is an absence of compliance for all nodes, along with errors message in webapp logs
+in `/var/log/rudder/webapp/yyyy_MM_dd.stderrout.log` with the table name affected
+
+Also, we strongly recommend you to have a *database backup before trying to upgrade* it.
+
+====
+
 == Upgrade the package
 
 First make sure you have the right version installed for the Rudder version you want to upgrade to.
