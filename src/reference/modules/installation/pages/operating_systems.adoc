@@ -9,6 +9,13 @@ Fully supported Operating Systems are systems that we frequently build packages 
 
 ==== Community support
 
+[NOTE]
+===========
+
+The community supported OS are available in the repository https://repository.rudder.io/ consult the install section for more details.
+
+===========
+
 The following operating systems are supported for Rudder Nodes and packages are
 available freely for these platforms:
 
@@ -26,6 +33,14 @@ available freely for these platforms:
 |===
 
 ==== Subscription support
+
+[NOTE]
+===========
+
+The subscription supported OS are available in the repository https://download.rudder.io/ it contains the community supported OS and
+all the OS only avaible through a subscription. Consult install sections for more details.
+
+===========
 
 The following operating systems are supported for Rudder Nodes and packages are
 available for these platforms as part of the https://www.rudder.io/en/pricing/subscription/[Rudder subscription]:
