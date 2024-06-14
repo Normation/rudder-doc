@@ -210,6 +210,19 @@ Node properties can be managed by using https://docs.rudder.io/api/#operation/up
 
 image::node-properties.png[Node properties in UI]
 
+==== Extendable properties along the hierarchy
+Properties do not have the same flexibility when creating a new property compared to when overriding a global property : the inherit mode of the global property is always kept when resolving the properties, from the top to the bottom of the hierarchy : `Global > Group > Node`. 
+
+This means that along the hierarchy, the behavior of appending or prepending list or string values is only possible when the highest parent overrides the global property having the inherit mode 'a' or 'p', the default value being otherwise 'o', for override.
+In summary, the overriding strategy along the hierarchy always depends on the behavior set for the global property, being the topmost of the hiearchy.
+
+Therefore if you want a customisable and extendable list as property of the node (it is also possible with string values), an easy way to do it is to :
+
+* define a global property `prop` with JSON value `[]`, and inherit mode `mao` or `mpo` (with string values, use `moa` or `mop`),
+* override the property `prop` along the hierarchy, for example a group *A* : `["telnet"]` and a group *B* inheriting *A* : `["ssh"]`, and a node in *B* : `["ftp"]`,
+* check that the node ends up with `["telnet","ssh","ftp"]` in append mode, otherwise if you want the reverse order, change to prepend mode
+
+
 ==== Configuration data example
 
 This section provides a full example of node property definition for the following use case:
