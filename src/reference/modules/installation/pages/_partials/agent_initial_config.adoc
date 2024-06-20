@@ -39,10 +39,12 @@ You may force the agent run by issuing the following command:
 
 ----
 
-rudder agent run
+rudder agent run -l
 
 ----
 
+The `-l` here prevents the agent from trying to update its policies, which is not possible yet, and only run
+with local policies.
 
 [NOTE]
 
