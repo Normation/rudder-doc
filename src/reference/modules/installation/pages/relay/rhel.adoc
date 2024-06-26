@@ -1,4 +1,4 @@
-= Install Rudder relay on RHEL or CentOS
+= Install Rudder relay on RHEL or derivatives
 
 include::{partialsdir}/relay_plugin.adoc[]
 
