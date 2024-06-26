@@ -1,4 +1,4 @@
-= Install Rudder agent on RHEL or CentOS or derivatives
+= Install Rudder agent on RHEL or derivatives
 
 include::{partialsdir}/quick_agent.adoc[]
 

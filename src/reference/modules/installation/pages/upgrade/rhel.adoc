@@ -1,4 +1,4 @@
-= Upgrade Rudder on RHEL or CentOS
+= Upgrade Rudder on RHEL or derivatives
 
 include::{partialsdir}/upgrade_notes.adoc[]
 

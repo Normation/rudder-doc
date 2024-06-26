@@ -1,4 +1,4 @@
-= Install Rudder server on RHEL or CentOS
+= Install Rudder server on RHEL or derivatives
 
 include::{partialsdir}/quick_server.adoc[]
 
