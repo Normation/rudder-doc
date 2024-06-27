@@ -25,7 +25,7 @@ available freely for these platforms:
 | OS | Version | Architecture
 
 | Debian | 11 and 12 | 64bit
-| Ubuntu | 20.04 LTS and 22.04 LTS | 64bit
+| Ubuntu | 20.04 LTS, 22.04 LTS and 24.04 LTS | 64bit
 | Red Hat Enterprise Linux (RHEL) / AlmaLinux, Rocky Linux, Oracle Linux / CentOS Stream | 8 and 9 | 64bit
 | SUSE Linux Enterprise Server (SLES) | 15 SP4+ | 64bit
 | Amazon Linux | 2023 | 64bit
@@ -53,8 +53,8 @@ available for these platforms as part of the https://www.rudder.io/en/pricing/su
 | 8 | 32bit, 64bit, armhf (Raspbian)
 | 9 to 12 | 32bit, 64bit, arm64, armhf (Raspbian)
 .2+| Ubuntu | 10.04 to 16.04 LTS | 32bit, 64bit
-| 18.04 LTS, 20.04 LTS and 22.04 LTS | 64bit
-.4+| Red Hat Enterprise Linux (RHEL) / AlmaLinux, Rocky Linux, Oracle Linux | 3 to 9 | 64bit
+| 18.04 LTS, 20.04 LTS, 22.04 LTS and 24.04 LTS | 64bit
+.3+| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 3 to 9 | 64bit
 | 3 to 7 | 32bit
 | 7 to 9 | ppc64le (Power)
 | 9 | arm64 / aarch64
@@ -106,7 +106,7 @@ The following operating systems are supported as a Rudder relay or server:
 | OS | Version | Architecture
 
 | Debian | 11 and 12 | 64bit
-| Ubuntu | 22.04 LTS | 64bit
+| Ubuntu | 22.04 LTS and 24.04 LTS | 64bit
 | Red Hat Enterprise Linux (RHEL) / AlmaLinux, Rocky Linux, Oracle Linux / CentOS Stream | 8 and 9 | 64bit
 | SUSE Linux Enterprise Server (SLES) | 15 SP4+ | 64bit
 | Amazon Linux | 2023 | 64bit
