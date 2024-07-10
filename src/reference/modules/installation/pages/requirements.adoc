@@ -16,11 +16,11 @@ Rudder uses the following network flows for regular operations. Make sure your f
 |From|To|Destination|Usage
 |User or API client|Root| *tcp/443* | Access Web interface/API
 |Node .3+|Relay/Root | *tcp/443* | Send reports and inventories, fetch files
-|Linux/AIX node  | *tcp/5309* |Fetch policies
+|Linux node  | *tcp/5309* |Fetch policies
 |Windows node  | *tcp/443* |Fetch policies
 .2+|Relay .2+|Root | *tcp/443* | Send reports and inventories, fetch files
 | *tcp/5309* |Fetch policies
-|Relay/Root|Linux/AIX node | _tcp/5309_ .2+| *[optional]* Trigger remote agent run
+|Relay/Root|Linux node | _tcp/5309_ .2+| *[optional]* Trigger remote agent run
 |Root|Relay|_tcp/443_
 |=======================
 
