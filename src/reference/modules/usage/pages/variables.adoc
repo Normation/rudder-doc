@@ -241,19 +241,18 @@ image::view-property-inheritance.png[Viewing property overrides]
 
 ===== Property syntax
 
+====
+
+Node properties usage inside techniques should be avoided in techniques as they are only linted when used in
+a directive parameters.
+If needed, use parameters in your technique and fill its value with a node property to use its value inside a technique.
+====
+
 [cols="3", options="header"]
 |===
 |Use case
 |name=datacenter, value="Paris"
 |name=datacenter, value={"dns": "1.1.1.1"}
-
-|Linux technique
-|`${node.properties[datacenter]}`
-|`${node.properties[datacenter][dns]}`
-
-|Windows technique
-|`$($node.properties.datacenter)`
-|`$($node.properties.datacenter.dns)`
 
 |Directive
 |`${node.properties[datacenter]}`
@@ -266,45 +265,6 @@ image::view-property-inheritance.png[Viewing property overrides]
 |Jinja2
 |`{{vars.node.properties.datacenter}}`
 |`{{vars.node.properties.datacenter.dns}}`
-
-|===
-
-===== Global parameter syntax
-
-[WARNING]
-
-====
-
-You should never access global parameters directly and always use the corresponding
-node property which may have been overridden.
-
-====
-
-[cols="3", options="header"]
-|===
-|Use case
-|name=datacenter, value="Paris"
-|name=datacenter, value={"dns": "1.1.1.1"}
-
-|Linux technique
-|`${rudder.parameters[datacenter]}`
-|`${rudder.parameters[datacenter][dns]}`
-
-|Windows technique
-|`$($rudder.parameters.datacenter)`
-|`$($rudder.parameters.datacenter.dns)`
-
-|Directive
-|`${rudder.parameters[datacenter]}`
-|`${rudder.parameters[datacenter][dns]}`
-
-|Mustache
-|`{{{vars.rudder.parameters.datacenter}}}`
-|`{{{vars.rudder.parameters.datacenter.dns}}}`
-
-|Jinja2
-|`{{vars.rudder.parameters.datacenter}}`
-|`{{vars.rudder.parameters.datacenter.dns}}`
 
 |===
 
@@ -758,8 +718,6 @@ In Rudder, you can define and use variables via the technique editor or the diff
 
 All variables are defined under a `prefix` (scope), so to reference a variable you will always need its `prefix` and its `name`, separated via a `.` char.
 To call a variable in Rudder we use `${...}` brackets syntax as described below:
-
-NOTE: For backward compatibility, the syntax `$(...)` is also supported, but deprecated and not recommended.
 
 ----
 // Call to a String or Iterator variable
