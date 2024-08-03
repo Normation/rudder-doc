@@ -4,28 +4,6 @@
 This section addresses some advanced or discouraged usages of variables, or implementation details that can be relevant for debugging or integration purpose. 
 If you want to learn about how variables are defined and used in Rudder, see xref:usage:variables.adoc[Variables].
 
-== Overriding generic_variable_definition by sorting policies
-
-You can use the merge of "Generic Variable Definition" directive to define variable override. 
-
-[WARNING]
-
-----
-
-This technique is discouraged, as it is rather hard to follow what value goes on which node. You should always prefer to use either global parameter/group property hierarchy override for IT ops knowledge, or creating `json` files in node local override directory, which is much easier to debug on site. 
-
-----
-
-For example, let say you want to define a *DNS* variable with default value *[default dns]* and on some node case,
-a value *[overridden dns]*:
-
-- Create a Directive [1] with *high* priority: it will be your *default* case, so set *DNS* to *[default dns]*.
-- Create an other Directive [2] with *lower* priority: it will be your specialized case, so set *DNS* to *[overridden dns]*.
-
-Then, a node with only Directive [1] will have the default value defined, and a node with both Directives will have the overriding one.
-
-It works because on the agent, you can redeclare a variable name and reassign to it a new value: the last one wins (so in our case, the *lowest* priority).
-
 == Technical implementation of Node properties
 
 On the server, one or more properties files are written for each node in the

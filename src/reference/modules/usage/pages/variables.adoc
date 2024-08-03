@@ -1112,7 +1112,7 @@ Some examples:
 
 ${node.properties[datacenter][id] | default = "LON2" }
 ${node.properties[datacenter][name] | default = """Co-location with "Hosting Company" in Paris (allows quotes)""" }
-${node.properties[datacenter][id] | default = "${rudder.parameters[default_datacenter]} }"
+${node.properties[datacenter][id] | default = "${rudder.properties[default_datacenter]} }"
 ${node.properties[netbios_name] | default = "${rudder.node.hostname}" }
 ${node.properties[dns_suffix] | default = ${node.properties[datacenter][dns_suffix] | default = "${rudder.node.hostname}.example.com" }
 
