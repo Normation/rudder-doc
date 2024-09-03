@@ -26,6 +26,28 @@ rudder package list --all
 
 ----
 
+== Upgrade from Rudder 8.1 to 8.2
+
+Upgrade from Rudder 8.1 is supported.
+
+=== Enforced use of BCRYPT to hash passwords
+
+[WARNING]
+
+====
+
+For security reasons, the `bcrypt` hash algorithm is now favoured over `md5` and `sha` unsalted hash algorithms.
+
+====
+
+If you previously used one of those unsalted hash algorithms, you should migrate user passwords to the more secure and salted BCRYPT algorithm.
+A migration in the `rudder-users.xml` file will be applied since the rudder server upgrade to 8.2 : in the `/opt/rudder/etc/rudder-users.xml` file, an attribute `unsafe-hashes="true"` is added that allows to still log in with the unsalted passwords. Once you have migrated the passwords of all users to one hashed with BCRYPT, you should change the value to `unsafe-hashes="false"` and restart you Rudder server, that will disallow any unsalted password and will make the authentication more secure.
+
+=== User management no longer needs the plugin
+
+The user-management plugin in 8.1 is no longer needed to have multiple users and manage them in Rudder : the "User management" administration page is now integrated in Rudder since the 8.2 version. All features from the plugin have been moved, and additional features such as specific authentication provider and user API tokens still require the installation of the xref:plugins:auth-backends.adoc[authentication backends] and xref:plugins:api-authorizations.adoc[api-authorization] plugins.
+
+
 == Upgrade from Rudder 7.3 or 8.0 to 8.1
 
 Upgrade from Rudder 7.3 or 8.0 is supported.

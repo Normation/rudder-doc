@@ -25,7 +25,7 @@ rudder.server.hstsIncludeSubDomains=true
 
 * It is recommended to use an external authentication backend exposing an OpenID Connect or OAUTH2 interface with a second authentication factor (TOTP, WebAuthn, etc.), configured through the **auth-backends** plugins.
 
-* In case you use local Rudder users, your passwords must be hashed with `bcrypt`. It may not be the case if you upgraded your server from pre-6.0 versions. You can check this either in the user management page or `/opt/rudder/etc/rudder-users.xml`.
+* In case you use local Rudder users, your passwords must be hashed with `bcrypt`, which is now the only hash algorithm used when generating new passwords in the user management page. It may still be the case that users use other kind of unsalted hashed password (especially before Rudder 6.0), so they are still allowed but they will be deprecated soon in favor of `bcrypt`. You can check the documentation of `/opt/rudder/etc/rudder-users.xml` and of the user management page for the migration guide.
 
 * Session expiration is configured by default to 30 minutes of user inactivity. You may want to shorten this value in `/opt/rudder/etc/rudder-web.properties` by modifying or adding the following property (and restarting the `rudder-jetty` service to apply it):
 
@@ -34,11 +34,11 @@ rudder.server.hstsIncludeSubDomains=true
 rudder.auth.idle-timeout=15 minutes
 ----
 
-* Give minimal privileges to Rudder users using roles (through the **user-management** plugin). You can create custom roles to match your needs in `/opt/rudder/etc/rudder-users.xml`.
+* Give minimal privileges to Rudder users using roles. You can create custom roles to match your needs in `/opt/rudder/etc/rudder-users.xml`.
 
 * After a configuration change on a user that might have a security impact
-(e.g., password reset if it may have leaked or permissions restriction), currently existing sessions will not be affected, so you need to
-restart the web application to enforce it (`systemctl restart rudder-jetty`).
+(e.g., password reset if it may have leaked or permissions restriction), a way to immediately stop the user sessions is to disable the user (it is also enforced when deleting the user). Then, reloading the users will take those configuration changes into account.
+Restarting the web application is also a safe alternative (`systemctl restart rudder-jetty`).
 
 * When upgrading from a previous version to 8.0, regenerate all your exiting API tokens to use the more secure hashed storage.
 

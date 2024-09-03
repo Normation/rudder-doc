@@ -7,10 +7,9 @@ Rudder user management allows to define:
 - authentication: what means of authentication is used to assess that an user is who he claims to be,
 - authorization: what set of actions the user can do in Rudder, from seeing pages to changing data or using APIs.
 
-Defaults authentication and authorization capabilities are limited, file-based configured and simple. These capabilities can be extended through several plugins:
+Defaults authentication and authorization capabilities are configured using files and can be managed in Rudder, and can be extended through several plugins:
 
 - xref:plugins:auth-backends.adoc[authentication backends plugin] allows to rely on LDAP/AD and OAUTH2/OpenID Connect to authenticate users,
-- xref:plugins:user-management.adoc[user-management plugin] allows to extend authorization granularity, define custom roles and have an UI for user management.
 - xref:plugins:api-authorizations.adoc[api-authorization plugin] allows to extend API authorization granularity and to allow users to get personal API token corresponding to their authorization.
 
 You can consult these plugin documentations for the corresponding details.
@@ -22,7 +21,7 @@ In that part of the documentation, we will focus of user management without thes
 In Rudder, authentication providers and user/role credentials are defined separately:
 
 - authentication providers are configured in the `/opt/rudder/etc/rudder-web.properties` main configuration file. Change to that file require a restart of Rudder.
-- user/role credentials are configured in the `/opt/rudder/etc/rudder-users.xml` file. Changes in that file only require a reload action, either thanks to the UI or via an API call, when the `user-management plugin` is installed, but they require a restart of Rudder without it.
+- user/role credentials are configured in the `/opt/rudder/etc/rudder-users.xml` file. Changes in that file only require a reload action, either thanks to the user management interface and API. A restart of Rudder also takes the changes into account.
 
 Their content and modification are detailed in the following sections.
 
@@ -50,7 +49,7 @@ A user whose authentication is accepted by the external provider but not declare
 is considered to have no rights at all (and so will only see a reduced version of Rudder homepage,
 with no action nor tabs available).
 
-== User and role configuration file
+== User configuration file
 
 `/opt/rudder/etc/rudder-users.xml` is the main configuration file for managing users and roles in Rudder.
 More precisely, it allows to:
@@ -59,7 +58,7 @@ More precisely, it allows to:
 - define `custom-roles` which are a way to give a name to a set of permissions so that it can be reused in user credential definition,
 - define general properties like user login case-sensitivity, or the hash algorithm used for passwords.
 
-Without the `user-managedment` plugin, every modification of this file should be followed by a restart of the Rudder web application to be taken into account (`systemctl restart rudder-jetty`).
+Every modification of this file should be followed by a reload of the table in the user management interface, an API call to reload users, or by a restart of the Rudder web application (`systemctl restart rudder-jetty`), to take it into account.
 
 
 === File format
@@ -69,7 +68,7 @@ The credentials of a user are defined in the XML file
 
 ----
 
-<authentication hash="bcrypt" case-sensitivity="true">
+<authentication unsafe-hashes="false" hash="bcrypt" case-sensitivity="true">
   <custom-roles>
     <role name="NodeAccess" permissions="node_read,node_write" />
     <role name="RuleAccess" permissions="rule_read,rule_edit" />
@@ -95,7 +94,7 @@ The `user` tag allows to declare a known user in Rudder.
 The `name` attributes is mandatory (non-empty).
 It defines the login that the user will use to connect to Rudder.
 
-The `password` attribute is optional. It stores the user's password hash when the `file` authentication provider is used.
+The `password` attribute is optional. It stores the user's password hash when the `file` authentication provider is used. The value must be a bcrypt-hashed password when the `unsafe-hashes` authentication attribute is `false`, and otherwise when it is `true` it can also be hashed with md5, sha, but this will be soon deprecated (see details in the password section below).
 
 The `permissions` attribute is optional. It lists granted permissions to the user.
 
@@ -119,12 +118,12 @@ When you change the case-sensitivity, make sure there is no potential conflicts 
 
 The authentication tag should have a "hash" attribute, making "password" attributes
 on every user expect hashed passwords. Not specifying a hash attribute will fall back
-to `bcrypt` passwords, but it is strongly advised to always specify the algorithm used.
-There is no guaranty that this default will remain at that value, which may lead to version upgrade inconveniences.
+to `bcrypt` passwords.
 
-The algorithm used to create the hash (and verify it during authentication)
-depend on the value of the hash attribute. The possible values, the
-corresponding algorithm and the Linux shell command need to obtain the hash of
+Since Rudder 8.2, the "hash" value is always forced to "bcrypt" and another attribute "unsafe-hashes" is introduced to indicate if user passwords with other legacy hashes (md5, sha) should be detected automatically and still be used for login. It is set automatically to `unsafe-hashes="true"` during Rudder startup to migrate from one of those legacy hash values to "bcrypt", and passwords should be migrated manually to bcrypt-hashed ones, after which the value should be set to `false`. Otherwise if "bcrypt" is the one already used during startup, `unsafe-hashes="false"` is set and there is nothing to migrate.
+
+Therefore the algorithm used to create the hash (and verify it during authentication) is always `bcrypt` by default, others algorithms are only recognised for passwords of existing users.
+The corresponding algorithm and the Linux shell command needed to obtain the hash of
 the "secret" password for this algorithm are listed here:
 
 .Hashed passwords algorithms list
@@ -132,12 +131,12 @@ the "secret" password for this algorithm are listed here:
 [options="header"]
 
 |====
-|Value                 | Algorithm | Linux command to hash the password | Note
-|"bcrypt"              | bcrypt    | `htpasswd -nBC 12 ""  \| tr -d ':\n' \| sed 's/$2y/$2b/'` | Highly recommended
-|"md5"                 | md5       | `read mypass; echo -n $mypass \| md5sum` | *Unsecure*, should not be used
-|"sha" or "sha1"       | sha1      | `read mypass; echo -n $mypass \| shasum` | *Unsecure*, should not be used
-|"sha256" or "sha-256" | sha256    | `read mypass; echo -n $mypass \| sha256sum` | *Unsecure*, should not be used
-|"sha512" or "sha-512" | sha512    | `read mypass; echo -n $mypass \| sha512sum` | *Unsecure*, should not be used
+| Algorithm | Linux command to hash the password | Note
+| bcrypt    | `htpasswd -nBC 12 ""  \| tr -d ':\n' \| sed 's/$2y/$2b/'` | Highly recommended
+| md5       | `read mypass; echo -n $mypass \| md5sum` | *Unsecure*, should not be used
+| sha1      | `read mypass; echo -n $mypass \| shasum` | *Unsecure*, should not be used
+| sha256    | `read mypass; echo -n $mypass \| sha256sum` | *Unsecure*, should not be used
+| sha512    | `read mypass; echo -n $mypass \| sha512sum` | *Unsecure*, should not be used
 |====
 
 .BCrypt parameters
@@ -158,7 +157,7 @@ Here is an example of authentication file with the `secret` password hashed usin
 
 ----
 
-<authentication hash="bcrypt" case-sensitivity="true">
+<authentication unsafe-hashes="false" hash="bcrypt" case-sensitivity="true">
   <!-- In this example, the hashed password is: "secret", hashed as a bcrypt value -->
   <user name="carol" password="$2b$12$C5QXJEHER1vwriBe7s7FROpfMmeKc9.Lz.n68SOYsxagQIsJARv.S" role="administrator"/>
 </authentication>
@@ -166,19 +165,191 @@ Here is an example of authentication file with the `secret` password hashed usin
 ----
 
 
-=== User roles and fine-grained authorizations
+== User roles and fine-grained authorizations
 
 For every user you can define a set of permissions (roles or individual rights), allowing it to access different
 pages or to perform different operations in Rudder.
 
-To ease management of authorization, you can also build custom roles with their own permission list of individual rights and 
-roles. See xref:plugins:user-management.adoc[user-management plugin's documentation] for more information on that topic.
+To ease management of authorization, you can also build custom roles with their own list of individual rights and roles, and assign fined-grained permissions to users in Rudder. The custom roles needs to be defined in the `/opt/rudder/etc/rudder-users.xml` file. The user management interface allows to assign those rights to every user and see all the permissions of a user.
 
-[CAUTION]
+=== Rights
+
+Rudder is using a system of fined-grained permissions to gain access to some part of the UI and to be able to
+execute actions through it or APIs.
+
+An unitary permission is named a `right`. It is composed of an object type and an operation applied to that object:
+
+* Object:  Indicates what kind of data will be displayed and/or can be set/updated by the user
+* Operation: Access level to be granted on the related object
+
+==== Object type
+
+Object types are linked to Rudder functional domains, like "things related to node management and inventories"
+(identified by the object name `node`) or "configure and view rules" (identified by the object name `rule`).
+Rudder plugins can bring new object types, documented in the plugin, like `cve` (for the CVE plugin).
+
+The list of core object type is:
+
+* *administration*: for rights on operations related to Rudder settings, plugin management, user management, etc.
+* *compliance*: for rights related to access to compliance information (especially with APIs).
+* *configuration*: for rights about configuration objects. It is a super-set of `rule`, `group`, `directive`, `technique`, `parameter`.
+* *deployer* and *validator*: for rights linked to change validation.
+* *deployment*: for rights linked to manual policy generation.
+* *directive*: for access, creation, deletion and configuration of directives.
+* *group*: for access, creation, deletion and configuration of groups.
+* *node*: rights to accept or refuse nodes, access inventory, change properties or settings.
+* *parameter*: for access, creation, deletion and configuration of parameters.
+* *rule*: for access, creation, deletion and configuration of rules.
+* *technique*: for access, creation, deletion and configuration of techniques.
+* *userAccount*: rights related to user information access or personal API token management.
+
+In addition to these domain-bound rights, Rudder internally manages two special rights:
+
+* `no_rights` is a special permission that forbids access to everything. It is given when something not expected happens (like permission computation errors) so that users don't get more rights than they should be allowed to.
+* `any_rights` is a special permission given to the `administrator` special role defined below that gives access to everything, whatever the rights to manage it are.
+
+==== Operations
+
+Rudder defines standard access level linked to objects that reflects the operation allowed for that
+object type:
+
+* *read* to read given items
+* *write* can create/delete items
+* *edit* can modify existing items
+* *all* which is a shortcut for "read, write, edit".
+
+==== Right syntax
+
+A right is defined by the syntax `${type}_${level}`:
+
+* *configuration_read* will give read access to the configuration (rule management, directives, etc)
+* *node_all* will give access to all action related to nodes.
+
+==== Correspondence with API permissions
+
+In Rudder, each permission grants access to some REST API endpoint mapping the corresponding action.
+
+=== Permissions
+
+In Rudder, `permissions` are a list of `rights`, or `roles` that are named set of rights which is the recommended way to assign permissions to users because it can be customized, as explained below.
+
+=== Roles
+
+A set of permissions can be assigned a name to become a `role` to ease the management of user rights.
+Rudder comes with some predefined roles and you can create your own custom role to fit your needs or take
+into account rights provided by plugins.
+
+==== Pre-defined roles
+
+===== Administrator
+
+Rudder has a special `administrator` role. That role grants
+access and modification rights to everything, including Rudder settings, plugin management, etc. Use it with care.
+
+===== Other pre-defined roles
+
+User management in Rudder comes with a set of pre-defined roles corresponding to the common use cases
+for interacting with Rudder.
+They are provided for convenience, but if they don't fit your need you can define your own roles (see following paragraph).
+
+|====
+|Name                | Access level
+|administration_only | Only access to administration part of rudder, can do everything within it.
+|user | Can access and modify everything but the administration part
+|configuration | Can only access and act on configuration section
+|read_only | Can access to every read only part, can perform no action
+|inventory | Access to information about nodes, can see their inventory, but can't act on them
+|rule_only | Access to information about rules, but can't modify them
+|workflow  | Access to all workflow usage like validate and deploy changes
+|compliance| Can access and act on compliance section
+|deployer  | Access to workflow usage and compliance
+|validator | Can access and act on compliance and validator part
+|====
+
+[INFO]
+====
+Built-in roles, like right, can use `\_` in their name. Custom-roles are not allowed to
+use `_` in their name.
 ====
 
-Defining and using different roles in Rudder require the `User-management` plugin.
+The precise permission set for each role is presented below:
+
+.Permission for pre-defined roles
+image::details_rights.png[]
+
+==== Custom roles
+
+You can define custom roles as union set of any permissions, ie any rights or other roles.
+Custom roles are defined in the files `/opt/rudder/etc/rudder-users.xml` with the following syntax:
+
+```
+<authentication>
+  <custom-roles>
+      <role name="read-only-restricted" permissions="node_read,rule_read" />
+      <role name="read-only-extended"   permissions="read-only-restricted,configuration_read" />
+      <role name="cve-access"           permissions="cve_read" />
+      <role name="auditor"              permissions="cve-access, compliance" />
+  </custom-roles>
+  ...
+</authentication>
+```
+
+We can see that:
+
+* a custom role has two parameters:
+** `name`: the name used to identify the role. It must be unique and can't use right syntax
+`xxxx_[read,write,edit,all]`, and it can't reuse an existing name from a pre-defined role.
+** `permissions`, which are a comma separated list of rights or role names. More precisely, the list can be
+a list of rights (`read-only-restricted`,`cve-access`), or a mix of rights and roles
+(`read-only-extended`), or even a list of other pre-defined or custom roles (`auditor`).
+Role order definition does not matter.
+
+The permissions granted by the role is the union of all rights granted by each right
+or role in the permission list.
+If a name in the `roles` list is unknown, it is ignored and grant no additional rights.
+
+
+=== User management interface
+
+Rudder provides an interface to ease user management : create and delete users, modify password, and roles (including custom roles but not the extent of unitary permissions) of existing users, as well as their personal information.
+
+The UI is available in the `Administration` menu on `User management` entry (1):
+
+image::usermanagement-ui.png[]
+
+With that UI, you can add a new user (2), reload `/opt/rudder/etc/rudder-users.xml` file from disk (3) and see
+what is the current authentication method configured for users (4) (see the xref:plugins:auth-backends.adoc[authentication
+backends plugin] for more information on that subject).
+You also have a table of all non-deleted users and their information (5).
+
+[WARNING]
+====
+
+The given role list is the one statically configured in `/opt/rudder/etc/rudder-users.xml`. Some plugin
+are able to change that list when user logs in if centralized authorization management is used. For example, OIDC plugin can do that.
+In that case, the actual list of role the user got is logged in the application logs and a warning message is displayed instead of (4).
 
 ====
 
-When the `user-management` plugin is not used, only the `administrator` roles is available.
+When you click on the button to edit a user, you get
+the user details and you can update them:
+
+image::usermanagement-ui-user-details.png[]
+
+
+WARNING: The plugin is not subject to validation workflow when `change validation` plugin is enabled: no change request will be generated when modifications are made.
+
+
+When you disable a user, they will no longer be able to use Rudder nor to log in again.
+And when deleting the user, it gets removed from the configuration file but is actually not removed in the Rudder database, which is only purged from all deleted users after some time, according to the `rudder.users.cleanup.purgeDeletedAfter` configuration property.
+
+==== Authentication backend fallback
+
+When you use an external provider for authentication, password will not be asked. However, you can still add a password,
+but it will only be used for the authentication as a fallback.
+
+image::ext_auth.png[]
+image::ext_auth_clicked.png[]
+
+Please consult the dedicated documentation about the plugin xref:plugins:auth-backends.adoc[authentication backends]
+if you need more details.
