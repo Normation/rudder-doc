@@ -1,9 +1,8 @@
 site:
-  title: Development Rudder Documentation
+  title: Rudder 8.2 Documentation
   start_page: get-started::home
-  url: https://docs.rudder.io/dev
 output:
-  dir: ./build/sites/site-dev
+  dir: ./build/history/8.2
 content:
   sources:
   - url: .
@@ -13,8 +12,6 @@ content:
     branches: master
     start_path: src/rudder-by-example
   - url: ./doc-build
-    branches: ["branches/rudder/8.1", "branches/rudder/8.2"]
+    branches: "branches/rudder/8.2"
     start_path: src/reference
-  - url: .
-    branches: master
-    start_path: src/changelogs
+

@@ -1,6 +1,6 @@
 ## Builds dynamic dependencies from other repos
 
-RUDDER_VERSION = 8.1
+RUDDER_VERSION = 8.2
 
 .PHONY: clean changelogs
 all: changelogs
