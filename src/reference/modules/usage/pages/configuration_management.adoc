@@ -152,7 +152,7 @@ a recent period as well as display a deviation log history for this period.
 
 image::rudder-rule-compliance-history.png[Changes compliance history]
 
-=== How compliance is calculated?
+=== How compliance is computed?
 
 As previously seen, in Rudder you define rules which target groups of nodes, and are composed of configuration directives.
 
@@ -184,7 +184,8 @@ No report::
 
 The system didn't send any reports since a time incompatible with the agent frequency run interval. Most
 likely, the node is not online or there is an ongoing network issue between the node and Rudder server.
-
+You can configure xref:_keep_last_compliance_duration[how long Rudder keeps compliance] in that case
+before marking the node in error.
 
 
 *At directive level: checking for drift and auto-healing*
@@ -263,8 +264,8 @@ image:audit_mode_general_overview.png[]
 This mode can be set:
 
 * Globally on the Rudder server, in the `Settings > General` page. In this can case there are two options: allow to override this mode on specific items, or use the global configuration everywhere.
-* On a directive, in the directive configuration form, 
-* On a node, from the `Node details > Settings` page, 
+* On a directive, in the directive configuration form,
+* On a node, from the `Node details > Settings` page,
 * From the node itself, which will override the mode configured on the Rudder server, thanks to `rudder agent set-force-audit` and `rudder agent unset-force-audit` commands.
 
 A lot of attention and several safeguards have been put in place to ensure that if you choose to use "Audit"
@@ -305,19 +306,113 @@ The main goal of Rudder is to compute compliance of configured rules on nodes by
 compliance reports with the list of expected checks for that node that Rudder knows about, and of course that the value of each check matches what
 is expected.
 
-This modelization of what Rudder expects allow it to be sure that all checks were actually done correctly. This reporting mode is the default one in Rudder, and 
+This modelization of what Rudder expects allow it to be sure that all checks were actually done correctly. This reporting mode is the default one in Rudder, and
 is called `full compliance` reporting mode.
 
 On some cases, especially when bandwidth between nodes and Rudder is low or when there is a really big number of nodes with lots of checks, you may want to
-reduce the number of check statuses sent in reports. 
-For that, there is a setting allowing to send only non-compliant checks in report. Since Rudder keeps a model of what is expected to be checked, 
-Rudder can then compute what check were actually done by assuming that the missing one are successes. 
+reduce the number of check statuses sent in reports.
+For that, there is a setting allowing to send only non-compliant checks in report. Since Rudder keeps a model of what is expected to be checked,
+Rudder can then compute what check were actually done by assuming that the missing one are successes.
 
-On extreme cases, for example for embedded hardware with costly network data plan, you may want to totally disable reporting. In that case, 
+On extreme cases, for example for embedded hardware with costly network data plan, you may want to totally disable reporting. In that case,
 Rudder will assume that the node is doing what it needs and Rudder will not put a "no answer" status for it, even if it does not get reports back.
 
-The setting is available either globally in the `Settings` menu (see image below), or on a node-by-node basis in its setting tab. 
+The setting is available either globally in the `Settings` menu (see image below), or on a node-by-node basis in its setting tab.
 
 We strongly advise to keep the default configuration and use the `Full compliance` mode.
 
 image:assets/images/reporting-mode-setting.png[Global configuration of reporting mode]
+
+[[_keep_last_compliance_duration]]
+== Non-answering nodes and configuration of last compliance validity
+
+When a node is not sending compliance reports to Rudder, it can be a big problem, like when a
+server goes outline. And even if Rudder is not a monitoring tool, in that case, you want to make very
+clear the fact that server didn't call home recently.
+To address that topic, by default, Rudder considers that after 2 times the duration of the agent run period,
+the node is not answering and all the compliance is put in "no answer" which is considered to be an error with
+regard to compliance.
+
+Sometime, it's totally expected that nodes often go outline, like in the case of managing user laptops.
+In that case, you may want to change Rudder behavior to keep last known compliance for much longer
+than 2 agent run periods, perhaps even as long as several days.
+
+This configuration is done through a sub-property of the system node property `rudder`.
+For example, to keep the last compliance for one hour, go to the node's properties tab, find `rudder`
+property (likely marked `inherited` if you didn't change it yet), click "edit" action:
+
+image:assets/images/edit_rudder_system_node_property.png[Edit rudder node property]
+
+Then, add the following new sub-properties in the JSON value:
+
+[source, json]
+----
+Property name: rudder
+Type: JSON
+Value:
+{
+  {
+... // don't change other existing sub-properties
+  },
+  "compliance_expiration_policy": {
+     "mode":"keep_last",
+     "duration":"1 hour"
+  }
+}
+----
+
+image:assets/images/set_compliance_expiration_policy.png[Change node compliance expiration policy]
+
+Save, and now the node can be offline for one hour and you still have access to its last compliance with an adapted explanation:
+
+image:assets/node_keep_last_compliance_view.png[Compliance kept for a non-answering node]
+
+=== Configure expiration policy
+
+The `rudder -> compliance_expiration_policy` is almost a standard node property: it can be configured at group levels
+and then inherited by all nodes, and/or overridden at the node level. But you can't change it at global parameter level.
+
+It has two sub-keys parameters:
+
+* `mode` : is the policy type you want to use between `expire_immediately` (default) or `keep_last`.
+** `expire_immediately` means that as soon as a standard grace duration of two node run periods is exceeded, the
+   node is displayed as "no answer".
+** `keep_last` means that the last known compliance will be kept for the duration given in `duration` parameter.
+   Note that that duration is time-based, and not multiple-of-run-agent-period-based. So, if you set `keep_last`
+   for a lower duration that two run period for that node, it won't do anything.
+* `duration` (optional) is the time limit during which the last compliance is kept. Its value must be composed of
+   a positive integer and a unit among `day`, `hour`, `minute`, `second`, `millisecond`, `nanosecond` with an
+   optional ending `s`.
+   You can also use the unit abbreviated form: `d`, `h`, `m`,`s`,`ms`,`µs`,`ns`.
+   Unit below `minutes` should not be useful for that use case but they are given for completeness.
+
+So, the default behavior of Rudder can be translated to the explicit property:
+
+[source, json]
+----
+{
+  {
+...
+  },
+  "compliance_expiration_policy": {
+     "mode":"expire_immediately"
+  }
+}
+----
+
+You may need it if you want to put it back for a specific node in a group with an different general policy.
+
+And if you have a group of user laptop, that are often going out of line for several days with week-ends and holidays, you could use a policy to that asks to keep last compliance for 10 days:
+
+[source, json]
+----
+{
+  {
+...
+  },
+  "compliance_expiration_policy": {
+     "mode":"keep_last",
+     "duration":"10 days"
+  }
+}
+----
