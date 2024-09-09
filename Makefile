@@ -12,8 +12,8 @@ LATEST_MAJOR=$(shell curl https://www.rudder-project.org/release-info/rudder/ver
 .PHONY: prepare rudder-theme/build/ui-bundle.zip optipng doc-build changelogs-build build/sites/site/.htaccess build/files $(SITES)
 .DEFAULT_GOAL := local
 
-all: $(GENERIC_DOCS) build/history/8.2/.htaccess build/sites/site/.htaccess $(VERSION_ARCHIVES) build/files test
-online: site site-dev build/sites/site/.htaccess build/history/8.2/.htaccess $(VERSION_ARCHIVES) build/files
+all: $(GENERIC_DOCS) build/history/8.2/.htaccess build/history/8.1/.htaccess build/sites/site/.htaccess $(VERSION_ARCHIVES) build/files test
+online: site site-dev build/sites/site/.htaccess build/history/8.2/.htaccess build/history/8.1/.htaccess $(VERSION_ARCHIVES) build/files
 local: site-local test
 
 rudder-theme/build/ui-bundle.zip:

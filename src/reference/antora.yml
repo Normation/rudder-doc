@@ -1,6 +1,6 @@
 name: reference
 title: Reference manual
-version: "8.1"
+version: "8.2"
 nav:
 - modules/ROOT/nav.adoc
 - modules/installation/nav.adoc
