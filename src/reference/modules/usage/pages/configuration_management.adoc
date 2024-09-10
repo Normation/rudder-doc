@@ -152,7 +152,7 @@ a recent period as well as display a deviation log history for this period.
 
 image::rudder-rule-compliance-history.png[Changes compliance history]
 
-=== How compliance is computed?
+=== How is compliance computed?
 
 As previously seen, in Rudder you define rules which target groups of nodes, and are composed of configuration directives.
 
@@ -327,13 +327,13 @@ image:assets/images/reporting-mode-setting.png[Global configuration of reporting
 == Non-answering nodes and configuration of last compliance validity
 
 When a node is not sending compliance reports to Rudder, it can be a big problem, like when a
-server goes outline. And even if Rudder is not a monitoring tool, in that case, you want to make very
-clear the fact that server didn't call home recently.
+server goes offline. And even if Rudder is not a monitoring tool, in that case, you want to make very
+clear that the server didn't call home recently.
 To address that topic, by default, Rudder considers that after 2 times the duration of the agent run period,
 the node is not answering and all the compliance is put in "no answer" which is considered to be an error with
 regard to compliance.
 
-Sometime, it's totally expected that nodes often go outline, like in the case of managing user laptops.
+Sometimes, it's totally expected that nodes go offline often, like in the case of managing user laptops.
 In that case, you may want to change Rudder behavior to keep last known compliance for much longer
 than 2 agent run periods, perhaps even as long as several days.
 
@@ -369,7 +369,7 @@ image:assets/node_keep_last_compliance_view.png[Compliance kept for a non-answer
 
 === Configure expiration policy
 
-The `rudder -> compliance_expiration_policy` is almost a standard node property: it can be configured at group levels
+The `rudder.compliance_expiration_policy` is almost a standard node property: it can be configured at group levels
 and then inherited by all nodes, and/or overridden at the node level. But you can't change it at global parameter level.
 
 It has two sub-keys parameters:
@@ -381,10 +381,9 @@ It has two sub-keys parameters:
    Note that that duration is time-based, and not multiple-of-run-agent-period-based. So, if you set `keep_last`
    for a lower duration that two run period for that node, it won't do anything.
 * `duration` (optional) is the time limit during which the last compliance is kept. Its value must be composed of
-   a positive integer and a unit among `day`, `hour`, `minute`, `second`, `millisecond`, `nanosecond` with an
+   a positive integer and a unit among `day`, `hour`, `minute`, `second` with an
    optional ending `s`.
-   You can also use the unit abbreviated form: `d`, `h`, `m`,`s`,`ms`,`µs`,`ns`.
-   Unit below `minutes` should not be useful for that use case but they are given for completeness.
+   You can also use the unit abbreviated form (never add a `s` in that case): `d`, `h`, `m`,`s`.
 
 So, the default behavior of Rudder can be translated to the explicit property:
 
