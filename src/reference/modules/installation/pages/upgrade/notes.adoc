@@ -26,92 +26,63 @@ rudder package list --all
 
 ----
 
-== Upgrade from Rudder 7.3 or 8.0 to 8.1
+== Upgrade from Rudder 8.1 to 8.2
 
-Upgrade from Rudder 7.3 or 8.0 is supported.
+Only upgrades from Rudder 8.1 are supported.
 
-=== New implementation of `rudder package`
+=== Rework of the Windows variables
 
-The plugin manager has been rewritten and its command-line interface is now simpler
-and more user-friendly.
-All commands taking plugin names now accept multiple values.
+In prior versions of Rudder, policy variables expansion was done using built-in raw Powershell
+variable interpretation which leads to :
 
-The new interface is not compatible with the earlier one and the arguments and options
-were reworked. For most used commands the changes are:
+* Security issues using Powershell injections
+* Using two different syntaxes for the variables in Rudder based on the node OS family (Windows/Linux)
 
-* `rudder package install-file <file>` -> `rudder package install <file>`
-* `rudder package plugin enable/disable <plugin>` -> `rudder package enable/disable <plugin>`
-* `rudder package check-connection` -> `rudder package update --check`
+Starting 8.2, the generated policies used by the Windows nodes are no longer interpreted by Powershell
+and the variables expansion is now made possible by a more fine grained parsing of the directives and
+techniques content at generation time and a simple template engine.
 
-You can still use the previous implementation with `RUDDER_PKG_COMPAT=1 rudder package ...`, but it will
-be removed in an upcoming release.
+*Using variables on Windows nodes in Rudder will now be done using the exact same syntax as when using some
+on a Linux node. Previously used Windows variables syntaxes are no longer supported and will break generation.*
 
-=== PostgreSQL>=13 version on RHEL 8 (and related distributions)
+As the older syntaxes are no longer supported, after upgrading to 8.2, if you were using the Windows plugin, it
+is most likely that the policy generation will be stopped on your Rudder until you are done with the complete
+syntax migration. A safety mecanism has been added to prevent any generation as long as no longer supported
+syntaxes are in used in your policies.
 
-include::{partialsdir}/rhel_postgres.adoc[]
+As a rule of thumb, avoid any occurrence of the pattern `$(.*)` in your directives and techniques.
+To help with the migration, please refer to the table below:
 
-=== Rudder run now update the policies by default
+[cols="1,1,1"]
+|===
+||Old syntax | New syntax
 
-Until Rudder 7, running `rudder agent run` only ran local policies, and to update the policies
-from the server before running them, users had to add the `-u` flag.
 
-In Rudder 8 the default behavior is now to update the policies before running them.
-A new `-l` (for "local") flag disables the update, and the `-u` flag is now ignored.
+|String type    |$($const.n)                              |${const.n}
+|Json/Data type |$($node.properties.datacenter)           |${node.properties[datacenter]}
+|Json/Data type |$($my_prefix.my_variable.datacenter.dns) |${my_prefix.my_variable[datacenter][dns]}
+|Raw            |$(user_content)                          |${const.dollar}(user_content)
+|===
 
-=== Drop radius support for user authentication
+The generation safety is done by a very simple script located in a new `policy-generation-pre-start` webapp hook
+located in `/opt/rudder/etc/hooks.d/policy-generation-pre-start` and distributed with the Windows plugin.
 
-The support of user authentication through Radius, which was deprecated since Rudder 7, has been removed.
+Note that in some cases the hook may block the generation if you are using inputs similar to the now deprecated
+syntax. If it is the case, please try to use `${const.dollar}(...)` instead of `$(...)` in the directives/methods
+fields.
 
-=== API tokens
+The hook can still be deactivated by commenting its content if needed, with the risk of deploying potentially
+broken, policies to your Windows nodes.
 
-The API tokens storage changes starting from 8.0.
-Plain tokens are now only available once after creation or
-re-generation, and the server only stores a hash.
-This improves the security and traceability of the tokens.
+=== Removal of obsolete techniques
 
-It does not change anything from a user perspective: the
-tokens are still a 32-character string, and are used in the same way
-in the requests, all changes are in the server.
+The `WindowsUpdate` technique has been removed from Rudder and the `System Updates` plugin should be used
+instead.
 
-For compatibility, previous tokens will continue working
-after upgrade, and a warning will be displayed in the interface
-if you still use them.
-Users are encouraged to plan replacement of the old tokens
-after upgrade, as they will stop
-working in a future Rudder version.
+=== Removal of the python based `rudder package` CLI
 
-=== Node delete mode is "erase"
+The python implementation was deprecated in 8.1 and replaced by a newer implementation with
+slight changes to its options. The older one will no longer be shipped in Rudder and only
+the default `rudder package` CLI introduced in 8.1 will remain.
 
-Historically, Rudder has supported a node delete mode where node information
-was moved in a dedicated LDAP branch and not deleted in addition to the 
-real deletion of information. The choice was configured by property
-`rudder.nodes.delete.defaultMode` and the default was `erase` since Rudder 7.2.
-At the same time, the `move` mode was deprecated.
-As of Rudder 8.0, the old `move` mode is removed and node information is erased
-from the database when a node is deleted.
-
-=== Windows OS conditions
-
-Windows agents starting from 7.3.4 (and 8.0.0) have new OS conditions for each Windows version
-(e.g. _Windows Server 2012 R2_, _Windows 11_, etc.)
-and they are now available in the technique editor interface, in the _Conditions_ method tab.
-
-[WARNING]
-
-====
-
-Do not use these new conditions on agents older then 7.3.4, as they will never be defined. This means:
-
-* Positive conditions like `windows_10` will never be defined, even on a Windows 10 system
-* Negative conditions like `!windows_server_2016` will always be defined, even on a Windows Server 2016
-
-You should hence make sure your Windows agents are >=8.0 or >=7.3.4 before using these new conditions.
-
-====
-
-== Upgrade from Rudder 7.2 or older to 8.1
-
-Direct upgrades from 7.2 versions and older are no longer supported on 8.1.
-If you are still running one of those, either on servers or nodes,
-please first upgrade to one of the supported versions, and then upgrade to 8.1.
 
