@@ -47,6 +47,61 @@ A migration in the `rudder-users.xml` file will be applied since the rudder serv
 
 The user-management plugin in 8.1 is no longer needed to have multiple users and manage them in Rudder : the "User management" administration page is now integrated in Rudder since the 8.2 version. All features from the plugin have been moved, and additional features such as specific authentication provider and user API tokens still require the installation of the xref:plugins:auth-backends.adoc[authentication backends] and xref:plugins:api-authorizations.adoc[api-authorization] plugins.
 
+=== Rework of the Windows variables
+
+In prior versions of Rudder, policy variables expansion was done using built-in raw Powershell
+variable interpretation which leads to :
+
+* Security issues using Powershell injections
+* Using two different syntaxes for the variables in Rudder based on the node OS family (Windows/Linux)
+
+Starting 8.2, the generated policies used by the Windows nodes are no longer interpreted by Powershell
+and the variables expansion is now made possible by a more fine grained parsing of the directives and
+techniques content at generation time and a simple template engine.
+
+*Using variables on Windows nodes in Rudder will now be done using the exact same syntax as when using some
+on a Linux node. Previously used Windows variables syntaxes are no longer supported and will break generation.*
+
+As the older syntaxes are no longer supported, after upgrading to 8.2, if you were using the Windows plugin, it
+is most likely that the policy generation will be stopped on your Rudder until you are done with the complete
+syntax migration. A safety mecanism has been added to prevent any generation as long as no longer supported
+syntaxes are in used in your policies.
+
+As a rule of thumb, avoid any occurrence of the pattern `$(.*)` in your directives and techniques.
+To help with the migration, please refer to the table below:
+
+[cols="1,1,1"]
+|===
+||Old syntax | New syntax
+
+
+|String type    |$($const.n)                              |${const.n}
+|Json/Data type |$($node.properties.datacenter)           |${node.properties[datacenter]}
+|Json/Data type |$($my_prefix.my_variable.datacenter.dns) |${my_prefix.my_variable[datacenter][dns]}
+|Raw            |$(user_content)                          |${const.dollar}(user_content)
+|===
+
+The generation safety is done by a very simple script located in a new `policy-generation-pre-start` webapp hook
+located in `/opt/rudder/etc/hooks.d/policy-generation-pre-start` and distributed with the Windows plugin.
+
+Note that in some cases the hook may block the generation if you are using inputs similar to the now deprecated
+syntax. If it is the case, please try to use `${const.dollar}(...)` instead of `$(...)` in the directives/methods
+fields.
+
+The hook can still be deactivated by commenting its content if needed, with the risk of deploying potentially
+broken, policies to your Windows nodes.
+
+=== Removal of obsolete techniques
+
+The `WindowsUpdate` technique has been removed from Rudder and the `System Updates` plugin should be used
+instead.
+
+=== Removal of the python based `rudder package` CLI
+
+The python implementation was deprecated in 8.1 and replaced by a newer implementation with
+slight changes to its options. The older one will no longer be shipped in Rudder and only
+the default `rudder package` CLI introduced in 8.1 will remain.
+
 == Upgrade from Rudder 8.0 or older to 8.2
 
 Direct upgrades from 8.0 versions and older are no longer supported on 8.2.
