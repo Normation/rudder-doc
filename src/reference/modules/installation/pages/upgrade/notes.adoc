@@ -50,7 +50,7 @@ is most likely that the policy generation will be stopped on your Rudder until y
 syntax migration. A safety mecanism has been added to prevent any generation as long as no longer supported
 syntaxes are in used in your policies.
 
-As a rule of thumb, avoid any occurence of the pattern `$(.*)` in your directives and techniques.
+As a rule of thumb, avoid any occurrence of the pattern `$(.*)` in your directives and techniques.
 To help with the migration, please refer to the table below:
 
 [cols="1,1,1"]
