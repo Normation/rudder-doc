@@ -36,9 +36,7 @@ rudder.auth.idle-timeout=15 minutes
 
 * Give minimal privileges to Rudder users using roles (through the **user-management** plugin). You can create custom roles to match your needs in `/opt/rudder/etc/rudder-users.xml`.
 
-* After a configuration change on a user that might have a security impact
-(e.g., password reset if it may have leaked or permissions restriction), currently existing sessions will not be affected, so you need to
-restart the web application to enforce it (`systemctl restart rudder-jetty`).
+* After a configuration change on a user that might have a security impact, the user session will be immediately invalidated (when user password or roles change, or when user is disabled or deleted).
 
 * When upgrading from a previous version to 8.0, regenerate all your exiting API tokens to use the more secure hashed storage.
 
