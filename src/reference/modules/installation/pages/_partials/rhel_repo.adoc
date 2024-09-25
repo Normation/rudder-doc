@@ -6,7 +6,7 @@ echo '[Rudder_8.1]
 name=Rudder 8.1
 baseurl=http://repository.rudder.io/rpm/8.1/RHEL_<VERSION>/
 gpgcheck=1
-gpgkey=https://repository.rudder.io/rudder_release_key.pub' > /etc/yum.repos.d/rudder.repo
+gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
 ----
 
@@ -24,7 +24,7 @@ username=LOGIN
 password=PASSWORD
 baseurl=http://download.rudder.io/rpm/8.1/RHEL_<VERSION>/
 gpgcheck=1
-gpgkey=https://download.rudder.io/rudder_release_key.pub' > /etc/yum.repos.d/rudder.repo
+gpgkey=https://download.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
 ----
 
@@ -36,7 +36,7 @@ echo '[Rudder_8.1]
 name=Rudder 8.1
 baseurl=https://LOGIN:PASSWORD@download.rudder.io/rpm/8.1/RHEL_<VERSION>/
 gpgcheck=1
-gpgkey=https://LOGIN:PASSWORD@download.rudder.io/rudder_release_key.pub' > /etc/yum.repos.d/rudder.repo
+gpgkey=https://LOGIN:PASSWORD@download.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
 ----
 

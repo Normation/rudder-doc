@@ -34,7 +34,7 @@ Now that we have access to Rudder branch version to use, we want to ensure that 
 name=Rudder ${rudder_branch} Repository
 baseurl=https://publisher.normation.com/rtf/rpm/${rudder_branch}/RHEL_${version}/
 gpgcheck=1
-gpgkey=https://repository.rudder.io/rudder_release_key.pub
+gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub
 ----
 
 
