@@ -41,13 +41,13 @@ image::dashboard-overview.png["Rudder dashboard", align="center"]
 
 We believe that there is a growing impedance mismatch between the Short Time of
 application development and deployment, and the Long Time of the infrastructure.
-The latter need rationalisation, stability and conformity before catching the hyped
+The latter needs rationalisation, stability and conformity before catching the hyped
 techno of the day, to be able to deliver reliable technical platform, continuously
 working with a minimum of risks.
 
 Rudder was made for the Long Time, to help team deliver efficient infrastructures with
 simplicity, giving them feedback where needed, keeping them alert of possible
-incoming problem, continuously checking conformity to their rules, and all of that
+incoming problems, continuously checking conformity to their rules, and all of that
 whatever the infrastructure they choose to build.
 
 image::introduction/build_run_devops.png["Modern IT production of services and Open Source automation tools stack", align="center"]
