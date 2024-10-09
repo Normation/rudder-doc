@@ -124,9 +124,9 @@ Let's add this configuration file:
 [source,mustache]
 ----
 server {
-    root {{{vars.Static_website.webroot}}};
-    server_name {{{vars.Static_website.domain}}};
-    listen {{{vars.Static_website.port}}};
+    root {{{vars.static_website.webroot}}};
+    server_name {{{vars.static_website.domain}}};
+    listen {{{vars.static_website.port}}};
 }
 ----
 
