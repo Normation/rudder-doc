@@ -18,7 +18,7 @@ vagrant ssh node
 And running the agent with:
 
 ----
-rudder agent run -u
+rudder agent run
 ----
 
 You should now be able to access your site:
