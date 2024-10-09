@@ -36,9 +36,8 @@ i.e. a technique plus a set of parameters.
 Defining a directive consists of choosing a technique and providing its parameters.
 
 First, let's give it a description. When using Rudder, keep in mind that filling all these documentation fields, though it may seem
-tedious, is very important for future reference, or collaboration with other.
-It is for example useful to include reference to external information (ticketing system, etc.),
-to allow keeping a track of all configuration changes.
+tedious, is very important for future reference, or collaboration with others. 
+It is for example useful to include references to external information (ticketing system, etc.), to allow keeping tracks of all configuration changes.
 Also, note these documentation fields are rendered as markdown, so you can include links, bullet points, etc.
 
 We now need to decide how we want to configure our SSH server.
