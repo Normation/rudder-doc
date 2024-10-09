@@ -13,7 +13,7 @@ It will make Rudder apply the selected directives on the target groups.
 
 ====
 
-We will define a new rule fow our web site configuration.
+We will define a new rule for our web site configuration.
 
 Let's go to the rules page, *Configuration management -> Rules*. On the left you can see a tree similar to what you saw in the groups page. It works in the same way, and rules categories
 are also here only for policy organization, and do not modify the rules behavior.
