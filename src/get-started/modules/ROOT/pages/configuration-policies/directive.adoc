@@ -33,7 +33,7 @@ This will make a new form appear, containing the configuration of the directive 
 As we said before, a technique is a parametrizable policy. A directive is a technique instance,
 i.e. a technique plus a set of parameters.
 
-Defining a directive consist of choosing a technique and providing its parameters.
+Defining a directive consists of choosing a technique and providing its parameters.
 
 First, let's give it a description. When using Rudder, keep in mind that filling all these documentation fields, though it may seem
 tedious, is very important for future reference, or collaboration with other.
