@@ -63,14 +63,14 @@ image::introduction/rule_compliance_details.png["Fine grained reporting on confi
 
 == Automatic inventory
 
-Rudder automatically does a technical, detailed inventory of the servers on
+Rudder does automatically a technical, detailed inventory of the servers on
 which the agent is installed.
 That inventory contains hardware information (like server kind, CPU, RAM,
-hard drives, etc), networks information (network interface and configuration),
+hard drives, etc), networks information (network interfaces and configuration),
 OS level data (OS type and name, version and patch level, etc) and software
 information (installed software with their versions).
 
-This information are available in Rudder configuration data base and can be
+These information are available in Rudder configuration data base and can be
 used to defined configuration rule targets. Typically, some configurations are
 linked to the kind of server (physical or virtual), the quantity of RAM
 available, the version of an OS library which contains a security bug, etc.
