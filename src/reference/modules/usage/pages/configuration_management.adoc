@@ -321,7 +321,7 @@ The setting is available either globally in the `Settings` menu (see image below
 
 We strongly advise to keep the default configuration and use the `Full compliance` mode.
 
-image:assets/images/reporting-mode-setting.png[Global configuration of reporting mode]
+image:reporting-mode-setting.png[Global configuration of reporting mode]
 
 [[_keep_last_compliance_duration]]
 == Non-answering nodes and configuration of last compliance validity
@@ -341,7 +341,7 @@ This configuration is done through a sub-property of the system node property `r
 For example, to keep the last compliance for one hour, go to the node's properties tab, find `rudder`
 property (likely marked `inherited` if you didn't change it yet), click "edit" action:
 
-image:assets/images/edit_rudder_system_node_property.png[Edit rudder node property]
+image:edit_rudder_system_node_property.png[Edit rudder node property]
 
 Then, add the following new sub-properties in the JSON value:
 
@@ -361,11 +361,11 @@ Value:
 }
 ----
 
-image:assets/images/set_compliance_expiration_policy.png[Change node compliance expiration policy]
+image:set_compliance_expiration_policy.png[Change node compliance expiration policy]
 
 Save, and now the node can be offline for one hour and you still have access to its last compliance with an adapted explanation:
 
-image:assets/node_keep_last_compliance_view.png[Compliance kept for a non-answering node]
+image:node_keep_last_compliance_view.png[Compliance kept for a non-answering node]
 
 === Configure expiration policy
 
