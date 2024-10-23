@@ -52,16 +52,6 @@ example:
 ${node.properties[datacenter]}
 ----
 
-
-[WARNING]
-
-====
-
-Note that even if properties' name is case-sensitive, collision can occur, on nodes based on Windows agent.
-We strongly recommend to use distinct strings for property's name, in particular on Windows node.
-
-====
-
 To get the original data (for debug only) there is the
 `properties.property_<fileid>` variable. A usage example:
 
