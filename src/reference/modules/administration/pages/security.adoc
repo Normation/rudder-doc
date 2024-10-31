@@ -36,6 +36,30 @@ rudder.auth.idle-timeout=15 minutes
 
 * Give minimal privileges to Rudder users using roles. You can create custom roles to match your needs in `/opt/rudder/etc/rudder-users.xml`.
 
+* When a user have not logged in, by default for 90 days, the account is marked as *disabled*, you can change this value by modifying or adding the parameter `rudder.users.cleanup.account.disableAfterLastLogin` in `/opt/rudder/etc/rudder-web.properties`, for example if we want to *disable* a user after 100 days of inactivity we can set the parameter like this :
+
+[source,ini]
+----
+rudder.users.cleanup.account.disableAfterLastLogin=100d
+----
+
+* A user is *deleted* after a certain period of time, by default the parameter `rudder.users.cleanup.account.deletedAfterLastLogin` is set to 120 days. You can change this value by modifying or adding this parameter in `/opt/rudder/etc/rudder-web.properties`, for example if we want to *delete* a user after 365 days of inactivity we can set the parameter like this :
+
+[source,ini]
+----
+rudder.users.cleanup.account.deletedAfterLastLogin=365d
+----
+
+* When an user is deleted (for example removed from `rudder-user.xml` file), then the user information, like status changes, are not purged immediately (typically to be able to do post-deletion accountability).
+You can modify the period of time (by default 30 days) after which the purge is performed by editing or adding the parameter `rudder.users.cleanup.purgeDeletedAfter`, like this:
+
+[source,ini]
+----
+rudder.users.cleanup.purgeDeletedAfter=60d
+----
+
+* Give minimal privileges to Rudder users using roles (through the **user-management** plugin). You can create custom roles to match your needs in `/opt/rudder/etc/rudder-users.xml`.
+
 * After a configuration change on a user that might have a security impact, the user session will be immediately invalidated (when user password or roles change, or when user is disabled or deleted).
 
 * When upgrading from a previous version to 8.0, regenerate all your exiting API tokens to use the more secure hashed storage.
