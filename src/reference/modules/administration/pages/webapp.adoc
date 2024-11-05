@@ -116,7 +116,7 @@ You can use Rudder's status HTTP API to check if the Webapp is running correctly
 [source, bash]
 ----
 # Locally on the server, directly calling the service HTTP interface
-curl --header "X-API-Token: $(cat /var/rudder/run/api-token)" http://127.0.0.1:8080/rudder/api/latest/system/status
+curl --header @/var/rudder/run/api-token-header http://127.0.0.1:8080/rudder/api/latest/system/status
 # Remotely with a dedicated API token, through reverse proxy
 curl --header "X-API-Token: MY_TOKEN" https://rudder.example.com/rudder/api/latest/system/status
 ----
