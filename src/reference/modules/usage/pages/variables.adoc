@@ -100,7 +100,7 @@ Example of setting the value for a node property to 'maa' (override object, appe
 
 ----
 
- curl -X POST -H "X-API-TOKEN: $(cat /var/rudder/run/api-token)" -H "Content-Type: application/json" https://rudder-server/rudder/api/latest/nodes/9930cee5-1fc8-43dd-b8f8-feb3812b803f -d '{"properties":[{"name":"OverrideUpdate", "value":{"array":[3,4], "string":"child", "object":{"child":"other"}}, "inheritMode":"maa"}]}'
+ curl -X POST --header @/var/rudder/run/api-token-header -H "Content-Type: application/json" https://rudder-server/rudder/api/latest/nodes/9930cee5-1fc8-43dd-b8f8-feb3812b803f -d '{"properties":[{"name":"OverrideUpdate", "value":{"array":[3,4], "string":"child", "object":{"child":"other"}}, "inheritMode":"maa"}]}'
 
 ----
 

@@ -64,7 +64,7 @@ to `jq` (provided as a dependency of Rudder):
 
 [source,shell]
 ----
-MODE=$(curl -k -X GET -H "X-API-TOKEN: $(cat /var/rudder/run/api-token)" -H "Content-Type: application/json" \
+MODE=$(curl -k -X GET -H @/var/rudder/run/api-token-header -H "Content-Type: application/json" \
   "https://localhost/rudder/api/latest/nodes/${RUDDER_NODE_ID}?include=minimal,properties" | \
   jq -r '.data.nodes[0].properties | map(select(.name = "accept"))[0].value')
 
@@ -81,7 +81,7 @@ Now that we know that the node can be accepted, we are doing it via an API call
 
 [source,shell]
 ----
-curl -f -k -X POST -H "X-API-TOKEN: $(cat /var/rudder/run/api-token)" \
+curl -f -k -X POST -H @/var/rudder/run/api-token-header \
   "https://localhost/rudder/api/latest/nodes/pending/${RUDDER_NODE_ID}" -d 'status=accepted'
 ----
 
