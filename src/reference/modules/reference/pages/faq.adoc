@@ -6,3 +6,18 @@
 * https://docs.rudder.io/versions[When are versions published and how long are they maintained?]
 * xref:installation:operating_systems.adoc#server-supported-os[What is the OS support deprecation policy?]
 * xref:reference:contribute.adoc#_bugs_prioritization[How are Rudder bug prioritized?]
+
+== Security
+
+=== Has Rudder been audited?
+
+Rudder has had several user-conducted pentests of variable depth and scope over the years,
+the reports of which are private.
+We also order our own code reviews and pentests, and make the reports public.
+
+==== July 2024: node-server communications audit and `relayd` code review
+
+https://cure53.de[Cure53] performed an audit of the node-server communication logic
+and a code review of the `relayd` daemon that handles most of the communication with nodes
+on relays and root servers. Read the full report https://docs.rudder.io/documents/CURE53-RUD-01-report.pdf[RUD-01-report]
+for details.
