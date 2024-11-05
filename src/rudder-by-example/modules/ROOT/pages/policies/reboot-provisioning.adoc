@@ -31,13 +31,13 @@ example every minute, as a cron job):
 set -e
 export PATH="/opt/rudder/bin/:${PATH}"
 
-token=$(cat /var/rudder/run/api-token)
+token=/var/rudder/run/api-token-header
 mkdir -p /var/log/rudder/jobs/
 
-initializing_nodes=$(curl --silent -k --header "X-API-Token: ${token}" 'https://127.0.0.1/rudder/api/latest/nodes?include=minimal&where=\[\{"objectType":"node","attribute":"state","comparator":"eq","value":"initializing"\}\]' | jq -r '.data.nodes[].id')
+initializing_nodes=$(curl --silent -k --header @${token} 'https://127.0.0.1/rudder/api/latest/nodes?include=minimal&where=\[\{"objectType":"node","attribute":"state","comparator":"eq","value":"initializing"\}\]' | jq -r '.data.nodes[].id')
 
 for node in ${initializing_nodes}; do
-  compliance=$(curl --silent -k --header "X-API-Token: ${token}" "https://127.0.0.1/rudder/api/latest/compliance/nodes/${node}?level=0" | jq '.data.nodes[0].compliance')
+  compliance=$(curl --silent -k --header @${token} "https://127.0.0.1/rudder/api/latest/compliance/nodes/${node}?level=0" | jq '.data.nodes[0].compliance')
   if [ "${compliance}" = "100" ]; then
     echo "$(date): ${node} has ${compliance}% compliance, switching to 'enabled' status" >> /var/log/rudder/jobs/provisioning.log
     curl --silent -k --header "X-API-Token: ${token}" --request POST "https://127.0.0.1/rudder/api/latest/nodes/${node}?state=enabled" >/dev/null
