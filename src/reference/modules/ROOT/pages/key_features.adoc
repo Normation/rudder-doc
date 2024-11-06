@@ -13,7 +13,7 @@ to execute.
 image::continuous-configuration.png[Continuous Configuration]
 
 
-Rudder is natively integrated with the supported OS (Linux, Windows, AIX - see
+Rudder is natively integrated with the supported OS (Linux, Windows - see
 xref:installation:operating_systems.adoc#node-supported-os[the list of supported Operating Systems for Nodes]) so that it provides generic, abstract, OS independent
 primitives to the user who can:
 

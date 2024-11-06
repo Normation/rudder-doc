@@ -67,14 +67,6 @@ zypper remove rudder-agent
 
 ----
 
-On AIX (all supported version):
-
-----
-
-rpm -e rudder-agent
-
-----
-
 On Slackware:
 
 ----
@@ -82,22 +74,6 @@ On Slackware:
 slackpkg remove rudder-agent
 
 ----
-
-[CAUTION]
-====
-
-On AIX, you will need to edit main crontab to remove `rudder` related commands by hand:
-
-- edit `/var/spool/cron/crontabs/root`
-- remove line(s) about `rudder`. There should be only one, looking like:
-
-----
-
-0,5,10,15,20,25,30,35,40,45,50,55 * * * * /opt/rudder/bin/rudder agent check -q >> /var/log/rudder/agent-check/check.log 2>&1
-
-----
-
-====
 
 === Backup files
 

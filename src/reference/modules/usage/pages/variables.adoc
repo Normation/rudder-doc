@@ -432,7 +432,7 @@ Information about a node's policy server:
 ====
 
 These variables are not available on Windows nodes, but
-only on with the Linux/AIX agent.
+only on with the Linux agent.
 
 ====
 

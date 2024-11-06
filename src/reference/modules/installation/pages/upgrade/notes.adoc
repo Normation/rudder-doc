@@ -47,93 +47,9 @@ A migration in the `rudder-users.xml` file will be applied since the rudder serv
 
 The user-management plugin in 8.1 is no longer needed to have multiple users and manage them in Rudder : the "User management" administration page is now integrated in Rudder since the 8.2 version. All features from the plugin have been moved, and additional features such as specific authentication provider and user API tokens still require the installation of the xref:plugins:auth-backends.adoc[authentication backends] and xref:plugins:api-authorizations.adoc[api-authorization] plugins.
 
+== Upgrade from Rudder 8.0 or older to 8.2
 
-== Upgrade from Rudder 7.3 or 8.0 to 8.1
-
-Upgrade from Rudder 7.3 or 8.0 is supported.
-
-=== New implementation of `rudder package`
-
-The plugin manager has been rewritten and its command-line interface is now simpler
-and more user-friendly.
-All commands taking plugin names now accept multiple values.
-
-The new interface is not compatible with the earlier one and the arguments and options
-were reworked. For most used commands the changes are:
-
-* `rudder package install-file <file>` -> `rudder package install <file>`
-* `rudder package plugin enable/disable <plugin>` -> `rudder package enable/disable <plugin>`
-* `rudder package check-connection` -> `rudder package update --check`
-
-You can still use the previous implementation with `RUDDER_PKG_COMPAT=1 rudder package ...`, but it will
-be removed in an upcoming release.
-
-=== PostgreSQL>=13 version on RHEL 8 (and related distributions)
-
-include::{partialsdir}/rhel_postgres.adoc[]
-
-=== Rudder run now update the policies by default
-
-Until Rudder 7, running `rudder agent run` only ran local policies, and to update the policies
-from the server before running them, users had to add the `-u` flag.
-
-In Rudder 8 the default behavior is now to update the policies before running them.
-A new `-l` (for "local") flag disables the update, and the `-u` flag is now ignored.
-
-=== Drop radius support for user authentication
-
-The support of user authentication through Radius, which was deprecated since Rudder 7, has been removed.
-
-=== API tokens
-
-The API tokens storage changes starting from 8.0.
-Plain tokens are now only available once after creation or
-re-generation, and the server only stores a hash.
-This improves the security and traceability of the tokens.
-
-It does not change anything from a user perspective: the
-tokens are still a 32-character string, and are used in the same way
-in the requests, all changes are in the server.
-
-For compatibility, previous tokens will continue working
-after upgrade, and a warning will be displayed in the interface
-if you still use them.
-Users are encouraged to plan replacement of the old tokens
-after upgrade, as they will stop
-working in a future Rudder version.
-
-=== Node delete mode is "erase"
-
-Historically, Rudder has supported a node delete mode where node information
-was moved in a dedicated LDAP branch and not deleted in addition to the 
-real deletion of information. The choice was configured by property
-`rudder.nodes.delete.defaultMode` and the default was `erase` since Rudder 7.2.
-At the same time, the `move` mode was deprecated.
-As of Rudder 8.0, the old `move` mode is removed and node information is erased
-from the database when a node is deleted.
-
-=== Windows OS conditions
-
-Windows agents starting from 7.3.4 (and 8.0.0) have new OS conditions for each Windows version
-(e.g. _Windows Server 2012 R2_, _Windows 11_, etc.)
-and they are now available in the technique editor interface, in the _Conditions_ method tab.
-
-[WARNING]
-
-====
-
-Do not use these new conditions on agents older then 7.3.4, as they will never be defined. This means:
-
-* Positive conditions like `windows_10` will never be defined, even on a Windows 10 system
-* Negative conditions like `!windows_server_2016` will always be defined, even on a Windows Server 2016
-
-You should hence make sure your Windows agents are >=8.0 or >=7.3.4 before using these new conditions.
-
-====
-
-== Upgrade from Rudder 7.2 or older to 8.1
-
-Direct upgrades from 7.2 versions and older are no longer supported on 8.1.
+Direct upgrades from 8.0 versions and older are no longer supported on 8.2.
 If you are still running one of those, either on servers or nodes,
-please first upgrade to one of the supported versions, and then upgrade to 8.1.
+please first upgrade to one of the supported versions, and then upgrade to 8.2.
 
