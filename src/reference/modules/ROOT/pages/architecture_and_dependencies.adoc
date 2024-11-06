@@ -35,6 +35,4 @@ It requires at most 500MB of free disk space.
 
 Rudder is currently supported on all major Linux distributions (Red Hat Enterprise Linux and derivatives
 like CentOS and Scientific Linux, Debian, Ubuntu, SUSE Linux Enterprise, etc.) for all supported versions,
-but also for older unsupported ones, Windows for desktops and servers (Server 2008 R2 or newer) and
-AIX (5.3 or newer). Experimental builds for Solaris, FreeBSD, Android and Mac OS X also exist,
-as well as a version for ARM architecture.
+but also for older unsupported ones and Windows for desktops and servers (Server 2008 R2 or newer).

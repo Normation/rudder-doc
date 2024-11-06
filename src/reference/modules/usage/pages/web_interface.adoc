@@ -170,7 +170,7 @@ The available search keywords are:
 |======================
 |Keyword |Search for
 |hostname |Hostnames
-|os_type |OS types (windows, linux, aix...)
+|os_type |OS types (windows, linux...)
 |os_name |OS Names (Windows Server 2012, Debian... )
 |os_version |OS versions (8, 2008 R2, ...)
 |os |OS Full Names (Debian GNU/Linux 6.0.10 (squeeze)...)

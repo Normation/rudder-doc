@@ -2,9 +2,9 @@ Add a yum repository for Rudder:
 
 ----
 
-echo '[Rudder_8.1]
-name=Rudder 8.1
-baseurl=http://repository.rudder.io/rpm/8.1/AL_2023/
+echo '[Rudder_8.2]
+name=Rudder 8.2
+baseurl=http://repository.rudder.io/rpm/8.2/AL_2023/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
@@ -18,11 +18,11 @@ the username and the password by your Rudder account):
 
 ----
 
-echo '[Rudder_8.1]
-name=Rudder 8.1
+echo '[Rudder_8.2]
+name=Rudder 8.2
 username=LOGIN
 password=PASSWORD
-baseurl=http://download.rudder.io/rpm/8.1/AL_2023/
+baseurl=http://download.rudder.io/rpm/8.2/AL_2023/
 gpgcheck=1
 gpgkey=https://download.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
