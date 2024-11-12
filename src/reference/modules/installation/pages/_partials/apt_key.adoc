@@ -7,7 +7,7 @@ into apt using the following command:
 
 ----
 
-wget --quiet -O /etc/apt/trusted.gpg.d/rudder_apt_key.gpg "https://repository.rudder.io/rpm/rudder_rpm_key.gpg"
+wget --quiet -O /etc/apt/trusted.gpg.d/rudder_apt_key.gpg "https://repository.rudder.io/apt/rudder_apt_key.pub"
 
 ----
 
