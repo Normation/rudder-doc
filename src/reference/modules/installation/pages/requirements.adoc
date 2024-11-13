@@ -187,10 +187,6 @@ Report logs (`/var/log/rudder/reports`) size will depend on the number of nodes 
 Non-compliant reports (error, repairs) from nodes are stored in `/var/log/rudder/compliance`, and with an average of 95%
 compliance from node, a safe estimation of disk usage is 200MB as a baseline, plus 11 MB per managed nodes
 
-Note: When using Syslog reporting, ticking "Log all reports received to `/var/log/rudder/reports/all.log`"
-under the *Administration -> Settings* tab in the Rudder web interface will record all logs from nodes in a text file,
-on top from the SQL database. This uses a lot of disk space, and is disabled by default.
-
 =======
 
 ====
