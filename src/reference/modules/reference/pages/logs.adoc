@@ -28,11 +28,6 @@ The `java.log` is used to log the JVM errors.
 
 The `apache2` folder is mostly used to log inventories and API calls.
 
-=== Reports
-
-Only active when using the `SYSLOG` reporting mode and enabled in the webapp settings, it aggregates all raw
-reports received from the nodes under the file `/var/log/rudder/reports/all.log`.
-
 === Compliance
 
 The `compliance` folder will aggregate by default all non `Success` or `N/A` reports under `/var/log/rudder/compliance/non-compliant-reports.log`

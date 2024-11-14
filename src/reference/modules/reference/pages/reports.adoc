@@ -14,8 +14,6 @@ Each Technique, when converted into a Directive and applied to a Node, must gene
 * The value of the key variable in the component (or None if not available)
 * The Execution Timestamp, to know in which execution of the agent the policy has been generated
 
-These reports are sent via Syslog to the Rudder Root Server, parsed and put in a database, that is queried to generate the reporting
-
 === Report format
 
 A report has the following format :
