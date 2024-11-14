@@ -1,30 +1,5 @@
 = Agent administration
 
-== Logging into syslog
-
-Linux agent generates logs that are sent to the rudder server, and also stored by default in the `LOG_LOCAL3` syslog facility.
-
-Since Rudder 7.1.7 and Rudder 7.2.0, this facility is configurable within the `rudder` node property, by overriding the `log.syslog_facility` key with group properties and/or node properties.
-
-Supported facilities::
-
-* LOG_USER
-* LOG_DAEMON
-* LOG_LOCAL0
-* LOG_LOCAL1
-* LOG_LOCAL2
-* LOG_LOCAL3
-* LOG_LOCAL4
-* LOG_LOCAL5
-* LOG_LOCAL6
-* LOG_LOCAL7
-* NONE
-
-NOTE: `NONE` is only available since Rudder 7.1.7 and 7.2.0, and prevent outputing logs in syslog
-
-NOTE: With the `NONE` facility, the component cf-served will still have some logs written to syslog, to remove them totally, you will need to follow this https://docs.rudder.io/reference/7.1/administration/server.html#_rudder_cf_serverd_logging[procedure]
-
-
 == Package manager data caching
 
 Linux agent caches information from the package manager to prevent overloading the system. It stores the list of installed packages on the system for 60 minutes, and the list of available updates for 240 minutes.
