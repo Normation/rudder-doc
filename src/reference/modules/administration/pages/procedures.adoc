@@ -113,6 +113,12 @@ systemctl start rudder-slapd
 [[_migration_backups_and_restores]]
 == Server backup and migration
 
+[CAUTION]
+====
+
+We are only supporting backup and restore on the same exact version of Rudder. Performing a backup and restore on different version of Rudder can cause major breaks that cannot be undone easily, we strongly advise against doing so.
+====
+
 It is advised to backup frequently your Rudder installation in case
 of a major outage.
 
@@ -126,6 +132,7 @@ This backup procedure will operate on principal Rudder data sources:
 * The PostgreSQL database
 * The configuration-repository folder
 * Rudder configuration
+* Rudder certificates
 
 It will also backup the application logs.
 
@@ -159,6 +166,12 @@ tar -C /var/rudder -zcf rudder-backup-$(date +%Y%m%d).tar.gz configuration-repos
 # Then backup Rudder configuration
 tar -C /opt/rudder -zcf rudder-etc-backup-$(date +%Y%m%d).tar.gz etc/
 
+# Backup the apache2 Rudder configuration file
+tar -C /var/rudder -zcf rudder-apache2-backup-$(date +%Y%m%d).tar.gz /etc/apache2/sites-enabled/
+
+# You will need to read the file /etc/apache2/sites-enabled/rudder.conf to get the location of the certifactes and copy them
+tar -C /var/rudder -zcf /tmp/rudder-certificates-backup-$(date +%Y%m%d%s).tar.gz /directory/file1.conf /directory/file2.conf
+
 # Finally, backup the logs (if you need them)
 tar -C /var/log -zcf rudder-log-backup-$(date +%Y%m%d).tar.gz rudder/
 
@@ -189,6 +202,12 @@ rudder agent disable
 
 # Stop Rudder services
 systemctl stop rudder-agent rudder-server rudder-relayd
+
+# Replace apache2 Rudder configuration
+tar -C /etc/apache2/sites-enabled/ rudder-apacahe2-backup-XXXXXXXX.tar.gz
+
+# Place the certificates files where they originated according to /etc/apache2/sites-enabled/rudder.conf
+tar -xvf rudder-certificates-backup-XXXXXX.tar.gz -C /tmp/ 
 
 # Drop the OpenLDAP database
 rm -rf /var/rudder/ldap/openldap-data/*.mdb
