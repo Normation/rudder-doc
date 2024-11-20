@@ -12,7 +12,6 @@
 ** xref:system/update-rudder-agent-package.adoc[Keep Rudder agents up to date]
 ** xref:system/manage-registry.adoc[Manage Windows registry content]
 ** xref:system/file-server-relay.adoc[Use relays and server as repository mirrors]
-** xref:system/system-update.adoc[Automatic system update]
 * Extending Rudder
 ** xref:extending-rudder/add-new-methods.adoc[Add new methods to the technique editor]
 * Configuration policy
