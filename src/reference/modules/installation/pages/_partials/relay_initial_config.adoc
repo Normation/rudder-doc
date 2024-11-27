@@ -22,6 +22,14 @@ When every step has completed successfully:
 - It will generate specific policies for the relay
 - The relay will update and switch to its new role
 
+[NOTE]
+====
+
+You may have to run `rudder agent run` command on the relay, before adding new nodes
+under this relay.
+
+====
+
 This is an example of node details pane showing a Rudder relay. Note the "Role:
 Rudder relay" part that shows that the machine has successfully changed
 from a node to a relay.
