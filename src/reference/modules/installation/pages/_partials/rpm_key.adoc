@@ -7,7 +7,7 @@ into rpm using the following command:
 
 ----
 
-rpm --import https://repository.rudder.io/rpm/rudder_rpm_key.pub
+rpm --import https://repository.rudder.io/rudder_release_key.pub
 
 ----
 
@@ -15,7 +15,8 @@ Our key fingerprint is:
 
 ----
 
-pub  1024R/6F07D355 2012-11-09 Rudder Project (RPM release key) <security@rudder-project.org>
-      Key fingerprint = 1141 A947 CDA0 4E83 82C1  B9C4 ADAB 3BD3 6F07 D355
+pub   rsa4096 2011-12-15 [SC]
+      7C1698177904212DD58CB4D19322C330474A19E8
+uid                      Rudder Project (release key) <security@rudder-project.org>
 
 ----

@@ -2,6 +2,24 @@
 
 include::{partialsdir}/upgrade_notes.adoc[]
 
+Re-import the rpm key since it has changed sinc Rudder 8.3
+
+----
+
+rpm --import https://repository.rudder.io/rudder_release_key.pub
+
+----
+
+Our key fingerprint is:
+
+----
+
+pub   rsa4096 2011-12-15 [SC]
+      7C1698177904212DD58CB4D19322C330474A19E8
+uid                      Rudder Project (release key) <security@rudder-project.org>
+
+----
+
 Add the Rudder packages repository:
 
 include::{partialsdir}/sles15_repo.adoc[]

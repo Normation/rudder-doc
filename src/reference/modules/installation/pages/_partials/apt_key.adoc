@@ -24,7 +24,7 @@ On ancient versions (before Debian 7 and before Ubuntu 10.04), you need to use t
 
 ----
 
-wget --quiet -O- "https://repository.rudder.io/rpm/rudder_rpm_key.pub" | sudo apt-key add -
+wget --quiet -O- "https://repository.rudder.io/rudder_release_key.pub" | sudo apt-key add -
 
 ----
 
