@@ -778,6 +778,7 @@ NOTE: the `string` that define a condition is often called a `class` - not in th
 We can use conditions to limit the evaluation of a method to a specific context, for example only on debian 9 or only when a given file has been modified by the agent.
 
 This allows:
+
 - using actions (like service restart) by limiting them to a specific context
 - writing generic policies compatible with different operating systems, by having specific parts for each
 
