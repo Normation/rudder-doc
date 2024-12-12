@@ -6,30 +6,6 @@ include::{partialsdir}/rpm_key.adoc[]
 
 include::{partialsdir}/rhel_repo.adoc[]
 
-* on Amazon Linux 1:
-
-----
-
-echo '[Rudder_8.1]
-name=Rudder 8.1
-baseurl=http://repository.rudder.io/rpm/8.1/RHEL_6/
-gpgcheck=1
-gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
-
-----
-
-* on Amazon Linux 2:
-
-----
-
-echo '[Rudder_8.1]
-name=Rudder 8.1
-baseurl=http://repository.rudder.io/rpm/8.1/RHEL_7/
-gpgcheck=1
-gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
-
-----
-
 * on Amazon Linux 2023:
 
 ----
@@ -41,6 +17,40 @@ gpgcheck=1
 gpgkey=https://repository.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
 
 ----
+
+[NOTE]
+====
+
+Downloading the Amazon Linux 1 & 2 agents requires an active subscription.
+
+====
+
+* on Amazon Linux 1:
+
+----
+
+echo '[Rudder_8.1]
+name=Rudder 8.1
+username=LOGIN
+password=PASSWORD
+baseurl=http://download.rudder.io/rpm/8.1/RHEL_6/
+gpgcheck=1
+gpgkey=https://download.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
+
+----
+
+* on Amazon Linux 2:
+
+----
+
+echo '[Rudder_8.1]
+name=Rudder 8.1
+baseurl=http://download.rudder.io/rpm/8.1/RHEL_7/
+gpgcheck=1
+gpgkey=https://download.rudder.io/rpm/rudder_rpm_key.pub' > /etc/yum.repos.d/rudder.repo
+
+----
+
 
 Install the package:
 
