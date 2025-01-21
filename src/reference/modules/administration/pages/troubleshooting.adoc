@@ -68,4 +68,33 @@ The copy of the file failed: the destination (/path/to/the/file) is not stored i
 
 This is due to a security policy, to avoid privilege escalation using the Rudder agent. You can edit links that are either owned by root, by the user currently running the agent (often root) or if the owner and group of the symbolic link are the same as the target.
 
+=== curl: (90) SSL: public key does not match pinned public key
 
+==== ESET endpoint security replacing issuers
+
+If the node is in the allowed network, the problem can come from https://help.eset.com/ees/9/en-US/idh_config_epfw_ssl.html[ESET Endpoint Security].
+It contains a certificate checker that modifies certificates (on the fly) that are consider invalids, by replacing the issuer field with this exact string:
+```bash
+CN=The original certificate provided by the server is untrusted
+```
+This changes the hash of the certificate, and prevents the Rudder agent from contacting its policy server over HTTPS.
+To identify precisely the problem follow these instructions:
+
+- On the node run
+```bash
+grep POLICY_SERVER_KEY_HASH /var/rudder/cfengine-community/inputs/rudder.json@ 
+```
+You will get a hash formatted like that `sha256//<hash>`
+
+- Then run this curl command to get information on certificate
+```bash
+curl -v -k --pin sha256//<hash> https://<policy-server-hostname-or-ip>
+```
+`sha256//<hash>` should be replaced by the value from the previous command
+
+- In the output, check the issuer line if it contains this following line, then it is linked to https://help.eset.com/ees/9/en-US/[ESET Endpoint Security software]
+```bash
+CN=The original certificate provided by the server is untrusted
+```
+
+To fix this problem you *should add the root server’s certificate to the Endpoint Detection and Response (EDR) configuration and explicitly allow it*: https://help.eset.com/ees/9/en-US/idh_config_epfw_ssl_known.html
