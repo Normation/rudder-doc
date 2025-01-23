@@ -1,5 +1,5 @@
-ALL_VERSIONS = 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10 2.11 3.0 3.1 3.2 4.0 4.1 4.2 4.3 5.0 6.0 6.1 6.2 7.0 7.1 7.2 7.3 8.0 8.1 8.2
-VERSIONS = 8.1 8.2
+ALL_VERSIONS = 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10 2.11 3.0 3.1 3.2 4.0 4.1 4.2 4.3 5.0 6.0 6.1 6.2 7.0 7.1 7.2 7.3 8.0 8.1 8.2 8.3
+VERSIONS = 8.1 8.2 8.3
 VERSION_DOCS = $(addprefix doc-, $(VERSIONS))
 VERSION_ARCHIVES = $(addsuffix .archive, $(VERSIONS))
 
