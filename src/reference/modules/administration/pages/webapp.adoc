@@ -94,7 +94,7 @@ See the https://docs.rudder.io/api/[API documentation] for more information abou
 
 The webapp outputs its logs directly into `/var/log/rudder/webapp`, and handles daily
 log file rotation itself.
-The files names have a `/var/log/rudder/webapp/YEAR_MONTH_DAY.stderrout.log` format.
+The files names have a `/var/log/rudder/webapp/webapp-YEAR_MONTH_DAY.log.gz` format.
 
 The log levels are configurable in `/opt/rudder/etc/logback.xml`.
 

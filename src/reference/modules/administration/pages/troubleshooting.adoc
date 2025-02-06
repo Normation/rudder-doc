@@ -15,7 +15,7 @@ Run `rudder agent inventory -i`:
 ** Run the given curl command after removing the `-s` or `--silent` argument to have a complete error
 
 * If it succeeds then the problem is probably on the root server. Check the web application logs in
-  `/var/log/rudder/webapp/TODAY.stderrout.log` for lines about your node's inventory:
+  `/var/log/rudder/webapp/webapp.log` for lines about your node's inventory:
 
 ** If you have an *Invalid signature* message
 

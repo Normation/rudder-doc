@@ -21,7 +21,7 @@ webapp
 === Webapp
 
 All web application logs are located under the `webapp` folder. A new log file is generated everytime the service `rudder-jetty` is restarted.
-If you want to access the current webapp logs, look for the file named `<today's date>.stderrout.log`.
+If you want to access the current webapp logs, look for the file named `webapp.log`.
 The `java.log` is used to log the JVM errors.
 
 === Apache2

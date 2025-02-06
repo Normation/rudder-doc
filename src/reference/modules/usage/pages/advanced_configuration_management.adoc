@@ -61,7 +61,7 @@ Two version of each of these files is conserved: the oldest one has a `.old` suf
 
 ==== `webapp` logs
 
-Rudder web application logs located in `/var/log/rudder/webapp/yyyy_MM_dd.stderrout.log` contains information
+Rudder web application logs located in `/var/log/rudder/webapp/webapp.log` contains information
 about policy generation process. All policy generation logs are gathered under `policy.generation`
 namespace (with optionally more precise namespace, like `policy.generation.timing` for timing information, or
 `policy.generation.update` for updated nodes, etc).
@@ -410,7 +410,7 @@ Where `archive.zip` is the path toward your archive file.
 
 Archives import/export feature has its own logger named `application.archive`.
 
-You can get more information about what is happening in `/var/log/rudder/webapp/yyyy_MM_dd.stderrout.log` by adding the following logger definition in file
+You can get more information about what is happening in `/var/log/rudder/webapp/webapp.log` by adding the following logger definition in file
 `/opt/rudder/etc/logback.xml` (no need to restart rudder after change) above lines `YOU SHOULD NOT HAVE TO CHANGE THINGS BELOW THAT LINE`:
 
 ----

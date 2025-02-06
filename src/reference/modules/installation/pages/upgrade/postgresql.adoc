@@ -22,7 +22,7 @@ sure that it will not enable rudder-relayd and rudder-jetty back during the upgr
 
 Upgrading PostgreSQL without disabling these service can lead to inconsistencies and might break constraints within the database schema.
 When the database constraints are broken, the typical symptom is an absence of compliance for all nodes, along with errors message in webapp logs
-in `/var/log/rudder/webapp/yyyy_MM_dd.stderrout.log` with the table name affected
+in `/var/log/rudder/webapp/webapp.log` with the table name affected
 
 Also, we strongly recommend you to have a *database backup before trying to upgrade* it.
 
