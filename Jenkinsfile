@@ -8,7 +8,13 @@ pipeline {
         stage('Tests') {
             parallel {
                 stage('typos') {
-                    agent { label 'script' }
+                    agent {
+                        dockerfile {
+                            label 'generic-docker'
+                            filename 'Dockerfile'
+                            args '-u 0:0'
+                        }
+                    }
                     steps {
                         sh script: 'typos --exclude "*.svg" --exclude "rudder-theme"', label: 'check typos'
                     }
