@@ -205,7 +205,7 @@ When configuration is enforced, it means that the system is not in the desired s
 
 Non compliant::
 
-When configuration is not enforced, it means that the systemn is not in the desired state. A drift is reported.
+When configuration is not enforced, it means that the system is not in the desired state. A drift is reported.
 
 Not applicable::
 
@@ -263,8 +263,8 @@ image:audit_mode_general_overview.png[]
 This mode can be set:
 
 * Globally on the Rudder server, in the `Settings > General` page. In this can case there are two options: allow to override this mode on specific items, or use the global configuration everywhere.
-* On a directive, in the directive configuration form, 
-* On a node, from the `Node details > Settings` page, 
+* On a directive, in the directive configuration form,
+* On a node, from the `Node details > Settings` page,
 * From the node itself, which will override the mode configured on the Rudder server, thanks to `rudder agent set-force-audit` and `rudder agent unset-force-audit` commands.
 
 A lot of attention and several safeguards have been put in place to ensure that if you choose to use "Audit"
@@ -305,18 +305,18 @@ The main goal of Rudder is to compute compliance of configured rules on nodes by
 compliance reports with the list of expected checks for that node that Rudder knows about, and of course that the value of each check matches what
 is expected.
 
-This modelization of what Rudder expects allow it to be sure that all checks were actually done correctly. This reporting mode is the default one in Rudder, and 
+This modelization of what Rudder expects allow it to be sure that all checks were actually done correctly. This reporting mode is the default one in Rudder, and
 is called `full compliance` reporting mode.
 
 On some cases, especially when bandwidth between nodes and Rudder is low or when there is a really big number of nodes with lots of checks, you may want to
-reduce the number of check statuses sent in reports. 
-For that, there is a setting allowing to send only non-compliant checks in report. Since Rudder keeps a model of what is expected to be checked, 
-Rudder can then compute what check were actually done by assuming that the missing one are successes. 
+reduce the number of check statuses sent in reports.
+For that, there is a setting allowing to send only non-compliant checks in report. Since Rudder keeps a model of what is expected to be checked,
+Rudder can then compute what check were actually done by assuming that the missing one are successes.
 
-On extreme cases, for example for embedded hardware with costly network data plan, you may want to totally disable reporting. In that case, 
+On extreme cases, for example for embedded hardware with costly network data plan, you may want to totally disable reporting. In that case,
 Rudder will assume that the node is doing what it needs and Rudder will not put a "no answer" status for it, even if it does not get reports back.
 
-The setting is available either globally in the `Settings` menu (see image below), or on a node-by-node basis in its setting tab. 
+The setting is available either globally in the `Settings` menu (see image below), or on a node-by-node basis in its setting tab.
 
 We strongly advise to keep the default configuration and use the `Full compliance` mode.
 

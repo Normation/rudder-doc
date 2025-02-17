@@ -380,7 +380,7 @@ curl -k -X GET -H "X-API-TOKEN: ...." 'https://rudderhost/rudder/api/latest/arch
 ----
 
 
-==== Extracting configuration items fom a past revision
+==== Extracting configuration items from a past revision
 
 Finally, you can obtain an archive with configuration from a past revision. Just append the revision to the item id after a URL-encoded `+` (ie `%2B`) and its dependencies will be resolved for the same revision.
 

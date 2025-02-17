@@ -211,10 +211,10 @@ Node properties can be managed by using https://docs.rudder.io/api/#operation/up
 image::node-properties.png[Node properties in UI]
 
 ==== Extendable properties along the hierarchy
-Properties do not have the same flexibility when creating a new property compared to when overriding a global property : the inherit mode of the global property is always kept when resolving the properties, from the top to the bottom of the hierarchy : `Global > Group > Node`. 
+Properties do not have the same flexibility when creating a new property compared to when overriding a global property : the inherit mode of the global property is always kept when resolving the properties, from the top to the bottom of the hierarchy : `Global > Group > Node`.
 
 This means that along the hierarchy, the behavior of appending or prepending list or string values is only possible when the highest parent overrides the global property having the inherit mode 'a' or 'p', the default value being otherwise 'o', for override.
-In summary, the overriding strategy along the hierarchy always depends on the behavior set for the global property, being the topmost of the hiearchy.
+In summary, the overriding strategy along the hierarchy always depends on the behavior set for the global property, being the topmost of the hierarchy.
 
 Therefore if you want a customisable and extendable list as property of the node (it is also possible with string values), an easy way to do it is to :
 

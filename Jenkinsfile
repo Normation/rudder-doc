@@ -11,7 +11,8 @@ pipeline {
                     agent {
                         dockerfile {
                             label 'generic-docker'
-                            additionalBuildArgs '-f https://raw.githubusercontent.com/Normation/rudder-tools/refs/heads/master/ci/typos.Dockerfile'
+                            filename ''
+                            additionalBuildArgs '-f https://raw.githubusercontent.com/Normation/rudder-tools/refs/heads/master/ci/common.Dockerfile'
                             args '-u 0:0'
                         }
                     }
