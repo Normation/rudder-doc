@@ -23,7 +23,7 @@ Click on *Create Rule*.
 image::./rule-2.png["New rule form", align="center"]
 
 This will open the configuration page of the new rule.
-Configuring a rules consists in selecting a list of directives and a list of groups you want ot link.
+Configuring a rules consists in selecting a list of directives and a list of groups you want to link.
 
 To select a group or a directive, simply click on it, and it will appear in the right green zone.
 You can then save your rule.

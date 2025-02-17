@@ -1,0 +1,12 @@
+[files]
+extend-exclude = [
+  "Jenkinsfile"
+]
+
+[default]
+extend-ignore-re = [
+  # xml content
+  "<[^\\n]+>",
+  "rpmbuild.*",
+  "OAUTHv2"
+]

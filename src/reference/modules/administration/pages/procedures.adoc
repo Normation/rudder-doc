@@ -169,7 +169,7 @@ tar -C /opt/rudder -zcf rudder-etc-backup-$(date +%Y%m%d).tar.gz etc/
 # Backup the apache2 Rudder configuration file
 tar -C /var/rudder -zcf rudder-apache2-backup-$(date +%Y%m%d).tar.gz /etc/apache2/sites-enabled/
 
-# You will need to read the file /etc/apache2/sites-enabled/rudder.conf to get the location of the certifactes and copy them
+# You will need to read the file /etc/apache2/sites-enabled/rudder.conf to get the location of the certificates and copy them
 tar -C /var/rudder -zcf /tmp/rudder-certificates-backup-$(date +%Y%m%d%s).tar.gz /directory/file1.conf /directory/file2.conf
 
 # Finally, backup the logs (if you need them)
@@ -207,7 +207,7 @@ systemctl stop rudder-agent rudder-server rudder-relayd
 tar -C /etc/apache2/sites-enabled/ rudder-apacahe2-backup-XXXXXXXX.tar.gz
 
 # Place the certificates files where they originated according to /etc/apache2/sites-enabled/rudder.conf
-tar -xvf rudder-certificates-backup-XXXXXX.tar.gz -C /tmp/ 
+tar -xvf rudder-certificates-backup-XXXXXX.tar.gz -C /tmp/
 
 # Drop the OpenLDAP database
 rm -rf /var/rudder/ldap/openldap-data/*.mdb

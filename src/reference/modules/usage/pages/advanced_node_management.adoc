@@ -24,9 +24,9 @@ Whatever the final status, a node is created in pending status. Then, if the sta
 == Override node FQDN
 
 Sometime, the node's FQDN reported in inventory is not the correct one. For example, the configured
-FQDN is an internal name, or it's incorrectly set-up by OS or not found in a normalized format by the agent. 
+FQDN is an internal name, or it's incorrectly set-up by OS or not found in a normalized format by the agent.
 
-This can be problematic and for example break the possibility for Rudder to trigger an agent run from node's 
+This can be problematic and for example break the possibility for Rudder to trigger an agent run from node's
 compliance page.
 
 In these cases, you can override the FQDN from the node using xref:extend-nodes-inventory[node inventory extension].
@@ -34,12 +34,12 @@ In these cases, you can override the FQDN from the node using xref:extend-nodes-
 The inventory extension must define the reserved property key `rudder_override_hostname` with a string value.
 
 If that key is defined, it is preferred to other values retrieved in agent inventory (`<RUDDER><HOSTNAME>` or else
-`<OPERATINGSYSTEM><FQDN>`) as the FQDN for the node. 
+`<OPERATINGSYSTEM><FQDN>`) as the FQDN for the node.
 
 When the override is used, an additional inventory extension key `rudder_original_hostname` is also defined. That key's value
 contains the original node hostname which would have been used without an override.
 
-This feature has beed introduced in Rudder 7.1.7 and 7.2.1.
+This feature has been introduced in Rudder 7.1.7 and 7.2.1.
 
 [NOTE]
 
@@ -154,7 +154,7 @@ following places:
 
 +/etc+:: Scripts to integrate Rudder Agent in the system (init, cron).
 
-+/opt/rudder/share/bootstrap-promises+:: Bootstraping policies for the Rudder
++/opt/rudder/share/bootstrap-promises+:: Bootstrapping policies for the Rudder
 Agent. These policies are used to download a common set of initial policies
 from the server.
 
@@ -536,7 +536,7 @@ systemctl stop rudder-cf-serverd.service
 systemctl disable rudder-cf-serverd.service
 ----
 
-* On systems still using the init script, edit `/etc/default/rudder-agent` and uncomment and set to 0 the `CFENGINE_COMMUNITY_RUN_1` line: 
+* On systems still using the init script, edit `/etc/default/rudder-agent` and uncomment and set to 0 the `CFENGINE_COMMUNITY_RUN_1` line:
 
 ----
 CFENGINE_COMMUNITY_RUN_1="0"

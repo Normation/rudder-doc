@@ -38,7 +38,7 @@ available freely for these platforms:
 ===========
 
 The subscription supported OS are available in the repository https://download.rudder.io/ it contains the community supported OS and
-all the OS only avaible through a subscription. Consult install sections for more details.
+all the OS only available through a subscription. Consult install sections for more details.
 
 ===========
 

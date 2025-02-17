@@ -123,4 +123,4 @@ You can make a call to this API in your node provisioning process, and provide
 the `agentKey` parameter (which should contain the content of `/opt/rudder/etc/ssl/agent.cert` on the node), and the `accepted` status.
 
 This way, once the node sends its first inventory, if the node id and certificate match the pre-provisioned entry, the node inventory will be updated.
-Please note that you can also pre-define node properties using this API to ensure that the pre-provisionned node will immediately join in the correct groups
+Please note that you can also pre-define node properties using this API to ensure that the pre-provisioned node will immediately join in the correct groups
