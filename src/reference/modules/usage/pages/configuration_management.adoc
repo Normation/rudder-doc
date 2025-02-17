@@ -206,7 +206,7 @@ When configuration is enforced, it means that the system is not in the desired s
 
 Non compliant::
 
-When configuration is not enforced, it means that the systemn is not in the desired state. A drift is reported.
+When configuration is not enforced, it means that the system is not in the desired state. A drift is reported.
 
 Not applicable::
 
