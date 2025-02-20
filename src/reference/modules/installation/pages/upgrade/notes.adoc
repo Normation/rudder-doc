@@ -64,7 +64,7 @@ on a Linux node. Previously used Windows variables syntaxes are no longer suppor
 
 As the older syntaxes are no longer supported, after upgrading to 8.2, if you were using the Windows plugin, it
 is most likely that the policy generation will be stopped on your Rudder until you are done with the complete
-syntax migration. A safety mecanism has been added to prevent any generation as long as no longer supported
+syntax migration. A safety mechanism has been added to prevent any generation as long as no longer supported
 syntaxes are in used in your policies.
 
 As a rule of thumb, avoid any occurrence of the pattern `$(.*)` in your directives and techniques.
