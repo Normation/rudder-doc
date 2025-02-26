@@ -61,6 +61,10 @@ build/sites/site/.htaccess:
 	echo 'Redirect /reference/current/ /reference/$(LATEST_MAJOR)/' > $@
 	echo 'Redirect /changelogs/current/ /changelogs/$(LATEST_MAJOR)/' >> $@
 
+build/history/8.3/.htaccess:
+	mkdir -p build/history/8.3/
+	echo 'Redirect /rudder-doc/reference/current/ /rudder-doc/reference/8.3/' > $@
+
 build/history/8.2/.htaccess:
 	mkdir -p build/history/8.2/
 	echo 'Redirect /rudder-doc/reference/current/ /rudder-doc/reference/8.2/' > $@
