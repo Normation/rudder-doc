@@ -23,6 +23,10 @@ rudder-theme/build/ui-bundle.zip:
 # Ugly workaround until we can use custom generators in antora
 doc-build:
 	[ -d $@ ] || git clone https://github.com/Normation/rudder-doc.git $@
+	cd $@ && git checkout branches/rudder/8.3 && git pull
+	cd $@/src/reference && make
+	cd $@ && git add -f src/reference && git commit --allow-empty -m "Build 8.3"
+	cd $@ && git clean -fd
 	cd $@ && git checkout branches/rudder/8.2 && git pull
 	cd $@/src/reference && make
 	cd $@ && git add -f src/reference && git commit --allow-empty -m "Build 8.2"
@@ -37,8 +41,8 @@ changelogs-build:
 	cd $@ && git checkout master && git pull
 	for version in $(ALL_VERSIONS); do \
 	  cd $@ && git checkout master && git branch -df "branches/rudder/$$version" ; git checkout -b "branches/rudder/$$version" ; \
-	  sed -i "s@version: \"8.2\"@version: \"$$version\"@" src/changelogs/antora.yml ; \
-	  sed -i "s@RUDDER_VERSION = 8.2@RUDDER_VERSION = $$version@" src/changelogs/dependencies/Makefile ; \
+	  sed -i "s@version: \"8.3\"@version: \"$$version\"@" src/changelogs/antora.yml ; \
+	  sed -i "s@RUDDER_VERSION = 8.3@RUDDER_VERSION = $$version@" src/changelogs/dependencies/Makefile ; \
 	  cd src/changelogs && make ; \
 	  cd ../.. && git add -f src/changelogs && git commit --allow-empty -m "Build" ; cd .. ; \
 	done
