@@ -74,7 +74,7 @@ You need to download the `.rpkg` package file of the plugin on your Rudder serve
 then install it with:
 
 ----
-rudder package install-file <package.rpkg>
+rudder package install <package.rpkg>
 ----
 
 To update a plugin, you need to reinstall it with the same command, but in the newer version.
