@@ -1,26 +1,43 @@
 [[plugins-management]]
 = Manage plugins
 
-Rudder is an extensible software. The *Plugins*
-menu sums-up information about loaded plugins, their version and their
-configuration. There are two types of Rudder pre-packaged plugins:
+Rudder is an extensible software. There is a dedicated *Plugins* page for listing available plugins, installing and managing plugins. There are two types of Rudder pre-packaged plugins:
 
 * Integration plugins, that allow linking Rudder to other tools (monitoring, inventory, notification, etc.). They are freely available.
-* Advanced features plugins (reporting, validation workflow, etc.) which are part of the Rudder subscription.
+* Feature-enhancing plugins (patch management, OIDC/LDAP login, validation workflow, etc.) which are provided under license after the setup of your Rudder account.
 
-You can download free plugins https://repository.rudder.io/plugins/[on repository.rudder.io] or get information about plugins included in the subscription the https://www.rudder.io/software/features/[dedicated page on rudder.io].
+You can download free plugins https://repository.rudder.io/plugins/[on repository.rudder.io] or get information about plugins included with your Rudder account and subscription https://www.rudder.io/software/features/[on the Rudder website].
 
-== Install plugins with a subscription
+== Basic plugin management via UI
 
-First, you need to configure your Rudder technical account (username and password)
-There are two ways to do it:
+To manage plugins through the Rudder web interface, navigate to *Administration -> Plugins*.
+From this page, you can list plugins from the repository, and search for plugins to install. Other actions such as upgrading, enabling, disabling, and uninstalling plugins are also available.
 
-- Using the web interface in *Administration -> Setup*
+=== Account setup for plugin licensing
+
+Before installing plugins, ensure your Rudder server is setup with a technical account, which _username_ is the same as the licensee ID used for verifying the plugin licenses.
+If the account is not yet setup, the Plugins page will have a warning with a link to the page to setup the account :
 
 image::credential_setup.png[]
 
-- By editing the configuration file `/opt/rudder/etc/rudder-pkg/rudder-pkg.conf` where you can also define proxy information if your Rudder server need to get
- through a proxy to download plugins, keep the values empty if you don't need them (no proxy or no authentication).
+The setup and advanced configuration values are also available, see the details in the <<advanced_plugin_management,Advanced plugin management>> section.
+After the successful setup of the plugins page, a summary of the license information of plugins will be displayed at the top of the Plugins page :
+
+
+image::plugins_list.png[]
+
+
+=== Plugins management
+For installing or upgrading plugins, search for the relevant plugins, then select the plugins and click on the action button. A confirmation page will appear, and Rudder will restart if necessary to load the new plugins.
+
+image::plugin_install_confirmation.png[]
+
+
+== Advanced plugin management
+
+=== Technical account configuration
+
+The technical account can be edited from the configuration file `/opt/rudder/etc/rudder-pkg/rudder-pkg.conf`, and you can also define proxy information if your Rudder server needs to get through a proxy to download plugins. Keep the values empty if you don't need them (no proxy or no authentication).
 
 [source,ini]
 ----
@@ -33,7 +50,10 @@ proxy_user =
 proxy_password =
 ----
 
-Plugin management uses the `rudder package` command.
+=== Plugin installation and management
+
+Plugin management in the command line involves using the `rudder package` command.
+
 Start by updating the repository index and your licenses:
 
 ----
@@ -53,10 +73,9 @@ rudder package install <plugin_name>
 rudder package install <plugin_name_1> <plugin_name_2>
 ----
 
-The application will restart if necessary. Please read install output carefully as some
-plugins require additional dependencies.
+The application will restart if necessary. Please read the install output carefully as some plugins require additional dependencies.
 
-To update a plugin, refresh repository index with `rudder package update` and run:
+To update a plugin, refresh the repository index with `rudder package update` and run:
 
 ----
 rudder package upgrade <plugin_name>
@@ -65,26 +84,24 @@ rudder package upgrade <plugin_name>
 If your server is configured to use the Rudder plugin repository, a daily job will automatically
 update your plugin index and licenses.
 If is fails or your server can't reach the repository, when one or more licenses come close to expiration,
-an alert will appear in Rudder's menu bar when a license is close to expiration.
+an alert will appear in Rudder's menu bar.
 
-== Manual plugins installation
+=== Manual plugins installation
 
-Plugin management uses the `rudder package` command.
-You need to download the `.rpkg` package file of the plugin on your Rudder server,
-then install it with:
+If you have downloaded the `.rpkg` package file of the plugin on your Rudder server, you can install it offline with :
 
 ----
 rudder package install <package.rpkg>
 ----
 
-To update a plugin, you need to reinstall it with the same command, but in the newer version.
+To update the plugin, you need to reinstall it with the same command, but in the newer version.
 If the plugin requires a license, you can enable it by putting your `license.key` and `.license` files under:
 
 ----
 /opt/rudder/etc/plugins/licenses/
 ----
 
-== More about plugins
+=== More about plugins
 
 A plugin is an `.rpkg` file (for "Rudder package"), see the xref:reference:plugin_format.adoc[dedicated documentation] for more
 information about the format.
