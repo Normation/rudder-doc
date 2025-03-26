@@ -35,7 +35,7 @@ rudder agent run    # to apply these policies locally
 
 This will display the state of all applied components, including the ones you have defined before.
 
-image::./run.png["Agent output", align="center"]
+image::run.png["Agent output", align="center"]
 
 The rest of the components are called system techniques, you can ignore them for now. They are
 responsible for maintaining the Rudder services themselves, and hence are not editable by users.
@@ -43,25 +43,27 @@ responsible for maintaining the Rudder services themselves, and hence are not ed
 Let's get back to the web interface, on the dashboard (click on the *Dashboard* link in the
 left menu, or directly on the Rudder logo):
 
-image::./dashboard.png["Dashboard graph", align="center"]
+image::dashboard.png["Dashboard graph", align="center"]
 
 You can see that compliance information got back to the server, and is used to
 display the current state in the dashboard.
 
 == Node compliance
 
-Now you can go to our node details by using the quick search filter, and searching for *node*
-(it's our node's hostname).
+Let's look at our node compliance in details. Click on:
 
-Go to the *Compliance reports* tab. You will see the applied policy and the current compliance
-regarding it. If you click on a line it will unfold until you get to the actual applied
-component.
+. *Nodes* menu
+. the node hostname *server*
+. the *Compliance* tab
+. unfold in clicking on *Global configuration for all nodes* in the screen lower part
 
-image::./node-compliance.png["Node compliance", align="center"]
+You can get the details of each applied policy on the node. Blue means compliant, orange not compliant, red errors.
+
+image::node-compliance.png["Node compliance", align="center"]
 
 == Conclusion
 
-We have now finished our first policy application, from definition, using a new technique
-or a built-in one, to the actual application on our Rudder server.
+We have now finished our first policy application, from definition using a new technique
+or a built-in one to the actual application on our Rudder server.
 
-We will now dig a bit deeper on what the xref:reference:usage:configuration_management.adoc#_policy_mode_audit_enforce[policy mode] (we modified) is, and how to use it.
+We will now dig a bit deeper on what the xref:reference:usage:configuration_management.adoc#_policy_mode_audit_enforce[policy mode] is, and how to use it.
