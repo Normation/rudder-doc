@@ -27,7 +27,7 @@ xref:installation:requirements.adoc#configure-the-network[network] section.
 
 ====
 
-On EL7, the default firewall is firewalld, and you can enable HTTPS access by running
+On EL7, the default firewall is firewalld, and you can enable HTTPS access by running:
 
 ----
 
