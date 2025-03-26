@@ -1,7 +1,7 @@
 [WARNING]
 ====
 
-Rudder 8.0 requires PostgreSQL 13 or newer, but on RHEL 8 (and derivatives), the version present
+Rudder 8 requires PostgreSQL 13 or newer, but on RHEL 8 (and derivatives), the version present
 by default in the system repositories is PostgreSQL 10.
 
 Before installing or upgrading to 8.0, you need to install a compatible PostgreSQL version on
