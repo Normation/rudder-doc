@@ -29,7 +29,6 @@ The agent that runs on all of these machines will download the latest version
 of its policies, and apply them locally. To trigger this process manually, run:
 
 ----
-rudder agent update # to update the policies from the server
 rudder agent run    # to apply these policies locally
 ----
 
