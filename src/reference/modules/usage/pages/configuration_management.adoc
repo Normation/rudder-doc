@@ -249,6 +249,31 @@ by score, for example to identify the systems needed most attention.
 image:score.png[]
 image:score2.png[]
 
+Scoring system for each score will be described below for base score (compliance and system updates). Other scores will be explained in their reladed plugins
+
+=== Compliance score
+
+Compliance score of a node is based on its compliance percent.
+
+* *A:* Compliance is over 95%
+* *B:* Compliance is between 80% and 95%
+* *C:* Compliance is between 50% and 80%
+* *D:* Compliance is between 20% and 50%
+* *E:* Compliance is between 5% and 20%
+* *F:* Compliance is below 5%
+
+=== System update score
+
+System update score of a node is based on software updates available in their inventory.
+
+* *A:* There is no security updates and there is less than 50 updates
+* *B:* There is between 1 and 5 security updates or between 50 and 75 updates
+* *C:* There is between 5 and 20 security updates or between 75 and 125 updates
+* *D:* There is between 20 and 50 security updates or between 125 and 175 updates
+* *E:* There is between 50 and 80 security updates or between 175 and 250 updates
+* *F:* There is more than 80 security updates or more than 250 updates
+
+
 [[_policy_mode_audit_enforce]]
 == Policy Mode (Audit/Enforce)
 
