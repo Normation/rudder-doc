@@ -49,7 +49,8 @@ display the current state in the dashboard.
 
 == Node compliance
 
-Let's look at our node compliance in details. Click on:
+Let's look at our node compliance in details. 
+For that, first open the node details page and navigate in the compliance tree :
 
 . *Nodes* menu
 . the node hostname *server*

@@ -6,7 +6,7 @@
 
 In this section you will:
 
-* Use Rudder's technique editor building blocks 
+* Use building blocks within the technique editor in Rudder 
 * Define a configuration policy within Rudder
 
 ====
@@ -23,23 +23,24 @@ Let's define a very simple policy: create a demo user. We will first create a ne
 
 image::tech-editor.png["Rudder technique editor", align="center"]
 
-We can now name our technique: _Demo user_, and add a small description for documentation:
+We can now name our technique: _Demo user_, and add a small description for documentation.
 
 
 How does this interface work?
 
-* The left part is the list of techniques (empty for now, but our new technique will pop there once we save it)
-* The center is the technique itself
-* The right part is the "methods" column (and a category list to navigate within methods)
+. The left part is the list of techniques (empty for now, but our new technique will pop there once we save it)
+. The center is the technique itself
+. The right part is the "methods" column (and a category list to navigate within methods)
 
 TIP: The xref:reference:reference:generic_methods.adoc[methods] are the building blocks used to form a technique. You can think of them as small bricks
 you assemble into a technique. 
 
-Let's start using methods to build a technique. Click on:
+Let's start using methods to build a technique. To do that, we will need to fill the 
+empty _Methods_ section at the bottom of the page. To add methods, click on:
 
-* the *Add* button to add methods
-* the *User* category (in the lower right of the interface)
-* the *User present* method
+. the *Add* button in the lower part of the screen
+. the *User* category in the lower right of the interface
+. the *User present* method
 
 
 image::demo.png["demo user", align="center"]
@@ -48,9 +49,9 @@ We have defined a first policy!
 
 Let's add a second method: 
 
-* click on *Add methods* in the lower left of the technique details, to display the list of available methods,
-* navigate to the *User* category. 
-* add a user description, with the xref:reference:reference:generic_methods.adoc#_user_fullname[User fullname method]:
+. click on *Add methods* in the lower left of the technique details, to display the list of available methods,
+. navigate to the *User* category. 
+. add a user description, with the xref:reference:reference:generic_methods.adoc#_user_fullname[User fullname method]:
 
 image::fullname.png["demo user's fullname", align="center"]
 

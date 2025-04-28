@@ -45,7 +45,7 @@ Also, note these documentation fields are rendered as markdown, so you can inclu
 We now need to decide how we want to configure our SSH server.
 Let's disable password authentication :
 
-. click on *Set parameters" button or *Parameters* tab 
+. click on *Set parameters* button or *Parameters* tab 
 . scroll down to *Section: Authentication settings*
 . click on *No* in the *Allow password authentication* part
 
@@ -53,8 +53,8 @@ image::ssh-password.png["SSH technique", align="center"]
 
 Then,
 
-. click on *Target rules*
-. choose *Global configuration for all nodes* 
+. click on the *Target rules* tab
+. check *Global configuration for all nodes* 
 . *Save*, then *Create* in the window asking for confirmation. 
 
 image::rule.png["SSH technique", align="center"]

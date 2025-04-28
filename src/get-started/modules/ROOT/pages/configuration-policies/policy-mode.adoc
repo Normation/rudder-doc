@@ -23,22 +23,23 @@ This is why you can see orange in compliance bars as they display techniques non
 
 In our example, as the user _demo_ does not exist on a newly installed system, the node is not compliant to the desired state.
 
-Let's change the policy mode. Click on:
+Let's change the policy mode of the directive by updating it. 
+Navigate to the directive page by clicking on :
 
-. menu *Directives* 
+. *Directives* in the menu
 . find *Demo user* in scrolling down the left part or in using the *Filter*
 . select the directive
 . change policy mode to *Global mode (enforce)* 
 . *Save* the modification
 . re-run the agent from the node terminal using ``$ rudder agent run``
 
-Go back to the demo user directive. You can use the Directive page, or use the quick search field, in the
+Go back to the _demo_ user directive. You can use the Directive page, or use the quick search field, in the
 header bar. Here you can search for any Rudder item (there is even a small query language!).
 
 image::quicksearch.png["Quicksearch field", align="center"]
 
 
-You will see the actual modification happening, with a "repaired" state, and the demo user now exists
+You will see the actual modification happening, with a "repaired" state, and the _demo_ user now exists
 on the system. If you go back to the dashboard, everything is green and compliance has reached 100%.
 
 _Audit/ Enforce modes_ can be used in many use cases. Basically, we recommand to use _Audit mode_ first and switch to _Enforce mode_ 
