@@ -2,8 +2,8 @@
 
 RUDDER_VERSION = 8.3
 
-.PHONY: clean generic_methods.adoc generic_methods_categories.txt rudder.adoc rudder-relayd.1.adoc hooks.adoc plugins versions.adoc
-all: generic_methods.adoc hooks.adoc rudder.adoc rudder-relayd.1.adoc plugins
+.PHONY: clean rudder.adoc rudder-relayd.1.adoc hooks.adoc plugins versions.adoc
+all: hooks.adoc rudder.adoc rudder-relayd.1.adoc plugins
 
 ## Repos
 
@@ -12,9 +12,6 @@ rudder-repo:
 
 rudder-agent-repo:
 	git clone https://github.com/Normation/rudder-agent.git rudder-agent-repo
-
-ncf-repo:
-	git clone https://github.com/Normation/ncf.git ncf-repo
 
 rudder-agent-windows-repo:
 	# Allow failing if builder has no access to agent-windows-repo
@@ -55,20 +52,6 @@ hooks.adoc: rudder-repo
 	  cat $$hook >> hooks.adoc ; \
 	done
 
-generic_methods.adoc: ncf-repo rudder-agent-windows-repo
-	cd rudder-agent-windows-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
-	cd rudder-agent-windows-repo && git pull
-	cd ncf-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
-	cd ncf-repo && git pull
-	cp rudder-agent-windows-repo/plugin/src/ncf/30_generic_methods/*.cf ncf-repo/tree/30_generic_methods/ || true
-	cp tools/ncf_doc_rudder.py ncf-repo/tests/
-	./ncf-repo/tests/ncf_doc_rudder.py
-	# Remove language setting on code field (#9621)
-	sed -i 's/```.*/```/' generic_methods.md
-	pandoc -t asciidoc -f markdown generic_methods.md > generic_methods.adoc
-
-generic_methods_categories.txt: generic_methods.adoc
-
 plugins: rudder-plugins-repo rudder-plugins-private-repo
 	cd rudder-plugins-private-repo && git checkout branches/rudder/$(RUDDER_VERSION) 2>/dev/null || git checkout master
 	cd rudder-plugins-private-repo && git pull && make clean && make doc
@@ -84,7 +67,7 @@ plugins: rudder-plugins-repo rudder-plugins-private-repo
 ## Clean
 
 clean:
-	rm -rf generic_methods.{adoc,md} generic_methods_categories.txt hooks.adoc rudder.adoc rudder-relayd.1.adoc plugins
+	rm -rf hooks.adoc rudder.adoc rudder-relayd.1.adoc plugins
 
 veryclean: clean
-	rm -rf rudder-agent-repo rudder-repo ncf-repo rudder-agent-windows-repo rudder-plugins-repo rudder-plugins-private-repo
+	rm -rf rudder-agent-repo rudder-repo rudder-agent-windows-repo rudder-plugins-repo rudder-plugins-private-repo

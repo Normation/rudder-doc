@@ -1,6 +1,4 @@
 = Generic methods
 
-This section documents all the generic methods available in the xref:usage:technique_editor.adoc#technique-editor[Technique Editor].
-
-include::{partialsdir}/dyn/generic_methods.adoc[leveloffset=-1]
-
+The methods' documentation is available in the xref:usage:technique_editor.adoc#technique-editor[Technique Editor],
+and in the https://docs.rudder.io/techniques/[YAML techniques reference].
