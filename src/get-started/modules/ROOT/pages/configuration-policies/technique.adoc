@@ -51,7 +51,7 @@ Let's add a second method:
 
 . click on *Add methods* in the lower left of the technique details, to display the list of available methods,
 . navigate to the *User* category. 
-. add a user description, with the xref:reference:reference:generic_methods.adoc#_user_fullname[User fullname method]:
+. add a user description, with the https://docs.rudder.io/techniques/8.3/user_fullname.html[User fullname method]:
 
 image::fullname.png["demo user's fullname", align="center"]
 
