@@ -45,7 +45,7 @@ image::./demo.png["demo user", align="center"]
 
 We have defined a first policy! Let's add a second method: click on *Add methods*
 in the lower left of the technique details, to display the list of available methods,
-and navigate to the *User* category. Let's add a user description, with the xref:reference:reference:generic_methods.adoc#_user_fullname[User fullname method]:
+and navigate to the *User* category. Let's add a user description, with the https://docs.rudder.io/techniques/current/user_fullname.html[User fullname method]:
 
 image::./fullname.png["demo user's fullname", align="center"]
 
