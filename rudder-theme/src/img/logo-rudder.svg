@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="50mm"
+   height="50mm"
+   viewBox="0 0 177.16535 177.16535"
+   id="svg8314"
+   version="1.1"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="logo-rudder-sm.svg">
+  <defs
+     id="defs8316" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="40.362845"
+     inkscape:cy="66.548497"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:showpageshadow="false"
+     showborder="true"
+     inkscape:window-width="1848"
+     inkscape:window-height="1016"
+     inkscape:window-x="750"
+     inkscape:window-y="1107"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata8319">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-875.19685)">
+    <g
+       id="g12"
+       transform="matrix(0.79533427,0,0,0.79533427,-24.190158,874.30442)">
+      <path
+         d="m 141.797,18.77 c -51.836,0 -93.856,41.964 -93.859,93.726 0,24.859 9.89,48.703 27.492,66.281 17.601,17.578 41.472,27.453 66.367,27.453 24.891,-0.003 48.762,-9.878 66.363,-27.457 17.602,-17.578 27.488,-41.418 27.488,-66.277 -0.039,-23.273 -8.75,-45.699 -24.433,-62.914 l -61.246,68.184 c -1.871,1.882 -4.344,2.816 -6.809,2.816 -2.465,0 -4.941,-0.934 -6.812,-2.816 -3.766,-3.758 -3.766,-9.852 0,-13.614 L 204.617,43.004 C 187.398,27.445 165.016,18.809 141.797,18.77 Z m -15.738,34.312 c 2.691,6.012 8.718,10.199 15.742,10.199 7.011,0 13.043,-4.187 15.734,-10.199 5.395,1.43 10.485,3.574 15.199,6.313 -0.609,1.566 -0.945,3.207 -1.074,4.843 l -20.578,17.891 c -2.949,-0.91 -6.059,-1.387 -9.281,-1.387 -17.535,0 -31.801,14.238 -31.801,31.766 0,17.5 14.266,31.75 31.801,31.75 17.527,0 31.797,-14.25 31.797,-31.75 0,-3.383 -0.543,-6.629 -1.516,-9.68 l 17.547,-20.156 c 1.82,-0.074 3.613,-0.418 5.344,-1.059 2.742,4.692 4.89,9.782 6.316,15.157 -6.012,2.703 -10.203,8.722 -10.203,15.738 0,7.004 4.191,13.019 10.203,15.707 -1.426,5.39 -3.574,10.473 -6.316,15.168 -6.153,-2.321 -13.368,-1.035 -18.325,3.91 -4.96,4.961 -6.253,12.152 -3.914,18.309 -4.714,2.738 -9.804,4.886 -15.199,6.308 -2.691,-6.004 -8.723,-10.195 -15.734,-10.195 -7.024,0 -13.051,4.191 -15.742,10.195 -5.399,-1.422 -10.489,-3.57 -15.188,-6.308 2.336,-6.157 1.035,-13.348 -3.93,-18.309 -4.937,-4.945 -12.16,-6.231 -18.312,-3.91 -2.754,-4.695 -4.887,-9.778 -6.328,-15.168 6.015,-2.688 10.211,-8.703 10.211,-15.707 0,-7.016 -4.196,-13.035 -10.211,-15.723 1.441,-5.387 3.574,-10.48 6.328,-15.172 6.152,2.321 13.375,1.035 18.312,-3.929 4.965,-4.946 6.266,-12.145 3.93,-18.289 4.699,-2.739 9.789,-4.883 15.188,-6.313 z"
+         style="fill:#13beb7;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path16"
+         inkscape:connector-curvature="0" />
+    </g>
+  </g>
+</svg>

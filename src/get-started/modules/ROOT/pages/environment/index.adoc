@@ -15,8 +15,7 @@ The rest of the tutorial assumes you are
 using this environment (you can also setup your own,
 you will only have to substitute hostnames/IP addresses when necessary).
 
-This installation method is cross-platform, and you can use it on Linux, Microsoft Windows, Mac OS X
-and more. You will need:
+This installation method is cross-platform, and you can use it on Linux and Microsoft Windows. You will need:
 
 * https://www.virtualbox.org/wiki/Downloads[VirtualBox], to run the demo virtual machines
 * https://www.vagrantup.com/downloads.html[Vagrant], to handle the virtual machines configuration and provisioning

@@ -9,6 +9,22 @@ Now we have applied our directive, we can trigger its application by using two a
 image::trigger-agent-run.png[Trigger directive application by trigger an agent run]
 
 
+
+== Check compliance
+
+If it has been less than 5 min since the directive creation, the agent might have not been executed. 
+You can click on *Trigger agent* to run the agent.
+
+After some time, when the agent ran twice, you will get:
+
+image::compliance.png["Disable weak ciphers compliance", align="center"]
+
+You can notice the *Restart sshd service* method is not applicable as the agent modified the file _/etc/ssh/sshd_config_ on its firt execution. After that, 
+the agent won't restart the service because the _/etc/ssh/sshd_config_ file is not modified anymore.
+
+
+
+
 * by connecting to our node using ssh:
 
 ----
@@ -21,12 +37,6 @@ And running the agent with:
 rudder agent run
 ----
 
-You should now be able to access your site:
-
-----
-$ curl http://localhost:8080
-<html><h1>Welcome to Rudder demo!</h1></html>
-----
 
 == Rule compliance
 
@@ -36,7 +46,7 @@ to get a general view of some policies compliance.
 
 Rules, in addition to linking node and policies, provide a compliance entry point.
 
-Go to your "Demo website" page (for example with the quick search field) and click on the rule.
+Go to *Rule* menu, then click on our rule *Hardening baseline*.
 
 It will display a compliance page with two parts:
 
@@ -45,8 +55,7 @@ It will display a compliance page with two parts:
 
 They allow exploring compliance differently, based on what you are looking for.
 
-At the bottom, you will see the *Recent changes* graph, which lists the changes
-done by Rudder for this rule.
+Furhtermore, the *Recent changes* tab lists the changes done by Rudder for this rule.
 Click on a time slot and the details will be displayed in the table below.
 
 Compliance is also available through Rudder API, allowing to monitor
