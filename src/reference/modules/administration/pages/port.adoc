@@ -82,7 +82,7 @@ rudder agent policy-server hostname:5309
 
 (or enforce the value in `/opt/rudder/etc/policy_server.dat`).
 
-The HTTPS port can be configured by creating the file `/opt/rudder/etc/agent.conf` on Linux systems, and `C:\Program Files\Rudder\etc\agent.conf` on Windows systems with content:
+The HTTPS port can be configured by creating the file `/opt/rudder/etc/agent.conf` on Linux systems, or editing file `C:\Program Files\Rudder\etc\agent.conf` on Windows systems and define the https_port parameter:
 
 ----
 
