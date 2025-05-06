@@ -84,7 +84,7 @@ Proxy options for the agent can be pre-configured if needed, see next section.
 == Proxy settings
 
 Agent supports configuration through proxy. Proxy can be configured in the file `C:\Program Files\Rudder\etc\agent.conf` which exists by default.
-It is a key-value based file, currently only supporting the `https_proxy` option.
+It is a key-value based file, supporting the `https_proxy` and `https_port` options.
 
 Correct value formats for the `https_proxy` key are listed below:
 
