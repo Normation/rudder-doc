@@ -83,9 +83,9 @@ The credentials of a user are defined in the XML file
 
 ----
 
-**<custom-role>**
+**<custom-roles>**
 
-`custom-role` section is optional and only available with the xref:plugins:user-management.adoc[user-management plugin]. It allows to define new named roles. See the plugin documentation for more information.
+The `custom-roles` section is optional and allows to define new roles with specific names. See xref:administration:users.adoc#_custom_roles[the documentation below for how to configure this section].
 
 **<user>**
 
