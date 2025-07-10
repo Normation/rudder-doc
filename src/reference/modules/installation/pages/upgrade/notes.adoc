@@ -104,7 +104,7 @@ the default `rudder package` CLI introduced in 8.1 will remain.
 
 === API changes on Rudder 8.3 : API version 21
 
-The API verson 21 brings a change in the output of the `system/info` endpoint.
+The API version 21 brings a change in the output of the `system/info` endpoint.
 
 If you were using the output of the `system/info` API call :
 
