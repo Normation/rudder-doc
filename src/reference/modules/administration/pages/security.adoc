@@ -5,6 +5,37 @@ add additional configurations to make your Rudder installation more secure.
 
 == Server
 
+=== Server certificate
+
+The Rudder root server accepts connections from both nodes and user browsers. If you want a different certificate for each, see next section (HTTPS).
+
+The new certificate must have `Digital Signature`, `Key Encipherment` and `Data Encipherment` in its X509v3 `Key Usage` and `UID=root` in its `Subject DN`. If you cannot provide one, see next section (HTTPS).
+
+If you have agents using port 5309 (CFEngine protocol) you must generate the new certificate with the same private kay as the old one, which can be found in `/var/rudder/cfengine-community/ppkeys/localhost.priv` on the server. If you can't, see next section (HTTPS).
+
+==== Provisioning a new certificate
+
+To change the server certificate, you first need a new certificate. The new certificate MUST have `Digital Signature`, `Key Encipherment` and `Data Encipherment` in its X509v3 `Key Usage`.
+
+If you changed the certificate private key, you must first do the following steps:
+- Get the new certificate's public key hash with this command `echo "sha256//$(openssl rsa -in private.key -outform der -pubout 2>/dev/null | openssl dgst -sha256 -binary | openssl enc -base64)"`
+- Get the existing server key hash with the command `rudder agent info` on the server
+- Modify `/opt/rudder/etc/rudder-web.properties` and change `rudder.server.certificate.additionalKeyHash=` to contain both separated by a semicolon `;`
+- Restart the server `systemctl restart rudder-jetty`
+
+This allows the new certificate to be accepted by agent. You then need to make sure this is applied to all agents before continuing. Usually, waiting for 24h is enough, but do not forget nodes that might be down during this period.
+
+==== Using this certificate on the server
+
+Run `rudder server new-certificate -c <your certificate.cert> -k <key.pem>`.
+
+The node should now see the new certificate.
+
+Please ensure that your browser now sees and accepts the new certificate.
+
+TODO: tested with relays ?
+TODO: tested with windows ?
+
 === HTTPS
 
 * By default, all HTTPS traffic is handled by the same virtual host in Apache httpd. To allow hardening the connection security, a first step is to split public Web/API from internal node-server communication. You can do so by commenting the default virtual host in `/etc/apache2/sites-enabled/rudder.conf` or `/etc/httpd/conf.d/rudder.conf` (depending on the distribution), and uncommenting the two separate configurations. You need to define a method to distinguish both configurations, in general with a different port (which allows applying different firewall rules too) or a specific domain for Web/API.
