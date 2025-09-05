@@ -16,7 +16,7 @@ In the demo platform, you have two nodes:
 * The `server` we already used
 * A `node` machine
 
-As you used Vagrant to create the platform, it has provisoned the node in:
+If you used Vagrant to create the platform, it has provisoned the node by:
 
 * installing rudder-agent
 * configuring agent in defining Rudder server's ip with `$ rudder agent policy-server <rudder-server_ip>`
