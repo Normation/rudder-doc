@@ -19,8 +19,7 @@ database.
 
 By default, this system will:
 
-* Archive reports older that 3 days
-* Remove reports older than 15 days
+* Remove reports older than 4 days
 * Delete all historized compliance levels after 15 days
 * Delete logs older than twice the maximum agent run interval
 
@@ -44,9 +43,9 @@ The estimated disk space consumption, with a 5 minutes agent run frequency, is 5
 per day and per node, plus 150 kB per Directive per node per day for archived reports, plus 150 kB per Directive per node per day for compliance level,
 which equate to is roughly 5 to 7 MB per Directive per two weeks and per node.
 
-Thus, 25 directives on 100 nodes, with the default reports retention policy, would take 13 to 18 GB, and
+Thus, 25 directives on 100 nodes, with the default reports retention policy, would take 4 to 6 GB, and
 25 directives on 1000 nodes with a 1 hour agent execution period with the default reports retention policy
-would take 11 to 15 GB.
+would take 5 to 8 GB.
 
 === PostgreSQL database bloating
 
@@ -54,12 +53,12 @@ PostgreSQL database can grow over time, even if the number of nodes and directiv
 This is because even if the database is regularly cleaned by Rudder as requested,
 the physical storage backend does not reclaim space on the hard drive, resulting in a "fragmented" database.
 
-This is often not an issue, as PostgreSQL handles this automatically,
+This is often not an issue, as recent versions of PostgreSQL handle this correctly,
 and new reports sent by the nodes to Rudder should fill the blanks in the database.
 This task is handled by the auto-vacuum process, which periodically cleans the storage regularly
 to prevent database bloating.
 
-However, database can grow significantly, resulting in large disk usage, and slower performance, due to massive
+However, in very rare occasions, the database may grow significantly, resulting in large disk usage, and slower performance, due to massive
 bloating (with database 3 or 4 times larger than necessary).
 
 To cure (or prevent) this behavior, you can trigger vacuum full operations, which put an exclusive lock on tables,
@@ -84,13 +83,12 @@ psql -u rudder -d rudder
 # And then, when you are connected to the rudder database in the psql shell, trigger a vacuum:
 rudder# VACUUM FULL ruddersysevents;
 rudder# VACUUM FULL archivedruddersysevents;
-rudder# VACUUM FULL nodecompliancelevels;
 ----
 
 
 === LDAP database reindexing
 
-In some very rare case, you will encounter some LDAP database entries that are not indexed and used
+In very rare case, you will encounter some LDAP database entries that are not indexed and used
 during searches. In that case, OpenLDAP will output warnings to notify you that they should be.
 
 [source,shell]

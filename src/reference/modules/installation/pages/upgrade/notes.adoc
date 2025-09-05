@@ -26,9 +26,9 @@ rudder package list --all
 
 ----
 
-== Upgrade from Rudder 8.1 to 8.2
+== Upgrade from Rudder 8.1 or 8.2 to 8.3
 
-Upgrade from Rudder 8.1 is supported.
+Upgrade from Rudder 8.1 or 8.2 is supported.
 
 === Enforced use of BCRYPT to hash passwords
 
@@ -36,27 +36,27 @@ Upgrade from Rudder 8.1 is supported.
 
 ====
 
-For security reasons, the `bcrypt` hash algorithm is now favoured over `md5` and `sha` unsalted hash algorithms.
+For security reasons, the `bcrypt` hash algorithm is now favored over `md5` and `sha` unsalted hash algorithms.
 
 ====
 
 If you previously used one of those unsalted hash algorithms, you should migrate user passwords to the more secure and salted BCRYPT algorithm.
-A migration in the `rudder-users.xml` file will be applied since the rudder server upgrade to 8.2 : in the `/opt/rudder/etc/rudder-users.xml` file, an attribute `unsafe-hashes="true"` is added that allows to still log in with the unsalted passwords. Once you have migrated the passwords of all users to one hashed with BCRYPT, you should change the value to `unsafe-hashes="false"` and restart you Rudder server, that will disallow any unsalted password and will make the authentication more secure.
+A migration in the `rudder-users.xml` file will be applied since the rudder server upgrade to 8.2: in the `/opt/rudder/etc/rudder-users.xml` file, an attribute `unsafe-hashes="true"` is added that allows to still log in with the unsalted passwords. Once you have migrated the passwords of all users to one hashed with BCRYPT, you should change the value to `unsafe-hashes="false"` and restart you Rudder server, that will disallow any unsalted password and will make the authentication more secure.
 
 === User management no longer needs the plugin
 
-The user-management plugin in 8.1 is no longer needed to have multiple users and manage them in Rudder : the "User management" administration page is now integrated in Rudder since the 8.2 version. All features from the plugin have been moved, and additional features such as specific authentication provider and user API tokens still require the installation of the xref:plugins:auth-backends.adoc[authentication backends] and xref:plugins:api-authorizations.adoc[api-authorization] plugins.
+The user-management plugin in 8.1 is no longer needed to have multiple users and manage them in Rudder: the "User management" administration page is now integrated in Rudder since the 8.2 version. All features from the plugin have been moved, and additional features such as specific authentication provider and user API tokens still require the installation of the xref:plugins:auth-backends.adoc[authentication backends] and xref:plugins:api-authorizations.adoc[api-authorization] plugins.
 
 === Rework of the Windows variables
 
-In prior versions of Rudder, policy variables expansion was done using built-in raw Powershell
-variable interpretation which leads to :
+In prior versions of Rudder, policy variables expansion was done using built-in raw PowerShell
+variable interpretation, which leads to :
 
-* Security issues using Powershell injections
+* Security issues using PowerShell injections
 * Using two different syntaxes for the variables in Rudder based on the node OS family (Windows/Linux)
 
-Starting 8.2, the generated policies used by the Windows nodes are no longer interpreted by Powershell
-and the variables expansion is now made possible by a more fine grained parsing of the directives and
+Starting 8.2, the generated policies used by the Windows nodes are no longer interpreted by PowerShell
+and the variable expansion is now made possible by a more fine-grained parsing of the directives and
 techniques content at generation time and a simple template engine.
 
 *Using variables on Windows nodes in Rudder will now be done using the exact same syntax as when using some
@@ -102,9 +102,18 @@ The python implementation was deprecated in 8.1 and replaced by a newer implemen
 slight changes to its options. The older one will no longer be shipped in Rudder and only
 the default `rudder package` CLI introduced in 8.1 will remain.
 
-== Upgrade from Rudder 8.0 or older to 8.2
+=== API changes on Rudder 8.3 : API version 21
 
-Direct upgrades from 8.0 versions and older are no longer supported on 8.2.
+The API version 21 brings a change in the output of the `system/info` endpoint.
+
+If you were using the output of the `system/info` API call :
+
+* Please check the new output format and https://docs.rudder.io/api/v/21/#tag/System/operation/getSystemInfo[The API documentation] to check if your scripts might need changes.
+* Or you can still use the previous API version output format by calling i.e. `/rudder/api/20/system/info...` instead of calling `/rudder/api/latest/system/info...`
+
+== Upgrade from Rudder 8.0 or older to 8.3
+
+Direct upgrades from 8.0 versions and older are no longer supported on 8.3.
 If you are still running one of those, either on servers or nodes,
-please first upgrade to one of the supported versions, and then upgrade to 8.2.
+please first upgrade to one of the supported versions, and then upgrade to 8.3.
 

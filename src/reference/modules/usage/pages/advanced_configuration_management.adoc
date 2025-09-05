@@ -228,8 +228,8 @@ It also includes a ttl mechanism that allows sharing a file for a limited amount
 
 To use this feature, two generic methods are available in the technique editor:
 
-* xref:reference:generic_methods.adoc#sharedfile_from_node[sharedfile_from_node]: To download a file shared from another node.
-* xref:reference:generic_methods.adoc#sharedfile_to_node[sharedfile_to_node]: To make a file available to another node.
+* https://docs.rudder.io/techniques/current/sharedfile_from_node.html[sharedfile_from_node]: To download a file shared from another node.
+* https://docs.rudder.io/techniques/current/sharedfile_to_node.html[sharedfile_to_node]: To make a file available to another node.
 
 See the documentation of these methods for details about the required parameters,
 and especially xref:reference:generic_methods.adoc#sharedfile_to_node[sharedfile_to_node] for a complete usage example.

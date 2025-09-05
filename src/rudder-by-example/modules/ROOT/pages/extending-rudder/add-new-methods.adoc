@@ -14,7 +14,7 @@ For this example we will want to create a method that let us define a
 Rudder variable based on the result of a template.
 
 To do this we will use the pre-existing Mustache templating methods furnished in Rudder:
-* xref:reference:reference:generic_methods.adoc#file_from_template_mustache[Mustache]: it is Rudder's native
+* https://docs.rudder.io/techniques/current/file_from_template_mustache.html[Mustache]: it is Rudder's native
 templating engine, with a very simple syntax, and the best performance. It should be the default choice for most cases.
 
 == Prerequisites

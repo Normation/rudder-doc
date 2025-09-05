@@ -83,9 +83,9 @@ The credentials of a user are defined in the XML file
 
 ----
 
-**<custom-role>**
+**<custom-roles>**
 
-`custom-role` section is optional and only available with the xref:plugins:user-management.adoc[user-management plugin]. It allows to define new named roles. See the plugin documentation for more information.
+The `custom-roles` section is optional and allows to define new roles with specific names. See xref:administration:users.adoc#_custom_roles[the documentation below for how to configure this section].
 
 **<user>**
 
@@ -122,6 +122,14 @@ to `bcrypt` passwords.
 
 Since Rudder 8.2, the "hash" value is always forced to "bcrypt" and another attribute "unsafe-hashes" is introduced to indicate if user passwords with other legacy hashes (md5, sha) should be detected automatically and still be used for login. It is set automatically to `unsafe-hashes="true"` during Rudder startup to migrate from one of those legacy hash values to "bcrypt", and passwords should be migrated manually to bcrypt-hashed ones, after which the value should be set to `false`. Otherwise if "bcrypt" is the one already used during startup, `unsafe-hashes="false"` is set and there is nothing to migrate.
 
+[CAUTION]
+====
+
+In Rudder version 9.0, support for legacy hashes is dropped definitively, and the `unsafe-hashes` attribute will be removed during startup.
+So, please read below how to enforce safer hashing algorithm for the passwords of users in Rudder.
+
+====
+
 Therefore the algorithm used to create the hash (and verify it during authentication) is always `bcrypt` by default, others algorithms are only recognised for passwords of existing users.
 The corresponding algorithm and the Linux shell command needed to obtain the hash of
 the "secret" password for this algorithm are listed here:
@@ -133,10 +141,10 @@ the "secret" password for this algorithm are listed here:
 |====
 | Algorithm | Linux command to hash the password | Note
 | bcrypt    | `htpasswd -nBC 12 ""  \| tr -d ':\n' \| sed 's/$2y/$2b/'` | Highly recommended
-| md5       | `read mypass; echo -n $mypass \| md5sum` | *Unsecure*, should not be used
-| sha1      | `read mypass; echo -n $mypass \| shasum` | *Unsecure*, should not be used
-| sha256    | `read mypass; echo -n $mypass \| sha256sum` | *Unsecure*, should not be used
-| sha512    | `read mypass; echo -n $mypass \| sha512sum` | *Unsecure*, should not be used
+| md5       | `read mypass; echo -n $mypass \| md5sum` | *Insecure*, should not be used
+| sha1      | `read mypass; echo -n $mypass \| shasum` | *Insecure*, should not be used
+| sha256    | `read mypass; echo -n $mypass \| sha256sum` | *Insecure*, should not be used
+| sha512    | `read mypass; echo -n $mypass \| sha512sum` | *Insecure*, should not be used
 |====
 
 .BCrypt parameters
@@ -164,6 +172,15 @@ Here is an example of authentication file with the `secret` password hashed usin
 
 ----
 
+[CAUTION]
+====
+
+But beware of usages of bcrypt : the bcrypt algorithm itself is considered a legacy algorithm.
+In upcoming versions, safer algorithms are supported for more security.
+Meanwhile, see the https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#bcrypt[OWASP recommendations] for avoiding
+security issues from the usage of bcrypt.
+
+====
 
 == User roles and fine-grained authorizations
 

@@ -72,7 +72,7 @@ server too, as it also runs an agent.
 
 The agent cannot know in advance that the server port has changed, so you must declare it when configuring the agent.
 
-To do this, add the port to the server name in your policy server configuration with:
+For Linux systems, to change the port to distribute policy, you need to add the port to the server name when defining the node policy server with:
 
 ----
 
@@ -82,7 +82,7 @@ rudder agent policy-server hostname:5309
 
 (or enforce the value in `/opt/rudder/etc/policy_server.dat`).
 
-And configure the HTTPS port in `/opt/rudder/etc/agent.conf` (you need to create the file):
+The HTTPS port can be configured by creating the file `/opt/rudder/etc/agent.conf` on Linux systems, or editing file `C:\Program Files\Rudder\etc\agent.conf` on Windows systems and define the https_port parameter:
 
 ----
 
@@ -90,7 +90,7 @@ https_port=443
 
 ----
 
-You must restart the agent to get its new set of promises and to make sure it listens for remote-run on this specific port :
+You must restart the agent to get its new set of policies and to make sure it listens for remote-run on this specific port :
 
 ----
 

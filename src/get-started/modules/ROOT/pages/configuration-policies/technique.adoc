@@ -42,6 +42,9 @@ empty _Methods_ section at the bottom of the page. To add methods, click on:
 . the *User* category in the lower right of the interface
 . the *User present* method
 
+We have defined a first policy! Let's add a second method: click on *Add methods*
+in the lower left of the technique details, to display the list of available methods,
+and navigate to the *User* category. Let's add a user description, with the https://docs.rudder.io/techniques/current/user_fullname.html[User fullname method]:
 
 image::demo.png["demo user", align="center"]
 

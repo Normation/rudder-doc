@@ -10,17 +10,6 @@ include::{partialsdir}/rpm_key.adoc[]
 
 include::{partialsdir}/al2023_repo.adoc[]
 
-To be able to install plugins on your Rudder server, you will need to https://github.com/amazonlinux/amazon-linux-2023/issues/414[replace the `gnupg2-minimal` package by the `gnupg2` package].
-To begin the installation, you should simply install the rudder-server
-meta-package, which will install the required components:
-
-----
-
-yum swap gnupg2-minimal gnupg2
-yum install rudder-server
-
-----
-
 include::{partialsdir}/initial_config.adoc[]
 
 
