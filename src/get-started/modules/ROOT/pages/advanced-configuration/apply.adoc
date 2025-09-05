@@ -10,8 +10,9 @@ Now we created our technique, we will need to instanciate it and add it to our r
 . in the *Parameters* tab, add the parameter *aes256-ctr,aes192-ctr,aes128-ctr*.
 This is a list of ciphers compliant to fips-140 2
 . in the *Target rules* tab, click on our rule *Hardening baseline*
+. click on *Save*. Now, our policy will be applied to our node, and if the node is not compliant, Rudder will remediate it.
 
-Now, our policy will be applied to our node. To check it, go to *Nodes*, select *node.rudder.local*, and switch to *Compliance* tab.
+To check the compliance results, go to *Nodes*, select *node.rudder.local*, and switch to *Compliance* tab.
 
 image::parameter-directive.png["Directive parameter", align="center"]
 
