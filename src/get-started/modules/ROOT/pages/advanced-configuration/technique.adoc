@@ -55,7 +55,7 @@ Now, let's add methods:
 
 . click on *Add* to show the building blocks on the right
 . then select *New block*. This block will enable us to add a condition to ensure the methods will be applied on Linux machines.
-. in the block, add a name and click on the *Conditons* tab.
+. in the block, add a name and click on the *Conditions* tab.
 . in the *Operating system* list, select *linux*
 
 image::weak-ciphers.png["New technique disable weak ciphers", align="center"]
