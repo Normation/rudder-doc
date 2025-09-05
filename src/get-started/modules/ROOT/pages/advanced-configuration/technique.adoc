@@ -41,7 +41,7 @@ Moreover, as those policies should be applied only on Linux machines, we will ad
 Now, let's get to work and start building our technique:
 
 . go to the technique editor (*Configurations -> Techniques*) and click on *Create*
-. call it "Disabke weak ciphers" and add a description
+. call it "Disable weak ciphers" and add a description
 . let's add a parameter to list strong ciphers in clicking on tab *Parameters*
 . fill *Variable name* with _strong_ciphers_
 
