@@ -22,7 +22,6 @@
 *** xref:agent/rhel.adoc[on RHEL/CentOS/Amazon Linux]
 *** xref:agent/sles.adoc[on SLES]
 *** xref:agent/windows.adoc[on Windows]
-*** xref:agent/aix.adoc[on AIX]
 ** Install relay
 *** xref:relay/debian.adoc[on Debian/Ubuntu]
 *** xref:relay/rhel.adoc[on RHEL/CentOS]
