@@ -1,26 +1,19 @@
-= Apply a complete applicative policy
+= Apply a security policy
 
-Now we have defined our technique, we will apply it.
-To do so, got to the directives page (*Configuration management -> Directives*)
-and find our new technique (for example by using the filter with "Website"),
-and create a directive.
 
-We will configure the site using the node property we defined in xref:node-management:data.adoc#_classify_nodes_using_node_properties[the node management section].
 
-The syntax to use to access them is `${node.properties[property_name]}`.
-Here we have hierarchical JSON, so we access a sub-key with `${node.properties[property_name][sub_key]}`.
+== Instantiate the policy in a directive
 
-This time our technique takes parameters, so we have to provide them:
+Now we created our technique, we will need to instantiate it and add it to our rule:
 
-* `${node.properties[website][webroot]}`
-* `${node.properties[website][domain]}`
-* `${node.properties[website][port]}`
+. go the *Directives* menu, scroll down, and create the directive *Disable weak ciphers*
+. in the *Parameters* tab, add the parameter *aes256-ctr,aes192-ctr,aes128-ctr*.
+This is a list of ciphers compliant to fips-140 2
+. in the *Target rules* tab, click on our rule *Hardening baseline*
+. click on *Save*. Now, our policy will be applied to our node, and if the node is not compliant, Rudder will remediate it.
 
-image::./technique-parameters.png["Parameters for our website technique", align="center"]
+To check the compliance results, go to *Nodes*, select *node.rudder.local*, and switch to *Compliance* tab.
 
-Then you can see the rules zone at the bottom of the page.
-It allows quickly linking a directive to a rule, as it is a common task in Rudder.
+image::parameter-directive.png["Directive parameter", align="center"]
 
-We will use it and select our *Demo Website* rule, then save the directive.
-
-image::./demo-rule.png["Parameters for our website technique", align="center"]
+Now, let's check compliance !

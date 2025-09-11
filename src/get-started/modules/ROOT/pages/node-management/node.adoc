@@ -6,7 +6,7 @@
 
 In this section, you will see:
 
-* How to manage a new server with Rudder
+* How to manage a new machine with Rudder
 * What does the Rudder server knows about managed nodes
 
 ====
@@ -16,9 +16,13 @@ In the demo platform, you have two nodes:
 * The `server` we already used
 * A `node` machine
 
-This machine already has Rudder installed, and we will see how to add the second one.
+If you used Vagrant to create the platform, it has provisoned the node by:
 
-[NOTE]
+* installing rudder-agent
+* configuring agent in defining Rudder server's ip with `$ rudder agent policy-server <rudder-server_ip>`
+* sending to Rudder server node's inventory with `$ rudder agent inventory`
+
+[TIP]
 
 ====
 
@@ -26,55 +30,30 @@ An *inventory* contains hardware and software information about a node.
 It is sent to register the node to the server after agent installation, and then
 gets updated daily (during the night, at a random time).
 
-You can manually trigger an inventory with `rudder agent inventory`.
+You can manually trigger an inventory with `$ rudder agent inventory`.
 
 ====
 
-[NOTE]
 
-====
 
-To get information about the agent state on a node, run:
+Let's accept our node:
 
-----
-# rudder agent info
-Hostname: server.rudder.local
-UUID: root
-Key Hash: 9fe57bb0dd0795c571b54fcb537c290004ab6454
-Policy server: 127.0.0.1
-Roles: rudder-agent
-Report mode: full-compliance
-Run interval: 5 min
-Agent is enabled
-Policy updated: 2020-06-28 22:20:01
-Inventory sent: 2020-06-28 02:05:49
-Version: Rudder agent 6.0.4
-----
+. go to *Pending nodes*
+. check the displayed node
+. *Accept*
 
-====
+image::accept-node.png["Accept new node", align="center"]
 
-How does adding a new node to Rudder work?
+As a configuration has already been created and applied to all nodes managed by Rudder, it will be applied 
+directly to the newly accepted node within 5 minutes. 
+It includes the two directives we defined before.
 
-* Install rudder-agent on the new node (using a standard software repository)
-* Configure the agent with the hostname or IP of the Rudder server that should manage it by editing `/opt/rudder/etc/policy-server.conf`.
-* It will automatically register itself to its server
-* Accept the new node on the server, and it is done
 
-In the demo platform, the agent has already be installed and configured, and it should have already sent
-an inventory to the server.
+Let's have a look at its inventory:
 
-Let's have a look at what this inventory contains.
-Go to *Node management -> Accept new nodes*.
+* go to *Nodes*. You can see two nodes displayed.
+* click on your node hostname *node.rudder.local*
+* switch to the *Inventory* tab
 
-You will see the *node* machine in the list. Click line, this will unfold the content of this node's inventory.
 
-You can navigate through the tabs, to see software and hardware information.
-
-image::./inventory.png["Inventory content", align="center"]
-
-Then you have to choose to accept this node or not. Once accepted, a node will get access to a configuration, so this can be a security-sensitive step.
-
-Let's accept our node, select the checkbox on the right, and click on *Accept*.
-
-And you can go back to the Nodes list, you will see we now have two nodes. A configuration has already be generated, and will be applied to our node within 5 minutes. It includes the two directives we defined before as they apply to all the nodes managed by Rudder.
-
+You can navigate through the tabs, to see OS, software and hardware information.

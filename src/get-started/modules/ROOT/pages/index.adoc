@@ -16,6 +16,6 @@ only basic Unix command-line skills.
 
 ====
 
-image::./dashboard-overview.png["Rudder dashboard", align="center"]
+image::dashboard-overview.png["Rudder dashboard", align="center"]
 
 Let's start by xref:environment/index.adoc[installing the test environment].

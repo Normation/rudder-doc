@@ -35,6 +35,7 @@ On all systems:
 ----
 npm i -g @antora/cli
 npm i -g @antora/site-generator-default
+npm i -g @antora/site-generator
 npm i -g gulp-cli
 npm i -g yarn
 ----

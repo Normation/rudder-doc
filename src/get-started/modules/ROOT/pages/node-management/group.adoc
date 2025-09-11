@@ -2,11 +2,11 @@
 
 In Rudder, we never apply policies to individual nodes, but always to sets of nodes.
 
-[NOTE]
+[TIP]
 
 ====
 
-A *group* is query over inventory data that defines a set of nodes,
+A *group* is a query over inventory data that defines a set of nodes. Groups
 on which specific policies can then be applied.
 
 ====
@@ -26,27 +26,60 @@ the content of the groups or applied configuration.
 
 ====
 
-There is a set of pre-defined groups (called system groups), that
+There is a set of predefined groups (called system groups), that
 covers Rudder-related classification.
 
-We will define a group made of all nodes running Ubuntu 16.04 LTS.
+We will define a group made of all nodes running Ubuntu 22.04 LTS.
 Click on *Create* in the groups tree. You will then see a popup asking for several parameters.
 
-image::./ubuntu.png["Group of Ubuntu 16.04 nodes", align="center"]
+image::ubuntu.png["Group of Ubuntu 22.04 nodes", align="center"]
 
-The group type is *dynamic*, which means the content of the group will be automatically
-updated whenever a nodes should enter or leave the group depending on its inventory data.
+The group type is _dynamic_. It means the group content will be automatically
+updated whenever a node respects belonging criteria.
 
-Then click on *Create*, and the new group will appear in the tree.
-Scroll down to go to the group definition.
+Let's configure group's criteria:
 
-image::./ubuntu-2.png["Group of Ubuntu 16.04 nodes", align="center"]
+. go to tab *Criteria*
+. click on *+* 
+. as the default criteria defining the OS type as Linux is what we want, click on *+* next to it 
+. select *Operating System Version* and fill the blank space with *22.04*
+. click on *Search*. Our node appears at the page bottom
+. *Save* 
 
-Click on *Search* to make the actual search over node information, you should see
-the `node` machine in the list. The server does not appear as Rudder servers are excluded from groups by default. Click on *Save*.
+image::ubuntu-2.png["Group of Ubuntu 22.04 nodes", align="center"]
 
-We now have defined a first custom group. You can use any combination of criteria based
-on the inventory data.
+NOTE: You can notice the server does not appear on nodes list as Rudder servers are excluded from groups by default.
+
+
+We now have defined a first custom group using inventory data. 
+
+You can also group machines using your own criteria:
+
+. go to menu *Nodes*
+. select your node in clicking on hostname
+. go to tab *Properties*
+. add the property *env* : *prod*
+. click on *+*
+
+image::group-properties.png["Create a property", align="center"]
+
+One property appeared in the table. Now, you will be able to create a group using it as a criteria:
+
+. go to menu *Groups*
+. click on *Create +*
+. add a name *Production machines* and *Create*
+. go to tab *Criteria*
+. click on *+*
+. in the first column, select *Properties*
+. fill the blank with *env=prod*
+. click on *Search*, then *Save*
+
+image::group-properties-2.png["Create a dynamic group with a property", align="center"]
+
+Now, we created a group using a custom criteria. Properties enable you to group machines 
+according your own needs.
+
+
 
 [TIP]
 .How to design groups in Rudder?
@@ -56,11 +89,10 @@ The best practice advice to:
 
 * Create multiple layers of groups:
 
-** Geographic (Data center, rack, etc.)
-** Business (Production, QA, etc.)
-** Applicative (Installed application, etc.)
-** System (Operating system, etc.)
-** etc.
+** Geographic (Data center, rack, ...)
+** Business (Production, QA, ...)
+** Applicative (Installed application, ...)
+** System (Operating system, ...)
 
 * Build subgroups using the belonging to another group as a criteria,
 which allows expressing complex cases without duplicating query definition

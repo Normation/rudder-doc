@@ -1,4 +1,4 @@
-= Define a complete applicative policy
+= Define a complete security policy
 
 [NOTE]
 
@@ -13,139 +13,52 @@ In this section, you will learn:
 
 ====
 
-== Technique creation
+== Technique conception
 
 In the first part, we defined a very simple technique
 that managed a user.
 
-We will go back to the technique editor (*Configuration policy -> Techniques*)
-and create a technique
-to configure a small website, that will consist of an nginx webserver installation,
-a deployment of a minimal configuration and an html file as our website.
+In this part, we will create a technique to disable weak ciphers.
 
-Let's call our new technique "Static website".
+This technique will need parameters.
 
-image::./website.png["Website technique", width=500, align="center"]
-
-But this time, we will add parameters to this technique.
-What are parameters? Just like we saw in the built-in techniques, you can pass parameters to techniques created in the technique editor. They are part of the technique
+TIP: What are parameters? Just like we saw in the built-in techniques, you can pass parameters to techniques 
+created in the technique editor. They are part of the technique
 definition, and their value is usable with the `${variable_name}` syntax.
 
-We will need three parameters:
+For this policy, we want to:
 
-* A path for our site, called `webroot`
-* A domain for our site, called `domain`
-* A port to listen on, called `port`
+* configure ciphers in the _/etc/ssh/sshd_config_ file. As the ciphers can change according the use case, we will pass them as parameters.
+* restart _sshd_ service if there has been a modification
+* check _$ sshd -T_ output in case sshd_config file has been modified without restarting service  
 
-image::./parameters.png["Technique parameters", width=500, align="center"]
+Moreover, as those policies should be applied only on Linux machines, we will add a condition in Rudder to respect that.
 
-Then we can start assembling our building blocks. We want:
+== Technique creation
 
-* to install nginx and manage the nginx service
-* to add our website content
-* to manage nginx configuration file
+=== Parameter configuration
 
-== Methods
+Now, let's get to work and start building our technique:
 
-We will now map our use case to generic methods in the technique editor.
+. go to the technique editor (*Configurations -> Techniques*) and click on *Create*
+. call it "Disable weak ciphers" and add a description
+. let's add a parameter to list strong ciphers in clicking on tab *Parameters*
+. fill *Variable name* with _strong_ciphers_
 
-=== Nginx installation
+image::parameters.png["Technique parameters", align="center"]
 
-Let's start with the easy part, the nginx setup. We need to install the nginx package.
+=== Methods
 
-To do so, we will use a *package present* method, that will continuously ensure the package is installed. You can skip all parameters except the package
-name, which is *nginx*, defaults are ok for us.
+==== Add a block to condition the grouped methods 
 
-image::./nginx-package.png["Install nginx package", width=500, align="center"]
+Now, let's add methods:
 
-And for the service, use a *service started* method, with the *nginx*
-service name. It will ensure the service is started.
+. click on *Add* to show the building blocks on the right
+. then select *New block*. This block will enable us to add a condition to ensure the methods will be applied on Linux machines.
+. in the block, add a name and click on the *Conditions* tab.
+. in the *Operating system* list, select *linux*
 
-image::./service.png["Start nginx service", width=500, align="center"]
-
-=== Website content
-
-==== File content
-
-Four our website content, we will use a simple *File content* with the html content of our website. This method can add content to a file, this is the most simple file editing method.
-
-[source,html]
-----
-<html><h1>Welcome to Rudder demo!</h1></html>
-----
-
-And put it in our webroot using `${webroot}/index.html`.
-
-NOTE: The enforce parameter specifies if we want to add content (with the `false` value) or to totally replace the content of the file (with the `true` value).
-
-image::./indexhtml.png["HTML index files", width=500, align="center"]
-
-NOTE: This one is only a demo example, a real use case would probably include a
-separate website deployment process.
-
-==== Permissions
-
-We need a second method for our website content, as the default permission for files created by Rudder is 640, owned
-by root. Our file would hence not be readable by the web server user.
-To configure specific permissions, use the *permissions (non-recursive)* method with
-the following parameters:
-
-* *mode*: `644`
-* *owner*: `root`
-* *group*: `root`
-
-image::./permission.png["File permissions", width=500, align="center"]
-
-=== Nginx configuration file
-
-The last missing part is the web server configuration file. We want to
-tell nginx to serve our page on the domain given as parameter, and on the given port.
-
-This time we won't use a simple file content, but a dedicated feature for such cases: templating.
-It allows providing a base file content, with special markers for parts that will be dynamically
-computed by the agent at execution. It allows to have node-specific content in a generic file
-(like the static file server in our example). Rudder's native templating language is named
-*mustache* (you'll see why very soon).
-
-[NOTE]
-
-====
-
-Templating allows replacing content in a generic template with
-specific data. The include environment conditions or variables.
-
-It is generally a good practice to enforce the content of file totally, either by templating or file copy than to
-use file editions, as they define an absolute state and are hence a lot easier to use and more reliable.
-
-====
-
-Let's add this configuration file:
-
-[source,mustache]
-----
-server {
-    root {{{vars.static_website.webroot}}};
-    server_name {{{vars.static_website.domain}}};
-    listen {{{vars.static_website.port}}};
-}
-----
-
-In the destination `/etc/nginx/conf.d/demo.conf` using a *file from a mustache string* method that allows us providing the template content directly in the web interface.
-
-image::./template.png["Templating method", width=500, align="center"]
-
-We have now defined all of our configuration states! But are we done yet? Not exactly,
-as we are missing an important piece: restarting the service when the configuration changes,
-in order to actually apply the configuration.
-
-=== Restart the service (when needed!)
-
-You can spot it is a bit different compared to our other methods: in this case
-it is not a state but an action we need to express.
-If we use an action method in our policies, the action will be executed
-at every agent run, which is not what we want here.
-
-The technique editor has a concept of conditions. What are conditions?
+image::weak-ciphers.png["New technique disable weak ciphers", align="center"]
 
 [NOTE]
 
@@ -155,8 +68,7 @@ A *condition* is represented by a string, and can be either defined or not.
 The conditions express what the current execution environment is:
 
 * We are on a Debian 9 system
-* The state of the nginx package is correct
-* The content of the configuration file has just been modified
+* The content of the configuration file has just been modified  (see below)
 * etc.
 
 We can use conditions to limit the evaluation of a method to a specific context,
@@ -169,8 +81,36 @@ This allows:
 
 ====
 
-In our case, we need to only execute our service restart when the configuration file method
-actually modifies the file. We need to use a condition that will be defined in this precise case.
+==== The *File key-value present* method
+
+. in the block, go back to the *Content* tab
+. drag and drop in the block the *File key-value present* method. You can find it using *Filter* or in clicking 
+on the *File* category in the right part. This method ensures the file contains an entry key -> value with arbitrary 
+separator between the key and its value. It is exactly what we need to configure the line defining ciphers.
+. fill the method content: add a name, fill the *Path* with our */etc/ssh/ssh_config* file, the *Key* is *Ciphers*,
+ the *Value* is our parameter *${strong_ciphers}* and finally the separator is a space
+
+image::weak-ciphers-method-1.png["New technique disable weak ciphers", align="center"]
+
+==== Restart service _sshd_ when needed
+
+
+
+Now, let's add the method to restart our service when there has been a change in the /etc/ssh/ssh_config file:
+
+. drag and drop in the block the method *Service restart*. You can find it using *Filter* or in clicking 
+on the *Service* category in the right part.
+. fill the method content: add a block name and fill the *Name* with *sshd*
+. then let's add the condition to restart the service only when there has been a change in the file _/etc/ssh/ssh_config_:
+.. select the method *File key-value present* and click on tab *Result conditions*.
+.. copy the result conditions *Repaired*.
+.. paste it in the tab *Conditions* of the method *Service restart*. 
+
+image::weak-ciphers-method-2.png["Method service restart for sshd", align="center"]
+
+You can spot it is different compared to our other methods: in this case
+it is not a state but an action we need to express.
+As we do not want the action method to be executed at every agent run, we have added a condition: the _/etc/ssh/sshd_config_ modification.
 
 [NOTE]
 
@@ -179,21 +119,12 @@ actually modifies the file. We need to use a condition that will be defined in t
 Every method will define a *result condition* that is one of the conditions displayed
 in method details:
 
-image::./result-conditions.png["Install nginx package conditions", width=500, align="center"]
-
 It can be:
 
 * *Success*: When the state was already compliant
 * *Repaired*: When the state has been modified by the agent to become compliant
 * *Error*: When the expected state could not be reached
 
-====
-
-In our case the condition will be the modification of the configuration file, so the condition will be the `repaired` condition of out templating method, i.e. `file_from_string_mustache__etc_nginx_conf_d_demo_conf_repaired` (you should use copy/paste in most result condition definitions).
-
-[NOTE]
-
-====
 
 Conditions can be combined using boolean operators:
 
@@ -202,35 +133,30 @@ Conditions can be combined using boolean operators:
 * `.` for *and*
 * `(` and `)` for grouping
 
-====
-
-Let's add a *Service restart* method, with the `nginx` service name as parameter.
-
-Then use the *Conditions* tab of the method to add the repaired condition of the nginx configuration:
-
-image::./restart-nginx.png["Restart nginx", width=500, align="center"]
-
-Now your service restart will only be executed when necessary.
-
-[NOTE]
 
 ====
 
-When you start using conditions, be careful to only use them when necessary.
-For example, we could imagine only deploying our website when installing the package.
 
-This is less reliable as we would stop checking it, and always
-consider it ok.
+==== Audit from command to check current configuration
 
-In short: Checking configuration is cheap, only add conditions when strictly necessary.
+Finally, we will check ciphers in the output of the command *sshd -T*:
 
-====
+. drag and drop in the block the method *Audit from command*. You can find it using *Filter* or in clicking 
+on the *Audit* category in the right part. As its name suggests, this method execute a command in audit mode.
+. fill method content:
+.. add a name 
+.. the *Command* should be *sshd -T | grep 'ciphers ${strong_ciphers}'*
+.. the *Compliant code* should be *0*
+. finally, *Save* the technique
+
+image::weak-ciphers-method-3.png["Method Audit from command for sshd -T", align="center"]
+
+
 
 == Conclusion
 
 Here is the final content of our technique:
 
-image::./methods.png["Final list of methods", width=500, align="center"]
+image::methods.png["Final list of methods", align="center"]
 
-We now have defined a complete applicative example, which probably looks like what you would do
-with a real system. In the following sections, we will apply it to a machine and check the results.
+We now have defined a security policy, now, we will apply it to a machine and check the results.

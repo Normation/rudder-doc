@@ -6,61 +6,64 @@
 
 In this section you will:
 
-* Use policy building blocks in the builder UI
+* Use building blocks within the technique editor in Rudder 
 * Define a configuration policy within Rudder
 
 ====
 
-Here you will learn to define a configuration policy through Rudder's technique editor.
-A technique is a configuration policy template, that will need to be instantiated afterwards.
+TIP: A technique is a configuration policy template.
 
-First, go to the xref:reference:usage:technique_editor.adoc#_techniques[Technique Editor] in *Configuration policy -> Techniques*. A configuration policy in Rudder is called a
+First, go to the xref:reference:usage:technique_editor.adoc#_techniques[Technique Editor] in *Configurations -> Techniques*. A configuration policy in Rudder is called a
 xref:reference:usage:configuration_management.adoc#_techniques[technique].
 
 You may have expected to start writing configuration code at this point. We won't!
 (though it is also perfectly possible, but not the purpose of this guide).
 
-Let's define a very simple policy: create a demo user. We will first create a new technique by clicking on *Create Technique*.
+Let's define a very simple policy: create a demo user. We will first create a new technique by clicking on *Create*.
 
-image::./tech-editor.png["Rudder technique editor", align="center"]
+image::tech-editor.png["Rudder technique editor", align="center"]
 
-We can now name our technique: *Demo user*, and add a small description for documentation:
+We can now name our technique: _Demo user_, and add a small description for documentation.
 
-image::./new.png["New technique form", align="center"]
 
 How does this interface work?
 
-* The left part is the list of techniques (empty for now, but our new technique will pop there once we save it)
-* The center is the technique itself
-* The right part is the "methods" column (and a category list to navigate within methods)
+. The left part is the list of techniques (empty for now, but our new technique will pop there once we save it)
+. The center is the technique itself
+. The right part is the "methods" column (and a category list to navigate within methods)
 
-The xref:reference:reference:generic_methods.adoc[methods] will be the building blocks to our technique. You can think of them as small bricks
-you will assemble into a technique. Let's start the configuration, click on the *User* category (in the lower right of the interface),
-and click on the *User present* method.
-It is now part of our technique's component list, with an orange warning asking for parameters. To provide them, click on the method instance in the technique.
+TIP: The xref:reference:reference:generic_methods.adoc[methods] are the building blocks used to form a technique. You can think of them as small bricks
+you assemble into a technique. 
 
-The right column will change from method list to method configuration:
+Let's start using methods to build a technique. To do that, we will need to fill the 
+empty _Methods_ section at the bottom of the page. To add methods, click on:
 
-image::./demo.png["demo user", align="center"]
+. the *Add* button in the lower part of the screen
+. the *User* category in the lower right of the interface
+. the *User present* method
 
 We have defined a first policy! Let's add a second method: click on *Add methods*
 in the lower left of the technique details, to display the list of available methods,
 and navigate to the *User* category. Let's add a user description, with the https://docs.rudder.io/techniques/current/user_fullname.html[User fullname method]:
 
-image::./fullname.png["demo user's fullname", align="center"]
+image::demo.png["demo user", align="center"]
+
+We have defined a first policy! 
+
+Let's add a second method: 
+
+. click on *Add methods* in the lower left of the technique details, to display the list of available methods,
+. navigate to the *User* category. 
+. add a user description, with the https://docs.rudder.io/techniques/8.3/user_fullname.html[User fullname method]:
+
+image::fullname.png["demo user's fullname", align="center"]
 
 We now have specified one characteristic of our user.
 
 Let's save this technique! (with the *Save* button). We now have a configuration policy
 we can apply yo our machines.
 
-== In Summary
-
-image::./technique_editor_steps.png["Information", align="center"]
-image::./technique_editor_filter.png["Filter generic methods", align="center"]
-image::./technique_editor_add_generic_method.png["Add generic method", align="center"]
-image::./technique_editor_save.png["Add more and save", align="center"]
-image::./technique_editor_first_technique_created.png["Overview of techniques", align="center"]
+=== Conclusion
 
 As you can see it is really simple to define the expected state for our machines
 through this editor.
