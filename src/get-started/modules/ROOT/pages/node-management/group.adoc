@@ -35,9 +35,9 @@ Click on *Create* in the groups tree. You will then see a popup asking for sever
 image::ubuntu.png["Group of Ubuntu 22.04 nodes", align="center"]
 
 The group type is _dynamic_. It means the group content will be automatically
-updated whenever a node respects belonging criterias.
+updated whenever a node respects belonging criteria.
 
-Let's configure group's criterias:
+Let's configure group's criteria:
 
 . go to tab *Criteria*
 . click on *+* 
@@ -53,7 +53,7 @@ NOTE: You can notice the server does not appear on nodes list as Rudder servers 
 
 We now have defined a first custom group using inventory data. 
 
-You can also group machines using your own criterias:
+You can also group machines using your own criteria:
 
 . go to menu *Nodes*
 . select your node in clicking on hostname

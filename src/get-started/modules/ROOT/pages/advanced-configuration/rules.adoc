@@ -17,7 +17,7 @@ We will define a new rule to apply our directives.
 
 Let's go to the rules page, *Configurations -> Rules*. 
 On the left you can see a tree similar to what you saw in the groups page. It works in the same way, and rules categories
-let you organize your rules, without modifing the rules behavior.
+let you organize your rules, without modifying the rules behavior.
 
 Click on *Create*, then fill basic information.
 
@@ -38,4 +38,4 @@ You can then save your rule.
 image::new-rule2.png["New rule settings groups", align="center"]
 
 Congrats, you successfully created your first rule !
-Now, we will create a technique, instanciate in a directive to add it to the rule.
+Now, we will create a technique, instantiate in a directive to add it to the rule.

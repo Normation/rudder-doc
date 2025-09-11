@@ -42,7 +42,7 @@ image::quicksearch.png["Quicksearch field", align="center"]
 You will see the actual modification happening, with a "repaired" state, and the _demo_ user now exists
 on the system. If you go back to the dashboard, everything is green and compliance has reached 100%.
 
-_Audit/ Enforce modes_ can be used in many use cases. Basically, we recommand to use _Audit mode_ first and switch to _Enforce mode_ 
+_Audit/ Enforce modes_ can be used in many use cases. Basically, we recommend to use _Audit mode_ first and switch to _Enforce mode_ 
 to remediate when you are sure the policy won't break anything important
 
 

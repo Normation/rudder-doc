@@ -101,7 +101,7 @@ Now, let's add the method to restart our service when there has been a change in
 . drag and drop in the block the method *Service restart*. You can find it using *Filter* or in clicking 
 on the *Service* category in the right part.
 . fill the method content: add a block name and fill the *Name* with *sshd*
-. then let's add the conditon to restart the service only when there has been a change in the file _/etc/ssh/ssh_config_:
+. then let's add the condition to restart the service only when there has been a change in the file _/etc/ssh/ssh_config_:
 .. select the method *File key-value present* and click on tab *Result conditions*.
 .. copy the result conditions *Repaired*.
 .. paste it in the tab *Conditions* of the method *Service restart*. 

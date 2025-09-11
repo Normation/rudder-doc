@@ -19,7 +19,7 @@ After some time, when the agent ran twice, you will get:
 
 image::compliance.png["Disable weak ciphers compliance", align="center"]
 
-You can notice the *Restart sshd service* method is not applicable as the agent modified the file _/etc/ssh/sshd_config_ on its firt execution. After that, 
+You can notice the *Restart sshd service* method is not applicable as the agent modified the file _/etc/ssh/sshd_config_ on its first execution. After that, 
 the agent won't restart the service because the _/etc/ssh/sshd_config_ file is not modified anymore.
 
 
@@ -55,7 +55,7 @@ It will display a compliance page with two parts:
 
 They allow exploring compliance differently, based on what you are looking for.
 
-Furhtermore, the *Recent changes* tab lists the changes done by Rudder for this rule.
+Furthermore, the *Recent changes* tab lists the changes done by Rudder for this rule.
 Click on a time slot and the details will be displayed in the table below.
 
 Compliance is also available through Rudder API, allowing to monitor

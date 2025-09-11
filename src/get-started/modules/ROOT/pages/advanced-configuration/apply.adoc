@@ -2,9 +2,9 @@
 
 
 
-== Instanciate the policy in a directive
+== Instantiate the policy in a directive
 
-Now we created our technique, we will need to instanciate it and add it to our rule:
+Now we created our technique, we will need to instantiate it and add it to our rule:
 
 . go the *Directives* menu, scroll down, and create the directive *Disable weak ciphers*
 . in the *Parameters* tab, add the parameter *aes256-ctr,aes192-ctr,aes128-ctr*.
