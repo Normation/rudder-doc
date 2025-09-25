@@ -129,8 +129,6 @@ A `SECTION` has the following attributes:
 
 NOTE: A multivalued section can only contain variable, and cannot contain section
 
-NOTE: If there are no `SECTION` defined with `component="true"`, a default `SECTION` for reporting will be generated, named after the id of the Technique (the folder name of the Technique)
-
 === Variables definitions in the <SECTION> tags
 
 There are three tags to create a variable:
