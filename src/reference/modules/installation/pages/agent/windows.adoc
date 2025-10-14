@@ -122,24 +122,14 @@ Desktop versions are not officially supported but should be mostly compatible as
 [cols="1,1"]
 |===
 |Powershell
-|version 4 or later
+|version 5 or later
 
 |.NET
-|version 4.5 or later
+|version 4.7.2 or later
 
 |PSDesiredStateConfiguration
 |installed
 |===
-
-For `Windows Server 2008R2` and `Windows Server 2012` you can upgrade the `PowerShell` version by following for instance, https://social.technet.microsoft.com/wiki/contents/articles/20623.windows-78-and-windows-server-2008-r22012-step-by-step-upgrading-powershell-to-version-4.aspx[this guide].
-
-On desktop or old Windows versions you may need to activate the `DSC` features and `WinRM` features.
-Please note that older desktop versions (`Windows 7 and 8`), you will need to install `PowerShell 4` and make sure `WinRM` is activated with the following command:
-
-----
-Set-WSManQuickConfig DSC
-----
-
 
 == Versioning policy
 

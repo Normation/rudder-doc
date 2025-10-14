@@ -8,7 +8,7 @@ Add Rudder's package repository:
 #   "bullseye" for Debian 11
 #   "jammy"    for Ubuntu 22.04 LTS
 
-echo "deb [arch=$(dpkg --print-architecture)] http://repository.rudder.io/apt/8.3/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
+echo "deb [arch=$(dpkg --print-architecture)] http://repository.rudder.io/apt/9.0/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 
 ----
 
@@ -21,7 +21,7 @@ You need to replace the username (LOGIN) and the password (PASSWORD) by your Rud
 [source, Bash]
 ----
 
-echo "deb [arch=$(dpkg --print-architecture)] https://download.rudder.io/apt/8.3/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
+echo "deb [arch=$(dpkg --print-architecture)] https://download.rudder.io/apt/9.0/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 
 echo 'machine download.rudder.io login LOGIN password PASSWORD' > /etc/apt/auth.conf.d/rudder.conf
 chmod 640 /etc/apt/auth.conf.d/rudder.conf

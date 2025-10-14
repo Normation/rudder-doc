@@ -2,7 +2,7 @@
 
 ----
 
-zypper ar -n 'Rudder 8.3' http://repository.rudder.io/rpm/8.3/SLES_12/ Rudder
+zypper ar -n 'Rudder 9.0' http://repository.rudder.io/rpm/9.0/SLES_12/ Rudder
 
 ----
 
@@ -14,7 +14,7 @@ the user name and the password by your Rudder account):
 
 ----
 
-zypper ar -n 'Rudder 8.3' https://LOGIN:PASSWORD@download.rudder.io/rpm/8.3/SLES_12/ Rudder
+zypper ar -n 'Rudder 9.0' https://LOGIN:PASSWORD@download.rudder.io/rpm/9.0/SLES_12/ Rudder
 
 ----
 

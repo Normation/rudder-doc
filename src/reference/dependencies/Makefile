@@ -1,6 +1,6 @@
 ## Builds dynamic dependencies from other repos
 
-RUDDER_VERSION = 8.3
+RUDDER_VERSION = 9.0
 
 .PHONY: clean rudder.adoc rudder-relayd.1.adoc hooks.adoc plugins versions.adoc
 all: hooks.adoc rudder.adoc rudder-relayd.1.adoc plugins
