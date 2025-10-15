@@ -31,7 +31,7 @@ You can also build it from the https://github.com/Normation/rudder/tree/master/d
 Specify a version to build with:
 
 ```bash
-docker build --build-arg VERSION=8.3.0 .
+docker build --build-arg VERSION=9.0.0 .
 ```
 
 ### Configuration

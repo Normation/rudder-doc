@@ -10,9 +10,9 @@ include::{partialsdir}/rhel_repo.adoc[]
 
 ----
 
-echo '[Rudder_8.3]
-name=Rudder 8.3
-baseurl=http://repository.rudder.io/rpm/8.3/AL_2023/
+echo '[Rudder_9.0]
+name=Rudder 9.0
+baseurl=http://repository.rudder.io/rpm/9.0/AL_2023/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rudder_release_key.pub' > /etc/yum.repos.d/rudder.repo
 
@@ -29,11 +29,11 @@ Downloading the Amazon Linux 1 & 2 agents requires an active subscription.
 
 ----
 
-echo '[Rudder_8.3]
-name=Rudder 8.3
+echo '[Rudder_9.0]
+name=Rudder 9.0
 username=LOGIN
 password=PASSWORD
-baseurl=http://download.rudder.io/rpm/8.3/RHEL_6/
+baseurl=http://download.rudder.io/rpm/9.0/RHEL_6/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rudder_release_key.pub' > /etc/yum.repos.d/rudder.repo
 
@@ -43,11 +43,11 @@ gpgkey=https://repository.rudder.io/rudder_release_key.pub' > /etc/yum.repos.d/r
 
 ----
 
-echo '[Rudder_8.3]
-name=Rudder 8.3
+echo '[Rudder_9.0]
+name=Rudder 9.0
 username=LOGIN
 password=PASSWORD
-baseurl=http://download.rudder.io/rpm/8.3/RHEL_7/
+baseurl=http://download.rudder.io/rpm/9.0/RHEL_7/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rudder_release_key.pub' > /etc/yum.repos.d/rudder.repo
 

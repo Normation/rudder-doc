@@ -11,9 +11,9 @@ Be careful, especially if you upgrade, the gpgkey URL below has changed in Rudde
 
 ----
 
-echo '[Rudder_8.3]
-name=Rudder 8.3
-baseurl=http://repository.rudder.io/rpm/8.3/RHEL_<VERSION>/
+echo '[Rudder_9.0]
+name=Rudder 9.0
+baseurl=http://repository.rudder.io/rpm/9.0/RHEL_<VERSION>/
 gpgcheck=1
 gpgkey=https://repository.rudder.io/rudder_release_key.pub' > /etc/yum.repos.d/rudder.repo
 
@@ -27,11 +27,11 @@ the VERSION, username and the password by your Rudder account):
 
 ----
 
-echo '[Rudder_8.3]
-name=Rudder 8.3
+echo '[Rudder_9.0]
+name=Rudder 9.0
 username=LOGIN
 password=PASSWORD
-baseurl=http://download.rudder.io/rpm/8.3/RHEL_<VERSION>/
+baseurl=http://download.rudder.io/rpm/9.0/RHEL_<VERSION>/
 gpgcheck=1
 gpgkey=https://download.rudder.io/rudder_release_key.pub' > /etc/yum.repos.d/rudder.repo
 
@@ -41,9 +41,9 @@ Or for RHEL/CentOS < 7 (replace VERSION with RHEL version):
 
 ----
 
-echo '[Rudder_8.3]
-name=Rudder 8.3
-baseurl=https://LOGIN:PASSWORD@download.rudder.io/rpm/8.3/RHEL_<VERSION>/
+echo '[Rudder_9.0]
+name=Rudder 9.0
+baseurl=https://LOGIN:PASSWORD@download.rudder.io/rpm/9.0/RHEL_<VERSION>/
 gpgcheck=1
 gpgkey=https://LOGIN:PASSWORD@download.rudder.io/rudder_release_key.pub' > /etc/yum.repos.d/rudder.repo
 

@@ -2,7 +2,7 @@
 
 include::{partialsdir}/upgrade_notes.adoc[]
 
-Re-import the rpm key since it has changed sinc Rudder 8.3
+Re-import the rpm key since it has changed since Rudder 8.3
 
 ----
 

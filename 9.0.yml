@@ -1,0 +1,17 @@
+site:
+  title: Rudder 9.0 Documentation
+  start_page: get-started::home
+output:
+  dir: ./build/history/9.0
+content:
+  sources:
+  - url: .
+    branches: master
+    start_path: src/get-started
+  - url: .
+    branches: master
+    start_path: src/rudder-by-example
+  - url: ./doc-build
+    branches: "branches/rudder/9.0"
+    start_path: src/reference
+
