@@ -13,10 +13,6 @@ rudder-repo:
 rudder-agent-repo:
 	git clone https://github.com/Normation/rudder-agent.git rudder-agent-repo
 
-rudder-agent-windows-repo:
-	# Allow failing if builder has no access to agent-windows-repo
-	git clone git@github.com:Normation/rudder-agent-windows.git rudder-agent-windows-repo || mkdir rudder-agent-windows-repo
-
 rudder-plugins-repo:
 	git clone https://github.com/Normation/rudder-plugins.git rudder-plugins-repo
 
@@ -70,4 +66,4 @@ clean:
 	rm -rf hooks.adoc rudder.adoc rudder-relayd.1.adoc plugins
 
 veryclean: clean
-	rm -rf rudder-agent-repo rudder-repo rudder-agent-windows-repo rudder-plugins-repo rudder-plugins-private-repo
+	rm -rf rudder-agent-repo rudder-repo rudder-plugins-repo rudder-plugins-private-repo
