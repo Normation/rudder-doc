@@ -26,9 +26,9 @@ rudder package list --all
 
 ----
 
-== Upgrade from Rudder 8.1 or 8.2 to 8.3
+== Upgrade from Rudder 8.3 to 9.0
 
-Upgrade from Rudder 8.1 or 8.2 is supported.
+Upgrade from Rudder 8.3 is supported.
 
 === Enforced use of BCRYPT to hash passwords
 
@@ -96,24 +96,13 @@ broken, policies to your Windows nodes.
 The `WindowsUpdate` technique has been removed from Rudder and the `System Updates` plugin should be used
 instead.
 
-=== Removal of the python based `rudder package` CLI
 
-The python implementation was deprecated in 8.1 and replaced by a newer implementation with
-slight changes to its options. The older one will no longer be shipped in Rudder and only
-the default `rudder package` CLI introduced in 8.1 will remain.
+=== API changes on Rudder 9.0 : API version 22
 
-=== API changes on Rudder 8.3 : API version 21
 
-The API version 21 brings a change in the output of the `system/info` endpoint.
+== Upgrade from Rudder 8.2 or older to 9.0
 
-If you were using the output of the `system/info` API call :
-
-* Please check the new output format and https://docs.rudder.io/api/v/21/#tag/System/operation/getSystemInfo[The API documentation] to check if your scripts might need changes.
-* Or you can still use the previous API version output format by calling i.e. `/rudder/api/20/system/info...` instead of calling `/rudder/api/latest/system/info...`
-
-== Upgrade from Rudder 8.0 or older to 8.3
-
-Direct upgrades from 8.0 versions and older are no longer supported on 8.3.
+Direct upgrades from 8.2 versions and older are no longer supported on 9.0.
 If you are still running one of those, either on servers or nodes,
-please first upgrade to one of the supported versions, and then upgrade to 8.3.
+please first upgrade to one of the supported versions, and then upgrade to 9.0.
 

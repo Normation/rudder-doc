@@ -13,7 +13,7 @@ content:
     branches: master
     start_path: src/rudder-by-example
   - url: ./doc-build
-    branches: ["branches/rudder/8.1", "branches/rudder/8.2", "branches/rudder/8.3", "branches/rudder/9.0"]
+    branches: ["branches/rudder/8.3", "branches/rudder/9.0"]
     start_path: src/reference
   - url: ./changelogs-build
     branches:
