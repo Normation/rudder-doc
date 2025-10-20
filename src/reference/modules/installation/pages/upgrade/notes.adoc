@@ -9,6 +9,17 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 
 ====
 
+== Known bugs
+
+On the first agent run, after initial installation or after an upgrade, the agent prints the following error message:
+
+```
+error: SERIOUS SECURITY ALERT: path race exploited in recursion to/from '/var/rudder/cfengine-community/modules'. Not safe for agent to continue - aborting
+error: Fatal CFEngine error: Not safe to continue
+```
+
+It is a false positive and disappears on the next runs. It is being tracked in https://issues.rudder.io/issues/27660[#25220], and will be fixed in upcoming patch releases.
+
 == Plugins upgrade
 
 If your server is connected to the Internet (directly or through a proxy), and you have configured
@@ -30,79 +41,46 @@ rudder package list --all
 
 Upgrade from Rudder 8.3 is supported.
 
-=== Enforced use of BCRYPT to hash passwords
+=== End of support for old operating systems
 
-[WARNING]
+Rudder 9.0 no longer supports installation on the following operating systems, for servers and relayd:
 
-====
+* SLES 15 < SP6
+* Ubuntu 22.04 LTS
+* Debian 11
+* RHEL 8
 
-For security reasons, the `bcrypt` hash algorithm is now favored over `md5` and `sha` unsalted hash algorithms.
+For agents:
 
-====
+* RHEL 6
+* RHEL 7 32bits
+* RHEL on PPC architecture
+* SLES 12 < SP5
+* SLES 15 < SP2
+* SLES on PPC architecture
+* Ubuntu LTS < 18.04
+* Slackware 14
+* Windows Server < 2016
+* Windows < 10
+* AIX on any version
 
-If you previously used one of those unsalted hash algorithms, you should migrate user passwords to the more secure and salted BCRYPT algorithm.
-A migration in the `rudder-users.xml` file will be applied since the rudder server upgrade to 8.2: in the `/opt/rudder/etc/rudder-users.xml` file, an attribute `unsafe-hashes="true"` is added that allows to still log in with the unsalted passwords. Once you have migrated the passwords of all users to one hashed with BCRYPT, you should change the value to `unsafe-hashes="false"` and restart you Rudder server, that will disallow any unsalted password and will make the authentication more secure.
+WARNING: Windows systems older than Windows Server 2016 and Windows 10 version will stop working with Rudder 9.0 servers. The agent will stop with an error message indicating that the OS version is not supported.
 
-=== User management no longer needs the plugin
+=== Enforced use of argon2id or bcrypt to hash local passwords
 
-The user-management plugin in 8.1 is no longer needed to have multiple users and manage them in Rudder: the "User management" administration page is now integrated in Rudder since the 8.2 version. All features from the plugin have been moved, and additional features such as specific authentication provider and user API tokens still require the installation of the xref:plugins:auth-backends.adoc[authentication backends] and xref:plugins:api-authorizations.adoc[api-authorization] plugins.
+Rudder users can be authenticated against a remote server (LDAP, AD, OIDC) or use a locally stored password hash. The local hashes can use different algorithms, depending on the way they were created. Old versions of Rudder used simple non-salted hashes, which are not suited for storing passwords. Since Rudder 6.1, passwords created in the user management interface use the safer bcrypt algorithm,
+and 9.0 introduces argon2id as the new default algorithm.
 
-=== Rework of the Windows variables
+Users created on an older Rudder server (without changing their passwords since), or manually created could still be using unsafe hashes. They must not be used, and their support is dropped in Rudder 9.0.
+To make sure you are not using them anymore, check the `/opt/rudder/etc/rudder-users.xml` file on your Rudder server(s). In the authentication section, check the value of the password attribute for each user. There are different cases:
 
-In prior versions of Rudder, policy variables expansion was done using built-in raw PowerShell
-variable interpretation, which leads to :
-
-* Security issues using PowerShell injections
-* Using two different syntaxes for the variables in Rudder based on the node OS family (Windows/Linux)
-
-Starting 8.2, the generated policies used by the Windows nodes are no longer interpreted by PowerShell
-and the variable expansion is now made possible by a more fine-grained parsing of the directives and
-techniques content at generation time and a simple template engine.
-
-*Using variables on Windows nodes in Rudder will now be done using the exact same syntax as when using some
-on a Linux node. Previously used Windows variables syntaxes are no longer supported and will break generation.*
-
-As the older syntaxes are no longer supported, after upgrading to 8.2, if you were using the Windows plugin, it
-is most likely that the policy generation will be stopped on your Rudder until you are done with the complete
-syntax migration. A safety mechanism has been added to prevent any generation as long as no longer supported
-syntaxes are in used in your policies.
-
-As a rule of thumb, avoid any occurrence of the pattern `$(.*)` in your directives and techniques.
-To help with the migration, please refer to the table below:
-
-[cols="1,1,1"]
-|===
-||Old syntax | New syntax
-
-
-|String type    |$($const.n)                              |${const.n}
-|Json/Data type |$($node.properties.datacenter)           |${node.properties[datacenter]}
-|Json/Data type |$($my_prefix.my_variable.datacenter.dns) |${my_prefix.my_variable[datacenter][dns]}
-|Raw            |$(user_content)                          |${const.dollar}(user_content)
-|===
-
-The generation safety is done by a very simple script located in a new `policy-generation-pre-start` webapp hook
-located in `/opt/rudder/etc/hooks.d/policy-generation-pre-start` and distributed with the Windows plugin.
-
-Note that in some cases the hook may block the generation if you are using inputs similar to the now deprecated
-syntax. If it is the case, please try to use `${const.dollar}(...)` instead of `$(...)` in the directives/methods
-fields.
-
-The hook can still be deactivated by commenting its content if needed, with the risk of deploying potentially
-broken, policies to your Windows nodes.
-
-=== Removal of obsolete techniques
-
-The `WindowsUpdate` technique has been removed from Rudder and the `System Updates` plugin should be used
-instead.
-
-
-=== API changes on Rudder 9.0 : API version 22
-
+* The value starts with `$2a$`, `$2b$`, `$2x$`, `$2y$` ou `$argon2id$` , which means the bcrypt or argon2id algorithms are used. You donst need to do anything.
+* The value is an hexadecimal string (only using `0-9a-f`), which means it uses an unsafe hash (depending on its length, either MD5, SHA1, SHA256 or SHA512).
+  - You should replace the hash, and use a different password. You can enter the new password in the User management page in the interface or compute an argon2id hash manually. See the documentation for details.
+* The value is empty, or contains another string value (like “ldap”). This means the user can only authenticate against a remote server, you don’t need to do anything.
 
 == Upgrade from Rudder 8.2 or older to 9.0
 
 Direct upgrades from 8.2 versions and older are no longer supported on 9.0.
 If you are still running one of those, either on servers or nodes,
-please first upgrade to one of the supported versions, and then upgrade to 9.0.
-
+please first upgrade to one of the supported versions and then upgrade to 9.0.
