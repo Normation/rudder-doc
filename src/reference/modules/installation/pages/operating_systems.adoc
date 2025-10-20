@@ -1,22 +1,22 @@
-= Supported Operating Systems
+= Supported operating systems
 
-[[node-supported-os, the list of supported Operating Systems for Nodes]]
-== Fully supported Operating Systems
+[[node-supported-os, the list of supported operating systems for nodes]]
+== Fully supported operating systems
 
-Fully supported Operating Systems are systems that we frequently build packages for and test on our servers.
+Fully supported operating systems are systems that we frequently build packages for and test on our servers.
 
-=== For Rudder Nodes
+=== For Rudder nodes
 
-==== Community support
+==== Rudder Core
 
 [NOTE]
 ===========
 
-The community supported OS are available in the repository https://repository.rudder.io/ consult the install section for more details.
+The OS supported in Rudder Core are available in the public repository https://repository.rudder.io/, consult the install section for more details.
 
 ===========
 
-The following operating systems are supported for Rudder Nodes and packages are
+The following operating systems are supported for Rudder nodes, and packages are
 available freely for these platforms:
 
 [options="header"]
@@ -24,10 +24,10 @@ available freely for these platforms:
 
 | OS | Version | Architecture
 
-| Debian | 11 and 12 | 64bit
-| Ubuntu | 20.04 LTS, 22.04 LTS and 24.04 LTS | 64bit
-| Red Hat Enterprise Linux (RHEL) / AlmaLinux, Rocky Linux, Oracle Linux / CentOS Stream | 8 to 10 | 64bit
-| SUSE Linux Enterprise Server (SLES) | 15 SP4+ | 64bit
+| Debian | 12 and 13 | 64bit
+| Ubuntu | 24.04 LTS | 64bit
+| Red Hat Enterprise Linux (RHEL) / AlmaLinux, Rocky Linux, Oracle Linux / CentOS Stream | 9 and 10 | 64bit
+| SUSE Linux Enterprise Server (SLES) | 15 SP6+ | 64bit
 | Amazon Linux | 2023 | 64bit
 
 |===
@@ -42,27 +42,23 @@ all the OS only available through a subscription. Consult install sections for m
 
 ===========
 
-The following operating systems are supported for Rudder Nodes and packages are
+The following operating systems are supported for Rudder nodes and packages are
 available for these platforms as part of the https://www.rudder.io/en/pricing/subscription/[Rudder subscription]:
 
 [options="header"]
 |===
 
 | OS | Version | Architecture
-.2+| Debian | 8 to 12 | 32bit, 64bit
-| 9 to 12 | arm64, armhf (Raspbian)
-.2+| Ubuntu | 10.04 LTS to 24.04 LTS | 64bit
-| 14.04 and 16.04 LTS | 32bit
-.4+| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 6 to 10 | 64bit
-| 7 to 9 | 64bit, ppc64le (Power)
-| 6 to 7 | 32bit
-| 9 | arm64 / aarch64
-.3+| SUSE Linux Enterprise Server (SLES) | 11 to 15 | 64bit
-| 12 and 15 | 64bit, ppc64le (Power)
-| 11 | 32bit
+.2+| Debian | 10 to 13 | 64bit, arm64, armhf (Raspbian)
+| 10 to 12 | 32bit
+.2+| Ubuntu | 18.04 LTS to 24.04 LTS | 64bit
+| 18.04 LTS | 32bit
+.2+| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 7 to 10 | 64bit
+| 9 and 10 | arm64
+.1+| SUSE Linux Enterprise Server (SLES) | 12SP5+ and 15SP2+ | 64bit
 | Amazon Linux | 2023 | 64bit
-| Slackware | 14.1, 14.2 and 15 | 64bit
-| Microsoft Windows Server | 2012 R2, 2016, 2019, 2022 | 64bit
+| Slackware | 15 | 64bit
+| Microsoft Windows Server | 2016, 2019, 2022, 2025 | 64bit
 | Microsoft Windows | 10 and 11 | 64bit
 
 |===
@@ -105,10 +101,10 @@ The following operating systems are supported as a Rudder relay or server:
 
 | OS | Version | Architecture
 
-| Debian | 11 and 12 | 64bit
-| Ubuntu | 22.04 LTS and 24.04 LTS | 64bit
-| Red Hat Enterprise Linux (RHEL) / AlmaLinux, Rocky Linux, Oracle Linux / CentOS Stream | 8 to 10 | 64bit
-| SUSE Linux Enterprise Server (SLES) | 15 SP4+ | 64bit
+| Debian | 12 and 13 | 64bit
+| Ubuntu | 24.04 LTS | 64bit
+| Red Hat Enterprise Linux (RHEL) / AlmaLinux, Rocky Linux, Oracle Linux / CentOS Stream | 9 and 10 | 64bit
+| SUSE Linux Enterprise Server (SLES) | 15 SP6+ | 64bit
 | Amazon Linux | 2023 | 64bit
 
 |===
