@@ -11,6 +11,8 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 
 == Known bugs
 
+=== Agent error after installation
+
 On the first agent run, after initial installation or after an upgrade, the agent prints the following error message:
 
 ```
@@ -18,7 +20,14 @@ error: SERIOUS SECURITY ALERT: path race exploited in recursion to/from '/var/ru
 error: Fatal CFEngine error: Not safe to continue
 ```
 
-It is a false positive and disappears on the next runs. It is being tracked in https://issues.rudder.io/issues/27660[#25220], and will be fixed in upcoming patch releases.
+It is a false positive and disappears on the next runs. It is being tracked in https://issues.rudder.io/issues/27660[#27660], and will be fixed in upcoming patch releases.
+
+=== Patch management hooks on Linux require running scripts from `/var`
+
+Rudder 9.0 agents are capable of running with `/var` mounted with the `readonly`
+option, except for system update event hooks, which still run from `var/rudder`
+and hence require this directory to allow executions.
+This is tracked in https://issues.rudder.io/issues/27777[#27777] and will be fixed in upcoming patch releases.
 
 == Plugins upgrade
 
