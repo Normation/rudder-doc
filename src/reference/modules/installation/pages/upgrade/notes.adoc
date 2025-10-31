@@ -75,6 +75,16 @@ For agents:
 
 WARNING: Windows systems older than Windows Server 2016 and Windows 10 version will stop working with Rudder 9.0 servers. The agent will stop with an error message indicating that the OS version is not supported.
 
+=== The `rudder-api-client` package removal
+
+The `rudder-api-client` package used to provide a CLI and Python library.
+It was not actively maintained and was removed from 9.0.
+It is possible to use the OpenAPI definition to generate clients,
+or to use generic HTTP tooling to replace it.
+
+The package is not automatically removed if it was installed in an older
+version. If you don't use it you can safely remove it after upgrade.
+
 === Enforced use of argon2id or bcrypt to hash local passwords
 
 Rudder users can be authenticated against a remote server (LDAP, AD, OIDC) or use a locally stored password hash. The local hashes can use different algorithms, depending on the way they were created. Old versions of Rudder used simple non-salted hashes, which are not suited for storing passwords. Since Rudder 6.1, passwords created in the user management interface use the safer bcrypt algorithm,
