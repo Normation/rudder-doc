@@ -363,7 +363,7 @@ The following query would all select the node:
 'Properties', 'Name=Value', +Name:JSON Path+, 'datacenter:$.location[?(@.name=~/Paris-[0-9]+/)]'
 
 //select based on belonging to a set
-'Properties', 'Name=Value', +Name:JSON Path+, 'datacenter:$.[?(@.environements subsetof ['prod', 'qa', 'dev'])]'
+'Properties', 'Name=Value', +Name:JSON Path+, 'datacenter:$.[?(@.environments subsetof ['prod', 'qa', 'dev'])]'
 
 ====
 
