@@ -5,10 +5,10 @@ Add Rudder's package repository:
 
 # If lsb_release is not installed on your machine, change $(lb_release -cs) by your distribution codename.
 # Ex:
-#   "bullseye" for Debian 11
-#   "jammy"    for Ubuntu 22.04 LTS
+#   "trixie"  for Debian 13
+#   "noble"   for Ubuntu 24.04 LTS
 
-echo "deb [arch=$(dpkg --print-architecture)] http://repository.rudder.io/apt/9.0/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/rudder_apt_key.gpg] http://repository.rudder.io/apt/9.0/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/rudder.list
 
 ----
 
