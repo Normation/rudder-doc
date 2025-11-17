@@ -40,7 +40,7 @@ for node in ${initializing_nodes}; do
   compliance=$(curl --silent -k --header @${token} "https://127.0.0.1/rudder/api/latest/compliance/nodes/${node}?level=0" | jq '.data.nodes[0].compliance')
   if [ "${compliance}" = "100" ]; then
     echo "$(date): ${node} has ${compliance}% compliance, switching to 'enabled' status" >> /var/log/rudder/jobs/provisioning.log
-    curl --silent -k --header "X-API-Token: ${token}" --request POST "https://127.0.0.1/rudder/api/latest/nodes/${node}?state=enabled" >/dev/null
+    curl --silent -k --header @${token} --request POST "https://127.0.0.1/rudder/api/latest/nodes/${node}?state=enabled" >/dev/null
   else
     echo "$(date): ${node} has ${compliance}% compliance, skipping for now" >> /var/log/rudder/jobs/provisioning.log
   fi
