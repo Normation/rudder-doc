@@ -18,10 +18,10 @@ If you have agents using port 5309 (CFEngine protocol) you must generate the new
 To change the server certificate, you first need a new certificate. The new certificate MUST have `Digital Signature`, `Key Encipherment` and `Data Encipherment` in its X509v3 `Key Usage`.
 
 If you changed the certificate private key, you must first do the following steps:
-- Get the new certificate's public key hash with this command `echo "sha256//$(openssl rsa -in private.key -outform der -pubout 2>/dev/null | openssl dgst -sha256 -binary | openssl enc -base64)"`
-- Get the existing server key hash with the command `rudder agent info` on the server
-- Modify `/opt/rudder/etc/rudder-web.properties` and change `rudder.server.certificate.additionalKeyHash=` to contain both separated by a semicolon `;`
-- Restart the server `systemctl restart rudder-jetty`
+* Get the new certificate's public key hash with this command `echo "sha256//$(openssl rsa -in private.key -outform der -pubout 2>/dev/null | openssl dgst -sha256 -binary | openssl enc -base64)"`
+* Get the existing server key hash with the command `rudder agent info` on the server
+* Modify `/opt/rudder/etc/rudder-web.properties` and change `rudder.server.certificate.additionalKeyHash=` to contain both separated by a semicolon `;`
+* Restart the server `systemctl restart rudder-jetty`
 
 This allows the new certificate to be accepted by agent. You then need to make sure this is applied to all agents before continuing. Usually, waiting for 24h is enough, but do not forget nodes that might be down during this period.
 
@@ -32,9 +32,6 @@ Run `rudder server new-certificate -c <your certificate.cert> -k <key.pem>`.
 The node should now see the new certificate.
 
 Please ensure that your browser now sees and accepts the new certificate.
-
-TODO: tested with relays ?
-TODO: tested with windows ?
 
 === HTTPS
 
