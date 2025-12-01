@@ -211,19 +211,10 @@ On a SUSE or RHEL/CentOS system:
 === Suggested values for a setup with more than 3000 nodes
 
 ----
-#
-# Amount of System V shared memory
-# --------------------------------
-#
 
-shared_buffers = 256MB
 
-# On old versions of PostgreSQL, you may need to set the proper amount of shared memory on the system.
-#
-#   $ sysctl -w kernel.shmmax=268435456
-#
-# Reference:
-# http://www.postgresql.org/docs/9.2/interactive/kernel-resources.html#SYSVIPC
+shared_buffers = 2GB
+
 #
 # Memory for complex operations
 # -----------------------------
@@ -245,15 +236,6 @@ maintenance_work_mem = 2GB
 
 wal_buffers = 4MB
 
-# Query planner
-# -------------
-#
-# Gives hint to the query planner about the size of disk cache.
-#
-# Setting effective_cache_size to 1/2 of remaining memory would be a normal
-# conservative setting:
-
-effective_cache_size = 1024MB
 
 ----
 
@@ -261,11 +243,10 @@ effective_cache_size = 1024MB
 
 ----
 
-shared_buffers = 64MB
+shared_buffers = 256MB
 work_mem = 4MB
 maintenance_work_mem = 256MB
 wal_buffers = 1MB
-effective_cache_size = 128MB
 
 
 ----
