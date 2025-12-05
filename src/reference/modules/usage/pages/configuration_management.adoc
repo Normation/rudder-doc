@@ -349,7 +349,7 @@ We strongly advise to keep the default configuration and use the `Full complianc
 image:reporting-mode-setting.png[Global configuration of reporting mode]
 
 [[_keep_last_compliance_duration]]
-== Non-answering nodes and configuration of last compliance validity
+== Compliance persistence for grey nodes
 
 When a node is not sending compliance reports to Rudder, it can be a big problem, like when a
 server goes offline. And even if Rudder is not a monitoring tool, in that case, you want to make very
