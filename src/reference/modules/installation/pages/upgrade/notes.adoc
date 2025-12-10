@@ -27,7 +27,16 @@ It is a false positive and disappears on the next runs. It is being tracked in h
 Rudder 9.0 agents are capable of running with `/var` mounted with the `readonly`
 option, except for system update event hooks, which still run from `var/rudder`
 and hence require this directory to allow executions.
-This is tracked in https://issues.rudder.io/issues/27777[#27777] and will be fixed in upcoming patch releases.
+This is tracked in https://issues.rudder.io/issues/27777[#27777] and is fixed in 9.0.2.
+
+=== Empty lines MiniJinja templating
+
+The new MiniJinja template engine shipped with the default Jinja2 behavior regarding newlines.
+This produces empty lines for each control block, which was inconvenient and
+inconsistent with other tools.
+
+We enabled the `trim_blocks` option in 9.0.2 to get a more familiar behavior. This changes the output
+of the templating, removing empty lines on the control blocks.
 
 == Plugins upgrade
 
