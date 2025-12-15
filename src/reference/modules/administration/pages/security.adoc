@@ -55,13 +55,6 @@ rudder.server.hstsIncludeSubDomains=true
 
 * In case you use local Rudder users, your passwords must be hashed with `bcrypt`, which is now the only hash algorithm used when generating new passwords in the user management page. It may still be the case that users use other kind of unsalted hashed password (especially before Rudder 6.0), so they are still allowed but they will be deprecated soon in favor of `bcrypt`. You can check the documentation of `/opt/rudder/etc/rudder-users.xml` and of the user management page for the migration guide.
 
-* Session expiration is configured by default to 30 minutes of user inactivity. You may want to shorten this value in `/opt/rudder/etc/rudder-web.properties` by modifying or adding the following property (and restarting the `rudder-jetty` service to apply it):
-
-[source,ini]
-----
-rudder.auth.idle-timeout=15 minutes
-----
-
 * Give minimal privileges to Rudder users using roles. You can create custom roles to match your needs in `/opt/rudder/etc/rudder-users.xml`.
 
 * When a user have not logged in, by default for 90 days, the account is marked as *disabled*, you can change this value by modifying or adding the parameter `rudder.users.cleanup.account.disableAfterLastLogin` in `/opt/rudder/etc/rudder-web.properties`, for example if we want to *disable* a user after 100 days of inactivity we can set the parameter like this :
@@ -93,6 +86,15 @@ rudder.users.cleanup.purgeDeletedAfter=60d
 * When upgrading from a previous version to 8.0, regenerate all your exiting API tokens to use the more secure hashed storage.
 
 * Give minimal privileges to your HTTP API tokens (though the **api-authorizations** plugin) and use a different token for each application or use-case.
+
+=== Session login timeout
+
+By default users are logged out after 30 minutes of user inactivity. The idle session expiration time can be configured in `/opt/rudder/etc/rudder-web.properties` by modifying or adding the following property (and restarting the `rudder-jetty` service to apply it):
+
+[source,ini]
+----
+rudder.auth.idle-timeout=15 minutes
+----
 
 
 == Agent
