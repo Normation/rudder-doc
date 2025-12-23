@@ -10,3 +10,13 @@ More information about plugins in the xref:plugins:index.adoc[dedicated] section
 
 ====
 
+[NOTE]
+
+====
+
+Relay servers are optional. 
+You only need to install a relay server if you want to manage multiple networks from Rudder, without having 
+to allow all the subnet access to Rudder server - typically for security reasons (DMZ, node isolation...).
+
+====
+
