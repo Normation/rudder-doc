@@ -57,14 +57,14 @@ rudder.server.hstsIncludeSubDomains=true
 
 * Give minimal privileges to Rudder users using roles. You can create custom roles to match your needs in `/opt/rudder/etc/rudder-users.xml`.
 
-* When a user have not logged in, by default for 90 days, the account is marked as *disabled*, you can change this value by modifying or adding the parameter `rudder.users.cleanup.account.disableAfterLastLogin` in `/opt/rudder/etc/rudder-web.properties`, for example if we want to *disable* a user after 100 days of inactivity we can set the parameter like this :
+* When a user have not logged in, *by default for 180 days*, the account is marked as *disabled*. You can change this value by modifying or adding the parameter `rudder.users.cleanup.account.disableAfterLastLogin` in `/opt/rudder/etc/rudder-web.properties`, for example if we want to *disable* a user after 100 days of inactivity we can set the parameter like this :
 
 [source,ini]
 ----
 rudder.users.cleanup.account.disableAfterLastLogin=100d
 ----
 
-* A user is *deleted* after a certain period of time, by default the parameter `rudder.users.cleanup.account.deletedAfterLastLogin` is set to 120 days. You can change this value by modifying or adding this parameter in `/opt/rudder/etc/rudder-web.properties`, for example if we want to *delete* a user after 365 days of inactivity we can set the parameter like this :
+* A user can be *deleted* after a certain period of time. By default users are never deleted. You can define an automatic deletion by modifying or adding the parameter `rudder.users.cleanup.account.deletedAfterLastLogin` in `/opt/rudder/etc/rudder-web.properties`, for example if we want to *delete* a user after 365 days of inactivity we can set the parameter like this :
 
 [source,ini]
 ----
