@@ -10,8 +10,6 @@ include::{partialsdir}/glossary/directive.adoc[]
 
 include::{partialsdir}/glossary/rule.adoc[]
 
-include::{partialsdir}/glossary/applied-policy.adoc[]
-
 ====
 
 As illustrated in this summary diagram, the rules are linking the
