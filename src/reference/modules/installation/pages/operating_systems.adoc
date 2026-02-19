@@ -49,19 +49,28 @@ available for these platforms as part of the https://www.rudder.io/en/pricing/su
 |===
 
 | OS | Version | Architecture
-.2+| Debian | 10 to 13 | 64bit, arm64, armhf (Raspbian)
-| 10 to 12 | 32bit
-.2+| Ubuntu | 18.04 LTS to 24.04 LTS | 64bit
-| 18.04 LTS | 32bit
-.2+| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 7 to 10 | 64bit
+.2+| Debian | 10*, 11, 12 and 13 | 64bit, arm64, armhf (Raspbian)
+| 10*, 11 and 12 | 32bit
+.2+| Ubuntu | 18.04*, 20.04, 22.04 and 24.04 LTS | 64bit
+| 18.04* LTS | 32bit
+.2+| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 7*, 8, 9 and 10 | 64bit
 | 9 and 10 | arm64
-.1+| SUSE Linux Enterprise Server (SLES) | 12SP5+ and 15SP2+ | 64bit
-| Amazon Linux | 2023 | 64bit
-| Slackware | 15 | 64bit
-| Microsoft Windows Server | 2016, 2019, 2022, 2025 | 64bit
-| Microsoft Windows | 10 and 11 | 64bit
+.1+| SUSE Linux Enterprise Server (SLES) | 12sp5+\*, 15sp2*, 15sp3*, 15sp4+ | 64bit
+| Amazon Linux | 2*, 2023 | 64bit
+| Slackware | 15* | 64bit
+| Microsoft Windows Server | 2016*, 2019*, 2022, 2025 | 64bit
+| Microsoft Windows | 10* and 11 | 64bit
 
 |===
+
+[NOTE]
+
+.Extended support
+
+====
+
+Operating systems marked with a * are only supported with an additional extended support subscription. Please contact the Rudder team for more information.
+====
 
 [WARNING]
 
