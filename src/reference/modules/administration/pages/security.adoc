@@ -235,7 +235,7 @@ cert_validation=true
 
 ==== CA-signed certificates installation on the Rudder server and relays
 
-You can use the same certificate for client-server communication using HTTPS protocol and the Rudder web interface. In this case, there must be two `Subject Alternative Name` extensions: one for the `UUID` and a 2nd on containing the server’s *hostname*.
+You can use the same certificate for client-server communication using HTTPS protocol and the Rudder web interface. In this case, there must be two `Subject Alternative Name` extensions: one for the `UUID` and a 2nd one containing the server’s *hostname*.
 
 If using a different certificate, it must have:
 
@@ -276,7 +276,7 @@ rudder.server.certificate.ca.path=/path/to/ca.pem
 
 **Certificates with node ID in SAN**
 
-By default the server looks for the node id in the certificate in the `UID` value of the `DN`. But it is not always possible to sign such certificates. In this case it is possible to move the node into into the Subject Alternative Name (`SAN`) part of the certificate.
+By default the server looks for the node id in the certificate in the `UID` value of the `DN`. But it is not always possible to sign such certificates. In this case it is possible to move the node ID into the Subject Alternative Name (`SAN`) part of the certificate.
 
 In this case the Web server configuration needs to be adapted. You need to create a file at a specific path, which will be automatically included. It is placed into `/opt/rudder/etc/rudder-apache-nodes-auth.conf`:
 
@@ -298,7 +298,7 @@ Then you need to add one or more `RewriteCond` that will only match a correct ce
 * You need to configure the first part with a value extracted by Apache from the certificate. The list of available variables is available in the Apache docs. When using a DNS in SAN, you need to specify the index of the entry. You can use `[OR]` to allow matching id from several places in the certificate. Replace `example.com` by the domain used in your certificate.
 * For example, you the first DNS entry of the SAN contains `rudder-{node_id}.company.com`, the condition will be `RewriteCond "%{SSL:SSL_CLIENT_SAN_DNS_0}=rudder-$1.company.com" "^(.+)=\1$"`.
 
-Once the file is created, run `systemctl reload apache2` (or `systemctl restart httpd` depending on your OS) to apply the change.
+Once the `/opt/rudder/etc/rudder-apache-nodes-auth.conf` file is created, run `systemctl reload apache2` (or `systemctl restart httpd` depending on your OS) to apply the change.
 
 To get detailed information about the RewriteCond matching, add:
 
