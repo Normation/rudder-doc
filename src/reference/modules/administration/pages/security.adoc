@@ -235,7 +235,7 @@ cert_validation=true
 
 ==== CA-signed certificates installation on the Rudder server and relays
 
-You can use the same certificate for client-server communication using HTTPS protocol and the Rudder web interface. In this case, in addition to the `UID`, it must include the server’s hostname in the `Subject Alternative Name` extension.
+You can use the same certificate for client-server communication using HTTPS protocol and the Rudder web interface. In this case, there must be two `Subject Alternative Name` extensions: one for the `UUID` and a 2nd one containing the server’s *hostname*.
 
 If using a different certificate, it must have:
 
@@ -273,6 +273,52 @@ rudder.server.certificate.validation=true
 # If omitted, the system CA store is used
 rudder.server.certificate.ca.path=/path/to/ca.pem
 ```
+
+**Certificates with node ID in SAN**
+
+By default the server looks for the node id in the certificate in the `UID` value of the `DN`. But it is not always possible to sign such certificates. In this case it is possible to move the node ID into the Subject Alternative Name (`SAN`) part of the certificate.
+
+In this case the Web server configuration needs to be adapted. You need to create a file at a specific path, which will be automatically included. It is placed into `/opt/rudder/etc/rudder-apache-nodes-auth.conf`:
+
+[source,ini]
+```
+# Not used by the auth process, only for logging purpose
+SSLUserName SSL_CLIENT_SAN_DNS_1
+
+# RewriteCond only matching a node of ID equal to $1
+RewriteCond "%{SSL:SSL_CLIENT_SAN_DNS_0}=$1.example.com" "^(.+)=\1$" [OR]
+RewriteCond "%{SSL:SSL_CLIENT_SAN_DNS_1}=$1.example.com" "^(.+)=\1$"
+```
+
+It can optionaly include a `SSLUserName` value which will allow to show the correct node id as user name in the logs. When absent, no user will be logged (- in the log).
+
+Then you need to add one or more `RewriteCond` that will only match a correct certificate:
+
+* The `$1` value is the node id extracted from the requested URL
+* You need to configure the first part with a value extracted by Apache from the certificate. The list of available variables is available in the Apache docs. When using a DNS in SAN, you need to specify the index of the entry. You can use `[OR]` to allow matching id from several places in the certificate. Replace `example.com` by the domain used in your certificate.
+* For example, you the first DNS entry of the SAN contains `rudder-{node_id}.company.com`, the condition will be `RewriteCond "%{SSL:SSL_CLIENT_SAN_DNS_0}=rudder-$1.company.com" "^(.+)=\1$"`.
+
+Once the `/opt/rudder/etc/rudder-apache-nodes-auth.conf` file is created, run `systemctl reload apache2` (or `systemctl restart httpd` depending on your OS) to apply the change.
+
+To get detailed information about the RewriteCond matching, add:
+
+[source,ini]
+```
+LogLevel alert rewrite:trace4
+```
+
+It will produce detailed logs for each request:
+
+[source,ini]
+```
+[Wed Oct 29 22:11:18.072897 2025] [rewrite:trace4] [pid 64704:tid 64722]
+mod_rewrite.c(4305): [client 192.168.2.3:59478] 192.168.2.3 - -
+[server/sid#7f5c26168a08][rid#7f5c242290a0/initial] RewriteCond:
+input='18c3a1a6-2dad-40eb-a1dd-2fb04a070d94.test=18c3a1a6-2dad-40eb-a1dd-2fb04a070d94.test'
+pattern='^(.*?)=\\1' => matched
+```
+
+**Restarting the Rudder Server**
 
 * The `rudder-jetty` service needs to be restarted after the changes have been made.
 * The configuration changes will be propagated to the nodes by the server, and will be persistent on the nodes, to prevent downgrade attacks. If you want to change one of these parameters, you need to update it on all nodes.
