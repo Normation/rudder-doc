@@ -125,7 +125,7 @@ Since Rudder 8.2, the "hash" value is always forced to "bcrypt" and another attr
 [CAUTION]
 ====
 
-In Rudder version 9.0, support for legacy hashes is dropped definitively, and the `unsafe-hashes` attribute will be removed during startup.
+In Rudder version 9.1, support for legacy hashes is dropped definitively, and the `unsafe-hashes` attribute will be removed during startup.
 So, please read below how to enforce safer hashing algorithm for the passwords of users in Rudder.
 
 ====
