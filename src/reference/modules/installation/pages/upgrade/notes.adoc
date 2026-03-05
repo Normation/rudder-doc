@@ -22,13 +22,6 @@ error: Fatal CFEngine error: Not safe to continue
 
 It is a false positive and disappears on the next runs. It is being tracked in https://issues.rudder.io/issues/27660[#27660], and will be fixed in upcoming patch releases.
 
-=== Patch management hooks on Linux require running scripts from `/var`
-
-Rudder 9.0 agents are capable of running with `/var` mounted with the `readonly`
-option, except for system update event hooks, which still run from `var/rudder`
-and hence require this directory to allow executions.
-This is tracked in https://issues.rudder.io/issues/27777[#27777] and is fixed in 9.0.2.
-
 === Empty lines MiniJinja templating
 
 The new MiniJinja template engine shipped with the default Jinja2 behavior regarding newlines.
@@ -55,13 +48,13 @@ rudder package list --all
 
 ----
 
-== Upgrade from Rudder 8.3 to 9.0
+== Upgrade from Rudder 8.3 to 9.1
 
 Upgrade from Rudder 8.3 is supported.
 
 === End of support for old operating systems
 
-Rudder 9.0 no longer supports installation on the following operating systems, for servers and relayd:
+Rudder 9.1 no longer supports installation on the following operating systems, for servers and relayd:
 
 * SLES 15 < SP6
 * Ubuntu 22.04 LTS
@@ -87,7 +80,7 @@ WARNING: Windows systems older than Windows Server 2016 and Windows 10 version w
 === The `rudder-api-client` package removal
 
 The `rudder-api-client` package used to provide a CLI and Python library.
-It was not actively maintained and was removed from 9.0.
+It was not actively maintained and was removed from 9.1.
 It is possible to use the OpenAPI definition to generate clients,
 or to use generic HTTP tooling to replace it.
 
@@ -99,7 +92,7 @@ version. If you don't use it you can safely remove it after upgrade.
 Rudder users can be authenticated against a remote server (LDAP, AD, OIDC) or use a locally stored password hash. The local hashes can use different algorithms, depending on the way they were created. Old versions of Rudder used simple non-salted hashes, which are not suited for storing passwords. Since Rudder 6.1, passwords created in the user management interface use the safer bcrypt algorithm,
 and 9.0 introduces argon2id as the new default algorithm.
 
-Users created on an older Rudder server (without changing their passwords since), or manually created could still be using unsafe hashes. They must not be used, and their support is dropped in Rudder 9.0.
+Users created on an older Rudder server (without changing their passwords since), or manually created could still be using unsafe hashes. They must not be used, and their support is dropped in Rudder 9.1.
 To make sure you are not using them anymore, check the `/opt/rudder/etc/rudder-users.xml` file on your Rudder server(s). In the authentication section, check the value of the password attribute for each user. There are different cases:
 
 * The value starts with `$2a$`, `$2b$`, `$2x$`, `$2y$` ou `$argon2id$` , which means the bcrypt or argon2id algorithms are used. You donst need to do anything.
@@ -107,8 +100,8 @@ To make sure you are not using them anymore, check the `/opt/rudder/etc/rudder-u
   - You should replace the hash, and use a different password. You can enter the new password in the User management page in the interface or compute an argon2id hash manually. See the documentation for details.
 * The value is empty, or contains another string value (like “ldap”). This means the user can only authenticate against a remote server, you don’t need to do anything.
 
-== Upgrade from Rudder 8.2 or older to 9.0
+== Upgrade from Rudder 8.2 or older to 9.1
 
-Direct upgrades from 8.2 versions and older are no longer supported on 9.0.
+Direct upgrades from 8.2 versions and older are no longer supported on 9.1.
 If you are still running one of those, either on servers or nodes,
-please first upgrade to one of the supported versions and then upgrade to 9.0.
+please first upgrade to one of the supported versions and then upgrade to 9.1.
