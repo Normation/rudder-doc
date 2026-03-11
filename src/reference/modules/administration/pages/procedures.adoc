@@ -164,11 +164,27 @@ tar -C /var/rudder -zcf rudder-backup-$(date +%Y%m%d).tar.gz configuration-repos
 # Then backup Rudder configuration
 tar -C /opt/rudder -zcf rudder-etc-backup-$(date +%Y%m%d).tar.gz etc/
 
-# Backup the apache2 Rudder configuration file
+# Identify your Apache configuration directory before running the backup:
+#   - If /etc/apache2/sites-enabled/ exists, use it
+#   - If /etc/httpd/conf.d/ exists, use it
+
+# Backup Rudder Apache configuration
 tar -C /var/rudder -zcf rudder-apache2-backup-$(date +%Y%m%d).tar.gz /etc/apache2/sites-enabled/
 
+# OR (if your system uses the httpd layout)
+tar -C /var/rudder -zcf rudder-apache2-backup-$(date +%Y%m%d).tar.gz /etc/httpd/conf.d/
+
 # You will need to read the file /etc/apache2/sites-enabled/rudder.conf to get the location of the certificates and copy them
+=======
+# OR (if your system uses the httpd layout)
+tar -C /var/rudder -zcf rudder-apache2-backup-$(date +%Y%m%d).tar.gz /etc/httpd/conf.d/
+
+# You will need to read the file /etc/apache2/sites-enabled/rudder.conf or /etc/httpd/conf.d/rudder.conf to get the location of the certificates and copy them
+
 tar -C /var/rudder -zcf /tmp/rudder-certificates-backup-$(date +%Y%m%d%s).tar.gz /directory/file1.conf /directory/file2.conf
+=======
+# You will need to read the file /etc/apache2/sites-enabled/rudder.conf or /etc/httpd/conf.d/rudder.conf to get the location of the certificates and copy them
+tar -C /var/rudder -zcf rudder-certificates-backup-$(date +%Y%m%d%s).tar.gz /directory/file1.conf /directory/file2.conf
 
 # Finally, backup the logs (if you need them)
 tar -C /var/log -zcf rudder-log-backup-$(date +%Y%m%d).tar.gz rudder/
@@ -201,10 +217,14 @@ rudder agent disable
 # Stop Rudder services
 systemctl stop rudder-agent rudder-server rudder-relayd
 
-# Replace apache2 Rudder configuration
-tar -C /etc/apache2/sites-enabled/ rudder-apacahe2-backup-XXXXXXXX.tar.gz
+# Restore the configuration into the SAME directory layout used by your system
+# Backup Rudder Apache configuration
+tar -C /etc/apache2/sites-enabled/ -zxf rudder-apache2-backup-XXXXXXXX.tar.gz
 
-# Place the certificates files where they originated according to /etc/apache2/sites-enabled/rudder.conf
+# If your system uses /etc/httpd/conf.d/
+tar -C /etc/httpd/conf.d/ -zxf rudder-apache2-backup-XXXXXXXX.tar.gz
+
+# Place the certificates files where they originated according to /etc/apache2/sites-enabled/rudder.conf or /etc/httpd/conf.d/rudder.conf
 tar -xvf rudder-certificates-backup-XXXXXX.tar.gz -C /tmp/
 
 # Drop the OpenLDAP database
@@ -249,6 +269,16 @@ rudder agent enable
 systemctl start rudder-agent rudder-server
 
 ----
+==== Issues with restore
+
+If you migrate plugins, check that after the migration they are in a disabled state, and make sure to *enable them*.
+
+After migration, if you encounter any issues while using a plugin, do not hesitate to reinstall it.
+
+After the migration, if you encounter an error when restarting Apache with certificate not recognizing, 
+please check the SELinux policies on the certificate directories using ls -Z,
+and if needed, restore the correct contexts with command : "restorecon -Rv /path/to/directory_certificate/"
+
 
 Then you need to trigger a full policy regeration in the status menu with the *Regenerate all policies* button.
 
