@@ -27,7 +27,7 @@ configuration policies and centralize agent reports and inventories.
 
 == Agents
 
-Agents can be installed using a simple software package (`.exe`, `.deb` or `.rpm`).
+Agents can be installed using a simple software package (`.msi`, `.deb` or `.rpm`).
 
 The agent has a very small memory footprint (< 20MB), and is very fast applying configurations
 (complete runtime below 10 seconds for hundreds of configuration components).
