@@ -9,28 +9,6 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 
 ====
 
-== Known bugs
-
-=== Agent error after installation
-
-On the first agent run, after initial installation or after an upgrade, the agent prints the following error message:
-
-```
-error: SERIOUS SECURITY ALERT: path race exploited in recursion to/from '/var/rudder/cfengine-community/modules'. Not safe for agent to continue - aborting
-error: Fatal CFEngine error: Not safe to continue
-```
-
-It is a false positive and disappears on the next runs. It is being tracked in https://issues.rudder.io/issues/27660[#27660], and will be fixed in upcoming patch releases.
-
-=== Empty lines MiniJinja templating
-
-The new MiniJinja template engine shipped with the default Jinja2 behavior regarding newlines.
-This produces empty lines for each control block, which was inconvenient and
-inconsistent with other tools.
-
-We enabled the `trim_blocks` option in 9.0.2 to get a more familiar behavior. This changes the output
-of the templating, removing empty lines on the control blocks.
-
 == Plugins upgrade
 
 If your server is connected to the Internet (directly or through a proxy), and you have configured
@@ -48,13 +26,13 @@ rudder package list --all
 
 ----
 
-== Upgrade from Rudder 8.3 to 9.1
+== Upgrade from Rudder 8.3 or 9.0 to 9.1
 
-Upgrade from Rudder 8.3 is supported.
+Upgrade from Rudder 8.3 or 9.0 is supported.
 
 === End of support for old operating systems
 
-Rudder 9.1 no longer supports installation on the following operating systems, for servers and relayd:
+Rudder 9 no longer supports installation on the following operating systems, for servers and relays:
 
 * SLES 15 < SP6
 * Ubuntu 22.04 LTS

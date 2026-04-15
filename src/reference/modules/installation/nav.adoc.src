@@ -32,7 +32,6 @@
 *** xref:upgrade/rhel.adoc[on RHEL/CentOS/Amazon Linux]
 *** xref:upgrade/sles.adoc[on SLES]
 *** xref:upgrade/windows.adoc[on Windows]
-*** xref:upgrade/postgresql.adoc[upgrade PostgreSQL]
+*** xref:upgrade/postgresql.adoc[Upgrade PostgreSQL]
 ** xref:migrate-db.adoc[Migrate to external DB]
-** xref:container.adoc[Containers - Docker]
 ** xref:dev.adoc[Development versions]
