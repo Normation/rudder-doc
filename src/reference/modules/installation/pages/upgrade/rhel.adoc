@@ -16,8 +16,6 @@ yum update rudder-agent
 
 == Rudder server
 
-include::{partialsdir}/rhel_postgres.adoc[]
-
 For Rudder server, upgrade the server packages:
 
 ----
