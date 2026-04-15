@@ -8,6 +8,8 @@ include::{partialsdir}/rpm_key.adoc[]
 
 Add the Rudder packages repository:
 
+include::{partialsdir}/sles16_repo.adoc[]
+
 include::{partialsdir}/sles15_repo.adoc[]
 
 include::{partialsdir}/sles12_repo.adoc[]
