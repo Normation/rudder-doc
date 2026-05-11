@@ -75,10 +75,10 @@ The credentials of a user are defined in the XML file
     <role name="SecurityDashboards" permissions="cve_read,system-update_read" />
   </custom-roles>
   <user name="alice"  password="xxxxxxx" permissions="administrator"/>
-  <user name="bob"    password="xxxxxxx" permissions="administration_only, node_read"/>
+  <user name="bob"    password="xxxxxxx" permissions="administration_only, node_read" tenants="zoneA"/>
   <user name="custom1" password="xxxxxxx" permissions="node_read,node_write,rule_read,rule_edit,directive_read,technique_read"/>
-  <user name="custom2" password="xxxxxxx" permissions="NodeAccess,RuleAccess,directive_read,technique_read"/>
-  <user name="audit"  password="xxxxxxx" permissions="SecurityDashboards"/>
+  <user name="custom2" password="xxxxxxx" permissions="NodeAccess,RuleAccess,directive_read,technique_read" tenants="-"/>
+  <user name="audit"  password="xxxxxxx" permissions="SecurityDashboards" tenants="*"/>
 </authentication>
 
 ----
@@ -97,6 +97,8 @@ It defines the login that the user will use to connect to Rudder.
 The `password` attribute is optional. It stores the user's password hash when the `file` authentication provider is used. The value must be a bcrypt-hashed password when the `unsafe-hashes` authentication attribute is `false`, and otherwise when it is `true` it can also be hashed with md5, sha, but this will be soon deprecated (see details in the password section below).
 
 The `permissions` attribute is optional. It lists granted permissions to the user.
+
+The `tenants` attribute is optional. It lists tenants which the user has access to. By default, there would be full access (equivalent to `tenants="*"`, see xref:plugins:multi-tenants.adoc[the multi-tenants plugin reference documentation]).
 
 [[_logins]]
 === Login case-sensitivity
