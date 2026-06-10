@@ -28,6 +28,7 @@ image::plugins_list.png[]
 
 
 === Plugins management
+
 For installing or upgrading plugins, search for the relevant plugins, then select the plugins and click on the action button. A confirmation page will appear, and Rudder will restart if necessary to load the new plugins.
 
 image::plugin_install_confirmation.png[]
@@ -86,16 +87,23 @@ update your plugin index and licenses.
 If is fails or your server can't reach the repository, when one or more licenses come close to expiration,
 an alert will appear in Rudder's menu bar.
 
-=== Manual plugins installation
+=== Manual or offline plugins installation
 
-If you have downloaded the `.rpkg` package file of the plugin on your Rudder server, you can install it offline with :
+Once you have downloaded the `.rpkg` package files of the plugins on your Rudder server, you can install it offline with:
 
 ----
-rudder package install <package.rpkg>
+rudder package install <package.rpkg> <package2.rpkg> ...
 ----
 
 To update the plugin, you need to reinstall it with the same command, but in the newer version.
-If the plugin requires a license, you can enable it by putting your `license.key` and `.license` files under:
+
+To install the licenses, download the archive from the server (https://download.rudder.io/plugins/licenses/[https://download.rudder.io/plugins/licenses/NAME/NAME-license.tar.gz] where `NAME` is the technical account name) and install them with:
+
+----
+rudder package install <NAME-license.tar.gz>
+----
+
+You can alternatively download individual licenses with the key file, and place them under:
 
 ----
 /opt/rudder/etc/plugins/licenses/
