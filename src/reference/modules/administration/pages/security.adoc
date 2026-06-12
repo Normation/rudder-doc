@@ -290,7 +290,7 @@ RewriteCond "%{SSL:SSL_CLIENT_SAN_DNS_0}=$1.example.com" "^(.+)=\1$" [OR]
 RewriteCond "%{SSL:SSL_CLIENT_SAN_DNS_1}=$1.example.com" "^(.+)=\1$"
 ```
 
-It can optionaly include a `SSLUserName` value which will allow to show the correct node id as user name in the logs. When absent, no user will be logged (- in the log).
+It can optionnaly include a `SSLUserName` value which will allow to show the correct node id as user name in the logs. When absent, no user will be logged (- in the log).
 
 Then you need to add one or more `RewriteCond` that will only match a correct certificate:
 
