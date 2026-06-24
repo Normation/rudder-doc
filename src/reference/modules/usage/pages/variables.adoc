@@ -28,7 +28,7 @@ value depends upon where it is used. There is three cases:
 
 The following sections will cover these notions and how to apply them in Rudder to fulfill your use cases.
 
-An overview of `variables` is available in https://docs.rudder.io/files/rudder-cheatsheet-advanced.pdf[Rudder cheatsheet].
+An overview of `variables` is available in https://docs.rudder.io/files/rudder-cheatsheet.pdf[Rudder cheatsheet].
 
 == Variables definition purpose: configuration data or source of environment knowledge?
 
