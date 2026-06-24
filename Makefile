@@ -9,11 +9,11 @@ SITES = $(GENERIC_DOCS) $(VERSIONS)
 
 LATEST_MAJOR=$(shell curl https://www.rudder-project.org/release-info/rudder/versions/latest)
 
-.PHONY: prepare rudder-theme/build/ui-bundle.zip optipng doc-build changelogs-build build/sites/site/.htaccess build/files $(SITES)
+.PHONY: prepare rudder-theme/build/ui-bundle.zip optipng doc-build changelogs-build build/sites/site/.htaccess $(SITES)
 .DEFAULT_GOAL := local
 
-all: $(GENERIC_DOCS) build/history/9.1/.htaccess build/history/9.0/.htaccess build/history/8.3/.htaccess  build/sites/site/.htaccess $(VERSION_ARCHIVES) build/files test
-online: site site-dev build/sites/site/.htaccess build/history/9.1/.htaccess build/history/9.0/.htaccess build/history/8.3/.htaccess $(VERSION_ARCHIVES) build/files
+all: $(GENERIC_DOCS) build/history/9.1/.htaccess build/history/9.0/.htaccess build/history/8.3/.htaccess  build/sites/site/.htaccess $(VERSION_ARCHIVES) test
+online: site site-dev build/sites/site/.htaccess build/history/9.1/.htaccess build/history/9.0/.htaccess build/history/8.3/.htaccess $(VERSION_ARCHIVES)
 local: site-local test
 
 rudder-theme/build/ui-bundle.zip:
@@ -76,11 +76,6 @@ build/history/9.0/.htaccess:
 build/history/8.3/.htaccess:
 	mkdir -p build/history/8.3/
 	echo 'Redirect /rudder-doc/reference/current/ /rudder-doc/reference/8.3/' > $@
-
-# Download documentation files
-build/files:
-	mkdir -p build/files
-	curl -o build/files/rudder-cheatsheet-advanced.pdf "https://raw.githubusercontent.com/Normation/rudder-tools/master/documents/cheatsheet-advanced/rudder-cheatsheet-advanced.pdf"
 
 test:
 	./tests/check_broken_links.sh
