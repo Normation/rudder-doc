@@ -98,7 +98,7 @@ Our general policy for Rudder server is to support the two latest
 supported versions. It means:
 
 * Debian _stable_ and _oldstable_
-* The two latest Ubuntu LTS versions
+* The latest Ubuntu LTS versions (plus the previous one is the latest is less than 9 month)
 * The latest major RHEL/CentOS and SLES versions (plus the previous one if the latest is less than 2 years old)
 
 ====
