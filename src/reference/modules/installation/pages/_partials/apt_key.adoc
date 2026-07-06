@@ -20,12 +20,3 @@ pub  4096R/474A19E8 2011-12-15 Rudder Project (release key) <security@rudder-pro
 
 ----
 
-On ancient versions (before Debian 7 and before Ubuntu 10.04), you need to use the apt-key tool instead:
-
-----
-
-wget --quiet -O- "https://repository.rudder.io/rudder_release_key.pub" | sudo apt-key add -
-
-----
-
-
