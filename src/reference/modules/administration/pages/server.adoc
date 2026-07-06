@@ -19,11 +19,11 @@ techniques, directives, rules) with a different set of nodes.
 In this case synchronized servers need to have exactly the same Rudder version.
 
 [[archives, Archives]]
-== Archives
+== Policy backup
 
-=== Archive use cases
+=== Policy backup use cases
 
-The archive feature of Rudder allows to:
+The Policy backup feature of Rudder allows to:
 
 * Exchange configuration between multiple Rudder instances, in particular when
 having distinct environments;
@@ -33,13 +33,13 @@ having distinct environments;
 ==== Changes testing
 
 Export the current configuration of Rudder before you begin to make any change
-you have to test: if anything goes wrong, you can return to this archived state.
+you have to test: if anything goes wrong, you can restore the configuration from that policy backup.
 
 ==== Changes qualification
 
 Assuming you have multiple Rudder instances, each on dedicated for the
 development, qualification and production environment. You can prepare the
-changes on the development instance, export an archive, deploy this archive on
+changes on the development instance, export an backup, deploy this backup on
 the qualification environment, then on the production environment.
 
 
@@ -57,12 +57,10 @@ the import will break the configuration on the target Rudder server.
 
 === Concepts
 
-In the *Utilities -> Archives* page of the Rudder Server web interface, you
-can export and import the configuration of Rudder Groups, Directives and Rules.
-You can either archive the complete configuration, or only the subset dedicated
-to Groups, Directives or Rules.
+In the *Administration → Maintenance -> Policy Backup* page of the Rudder Server web interface, you can export and import the configuration of Rudder Groups, Directives and Rules.
+You can create either a global policy backup or a backup containing only a specific subset of the configuration, such as Groups, Rules, Directives and active techniques, or Parameters.
 
-When archiving configuration, a 'git tag' is created into `/var/rudder/configuration-repository`.
+When a Policy Backup is created, a 'git tag' is created into `/var/rudder/configuration-repository`.
 This tag is then referenced in the Rudder web interface, and available for download
 as a zip file. Please note that each change in the Rudder web interface is also
 committed in the repository.
@@ -71,28 +69,28 @@ committed in the repository.
 [WARNING]
 ===========
 
-Currently, Archiving also add all unstaged files in the commit in +/var/rudder/configuration-repository+.
+Currently, creating a Policy Backup also add all unstaged files in the commit in +/var/rudder/configuration-repository+.
 So it can change the Techniques used by Rudder (Rudder uses the latest commit in git as a reference). You
-should away ensure that there are no unstaged files before doing any Archive to avoid any side effect.
-In the future, Rudder will prevent any Archive in Techniques or Generic Methods are not committed.
+should away ensure that there are no unstaged files before creating a policy backup to avoid any side effect.
+In the future, Rudder will prevent creating a policy backup when Techniques or Generic Methods are not committed.
 
 ===========
 
 
 The content of this repository can be imported into any Rudder server (with the same version).
 
-=== Archiving
+=== Policy Backup procedure
 
-To archive Rudder Rules, Groups, Directives, or make a global archive, you need to go to
-the *Utilities -> Archives* page of the Rudder Server web interface.
+To create a Policy Backup of Rudder Rules, Groups, Directives, or make a global backup, you need to go to
+the *Administration -> Maintenance -> Policy Backup* page of the Rudder Server web interface.
 
-To perform a global archive, the steps are:
+To perform a global backup, the steps are:
 
-. Click on *Archive everything* - it will update the drop-down list *Choose an archive* with
+. Click on *Backup everything* - it will update the drop-down list *Choose a backup to restore* with
 the latest data
-. In the drop down list *Choose an archive*, select the newly created archive (archives are sorted
+. In the drop down list *Choose a backup to restore*, select the newly created backup (backups are sorted
 by date), for example 2015-01-08 16:39
-. Click on *Download as zip* to download an archive that will include all elements.
+. Click on *Download as zip* to download an backup that will include all elements.
 
 === Importing configuration
 
@@ -100,13 +98,13 @@ On the target server, importing the configuration will "merge" them with the exi
 every groups, rules, directives or techniques with the same identifier will be replaced by the import,
 and all others will remain untouched.
 
-To import the archive on the target Rudder server, you can follow the following steps:
+To import the backup on the target Rudder server, you can follow the following steps:
 
 . Uncompress the zip archive in `/var/rudder/configuration-repository`
 . If necessary, correct all files permissions: `chown -R root:rudder directives groups parameters ruleCategories rules techniques`
 . Add all files in the git repository: `git add . && git commit -am "Importing configuration"`
 . In the Web interface, go to the *Settings > General* page, at the bottom of the page in *Manage Technique library* section, click *Reload Techniques* button
-. Finally, in the Web interface, go to the *Utilities > Archives* page, in the *Global Archive* section (first section), select *Latest Git commit* in the drop down list, and click on *Restore everything* to restore the configuration.
+. Finally, in the Web interface, go to the *Administration > Maintenance > Policy Backup* page, in the *Global Backup* section (first section), select *Latest Git commit* in the drop down list, and click on *Restore everything* to restore the configuration.
 
 [TIP]
 
@@ -121,7 +119,7 @@ For instance, using one unique git repository you can follow this workflow:
 
 .. Use Rudder web interface to prepare your policy;
 
-.. Create an archive;
+.. Create a policy backup;
 
 .. +git push+ to the central repository;
 
@@ -129,16 +127,16 @@ For instance, using one unique git repository you can follow this workflow:
 
 .. +git pull+ from the central repository;
 
-.. Use  Rudder web interface to import the qualified archive.
+.. Use  Rudder web interface to import the qualified policy backup.
 
 ====
 
 
 === Deploy a preconfigured instance
 
-You can use the procedures of Archiving and Restoring configuration to deploy
+You can use the Policy backup feature configuration to deploy
 preconfigured instance. You would prepare first in your labs the configuration for
-Groups, Directives and Rules, create an Archive, and import the Archive on the
+Groups, Directives and Rules, create an Backup, and import the Backup on the
 new Rudder server installation
 
 == Event Logs
