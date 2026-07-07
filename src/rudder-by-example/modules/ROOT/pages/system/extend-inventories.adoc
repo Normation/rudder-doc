@@ -30,7 +30,7 @@ To be able to use our custom data we need to:
 == Inventory extension script
 
 An inventory extension script can be written in any language, it just needs to be an
-executable file placed in `/var/rudder/hooks.d` that outputs a json object. It will be called at each 
+executable file placed in `/var/rudder/hooks.d` (`C:\Program Files\Rudder\hooks.d` on a Windows agent) that outputs a json object. It will be called at each 
 inventory, and its output will be added into it.
 
 NOTE: Read the xref:reference:usage:advanced_node_management.adoc#extend-nodes-inventory[dedicated section]
