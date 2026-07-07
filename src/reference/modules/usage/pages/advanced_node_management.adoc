@@ -394,9 +394,9 @@ variables in Directives parameters.
 
 === Creating a node inventory hook
 
-An inventory hook can be any kind of executable that can be called without parameters, from a shell script to a C program.
+An inventory hook can be any kind of executable that can be called without parameters, from a shell script to a C program. For Windows, you need to adapt the commands and the script in this part.
 
-Hooks are located in directory `/var/rudder/hooks.d`. You may need to create that directory the first time you want to add hooks:
+Hooks are located in directory `/var/rudder/hooks.d` (`C:\Program Files\Rudder\hooks.d` on a Windows agent). You may need to create that directory the first time you want to add hooks:
 
 ----
 
