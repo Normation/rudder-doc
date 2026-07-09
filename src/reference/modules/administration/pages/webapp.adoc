@@ -73,6 +73,14 @@ Or for the maximum number of keys in HTTP forms:
 
 Then restart the application with `systemctl restart rudder-jetty` for these settings to take effect.
 
+[NOTE]
+===
+For this example, bear in mind that there is a always a limit to file size upload,
+the webapp itself has a hard limit of 8MB by default,
+starting from which which you may use xref:administration:relayd.adoc#_data_files[the shared folder] 
+or xref:usage:technique_editor.adoc#_interface[technique resources].
+===
+
 == Data files
 
 The webapp is loaded from `/opt/rudder/share/webapp/rudder.war`.
