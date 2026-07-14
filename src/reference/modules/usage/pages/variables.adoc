@@ -322,12 +322,15 @@ If you want to get facts about the node when the check is done, look at next sec
 
 |===
 
-====== Inventory variables list
+====== Inventory variable list
 
 [cols="2", options="header"]
 |===
 |Variable
 |Description
+
+|`nodeId`
+|Rudder ID of the node
 
 |`hostname`
 |Node hostname
@@ -392,7 +395,7 @@ Information about a node:
 |Description
 
 |`${rudder.node.id}`
-|Rudder id of the node
+|Rudder ID of the node
 
 |`${rudder.node.hostname}`
 |Node hostname
