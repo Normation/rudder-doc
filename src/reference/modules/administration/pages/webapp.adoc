@@ -58,7 +58,7 @@ A part of the application configuration (especially HTTP related items) is confi
 xref:reference:reference:jetty_server_configuration.adoc[dedicated section].
 
 In particular, to set the maximum size of file uploads on the server (used for shared files and technique resources uploads),
-add these lines at the end of `/opt/rudder/etc/rudder-jetty-base/start.ini`:
+add these lines at the end of an INI file in `/opt/rudder/etc/rudder-jetty-base/start.d/`:
 
 ----
 # 100MB

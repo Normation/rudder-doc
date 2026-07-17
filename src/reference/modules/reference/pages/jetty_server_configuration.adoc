@@ -43,21 +43,21 @@ You should not change anything here. Each time you want to customize a module, c
 
 === Overrides: /opt/rudder/etc/rudder-jetty-base/
 
-This directory contains Rudder specific configuration files, mainly `etc` subdirectory and `start.ini` configuration file.
+This directory contains Rudder specific configuration files, mainly `etc` subdirectory and `start.d` configuration directory.
 
 ==== /opt/rudder/etc/rudder-jetty-base/etc
 
 This directory contains overrides for default modules. You can copy module configuration from `/opt/rudder/jetty/etc` here and customize them as you wish.
 
-==== `start.ini` configuration file
+==== `start.d` configuration directory
 
-This file is the main configuration file for `Jetty` modules. It tells `Jetty`
-which modules are enable, and what are their parameters.
+This directory contains all configuration file for `Jetty` modules. Since Rudder 9.1, it is now a directory, instead of the previous `start.ini` main configuration file.
+Configuration files within this directory, which have the INI format, tell `Jetty` which modules are enabled, and what are their parameters.
 
 For example, if you want to customize authorized header request size, you can
-change value of parameter `requestHeaderSize` defined for module `server`
+change value of parameter `requestHeaderSize` defined for module `server`.
 
-This file contains important parameters, like `setuid`, thread pool configuration , ;
+This file contains important parameters, like `setuid`, thread pool configuration ;
 various configuration on `HTTP` and request and answer sizes, log and request log
 configuration (files name, ...), etc.
 
@@ -65,7 +65,7 @@ You can also override system properties that need to be passed to java command l
 with `-D` option in that file. Typically, if you need to increase `maxFormContentSize`
 or `maxFormKey` as explained
 https://jetty.org/docs/jetty/12.1/programming-guide/security/configuring-form-size.html[in Jetty documentation]
-you can just add corresponding lines at the end of `start.ini`:
+you can just add corresponding lines within a given INI file:
 
 ----
 -Dorg.eclipse.jetty.server.Request.maxFormKeys=200
