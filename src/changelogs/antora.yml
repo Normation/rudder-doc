@@ -1,6 +1,6 @@
 name: changelogs
 title: Changelogs
-version: "9.1"
+version: "9.2"
 nav:
 - modules/ROOT/nav.adoc
 
