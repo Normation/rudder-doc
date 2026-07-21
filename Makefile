@@ -1,5 +1,5 @@
 ALL_VERSIONS = 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10 2.11 3.0 3.1 3.2 4.0 4.1 4.2 4.3 5.0 6.0 6.1 6.2 7.0 7.1 7.2 7.3 8.0 8.1 8.2 8.3 9.0 9.1
-VERSIONS = 8.3 9.0 9.1
+VERSIONS = 9.0 9.1
 VERSION_DOCS = $(addprefix doc-, $(VERSIONS))
 VERSION_ARCHIVES = $(addsuffix .archive, $(VERSIONS))
 
@@ -12,8 +12,8 @@ LATEST_MAJOR=$(shell curl https://www.rudder-project.org/release-info/rudder/ver
 .PHONY: prepare rudder-theme/build/ui-bundle.zip optipng doc-build changelogs-build build/sites/site/.htaccess $(SITES)
 .DEFAULT_GOAL := local
 
-all: $(GENERIC_DOCS) build/history/9.1/.htaccess build/history/9.0/.htaccess build/history/8.3/.htaccess  build/sites/site/.htaccess $(VERSION_ARCHIVES) test
-online: site site-dev build/sites/site/.htaccess build/history/9.1/.htaccess build/history/9.0/.htaccess build/history/8.3/.htaccess $(VERSION_ARCHIVES)
+all: $(GENERIC_DOCS) build/history/9.1/.htaccess build/history/9.0/.htaccess build/sites/site/.htaccess $(VERSION_ARCHIVES) test
+online: site site-dev build/sites/site/.htaccess build/history/9.1/.htaccess build/history/9.0/.htaccess $(VERSION_ARCHIVES)
 local: site-local test
 
 rudder-theme/build/ui-bundle.zip:
@@ -30,10 +30,6 @@ doc-build:
 	cd $@ && git checkout branches/rudder/9.0 && git pull
 	cd $@/src/reference && make
 	cd $@ && git add -f src/reference && git commit --allow-empty -m "Build 9.0"
-	cd $@ && git clean -fd
-	cd $@ && git checkout branches/rudder/8.3 && git pull
-	cd $@/src/reference && make
-	cd $@ && git add -f src/reference && git commit --allow-empty -m "Build 8.3"
 	cd $@ && git clean -fd
 
 changelogs-build:
@@ -72,10 +68,6 @@ build/history/9.1/.htaccess:
 build/history/9.0/.htaccess:
 	mkdir -p build/history/9.0/
 	echo 'Redirect /rudder-doc/reference/current/ /rudder-doc/reference/9.0/' > $@
-
-build/history/8.3/.htaccess:
-	mkdir -p build/history/8.3/
-	echo 'Redirect /rudder-doc/reference/current/ /rudder-doc/reference/8.3/' > $@
 
 test:
 	./tests/check_broken_links.sh
