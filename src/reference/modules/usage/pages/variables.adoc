@@ -351,10 +351,10 @@ If you want to get facts about the node when the check is done, look at next sec
 |The operating system name (like "Debian")
 
 |`os.fullName`
-|The operating system full name (like "Debian GNU/Linux 9.1 (stretch)")
+|The operating system full name (like "Debian GNU/Linux 9.2 (stretch)")
 
 |`os.version`
-|The operating system version (like "9.1")
+|The operating system version (like "9.2")
 
 |`os.kernelVersion`
 |The kernel version on the node (like "4.9.0-3-amd64")
