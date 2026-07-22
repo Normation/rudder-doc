@@ -47,4 +47,5 @@ content:
     - "branches/rudder/8.3"
     - "branches/rudder/9.0"
     - "branches/rudder/9.1"
+    - "branches/rudder/9.2"
     start_path: src/changelogs
