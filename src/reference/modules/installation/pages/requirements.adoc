@@ -162,8 +162,23 @@ For example, a default installation with 500 nodes and an average of
 50 Directives by node should require between *76 GB and 114 GB* of disk space
 for PostgreSQL.
 
+If you use the Policy Benchmarks plugin, the amount of data reported by the nodes is significantly higher, and as a rule of thumb, you can consider that it add the equivalent of 25 extra Directives
+The computation for disk usage for PostgreSQL database becomes:
+
+----
+max_space_with_policy_benchmarks = (number of Directives + 25 ) * number of Nodes * ( retention duration in days * 900 kB + archive retention in days * 150 + compliance retention in days * 150 )
+----
+
 Follow the xref:administration:performance.adoc#_reports_retention[reports Retention] section to configure the
 retention duration.
+
+[NOTE]
+
+====
+
+You can switch to xref:configuration_management.adoc#_reporting_mode_non_compliant_only[non-compliant only] reporting mode to log only non-compliance, and divide by 3 to 15 the disk space requirement.
+
+====
 
 [WARNING]
 
@@ -192,7 +207,8 @@ distributed to the agents). A safe estimation is 1.5GB, plus 10MB per managed no
 `/var/log/rudder`::
 Report logs (`/var/log/rudder/reports`) size will depend on the number of nodes you manage and global compliance.
 Non-compliant reports (error, repairs) from nodes are stored in `/var/log/rudder/compliance`, and with an average of 95%
-compliance from node, a safe estimation of disk usage is 200MB as a baseline, plus 11 MB per managed nodes
+compliance from node, a safe estimation of disk usage is 200MB as a baseline, plus 11MB per managed nodes. If you use
+the Policy Benchmark module, the amount can climb to 150MB per managed nodes, and we recommend to lower the data retention for non-compliant reports.
 
 =======
 
