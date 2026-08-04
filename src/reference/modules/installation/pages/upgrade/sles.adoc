@@ -20,9 +20,18 @@ uid                      Rudder Project (release key) <security@rudder-project.o
 
 ----
 
-Add the Rudder packages repository:
+If you are upgrading Rudder to a newer minor or major version, you will need to change the repository. Zypper does not allow to change the URL, so you will need to remove the previous Rudder packages repository:
+
+----
+
+zypper rr Rudder
+
+----
+
+Then add the Rudder packages repository:
 
 include::{partialsdir}/sles15_repo.adoc[]
+
 
 include::{partialsdir}/sles12_repo.adoc[]
 
