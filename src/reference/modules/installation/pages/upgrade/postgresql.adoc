@@ -32,7 +32,8 @@ Also, we strongly recommend you to have a *database backup before trying to upgr
 
 First, make sure you have the right version installed for the Rudder version you want to upgrade to.
 
-Rudder 8.0 requires at least PostgreSQL 13.
+Rudder requires at least PostgreSQL 13, see
+xref:installation:requirements.adoc#_postgresql[the requirements].
 
 On Debian-like systems:
 
