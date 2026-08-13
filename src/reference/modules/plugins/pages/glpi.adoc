@@ -1,0 +1,41 @@
+[glpi-plugin]
+= GLPI
+
+This plugin provides integration between Rudder and GLPI. It will send
+to your GLPI server the up-to-date inventories processed by the Rudder
+server.
+You need GLPI version *10.0.0.6* or below, in order for the plugin to run correctly.
+
+== Installation
+
+* Install a https://glpi-project.org/[GLPI server]. The server is not
+required to be running on the same host as the Rudder server. However,
+this plugin has to be installed and running on the Rudder server.
+* Install the
+https://github.com/fusioninventory/fusioninventory-for-glpi/releases[fusion inventory plugin for GLPI]
+* Install the glpi plugin on your Rudder server
+* Install `xmlstarlet`
+* Edit the configuration file in `/opt/rudder/etc/glpi.conf`. This config
+file must contain the URL to your GLPI server’s fusion inventory plugin.
+
+[WARNING]
+
+====
+
+The glpiinventory plugin of GLPI looks to be the same as the fusioninventory plugin, but it is not.
+The glpiinventory plugin refuses some elements present in fusioninventory for Rudder, so
+it doesn't work with Rudder inventories. Please use the fusioninventory plugin instead.
+
+====
+
+
+== Usage
+
+Run `/opt/rudder/bin/glpi-plugin send-all` to update all the inventories.
+This command is run automatically everyday around 7AM.
+
+To manuallyi update an inventory for a specific node, run `/opt/rudder/bin/glpi-plugin send-one UUID`.
+The plugin will automatically send a new inventory upon node
+addition to Rudder.
+
+NOTE: All nodes inventories are sent daily to GLPI, including pending nodes.
