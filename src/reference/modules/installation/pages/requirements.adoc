@@ -53,7 +53,9 @@ dedicated support.
 
 == PostgreSQL
 
-We ensure that the version of PostgreSQL provided by all supported OS is compatible with Rudder. 
+Rudder requires *PostgreSQL 13 or later*.
+
+We ensure that the version of PostgreSQL provided by all supported OS is compatible with Rudder.
 If you want to use an external database, please check specific requirements in the setup documentation for installing xref:server/external-db.adoc#install-postgresql[the PostgreSQL server] on a separate host.
 
 [[rudder-cloud-compatibility]]
@@ -150,23 +152,25 @@ To manage more than 100 nodes, it is strongly recommended to use SSD or NAS/SAN 
 
 The PostgreSQL database will take up most of the disk space needed by Rudder. The storage
 necessary for the database can be estimated by counting around
-500 to 900 kB per Directive per Node per Day of retention of node execution reports (default is 4 days),
-plus 150 kB per Directive per Node per Day of archiving (default is 0 days),
-plus 150 kB per Directive per Node per Day of compliance retention (default is 8 days) :
+500 to 900 kB per Directive per Node per Day of retention of node execution reports
+(default is 4 days), assuming the default 5 minutes agent run interval:
 
 ----
-max_space = number of Directives * number of Nodes * ( retention duration in days * 900 kB + archive retention in days * 150 + compliance retention in days * 150 )
+max_space = number of Directives * number of Nodes * retention duration in days * 900 kB
 ----
 
 For example, a default installation with 500 nodes and an average of
-50 Directives by node should require between *76 GB and 114 GB* of disk space
+50 Directives by node should require between *50 GB and 90 GB* of disk space
 for PostgreSQL.
+
+The volume is proportional to the number of agent runs, so it scales inversely with the agent run
+interval: with a 1 hour run interval instead of 5 minutes, divide the result by 12.
 
 If you use the Policy Benchmarks plugin, the amount of data reported by the nodes is significantly higher, and as a rule of thumb, you can consider that it add the equivalent of 25 extra Directives
 The computation for disk usage for PostgreSQL database becomes:
 
 ----
-max_space_with_policy_benchmarks = (number of Directives + 25 ) * number of Nodes * ( retention duration in days * 900 kB + archive retention in days * 150 + compliance retention in days * 150 )
+max_space_with_policy_benchmarks = (number of Directives + 25 ) * number of Nodes * retention duration in days * 900 kB
 ----
 
 Follow the xref:administration:performance.adoc#_reports_retention[reports Retention] section to configure the
