@@ -6,7 +6,7 @@ and handles inventories and reports forwarding to the root server from nodes.
 
 == Configuration
 
-Relay configuration is stored in `/opt/rudder/etc/relay`:
+Relay configuration is stored in `/opt/rudder/etc/relayd`:
 
 * `main.conf` contains general configuration. Its content is managed by the Rudder agent of the relay.
 * `logging.conf` contains logging information.
