@@ -3,10 +3,9 @@
 ====
 
 Relay servers won't work if you don't have a valid scale-out-relay plugin installed.
+If you install a relay without that plugin, policy generation will fail, preventing new policies to be applied to your Nodes. More information about plugins in the xref:plugins:index.adoc[dedicated] section
 
-If you install a relay without that plugin, policy generation will fail, preventing new policies to be applied to your Nodes.
-
-More information about plugins in the xref:plugins:index.adoc[dedicated] section
+Rudder 9.1 server only supports relay running version 9.0 or later.
 
 ====
 
@@ -19,4 +18,6 @@ You only need to install a relay server if you want to manage multiple networks 
 to allow all the subnet access to Rudder server - typically for security reasons (DMZ, node isolation...).
 
 ====
+
+
 
