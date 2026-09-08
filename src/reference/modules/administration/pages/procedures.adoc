@@ -55,7 +55,7 @@ the physical storage backend does not reclaim space on the hard drive, resulting
 In steady state this is often not an issue: the space freed inside the database files is reused by
 the new reports sent by the nodes. Making that space reusable is the job of the `VACUUM` process,
 which runs both automatically (PostgreSQL's autovacuum) and explicitly (Rudder vacuums the report
-tables after each database cleaning).
+tables after each database cleaning, using `rudder.batch.databasecleaner.runtime` properties).
 
 `VACUUM` does not, however, return the freed space to the filesystem: the size of the PostgreSQL
 data directory does not decrease. In particular, lowering the report retention duration frees
@@ -67,6 +67,7 @@ performance, due to bloating (with database 3 or 4 times larger than necessary).
 
 To cure (or prevent) this behavior, you can trigger vacuum full operations, which put an exclusive lock on tables,
 and will lock both the Rudder interface and the reporting system for quite a long time.
+
 
 [WARNING]
 
@@ -84,6 +85,14 @@ rudder# SELECT pg_size_pretty(pg_total_relation_size('ruddersysevents'));
 ====
 
 ==== Reclaiming space with locking, using VACUUM FULL
+
+
+Automatic vacuuming is already applied as daily maintenance operation on some database tables (`nodelastcompliance`).
+
+They are configured with the schedule time from `rudder.batch.databasecleaner.runtime.hour` and `rudder.batch.databasecleaner.runtime.minute` properties.
+
+Applying a `VACUUM FULL` to free some disk space can be done at will:
+
 
 [source,shell]
 
@@ -103,6 +112,113 @@ psql -U rudder -d rudder -h localhost
 rudder# VACUUM FULL ruddersysevents;
 ----
 
+==== Preventing bloat accumulation
+
+Despite the automatic Postgres vacuum operations, some tables database can grow larger as 
+the autovacuum process is not able to keep up with the write rate of Rudder data.
+
+It can make the size of the PostgreSQL data directory go upward over days.
+
+This is a matter of the I/O throughput available to PostgreSQL: on a server left with a 
+configuration that is too lenient for its disk and its workload, a single pass over a large 
+compliance table can take tens of minutes instead of seconds, and everything written during 
+that window accumulates.
+
+It can be detected typically from monitoring of specific values:
+
+===== Diagnosing bloat
+
+First, have a look at tables that may have a high bloat factor, from https://wiki.postgresql.org/wiki/Show_database_bloat[Postgres' wiki].
+
+To start diagnosing, enable `log_autovacuum_min_duration = 0`. Every completed autovacuum pass is then
+logged, and those log lines are the primary diagnostic.
+
+A recurring warning like the following is an indication that some configuration may need
+to be changed:
+
+[source]
+----
+LOG:  checkpoints are occurring too frequently (16 seconds apart)
+HINT:  Consider increasing the configuration parameter "max_wal_size".
+----
+
+.Review the current settings
+[source,sql]
+----
+SELECT name, setting, source, sourcefile FROM pg_settings
+WHERE name IN ('max_wal_size', 'min_wal_size', 'shared_buffers',
+               'maintenance_work_mem', 'autovacuum_work_mem');
+----
+
+.Look at the vacuums currently running
+[source,sql]
+----
+SELECT p.pid, p.phase, p.heap_blks_total, p.heap_blks_scanned,
+       p.heap_blks_vacuumed, p.index_vacuum_count,
+       (p.heap_blks_total - p.heap_blks_vacuumed) AS remaining,
+       (p.heap_blks_total - p.heap_blks_vacuumed) / 1500 / 60 AS eta_minutes,
+       now() - a.xact_start AS running_for
+FROM pg_stat_progress_vacuum p
+JOIN pg_stat_activity a USING (pid);
+----
+
+For slow vacuum with an ETA that is big, constant rates can be observed during 
+the different phases (index/heap scan, vacuuming).
+
+
+[WARNING]
+====
+Per-table autovacuum options such as `toast.autovacuum_vacuum_scale_factor`,
+`toast.autovacuum_vacuum_threshold` and `toast.autovacuum_vacuum_cost_delay` cannot actually
+help against accumulating bloat. The configuration of Postgres with respect to IO and machine
+characteristics is the most likely the solution to that kind of issue.
+====
+
+[#increasing-postgres-io-processing]
+===== Increasing Postgres IO processing
+
+`max_wal_size`, `min_wal_size` and `shared_buffers` are the settings to raise.
+
+They determine the read and write throughput actually available to autovacuum.
+Setting these values correctly can determine whether a pass completes
+in a few seconds or in tens of minutes.
+
+* `shared_buffers`: impacts RAM usage, and capacity of Postgres to process a vacuum pass,
+  in par with storage operations (see WAL parameters next). A starting point is 25% of system RAM
+* `max_wal_size` and `min_wal_size`: impacts disk writes of pages, to be processed for autovacuum operations
+  
+On a dedicated database server with 16 GB of RAM, you may have as a starting point:
+
+[source,ini]
+----
+shared_buffers = 4GB
+max_wal_size = 16GB
+min_wal_size = 2GB
+----
+
+[WARNING]
+
+====
+
+`shared_buffers` requires a full PostgreSQL restart. The others take
+effect on `SELECT pg_reload_conf()`, but a vacuum already in progress keeps the values
+it started with, so any effect will only appear in the next one.
+
+====
+
+===== Further settings to review
+
+If bloat still accumulates after the above, the remaining settings to look at all
+concern how PostgreSQL uses the disk. Review them together rather than one at a time:
+
+* `checkpoint_timeout` and `checkpoint_completion_target` — how often PostgreSQL
+  checkpoints, and whether the resulting writes are spread out or issued in bursts.
+  Frequent checkpoints substantially increase the volume of WAL written, which competes
+  with autovacuum for the same device.
+* `effective_io_concurrency` and `random_page_cost` — both assume a spinning disk by
+  default and should be adjusted on SSD or NVMe storage.
+* The storage layer itself. Full-disk encryption (LUKS/dm-crypt) and thin-provisioned
+  LVM both add write latency relative to the underlying device.
 
 === LDAP database reindexing
 
