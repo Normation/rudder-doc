@@ -278,6 +278,20 @@ systemctl restart postgresql
 
 ====
 
+[NOTE]
+
+====
+
+These values assume compliance data that stays moderate in size. On a server managing a
+large number of nodes and/or directives, they may not be sufficient and lead to increased disk usage.
+
+This may be due to autovacuum of a big volume compliance, that both needs more memory and
+more write-ahead log headroom to keep up. If that happens, you may have a look at 
+xref:administration:procedures.adoc#increasing-postgres-io-processing[Increasing Postgres IO processing] for
+the settings to change and how to diagnose such issues.
+
+====
+
 ==== Maximum number of file descriptors
 
 If you manage thousands of nodes with Rudder, you should increase the open file limits as policy generation opens and write a lot of file.
