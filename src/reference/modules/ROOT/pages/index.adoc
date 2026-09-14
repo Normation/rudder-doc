@@ -31,7 +31,7 @@ A few things that make Rudder stand out:
   more than a blip in the sales stats. Built-in features include change requests,
   audit logs, and strong authentication.
 * Rudder relies on an agent that needs to be installed on all hosts to audit.
-  The *agent is very lightweight* (10 to 20 MB of RAM at peak) and *blazingly fast*
+  The *agent is very lightweight* (about 90 Mb of RAM at peak) and *blazingly fast*
   (it’s written in C and takes less than 10 seconds to verify 100 rules). Installation
   is self-contained, via a single package, and can auto-update to limit agent
   management burden.
