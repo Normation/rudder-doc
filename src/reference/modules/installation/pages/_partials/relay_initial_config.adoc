@@ -28,6 +28,8 @@ When every step has completed successfully:
 You may have to run `rudder agent run` command on the relay, before adding new nodes
 under this relay.
 
+You also need to configure the allowed networks for the relay. You can do so by editing the correct section (the one about your relay) in the *Allowed networks* page, located in the *Settings*.
+
 ====
 
 This is an example of node details pane showing a Rudder relay. Note the "Role:
