@@ -255,6 +255,14 @@ rudder server reload-techniques
 
 You're done.
 
+[WARNING]
+====
+Technique resources are deployed to each node applying the technique, so large resources can greatly increase disk usage
+(for example, a 100 MB resource used on 100 nodes represents 10 GB of policies on disk).
+Prefer uploading resources from the technique editor interface, whose maximum upload size is
+xref:administration:webapp.adoc#_maximum_size_of_uploaded_files[configurable].
+====
+
 
 == Import / Export archive of rules, directives, techniques, groups and related dependencies
 
