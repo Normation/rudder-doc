@@ -44,7 +44,9 @@ rudder.server.hstsIncludeSubDomains=true
 
 === Authentication and user management
 
-* It is recommended to use an external authentication backend exposing an OpenID Connect or OAUTH2 interface with a second authentication factor (TOTP, WebAuthn, etc.), configured through the **auth-backends** plugins.
+* Enable multi-factor authentication. For users in the Rudder configuration file and LDAP users, enable the built-in
+xref:administration:users.adoc#totp-authentication[TOTP authentication]. For OpenID Connect (OIDC) or OAUTH2 users (configured
+through the **auth-backends** plugin), enforce a second factor (TOTP, WebAuthn, etc.) in your external identity provider.
 
 * In case you use local Rudder users, your passwords must be hashed with `bcrypt`, which is now the only hash algorithm used when generating new passwords in the user management page. It may still be the case that users use other kind of unsalted hashed password (especially before Rudder 6.0), so they are still allowed but they will be deprecated soon in favor of `bcrypt`. You can check the documentation of `/opt/rudder/etc/rudder-users.xml` and of the user management page for the migration guide.
 
