@@ -64,6 +64,9 @@ image::technique_editor/technique-upload-resource.png[]
 image::technique_editor/technique-uploaded-file.png[]
 image::technique_editor/technique-resource-added.png[]
 
+NOTE: Uploaded resources are limited to 8 MiB per file by default, see
+xref:administration:webapp.adoc#_maximum_size_of_uploaded_files[how to configure the maximum size of uploaded files].
+
 
 - A column listing Generic methods / displaying generic method details
 
