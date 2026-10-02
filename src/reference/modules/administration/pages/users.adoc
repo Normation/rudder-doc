@@ -49,6 +49,64 @@ A user whose authentication is accepted by the external provider but not declare
 is considered to have no rights at all (and so will only see a reduced version of Rudder homepage,
 with no action nor tabs available).
 
+[[totp-authentication]]
+== Multi-factor authentication (TOTP)
+
+Rudder can ask users for a second authentication factor when they log in: a one-time code (TOTP) from an authenticator
+app on their phone or computer (e.g. FreeOTP, Google Authenticator, or a password manager that supports TOTP codes).
+
+=== Configuration
+
+To make TOTP mandatory, add or change this property in `/opt/rudder/etc/rudder-web.properties`,
+then restart the Rudder web application (`systemctl restart rudder-jetty`):
+
+[source,ini]
+----
+rudder.auth.otp.enforce=true
+----
+
+=== TOTP enforcement per authentication provider
+
+Users are asked for a code after they log in successfully with their username and password. This applies to:
+
+* users defined in the xref:administration:users.adoc#_user_configuration_file[user configuration file] (`file` authentication provider),
+* users who log in with the *LDAP/Active Directory* provider of the xref:plugins:auth-backends.adoc[authentication backends plugin].
+
+[WARNING]
+====
+
+TOTP is *not* applied in these cases:
+
+* users who log in with the *OpenID Connect* (OIDC) or *OAUTHv2* providers: the external identity provider is expected to enforce the
+second factor itself (see the xref:administration:security.adoc#_authentication_and_user_management[security recommendations]),
+* the super admin account (`rudder.auth.admin.login`), which is always skipped since it is meant to be a recovery account.
+
+====
+
+=== TOTP login steps
+
+When TOTP is mandatory:
+
+. The user logs in with their username and password, as usual.
+
+. *Enrollment (first login only)*: if the user hasn't set up TOTP yet, Rudder shows a page with a QR code.
+The user scans it with their authenticator app, which then starts generating codes for Rudder.
++
+image::totp-enroll.png[TOTP enrollment page with a QR code]
+
+. *Enrollment validation*: to finish setting it up, the user types the code currently shown in their authenticator app.
+If the code is valid, the enrollment is complete and the user is logged in.
++
+image::totp-enroll-validation.png[TOTP enrollment validation with a code]
+
+. *Later logins*: after entering their username and password, the user is asked for a valid code from their authenticator app.
++
+image::totp-login.png[TOTP code asked at login]
+
+If a user can no longer use their authenticator app (e.g. they lost their access), an administrator can reset their TOTP
+from the user management interface (see xref:administration:users.adoc#totp-reset[resetting a user's TOTP]).
+The user will then be asked to enroll again the next time they log in.
+
 == User configuration file
 
 `/opt/rudder/etc/rudder-users.xml` is the main configuration file for managing users and roles in Rudder.
@@ -362,13 +420,22 @@ WARNING: The plugin is not subject to validation workflow when `change validatio
 When you disable a user, they will no longer be able to use Rudder nor to log in again.
 And when deleting the user, it gets removed from the configuration file but is actually not removed in the Rudder database, which is only purged from all deleted users after some time, according to the `rudder.users.cleanup.purgeDeletedAfter` configuration property.
 
+[[totp-reset]]
+==== Resetting a user's TOTP
+
+When xref:administration:users.adoc#totp-authentication[TOTP is enforced], you can reset the TOTP of a user who has already
+enrolled after a first successful login, for example if they lost access to their authenticator app. Open the user's details and use the TOTP reset action:
+
+image::usermanagement-ui-totp-reset.png[Reset TOTP of a user in the user management interface]
+
+Next time they log in, they will be asked to scan a new QR code and enroll again.
+
 ==== Authentication backend fallback
 
 When you use an external provider for authentication, password will not be asked. However, you can still add a password,
 but it will only be used for the authentication as a fallback.
 
-image::ext_auth.png[]
-image::ext_auth_clicked.png[]
+image::usermanagement-ext-auth.png[]
 
 Please consult the dedicated documentation about the plugin xref:plugins:auth-backends.adoc[authentication backends]
 if you need more details.
