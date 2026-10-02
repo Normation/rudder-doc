@@ -51,35 +51,43 @@ rudder.auth.provider=ldap
 
 Then it's this value that will be used (as it has higher priority due to override file name ordering).
 
+=== Maximum size of uploaded files
+
+The maximum size of each file uploaded to the Rudder server via the UI is set by the `rudder.server.upload.maxSize` property,
+with a default value of 8 MiB:
+
+----
+rudder.server.upload.maxSize=8MiB
+----
+
+For example, to allow uploads of up to 100 MiB in resources of the technique editor (notice the `i` in `MiB`, it's for the 1024 factor for units):
+
+----
+rudder.server.upload.maxSize=100MiB
+----
+
+Then restart the application with `systemctl restart rudder-jetty` for the settings to take effect.
+
+[WARNING]
+====
+Use this setting to change the maximum size of uploaded files, since no other limits are known to be working 
+(like `LimitRequestBody` in Apache, and Jetty forms configuration which do not impact uploads from the UI, see below).
+====
+
+To bypass this limit for large files, you can also place them directly on the Rudder server, by following
+xref:usage:advanced_configuration_management.adoc#_update_technique_resources_from_command_line[the technique resources update from command line].
+
 === Application server (Jetty) configuration
 
 A part of the application configuration (especially HTTP related items) is configured in a different location,
 `/opt/rudder/etc/rudder-jetty-base/`. You can learn more about the usage of the Jetty application server in the
 xref:reference:reference:jetty_server_configuration.adoc[dedicated section].
 
-In particular, to set the maximum size of file uploads on the server (used for shared files and technique resources uploads),
-add these lines at the end of an INI file in `/opt/rudder/etc/rudder-jetty-base/start.d/`:
-
-----
-# 100MB
--Dorg.eclipse.jetty.server.Request.maxFormContentSize=1048576
-----
-
-Or for the maximum number of keys in HTTP forms:
-
-----
--Dorg.eclipse.jetty.server.Request.maxFormKeys=200
-----
+Jetty settings are configured in INI files in `/opt/rudder/etc/rudder-jetty-base/start.d/`,
+see the https://jetty.org/docs/jetty/12.1/operations-guide/start/index.html[official Jetty documentation]
+for more details about customizing Jetty.
 
 Then restart the application with `systemctl restart rudder-jetty` for these settings to take effect.
-
-[NOTE]
-===
-For this example, bear in mind that there is a always a limit to file size upload,
-the webapp itself has a hard limit of 8MB by default,
-starting from which which you may use xref:administration:relayd.adoc#_data_files[the shared folder] 
-or xref:usage:technique_editor.adoc#_interface[technique resources].
-===
 
 == Data files
 
