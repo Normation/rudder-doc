@@ -13,7 +13,7 @@ If you have agents using port 5309 (CFEngine protocol) you must generate the new
 
 ==== Provisioning a new certificate
 
-To change the certificates on your server, follow the documentation inside the file **/etc/httpd/conf.d/rudder.conf** or **/etc/apache2/sites-enabled/rudder.conf**.
+To change the certificates on your server, follow the documentation inside the file _/etc/httpd/conf.d/rudder.conf_ or _/etc/apache2/sites-enabled/rudder.conf_.
 
 The new certificate must have `Digital Signature`, `Key Encipherment` and `Data Encipherment` in its X509v3 `Key Usage` and `UID=root` in its `Subject DN`. If you cannot provide one, see next section (HTTPS)..
 
