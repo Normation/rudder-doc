@@ -9,13 +9,13 @@ add additional configurations to make your Rudder installation more secure.
 
 The Rudder root server accepts connections from both nodes and user browsers. If you want a different certificate for each, see next section (HTTPS).
 
-The new certificate must have `Digital Signature`, `Key Encipherment` and `Data Encipherment` in its X509v3 `Key Usage` and `UID=root` in its `Subject DN`. If you cannot provide one, see next section (HTTPS).
-
-If you have agents using port 5309 (CFEngine protocol) you must generate the new certificate with the same private kay as the old one, which can be found in `/var/rudder/cfengine-community/ppkeys/localhost.priv` on the server. If you can't, see next section (HTTPS).
+If you have agents using port 5309 (CFEngine protocol) you must generate the new certificate with the same private key as the old one, which can be found in `/var/rudder/cfengine-community/ppkeys/localhost.priv` on the server. If you can't, see next section (HTTPS).
 
 ==== Provisioning a new certificate
 
-To change the server certificate, you first need a new certificate. The new certificate MUST have `Digital Signature`, `Key Encipherment` and `Data Encipherment` in its X509v3 `Key Usage`.
+To change the certificates on your server, follow the documentation inside the file */etc/httpd/conf.d/rudder.conf* or */etc/apache2/sites-enabled/rudder.conf*.
+
+The new certificate must have `Digital Signature`, `Key Encipherment` and `Data Encipherment` in its X509v3 `Key Usage` and `UID=root` in its `Subject DN`. If you cannot provide one, see next section (HTTPS)..
 
 If you changed the certificate private key, you must first do the following steps:
 
