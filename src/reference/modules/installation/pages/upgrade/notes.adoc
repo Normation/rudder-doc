@@ -9,6 +9,128 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 
 ====
 
+== Webapp hardening
+
+== Tenants
+
+== Rudder parameters syntax deprecation
+
+The syntax to access the properties is being made more consistent, with the deprecation
+of old variants, in favor of the `${rudder.properties[X]}` syntax.
+
+The following cases are deprecated and will stop working in directive parameters, breaking the generation.
+Usage in techniques is deprecated and will stop working in a future version.
+
+* `${rudder.param.X}`
+* `${rudder.parameters[X]}`
+* `${rudder_parameters.X}`
+
+== Windows agent
+
+=== Requirements
+
+* The 9.2+ policies now requires `.NET standard 2.0` to be installed on the agents.
+* The Rudder event logs size is no longer forced to 50MB and now defaults to the Windows default size.
+
+=== Moving from scheduled tasks to AgentD
+
+Until 9.2.0, the Windows Rudder agent runs were triggered through Windows Scheduled Tasks.
+They are now triggered by a dedicated service named `RudderAgentD`.
+The legacy scheduled tasks are replaced only when both agent and policy server version are 9.2.0 or later, and the agent is not configured to run under an account other than SYSTEM.
+
+==== Windows agents running under a custom account
+
+WARNING: If your agents run under an account other than SYSTEM, read this before upgrading
+
+Agents configured with a custom account (with a non-empty `C:\Program Files\Rudder\etc\scheduledTaskUser.conf`) must be upgraded with the options `SCHEDULEDTASKUSER` and
+`SCHEDULEDTASKPASSWORD` passed to the installer to keep the legacy scheduled tasks.
+
+The migration toward the new `RudderAgentD` service using a custom account requires that you:
+
+- have a 9.2+ policy server
+- upgrade the agent to 9.2+ using the options above
+- modify the service settings to make it run using your dedicated service account
+- remove the `C:\Program Files\Rudder\etc\scheduledTaskUser.conf`
+- start the service `RudderAgentD`
+
+The next agent run should remove the legacy scheduled tasks.
+When migrated to `RudderAgentD` the agent will no longer require that you pass `SCHEDULEDTASKUSER` and `SCHEDULEDTASKPASSWORD` options
+to the installer when upgrading to future versions as the service settings are not managed by the agent, and your settings will be kept between upgrades.
+
+=== AgentD configuration
+
+The new service triggers the scheduled agent runs and inventories.
+It is configured by a TOML conf file in `C:\Program Files\Rudder\etc\agentd.conf`, managed by the agent.
+The service logs its events under the `Applications and Services Logs/RudderAgentD` Windows Event Viewer.
+
+If the configuration file is malformed, the service will still start, using a default configuration that runs the agent every 5 minutes.
+
+=== Changes to the installer
+
+The graphical installer of the Windows agent now uses the Rudder colors and follows Microsoft Installer standards more closely:
+
+- Downgrading is no longer possible without uninstalling the newer version first
+- Re-running the installer of the currently installed version now performs an MSI repair
+
+== Compliance API
+
+The compliance API endpoints are now integrated into each item's type APIs for
+consistence.
+
+[cols="1,1", options="header"]
+|===
+| Old endpoint | New corresponding endpoint
+
+| `+/compliance/directives+`
+| `+/directives/compliance+`
+
+| `+/compliance/directives/{directiveId}+`
+| `+/directives/{directiveId}/compliance+`
+
+| `+/compliance/groups/{targetOrNodeGroupId}+`
+| `+/groups/{targetOrNodeGroupId}/compliance/global+`
+
+| `+/compliance/groups/{targetOrNodeGroupId}/target+`
+| `+/groups/{targetOrNodeGroupId}/compliance/targeted+`
+
+| `+/compliance/nodes+`
+| `+/nodes/compliance+`
+
+| `+/compliance/nodes/{nodeId}+`
+| `+/nodes/{nodeId}/compliance+`
+
+| `+/compliance/rules+`
+| `+/rules/compliance+`
+
+| `+/compliance/rules/{ruleId}+`
+| `+/rules/{ruleId}/compliance+`
+|===
+
+The old endpoints are deprecated and will be removed in a future version.
+
+== Generation
+
+Two main changes were made to the policy generation process:
+
+* A sanity check that was systematically done on the Linux policies is now disabled. It is useless in the majority of cases,
+  and mostly indicated when developing "built-in" techniques. You can reenable it by removing the `.disabled` suffix of
+  the `/opt/rudder/etc/hooks.d/policy-generation-node-ready/11-linux-policies-check.disabled` file on the server.
+* The internal templating engine is replaced by a more efficient implementation. You can switch back to the old implementation
+  by setting `rudder.policy.template.engine=string-template` in the webapp configuration file.
+  If this fixes something for you, please report it on the bug tracker as the deprecated backend is planned for removal. 
+
+== Miscellaneous
+
+* The `package` methods will now install new dependencies when upgrading a package (by passing `--with-new-pkgs`).
+* The `redhard_X` conditions will now be defined on all RHEL-related distributions (Oracle, ROcky, Alma, CentOS).
+* The *Rudder Security Configuration* (`rsc_01`) benchmark which was deprecated since version 9.0.1 is now removed.
+* The inventory now runs ate the end of the agent run. This means the *Trigger inventory* method and other actions
+  triggering an inventory (patch campaign, etc) now make an inventory in the same run agent they are called.
+* The `rudder server debug` command is deprecated. The `rudder-cf-serverd` logs now contains all relevant information.
+* A built-in TOTP MFA feature is added, and the `auth-backends` plugins moves is now a closed-source plugin.
+* The *File from template* method has a new `sandboxing` option, enabled by default, which prevents file system access.
+  Only disable it on trusted templates.
+
 == Plugins upgrade
 
 If your server is connected to the Internet (directly or through a proxy), and you have configured
@@ -26,12 +148,12 @@ rudder package list --all
 
 ----
 
-== Upgrade from Rudder 9.0 or 9.1 to 9.2
+== Upgrade from Rudder 9.1 to 9.2
 
 Upgrade from Rudder 9.0 or 9.1 is supported.
 
-== Upgrade from Rudder 8.3 or older to 9.2
+== Upgrade from Rudder 9.0 or older
 
-Direct upgrades from 8.3 versions and older are no longer supported on 9.2.
+Direct upgrades from 9.0 versions and older are no longer supported on 9.2.
 If you are still running one of those, either on servers or nodes,
 please first upgrade to one of the supported versions and then upgrade to 9.2.
