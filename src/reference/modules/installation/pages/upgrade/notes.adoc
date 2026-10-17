@@ -150,7 +150,34 @@ rudder package list --all
 
 == Upgrade from Rudder 9.1 to 9.2
 
-Upgrade from Rudder 9.0 or 9.1 is supported.
+Upgrade from Rudder 9.1 is supported.
+
+=== Migration of the rudder-users.xml file
+
+As part of the web application hardening, the `rudder-users.xml` file has been moved from its previous location:
+`/opt/rudder/etc/rudder-users.xml` to: `/opt/rudder/etc/webapp/rudder-users.xml`
+This migration is handled automatically during the upgrade.
+
+=== Hardening changes for the configuration-repository
+
+All changes to the configuration-repository via Git must now be performed using
+the `rudder-webapp` user.
+
+=== Adding writable directories to systemd hardening
+
+As part of the Rudder 9.2 release, the web application is now sandboxed using systemd directives.
+
+If your configuration requires additional writable directories, add them to the
+systemd hardening configuration in `/lib/systemd/system/rudder-jetty.service`
+using the `ReadWritePaths` directive.
+For example:
+
+----
+
+[Service]
+ReadWritePaths=/opt/rudder /var/rudder /var/log /etc/cron.d /etc/systemd/system /path/to/writable/directory
+
+----
 
 == Upgrade from Rudder 9.0 or older
 
