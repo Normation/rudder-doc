@@ -49,10 +49,11 @@ available for these platforms as part of the https://www.rudder.io/en/pricing/su
 |===
 
 | OS | Version | Architecture
-.2+| Debian | 10*, 11, 12 and 13 | 64bit, arm64, armhf (Raspbian)
-| 10*, 11 and 12 | 32bit
-.2+| Ubuntu | 18.04*, 20.04, 22.04, 24.04 and 26.04 LTS | 64bit
-| 18.04* LTS | 32bit
+.2+| Debian | 13 | 64bit, arm64
+| 10*, 11, 12 | 32bit, 64bit, arm64, armhf (Raspbian)
+.3+| Ubuntu | 24.04 and 26.04 LTS | 64bit, arm64
+| 20.04 and 22.04 LTS | 64bit
+| 18.04* LTS | 32bit, 64bit
 .2+| Red Hat Enterprise Linux (RHEL) / RHEL-like (CentOS, etc) | 7*, 8, 9 and 10 | 64bit
 | 9 and 10 | arm64
 .1+| SUSE Linux Enterprise Server (SLES) | 12sp5+\*, 15sp2*, 15sp3*, 15sp4+ and 16 | 64bit

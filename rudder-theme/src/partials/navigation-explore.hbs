@@ -14,7 +14,7 @@
         <li class="version
           {{~#if (and (eq ../this @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
           {{~#if (eq this ../latestVersion)}} is-latest{{/if}}">
-	  {{~#if (eq ./version "9.2") }}
+	  {{~#if (eq ./version "10.0") }}
           <a href="{{{relativize @root.page.url ./url}}}">{{./version}}-beta</a>
 	  {{else}}
 	        <a href="{{{relativize @root.page.url ./url}}}">{{./version}}</a>
@@ -34,10 +34,10 @@
       <span class="title">YAML techniques</span>
         <ul class="versions">
           <li class="version">
-              <a href="https://docs.rudder.io/techniques/9.1/">9.1</a>
+              <a href="https://docs.rudder.io/techniques/9.2/">9.2</a>
           </li>
           <li class="version">
-              <a href="https://docs.rudder.io/techniques/9.0/">9.0</a>
+              <a href="https://docs.rudder.io/techniques/9.1/">9.1</a>
           </li>
         </ul>
     </li>
@@ -45,10 +45,10 @@
       <span class="title">Public API reference</span>
         <ul class="versions">
           <li class="version is-latest">
-            <a href="https://docs.rudder.io/api/v/23/">9.1 (v23)</a>
+            <a href="https://docs.rudder.io/api/v/23/">9.2 (v24)</a>
           </li>
           <li class="version">
-            <a href="https://docs.rudder.io/api/v/22/">9.0 (v22)</a>
+            <a href="https://docs.rudder.io/api/v/22/">9.1 (v23)</a>
           </li>
           <li class="version">
             <a href="https://docs.rudder.io/api/v/">older</a>
@@ -59,7 +59,7 @@
       <span class="title">Relay API reference</span>
         <ul class="versions">
 	  <li class="version is-latest">
-	    <a href="https://docs.rudder.io/api/relay/v/1/">8 (v1)</a>
+	    <a href="https://docs.rudder.io/api/relay/v/1/">9 (v1)</a>
 	  </li>
         </ul>
     </li>
@@ -71,7 +71,7 @@
           {{#if (eq this.name "reference")}}
           {{#each ./versions}}
           <li class="version {{~#if (eq this ../latestVersion)}} is-latest{{/if}}">
-	    {{~#if (eq ./version "9.2") }}
+	    {{~#if (eq ./version "10.0") }}
             <a href="{{@root.site.url}}/changelogs/{{./version}}/index.html">{{./version}}-beta</a>
 	    {{else}}
 	          <a href="{{@root.site.url}}/changelogs/{{./version}}/index.html">{{./version}}</a>
