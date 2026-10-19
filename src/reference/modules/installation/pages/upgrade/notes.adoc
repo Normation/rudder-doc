@@ -11,8 +11,6 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 
 == Webapp hardening
 
-== Tenants
-
 == Rudder parameters syntax deprecation
 
 The syntax to access the properties is being made more consistent, with the deprecation
@@ -130,6 +128,195 @@ Two main changes were made to the policy generation process:
 * A built-in TOTP MFA feature is added, and the `auth-backends` plugins moves is now a closed-source plugin.
 * The *File from template* method has a new `sandboxing` option, enabled by default, which prevents file system access.
   Only disable it on trusted templates.
+
+== Tenants
+
+In 9.2, multi-tenancy (`multi-tenants` plugin) applies to all configuration objects and not only to nodes.
+
+If you don't use that feature or if all users and API have fulle access to all tenants, nothing changes for you. 
+If you DO use multi-tenancy in previous version of Rudder on nodes, and as soon as one user or API account is restricted to some tenant, then you must read the following
+section and proceed to manual tagging of configuration objects. Missing to do so will result in tenant-retrained users loosing access to all configuration objects. 
+
+=== What changed
+
+* Up to 9.1, tenants only filtered nodes: every user saw and used all rules, directives, groups and techniques.
+* From 9.2, every configuration object carries a tenant tag, and a user only sees and changes the objects their tenants allow. This covers rules, directives, groups, 
+  techniques, global properties, their categories, campaigns, security benchmarks, event logs and change requests.
+* for nodes in 9.1, the tag attribute name was `tenant` and could only hold one value. In 9.2, the tag attribute name is `security` and it was extended to more cases (see below).  
+* An object without a tag is visible to administrators only. This is the state of every existing object after the upgrade.
+
+=== Tenant attribute values and meaning
+
+[cols="1,1,1", options="header"]
+|===
+| Object with tag | Who can sees it and uses it | Who can changes it
+
+| none
+| administrators
+| administrators
+
+| `open-ro`
+| everybody
+| administrators
+
+| `open-rw`
+| everybody
+| anybody with write access
+
+| `{"tenants":["zoneA","zoneB"]}`
+| administrators, users of `zoneA` or `zoneB`
+| administrators, users with write access on `zoneA` or `zoneB`
+|===
+
+=== Automatic changes on upgrade. 
+
+Some change aren't linked to business decision and are automated during the migration to Rudder 9.2:
+
+* the root categories of rules, groups and techniques, the `System groups` category, the three special targets (`All nodes`, `All nodes except policy servers`, `All policy servers`) 
+  and the `rudder` global property are tagged `open-ro`,
+* techniques shipped by Rudder are declared `open-ro` in their `metadata.xml`, and the first boot copies that tag onto their active techniques and categories,
+* tags already set in 9.1 are kept,
+* event logs, change requests and campaign events recorded before 9.2 stay visible to administrators only.
+
+Everything else must be tagged by hand. Rudder 9.2.0 has no UI for this and need manual action.
+The method depends on where the object is stored.
+
+=== Manually setting tags to configuration objects. 
+
+Note: A user can only see an object if he can see its parent categories (included via `open-ro` visibility).
+
+==== Techniques: file system
+
+Technique editor techniques live in `/var/rudder/configuration-repository/techniques/ncf_techniques/<id>/<version>/`. Declare the tenant tag in their `technique.yml`:
+
+[source,yaml]
+----
+security: open-ro
+# or
+security:
+  tenants: [zoneA, zoneB]
+----
+
+A technique category declares it inside `<xml>` in its `category.xml`:
+
+[source,xml]
+----
+<security><open-ro/></security>
+<!-- or -->
+<security><tenants><tenant id="zoneA"/><tenant id="zoneB"/></tenants></security>
+----
+
+Then commit, and restart Rudder with the flag that makes it recompile every `technique.yml`:
+
+----
+cd /var/rudder/configuration-repository
+git add techniques && git commit -m "Tag techniques with tenants"
+su -s /bin/sh rudder-webapp -c "touch /var/rudder/lib/webapp/force_ncf_technique_update"
+systemctl restart rudder-jetty
+----
+
+At every technique reload and at every boot, Rudder copies these file system tags onto the active techniques and their categories, 
+so no LDAP change is needed for them. The file system value is the source of truth, so if LDAP contains another value, it will be overwritten.
+
+==== Campaigns: file system
+
+Campaigns (system updates, etc.) are JSON files in `/var/rudder/configuration-repository/campaigns/`. Add the tag in their `info` object:
+
+[source,json]
+----
+{
+  "info": {
+    "id": "...",
+    "name": "...",
+    ...
+    "security": {"tenants": ["zoneA"]}
+  },
+  ...
+}
+----
+
+The tag is carried onto the rule and directive the campaign generates, so the campaign only applies to the nodes of its tenants. Then commit and restart:
+
+----
+cd /var/rudder/configuration-repository
+git add campaigns && git commit -m "Tag campaigns with tenants"
+systemctl restart rudder-jetty
+----
+
+==== Security benchmarks: API
+
+Security benchmaks data are saved in several places, so for them, a minimal API was added to ease the migration. 
+You will need to use an administrator API token:
+
+----
+curl -H "X-API-Token: ${TOKEN}" -H "Content-Type: application/json" -X POST \
+  https://rudder.example.com/rudder/api/latest/securityBenchmarks/internal/<benchmarkId>/security \
+  -d '{"security": {"tenants": ["zoneA"]}}'
+----
+
+`"security": "open-ro"` makes a benchmark visible to every tenant.
+
+==== Other objects: LDAP
+
+Rules, directives, groups, global properties, and rule and group categories carry the tag in the `securityTag` LDAP attribute. Stop the web application
+while editing it, so that the change is read at restart:
+
+----
+# LDAP password is in /opt/rudder/etc/rudder-passwords.conf 
+LDAP="-x -H ldap://localhost/ -D cn=manager,cn=rudder-configuration -W"
+
+# list the user objects without a tag
+ldapsearch ${LDAP} -LLL -b "ou=Rudder,cn=rudder-configuration" \
+  '(&(|(objectClass=rule)(objectClass=ruleCategory)(objectClass=directive)(objectClass=nodeGroup)(objectClass=groupCategory)(objectClass=parameter))(!(securityTag=*))(!(isSystem=TRUE)))' dn
+----
+
+Then, you will need to decide which object can be seen on which tenant. 
+Once that inventory is done, write an LDIF file with one block per object to tag:
+
+----
+dn: ruleId=32377fd7-02fd-43d0-aab7-28460a91347b,ou=Rules,ou=Rudder,cn=rudder-configuration
+changetype: modify
+replace: securityTag
+securityTag: {"tenants":["zoneA"]}
+
+dn: groupCategoryId=f0e1d2c3-...,groupCategoryId=GroupRoot,ou=Rudder,cn=rudder-configuration
+changetype: modify
+replace: securityTag
+securityTag: open-ro
+
+etc. 
+----
+
+
+then apply it and restart:
+
+----
+ldapmodify ${LDAP} -f tags.ldif
+systemctl start rudder-jetty
+----
+
+System objects (`isSystem=TRUE`) must stay untagged.
+
+=== Tenants given by an identity provider
+
+For the `auth-backends` OAuth2/OIDC and JWT providers, `tenants.enabled` (default `false`) tells whether the provider gives the tenants.
+
+If the tenant feature is disabled in the mapping, then for consistency, users provided by OIDC get access to configuration objects:
+* `rudder.auth.oauth2.provider.<idp>.tenants.enabled=false`: the user's tenants come from `rudder-users.xml`; a user absent from that file, or without a `tenants` attribute, gets `*`.
+* `rudder.auth.oauth2.jwt.provider.<idp>.tenants.enabled=false`: every token gets `*`, like an API account without a `tenants` attribute.
+
+Therefor, if you use tenants, you must enable the `tenants` parameter on a server with restricted users: set `tenants.enabled=true` and a `tenants.mapping` on every provider.
+
+=== Known limitations in 9.2.0
+
+Both are planned to be fixed in 9.2.1.
+
+* Archive import (`POST /archives/import`) keeps the tags found in the archive, and archive export ignores tenants. A user with configuration write access can therefore 
+  read and change objects outside their tenants through archives. If your tenant isolation must hold against restricted users with configuration write access who are not administrator, 
+  wait for 9.2.1 before upgrading or restrict access to these endpoint in Apache reverse proxy configuration.
+* The web interface does not re-check a user's tenants against the plugin after authentication. A tenant deleted in the plugin still gives access to its objects in the web interface, 
+  and a restricted user keeps their tenants when the plugin is disabled or its license expires. When you delete a tenant, also remove it from the users' 
+  configuration (`rudder-users.xml` or the identity provider mapping).
 
 == Plugins upgrade
 
