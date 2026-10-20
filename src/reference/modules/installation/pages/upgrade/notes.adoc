@@ -11,6 +11,37 @@ xref:administration:procedures.adoc#_migration_backups_and_restores[backup proce
 
 == Webapp hardening
 
+=== Migration of the rudder-users.xml file
+
+As part of the web application hardening, the `rudder-users.xml` file has been moved from its previous location:
+`/opt/rudder/etc/rudder-users.xml` to: `/opt/rudder/etc/webapp/rudder-users.xml`
+This migration is handled automatically during the upgrade.
+
+=== Hardening changes for the configuration-repository
+
+All changes to the configuration-repository via Git must now be performed using
+the `rudder-webapp` user.
+To switch from the `root` user to the `rudder-webapp` user, use the command `su -s /bin/bash rudder-webapp`.
+
+=== Adding writable directories to systemd hardening
+
+As part of the Rudder 9.2 release, the web application is now sandboxed using systemd directives.
+
+If your configuration requires additional writable directories,
+you must override the default service configuration by running `systemctl edit rudder-jetty`,
+and adding the required directories to the `ReadWritePaths` directive.
+
+For example:
+
+----
+
+[Service]
+ReadWritePaths=/opt/rudder /var/rudder /var/log /etc/cron.d /etc/systemd/system /path/to/writable/directory
+
+----
+
+== Tenants
+
 == Rudder parameters syntax deprecation
 
 The syntax to access the properties is being made more consistent, with the deprecation
@@ -337,7 +368,7 @@ rudder package list --all
 
 == Upgrade from Rudder 9.1 to 9.2
 
-Upgrade from Rudder 9.0 or 9.1 is supported.
+Upgrade from Rudder 9.1 is supported.
 
 == Upgrade from Rudder 9.0 or older
 

@@ -1,7 +1,8 @@
 = Webapp administration
 
 The `rudder-jetty` service, usually called the Rudder webapp, is part of the `rudder-server` package
-and runs on Rudder servers only. It provides the Web interface of Rudder, its HTTP API,
+and runs on Rudder servers only. It runs as the `rudder-webapp` user
+and provides the Web interface of Rudder, its HTTP API,
 computes the policies to apply and handles reports and inventories from nodes
 (but does not communicate directly with them, but only through relay
 services, namely `apache2/httpd`, `rudder-relay` and `rudder-cf-serverd`).
