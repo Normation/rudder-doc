@@ -351,7 +351,7 @@ machine type, OS details, hardware, software, networks, running virtual
 machines, running processes, environment variables...
 
 This inventory is scheduled once every 24 hours, and will happen in between
-0:00 and 5:00 AM. The exact time is randomized across nodes to "smooth" the
+0:00 and 6:00 AM. The exact time is randomized across nodes to "smooth" the
 load across your infrastructure.
 
 
