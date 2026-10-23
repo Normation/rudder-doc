@@ -229,11 +229,18 @@ On each of the node (including the server and relays), you need:
 
 Install the generated certificate and key for the server’s agent:
 
-* Place the server’s agent private key into   `/opt/rudder/etc/ssl/agent-http.key`
-* Place the server’s agent certificate into `/opt/rudder/etc/ssl/agent-http.cert`
-* If relevant, put the custom CA (with intermediate certificates if needed) into `/var/rudder/lib/ssl/policy_server_ca.pem`.
+* Place the server’s agent private key into:
+	* `/opt/rudder/etc/ssl/agent-http.key` on Linux
+	* `C:/Program Files/Rudder/etc/ssl/agent-http.key` on Windows
+* Place the server’s agent certificate into:
+	* `/opt/rudder/etc/ssl/agent-http.cert` on Linux
+	* `C:/Program Files/Rudder/etc/ssl/agent-http.cert` on Windows
+* If relevant, put the custom CA (with intermediate certificates if needed) into:
+	* `/var/rudder/lib/ssl/policy_server_ca.pem` on Linux
+	* `C:/Program Files/Rudder/lib/ssl/policy_server_ca.pem` on Windows
+	* if the file does not exist, the agent will fallback to `SChannel` as SSL backend.
 
-Edit the agent configuration file, ``/opt/rudder/etc/agent.conf`, and add the lines:
+Edit the agent configuration file `/opt/rudder/etc/agent.conf` (`C:/Program Files/Rudder/etc/agent.conf` on Windows), and add the lines:
 
 [source,ini]
 ```
