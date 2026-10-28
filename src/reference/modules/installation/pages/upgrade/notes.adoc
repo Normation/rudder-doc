@@ -21,7 +21,7 @@ This migration is handled automatically during the upgrade.
 
 All changes to the configuration-repository via Git must now be performed using
 the `rudder-webapp` user.
-To switch from the `root` user to the `rudder-webapp` user, use the command `su -s /bin/bash rudder-webapp`.
+To switch from the `root` user to the `rudder-webapp` user, use the command `rudder server su`.
 
 === Adding writable directories to systemd hardening
 
