@@ -1,0 +1,182 @@
+= Network security
+:page-aliases: port.adoc
+
+[[network-flows]]
+== Network flows
+
+Rudder uses the following network flows for regular operations:
+
+include::administration:partial$network_flows.adoc[]
+
+Only open the flows you need in your firewalls. In particular, the agent port (`5309/tcp`) on nodes
+only needs to be reachable from their policy server, and only when using remote agent runs.
+
+== Recommendations
+
+* Do not expose Rudder on untrusted networks, like the Internet (see <<untrusted-networks,below>>).
+* Add firewall rules to limit access to Rudder ports to the relevant systems, as described in the
+<<network-flows,network flows>> table.
+* Use relays to centralize the flows of an isolated network zone (DMZ, remote site, etc.), so that only the relay
+needs to communicate with the root server.
+
+[[untrusted-networks]]
+== Exposure to untrusted networks
+
+Exposing Rudder on unrestricted networks, like the Internet, still carries significant risks.
+Rudder was not designed for this use case, even though its security has improved a lot:
+
+* *Denial of service*: any host that can reach a Rudder server or relay can easily make Rudder unusable,
+without being authenticated, for example by filling its disk with inventories. In the default configuration,
+this is a known limitation, and is not considered a vulnerability.
+* *Large attack surface*: the whole stack (Apache httpd, relayd, the webapp, `cf-serverd`, etc.) is reachable,
+and some of these services are highly privileged.
+* Automated attack tools, including AI-based ones, increase the number of vulnerabilities found and exploited,
+and hence these risks.
+
+Therefore:
+
+* *Do not expose Rudder on the Internet.* Even though all communications are encrypted with TLS 1.3,
+avoid Rudder communications across public networks.
+* To manage nodes outside your private network (laptops, IoT devices, remote sites, etc.), use a VPN for Rudder communications.
+* Beware of `rudder-cf-serverd`, which listens on all interfaces by default on Linux agents.
+<<disable-agent-listener,Disable it>> or restrict access to it with a firewall.
+
+[[untrusted-networks-mitigations]]
+=== If Rudder must be exposed
+
+If you nevertheless need to expose Rudder on an untrusted network, limit the risks with the following measures:
+
+* *Use a dedicated relay* for the exposed nodes, so that the root server is not exposed. Otherwise,
+xref:administration:security_web.adoc#split-virtual-hosts[split the virtual hosts] and keep the Web interface and API
+only reachable from your private network.
+* *Use the xref:administration:security_node_trust.adoc#https-only[HTTPS-only mode].*
+* *If possible, use xref:administration:security_node_trust.adoc#ca-certificates[certificates signed by your own CA] with validation.*
+The policy server then rejects inventories and reports from hosts without a valid certificate, which greatly limits
+the risks, including denial of service. It is currently the only way to prevent unauthenticated hosts from sending data to Rudder.
+* *<<disable-agent-listener,Disable the agent network service>>* on the nodes. The HTTPS-only mode disables it
+everywhere when enabled on the server.
+* *Filter at the network level* when possible:
+** with firewall rules on the systems, limited to the <<network-flows,required flows>>
+** with the <<allowed-networks,allowed networks>> of the policy servers
+
+[[disable-agent-listener]]
+== Disable the agent network service
+
+By default, Linux agents run the `rudder-cf-serverd` service, which listens on `5309/tcp` on all interfaces to allow
+remote agent runs (using the _Trigger agent_ button in node details or the `nodes/apply` HTTP API).
+
+If you don't use remote runs, you can disable this service so that your nodes do not expose anything on the network:
+
+----
+systemctl disable --now rudder-cf-serverd
+----
+
+You can also do it with a Rudder technique, to apply it to a group of nodes.
+
+If you keep the service, note that on simple nodes it only accepts connections from the node's policy server.
+You can also restrict the address it listens on with the `server.cf_serverd_bind_address` key of the `rudder` property
+(`::` by default, i.e. all interfaces), for example to bind it to an internal interface only. Override it on the relevant
+nodes or groups with a property like:
+
+[source,json]
+----
+{ "rudder": { "server": { "cf_serverd_bind_address": "10.0.0.12" } } }
+----
+
+NOTE: On Rudder servers and relays, this service distributes policies to the nodes, and cannot be disabled
+unless you use the xref:administration:security_node_trust.adoc#https-only[HTTPS-only mode].
+
+[[allowed-networks]]
+== Allowed networks
+
+The allowed networks define the networks from which nodes can connect to their policy server to get policies and files:
+
+* node-specific files are only accessible to the node itself, authenticated by its certificate, and from an allowed network
+* common files are accessible to all hosts in the allowed networks
+
+Restrict this list to the networks containing your nodes. See xref:administration:server.adoc#_configure_allowed_networks[configure allowed networks]
+for the configuration procedure.
+
+[[change-ports]]
+== Change server ports
+
+You can change the ports used by the two communication protocols:
+
+* HTTPS port used by Windows and Linux nodes (default `443`)
+* `rudder-cf-serverd` port used by Linux nodes (default `5309`)
+
+[CAUTION]
+====
+All agents and relays must use the same port to communicate. If you change the port on an existing infrastructure,
+you must do it on all machines.
+====
+
+=== Change listening ports on the root server
+
+[NOTE]
+====
+It is currently not possible to change the HTTPS port when SELinux is enabled on the system
+(without a custom SELinux policy).
+====
+
+To change the ports on the Rudder server, edit `/opt/rudder/etc/rudder-web.properties` and set the
+values of (replace 443 and 5309 by the values you want):
+
+----
+rudder.policy.distribution.port.cfengine=5309
+rudder.policy.distribution.port.https=443
+rudder.server.relay.api=https://localhost:443/rudder/relay-api
+----
+
+Then restart the server and the agent:
+
+----
+systemctl restart rudder-jetty
+systemctl restart rudder-agent
+----
+
+Then edit your Rudder virtual host in the Apache httpd configuration (`/etc/apache2/sites-enabled/rudder.conf` on Debian/Ubuntu,
+`/etc/httpd/conf.d/rudder.conf` on RHEL, `/etc/apache2/vhosts.d/rudder.conf` on SLES), and modify the port:
+
+----
+<VirtualHost *:443>
+----
+
+You may also need to add a directive to listen on the new port:
+
+----
+Listen 443
+----
+
+Then restart the `apache2` or `httpd` service.
+
+TIP: To keep the Web interface and API on port 443 and use another port for node communication,
+xref:administration:security_web.adoc#split-virtual-hosts[split the virtual hosts].
+
+The server services configuration is now over. You must then follow the next section on your root
+server too, as it also runs an agent.
+
+=== Set the connection port on the agents (nodes, relays, and root server)
+
+The agent cannot know in advance that the server port has changed, so you must declare it when configuring the agent.
+
+On Linux systems, to change the port used to distribute policies, add the port to the server name when defining the node's policy server:
+
+----
+rudder agent policy-server hostname:5309
+----
+
+(or enforce the value in `/var/rudder/cfengine-community/policy_server.dat`).
+
+The HTTPS port can be configured by creating the file `/opt/rudder/etc/agent.conf` on Linux systems, or editing the file
+`C:\Program Files\Rudder\etc\agent.conf` on Windows systems, and defining the `https_port` parameter:
+
+----
+https_port=443
+----
+
+You must restart the agent to get its new set of policies and to make sure it listens for remote runs on this specific port:
+
+----
+systemctl restart rudder-agent
+----

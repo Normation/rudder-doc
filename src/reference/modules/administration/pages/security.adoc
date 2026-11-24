@@ -1,376 +1,96 @@
-= Rudder security & hardening
+= Security & hardening
+:page-aliases: reference:security.adoc
 
-Rudder provides secure defaults whenever possible, but depending on your use case you can
-add additional configurations to make your Rudder installation more secure.
+Rudder provides secure defaults whenever possible. This page describes the security model
+and lists the actions you can take to harden your installation, with links to the detailed procedures:
 
-== Server
+* xref:administration:security_network.adoc[Network security]: network flows, firewall rules and ports
+* xref:administration:security_node_trust.adoc[Node-server trust and certificates]: how nodes and servers authenticate each other, and how to strengthen it
+* xref:administration:security_web.adoc[Web interface and API security]: HTTPS, authentication and user management
 
-=== Server certificate
+[[security-model]]
+== Security model
 
-The Rudder root server accepts connections from both nodes and user browsers. If you want a different certificate for each, see next section (HTTPS).
+=== Data confidentiality
 
-If you have agents using port 5309 (CFEngine protocol) you must generate the new certificate with the same private key as the old one, which can be found in `/var/rudder/cfengine-community/ppkeys/localhost.priv` on the server. If you can't, see next section (HTTPS).
+Rudder is designed to strictly separate policies between nodes, and to only let a node access its own policies.
 
-==== Provisioning a new certificate
+All confidential information should be stored in node-specific data, namely:
 
-To change the certificates on your server, follow the documentation inside the file _/etc/httpd/conf.d/rudder.conf_ or _/etc/apache2/sites-enabled/rudder.conf_.
+* the directives, groups, rules, and their parameters
+* the technique parameters in the technique editor
+* the shared-files directory
 
-The new certificate must have `Digital Signature`, `Key Encipherment` and `Data Encipherment` in its X509v3 `Key Usage` and `UID=root` in its `Subject DN`. If you cannot provide one, see next section (HTTPS).
+This data is:
 
-If you changed the certificate private key, you must first do the following steps:
+* always transferred encrypted (using the agent copy protocol or HTTPS for nodes, and HTTPS for the Web interface and the API)
+* only available to the nodes that need it
+* only accessible locally to the users that need it:
+** *root server*: all the data is present. Files are only accessible to the `root` user and the Rudder service users.
+The backends (PostgreSQL, OpenLDAP) only listen on the loopback interface by default and use Rudder-specific accounts,
+whose passwords are only readable by privileged users. Remote access is only possible through the Web interface
+(with an authorized user account) or the API (with a token).
+** *relay*: only the data needed for the relay itself and the nodes it serves is stored locally, only accessible to the `root` user.
+** *node*: only the data needed to configure the node is stored locally, only accessible to the `root` user.
 
-* Get the new certificate's public key hash with this command `echo "sha256//$(openssl rsa -in private.key -outform der -pubout 2>/dev/null | openssl dgst -sha256 -binary | openssl enc -base64)"`
-* Get the existing server key hash with the command `rudder agent info` on the server
-* Modify `/opt/rudder/etc/rudder-web.properties` and change `rudder.server.certificate.additionalKeyHash=` to contain both separated by a semicolon `;`
-* Restart the server `systemctl restart rudder-jetty`
+Some content is common to all nodes, and is readable by any node in the
+xref:administration:security_network.adoc#allowed-networks[allowed networks], and by all users on the nodes:
 
-This allows the new certificate to be accepted by agent. You then need to make sure this is applied to all agents before continuing. Usually, waiting for 24h is enough, but do not forget nodes that might be down during this period.
+* the common ncf part (`/var/rudder/ncf/common`), which includes all the content distributed in the `ncf` package
+* the Rudder technique sources, without their parameters (`/var/rudder/configuration-repository/techniques`)
 
-=== HTTPS
+Never store secrets in technique sources. To use secrets in your policies, see
+xref:rudder-by-example:ROOT:policies/using-secrets-in-configuration-policies.adoc[using secrets in configuration policies].
 
-* By default, all HTTPS traffic is handled by the same virtual host in Apache httpd. To allow hardening the connection security, a first step is to split public Web/API from internal node-server communication. You can do so by commenting the default virtual host in `/etc/apache2/sites-enabled/rudder.conf` or `/etc/httpd/conf.d/rudder.conf` (depending on the distribution), and uncommenting the two separate configurations. You need to define a method to distinguish both configurations, in general with a different port (which allows applying different firewall rules too) or a specific domain for Web/API.
+=== Node-server communication
 
-* Once your virtual hosts are split, set up a valid certificate for the Web/API. This allows validating the server identity from Web browsers and API clients. You can use an internal PKI or a publicly trusted certificate, like with _Let's Encrypt_. The certificate configuration is done in `/etc/apache2/sites-enabled/rudder.conf` or `/etc/httpd/conf.d/rudder.conf` depending on your distribution, in the Web/API virtual host. To configure the TLS settings of the Web/API virtual hosts depending on your requirements and platform, we recommend using https://ssl-config.mozilla.org/[Mozilla SSL configurator generator].
+* All communications between nodes, relays and the root server are encrypted with TLS 1.3.
+* Each agent has its own key pair and certificate, used to sign the inventories, reports and shared files it sends.
+The server registers the node certificate when the node is accepted, and checks the signatures against it.
+* By default, nodes and their policy server authenticate each other by pinning their keys, with trust established on first use.
+The trust can be pre-established during provisioning, and the communications can also rely on certificates issued by your own certificate authority.
 
-* _HTTP Strict Transport Security_ (HSTS) ensures the user's browser will always use HTTPS to connect to your server. It is not enabled by default as it may conflict with other services served from the same domain (e.g. package repositories). If you only use HTTPS with your Rudder's server domain, you can enable the HSTS header in `/opt/rudder/etc/rudder-web.properties` by modifying or adding the following properties (and restarting the `rudder-jetty` service to apply it):
-+
-[source,ini]
-----
-rudder.server.hsts=true
-rudder.server.hstsIncludeSubDomains=true
-----
+See xref:administration:security_node_trust.adoc[Node-server trust and certificates] for details.
 
-* You may want to hide the Apache httpd version from the headers. It cannot be done inside Rudder's configuration as it is a global httpd setting. To do so, you need to set the `ServerTokens` parameter to the `Prod` value (in `/etc/httpd` or `/etc/apache` depending on your distribution).
+=== Services
 
-=== Authentication and user management
+Rudder services run with dedicated users and with limited access to the filesystem when possible.
+See the security section of each service:
 
-* Enable multi-factor authentication. For users in the Rudder configuration file and LDAP users, enable the built-in
-xref:administration:users.adoc#totp-authentication[TOTP authentication]. For OpenID Connect (OIDC) or OAUTH2 users (configured
-through the **auth-backends** plugin), enforce a second factor (TOTP, WebAuthn, etc.) in your external identity provider.
+* xref:administration:webapp.adoc#webapp-security[Webapp]
+* xref:administration:relayd.adoc#relayd-security[Relayd]
+* xref:administration:slapd.adoc#slapd-security[Slapd]
 
-* In case you use local Rudder users, your passwords must be hashed with `bcrypt`, which is now the only hash algorithm used when generating new passwords in the user management page. It may still be the case that users use other kind of unsalted hashed password (especially before Rudder 6.0), so they are still allowed but they will be deprecated soon in favor of `bcrypt`. You can check the documentation of `/opt/rudder/etc/rudder-users.xml` and of the user management page for the migration guide.
+[[hardening-checklist]]
+== Hardening checklist
 
-* Give minimal privileges to Rudder users using roles. You can create custom roles to match your needs in `/opt/rudder/etc/rudder-users.xml`.
+=== Network
 
-* When a user has not logged in, *by default for 180 days*, the account is marked as *disabled*. You can change this value by modifying or adding the parameter `rudder.users.cleanup.account.disableAfterLastLogin` in `/opt/rudder/etc/rudder-web.properties`, for example if we want to *disable* a user after 100 days of inactivity we can set the parameter like this:
-+
-[source,ini]
-----
-rudder.users.cleanup.account.disableAfterLastLogin=100d
-----
+* Do not expose Rudder on the Internet, and use a VPN for nodes outside your private network. If you must expose it,
+apply the xref:administration:security_network.adoc#untrusted-networks-mitigations[mitigations for untrusted networks].
+* Restrict access to the Rudder ports to the xref:administration:security_network.adoc#network-flows[required network flows] with a firewall.
+* Restrict the xref:administration:security_network.adoc#allowed-networks[allowed networks] to the networks containing your nodes.
+* If you don't use remote agent runs, xref:administration:security_network.adoc#disable-agent-listener[disable the agent network service] on your nodes.
 
-* A user can be *deleted* after a certain period of time. By default users are never deleted. You can define an automatic deletion by modifying or adding the parameter `rudder.users.cleanup.account.deletedAfterLastLogin` in `/opt/rudder/etc/rudder-web.properties`, for example if we want to *delete* a user after 365 days of inactivity we can set the parameter like this:
-+
-[source,ini]
-----
-rudder.users.cleanup.account.deletedAfterLastLogin=365d
-----
+=== Node-server communication
 
-* When an user is deleted (for example removed from `rudder-user.xml` file), then the user information, like status changes, are not purged immediately (typically to be able to do post-deletion accountability).
-You can modify the period of time (by default 30 days) after which the purge is performed by editing or adding the parameter `rudder.users.cleanup.purgeDeletedAfter`, like this:
-+
-[source,ini]
-----
-rudder.users.cleanup.purgeDeletedAfter=60d
-----
+* Pre-establish trust between nodes and their policy server during provisioning: xref:administration:security_node_trust.adoc#pre-provision-node[register the node certificate]
+on the server, and xref:administration:security_node_trust.adoc#pre-establish-trust[pin the server key] on the node.
+* Configure nodes to xref:administration:security_node_trust.adoc#https-only[only use HTTPS] to communicate with their policy server.
+* Use xref:administration:security_node_trust.adoc#ca-certificates[certificates signed by your certificate authority] and enable certificate validation.
 
-* Give minimal privileges to Rudder users using roles (through the **user-management** plugin). You can create custom roles to match your needs in `/opt/rudder/etc/rudder-users.xml`.
+=== Web interface and API
 
-* After a configuration change on a user that might have a security impact, the user session will be immediately invalidated (when user password or roles change, or when user is disabled or deleted).
+* xref:administration:security_web.adoc#web-certificate[Use a trusted certificate] for the Web interface and API, and enable xref:administration:security_web.adoc#hsts[HSTS].
+* Enable xref:administration:security_web.adoc#authentication[multi-factor authentication] and give minimal privileges to users and API tokens.
+* Adjust the xref:administration:security_web.adoc#sessions-and-accounts[session timeout and inactive account policy] to your requirements.
 
-* When upgrading from a previous version to 8.0, regenerate all your existing API tokens to use the more secure hashed storage.
+=== Server
 
-=== Session login timeout
+* Perform Git changes in the configuration repository as the `rudder-webapp` user, with `rudder server su`, and not as `root`.
+* Only allow additional writable directories for the webapp when strictly necessary (see xref:administration:webapp.adoc#webapp-security[webapp security]).
+* If you use the rsync synchronization for relays, xref:administration:relayd.adoc#_synchronization_via_ssh[restrict the SSH access] of the relays to the root server.
 
-By default users are logged out after 30 minutes of user inactivity. The idle session expiration time can be configured in `/opt/rudder/etc/rudder-web.properties` by modifying or adding the following property (and restarting the `rudder-jetty` service to apply it):
+== Security audits
 
-[source,ini]
-----
-rudder.auth.idle-timeout=15 minutes
-----
-
-=== Systemd service hardening
-
-The `rudder-jetty` service uses the following systemd hardening options in its service file:
-
-* `PrivateTmp=true`: gives the service its own private `/tmp` and `/var/tmp` directories, which are not shared with other services
-* `ProtectSystem=strict`: makes the system filesystem read-only for the service, except for paths explicitly allowed by ReadWritePaths
-* `ReadWritePaths=/opt/rudder /var/rudder /var/log /etc/cron.d /etc/systemd/system`: specifies the directories that the service is allowed to write to
-
-== Agent
-
-* If you don't use the remote-run feature (using the _Trigger agent_ button in node details or the `nodes/apply` HTTP API), you can totally disable the service listening on the network. This way, your Rudder agents will not expose anything on the network. To do so, you need to disable the `rudder-cf-serverd` sub-service, with a Rudder technique or the `systemctl disable --now rudder-cf-serverd` command.
-
-NOTE: On Rudder servers and relays this service is necessary as it handles policy distribution, and hence cannot be disabled.
-
-== Network
-
-=== Generalities
-
-* Even if all communications are encrypted with TLS 1.3, we recommend avoiding Rudder communications across public networks, and using a VPN in case you need access outside your private network.
-
-* Add firewall rules to limit access to Rudder ports to relevant systems.
-
-=== Pre-establish trust
-
-By default, Rudder agent and server/relay mutually authenticate (with _mTLS_) based on a Trust On First Use (_TOFU_) principle. The first inventory will provide a key that will be stored by the server on node acceptation, and the agent will pin the server certificate present in the first policies downloaded. The following steps allow configuring Rudder to perform certificate validation from the start by establishing mutual trust with pre-shared information during agent provisioning.
-
-==== Provisioning an agent with pre-established server trust
-
-Pre-configuring the server information requires you to know the server key hash to trust. Here the _policy server_ refers to your node's server, either a relay or a server.
-
-On the policy server, get the key hashes with:
-
-----
-# rudder agent info
-[...]
-Key/Certificate
-           Key hash: MD5=595221aa16c00dcec78ba1259d7708de
-           Key hash: sha256//2cMrJbjcdh25hJkzFVlyKs62DXsaFmumbcFpQ6/ZguU=
-[...]
-----
-
-On the agent, provide the hash to trust when configuring the policy-server:
-
-----
-# rudder agent policy-server -t sha256//2cMrJbjcdh25hJkzFVlyKs62DXsaFmumbcFpQ6/ZguU= mypolicyserver
-----
-
-You can check that the trust is established by running the following command:
-
-----
-[root@rudder ~]# rudder agent info
-[...]
-        Key pinning: full
-[...]
-----
-
-==== Pre-provision a node on the server
-
-In order to automate node acceptation on the server while checking
-the node's identity, you can use the https://docs.rudder.io/api/#tag/Nodes/operation/createNodes[node creation] API.
-You can make a call to this API in your node provisioning process, and provide
-the `agentKey` parameter (which should contain the content of `/opt/rudder/etc/ssl/agent.cert` on the node), and the `accepted` status.
-
-This way, once the node sends its first inventory, if the node id and certificate match the pre-provisioned entry, the node inventory will be updated.
-Please note that you can also pre-define node properties using this API to ensure that the pre-provisioned node will immediately join in the correct groups
-
-=== Using HTTPS port 443 only between Rudder server and nodes
-
-By default, Linux nodes get their policies from the Rudder server by connecting to it on `5309/tcp`, and send their reports back to the server by connecting to it on `443/tcp` (https).
-
-Windows nodes, when supported, always only use HTTPS to port `443/tcp`.
-
-If needed, it is also possible to configure the Linux nodes to communicate with the server using only HTTPS to port `443/tcp`.
-
-==== Limitations
-
-Limiting Linux nodes to using `443/tcp` comes with the following limitations:
-
-* **Remote agent run trigger from the server's GUI becomes impossible**, as it relies on the `rudder-cf-serverd` service running on the node and using port `5309/tcp`.
-
-* **Recursive file copies from the server’s shared folder to the nodes become impossible.** Only individual file copies with the `file_from_shared_folder` method work normally.
-
-* Relays synchronization will only work in the `rsync` mode which is not the default and requires additional configuration.
-
-==== Linux Nodes configuration
-
-If you wish to use Rudder to configure nodes to use HTTPS only, you first need to configure the nodes and only then turn off '5309/tcp' on the server.
-
-* Edit the agent configuration file (create it if absent): `/opt/rudder/etc/agent.conf` and insert the line:
-+
-[source,ini]
-----
-https_only=true
-----
-
-That's all that is needed on the nodes sides.
-
-After having performed that change on a node, check that the Rudder agent is still working properly by issuing the command `rudder agent run`.
-
-==== Server configuration
-
-The server doesn't need any additional configuration to be able to serve nodes using *https* only.
-
-However, if we want to limit the server itself to accept only *https* and not use `5309/tcp` at all, then the  webapp’s configuration file, `/opt/rudder/etc/rudder-web.properties` needs to be modified to add the following parameter:
-
-[source,ini]
-----
-rudder.server.certificate.httpsOnly=true
-----
-
-This modification disables CFEngine-based file copies and disables the `rudder-cf-serverd` service everywhere (on both server and nodes).
-
-* The `rudder-jetty` service needs to be restarted after the change has been made.
-* The configuration change will be propagated to the nodes by the server, and will be persistent: `rudder-cf-serverd` will be stopped and disabled on the server and nodes. Should this need to be reverted, it would have to be done manually on the nodes (or using a rudder ad-hoc technique).
-
-==== Authentication with CA-signed certificates
-
-If only the above changes are performed, the authentication system between the nodes and server will be performed in the usual way: TOFU (*Trust On First Use*) using certificates auto-generated on the server and nodes.
-
-It is however possible to use a local CA to manually create https certificates for the Rudder server and each node.
-
-For doing this, the additional following steps must be performed:
-
-==== Certificates
-
-On each of the nodes (including the server and relays), you need:
-
-* A private key. There is no specific requirement on the type (as long as it can be used with TLS 1.3), or size.
-
-* An X.509 certificate signed by a recognized CA. It must:
-** have `digitalSignature` as keyUsage.
-** have a DN Subject containing `UID=<node id>` where `<node id>` is the node’s ID in Rudder.
-** If it is not possible to have a certificate generated for a node with `UID=<node id>` in the DN Subject, it is then possible to put it in the `Subject Alternative Name` extension.
-
-==== CA-signed certificates installation on the nodes
-
-Install the generated certificate and key for the server’s agent:
-
-* Place the server’s agent private key into:
-** `/opt/rudder/etc/ssl/agent-http.key` on Linux
-** `C:/Program Files/Rudder/etc/ssl/agent-http.key` on Windows
-* Place the server’s agent certificate into:
-** `/opt/rudder/etc/ssl/agent-http.cert` on Linux
-** `C:/Program Files/Rudder/etc/ssl/agent-http.cert` on Windows
-* If relevant, put the custom CA (with intermediate certificates if needed) into:
-** `/var/rudder/lib/ssl/policy_server_ca.pem` on Linux
-** `C:/Program Files/Rudder/lib/ssl/policy_server_ca.pem` on Windows
-** if the file does not exist, the agent will fallback to `SChannel` as SSL backend.
-
-Edit the agent configuration file `/opt/rudder/etc/agent.conf` (`C:/Program Files/Rudder/etc/agent.conf` on Windows), and add the lines:
-
-[source,ini]
-----
-https_only=true
-cert_validation=true
-----
-
-
-==== CA-signed certificates installation on the Rudder server and relays
-
-You can use the same certificate for client-server communication using HTTPS protocol and the Rudder web interface. In this case, there must be two `Subject Alternative Name` extensions: one for the `UUID` and a 2nd one containing the server’s *hostname*.
-
-If using a different certificate, it must have:
-
-* The server’s hostname in the `Subject Alternative Name` extension, and can hence be a standard web server certificate (compatible with *Let’s Encrypt* for example)
-* The `digitalSignature` and `keyEncipherment` keyUsage present.
-
-NOTE: The hostname included in the certificate must be the one used by the agents to connect to the server (their policy server configuration).
-
-**Certificate and key installation**
-
-Install the generated certificate and key for the server’s agent:
-
-* Place the server’s agent private key into `/opt/rudder/etc/ssl/agent-http.key`
-* Place the server’s agent certificate into `/opt/rudder/etc/ssl/agent-http.cert`
-
-If you use a separate certificate (and key) for the HTTP server:
-
-* Place the private key in `opt/rudder/etc/ssl/server.key`
-* Place the certificate in `/opt/rudder/etc/ssl/server.cert`
-
-**Configuration**
-
-Modify the webapp’s configuration file, `/opt/rudder/etc/rudder-web.properties`:
-
-* `rudder.server.certificate.ca.path` is used when provided, in place of the system store
-* `rudder.server.certificate.httpsOnly` disables CFEngine-based file copies. It disables the `rudder-cf-serverd service` everywhere (on nodes and server, see explanations in the previous section).
-* `rudder.server.certificate.validation` changes the validation mode of all HTTPS connections. It requires `rudder.server.certificate.httpsOnly` to be enabled.
-
-The resulting `/opt/rudder/etc/rudder-web.properties` part will look like:
-
-[source,ini]
-----
-rudder.server.certificate.httpsOnly=true
-rudder.server.certificate.validation=true
-# If omitted, the system CA store is used
-rudder.server.certificate.ca.path=/path/to/ca.pem
-----
-
-**Certificates with node ID in SAN**
-
-By default the server looks for the node id in the certificate in the `UID` value of the `DN`. But it is not always possible to sign such certificates. In this case it is possible to move the node ID into the Subject Alternative Name (`SAN`) part of the certificate.
-
-In this case the Web server configuration needs to be adapted. You need to create a file at a specific path, which will be automatically included. It is placed into `/opt/rudder/etc/rudder-apache-nodes-auth.conf`:
-
-[source,ini]
-----
-# Not used by the auth process, only for logging purpose
-SSLUserName SSL_CLIENT_SAN_DNS_1
-
-# RewriteCond only matching a node of ID equal to $1
-RewriteCond "%{SSL:SSL_CLIENT_SAN_DNS_0}=$1.example.com" "^(.+)=\1$" [OR]
-RewriteCond "%{SSL:SSL_CLIENT_SAN_DNS_1}=$1.example.com" "^(.+)=\1$"
-----
-
-It can optionally include a `SSLUserName` value which will allow to show the correct node id as user name in the logs. When absent, no user will be logged (- in the log).
-
-Then you need to add one or more `RewriteCond` that will only match a correct certificate:
-
-* The `$1` value is the node id extracted from the requested URL
-* You need to configure the first part with a value extracted by Apache from the certificate. The list of available variables is available in the Apache docs. When using a DNS in SAN, you need to specify the index of the entry. You can use `[OR]` to allow matching id from several places in the certificate. Replace `example.com` by the domain used in your certificate.
-* For example, if the first DNS entry of the SAN contains `rudder-{node_id}.company.com`, the condition will be `RewriteCond "%{SSL:SSL_CLIENT_SAN_DNS_0}=rudder-$1.company.com" "^(.+)=\1$"`.
-
-Once the `/opt/rudder/etc/rudder-apache-nodes-auth.conf` file is created, run `systemctl reload apache2` (or `systemctl restart httpd` depending on your OS) to apply the change.
-
-To get detailed information about the RewriteCond matching, add:
-
-[source,ini]
-----
-LogLevel alert rewrite:trace4
-----
-
-It will produce detailed logs for each request:
-
-[source,ini]
-----
-[Wed Oct 29 22:11:18.072897 2025] [rewrite:trace4] [pid 64704:tid 64722]
-mod_rewrite.c(4305): [client 192.168.2.3:59478] 192.168.2.3 - -
-[server/sid#7f5c26168a08][rid#7f5c242290a0/initial] RewriteCond:
-input='18c3a1a6-2dad-40eb-a1dd-2fb04a070d94.test=18c3a1a6-2dad-40eb-a1dd-2fb04a070d94.test'
-pattern='^(.*?)=\\1' => matched
-----
-
-**Restarting the Rudder Server**
-
-* The `rudder-jetty` service needs to be restarted after the changes have been made.
-* The configuration changes will be propagated to the nodes by the server, and will be persistent on the nodes, to prevent downgrade attacks. If you want to change one of these parameters, you need to update it on all nodes.
-
-Once `rudder-jetty` has been restarted, the agent must be run on the Rudder server itself, to apply the changes: `rudder agent run`.
-
-==== Troubleshooting
-
-===== Services
-
-To check the `rudder-cf-serverd` service is correctly stopped, run `systemctl status rudder-cf-serverd.service`. It should be stopped and disabled:
-
-[source,ini]
-----
-rudder-cf-serverd.service - CFEngine file server
-	Loaded: loaded (/lib/systemd/system/rudder-cf-serverd.service; disabled; preset: enabled)
-	Active: inactive (dead)
-----
-
-===== Certificates and keys
-
-To check a node’s certificate:
-
-* The command `openssl x509 -in agent1.pem -noout -subject` should return a line like `subject=UID=1ba6a1b9-e7d4-4588-a760-f6405ec3d445`. If the `UID` is not present, the node will not be able to download its policies from the server even if the certificate is valid.
-* The command `openssl x509 -noout -ext subjectAltName -in certs/server.crt` for server certificates should return something like:
-+
-[source,ini]
-----
-X509v3 Subject Alternative Name:
-	DNS:<policy server hostname>
-----
-
-To check the certificate chain from the node, you can use:
-
-[source,ini]
-----
-openssl s_client -cert_chain /opt/rudder/etc/ssl/agent-http.cert -key
-/opt/rudder/etc/ssl/agent-http.key -verifyCAfile
-/var/rudder/lib/ssl/policy_server_ca.pem <SERVER HOSTNAME>:443
-----
-
+Rudder has been audited by external security firms, see the xref:reference:faq.adoc#_has_rudder_been_audited[FAQ] for the published reports.

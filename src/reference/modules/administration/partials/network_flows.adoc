@@ -1,0 +1,12 @@
+[cols="<.^2,<.^2,<.^1,<.^4", options="header"]
+|=======================
+|From|To|Port|Usage
+|User or API client|Root server| *tcp/443* | Access the Web interface and API
+.2+|Node .2+|Policy server (relay or root) | *tcp/443* | Send inventories and reports, fetch files. Windows nodes, and Linux nodes in HTTPS-only mode, also fetch their policies.
+| *tcp/5309* | Linux nodes: fetch policies and shared files (not used in HTTPS-only mode)
+.3+|Relay .3+|Root server | *tcp/443* | Send inventories and reports, fetch files
+| *tcp/5309* | Fetch policies (not used in HTTPS-only mode)
+| _tcp/22_ | *[optional]* Synchronize policies with rsync over SSH
+|Relay or root server|Linux node| _tcp/5309_ .2+| *[optional]* Trigger remote agent runs
+|Root server|Relay|_tcp/443_
+|=======================

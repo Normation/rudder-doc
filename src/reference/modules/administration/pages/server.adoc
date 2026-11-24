@@ -191,6 +191,8 @@ Rudder policy server to get their updated rules.
 You can add as many networks as you want, the expected format is:
 `networkip/mask`, for example `42.42.0.0/16`.
 
+See xref:administration:security_network.adoc#allowed-networks[allowed networks] for what this setting protects.
+
 === Clear caches
 
 Clear cached data, like node configuration. That will trigger a full

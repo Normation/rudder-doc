@@ -27,18 +27,8 @@ To switch from the `root` user to the `rudder-webapp` user, use the command `rud
 
 As part of the Rudder 9.2 release, the web application is now sandboxed using systemd directives.
 
-If your configuration requires additional writable directories,
-you must override the default service configuration by running `systemctl edit rudder-jetty`,
-and adding the required directories to the `ReadWritePaths` directive.
-
-For example:
-
-----
-
-[Service]
-ReadWritePaths=/opt/rudder /var/rudder /var/log /etc/cron.d /etc/systemd/system /path/to/writable/directory
-
-----
+If your configuration requires additional writable directories, see
+xref:administration:webapp.adoc#webapp-security[webapp security] to add them to the `ReadWritePaths` directive.
 
 == Tenants
 

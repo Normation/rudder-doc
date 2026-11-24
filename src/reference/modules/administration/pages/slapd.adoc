@@ -28,8 +28,13 @@ See the xref:administration:procedures.adoc#_migration_backups_and_restores[back
 `rudder-slapd` logs into `/var/log/rudder/ldap/slapd.log`, and Rudder comes with a logrotate configuration
 for its logs.
 
+[[slapd-security]]
 == Security
 
-Relayd runs with the `rudder-slapd` user and the `rudder` group.
-On recent systemd versions it runs with limited access to the filesystem (can only
-access predefined data directories).
+`rudder-slapd` runs with the `rudder-slapd` user and group, and only listens on the loopback interface (`127.0.0.1:389`).
+
+The `rudder-slapd` service uses the following systemd hardening options:
+
+* `PrivateTmp=true`: gives the service its own private `/tmp` and `/var/tmp` directories
+* `ProtectSystem=strict`: makes the system filesystem read-only for the service, except for the following data directories
+* `ReadWritePaths=/var/rudder/ldap/ /var/log/rudder/ldap/`

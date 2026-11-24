@@ -206,7 +206,7 @@ image::graphviz/data_workflow.png[Rudder data workflow]
 
 * `/opt/rudder/etc/reportsInfo.xml`
 
-* `/opt/rudder/etc/rudder-users.xml`
+* `/opt/rudder/etc/webapp/rudder-users.xml`
 
 * `/opt/rudder/etc/rudder-web.properties`
 
