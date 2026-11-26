@@ -129,12 +129,12 @@ The credentials of a user are defined in the XML file
 <authentication unsafe-hashes="false" hash="bcrypt" case-sensitivity="true">
   <custom-roles>
     <role name="NodeAccess" permissions="node_read,node_write" />
-    <role name="RuleAccess" permissions="rule_read,rule_edit" />
-    <role name="SecurityDashboards" permissions="cve_read,system-update_read" />
+    <role name="RuleAccess" permissions="rule_read,rule_write" />
+    <role name="SecurityDashboards" permissions="cve_read,system_update_read" />
   </custom-roles>
   <user name="alice"  password="xxxxxxx" permissions="administrator"/>
   <user name="bob"    password="xxxxxxx" permissions="administration_only, node_read" tenants="zoneA"/>
-  <user name="custom1" password="xxxxxxx" permissions="node_read,node_write,rule_read,rule_edit,directive_read,technique_read"/>
+  <user name="custom1" password="xxxxxxx" permissions="node_read,node_write,rule_read,rule_write,directive_read,technique_read"/>
   <user name="custom2" password="xxxxxxx" permissions="NodeAccess,RuleAccess,directive_read,technique_read" tenants="-"/>
   <user name="audit"  password="xxxxxxx" permissions="SecurityDashboards" tenants="*"/>
 </authentication>
@@ -154,7 +154,7 @@ It defines the login that the user will use to connect to Rudder.
 
 The `password` attribute is optional. It stores the user's password hash when the `file` authentication provider is used. The value must be a bcrypt-hashed password when the `unsafe-hashes` authentication attribute is `false`, and otherwise when it is `true` it can also be hashed with md5, sha, but this will be soon deprecated (see details in the password section below).
 
-The `permissions` attribute is optional. It lists granted permissions to the user.
+The `permissions` attribute is optional. It lists granted permissions to the user. A user without permissions has no rights.
 
 The `tenants` attribute is optional. It lists tenants which the user has access to. By default, there would be full access (equivalent to `tenants="*"`, see xref:plugins:multi-tenants.adoc[the multi-tenants plugin reference documentation]).
 
@@ -268,10 +268,11 @@ Rudder plugins can bring new object types, documented in the plugin, like `cve` 
 The list of core object type is:
 
 * *administration*: for rights on operations related to Rudder settings, plugin management, user management, etc.
+* *archive*: for rights on the ZIP archive API: `archive_read` to export, `archive_write` to import. An import writes techniques, directives, groups and rules at once, so `archive_write` and `archive_read` is only given by the `administrator` role by default.
 * *compliance*: for rights related to access to compliance information (especially with APIs).
-* *configuration*: for rights about configuration objects. It is a super-set of `rule`, `group`, `directive`, `technique`, `parameter`.
+* *configuration*: for access to the *Configurations* menu, and to the campaign API. It does not give access to rules, directives, techniques or parameters, which each need their own right (for example `rule_read`).
 * *deployer* and *validator*: for rights linked to change validation.
-* *deployment*: for rights linked to manual policy generation.
+* *deployment*: for the manual policy generation in the web interface. The API endpoints that update or regenerate policies require `technique_write`.
 * *directive*: for access, creation, deletion and configuration of directives.
 * *group*: for access, creation, deletion and configuration of groups.
 * *node*: rights to accept or refuse nodes, access inventory, change properties or settings.
@@ -282,8 +283,8 @@ The list of core object type is:
 
 In addition to these domain-bound rights, Rudder internally manages two special rights:
 
-* `no_rights` is a special permission that forbids access to everything. It is given when something not expected happens (like permission computation errors) so that users don't get more rights than they should be allowed to.
-* `any_rights` is a special permission given to the `administrator` special role defined below that gives access to everything, whatever the rights to manage it are.
+* `no_rights` is a special permission that forbids access to everything. It is given when something not expected happens (like permission computation errors) so that users don't get more rights than they should be allowed to. It can also be set in `permissions`: it then removes every other permission of the user.
+* `any_rights` is a special permission given to the `administrator` special role defined below that gives access to everything, whatever the rights to manage it are. In `permissions`, the `any` keyword gives it.
 
 ==== Operations
 
@@ -291,15 +292,15 @@ Rudder defines standard access level linked to objects that reflects the operati
 object type:
 
 * *read* to read given items
-* *write* can create/delete items
-* *edit* can modify existing items
+* *write* can create, modify and delete items
+* *edit* is deprecated. It can modify existing items in some screens of the web interface only. The API requires `write` for any change, and most screens save through the API: give `write` to allow modifications.
 * *all* which is a shortcut for "read, write, edit".
 
 ==== Right syntax
 
 A right is defined by the syntax `${type}_${level}`:
 
-* *configuration_read* will give read access to the configuration (rule management, directives, etc)
+* *rule_read* will give read access to rules
 * *node_all* will give access to all action related to nodes.
 
 ==== Correspondence with API permissions
@@ -332,8 +333,8 @@ They are provided for convenience, but if they don't fit your need you can defin
 |====
 |Name                | Access level
 |administration_only | Only access to administration part of rudder, can do everything within it.
-|user | Can access and modify everything but the administration part
-|configuration | Can only access and act on configuration section
+|user | Can access and modify nodes, groups, rules, directives, techniques and parameters. No access to administration, compliance, change validation or manual policy generation
+|configuration | Can access and modify rules, directives, techniques and parameters (not groups)
 |read_only | Can access to every read only part, can perform no action
 |inventory | Access to information about nodes, can see their inventory, but can't act on them
 |rule_only | Access to information about rules, but can't modify them
@@ -342,6 +343,10 @@ They are provided for convenience, but if they don't fit your need you can defin
 |deployer  | Access to workflow usage and compliance
 |validator | Can access and act on compliance and validator part
 |====
+
+No pre-defined role other than `administrator` can import or export a ZIP archive: add `archive_write` or `archive_read` to a role or user to allow it.
+
+Plugins can add rights to pre-defined roles. For example, the system updates plugin adds its rights to `user`, `read_only` and `inventory`.
 
 [INFO]
 ====
@@ -375,7 +380,7 @@ We can see that:
 
 * a custom role has two parameters:
 ** `name`: the name used to identify the role. It must be unique and can't use right syntax
-`xxxx_[read,write,edit,all]`, and it can't reuse an existing name from a pre-defined role.
+`xxxx_[read,write,edit,all]` nor be `any`, and it can't reuse an existing name from a pre-defined role.
 ** `permissions`, which are a comma separated list of rights or role names. More precisely, the list can be
 a list of rights (`read-only-restricted`,`cve-access`), or a mix of rights and roles
 (`read-only-extended`), or even a list of other pre-defined or custom roles (`auditor`).
@@ -383,7 +388,7 @@ Role order definition does not matter.
 
 The permissions granted by the role is the union of all rights granted by each right
 or role in the permission list.
-If a name in the `roles` list is unknown, it is ignored and grant no additional rights.
+If a name in the `permissions` list is unknown, it is ignored with a warning in the logs and grants no additional rights.
 
 
 === User management interface
