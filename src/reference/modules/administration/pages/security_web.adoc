@@ -1,0 +1,141 @@
+= Web interface and API security
+
+This page describes how to secure the access to the Rudder Web interface and API on the root server.
+
+[[https]]
+== HTTPS
+
+[[split-virtual-hosts]]
+=== Split Web/API and node communication
+
+By default, all HTTPS traffic (Web interface, API and node communication) is handled by the same virtual host in Apache httpd,
+using the certificate configured for xref:administration:security_node_trust.adoc#node-server-communication[node-server communication],
+whatever the chosen mode. To harden the connection security, start by separating the Web interface and API from the
+node-server communication. This allows using a different certificate, configuration and firewall rules for each.
+
+The `/opt/rudder/bin/split-vhost` script does it for you. It takes the node communication and the Web/API virtual host
+definitions (`<ip>`, `<ip>:<port>`, `<hostname>` or `<hostname>:<port>`), and the certificate and key to use for the Web/API:
+
+----
+/opt/rudder/bin/split-vhost -c /path/to/web.crt -k /path/to/web.key rudder-nodes.example.com rudder.example.com
+----
+
+Run it without arguments to display all its options. With `-b` instead of `-c` and `-k`, it issues a _Let's Encrypt_
+certificate with certbot, which stops the Web server during issuance and renewals. It only works on an unmodified
+Rudder virtual host configuration (it offers to reset a customized one), and restores the previous configuration
+if the Web server fails to start with the new one.
+
+To do it manually, edit the Rudder virtual host configuration (`/etc/apache2/sites-enabled/rudder.conf` on Debian/Ubuntu,
+`/etc/httpd/conf.d/rudder.conf` on RHEL, `/etc/apache2/vhosts.d/rudder.conf` on SLES),
+comment the default virtual host and uncomment the two separate configurations.
+
+You need a criterion to distinguish both virtual hosts, either a different port (see
+xref:administration:security_network.adoc#change-ports[change server ports]) or a different `ServerName`.
+If both virtual hosts share the same IP address and port:
+
+* The hostname used for the Web interface and API must be the `ServerName` of the Web/API virtual host.
+* The hostname or IP address configured as policy server on the nodes must be the `ServerName` of the node communication virtual host.
+* `127.0.0.1` must be a `ServerAlias` of the node communication virtual host, as the agent running on the Rudder server itself
+uses it as its policy server. It is good practice to also add the server's IP address as a `ServerAlias`, so that nodes can
+use either the hostname or the IP address of the server.
+
+Then reload the Web server with `systemctl reload apache2` (or `systemctl reload httpd` depending on your OS).
+
+[[web-certificate]]
+=== Web interface and API certificate
+
+Once the virtual hosts are split, set up a valid certificate for the Web/API virtual host. This allows Web browsers
+and API clients to validate the server identity. You can use an internal PKI or a publicly trusted certificate, like with _Let's Encrypt_.
+
+Configure the certificate and key paths (`SSLCertificateFile` and `SSLCertificateKeyFile`) in the Web/API virtual host.
+
+The default configuration only allows TLS 1.3. To adapt the TLS settings of the Web/API virtual host to your
+requirements and platform, we recommend using the https://ssl-config.mozilla.org/[Mozilla SSL configuration generator].
+
+This certificate is not related to the node-server communication or to the Rudder backend. To change the certificate used for
+node-server communication, see xref:administration:security_node_trust.adoc#custom-server-certificate[pinning with a custom server certificate].
+
+[[hsts]]
+=== HTTP Strict Transport Security
+
+_HTTP Strict Transport Security_ (HSTS) ensures the user's browser always uses HTTPS to connect to your server.
+It is not enabled by default as it may conflict with other services served from the same domain (e.g. package repositories).
+
+If you only use HTTPS with your Rudder server's domain, enable the HSTS header in `/opt/rudder/etc/rudder-web.properties`
+by adding the following properties:
+
+[source,ini]
+----
+rudder.server.hsts=true
+rudder.server.hstsIncludeSubDomains=true
+----
+
+Then restart the webapp with `systemctl restart rudder-jetty`.
+
+=== Server version
+
+To hide the Apache httpd version from the HTTP headers, set the `ServerTokens` parameter to `Prod` in the global
+Apache httpd configuration (in `/etc/httpd` or `/etc/apache2` depending on your distribution). It cannot be done
+inside Rudder's configuration, as it is a global setting.
+
+[[authentication]]
+== Authentication and authorizations
+
+See xref:administration:users.adoc[user management] for the complete configuration reference.
+
+* *Enable multi-factor authentication.* For users defined in the Rudder configuration file and LDAP users, enable the built-in
+xref:administration:users.adoc#totp-authentication[TOTP authentication]. For OpenID Connect (OIDC) or OAuth2 users (configured
+through the xref:plugins:auth-backends.adoc[authentication backends plugin]), enforce a second factor (TOTP, WebAuthn, etc.)
+in your external identity provider.
+* *Use bcrypt password hashes.* For local Rudder users, passwords must be hashed with `bcrypt`, which is the only hash algorithm used
+when generating new passwords in the user management page. Older unsalted hashes are still accepted but deprecated,
+see xref:administration:users.adoc#_passwords[passwords] for the migration.
+* *Give minimal privileges.* Assign users the roles they need, and create
+xref:administration:users.adoc#_user_roles_and_fine_grained_authorizations[custom roles] to match your needs.
+Give API tokens only the permissions they need.
+
+[[sessions-and-accounts]]
+== Sessions and accounts
+
+=== Session timeout
+
+By default, users are logged out after 30 minutes of inactivity. To change it, set the following property in
+`/opt/rudder/etc/rudder-web.properties`:
+
+[source,ini]
+----
+rudder.auth.idle-timeout=15 minutes
+----
+
+Then restart the webapp with `systemctl restart rudder-jetty`.
+
+After a configuration change on a user that might have a security impact (password or roles change, user disabled or deleted),
+the user's sessions are immediately invalidated.
+
+=== Inactive accounts
+
+The lifecycle of user accounts is configured in `/opt/rudder/etc/rudder-web.properties`:
+
+* When a user has not logged in for *180 days* (by default), the account is *disabled*. For example, to disable users after 100 days of inactivity:
++
+[source,ini]
+----
+rudder.users.cleanup.account.disableAfterLastLogin=100 days
+----
+
+* A disabled user can be *deleted* after a period of inactivity. By default, users are never deleted. For example, to delete users after 365 days of inactivity:
++
+[source,ini]
+----
+rudder.users.cleanup.account.deleteAfterLastLogin=365 days
+----
+
+* When a user is deleted (for example removed from the `rudder-users.xml` file), its information (like status changes) is kept
+for post-deletion accountability, and purged after 30 days by default. For example, to purge it after 60 days:
++
+[source,ini]
+----
+rudder.users.cleanup.purgeDeletedAfter=60 days
+----
+
+Then restart the webapp with `systemctl restart rudder-jetty`.

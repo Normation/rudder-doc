@@ -107,6 +107,35 @@ an apache httpd reverse proxy configuration.
 
 See the https://docs.rudder.io/api/[API documentation] for more information about the API.
 
+[[webapp-security]]
+== Security
+
+The webapp runs with the `rudder-webapp` user and the `rudder` group. It only listens on the loopback interface,
+and is only reachable through the Apache httpd reverse proxy.
+
+=== Systemd sandboxing
+
+The `rudder-jetty` service uses the following systemd hardening options:
+
+* `PrivateTmp=true`: gives the service its own private `/tmp` and `/var/tmp` directories, not shared with other services
+* `ProtectSystem=strict`: makes the system filesystem read-only for the service, except for paths explicitly allowed by `ReadWritePaths`
+* `ReadWritePaths=/opt/rudder /var/rudder /var/log /etc/cron.d /etc/systemd/system`: the directories the service is allowed to write to
+
+If your configuration requires additional writable directories, override the service
+configuration with `systemctl edit rudder-jetty`, and add the required directories to the `ReadWritePaths` directive:
+
+----
+[Service]
+ReadWritePaths=/opt/rudder /var/rudder /var/log /etc/cron.d /etc/systemd/system /path/to/writable/directory
+----
+
+Only add the directories that are strictly necessary.
+
+=== Configuration repository
+
+All changes to the configuration repository (`/var/rudder/configuration-repository`) via Git must be performed
+using the `rudder-webapp` user, not `root`. To switch from the `root` user to the `rudder-webapp` user, use the command `rudder server su`.
+
 == Logging
 
 The webapp outputs its logs directly into `/var/log/rudder/webapp`, and handles daily

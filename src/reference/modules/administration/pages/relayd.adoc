@@ -95,12 +95,19 @@ See the https://docs.rudder.io/api/relay/#tag/System/operation/getStatus[API doc
 
 See the https://docs.rudder.io/api/relay/#tag/System/operation/getMetrics[API documentation] for details.
 
+[[relayd-security]]
 == Security
 
 Relayd runs with the `rudder-relayd` user and the `rudder` group.
-It also runs in a dedicated SELinux context on RHEL, and on recent
-systemd versions it runs with limited access to the filesystem (can only
-write into predefined data directories).
+It also runs in a dedicated SELinux context on RHEL.
+
+The `rudder-relayd` service uses the following systemd hardening options:
+
+* `PrivateTmp=true`: gives the service its own private `/tmp` and `/var/tmp` directories
+* `ProtectSystem=strict`: makes the system filesystem read-only for the service, except for the following data directories
+* `ReadWritePaths=/var/rudder/reports /var/rudder/inventories /var/rudder/shared-files /var/rudder/cfengine-community/state`
+
+If you use the rsync synchronization mode, see the security recommendations in the <<_synchronization_via_ssh,next section>>.
 
 == Synchronization via ssh
 

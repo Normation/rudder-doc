@@ -21,7 +21,7 @@ In that part of the documentation, we will focus of user management without thes
 In Rudder, authentication providers and user/role credentials are defined separately:
 
 - authentication providers are configured in the `/opt/rudder/etc/rudder-web.properties` main configuration file. Change to that file require a restart of Rudder.
-- user/role credentials are configured in the `/opt/rudder/etc/rudder-users.xml` file. Changes in that file only require a reload action, either thanks to the user management interface and API. A restart of Rudder also takes the changes into account.
+- user/role credentials are configured in the `/opt/rudder/etc/webapp/rudder-users.xml` file. Changes in that file only require a reload action, either thanks to the user management interface and API. A restart of Rudder also takes the changes into account.
 
 Their content and modification are detailed in the following sections.
 
@@ -78,7 +78,7 @@ Users are asked for a code after they log in successfully with their username an
 TOTP is *not* applied in these cases:
 
 * users who log in with the *OpenID Connect* (OIDC) or *OAUTHv2* providers: the external identity provider is expected to enforce the
-second factor itself (see the xref:administration:security.adoc#_authentication_and_user_management[security recommendations]),
+second factor itself (see the xref:administration:security_web.adoc#authentication[security recommendations]),
 * the super admin account (`rudder.auth.admin.login`), which is always skipped since it is meant to be a recovery account.
 
 ====
@@ -109,7 +109,7 @@ The user will then be asked to enroll again the next time they log in.
 
 == User configuration file
 
-`/opt/rudder/etc/rudder-users.xml` is the main configuration file for managing users and roles in Rudder.
+`/opt/rudder/etc/webapp/rudder-users.xml` is the main configuration file for managing users and roles in Rudder.
 More precisely, it allows to:
 
 - list each user allowed to access Rudder, along with their granted permissions to see or do things in Rudder. In the case of the default `file` authentication provider, it also allows to store user password hash.
@@ -122,7 +122,7 @@ Every modification of this file should be followed by a reload of the table in t
 === File format
 
 The credentials of a user are defined in the XML file
-`/opt/rudder/etc/rudder-users.xml`. This file expects the following format:
+`/opt/rudder/etc/webapp/rudder-users.xml`. This file expects the following format:
 
 ----
 
@@ -161,7 +161,7 @@ The `tenants` attribute is optional. It lists tenants which the user has access 
 [[_logins]]
 === Login case-sensitivity
 
-Logins are case-sensitive by default. To change this behavior yon can modify the parameter `case-sensitivity` to `false` in `/opt/rudder/etc/rudder-users.xml`, then restart the application (`systemctl restart rudder-jetty`).
+Logins are case-sensitive by default. To change this behavior yon can modify the parameter `case-sensitivity` to `false` in `/opt/rudder/etc/webapp/rudder-users.xml`, then restart the application (`systemctl restart rudder-jetty`).
 
 This option can be used to get consistent authentication constraints on login with an external xref:plugins:auth-backends.adoc[authentication provider], typically with an `Active Directory` based authentication.
 
@@ -247,7 +247,7 @@ security issues from the usage of bcrypt.
 For every user you can define a set of permissions (roles or individual rights), allowing it to access different
 pages or to perform different operations in Rudder.
 
-To ease management of authorization, you can also build custom roles with their own list of individual rights and roles, and assign fined-grained permissions to users in Rudder. The custom roles needs to be defined in the `/opt/rudder/etc/rudder-users.xml` file. The user management interface allows to assign those rights to every user and see all the permissions of a user.
+To ease management of authorization, you can also build custom roles with their own list of individual rights and roles, and assign fined-grained permissions to users in Rudder. The custom roles needs to be defined in the `/opt/rudder/etc/webapp/rudder-users.xml` file. The user management interface allows to assign those rights to every user and see all the permissions of a user.
 
 === Rights
 
@@ -362,7 +362,7 @@ image::details_rights.png[]
 ==== Custom roles
 
 You can define custom roles as union set of any permissions, ie any rights or other roles.
-Custom roles are defined in the files `/opt/rudder/etc/rudder-users.xml` with the following syntax:
+Custom roles are defined in the files `/opt/rudder/etc/webapp/rudder-users.xml` with the following syntax:
 
 ```
 <authentication>
@@ -399,7 +399,7 @@ The UI is available in the `Administration` menu on `User management` entry (1):
 
 image::usermanagement-ui.png[]
 
-With that UI, you can add a new user (2), reload `/opt/rudder/etc/rudder-users.xml` file from disk (3) and see
+With that UI, you can add a new user (2), reload `/opt/rudder/etc/webapp/rudder-users.xml` file from disk (3) and see
 what is the current authentication method configured for users (4) (see the xref:plugins:auth-backends.adoc[authentication
 backends plugin] for more information on that subject).
 You also have a table of all non-deleted users and their information (5).
@@ -407,7 +407,7 @@ You also have a table of all non-deleted users and their information (5).
 [WARNING]
 ====
 
-The given role list is the one statically configured in `/opt/rudder/etc/rudder-users.xml`. Some plugin
+The given role list is the one statically configured in `/opt/rudder/etc/webapp/rudder-users.xml`. Some plugin
 are able to change that list when user logs in if centralized authorization management is used. For example, OIDC plugin can do that.
 In that case, the actual list of role the user got is logged in the application logs and a warning message is displayed instead of (4).
 
